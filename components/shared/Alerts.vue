@@ -1,0 +1,27 @@
+<template>
+  <div class="alert-list">
+    <alert :key="i" :type="alert.level" :buttons="alert.buttons" class="alert-list__item" v-for="(alert, i) in alerts">{{ alert.message }}</alert>
+  </div>
+</template>
+
+<script>
+  import Alert from '../../components/shared/Alert.vue'
+
+  export default {
+    name: 'Alerts',
+    components: {Alert},
+    data: function () {
+      return {
+        show: false
+      }
+    },
+    computed: {
+      alerts: function () {
+        if (!this.$store.state.alerts) {
+          return []
+        }
+        return this.$store.state.alerts
+      }
+    }
+  }
+</script>

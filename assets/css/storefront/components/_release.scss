@@ -1,0 +1,92 @@
+$font-factor: 0.9;
+
+.release {
+  &__button-bar {
+    display: inline-block;
+    position: relative;
+    margin-top: $font-factor + em;
+    .play {
+      display: inline-block;
+      position: relative;
+      margin-right: 10px;
+    }
+    &__add-to-cart {
+      position: relative;
+      background-color: $brand-color-green;
+      border-radius: 2px;
+      display: inline-block;
+      line-height: 48px;
+      width: 12em;
+      color: white;
+      text-align: center;
+      font-size: $font-factor + em;
+      vertical-align: top;
+    }
+  }
+}
+
+.release-detail {
+  &__header {
+    padding-top: 3.4em;
+    padding-bottom: 3.4em;
+    display: inline-block;
+    font-size: $font-size-sm;
+  }
+  &__back {
+    display: inline-block;
+    margin-right: 3em;
+    img {
+      transform: scaleX(-1);
+      margin-right: 10px;
+    }
+    a {
+      margin-left: 0px;
+      color: $brand-color-black;
+      &:hover {
+        color: $brand-color-green;
+      }
+    }
+  }
+  &__breadcrumb {
+    display: inline-block;
+    color: $gray-color-1;
+    a {
+      color: $gray-color-1;
+    }
+  }
+  &__tracklist {
+    padding-left: 4em;
+    padding-bottom: 8em;
+    &__item {
+      position: relative;
+      max-height: 100px;
+      vertical-align: middle;
+      padding: $global-padding 0;
+      border-bottom: none;
+      border-top: 1px solid $gray-color-2;
+      &:last-child {
+        border-bottom: 1px solid $gray-color-2;
+      }
+      &:hover {
+        cursor: pointer;
+        color: $link-hover-color;
+      }
+      .play {
+        display: inline-block;
+        border: 0px;
+        top: -0.2em;
+        right: 0px;
+        position:absolute;
+      }
+    }
+    &__position {
+      display: inline-block;
+      padding-right: .8em;
+      opacity: .5;
+    }
+    @include media-breakpoint-down(md) {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+    }
+  }
+}

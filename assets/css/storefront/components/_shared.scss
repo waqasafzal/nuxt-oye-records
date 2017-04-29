@@ -1,0 +1,20 @@
+.preheader {
+  font-size: $font-size-sm;
+  text-transform: uppercase;
+}
+
+.dropdown {
+  &__button {
+    background-color: transparent !important;
+    color: $brand-color-black !important;
+    padding: 1em !important;
+    &__arrow {
+      border-top: 5px solid $brand-color-black;
+    }
+  }
+  &__values {
+    &__item {
+      padding: 1em !important;
+    }
+  }
+}

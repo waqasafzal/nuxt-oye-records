@@ -1,0 +1,208 @@
+.release-list-info {
+  position: relative;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  padding-top: .4em;
+  margin-bottom: 1em;
+  &__header {
+    position: relative;
+    padding-top: 0.5em;
+    height: 16px;
+    color: $brand-color-black;
+    line-height: 16px;
+    font-size: $font-size-sm;
+    display: block;
+    &__artist-name {
+      display: inline-block;
+      max-width: 65%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &__price {
+      position: relative;
+      float: right;
+      display: inline-block;
+    }
+  }
+  &__release-title {
+    padding-top: 1em;
+    position: relative;
+    height: 14px;
+    opacity: 0.6;
+    color: $brand-color-black;
+    font-size: $font-size-sm;
+    line-height: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__label {
+    display: none;
+    padding-top: 0.8em;
+    padding-bottom: 0.2em;
+    font-size: $font-size-sm;
+    opacity: 0.6;
+    color: $brand-color-black;
+  }
+}
+
+.list-item {
+  position: relative;
+
+  @include media-breakpoint-down(xs) {
+    img {
+      height: 100px;
+      object-fit: none;
+      object-position: center;
+    }
+    overflow: hidden;
+    height: 200px;
+  }
+  @include media-breakpoint-only(xl) {
+    height: 240px;
+  }
+  @include media-breakpoint-only(lg) {
+    height: 180px;
+  }
+  @include media-breakpoint-only(md) {
+    height: 300px;
+  }
+  @include media-breakpoint-only(sm) {
+    height: 280px;
+  }
+}
+
+.resizable-list-item-inner {
+  height: 100%;
+  width: 100%;
+  &:hover {
+    padding-left: calc(5% - 1px);
+    padding-right: calc(5% - 1px);
+    padding-bottom: 5%;
+  }
+  .release-list {
+    &-image {
+      position: relative;
+      .release-list-play {
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: none;
+      }
+    }
+    &-add {
+      display: none;
+      width: 100%;
+      float: bottom;
+      position: relative;
+      //
+      //&:hover:after {
+      //  content: '';
+      //  position: absolute;
+      //  top: 0;
+      //  left: 0;
+      //  width: 100%;
+      //  height: 100%;
+      //  background-color: $brand-color-black;
+      //  opacity: 0.3;
+      //}
+    }
+  }
+}
+
+.resizable-list-item-outer {
+  position: absolute;
+  height: 220px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  &:hover {
+    background-color: white;
+    height: 240px;
+    width: 110%;
+    margin-left: -5%;
+    margin-right: -5%;
+    z-index: 1;
+    .release-list-add {
+      display: block;
+    }
+    .release-list-info__label {
+      display: block;
+    }
+    .release-list-play {
+      display: inline-block;
+      &:hover {
+        opacity: 1;
+        background-color: $brand-color-green !important;
+      }
+    }
+    .release-list-image:after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      background: $brand-color-black;
+      position: absolute;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+    }
+
+    @include media-breakpoint-only(xl) {
+      height: 310px
+    }
+    @include media-breakpoint-only(lg) {
+      height: 260px
+    }
+    @include media-breakpoint-only(md) {
+      height: 275px
+    }
+    @include media-breakpoint-down(sm) {
+      height: 280px
+    }
+  }
+  @include media-breakpoint-up(xl) {
+    height: 240px;
+  }
+  @include media-breakpoint-only(lg) {
+    height: 300px;
+  }
+  @include media-breakpoint-only(md) {
+    height: 260px;
+  }
+  @include media-breakpoint-only(sm) {
+    height: 240px;
+  }
+  @include media-breakpoint-only(xs) {
+    height: 150px;
+  }
+}
+
+.release-list-summary {
+  border-bottom: 1px solid $gray-color-2;
+  min-height: 300px;
+  &__header {
+    width: 100%;
+    position: relative;
+    margin-bottom: 40px;
+    h2 {
+      margin-bottom: 0px !important;
+      display: inline-block;
+    }
+    &__more {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      display: inline-block;
+      color: $gray-color-1;
+    }
+    a {
+      color: $gray-color-1;
+      text-transform: capitalize;
+    }
+  }
+}

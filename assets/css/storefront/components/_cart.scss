@@ -1,0 +1,217 @@
+.cart {
+  h3 {
+    text-transform: uppercase;
+    color: $skull-gray;
+  }
+  &__table-header {
+    background-color: $gray-color-2;
+    padding-bottom: $global-padding / 2;
+    padding-top: $global-padding;
+    padding-left: $global-padding * 2;
+    padding-right: $global-padding * 2;
+    h5 {
+      padding: 0px;
+      font-size: $font-size-sm;
+      text-transform: uppercase;
+    }
+  }
+  &__line {
+    padding: $global-padding * 2;
+    margin-top: 0px !important;
+
+    border-bottom: 1px solid $gray;
+    &.last {
+      border-bottom-color: $skull-gray;
+    }
+    .col-5 {
+      margin-top: $global-margin / 2;
+      @include media-breakpoint-down(sm) {
+        text-align: right;
+        p {
+          margin-top: $global-margin * 2;
+        }
+      }
+    }
+    &__product {
+      &__info {
+        display: inline-block;
+        margin-top: $global-margin / 2;
+        margin-bottom: 0;
+        line-height: 1rem;
+        .release {
+          &__name {
+
+          }
+          &__title {
+            opacity: 0.6;
+            margin-top: 0.5em;
+          }
+          &__shipping {
+            margin-top: 1em;
+            opacity: 0.6;
+            font-size: $font-size-xs;
+          }
+        }
+        small {
+          color: $skull-gray;
+        }
+      }
+      a {
+        transition: 0.3s;
+        color: $body-color;
+        &:hover {
+          text-decoration: none;
+          color: $skull-gray;
+        }
+        img {
+          vertical-align: top;
+          margin-right: $global-margin;
+        }
+      }
+    }
+    &__quantity {
+      form {
+        display: inline-block;
+        input {
+          width: 4rem;
+          padding: $global-padding / 2;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      &-error {
+        display: block;
+      }
+      img {
+        max-width: 18px;
+      }
+    }
+    .cart-item-delete {
+      cursor: pointer;
+      font-size: $font-size-h2;
+      opacity: 0.5;
+      margin-top: -6px;
+    }
+    &__cell {
+      display: inline-flex;
+    }
+  }
+  &__total {
+    height: 9em;
+    background-color: $gray-color-2;
+    padding: $global-padding * 2;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  &__subtotal {
+    height: 9em;
+    padding: $global-padding * 2;
+  }
+  &__delivery-info {
+    margin-top: $global-margin * 2;
+    p {
+      margin-bottom: 0;
+    }
+    &__price {
+      p {
+        text-align: right;
+      }
+    }
+    &__list {
+      border-top: 1px solid $gray;
+      .deliveryform {
+        padding: $global-padding 0;
+        width: 100%;
+        select {
+          @include media-breakpoint-down(sm) {
+            width: 100%;
+          }
+          background-color: $white;
+          height: calc(2.25rem + 2px);
+          @include media-breakpoint-up(sm) {
+            float: right;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+        label {
+          margin-right: $global-margin;
+          margin-top: $global-margin / 2;
+        }
+      }
+      .col-6 {
+        padding: 0;
+      }
+    }
+  }
+  &__empty {
+    text-align: center;
+    img {
+      margin: $global-margin * 2 0;
+    }
+    .btn {
+      margin: $global-margin * 2 0 $global-margin * 5;
+    }
+  }
+  &__checkout-button {
+    border-radius: 2px;
+    background-color: $brand-color-green;
+    color: white;
+    height: 64px;
+    line-height: 64px;
+    text-align: center;
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    &:hover {
+      background-color: #29AB5D;
+      cursor: pointer;
+    }
+  }
+  &__bottom-bar {
+    margin-top: $global-margin * 2;
+    padding-right: $global-padding;
+  }
+  &__continue-button {
+    height: 64px;
+    line-height: 64px;
+    color: $brand-color-green;
+    &:hover {
+      color: #29AB5D;
+    }
+  }
+}
+
+.flex-align-right {
+  margin-left: auto;
+}
+
+.release {
+  &__price {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+.cart-cell-center {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.arrow-rotated {
+  display: inline-block;
+  vertical-align: middle;
+  transform: rotate(180deg);
+  margin-right: 1em;
+  margin-top: -3px;
+}
+
+.helper {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}

@@ -1,0 +1,71 @@
+// GLOBAL
+$fa-font-path: "~font-awesome/fonts";
+
+$global-padding: 1rem;
+$global-margin: 1rem;
+$button-border-radius: 4px;
+
+// COLORS
+$skull-gray: #828282;
+$form-active: #FFFAEC;
+
+
+$brand-color-green: #30C46C;
+$brand-color-black: #313532;
+
+$brand-secondary-color-red: #FF8174;
+$brand-secondary-color-blue: #278AB3;
+$brand-secondary-color-yellow: #FFB96E;
+
+$link-color: $brand-color-black;
+
+$gray-color-1: #989A98;
+$gray-color-2: #EBE9E6;
+$gray-color-3: #F3F2EF;
+$gray-color-4: #F8F7F5;
+$gray-color-5: #FBFBFA;
+
+$search-form-border-color: #F0F0F0;
+
+$gray: #D3D1D0;
+$light-gray: #f2f2f2;
+$dark-gray: #909090;
+$white: #fff;
+$body-color: #333333;
+$red: #EB5757;
+$darkred: #c53636;
+$green: #27AE60;
+$darkgreen: #1b8a4a;
+$blue: #26A5D4;
+// TYPOGRAPHY
+$font-family-sans-serif: 'Roboto Condensed';
+
+$font-size-h1:  2.5rem;
+$font-size-h2: 2rem;
+$font-size-h3: 1.5rem;
+$font-size-h4: 1.25rem;
+$font-size-h5: 1rem;
+$font-size-sm: 0.75rem;
+
+$font-size-lg: 3rem;
+
+$font-weight-base: 300 !default;
+$headings-font-weight: $font-weight-base;
+$nav-link-padding: 0;
+
+$display-lines: 3;
+
+$brand-primary: $brand-color-green;
+
+$link-color:            $brand-color-black !default;
+$link-decoration:       none !default;
+$link-hover-color:      $brand-color-green !default;
+$link-hover-decoration: none !default;
+
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1360px
+) !default;

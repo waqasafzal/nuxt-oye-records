@@ -1,0 +1,39 @@
+.carousel {
+  &__slide {
+    height: 350px;
+    overflow: hidden;
+  }
+  &__controls {
+    margin: auto;
+    text-align: center;
+    &__button {
+      display: inline-block;
+      height: 3px;
+      width: 36px;
+      background-color: $brand-color-black;
+      opacity: .1;
+      margin: 0 .2em;
+      // thin an fancy button ok but make the clickable area bigger
+      &:after {
+        content: "";
+        padding: 20px;
+        height: 3px;
+        left: -10px;
+        top: -10px;
+      }
+    }
+    .active {
+      background-color: $brand-color-green;
+      opacity: 1;
+    }
+  }
+}
+//
+.carousel-indicators {
+  li {
+    background-color: $gray-color-2 !important;
+  }
+  .active {
+    background-color: $brand-color-green !important;
+  }
+}

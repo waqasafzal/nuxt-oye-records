@@ -1,0 +1,200 @@
+.page {
+  &__header {
+    width: 100%;
+    font-size: $font-size-lg;
+    letter-spacing: -1px;
+    height: 3.4em;
+    display: inline-block;
+    padding-top: 1.1em;
+    border-bottom: 1px solid $gray-color-2;
+  }
+  h1 {
+    line-height: 38px;
+    letter-spacing: -1px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 65px;
+  }
+  h3 {
+    margin-top: 2em;
+    margin-bottom: 1.7em;
+  }
+}
+.frontpage {
+  &__teaser {
+    position: relative;
+    margin-bottom: 200px;
+    background-color: rgba(248,247,245,1);
+    letter-spacing: 1px;
+    margin-top: 5px;
+    min-height: 500px;
+
+    &__content {
+      padding-left: 120px;
+      padding-top: 202px;
+      padding-right: 120px;
+      margin-bottom: 12em;
+      display: block;
+      height: 560px;
+      -moz-background-size: 30%;
+      -webkit-background-size: 30%;
+      //background-size: 30%;
+      margin-right: 30px;
+      background-origin: content-box;
+      background-position: right bottom;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1600px;
+
+      @include media-breakpoint-down(sm) {
+        padding-top: 100px;
+        padding-left: 60px;
+        padding-right: 50px;
+        background-position: 0 250px;
+        background-size: 100% auto;
+        height: 450px;
+      }
+    }
+    &__news-label {
+      border-radius: 2px;
+      width: 90px;
+      margin-bottom: .9em;
+      span {
+        display:table;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin:0 auto;
+        height: 10px;
+        text-transform: uppercase;
+        color: $brand-color-black;
+        font-size: 0.5em;
+        line-height: 10px;
+        text-align: center;
+      }
+    }
+    &__title {
+      display: block;
+      font-size: 3em;
+      color: #313532;
+      opacity: 0.4;
+      line-height: 1em;
+    }
+    &__artist {
+      padding-top: .2em;
+      display: block;
+      font-size: 3em;
+    }
+    a {
+      color: $body-color;
+      text-decoration: none;
+      &:hover:after {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $brand-color-green;
+        opacity: 0.1;
+        cursor: pointer;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__weekly {
+    &__panel {
+      font-size: .8em;
+      bottom: 140px;
+      margin-top: -350px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1500px;
+      min-height: 300px;
+      @include media-breakpoint-down(md) {
+        margin-left: -15px;
+        margin-right: -15px;
+      }
+      a {
+        color: $body-color;
+        text-decoration: none;
+      }
+    }
+    &__item {
+      height: 100%;
+      background-color: #F3F2EF;
+      margin-bottom: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 800px;
+      &__content {
+        position: relative;
+        padding-top: 50px;
+        padding-left: 63px;
+        padding-right: 30px;
+        padding-bottom: 30px;
+        width: 100%;
+        height: 100%;
+        -moz-background-size: auto 100%;
+        -webkit-background-size: auto 100%;
+        background-origin: content-box;
+        background-position: right bottom;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        &__artist {
+          padding-top: 1em;
+          font-size: 1.8em;
+        }
+        &__title {
+          font-size: 1.8em;
+          color: #313532;
+          opacity: .5;
+          width: 40%;
+          height: 68px;
+        }
+        &__image {
+          display: inline-block;
+          right: 10px;
+          bottom: 10px;
+          float: right;
+          max-width: 300px;
+          min-width: 200px;
+          width: 200px;
+          height: 200px;
+        }
+      }
+      &__cell {
+        position: relative;
+        padding-bottom: 20px;
+      }
+      &:hover:after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $brand-color-green;
+        opacity: 0.1;
+        cursor: pointer;
+        pointer-events: none;
+      }
+    }
+  }
+  &__sections {
+    //position: absolute;
+    //margin-top: 1000px;
+  }
+}
+
+.background {
+  width: 100vw;
+  background-color: $gray-color-5;
+}
+
+.feature-category {
+  text-transform: uppercase;
+  font-size: .9em;
+}
