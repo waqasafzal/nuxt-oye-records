@@ -28,30 +28,50 @@ setupAPI()
 
 module.exports = {
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: 'OYE Records - Webshop',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: 'Nuxt.js project'},
+      {
+        hid: 'url',
+        property: 'og:url',
+        content: apiHost
+      },
+      {
+        hid: 'type',
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        hid: 'title',
+        property: 'og:title',
+        content: 'OYE Records - The place to put the records on!'
+      },
+      {
+        hid: 'description',
+        property: 'og:description',
+        content: 'Find you favorite records in a place where the music is the key to your heart'
+      }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#3B8070' },
+   ** Customize the progress-bar color
+   */
+  loading: {color: '#3B8070'},
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** Run ESLINT on save
-    */
+     ** Run ESLINT on save
+     */
     extend (config, ctx) {
       if (ctx.isClient) {
         config.module.rules.push({
@@ -92,7 +112,7 @@ module.exports = {
       src: '~plugins/vue-slider-component',
       ssr: false
     },
-    { src: '~plugins/apollo.js', injectAs: 'apolloProvider' },
+    {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-cookie', ssr: false}
   ],
   router: {
@@ -103,22 +123,21 @@ module.exports = {
           name: 'genres-slug-subslug',
           path: '/genres/:slug/:subslug',
           component: resolve(__dirname, 'pages/genres/_slug/index.vue')
-        // },
-        // {
-        //   name: 'releases-slug',
-        //   path: '/releases/:id-:slug',
-        //   component: resolve(__dirname, 'pages/releases/_slug.vue')
+          // },
+          // {
+          //   name: 'releases-slug',
+          //   path: '/releases/:id-:slug',
+          //   component: resolve(__dirname, 'pages/releases/_slug.vue')
         }
       )
     }
   },
   css: [
-    { src: '~assets/css/storefront/storefront.scss', lang: 'scss' }
+    {src: '~assets/css/storefront/storefront.scss', lang: 'scss'}
   ],
   devProxy: {
-    'localhost:8000/graphql': 'http://local.oye.com:8000/',
-    'localhost:8000/media': 'http://local.oye.com:8000/',
-    'localhost:8000/admin': 'http://local.oye.com:8000/',
-    'localhost:8000/static/admin/css': 'http://local.oye.com:8000/'
+    'localhost:3000/media': 'http://local.oye.com:8000/',
+    'localhost:3000/admin': 'http://local.oye.com:8000/',
+    'localhost:3000/static/admin/css': 'http://local.oye.com:8000/'
   }
 }

@@ -12,17 +12,25 @@
           <nuxt-link to="/">Home</nuxt-link>
           <template v-if="release.mainGenre">
             /
+
+
             <nuxt-link
-              :to="{name: 'genres-slug', params: {slug: release.mainGenre.slug}}">
-            {{ release.mainGenre.name }}
+                :to="{name: 'genres-slug', params: {slug: release.mainGenre.slug}}">
+              {{ release.mainGenre.name }}
+
+
 
             </nuxt-link>
           </template>
           <template v-if="release.mainGenreSub">
             /
+
+
             <nuxt-link
-              :to="{name: 'genres-slug-subslug', params: {slug: release.mainGenreSub.parentGenre.slug, subslug: release.mainGenreSub.slug}}">
-            {{ release.mainGenreSub.name }}
+                :to="{name: 'genres-slug-subslug', params: {slug: release.mainGenreSub.parentGenre.slug, subslug: release.mainGenreSub.slug}}">
+              {{ release.mainGenreSub.name }}
+
+
 
 
 
@@ -73,9 +81,13 @@
               <i class="fa fa-fw fa-facebook"></i> Facebook
 
 
+
+
             </network>
             <network network="twitter">
               <i class="fa fa-fw fa-twitter"></i> Twitter
+
+
 
 
             </network>
@@ -84,6 +96,8 @@
         <h4>Details</h4>
         <div class="product__details__detail">
           Genre
+
+
 
 
 
@@ -101,7 +115,7 @@
                         }}</nuxt-link>
                     </template>
                   </span>
-        </p>
+          </p>
         </div>
         <div class="product__details__detail">
           Release Date
@@ -118,9 +132,13 @@
             Tracklist
 
 
+
+
           </template>
           <template v-else>
             No Tracklist Available
+
+
 
 
           </template>
@@ -136,9 +154,13 @@
             {{ track.title }}
 
 
+
+
           </template>
           <template v-else>
             Track {{track.position + 1}}
+
+
 
 
           </template>
@@ -159,7 +181,7 @@
   import ReleaseDescription from '../../../components/releases/ReleaseDescription'
   import PlayReleaseButton from '../../../components/releases/PlayReleaseButton'
   import client from '../../../plugins/apollo'
-  import {createReleaseDetailsQuery} from '../../../components/releases/queries'
+  import { createReleaseDetailsQuery } from '../../../components/releases/queries'
 
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
@@ -178,7 +200,44 @@
         csrftoken: ''
       }
     },
-    metaInfo: function () {
+    head () {
+      return {
+        meta: [
+          {
+            hid: 'title',
+            property: 'og:title',
+            content: this.pageTitle
+          },
+          {
+            hid: 'url',
+            property: 'og:url',
+            content: this.currentRoute
+          },
+          {
+            hid: 'type',
+            property: 'og:type',
+            content: 'music.album'
+          },
+          {
+            hid: 'description',
+            property: 'og:description',
+            content: this.release && this.release.description
+          },
+          {
+            hid: 'og:image',
+            property: 'og:image',
+            content: this.releaseImage
+          }
+        ]
+      }
+    },
+    async asyncData ({params}) {
+      let {data} = await client.query(createReleaseDetailsQuery(params.slug))
+      return {
+        release: data.release
+      }
+    },
+    head () {
       return {
         meta: [
           {
@@ -206,12 +265,6 @@
             content: this.releaseImage
           }
         ]
-      }
-    },
-    async asyncData ({params}) {
-      let {data} = await client.query(createReleaseDetailsQuery(params.slug))
-      return {
-        release: data.release
       }
     },
     methods: {
