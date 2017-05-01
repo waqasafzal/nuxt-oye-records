@@ -8,6 +8,7 @@
     "apollo-client": "^1.0.1",
     "babel-polyfill": "^6.23.0",
     "graphql-tag": "^2.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "node-fetch": "^1.6.3",
     "nuxt": "latest",
     "style-loader": "^0.16.1",
