@@ -237,36 +237,6 @@
         release: data.release
       }
     },
-    head () {
-      return {
-        meta: [
-          {
-            vmid: 'title',
-            property: 'og:title',
-            content: this.pageTitle
-          },
-          {
-            vmid: 'url',
-            property: 'og:url',
-            content: this.currentRoute
-          },
-          {
-            vmid: 'type',
-            property: 'og:type',
-            content: 'music.album'
-          },
-          {
-            vmid: 'description',
-            property: 'og:description',
-            content: this.release && this.release.description
-          },
-          {
-            property: 'og:image',
-            content: this.releaseImage
-          }
-        ]
-      }
-    },
     methods: {
       onAddToCartSuccess () {
         console.log('success')
