@@ -90,7 +90,7 @@
           <p>
                   <span :key="genre.pk" v-for="(genre, i) in release.genres">
                     {{ i > 0 ? ' / ' : ''}}
-                    <template v-if="genre.subgenres.length > 0">
+                    <template v-if="genre.subgenres">
                       <nuxt-link
                           :to="{name: 'genres-slug', params: {slug: genre.slug}}">{{ genre.name
                         }}</nuxt-link>
@@ -209,7 +209,6 @@
       }
     },
     async asyncData ({params}) {
-      console.log('Params' + JSON.stringify(params))
       let {data} = await client.query(createReleaseDetailsQuery(params.slug))
       return {
         release: data.release
