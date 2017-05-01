@@ -15,7 +15,7 @@ var setupAPI = function () {
       apiHost = "'https://oye-records.com'"
       break
     case 'testing':
-      apiHost = "'https://oye.kolter.it'"
+      apiHost = "'http://oye.kolter.it'"
       break
     case 'develop':
     default:
