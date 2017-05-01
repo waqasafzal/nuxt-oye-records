@@ -5,7 +5,7 @@
         <template v-if="status === 'new' && genre">Latest </template>
         {{ title }}
       </h3>
-      <nuxt-link :to="toRoute" class="release-list-summary__header__more">
+      <nuxt-link v-if="getRoute()" :to="getRoute()" class="release-list-summary__header__more">
         View all
         <template v-if="genre">{{ title }}</template>
         <img src="../../assets/images/arrow_right_grey.svg"/>
@@ -17,7 +17,7 @@
 
 <script>
   import ReleaseList from './ReleaseList'
-  import gql from 'graphql-tag'
+//  import gql from 'graphql-tag'
 
   var getReleaseListColumnNumber
   if (process.BROWSER_BUILD) {
@@ -31,75 +31,76 @@
 
   export default {
     components: {ReleaseList},
-    props: ['pageSize', 'status', 'title', 'genre'],
+    props: ['pageSize', 'status', 'title', 'genre', 'releases'],
     name: 'ReleaseListSummary',
     data: function () {
       return {
         count: (this.pageSize || 1) * getReleaseListColumnNumber(),
-        loading: false,
-        releases: []
+        loading: false
       }
     },
-    computed: {
-      filterBy: function () {
-        let filterBy = {
-          'status': this.status
-        }
-        if (this.genre) {
-          var genreIds = []
-          if (this.genre.pk) {
-            genreIds.push(this.genre.pk)
-          } else {
-            let subgenreIds = this.genre.genres.map(x => x.pk)
-            genreIds = genreIds.concat(subgenreIds)
-          }
-          filterBy['genres'] = genreIds
-          filterBy['status'] = 'any'
-        }
-        return JSON.stringify(filterBy)
-      },
-      toRoute: function () {
+    methods: {
+//      filterBy: function () {
+//        let filterBy = {
+//          'status': this.status
+//        }
+//        if (this.genre) {
+//          var genreIds = []
+//          if (this.genre.pk) {
+//            genreIds.push(this.genre.pk)
+//          } else {
+//            let subgenreIds = this.genre.genres.map(x => x.pk)
+//            genreIds = genreIds.concat(subgenreIds)
+//          }
+//          filterBy['genres'] = genreIds
+//          filterBy['status'] = 'any'
+//        }
+//        return JSON.stringify(filterBy)
+//      },
+      getRoute: function () {
+        var route
         if (this.status === 'new') {
           if (this.genre) {
-            if (this.genre.pk) {
-              return {
-                name: 'genre-id-slug',
-                params: {genreId: this.genre.pk, slug: this.genre.slug, genre: this.genre}
+            if (this.genre.id) {
+              route = {
+                name: 'genres-slug',
+                params: {slug: this.genre.slug, genre: this.genre}
               }
             }
           } else {
-            return {name: 'releases-new'}
+            route = {name: 'releases-new'}
           }
         } else if (this.status === 'pre') {
-          return {name: 'releases-pre'}
+          route = {name: 'releases-pre'}
         } else if (this.status === 'back') {
-          return {name: 'releases-back'}
+          route = {name: 'releases-back'}
         }
+        return route
       }
-    },
-    apollo: {
-      // Query with parameters
-      releases () {
-        return {
-          query: gql`query Releases($first: Int!, $filterBy: JSONString!) {
-            releases(first: $first, filterBy: $filterBy) {
-              ...Releases
-            }
-          }
-          ${ReleaseList.fragments.releases}
-          `,
-          variables () {
-            return {
-              first: this.count,
-              filterBy: this.filterBy
-            }
-          },
-          loadingKey: 'loadingQueriesCount',
-          watchLoading (isLoading, countModifier) {
-            this.loading = isLoading
-          }
-        }
-      }
+//    },
+//    apollo: {
+//      // Query with parameters
+//      releases () {
+//        return {
+//          query: gql`query Releases($first: Int!, $filterBy: JSONString!) {
+//            releases(first: $first, filterBy: $filterBy) {
+//              ...Releases
+//            }
+//          }
+//          ${ReleaseList.fragments.releases}
+//          `,
+//          variables () {
+//            return {
+//              first: this.count,
+//              filterBy: this.filterBy
+//            }
+//          },
+//          loadingKey: 'loadingQueriesCount',
+//          watchLoading (isLoading, countModifier) {
+//            this.loading = isLoading
+//          }
+//        }
+//      }
     }
   }
 </script>

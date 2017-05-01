@@ -1,7 +1,7 @@
 <template>
   <div>
     <json-ld-product-schema :release="release"></json-ld-product-schema>
-    <nuxt-link :to="{ name: 'release-id-slug', params: { id: release.pk, slug: release.slug }}">
+    <nuxt-link :to="{ name: 'releases-slug', params: { slug: release.slug }}">
       <div class="text-left list-item">
         <div class="resizable-list-item-outer">
           <div class="resizable-list-item-inner">

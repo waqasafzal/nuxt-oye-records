@@ -80,6 +80,7 @@ export const releaseDetails = gql`
                 slug
             }
         }
+        discogsUrl
     }
 `
 
@@ -126,6 +127,7 @@ export const releasesConnections = gql`
                     }
                 }
                 thumbnailUrl
+                discogsUrl
             }
         }
         pageInfo {

@@ -12,19 +12,19 @@
           <nuxt-link to="/">Home</nuxt-link>
           <template v-if="release.mainGenre">
             /
-
             <nuxt-link
-              :to="{name: 'genre-id-slug', params: {genreId: release.mainGenre.pk, slug: release.mainGenre.slug}}">
+              :to="{name: 'genres-slug', params: {slug: release.mainGenre.slug}}">
             {{ release.mainGenre.name }}
 
             </nuxt-link>
           </template>
           <template v-if="release.mainGenreSub">
             /
-
             <nuxt-link
-              :to="{name: 'subgenre-id-slug', params: {genreId: release.mainGenreSub.parentGenre.pk, subGenreId: release.mainGenreSub.pk, slug: release.mainGenreSub.parentGenre.slug, subSlug: release.mainGenreSub.slug}}">
+              :to="{name: 'genres-slug-subslug', params: {slug: release.mainGenreSub.parentGenre.slug, subslug: release.mainGenreSub.slug}}">
             {{ release.mainGenreSub.name }}
+
+
 
             </nuxt-link>
           </template>
@@ -56,7 +56,8 @@
         <div class="product__info__footer">
           <div :class="['product__info__availability', release.availability.status]"></div>
           <span>{{ inStockMessage }}</span>
-          <span class="pressing">{{ release.format }} | {{ year }} - {{ pressingRegion }} | {{ release.condition }}</span>
+          <span class="pressing">{{ release.format }} | {{ year }} - {{ pressingRegion }} | {{ release.condition
+            }}</span>
         </div>
       </div>
     </div>
@@ -70,9 +71,13 @@
           <div>
             <network network="facebook">
               <i class="fa fa-fw fa-facebook"></i> Facebook
+
+
             </network>
             <network network="twitter">
               <i class="fa fa-fw fa-twitter"></i> Twitter
+
+
             </network>
           </div>
         </social-sharing>
@@ -80,14 +85,20 @@
         <div class="product__details__detail">
           Genre
 
+
+
           <p>
                   <span :key="genre.pk" v-for="(genre, i) in release.genres">
                     {{ i > 0 ? ' / ' : ''}}
                     <template v-if="genre.subgenres.length > 0">
-                      <nuxt-link :to="{name: 'GenreDetailPage', params: {genreId: genre.pk, slug: genre.slug}}">{{ genre.name }}</nuxt-link>
+                      <nuxt-link
+                          :to="{name: 'genres-slug', params: {slug: genre.slug}}">{{ genre.name
+                        }}</nuxt-link>
                     </template>
                     <template v-else>
-                      <nuxt-link :to="{name: 'SubGenreDetailPage', params: {genreId: genre.parentGenre.pk, slug: genre.parentGenre.slug, subGenreId: genre.pk, subSlug: genre.slug}}">{{ genre.name }}</nuxt-link>
+                      <nuxt-link
+                          :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug}}">{{ genre.name
+                        }}</nuxt-link>
                     </template>
                   </span>
         </p>
@@ -105,9 +116,13 @@
         <h4>
           <template v-if="release.tracks.length > 0">
             Tracklist
+
+
           </template>
           <template v-else>
             No Tracklist Available
+
+
           </template>
         </h4>
         <div class="release-detail__tracklist__item"
@@ -119,11 +134,15 @@
           </template>
           <template v-if="track.title">
             {{ track.title }}
+
+
           </template>
           <template v-else>
             Track {{track.position + 1}}
+
+
           </template>
-          <div class="release-detail__tracklist__item play" >
+          <div class="release-detail__tracklist__item play">
             <play-release-button :release="release" background="transparent" foreground="#313532"></play-release-button>
           </div>
         </div>
@@ -134,25 +153,22 @@
 
 <script>
   import Vue from 'vue'
-  import ReleasePrice from '../../components/releases/ReleasePrice.vue'
-  import {releaseDetails} from '../../components/graphql/releases'
-  import DjangCsrfToken from '../../components/shared/django-csrf-token/django-csrf-token'
-  import JsonLdProductSchema from '../../components/releases/JsonLdProductSchema.vue'
-  import gql from 'graphql-tag'
-  import ReleaseButtonBar from '../../components/releases/ReleaseButtonBar'
-  import ReleaseDescription from '../../components/releases/ReleaseDescription'
-  import PlayReleaseButton from '../../components/releases/PlayReleaseButton'
+  import ReleasePrice from '../../../components/releases/ReleasePrice.vue'
+  import JsonLdProductSchema from '../../../components/releases/JsonLdProductSchema.vue'
+  import ReleaseButtonBar from '../../../components/releases/ReleaseButtonBar'
+  import ReleaseDescription from '../../../components/releases/ReleaseDescription'
+  import PlayReleaseButton from '../../../components/releases/PlayReleaseButton'
+  import client from '../../../plugins/apollo'
+  import {createReleaseDetailsQuery} from '../../../components/releases/queries'
 
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
-
-  Vue.use(DjangCsrfToken)
 
   Vue.component('release-price', ReleasePrice)
 
   export default {
     name: 'ReleaseDetailView',
-    props: ['id'],
+    props: ['id', 'slug', 'subslug'],
     components: {PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
     data: function () {
       return {
@@ -192,23 +208,11 @@
         ]
       }
     },
-    apollo: {
-      // Query with parameters
-      release () {
-        return {
-          query: gql`query Release($pk: String!) {
-            release (slug: $slug){
-              ...ReleaseDetails
-            }
-          }
-          ${releaseDetails}
-          `,
-          variables () {
-            return {
-              slug: this.slug
-            }
-          }
-        }
+    async asyncData ({params}) {
+      console.log('Params' + JSON.stringify(params))
+      let {data} = await client.query(createReleaseDetailsQuery(params.slug))
+      return {
+        release: data.release
       }
     },
     methods: {
@@ -273,7 +277,7 @@
         return __API__ + this.$route.path
       },
       releaseImage: function () {
-        return this.release && this.release.thumbnailUrl
+        return this.release && __API__ + this.release.thumbnailUrl
       }
     }
   }

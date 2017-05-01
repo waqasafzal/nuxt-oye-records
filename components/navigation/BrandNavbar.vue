@@ -8,12 +8,11 @@
                  src="../../assets/images/mobile-bar.svg" v-on:click="toggleMobileNav" v-on-clickaway="closeMobileNav">
             <span>menu</span>
           </div>
-          <router-link to="/">
+          <nuxt-link to="/">
             <img src="../../assets/images/oye-logo.svg" alt="Oye Records"
                  height="50">
-          </router-link>
+          </nuxt-link>
         </div>
-        <!-- AUDIO PLAYER ON SAME LEVEL AS NAVIGATION TO BE HIDDEN FROM MD DOWN-->
         <main-navbar class="col-2 col-md-8"></main-navbar>
         <div class="col-2 col-md-2 navbar__search static">
           <img class="hidden-md-up mobile-search-icon float-right"
@@ -29,22 +28,6 @@
             </button>
           </form>
         </div>
-        <!--<div class="col-2 col-md-4">-->
-          <!--<div class="navbar__brand__cart float-right" v-on:mouseenter="showCart" v-on:mouseleave="hideCart">-->
-            <!--<router-link :class="['cart__icon', isVisibleCart ? 'hover': '']" to="/cart">-->
-              <!--<span class="cart-label hidden-sm-down">Your Cart</span>-->
-              <!--<img class="navbar__brand__cart__icon"-->
-                   <!--src="../../assets/images/cart.svg" alt="Cart">-->
-              <!--<span :class="['badge', cartCount === undefined ? 'empty': '']">-->
-              <!--<template v-if="cartCount !== undefined">{{ cartCount }}</template>-->
-              <!--<template v-else>0</template>-->
-            <!--</span>-->
-            <!--</router-link>-->
-            <!--<div :class="['cart-dropdown', 'hidden-md-down', isVisibleCart ? 'show': '']">-->
-              <!--<cart-dropdown></cart-dropdown>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
       </div>
     </div>
   </div>
@@ -54,13 +37,12 @@
   import Vue from 'vue'
   import CartDropdown from '../../components/cart/CartDropdown.vue'
   import { mixin as clickaway } from 'vue-clickaway'
-  import AudioPlayer from '../../components/audio/AudioPlayer'
   import MainNavbar from './MainNavbar'
 
   Vue.component('cart-dropdown', CartDropdown)
 
   export default {
-    components: {MainNavbar, AudioPlayer},
+    components: {MainNavbar},
     name: 'BrandNavbar',
     mixins: [ clickaway ],
     data: function () {

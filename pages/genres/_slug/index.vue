@@ -40,13 +40,15 @@
 </template>
 
 <script>
-  import ReleaseList from '../../components/releases/ReleaseList.vue'
-  import {ReleasePagingMixin} from '../../components/releases/releases-paging-mixin'
-  import gql from 'graphql-tag'
-  import {getReleaseListColumnNumber} from '../../components/utils'
-  import ReleaseItem from '../../components/releases/ReleaseItem'
-  import Dropdown from '../../components/shared/Dropdown'
-  import LoadingSpinner from '../../components/shared/LoadingSpinner'
+  import ReleaseList from '../../../components/releases/ReleaseList.vue'
+//  import gql from 'graphql-tag'
+  import {getReleaseListColumnNumber} from '../../../components/utils'
+  import ReleaseItem from '../../../components/releases/ReleaseItem'
+  import Dropdown from '../../../components/shared/Dropdown'
+  import LoadingSpinner from '../../../components/shared/LoadingSpinner'
+  import client from '../../../plugins/apollo'
+  import { createReleaseListQuery } from '../../../components/releases/queries'
+  import { createGenreQuery } from '../../../components/genres/queries'
 
   const MAX_BESTSELLERS = 40
 
@@ -57,9 +59,8 @@
       ReleaseItem,
       ReleaseList
     },
-    mixins: [ReleasePagingMixin],
     name: 'GenreDetailPage',
-    props: ['genreId', 'subGenreId', 'genre'],
+    props: ['genre'],
     data: function () {
       var genreId = this.genreId
       var isSubgenre = typeof this.subGenreId !== 'undefined'
@@ -74,8 +75,34 @@
         relevantGenreId: genreId,
         isSubgenre: isSubgenre,
         detailGenre: this.genre,
+        genreSlug: this.slug,
+        genreSubslug: this.subslug,
         bsPageSize: getReleaseListColumnNumber() * (2 / 3),
         currentSlide: 1
+      }
+    },
+    async asyncData ({params}) {
+      let releaseFilterParams = {}
+      if (params.subslug) {
+        releaseFilterParams['subgenres'] = [params.subslug]
+      } else if (params.slug) {
+        releaseFilterParams['genres'] = [params.slug]
+      }
+      let genreReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)}))
+
+      releaseFilterParams['status'] = 'bestsellers'
+      let bestsellerReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)}))
+
+      let options = {
+        slug: params.subslug || params.slug,
+        isSubgenre: typeof params.subslug !== 'undefined'
+      }
+      let detailGenreResults = await client.query(createGenreQuery(options))
+
+      return {
+        detailGenre: detailGenreResults.data.detailGenre,
+        releases: genreReleases.data.releases,
+        bestsellers: bestsellerReleases.data.releases
       }
     },
     computed: {
@@ -120,18 +147,15 @@
       },
       selectSlide (index) {
         if (index !== this.currentSlide) {
-          console.log('INDEX ' + index)
           this.currentSlide = index
         }
       },
       onSelected (value) {
         let location = {
-          name: 'SubGenreDetailPage',
+          name: 'genres-slug-subslug',
           params: {
-            genreId: this.detailGenre.pk,
             slug: this.detailGenre.slug,
-            subGenreId: value.pk,
-            subSlug: value.slug,
+            subslug: value.slug,
             genre: value
           }
         }
@@ -139,86 +163,51 @@
       }
     },
     watch: {
-      $route () {
-        console.log('route reload')
+      $route (options) {
+        let params = options.params
 
-        if (this.genre) {
-          this.detailGenre = this.genre
-        } else {
-          var genreId = this.genreId
-          var isSubgenre = typeof this.subGenreId !== 'undefined'
-          if (isSubgenre) {
-            genreId = this.subGenreId
-          }
-          this.relevantGenreId = genreId
-          this.isSubgenre = isSubgenre
+        this.detailGenre = params.genre
+        let slug = params.slug
+        let subslug = params.subslug
 
-          var vm = this
-
-          this.$apollo.queries.detailGenre.fetchMore({
-            // New variables
-            variables: {
-              pk: this.relevantGenreId,
-              sub: this.isSubgenre
-            },
-            // Transform the previous result with new data
-            updateQuery: (previousResult, {fetchMoreResult}) => {
-              let data = fetchMoreResult
-              vm.detailGenre = data.detailGenre
-
-              return {
-                detailGenre: data.detailGenre
-              }
-            }
+        if (typeof this.detailGenre === 'undefined') {
+          client.query(
+            createGenreQuery({
+              slug: subslug || slug,
+              sub: typeof subslug === 'undefined'
+            })
+          ).then((result) => {
+            vm.loading = false
+            vm.detailGenre = result.data.detailGenre
           })
         }
+
+        let releaseFilterParams = {}
+        if (subslug) {
+          releaseFilterParams['subgenres'] = [subslug]
+        } else if (slug) {
+          releaseFilterParams['genres'] = [slug]
+        }
+
+        var vm = this
+        this.loading = true
         this.releases = []
+        client.query(
+          createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)})
+        ).then(({data}) => {
+          vm.loading = false
+          vm.releases = data.releases
+        })
+
+        releaseFilterParams['status'] = 'bestsellers'
         this.bestsellers = []
-      }
-    },
-    apollo: {
-      detailGenre: function () {
-        return {
-          query: gql`query Genre($pk: ID!, $sub: Boolean) {
-            detailGenre: genre(pk: $pk, sub: $sub) {
-              pk
-              name
-              slug
-              subgenres {
-                pk
-                name
-                slug
-              }
-            }
-          }`,
-          variables: function () {
-            return {
-              pk: this.relevantGenreId,
-              sub: this.isSubgenre
-            }
-          }
-        }
-      },
-      bestsellers: function () {
-        return {
-          query: gql`query Bestsellers($first: Int!, $after: String, $filterBy: JSONString!) {
-            bestsellers: releases(first: $first, after: $after, filterBy: $filterBy) {
-                ...Releases
-            }
-          }
-          ${ReleaseList.fragments.releases}
-          `,
-          variables: function () {
-            return {
-              first: MAX_BESTSELLERS,
-              after: '',
-              filterBy: this.getFilterByParameter('bestsellers')
-            }
-          },
-          watchLoading (isLoading, countModifier) {
-            this.bsLoading = isLoading
-          }
-        }
+        this.bsLoading = true
+        client.query(
+          createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)})
+        ).then(({data}) => {
+          vm.bestsellers = data.releases
+          vm.bsLoading = false
+        })
       }
     }
   }

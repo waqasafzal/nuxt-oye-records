@@ -9,6 +9,7 @@
 <script>
   import gql from 'graphql-tag'
   import {releaseDetails} from '../graphql/releases'
+  import client from '../../plugins/apollo'
 
   export default {
     name: 'PlayReleaseButton',
@@ -29,30 +30,30 @@
     },
     methods: {
       playRelease () {
-        if (this.release && (!this.release.tracks || this.release.tracks.length === 0)) {
+        if (this.playableRelease && (!this.playableRelease.tracks || this.playableRelease.tracks.length === 0)) {
           this.fetchRelease()
         } else {
           this.$store.dispatch('playRelease', {
-            release: this.release
+            release: this.playableRelease
           }).then(track => {
           })
         }
       },
       fetchRelease () {
         var vm = this
-        this.$apollo.query({
-          query: gql`query Release($pk: ID!) {
-            release (pk: $pk){
+        client.query({
+          query: gql`query Release($slug: String!) {
+            release (slug: $slug){
               ...ReleaseDetails
             }
           }
           ${releaseDetails}
           `,
           variables: {
-            pk: this.release.pk
+            slug: this.playableRelease.slug
           }
         }).then((result) => {
-          vm.release = result.data.release
+          vm.playableRelease = result.data.release
           vm.playRelease()
         })
       }
@@ -62,7 +63,8 @@
         baseSize: this.size,
         ratio: 1.1,
         foregroundColor: this.foreground,
-        backgroundColor: this.background
+        backgroundColor: this.background,
+        playableRelease: this.release
       }
     },
     computed: {

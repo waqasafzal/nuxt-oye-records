@@ -11,31 +11,28 @@
 import * as types from './types'
 import Vue from 'vue'
 import gql from 'graphql-tag'
-import Apollo from '../plugins/apollo'
+import apolloClient from '../plugins/apollo'
 import {oyeCart} from '../components/graphql/cart'
 
 import {addCartAlertMessage} from '../components/shared/utils'
 
-const apolloClient = Apollo.defaultClient
+// const apolloClient = Apollo.defaultClient
 
 export const getCart = ({commit}) => new Promise((resolve, reject) => {
-  apolloClient
-  .query({
+  apolloClient.query({
     query: gql`query OyeCart {
         cart {
             ...OyeCart
         }
     },
-    ${oyeCart}`,
-    result (data) {
-      if (data.cart.cookie) {
-        Vue.cookie.set('cart', data.cart.cookie, true)
-        console.log(Vue.cookie.get('cart'))
-      }
-      commit(types.SET_CART, data.cart)
-    }
+    ${oyeCart}`
   })
   .then(({data}) => {
+    if (data.cart.cookie) {
+      Vue.cookie.set('cart', data.cart.cookie, true)
+      console.log(Vue.cookie.get('cart'))
+    }
+    commit(types.SET_CART, data.cart)
     const r = data && data.cart
     commit(types.SET_CART, r || null)
     return resolve(r)
@@ -65,9 +62,6 @@ export const addToCart = ({commit}, args) => new Promise((resolve, reject) => {
             cart: addToCart.cart
           }
         }
-      },
-      update: function (data, response) {
-        console.log('update' + data + response)
       }
     }
   ).then(({data}) => {

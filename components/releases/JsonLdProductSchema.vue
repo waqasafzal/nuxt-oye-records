@@ -1,5 +1,5 @@
 <template>
-    <script type="application/ld+json">
+    <script v-html="productSchema" type="application/ld+json">
       {{ productSchema }}
     </script>
 </template>
@@ -10,14 +10,14 @@
     props: ['release'],
     data: function () {
       return {
-        releaseUrl: this.$router.resolve({
-          name: 'release-id-slug',
-          params: {id: this.release.pk, slug: this.release.slug}}).href
+        releaseUrl: __API__ + this.$router.resolve({
+          name: 'releases-slug',
+          params: {slug: this.release.slug}}).href
       }
     },
     computed: {
       productSchema () {
-        return JSON.stringify({
+        let schema = {
           '@context': 'http://schema.org/',
           '@type': 'MusicAlbum',
           'name': this.release.title,
@@ -66,7 +66,11 @@
               ]
             }
           }
-        })
+        }
+        if (this.release.discogsUrl) {
+          schema['sameAs'] = this.release.discogsUrl
+        }
+        return JSON.stringify(schema)
       }
     }
   }

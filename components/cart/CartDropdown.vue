@@ -5,7 +5,7 @@
       <div id="cart-dropdown-list" :class="['cart-dropdown__list', lines.length <= 2 ? 'overflow': '']">
         <div :class="['row', 'item', line.not_available]" :key="i" v-for="(line, i) in lines">
           <div class="col-md-10">
-            <nuxt-link :to="{name: 'release-id-slug', params: {id: line.release.pk, slug: line.release.slug}}">
+            <nuxt-link :to="{name: 'releases-slug', params: {slug: line.release.slug}}">
               <img class="cart-dropdown__image" :src="line.smallImageUrl" :alt="artistName(line.release) + ' ' + line.release.title" />
               <h3>
                 <div class="row">

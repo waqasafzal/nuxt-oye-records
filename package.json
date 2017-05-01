@@ -27,7 +27,7 @@
     "vuex": "^2.2.1"
   },
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt $NODE_DEBUG_OPTION ",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",

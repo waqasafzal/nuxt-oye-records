@@ -10,7 +10,7 @@ export const addCartAlertMessage = function (message, level, showCart) {
     buttons.push({
       title: 'View Cart',
       route: {
-        name: 'CartPage'
+        name: 'cart'
       }
     })
   }

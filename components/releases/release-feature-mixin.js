@@ -1,4 +1,5 @@
-import gql from 'graphql-tag'
+import {createReleaseBaseDetailsQuery} from './queries'
+import client from '../../plugins/apollo'
 
 export const ReleaseFeature = {
   data: function () {
@@ -6,43 +7,10 @@ export const ReleaseFeature = {
       release: null
     }
   },
-  apollo: {
-    // Query with parameters
-    release () {
-      return {
-        query: gql`query Release($slug: String!) {
-            release (slug: $slug){
-                pk
-                artistFirstName
-                artistLastName
-                title
-                artistFirstName
-                artistLastName
-                hasTracks
-                tracks {
-                    url
-                    title
-                    position
-                    release {
-                        artistFirstName
-                        artistLastName
-                        title
-                    }
-                }
-                availability {
-                    status
-                }
-                slug
-                thumbnailUrl
-            }
-        }
-        `,
-        variables () {
-          return {
-            slug: this.slug
-          }
-        }
-      }
+  async asyncData ({params}) {
+    var {data} = await client.query(createReleaseBaseDetailsQuery(params.slug))
+    return {
+      release: data.release
     }
   }
 }

@@ -4,11 +4,11 @@
       <slot></slot>
       <div class="alert-list__buttons">
         <div v-for="button in buttons">
-          <router-link :to="button.route">
+          <nuxt-link :to="button.route">
             <div class="alert-list__button">
               {{ button.title }}
             </div>
-          </router-link>
+          </nuxt-link>
         </div>
       </div>
     </div>

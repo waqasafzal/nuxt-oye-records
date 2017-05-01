@@ -11,16 +11,16 @@
   Vue.component('releases-page', ReleasePage)
 
   const filterBy = JSON.stringify({
-    status: 'back'
+    status: 'used'
   })
 
   export default {
-    name: 'BackInStockPage',
+    name: 'PreOrderPage',
     mixins: [ReleasePagingMixin(filterBy)],
     data: function () {
       return {
         pageSize: 5,
-        status: 'back'
+        status: 'used'
       }
     }
   }

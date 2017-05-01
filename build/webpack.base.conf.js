@@ -8,10 +8,10 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-var apiHost = "'http://localhost:8000'"
+var apiHost = "'http://localhost:3000'"
 
 var setupAPI = function () {
-  apiHost = "'http://localhost:8000'"
+  apiHost = "'http://localhost:3000'"
   switch (process.env.NODE_ENV) {
     case 'production':
       apiHost = "'https://oye-records.com'"
@@ -21,7 +21,7 @@ var setupAPI = function () {
       break
     case 'develop':
     default:
-      apiHost = "'http://localhost:8000'"
+      apiHost = "'http://localhost:3000'"
       break
   }
 }

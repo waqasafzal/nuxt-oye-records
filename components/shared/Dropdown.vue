@@ -39,7 +39,6 @@
         return data
       },
       onSelected (value) {
-        console.log('sss' + value)
         this.$emit('selected', value)
       }
     }

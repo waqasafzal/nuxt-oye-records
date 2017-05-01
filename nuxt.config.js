@@ -31,7 +31,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'starter',
+    title: 'OYE Records - Webshop',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -93,26 +93,21 @@ module.exports = {
       ssr: false
     },
     { src: '~plugins/apollo.js', injectAs: 'apolloProvider' },
-    {src: '~plugins/vue-cookie'}
+    {src: '~plugins/vue-cookie', ssr: false}
   ],
   router: {
     middleware: ['apollo'],
     extendRoutes (routes, resolve) {
       routes.push(
         {
-          name: 'genre-id-slug',
-          path: '/genre/:id-:slug',
-          component: resolve(__dirname, 'pages/genres/_id.vue')
-        },
-        {
-          name: 'subgenre-id-slug',
-          path: '/genres/:genreId-:slug/:subGenreId-:subSlug',
-          component: resolve(__dirname, 'pages/genres/_id.vue')
-        },
-        {
-          name: 'release-id-slug',
-          path: '/releases/:id-:slug',
-          component: resolve(__dirname, 'pages/releases/_id.vue')
+          name: 'genres-slug-subslug',
+          path: '/genres/:slug/:subslug',
+          component: resolve(__dirname, 'pages/genres/_slug/index.vue')
+        // },
+        // {
+        //   name: 'releases-slug',
+        //   path: '/releases/:id-:slug',
+        //   component: resolve(__dirname, 'pages/releases/_slug.vue')
         }
       )
     }
@@ -121,8 +116,9 @@ module.exports = {
     { src: '~assets/css/storefront/storefront.scss', lang: 'scss' }
   ],
   devProxy: {
-    'localhost:3000/media': 'http://local.oye.com:8000/',
-    'localhost:3000/admin': 'http://local.oye.com:8000/',
-    'localhost:3000/static/admin/css': 'http://local.oye.com:8000/'
-  },
+    'localhost:8000/graphql': 'http://local.oye.com:8000/',
+    'localhost:8000/media': 'http://local.oye.com:8000/',
+    'localhost:8000/admin': 'http://local.oye.com:8000/',
+    'localhost:8000/static/admin/css': 'http://local.oye.com:8000/'
+  }
 }

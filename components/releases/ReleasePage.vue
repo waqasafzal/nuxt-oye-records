@@ -14,15 +14,13 @@
 
   import ReleaseList from './ReleaseList.vue'
   import NoResults from '../shared/NoResults.vue'
-  import {ReleasePagingMixin} from '../releases/releases-paging-mixin'
 
   Vue.component('noresults', NoResults)
   Vue.component('release-list', ReleaseList)
 
   export default {
     name: 'ReleasePage',
-    props: ['pageSize', 'status'],
-    mixins: [ReleasePagingMixin],
+    props: ['pageSize', 'status', 'releases', 'loading'],
     data: function () {
       return {
         filterBy: JSON.stringify({
