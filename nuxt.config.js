@@ -15,7 +15,11 @@ var setupAPI = function () {
       apiHost = "'https://oye-records.com'"
       break
     case 'testing':
-      apiHost = "'http://oye.kolter.it'"
+      if (process.env.INSECURE) {
+        apiHost = "'http://oye.kolter.it'"
+      } else {
+        apiHost = "'https://oye.kolter.it'"
+      }
       break
     case 'develop':
     default:
