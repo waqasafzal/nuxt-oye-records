@@ -12,10 +12,9 @@
         <button @click="forwards()" class="audio-control__btn forward"></button>
       </div>
       <div class="col-8">
-        <vue-slider :dotSize="10" class="position-slider" id="position-slider" tooltip="hidden" :formatter="time" :max="duration"
-                    v-model="currentTime"></vue-slider>
+        <input v-model="currentTime" class="position-slider" type="range" :max="duration"></input>
         <div class="audio-control__stats">
-          <div class="audio-control__stats__time">{{ time(currentTime) }} / {{ time(duration) }}</div>
+          <div class="audio-control__stats__time">{{ time(currentTime/1000) }} / {{ time(duration/1000) }}</div>
           <div class="audio-control__stats__count">{{ playlistPos }} / {{ playlistLength }}</div>
         </div>
       </div>
@@ -35,6 +34,8 @@
       return '00:00'
     }
   }
+
+  const PRECISION_FACTOR = 1000
 
   export default {
     components: {TrackDisplay},
@@ -76,10 +77,11 @@
         this.togglePlayButton()
       },
       currentTime: function (val) {
-        let diff = this.audio.currentTime - val
+        let number = (val / PRECISION_FACTOR)
+        let diff = this.audio.currentTime - number
         // if the change diff is big enough to assume a user triggered skip
         if (diff > 1 || diff < -1) {
-          this.audio.currentTime = val
+          this.audio.currentTime = number
         }
       }
     },
@@ -126,11 +128,9 @@
         this.audio.addEventListener('ended', this.forwards)
       },
       _handlePlayingUI: function (e) {
-        let currTime = parseInt(this.audio.currentTime)
-        let percentage = parseInt((currTime / this.totalDuration) * 100)
-        this.progressStyle = `width:${percentage}%;`
+        let currTime = parseInt(this.audio.currentTime * PRECISION_FACTOR)
         this.currentTime = currTime
-        this.duration = this.audio.duration
+        this.duration = this.audio.duration * PRECISION_FACTOR
       },
       time: function (val) {
         return convertTimeHHMMSS(val)

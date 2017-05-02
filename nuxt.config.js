@@ -104,7 +104,6 @@ module.exports = {
         }
       }
     ],
-    vendor: ['vue-slider-component'],
     plugins: [
       new webpack.DefinePlugin({
         __API__: apiHost
@@ -112,10 +111,6 @@ module.exports = {
     ]
   },
   plugins: [
-    {
-      src: '~plugins/vue-slider-component',
-      ssr: false
-    },
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-cookie', ssr: false}
   ],

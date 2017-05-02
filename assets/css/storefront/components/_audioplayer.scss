@@ -32,6 +32,7 @@
   }
   &__stats {
     //display: inline-block;
+    margin-top: -6px;
     &__time {
       display: inline-block;
     }
@@ -44,9 +45,11 @@
 }
 
 .position-slider {
-  position: absolute;
+  position: relative;
   margin-right: 20px;
   top: 14%;
+  width: 98%;
+
 }
 
 #audioplayer {

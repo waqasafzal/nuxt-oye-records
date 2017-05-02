@@ -24,16 +24,9 @@
           </template>
           <template v-if="release.mainGenreSub">
             /
-
-
             <nuxt-link
                 :to="{name: 'genres-slug-subslug', params: {slug: release.mainGenreSub.parentGenre.slug, subslug: release.mainGenreSub.slug}}">
               {{ release.mainGenreSub.name }}
-
-
-
-
-
             </nuxt-link>
           </template>
         </div>
@@ -78,7 +71,7 @@
                         v-cloak inline-template>
           <div>
             <network network="facebook">
-              <i class="fa fa-fw fa-facebook"></i> Facebook
+              <i class="fa fa-fw fa-facebook"></i>Facebook
 
 
 
@@ -96,11 +89,6 @@
         <h4>Details</h4>
         <div class="product__details__detail">
           Genre
-
-
-
-
-
           <p>
                   <span :key="genre.pk" v-for="(genre, i) in release.genres">
                     {{ i > 0 ? ' / ' : ''}}

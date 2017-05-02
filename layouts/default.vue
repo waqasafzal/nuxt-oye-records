@@ -10,7 +10,9 @@
       <div class="container maincontent page">
         <nuxt></nuxt>
       </div>
-      <audio-player></audio-player>
+      <template v-if="audio">
+        <audio-player></audio-player>
+      </template>
     </div>
   </div>
 </template>
