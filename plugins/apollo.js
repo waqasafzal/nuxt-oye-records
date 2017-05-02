@@ -11,8 +11,6 @@ import 'isomorphic-fetch'
 // Vue.use(VueApollo)
 
 let hostUrl = __API__
-console.log(hostUrl)
-// let hostUrl = 'http://local.oye.com:8000'
 
 let networkInterface = createNetworkInterface({
   uri: hostUrl + '/graphql',

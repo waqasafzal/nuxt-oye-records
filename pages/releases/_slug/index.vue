@@ -239,7 +239,6 @@
     },
     methods: {
       onAddToCartSuccess () {
-        console.log('success')
       },
       addToCart (pk) {
         this.$store.dispatch('addToCart', {
@@ -254,7 +253,6 @@
         })
       },
       onAddToCartError () {
-        console.log('error')
       },
       back () {
         this.$router.go(-1)

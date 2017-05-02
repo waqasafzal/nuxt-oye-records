@@ -30,7 +30,6 @@ export const getCart = ({commit}) => new Promise((resolve, reject) => {
   .then(({data}) => {
     if (data.cart.cookie) {
       Vue.cookie.set('cart', data.cart.cookie, true)
-      console.log(Vue.cookie.get('cart'))
     }
     commit(types.SET_CART, data.cart)
     const r = data && data.cart

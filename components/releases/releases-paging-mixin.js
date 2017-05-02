@@ -56,7 +56,6 @@ export const ReleasePagingMixin = function (filterBy) {
 
         // Fetch more data and transform the original result
         this.loading = true
-        console.log('loading: ' + this.loading)
         var vm = this
         client.query(createReleaseListQuery({
           first: this.count,
