@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="row">
-      <release-item :release="release.node"
-                    v-for="release in releases.edges"
-                    :key="release.node.id"
+      <release-item :release="getRelease(release)"
+                    v-for="(release, i) in getReleases(releases)"
+                    :key="i"
                     class="col-12 col-sm-6 col-md-3 col-lg-2 product-list">
       </release-item>
     </div>
@@ -14,7 +14,7 @@
 <script>
 
   import Vue from 'vue'
-  import {releasesConnections} from '../graphql/releases'
+  import { releasesConnections } from '../graphql/releases'
 
   import LoadingSpinner from '../shared/LoadingSpinner.vue'
   import ReleaseItem from './ReleaseItem.vue'
@@ -27,6 +27,16 @@
     props: ['releases', 'loading'],
     fragments: {
       releases: releasesConnections
+    },
+    methods: {
+      getReleases (items) {
+        let releases = items.edges || items
+        return releases
+      },
+      getRelease (item) {
+        let release = item.node || item.release || item
+        return release
+      }
     }
   }
 </script>

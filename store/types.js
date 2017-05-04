@@ -12,3 +12,7 @@ export const ADD_TRACK = 'ADD_TRACK'
 export const PLAY_BACKWARD = 'PLAY_BACKWARD'
 export const PLAY_FORWARD = 'PLAY_FORWARD'
 export const ADD_ALERT = 'ADD_ALERT'
+
+export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS'
+export const ADD_SEARCH_RESULTS = 'ADD_SEARCH_RESULTS'
+export const SET_QUERY = 'SET_QUERY'

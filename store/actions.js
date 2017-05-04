@@ -12,9 +12,10 @@ import * as types from './types'
 import Vue from 'vue'
 import gql from 'graphql-tag'
 import apolloClient from '../plugins/apollo'
-import {oyeCart} from '../components/graphql/cart'
+import { oyeCart } from '../components/graphql/cart'
 
-import {addCartAlertMessage} from '../components/shared/utils'
+import { addCartAlertMessage } from '../components/shared/utils'
+import { callReleaseSearchQuery } from '../components/search/queries'
 
 // const apolloClient = Apollo.defaultClient
 
@@ -181,4 +182,30 @@ export const setUser = ({commit}, args) => new Promise((resolve, reject) => {
 
 export const addAlert = ({commit}, args) => new Promise((resolve, reject) => {
   commit(types.ADD_ALERT, args)
+})
+
+export const search = ({commit}, args) => new Promise((resolve, reject) => {
+  let type = args.type
+  let mutationType = args.append ? types.ADD_SEARCH_RESULTS : types.SET_SEARCH_RESULTS
+  let query = args.query
+  if (query) {
+    if (type === 'releases') {
+      callReleaseSearchQuery(query, args.size, args.page || 1, ({data}) => {
+        let rearchResults = data.search
+        commit(mutationType, {search: rearchResults, type: type})
+        resolve({
+          search: rearchResults
+        })
+      })
+    }
+  } else {
+    commit(mutationType, {
+      search: {
+        results: [],
+        total: 0
+      },
+      type: type
+    })
+  }
+  commit(types.SET_QUERY, query)
 })

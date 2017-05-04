@@ -2,7 +2,7 @@
   <div class="navbar__brand">
     <div class="container">
       <div class="row no-gutters">
-        <div class="col-8 col-md-2 navbar__logo">
+        <div class="col-8 col-md-1 navbar__logo">
           <div class="menu-icon-mobile hidden-md-up">
             <img class="navbar__brand__menu-toggle closed open"
                  src="../../assets/images/mobile-bar.svg" v-on:click="toggleMobileNav" v-on-clickaway="closeMobileNav">
@@ -14,20 +14,7 @@
           </nuxt-link>
         </div>
         <main-navbar class="col-2 col-md-8"></main-navbar>
-        <div class="col-2 col-md-2 navbar__search static">
-          <img class="hidden-md-up mobile-search-icon float-right"
-               src="../../assets/images/search-icon.svg">
-          <form class="form-inline navbar__brand__search"
-                action="search/search">
-            <div class="mobile-close-search hidden-md-up">
-              <img src="../../assets/images/close-icon.svg">
-            </div>
-            <input class="form-control search-input" type="text" name="q" :value="query">
-            <button class="btn btn-link" type="submit">
-              <img src="../../assets/images/search-icon.svg">
-            </button>
-          </form>
-        </div>
+        <search class="col-2 col-md-3"></search>
       </div>
     </div>
   </div>
@@ -38,11 +25,12 @@
   import CartDropdown from '../../components/cart/CartDropdown.vue'
   import { mixin as clickaway } from 'vue-clickaway'
   import MainNavbar from './MainNavbar'
+  import Search from '../search/Search'
 
   Vue.component('cart-dropdown', CartDropdown)
 
   export default {
-    components: {MainNavbar},
+    components: {Search, MainNavbar},
     name: 'BrandNavbar',
     mixins: [ clickaway ],
     data: function () {

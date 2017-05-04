@@ -118,17 +118,9 @@
         <h4>
           <template v-if="release.tracks.length > 0">
             Tracklist
-
-
-
-
           </template>
           <template v-else>
             No Tracklist Available
-
-
-
-
           </template>
         </h4>
         <div class="release-detail__tracklist__item"
@@ -217,6 +209,15 @@
             content: this.releaseImage
           }
         ]
+      }
+    },
+    watch: {
+      $route ({params}) {
+        this.release = ''
+        let slug = params.slug
+        client.query(createReleaseDetailsQuery(slug)).then(({data}) => {
+          this.release = data.release
+        })
       }
     },
     async asyncData ({params}) {

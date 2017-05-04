@@ -60,6 +60,8 @@
     }
   }
   &__search {
+    position: relative;
+    display: inline-block;
     .mobile-search-icon {
       padding-right: $global-padding;
     }

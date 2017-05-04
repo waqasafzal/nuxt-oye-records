@@ -23,6 +23,13 @@ const store = new Vuex.Store({
       nextTrack: null,
       currentTrack: null
     },
+    search: {
+      query: '',
+      releases: {
+        results: [],
+        total: 0
+      }
+    },
     alerts: null
   },
 
@@ -79,6 +86,26 @@ const store = new Vuex.Store({
           player.currentTrack = player.history[player.position]
         }
       }
+    },
+    [types.SET_SEARCH_RESULTS]: (state, args) => {
+      let type = args.type
+      if (type === 'releases') {
+        let search = args.search
+        state.search.releases.results = search.results
+        state.search.releases.total = search.total
+      }
+    },
+    [types.ADD_SEARCH_RESULTS]: (state, args) => {
+      let type = args.type
+      if (type === 'releases') {
+        let results = state.search.releases.results
+        let search = args.search
+        state.search.releases.results = results.concat(search.results)
+        state.search.releases.total = search.total
+      }
+    },
+    [types.SET_QUERY]: (state, query) => {
+      state.search.query = query
     }
   },
   actions

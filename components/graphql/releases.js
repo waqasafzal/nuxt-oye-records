@@ -85,22 +85,47 @@ export const releaseDetails = gql`
 `
 
 export const releasePlayerInfo = gql`
-  fragment ReleasePlayerInfo on ArtikelType {
-      pk
-      title
-      artistFirstName
-      artistLastName
-      tracks {
-          url
-          title
-          position
-          release {
-              artistFirstName
-              artistLastName
-              title
-          }
-      }
-  }
+    fragment ReleasePlayerInfo on ArtikelType {
+        pk
+        title
+        artistFirstName
+        artistLastName
+        tracks {
+            url
+            title
+            position
+            release {
+                artistFirstName
+                artistLastName
+                title
+            }
+        }
+    }
+`
+
+export const release = gql`
+    fragment Release on ArtikelType {
+        pk
+        title
+        slug
+        label
+        artistFirstName
+        artistLastName
+        price {
+            currency
+            gross
+        }
+        hasTracks
+        availability {
+            status
+            priceRange  {
+                maxPrice { gross, grossLocalized, currency },
+                minPrice { gross, grossLocalized, currency }
+            }
+        }
+        thumbnailUrl
+        discogsUrl
+    }
 `
 
 export const releasesConnections = gql`
@@ -108,33 +133,14 @@ export const releasesConnections = gql`
         edges {
             cursor
             node {
-                pk
-                title
-                slug
-                label
-                artistFirstName
-                artistLastName
-                price {
-                    currency
-                    gross
-                }
-                hasTracks
-                availability {
-                    status
-                    priceRange  {
-                        maxPrice { gross, grossLocalized, currency },
-                        minPrice { gross, grossLocalized, currency }
-                    }
-                }
-                thumbnailUrl
-                discogsUrl
+                ...Release
             }
         }
         pageInfo {
             hasNextPage
         }
     }
-`
+${release}`
 
 export const newStatus = JSON.stringify({'status': 'new'})
 export const backStatus = JSON.stringify({'status': 'back'})
