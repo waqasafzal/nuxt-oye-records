@@ -8,19 +8,4 @@
   width: 23px;
   display: inline-block;
   margin-right: 5px;
-  &-facebook {
-  }
-  &-twitter {
-
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    opacity: 0.9;
-  }
 }
