@@ -27,3 +27,8 @@ if (process.BROWSER_BUILD) {
 }
 
 export const getReleaseListColumnNumber = _getReleaseListColumnNumber
+
+const ROWS = 5
+export const getPageSize = function () {
+  return getReleaseListColumnNumber() * ROWS
+}

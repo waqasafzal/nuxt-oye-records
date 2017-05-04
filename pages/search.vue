@@ -15,16 +15,12 @@
 
 <script>
   import ReleaseList from '../components/releases/ReleaseList'
-  import { getReleaseListColumnNumber } from '../components/utils'
-
-  const ROWS = 5
-  const PAGE_SIZE = getReleaseListColumnNumber() * ROWS
+  import { getPageSize } from '../components/utils'
 
   export default {
     components: {ReleaseList},
     name: 'SearchPage',
     data: function () {
-      console.log('initialQuery' + this.initialQuery)
       return {
         query: this.$store.state.search.query,
         loadingReleases: false,
@@ -41,7 +37,7 @@
     },
     mounted () {
       if (this.query && this.releaseResults.length < this.releasesTotal) {
-        this.loadMore()
+        this.loadMore(false)
       }
       window.onscroll = this.checkInfiniteScrolling
     },
@@ -49,18 +45,18 @@
       checkInfiniteScrolling () {
         if (!this.loadingReleases && (this.releaseResults.length < this.releasesTotal) &&
           (window.innerHeight + window.scrollY) >= this.$el.offsetHeight) {
-          this.loadMore()
+          this.loadMore(true)
         }
       },
-      loadMore () {
+      loadMore (append) {
         this.page += 1
         this.loadingReleases = true
         this.$store.dispatch('search', {
           type: 'releases',
           query: this.query,
-          size: PAGE_SIZE,
+          size: getPageSize(),
           page: this.page,
-          append: true
+          append: append
         }).then(result => {
           this.loadingReleases = false
         })

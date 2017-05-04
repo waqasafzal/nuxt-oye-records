@@ -44,6 +44,7 @@
 
   import _ from 'lodash'
   import * as types from '../../store/types'
+  import { getPageSize } from '../utils'
 
   const MAX_ARTISTS = 2
   const MAX_RELEASES = 3
@@ -88,7 +89,7 @@
             this.$store.dispatch('search', {
               query: this.query,
               type: 'releases',
-              size: MAX_RELEASES,
+              size: getPageSize(),
               identifier: identifier
             })
           } else {
