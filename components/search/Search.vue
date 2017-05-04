@@ -47,7 +47,7 @@
   import { getPageSize } from '../utils'
 
   const MAX_ARTISTS = 2
-  const MAX_RELEASES = 3
+  const MAX_RELEASES = 5
 
   export default {
     name: 'Search',
