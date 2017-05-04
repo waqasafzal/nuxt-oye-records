@@ -65,24 +65,19 @@
     <hr/>
     <div class="row product__secondary-infos">
       <div class="col-md-6 col-12 product__details">
-        <social-sharing :url="currentRoute"
+        <h4>Share Article</h4>
+        <social-sharing class="social-sharing" :url="currentRoute"
                         :title="pageTitle"
                         :description="release.description"
                         v-cloak inline-template>
           <div>
             <network network="facebook">
-              <i class="fa fa-fw fa-facebook"></i>Facebook
-
-
-
-
+              <!--<i class="fa fa-fw fa-facebook"></i>-->
+              <img class="fa fa-facebook" src="~assets/images/Facebook.svg" />
             </network>
             <network network="twitter">
-              <i class="fa fa-fw fa-twitter"></i> Twitter
-
-
-
-
+              <img class="fa fa-twitter" src="~assets/images/Twitter.svg" />
+              <!--<i class="fa fa-fw fa-twitter"></i> Twitter-->
             </network>
           </div>
         </social-sharing>
