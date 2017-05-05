@@ -1,5 +1,5 @@
 <template>
-  <div class="play-forward-button" :style="playReleaseStyle" @click.prevent="onClick">
+  <div class="play-backward-button" :style="playReleaseStyle" @click.prevent="onClick">
     <div :style="arrowStyle">
       <div :style="arrowRightStyle">
         <div :style="barStyle"></div>
@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: 'ForwardButton',
+    name: 'BackwardButton',
     props: {
       size: {
         type: Number,
@@ -38,7 +38,7 @@
         return {
           height: `${this.baseSize}px`,
           width: `${this.baseSize}px`,
-          transform: 'scaleX(-1)',
+//          transform: 'scaleX(-1)',
           borderRadius: '2px',
           backgroundColor: this.backgroundColor
         }
@@ -75,22 +75,22 @@
     },
     methods: {
       onClick () {
-        this.$emit('forward')
+        this.$emit('backward')
       }
     }
   }
 </script>
 
 <style lang="scss">
-  .play-forward-button {
+  .play-backward-button {
     &:hover:after {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      border-radius: 2px;
       height: 100%;
+      border-radius: 2px;
       background-color: white;
       opacity: 0.1;
     }

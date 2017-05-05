@@ -1,7 +1,12 @@
 <template>
-  <div :class="['play-release-button', active ? 'active': '']" :style="playReleaseStyle" @click.prevent="onClick">
+  <div class="play-release-button" :style="playReleaseStyle" @click.prevent="onClick">
     <div :style="arrowStyle">
-      <div :style="[active ? pauseStyle : arrowRightStyle]"></div>
+      <template v-if="active">
+        <div :style="pauseStyle"></div>
+      </template>
+      <template v-else>
+        <div :style="arrowRightStyle"></div>
+      </template>
     </div>
   </div>
 </template>
@@ -10,6 +15,7 @@
   export default {
     name: 'PlayButton',
     props: {
+      release: Object,
       size: {
         type: Number,
         default: 32
@@ -29,10 +35,14 @@
         ratio: 1.1,
         foregroundColor: this.foreground,
         backgroundColor: this.background,
-        active: false
+        initiated: false
       }
     },
     computed: {
+      active () {
+        let player = this.$store.state.player
+        return this.release && player.playing && player.currentTrack.release.slug === this.release.slug
+      },
       playReleaseStyle: function () {
         return {
           height: `${this.baseSize}px`,
@@ -48,7 +58,7 @@
         }
       },
       arrowRightStyle: function () {
-        return {
+        let style = {
           width: 0,
           height: 0,
           borderRadius: `${this.baseSize / 16}px`,
@@ -60,9 +70,10 @@
           right: `${this.baseSize * 0.1 / 2}px`,
           top: `${(this.baseSize / 4) * this.ratio}px`
         }
+        return style
       },
       pauseStyle: function () {
-        return {
+        let style = {
           position: 'relative',
           width: `${this.baseSize / 2.6}px`,
           height: `${this.baseSize / 2.4}px`,
@@ -71,15 +82,16 @@
           borderRight: `${this.baseSize / 8}px solid white`,
           top: `${(this.baseSize / 3.5) * this.ratio}px`
         }
+        return style
       }
     },
     methods: {
       onClick () {
         if (this.active) {
-          this.active = false
+//          this.active = false
           this.$emit('pause')
         } else {
-          this.active = true
+//          this.active = true
           this.$emit('play')
         }
       }

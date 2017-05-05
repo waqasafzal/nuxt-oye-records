@@ -1,5 +1,12 @@
 <template>
-  <play-button :size="size" :foreground="foreground" :background="background" v-if="hasTracks" @play="playRelease"></play-button>
+  <play-button :release="playableRelease"
+               :size="size"
+               :foreground="foreground"
+               :background="background"
+               v-if="hasTracks"
+               @play="playRelease"
+               @pause="onPause"
+  ></play-button>
 </template>
 
 <script>
@@ -7,6 +14,7 @@
   import {releaseDetails} from '../graphql/releases'
   import client from '../../plugins/apollo'
   import PlayButton from '../audio/PlayButton'
+  import * as types from '../../store/types'
 
   export default {
     components: {PlayButton},
@@ -39,6 +47,8 @@
           this.$store.dispatch('playRelease', {
             release: this.playableRelease
           }).then(track => {
+//            console.log('set track: ' + track)
+//            this.play = track
           })
         }
       },
@@ -59,6 +69,9 @@
           vm.playableRelease = result.data.release
           vm.playRelease()
         })
+      },
+      onPause () {
+        this.$store.commit(types.PAUSE_TRACK)
       }
     },
     computed: {

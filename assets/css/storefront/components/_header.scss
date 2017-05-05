@@ -1,5 +1,5 @@
 .navbar {
-  padding: 0;
+  padding: 41px 0 0 0;
   @include media-breakpoint-down(sm) {
     img {
       max-height: 30px;
@@ -11,7 +11,11 @@
     }
   }
   &__account {
+    position: fixed;
+    background-color: white;
+    z-index: 10;
     padding: $global-padding * 0.25 0;
+    width: 100%;
     border-bottom: 1px solid $gray-color-2;
     p {
       font-size: 0.7rem;

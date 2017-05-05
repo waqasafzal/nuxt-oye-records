@@ -1,64 +1,131 @@
-.audio-control {
-  &__btn-panel {
-    text-align: justify;
-    &:after {
-      content: "";
-      width: 100%;
-      display: inline-block;
-    }
-  }
-  &__btn {
-    height: 35px;
-    width: 35px;
-    border: none;
-    display: inline-block;
-    background-size: 50% 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
-    position: relative;
-    &.play {
-      background-image: url('../../../assets/images/play.png');
-    }
-    &.pause {
-      background-image: url('../../../assets/images/pause.png');
-    }
-    &.backward {
-      background-image: url('../../../assets/images/backward.png');
-    }
-    &.forward {
-      background-image: url('../../../assets/images/forward.png');
-    }
-  }
-  &__stats {
-    //display: inline-block;
-    margin-top: -6px;
-    &__time {
-      display: inline-block;
-    }
-    &__count {
-      display: inline-block;
-      float: right;
-      right: 10px;
-    }
-  }
-}
-
-.position-slider {
-  position: relative;
-  margin-right: 20px;
-  top: 14%;
-  width: 98%;
-
-}
-
 #audioplayer {
-  background-color: $brand-color-green;
-  opacity: .9;
+  background-color: $brand-color-black;
   position: fixed;
   z-index: 10;
-  height: 70px;
+  height: 60px;
   bottom: 0px;
   width: 100%;
-  margin-top: 50px;
+  display: flex;
+  .button-box {
+    position: relative;
+    width: 138px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .control-item {
+    display: flex;
+    justify-content: space-between;
+  }
+  .current-track {
+    padding: 10px 20px;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    &__info-box {
+      letter-spacing: 0px;
+      display: flex;
+      margin-top: auto;
+      justify-content: space-between;
+      font-size: 12px;
+      .track-info {
+        padding-bottom: 5px;
+        display: inline-flex;
+        .track-artist {
+          color: $gray-color-2
+        }
+        .track-title {
+          color: $gray-color-1
+        }
+      }
+      .track-time {
+        display: inline-flex;
+        &__remaining {
+          color: $gray-color-2
+        }
+        &__total {
+          color: $gray-color-1
+        }
+      }
+    }
+    .position-slider {
+      margin-bottom: auto;
+    }
+  }
+  .audio-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__buttons {
+      display: inline-flex;
+      justify-content: space-around;
+      width: 100%;
+      padding: 2px;
+    }
+    &__btn {
+      position: relative;
+    }
+  }
+}
+
+.ap {
+  &__element {
+    border-right: 1px solid #414242;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 0px;
+    background-color: black;
+    border: none;
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 4px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: #13bba4;
+  }
+
+  input[type=range]:focus {
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    position: relative;
+    width: 1px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 20px;
+    cursor: ew-resize;
+    background: #434343;
+    box-shadow: -30000px 0 0 30000px $brand-color-green;
+  }
+}
+
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7;
+}
+input[type="range"]::-moz-range-track {
+  background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7;
+}
+input[type="range"]::-ms-fill-upper {
+  background-color: #9a905d;
 }

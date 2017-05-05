@@ -21,10 +21,11 @@ const store = new Vuex.Store({
       history: [],
       position: 0,
       nextTrack: null,
-      currentTrack: null
+      currentTrack: null,
+      playing: false
     },
     search: {
-      query: '',
+      query: null,
       releases: {
         results: [],
         total: 0
@@ -59,11 +60,23 @@ const store = new Vuex.Store({
       }
     },
     [types.PLAY_TRACK]: (state, track) => {
-      if (track) {
-        state.player.history.push(track)
+      let player = state.player
+      let changing = player.currentTrack !== track
+      if (track && changing) {
+        player.history.push(track)
       }
-      state.player.currentTrack = track
-      state.player.position = state.player.history.length - 1
+      player.playing = true
+      player.currentTrack = track
+      if (changing) {
+        player.position = player.history.length - 1
+      }
+      console.log('play')
+    },
+    [types.PAUSE_TRACK]: (state) => {
+      if (state.player) {
+        state.player.playing = false
+        console.log('pause')
+      }
     },
     [types.PLAY_BACKWARD]: (state, track) => {
       var player = state.player
@@ -79,11 +92,14 @@ const store = new Vuex.Store({
       let player = state.player
       if (player) {
         let pos = player.position
-        if (pos < player.history.length - 1) {
+        if (pos < player.history.length) {
           player.position = player.position + 1
         }
+        console.log(`${player.position} ${player.history.length}`)
         if (player.position < player.history.length) {
           player.currentTrack = player.history[player.position]
+        } else {
+          player.playing = false
         }
       }
     },

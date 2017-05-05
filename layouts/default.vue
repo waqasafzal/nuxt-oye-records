@@ -1,7 +1,7 @@
 <template>
   <div id="app">
+    <account-navbar></account-navbar>
     <header class="navbar" role="navigation">
-      <account-navbar></account-navbar>
       <brand-navbar :isOpenMobile="isOpenMobileMenu" v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
     </header>

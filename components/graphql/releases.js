@@ -4,6 +4,20 @@
 
 import gql from 'graphql-tag'
 
+export const tracksFragment = gql`
+    fragment Tracks on ReleaseTrackType {
+        url
+        title
+        position
+        release {
+            pk
+            slug
+            artistFirstName
+            artistLastName
+            title
+        }
+    }
+`
 // Save the fragment into a variable
 export const releaseDetails = gql`
     fragment ReleaseDetails on ArtikelType {
@@ -50,15 +64,7 @@ export const releaseDetails = gql`
         thumbnailUrl
         addToCartUrl
         tracks {
-            url
-            title
-            position
-            releasePosition
-            release {
-                artistFirstName
-                artistLastName
-                title
-            }
+            ...Tracks
         }
         mainGenre {
             pk
@@ -82,6 +88,7 @@ export const releaseDetails = gql`
         }
         discogsUrl
     }
+    ${tracksFragment}
 `
 
 export const releasePlayerInfo = gql`
@@ -91,16 +98,10 @@ export const releasePlayerInfo = gql`
         artistFirstName
         artistLastName
         tracks {
-            url
-            title
-            position
-            release {
-                artistFirstName
-                artistLastName
-                title
-            }
+            ...Tracks
         }
     }
+    ${tracksFragment}
 `
 
 export const release = gql`

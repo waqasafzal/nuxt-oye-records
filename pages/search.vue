@@ -22,21 +22,27 @@
     name: 'SearchPage',
     data: function () {
       return {
-        query: this.$store.state.search.query,
         loadingReleases: false,
         page: 0
       }
     },
     computed: {
+      query () {
+        let storeQuery = this.$store.state.search.query
+        let q = this.$route.query.q
+        console.log('storeQuery: ' + storeQuery + ' q: ' + q)
+        return storeQuery || q || ''
+      },
       releaseResults () {
-        return this.$store.state.search.releases.results
+        return this.$store.state.search.releases.results || []
       },
       releasesTotal () {
-        return this.$store.state.search.releases.total
+        return this.$store.state.search.releases.total || 0
       }
     },
     mounted () {
-      if (this.query && this.releaseResults.length < this.releasesTotal) {
+      let storeQuery = this.$store.state.query
+      if (this.query && (this.releaseResults.length < this.releasesTotal || typeof storeQuery === 'undefined')) {
         this.loadMore(false)
       }
       window.onscroll = this.checkInfiniteScrolling

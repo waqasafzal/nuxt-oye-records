@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { releaseDetails } from '../graphql/releases'
+import { releaseDetails, tracksFragment } from '../graphql/releases'
 
 import ReleaseList from '../releases/ReleaseList.vue'
 
@@ -23,28 +23,22 @@ export const createReleaseBaseDetailsQuery = function (slug) {
     query: gql`query Release($slug: String!) {
         release (slug: $slug) {
             pk
+            slug
             artistFirstName
             artistLastName
             title
             hasTracks
             tracks {
-                url
-                title
-                position
-                release {
-                    artistFirstName
-                    artistLastName
-                    title
-                }
+                ...Tracks
             }
             availability {
                 status
             }
-            slug
             thumbnailUrl
             discogsUrl
         }
     }
+    ${tracksFragment}
     `,
     variables: {
       slug: slug
