@@ -135,6 +135,7 @@
         this.blurEnabled = false
       },
       onSubmit () {
+        console.log('on submit')
         this.$router.push({
           name: 'search',
           query: {

@@ -30,14 +30,13 @@
       query () {
         let storeQuery = this.$store.state.search.query
         let q = this.$route.query.q
-        console.log('storeQuery: ' + storeQuery + ' q: ' + q)
         return storeQuery || q || ''
       },
       releaseResults () {
-        return this.$store.state.search.releases.results || []
+        return this.$store.state.search.releases.results
       },
       releasesTotal () {
-        return this.$store.state.search.releases.total || 0
+        return this.$store.state.search.releases.total
       }
     },
     mounted () {
