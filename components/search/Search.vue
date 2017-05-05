@@ -2,7 +2,7 @@
   <div class="navbar__search">
     <img class="hidden-md-up mobile-search-icon float-right"
          src="../../assets/images/search-icon.svg">
-    <form @submit="onSubmit" class="form-inline navbar__brand__search">
+    <form @submit.prevent="onSubmit" class="form-inline navbar__brand__search">
       <div class="mobile-close-search hidden-md-up">
         <img src="../../assets/images/close-icon.svg">
       </div>
@@ -135,13 +135,13 @@
         this.blurEnabled = false
       },
       onSubmit () {
-        console.log('on submit')
         this.$router.push({
           name: 'search',
           query: {
             q: this.query
           }
         })
+        this.hideResults()
       }
     }
   }
