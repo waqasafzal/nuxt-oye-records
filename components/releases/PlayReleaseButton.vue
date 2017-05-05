@@ -1,17 +1,15 @@
 <template>
-  <div class="play-release-button" v-if="hasTracks" :style="playReleaseStyle" @click.prevent="playRelease">
-    <div :style="arrowStyle">
-      <div :style="arrowRightStyle"></div>
-    </div>
-  </div>
+  <play-button :size="size" :foreground="foreground" :background="background" v-if="hasTracks" @play="playRelease"></play-button>
 </template>
 
 <script>
   import gql from 'graphql-tag'
   import {releaseDetails} from '../graphql/releases'
   import client from '../../plugins/apollo'
+  import PlayButton from '../audio/PlayButton'
 
   export default {
+    components: {PlayButton},
     name: 'PlayReleaseButton',
     props: {
       release: Object,
@@ -26,6 +24,11 @@
       background: {
         type: String,
         default: '#313532'
+      }
+    },
+    data: function () {
+      return {
+        playableRelease: this.release
       }
     },
     methods: {
@@ -58,63 +61,11 @@
         })
       }
     },
-    data: function () {
-      return {
-        baseSize: this.size,
-        ratio: 1.1,
-        foregroundColor: this.foreground,
-        backgroundColor: this.background,
-        playableRelease: this.release
-      }
-    },
     computed: {
-      playReleaseStyle: function () {
-        return {
-          height: `${this.baseSize}px`,
-          width: `${this.baseSize}px`,
-          transform: 'scaleX(-1)',
-          borderRadius: '2px',
-          backgroundColor: this.backgroundColor
-        }
-      },
-      arrowStyle: function () {
-        return {
-          textAlign: 'center'
-        }
-      },
-      arrowRightStyle: function () {
-        return {
-          width: 0,
-          height: 0,
-          borderRadius: `${this.baseSize / 16}px`,
-          borderTop: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
-          borderBottom: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
-          borderRight: `${this.baseSize / 4}px solid ${this.foregroundColor}`,
-          margin: '0px auto 0px auto',
-          position: 'relative',
-          right: `${this.baseSize * 0.1 / 2}px`,
-          top: `${(this.baseSize / 4) * this.ratio}px`
-        }
-      },
       hasTracks () {
-        let release = this.release
-        return release && release.hasTracks || (release.tracks && release.tracks.length > 0)
+        var release = this.release
+        return release && (release.hasTracks || (release.tracks && release.tracks.length > 0))
       }
     }
   }
 </script>
-
-<style lang="scss">
-  .play-release-button {
-    &:hover:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: black;
-      opacity: 0.5;
-    }
-  }
-</style>

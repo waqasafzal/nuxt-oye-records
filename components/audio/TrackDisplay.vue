@@ -1,23 +1,15 @@
 <template>
-  <div class="marquee">
-    <template v-if="currentTrack">
-      <p class="moving" ref="movingFront">
-        {{ currentTrack.release.artistFirstName }}
-        {{ currentTrack.release.artistLastName }} -
+  <div v-if="currentTrack">
+    <div class="track-artist">
+      {{ currentTrack.release.artistFirstName }}
+      {{ currentTrack.release.artistLastName }} -
+    </div>
+    <div class="track-title">
         <template v-if="currentTitle">{{ currentTrack.title }}</template>
         <template v-else>Track {{ currentTrack.release.position }}</template>
         -
-        {{ currentTrack.release.title }}
-      </p>
-      <p class="moving-flip" ref="movingBack">
-        {{ currentTrack.release.artistFirstName }}
-        {{ currentTrack.release.artistLastName }} -
-        <template v-if="currentTrack.title">{{ currentTrack.title }}</template>
-        <template v-else>Track {{ currentTrack.release.position }}</template>
-        -
-        {{ currentTrack.release.title }}
-      </p>
-    </template>
+      {{ currentTrack.release.title }}
+    </div>
   </div>
 </template>
 
@@ -71,34 +63,3 @@
     }
   }
 </script>
-
-<style>
-  .marquee {
-    width: auto;
-    padding: .5em;
-    height: 2em;
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-  }
-
-  .marquee .moving {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 8s linear -4s infinite;
-  }
-
-  .marquee .moving-flip {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee-flip 12s linear 6s infinite;
-  }
-  @keyframes marquee {
-    0%   { transform: translate(-100%, 0); }
-    100% { transform: translate(0, 0); }
-  }
-  @keyframes marquee-flip {
-    0%   { transform: translate(-100%, 0); }
-    100% { transform: translate(0, 0); }
-  }
-</style>

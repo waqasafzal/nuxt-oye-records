@@ -1,30 +1,44 @@
 <template>
   <div id="audioplayer" v-show="currentTrack">
+    <div class="ap__element button-box">
+      <button @click="backwards()" class="audio-control__btn backward"></button>
+      <play-button ref="playBtn" size="" @play="playAudio" @pause="pauseAudio" class="audio-control__btn play" background="#30C46C"></play-button>
+      <forward-button class="audio-control__btn forward" @forward="forwards()"></forward-button>
+    </div>
+    <div class="ap__element current-track">
+      <div v-if="currentTrack" class="current-track__info-box">
+        <div class="track-info">
+          <div class="track-artist">
+            <template v-if="currentTrack.release.artistFirstName">
+              {{ currentTrack.release.artistFirstName }}
+            </template>
+            {{ currentTrack.release.artistLastName }}&nbsp;-&nbsp;
+          </div>
+          <div class="track-title">
+            <template v-if="currentTrack.title">{{ currentTrack.title }}</template>
+            <template v-else>Track {{ currentTrack.position }}</template>
+          </div>
+        </div>
+        <div class="track-time">
+          <div class="track-time__remaining">{{ time(currentTime / 1000) }}&nbsp;/&nbsp;</div>
+          <div class="track-time__total">{{ time(duration / 1000) }}</div>
+        </div>
+      </div>
+      <input v-model="currentTime" :style="" class="position-slider" type="range" :max="duration"></input>
+    </div>
+    <div class="ap__element button-box">BURGER</div>
+    <div class="ap__element button-box">CART</div>
     <audio id="music" ref="music">
       <source v-if="currentTrack" :src="currentTrack.url" type="audio/mpeg">
     </audio>
-    <track-display></track-display>
-
-    <div class="row">
-      <div class="col-4 audio-control__btn-panel">
-        <button @click="backwards()" class="audio-control__btn backward"></button>
-        <button @click="playAudio()" class="audio-control__btn play" ref="playBtn"></button>
-        <button @click="forwards()" class="audio-control__btn forward"></button>
-      </div>
-      <div class="col-8">
-        <input v-model="currentTime" class="position-slider" type="range" :max="duration"></input>
-        <div class="audio-control__stats">
-          <div class="audio-control__stats__time">{{ time(currentTime/1000) }} / {{ time(duration/1000) }}</div>
-          <div class="audio-control__stats__count">{{ playlistPos }} / {{ playlistLength }}</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </template>
 
 <script>
   import TrackDisplay from './TrackDisplay'
+  import PlayReleaseButton from '../releases/PlayReleaseButton'
+  import PlayButton from './PlayButton'
+  import ForwardButton from './ForwardButton'
 
   const convertTimeHHMMSS = (val) => {
     if (val > 0) {
@@ -38,7 +52,7 @@
   const PRECISION_FACTOR = 1000
 
   export default {
-    components: {TrackDisplay},
+    components: {ForwardButton, PlayButton, PlayReleaseButton, TrackDisplay},
     name: 'AudioPlayer',
     data: function () {
       return {
@@ -86,25 +100,13 @@
       }
     },
     methods: {
-      togglePlayBtn (doPlay) {
-        var playBtn = this.$refs.playBtn
-        let classNames = playBtn.classList
-        if (!doPlay) {
-          classNames.remove('play')
-          classNames.add('pause')
-        } else {
-          classNames.remove('pause')
-          classNames.add('play')
-        }
+      pauseAudio () {
+        var music = this.$refs.music
+        music.play()
       },
       playAudio () {
         var music = this.$refs.music
-        if (music.paused) {
-          music.play()
-        } else {
-          music.pause()
-        }
-        this.togglePlayBtn(music.paused)
+        music.play()
       },
       backwards () {
         this.$store.dispatch('prevTrack')
