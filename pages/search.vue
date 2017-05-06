@@ -22,11 +22,13 @@
     name: 'SearchPage',
     data: function () {
       return {
-        loadingReleases: false,
         page: 0
       }
     },
     computed: {
+      loadingReleases () {
+        return this.$store.state.search.loading
+      },
       query () {
         let storeQuery = this.$store.state.search.query
         let q = this.$route.query.q
@@ -55,7 +57,6 @@
       },
       loadMore (append) {
         this.page += 1
-        this.loadingReleases = true
         this.$store.dispatch('search', {
           type: 'releases',
           query: this.query,
@@ -63,7 +64,6 @@
           page: this.page,
           append: append
         }).then(result => {
-          this.loadingReleases = false
         })
       }
     }

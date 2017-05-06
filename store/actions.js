@@ -190,6 +190,16 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
   let query = args.query
   if (query) {
     if (type === 'releases') {
+      if (!args.append) {
+        commit(types.SET_SEARCH_RESULTS, {
+          type: 'releases',
+          search: {
+            total: 0,
+            results: []
+          }
+        })
+      }
+      commit(types.SET_SEARCH_LOADING)
       callReleaseSearchQuery(query, args.size, args.page || 1, ({data}) => {
         let rearchResults = data.search
         commit(mutationType, {search: rearchResults, type: type})

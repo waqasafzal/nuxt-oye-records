@@ -26,6 +26,7 @@ const store = new Vuex.Store({
     },
     search: {
       query: null,
+      loading: false,
       releases: {
         results: [],
         total: 0
@@ -105,6 +106,7 @@ const store = new Vuex.Store({
     },
     [types.SET_SEARCH_RESULTS]: (state, args) => {
       let type = args.type
+      state.search.loading = false
       if (type === 'releases') {
         let search = args.search
         state.search.releases.results = search.results
@@ -113,6 +115,7 @@ const store = new Vuex.Store({
     },
     [types.ADD_SEARCH_RESULTS]: (state, args) => {
       let type = args.type
+      state.search.loading = false
       if (type === 'releases') {
         let results = state.search.releases.results
         let search = args.search
@@ -122,6 +125,9 @@ const store = new Vuex.Store({
     },
     [types.SET_QUERY]: (state, query) => {
       state.search.query = query
+    },
+    [types.SET_SEARCH_LOADING]: (state) => {
+      state.search.loading = true
     }
   },
   actions
