@@ -17,7 +17,7 @@
         <div class="search__results__header">Artists</div>
         <div @click="hideResults" class="search__results__row" v-for="item in artistsResults">
           <nuxt-link v-if="item.artist" class="search__results__item"
-                     :to="{name:'releases-slug', params: {slug: item.artist.slug}}">
+                     :to="{name:'search', query: { q: item.artist.name }}">
             <div class="search__artist__image">
               <img :src="item.artist.smallThumbnailUrl"/>
             </div>
