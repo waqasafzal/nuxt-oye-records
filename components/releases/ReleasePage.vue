@@ -2,8 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div class="page__header">{{ category }}</div>
-      <h3>Released Today</h3>
-      <release-list id="releaselist" :releases="releases" :loading="loading"></release-list>
+      <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
     </div>
   </div>
 </template>
@@ -33,9 +32,9 @@
         if (this.status === 'new') {
           return 'New Releases'
         } else if (this.status === 'pre') {
-          return 'Pre Order'
+          return 'Upcoming'
         } else if (this.status === 'used') {
-          return 'Second Hand'
+          return 'Used Vinyl'
         }
       }
     }

@@ -21,6 +21,7 @@
   import AccountNavbar from '../components/navigation/AccountNavbar'
   import client from '../plugins/apollo'
   import Vue from 'vue'
+  import {getAuthHeader} from '~/utils/auth'
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
 
@@ -46,27 +47,20 @@
           if (!req.options.headers) {
             req.options.headers = {}  // Create the header object if needed.
           }
-          var item = localStorage.getItem('token')
-          if (item !== 'undefined') {
-            req.options.headers['Authorization'] = 'Token ' + item
-          }
 
-          var crsftoken = Vue.cookie.get('csrftoken')
+          var jwt = Vue.cookie.get('jwt')
+          if (jwt) {
+            var header = getAuthHeader()
+            if (header) {
+              req.options.headers['Authorization'] = header
+            }
+          }
 
           var cart = Vue.cookie.get('cart')
           if (cart) {
             req.options.headers['X-CART-TOKEN'] = cart
           }
-          if (!crsftoken) {
-            this.fetchStatus(function () {
-              crsftoken = Vue.cookie.get('csrftoken')
-              req.options.headers['X-CSRFToken'] = crsftoken
-              next()
-            })
-          } else {
-            req.options.headers['X-CSRFToken'] = crsftoken
-            next()
-          }
+          next()
         }
       }])
     }

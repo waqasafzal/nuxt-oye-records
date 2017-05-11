@@ -7,7 +7,6 @@ const fetchCart = {
     const store = this.$store
     return new Promise((resolve, reject) => {
       if (store.state.cart) {
-        console.log('fetchCart.resolve')
         resolve()
       } else {
         return store

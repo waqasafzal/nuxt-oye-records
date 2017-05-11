@@ -15,7 +15,7 @@ import apolloClient from '../plugins/apollo'
 import { oyeCart } from '../components/graphql/cart'
 
 import { addCartAlertMessage } from '../components/shared/utils'
-import { callReleaseSearchQuery } from '../components/search/queries'
+import { callArtistSearchQuery, callReleaseSearchQuery } from '../components/search/queries'
 
 // const apolloClient = Apollo.defaultClient
 
@@ -201,6 +201,14 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
       }
       commit(types.SET_SEARCH_LOADING)
       callReleaseSearchQuery(query, args.size, args.page || 1, ({data}) => {
+        let rearchResults = data.search
+        commit(mutationType, {search: rearchResults, type: type})
+        resolve({
+          search: rearchResults
+        })
+      })
+    } else if (type === 'artists') {
+      callArtistSearchQuery(query, args.size, ({data}) => {
         let rearchResults = data.search
         commit(mutationType, {search: rearchResults, type: type})
         resolve({

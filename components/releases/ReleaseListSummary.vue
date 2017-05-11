@@ -17,7 +17,6 @@
 
 <script>
   import ReleaseList from './ReleaseList'
-//  import gql from 'graphql-tag'
 
   var getReleaseListColumnNumber
   if (process.BROWSER_BUILD) {
@@ -40,23 +39,6 @@
       }
     },
     methods: {
-//      filterBy: function () {
-//        let filterBy = {
-//          'status': this.status
-//        }
-//        if (this.genre) {
-//          var genreIds = []
-//          if (this.genre.pk) {
-//            genreIds.push(this.genre.pk)
-//          } else {
-//            let subgenreIds = this.genre.genres.map(x => x.pk)
-//            genreIds = genreIds.concat(subgenreIds)
-//          }
-//          filterBy['genres'] = genreIds
-//          filterBy['status'] = 'any'
-//        }
-//        return JSON.stringify(filterBy)
-//      },
       getRoute: function () {
         var route
         if (this.status === 'new') {
@@ -71,36 +53,12 @@
             route = {name: 'releases-new'}
           }
         } else if (this.status === 'pre') {
-          route = {name: 'releases-pre'}
+          route = {name: 'releases-upcoming'}
         } else if (this.status === 'back') {
           route = {name: 'releases-back'}
         }
         return route
       }
-//    },
-//    apollo: {
-//      // Query with parameters
-//      releases () {
-//        return {
-//          query: gql`query Releases($first: Int!, $filterBy: JSONString!) {
-//            releases(first: $first, filterBy: $filterBy) {
-//              ...Releases
-//            }
-//          }
-//          ${ReleaseList.fragments.releases}
-//          `,
-//          variables () {
-//            return {
-//              first: this.count,
-//              filterBy: this.filterBy
-//            }
-//          },
-//          loadingKey: 'loadingQueriesCount',
-//          watchLoading (isLoading, countModifier) {
-//            this.loading = isLoading
-//          }
-//        }
-//      }
     }
   }
 </script>

@@ -8,11 +8,8 @@
         <div class="col-6">
           <ul class="float-right">
             <template v-if="user.authenticated">
-              <li v-if="user.is_staff">
-                <nuxt-link to="/dashboard">Dashboard</nuxt-link>
-              </li>
               <li>
-                <nuxt-link to="/account/details">Your account</nuxt-link>
+                <nuxt-link :to="{name: 'account-details'}">Your account</nuxt-link>
               </li>
               <li>
                 <nuxt-link to="/" @click.native="logout()">Log out</nuxt-link>
@@ -20,10 +17,10 @@
             </template>
             <template v-else>
               <li>
-                <nuxt-link to="/account/signup">Register</nuxt-link>
+                <nuxt-link :to="{name: 'account-signup'}">Register</nuxt-link>
               </li>
               <li>
-                <nuxt-link to="/account/login">Log in</nuxt-link>
+                <nuxt-link :to="{name: 'account-login'}">Log in</nuxt-link>
               </li>
             </template>
             <!--<div class="navbar__account__cart float-right" v-on:mouseenter="showCart" v-on:mouseleave="hideCart">-->
@@ -50,7 +47,7 @@
 </template>
 
 <script>
-  import auth from '../../components/auth'
+  import {logout} from '~/utils/auth'
   import {fetchCart} from '../../components/cart/fetch-cart-mixin'
 
   export default {
@@ -70,7 +67,7 @@
     },
     methods: {
       logout: function () {
-        auth.logout()
+        logout()
       }
     }
   }

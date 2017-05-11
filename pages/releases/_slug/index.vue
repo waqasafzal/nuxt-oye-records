@@ -55,7 +55,7 @@
         <div class="product__info__tax-included">Tax included, Shipping not included</div>
         <release-description :release="release"></release-description>
         <div class="product__info__footer">
-          <div :class="['product__info__availability', release.availability.status]"></div>
+          <div :class="['product__info__availability', releaseStatus]"></div>
           <span>{{ inStockMessage }}</span>
           <span class="pressing">{{ release.format }} | {{ year }} - {{ pressingRegion }} | {{ release.condition
             }}</span>
@@ -246,21 +246,33 @@
       inStockMessage: function () {
         let status = this.release.availability.status
         var message = ''
-        if (status === 'out') {
-          message = 'Out of stock'
+        if (status === 'out' || status === 'upcoming') {
+          if (status === 'out') {
+            message = 'Out of stock'
+          } else {
+            message = 'Upcoming'
+          }
         } else {
           if (status === 'one') {
             message = 'One copy left'
           } else if (status === 'few') {
             message = 'Few copies left'
           } else if (status === 'available') {
-            message = 'On Stock'
+            message = 'In Stock'
           }
           if (message) {
             message = message + ', Shipping 1-2 Days'
           }
         }
         return message
+      },
+      releaseStatus: function () {
+        let status = this.release.availability.status
+        if (status === 'out' || status === 'upcoming') {
+          return 'out'
+        } else {
+          return status
+        }
       },
       pressingRegion: function () {
         return 'EU'

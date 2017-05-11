@@ -13,6 +13,22 @@
       </button>
     </form>
     <div v-if="resultsVisible && hasResults" class="search__results">
+      <div v-if="artistsResults.length > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
+        <div class="search__results__header">Artists</div>
+        <div @click="hideResults" class="search__results__row" v-for="item in artistsResults">
+          <nuxt-link v-if="item.artist" class="search__results__item"
+                     :to="{name:'releases-slug', params: {slug: item.artist.slug}}">
+            <div class="search__artist__image">
+              <img :src="item.artist.smallThumbnailUrl"/>
+            </div>
+            <div class="search__release__infos">
+              <div class="search__release__name">
+                {{ item.artist.name }}
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
+      </div>
       <div v-if="releasesTotal > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
         <div class="search__results__header">Releases</div>
         <div @click="hideResults" class="search__results__row" v-for="item in releaseResults">
@@ -54,7 +70,7 @@
   import { getPageSize } from '../utils'
 
   const MAX_ARTISTS = 2
-  const MAX_RELEASES = 5
+  const MAX_RELEASES = 3
 
   export default {
     name: 'Search',
@@ -78,13 +94,16 @@
     },
     computed: {
       hasResults () {
-        return this.releasesTotal > 0
+        return this.releasesTotal > 0 || this.releaseResults.length > 0
       },
       hasMore () {
         return this.releasesTotal > MAX_RELEASES || this.artistsTotal.length > MAX_ARTISTS
       },
       releaseResults () {
         return this.$store.state.search.releases.results.slice(0, MAX_RELEASES)
+      },
+      artistsResults () {
+        return this.$store.state.search.artists.results.slice(0, MAX_ARTISTS)
       },
       releasesTotal () {
         return this.$store.state.search.releases.total
@@ -105,9 +124,21 @@
               size: getPageSize(),
               identifier: identifier
             })
+            this.$store.dispatch('search', {
+              query: this.query,
+              type: 'artists',
+              size: 2
+            })
           } else {
             this.$store.commit(types.SET_SEARCH_RESULTS, {
               type: 'releases',
+              search: {
+                total: 0,
+                results: []
+              }
+            })
+            this.$store.commit(types.SET_SEARCH_RESULTS, {
+              type: 'artists',
               search: {
                 total: 0,
                 results: []

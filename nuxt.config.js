@@ -112,21 +112,17 @@ module.exports = {
   },
   plugins: [
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
+    {src: '~plugins/vue-resource'},
     {src: '~plugins/vue-cookie', ssr: false}
   ],
   router: {
-    middleware: ['apollo'],
+    middleware: ['apollo', 'check-auth'],
     extendRoutes (routes, resolve) {
       routes.push(
         {
           name: 'genres-slug-subslug',
           path: '/genres/:slug/:subslug',
           component: resolve(__dirname, 'pages/genres/_slug/index.vue')
-          // },
-          // {
-          //   name: 'releases-slug',
-          //   path: '/releases/:id-:slug',
-          //   component: resolve(__dirname, 'pages/releases/_slug.vue')
         }
       )
     }

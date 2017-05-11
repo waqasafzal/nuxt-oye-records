@@ -59,13 +59,14 @@ export const ReleasePagingMixin = function (filterBy) {
         var vm = this
         client.query(createReleaseListQuery({
           first: this.count,
-          filterBy: this.filterBy,
+          filterBy: filterBy,
           after: this.cursor
         })).then(({data}) => {
           vm.loading = false
-          console.log('loading: ' + this.loading)
-          vm.releases['edges'] = vm.releases['edges'].concat(data.releases.edges)
-          vm.pageInfo = data.releases.pageInfo
+          vm.releases = {
+            edges: [...vm.releases['edges'], ...data.releases.edges],
+            pageInfo: data.releases.pageInfo
+          }
           vm.showMoreEnabled = data.releases.pageInfo.hasNextPage
         })
       }

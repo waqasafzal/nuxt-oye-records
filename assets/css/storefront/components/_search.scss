@@ -43,6 +43,22 @@ $font-size-xs-fixed: 12px;
       text-decoration: underline;
     }
   }
+  &__artist {
+    &__image {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      vertical-align: middle;
+      padding: 12px 0;
+      img {
+        margin-top: auto;
+        margin-bottom: auto;
+        height: 54px;
+        width: 54px;
+        border-radius: 50%;
+      }
+    }
+  }
   &__release {
     &__image {
       position: relative;
