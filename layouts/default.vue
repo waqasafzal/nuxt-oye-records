@@ -19,9 +19,9 @@
   import BrandNavbar from '../components/navigation/BrandNavbar'
   import Alerts from '../components/shared/Alerts'
   import AccountNavbar from '../components/navigation/AccountNavbar'
-  import client from '../plugins/apollo'
-  import Vue from 'vue'
-  import {getAuthHeader} from '~/utils/auth'
+//  import client from '../plugins/apollo'
+//  import Vue from 'vue'
+//  import {getAuthHeader} from '~/utils/auth'
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
 
