@@ -55,12 +55,27 @@
               req.options.headers['Authorization'] = header
             }
           }
+          client.networkInterface.use([{
+            applyMiddleware (req, next) {
+              if (!req.options.headers) {
+                req.options.headers = {}  // Create the header object if needed.
+              }
 
-          var cart = Vue.cookie.get('cart')
-          if (cart) {
-            req.options.headers['X-CART-TOKEN'] = cart
-          }
-          next()
+              var jwt = Vue.cookie.get('jwt')
+              if (jwt) {
+                var header = getAuthHeader()
+                if (header) {
+                  req.options.headers['Authorization'] = header
+                }
+              }
+
+              var cart = Vue.cookie.get('cart')
+              if (cart) {
+                req.options.headers['X-CART-TOKEN'] = cart
+              }
+              next()
+            }
+          }])
         }
       }])
     }
