@@ -34,6 +34,9 @@
         let q = this.$route.query.q
         return storeQuery || q || ''
       },
+      fields () {
+        return this.$route.query.fields
+      },
       releaseResults () {
         return this.$store.state.search.releases.results
       },
@@ -59,6 +62,7 @@
         this.page += 1
         this.$store.dispatch('search', {
           type: 'releases',
+          fields: this.fields,
           query: this.query,
           size: getPageSize(),
           page: this.page,

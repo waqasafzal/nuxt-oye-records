@@ -135,6 +135,16 @@ const store = new Vuex.Store({
       state.search.loading = true
     }
   },
+
+  getters: {
+    isAuthenticated (state) {
+      return state.user || state.user.authenticated
+    },
+    loggedUser (state) {
+      return state.user
+    }
+  },
+
   actions
 })
 

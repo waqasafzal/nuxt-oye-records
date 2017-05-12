@@ -12,7 +12,7 @@
           <nuxt-link class="nav-link" :to="{name: 'releases-upcoming'}">Upcoming</nuxt-link>
         </li>
         <li class="nav-item">
-          <nuxt-link class="nav-link" to="/charts">Charts</nuxt-link>
+          <nuxt-link class="nav-link" :to="{name: 'charts'}">Charts</nuxt-link>
         </li>
         <li class="nav-item">
           <nuxt-link class="nav-link" :to="{name: 'releases-used'}">Second Hand</nuxt-link>

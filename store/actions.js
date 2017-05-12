@@ -200,7 +200,7 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
         })
       }
       commit(types.SET_SEARCH_LOADING)
-      callReleaseSearchQuery(query, args.size, args.page || 1, ({data}) => {
+      callReleaseSearchQuery(query, args.size, args.page || 1, args.fields, ({data}) => {
         let rearchResults = data.search
         commit(mutationType, {search: rearchResults, type: type})
         resolve({

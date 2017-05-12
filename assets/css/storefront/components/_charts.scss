@@ -1,0 +1,14 @@
+.charts {
+  &-infobox {
+    height: 268px;
+    img {
+      height: 208px;
+      width: 100%;
+      background-color: $brand-color-green;
+    }
+    &__name {
+      margin-top: .5em;
+      font-size: $font-size-h3;
+    }
+  }
+}

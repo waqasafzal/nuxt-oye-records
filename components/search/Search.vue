@@ -17,7 +17,7 @@
         <div class="search__results__header">Artists</div>
         <div @click="setQuery(item.artist.name)" class="search__results__row" v-for="item in artistsResults">
           <nuxt-link v-if="item.artist" class="search__results__item"
-                     :to="{name:'search', query: { q: item.artist.name }}">
+                     :to="{name:'search', query: { q: item.artist.name, fields: JSON.stringify(['artist_name'])}}">
             <div class="search__artist__image">
               <img :src="item.artist.smallThumbnailUrl"/>
             </div>
@@ -81,12 +81,16 @@
         queryCount: 0,
         resultsVisible: false,
         artistsTotal: 0,
-        blurEnabled: true
+        blurEnabled: true,
+        lastQuery: ''
       }
     },
     watch: {
       query (val) {
-        this.queryResult()
+        if (val.toLowerCase() !== this.lastQuery.toLowerCase()) {
+          this.queryResult()
+        }
+        this.lastQuery = val
       },
       storeQuery (val) {
         this.query = val
@@ -176,6 +180,7 @@
       },
       setQuery (query) {
         this.$store.commit(types.SET_QUERY, query)
+        this.hideResults()
       }
     }
   }
