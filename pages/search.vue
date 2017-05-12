@@ -32,10 +32,10 @@
       query () {
         let storeQuery = this.$store.state.search.query
         let q = this.$route.query.q
-        return q || storeQuery || ''
+        return storeQuery || q || ''
       },
       fields () {
-        return this.$route.query.fields
+        return this.$store.state.search.fields || this.$route.query.fields
       },
       releaseResults () {
         return this.$store.state.search.releases.results

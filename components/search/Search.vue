@@ -15,7 +15,7 @@
     <div v-if="resultsVisible && hasResults" class="search__results">
       <div v-if="artistsResults.length > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
         <div class="search__results__header">Artists</div>
-        <div @click="hideResults" class="search__results__row" v-for="item in artistsResults">
+        <div @click="setQuery(item.artist.name, ['artist_name'])" class="search__results__row" v-for="item in artistsResults">
           <nuxt-link v-if="item.artist" class="search__results__item"
                      :to="{name:'search', query: { q: item.artist.name, fields: JSON.stringify(['artist_name'])}}">
             <div class="search__artist__image">
@@ -178,8 +178,8 @@
         })
         this.hideResults()
       },
-      setQuery (query) {
-        this.$store.commit(types.SET_QUERY, query)
+      setQuery (query, fields) {
+        this.$store.commit(types.SET_QUERY, {query, fields: JSON.stringify(fields)})
         this.hideResults()
       }
     }

@@ -225,5 +225,5 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
       type: type
     })
   }
-  commit(types.SET_QUERY, query)
+  commit(types.SET_QUERY, {query})
 })
