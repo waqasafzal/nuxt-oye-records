@@ -31,7 +31,7 @@
     <!--</div>-->
     <div class="artist__charts">
       <h3>Charts</h3>
-      <edit-charts></edit-charts>
+      <charts-editor :artist="artist"></charts-editor>
     </div>
 
   </div>
@@ -42,9 +42,9 @@
   import client from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import {getCurrentMonth} from '~/utils/date'
-  import * as types from '../../../../store/types'
+  import * as types from '~/store/types'
   import { getAuthHeader } from '~/utils/auth/index'
-  import EditCharts from '../../../../components/charts/EditCharts'
+  import ChartsEditor from '../../../../components/charts/ChartsEditor'
 
   let component = {}
   if (process.browser) {
@@ -64,7 +64,7 @@
   Vue.component('dropzone', component)
 
   export default {
-    components: {EditCharts},
+    components: {ChartsEditor},
     name: 'AccountArtist',
     middleware: ['auth-artist'],
     data: function () {
@@ -126,7 +126,8 @@
         client.query({
           query: gql`query Artist($slug: String!, $month: Int!) {
             artist(slug: $slug) {
-              thumbnailUrl(full: true)
+              pk
+              thumbnailUrl(width: 1200, height: 300)
               slug
               name
               charts(month: $month) {

@@ -3,11 +3,14 @@
     &__edit-box {
       display: flex;
       position: relative;
+      min-height: 300px;
+      max-height: 500px;
       img {
         position: absolute;
+        height: 100%;
       }
       .button {
-        z-index: 100;
+        z-index: 15;
         width: 80px;
         position: absolute;
         text-align: center;
