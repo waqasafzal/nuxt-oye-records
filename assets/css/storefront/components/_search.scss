@@ -17,6 +17,10 @@ $font-size-xs-fixed: 12px;
       padding: 5px;
       font-size: $font-size-h4;
     }
+    &__body {
+      max-height: 400px;
+      overflow-y: scroll;
+    }
     &__item {
       display: flex;
       align-items: center;
@@ -26,6 +30,7 @@ $font-size-xs-fixed: 12px;
     }
     &__row {
       border-bottom: 1px solid $gray-color-2;
+      width: 100%;
       &:hover {
         background-color: $gray-color-4;
         width: calc(100% + 20px);

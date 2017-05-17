@@ -55,7 +55,7 @@
         }
         // We need to pass the component's this context
         // to properly make use of http in the auth service
-        login(this, credentials, '/')
+        login(this, credentials, '/account/details')
 
         // Leave no trace
         this.credentials.password = ''

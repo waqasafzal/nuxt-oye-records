@@ -1,0 +1,22 @@
+.artist {
+  &__image {
+    &__edit-box {
+      display: flex;
+      position: relative;
+      img {
+        position: absolute;
+      }
+      .button {
+        z-index: 100;
+        width: 80px;
+        position: absolute;
+        text-align: center;
+      }
+      .dropzone {
+        position: absolute;
+        //width: 610px;
+        //height: 208px;
+      }
+    }
+  }
+}

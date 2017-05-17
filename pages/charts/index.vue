@@ -11,22 +11,16 @@
             <template v-if="artistCharts.edges.length > 0">
               <div class="row">
                 <div class="col-sm-12 col-md-6 charts-infobox" v-for="chart in artistCharts.edges">
-                  <img :src="chart.node.image"/>
+                  <img :src="chart.node.imageUrl"/>
                   <div class="charts-infobox__name">
                     <template v-if="chart.node.artist">
                       {{ chart.node.artist.name }}
-
-
                     </template>
                     <template v-else>
                       {{ chart.node.user.firstName }}
-
-
                     </template>
                     <template v-if="chart.node.name">
                       {{ chart.node.name }}
-
-
                     </template>
                   </div>
                 </div>
@@ -34,30 +28,22 @@
             </template>
             <template v-else>
               No DJ Charts for {{ currentMonth.name }}
-
-
             </template>
             <div class="release-list-summary__header">
               <h3>Staff Charts - {{ currentMonth.name }}</h3>
             </div>
             <div class="row">
               <div class="col-sm-12 col-md-6 charts-infobox" v-for="chart in staffCharts.edges">
-                <img :src="chart.node.image"/>
+                <img :src="chart.node.imageUrl"/>
                 <div class="charts-infobox__name">
                   <template v-if="chart.node.artist">
                     {{ chart.node.artist.name }}
-
-
                   </template>
                   <template v-else>
                     {{ chart.node.user.firstName }}
-
-
                   </template>
                   <template v-if="chart.node.name">
                     {{ chart.node.name }}
-
-
                   </template>
                 </div>
               </div>
@@ -98,6 +84,7 @@
                 artist {
                   name
                 }
+                imageUrl
                 category
                 name
               }
@@ -109,6 +96,7 @@
                 user {
                   firstName
                 }
+                imageUrl
                 category
                 name
               }

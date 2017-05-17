@@ -62,7 +62,8 @@ module.exports = {
       }
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+      {href: 'https://fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
     ]
   },
   /*
@@ -133,6 +134,7 @@ module.exports = {
   devProxy: {
     'localhost:3000/media': 'http://local.oye.com:8000/',
     'localhost:3000/admin': 'http://local.oye.com:8000/',
-    'localhost:3000/static/admin/css': 'http://local.oye.com:8000/'
+    'localhost:3000/static/admin/css': 'http://local.oye.com:8000/',
+    'localhost:3000/oye': 'http://local.oye.com:8000/'
   }
 }

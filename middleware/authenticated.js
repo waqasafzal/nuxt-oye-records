@@ -1,5 +1,5 @@
-export default function ({ store, redirect }) {
+export default function ({ store, router, redirect }) {
   if (!store.getters.isAuthenticated) {
-    return redirect({name: 'account-login'})
+    return redirect('/account/login')
   }
 }

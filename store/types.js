@@ -4,6 +4,9 @@
 
 export const SET_CART = 'SET_CART'
 export const SET_USER = 'SET_USER'
+export const SET_USER_ARTISTS = 'SET_USER_ARTISTS'
+export const UPDATE_USER_ARTIST = 'UPDATE_USER_ARTIST'
+
 export const LOGOUT_USER = 'LOGOUT_USER'
 export const CART_UPDATING = 'CART_UPDATING'
 

@@ -227,3 +227,22 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
   }
   commit(types.SET_QUERY, {query})
 })
+
+// export const saveCharts = ({commit}, args) => new Promise((resolve, reject) => {
+//   apolloClient.mutate({
+//     mutation: gql`mutation ($charts: JSONString!) {
+//         saveCharts(charts: $charts) {
+//             ok
+//         }
+//     }`,
+//     variables: {
+//       charts: args.charts
+//     }
+//   }).then(({data}) => {
+//     addCartAlertMessage('Charts were successfully saved.', 'info')
+//
+//     const r = data && data.removeRelease.cart
+//     commit(types.SET_CART, r || null)
+//     return resolve(r)
+//   }).catch(er => reject(er))
+// })

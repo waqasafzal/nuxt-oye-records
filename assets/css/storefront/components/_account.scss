@@ -1,0 +1,9 @@
+.account {
+  &__artist {
+    img {
+      height: 208px;
+      width: 100%;
+      background-color: $brand-color-green;
+    }
+  }
+}

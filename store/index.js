@@ -15,7 +15,8 @@ const store = new Vuex.Store({
     cart: null,
     cartUpdating: false,
     user: {
-      authenticated: false
+      authenticated: false,
+      artists: []
     },
     player: {
       history: [],
@@ -135,15 +136,34 @@ const store = new Vuex.Store({
     },
     [types.SET_SEARCH_LOADING]: (state) => {
       state.search.loading = true
+    },
+    [types.SET_USER_ARTISTS]: (state, {artists}) => {
+      state.user.artists = artists
+    },
+    [types.UPDATE_USER_ARTIST]: (state, {artist}) => {
+      var userArtists = state.user.artists
+      var updated = false
+      for (var i = 0; i < userArtists.length; i++) {
+        if (userArtists[i].slug === artist.slug) {
+          userArtists[i] = artist
+          updated = true
+        }
+      }
+      if (!updated) {
+        userArtists.push(artist)
+      }
     }
   },
 
   getters: {
     isAuthenticated (state) {
-      return state.user || state.user.authenticated
+      return state.user && state.user.authenticated
     },
     loggedUser (state) {
       return state.user
+    },
+    artists (state) {
+      return state.user && state.user.authenticated && state.user.artists
     }
   },
 
