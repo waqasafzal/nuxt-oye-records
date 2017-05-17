@@ -33,7 +33,9 @@
                         id="myVueDropzone"
                         width="75%"
                         height="208px"
-                        url="/oye/image/" v-on:vdropzone-success="substituteImageUrl">
+                        url="/oye/image/" v-on:vdropzone-success="substituteImageUrl"
+                        :headers="headers"
+              >
                 <input type="hidden" name="payload" :value="imageUploadPayload">
               </dropzone>
             </template>
@@ -106,16 +108,17 @@
 
 <script>
   import _ from 'lodash'
-  import * as types from '../../store/types'
+  import * as types from '~/store/types'
   import client from '~/plugins/apollo'
   import gql from 'graphql-tag'
-  import { callReleaseSearchQuery } from '../../components/search/queries'
-  import LoadingSpinner from '../../components/shared/LoadingSpinner'
-  import { addCartAlertMessage } from '../../components/shared/utils'
-  import { getCurrentMonth } from '../../utils/date'
+  import { callReleaseSearchQuery } from '~/components/search/queries'
+  import LoadingSpinner from '~/components/shared/LoadingSpinner'
+  import { addCartAlertMessage } from '~/components/shared/utils'
+  import { getCurrentMonth } from '~/utils/date'
 
   import Vue from 'vue'
   import NuxtLink from '../../.nuxt/components/nuxt-link'
+  import { getAuthHeader } from '~/utils/auth/index'
 
   let component = {}
   if (process.browser) {
@@ -160,7 +163,11 @@
         isVisibleSearch: false,
         blurEnabled: true,
         uploadUrl: __API__ + '/oye/image/',
-        imageUploadPayload: null
+        imageUploadPayload: JSON.stringify({
+          target: {
+            type: 'charts'
+          }
+        })
       }
     },
     computed: {
@@ -175,6 +182,17 @@
           target: {
             type: 'charts',
             id: this.currentCharts.pk
+          }
+        }
+      },
+      headers () {
+        if (process.browser) {
+          var jwt = this.$cookie.get('jwt')
+          if (jwt) {
+            var header = getAuthHeader()
+            return {
+              Authorization: header
+            }
           }
         }
       }
@@ -243,7 +261,8 @@
         this.blurEnabled = false
       },
       substituteImageUrl: function (file, response) {
-        this.currentCharts.imageUrl
+        this.currentCharts.imageUrl = response.url
+        this.currentCharts.pk = response.charts_id
       }
     },
     mounted () {
