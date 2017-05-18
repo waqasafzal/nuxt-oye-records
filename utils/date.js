@@ -5,8 +5,15 @@ export const monthNames = [
 ]
 
 export const getCurrentMonth = function () {
-  var d = new Date()
-  let month = d.getMonth()
+  return getMonth(new Date())
+}
+
+export const getMonthFromString = function (isoDate) {
+  return getMonth(new Date(isoDate))
+}
+
+export const getMonth = function (date) {
+  let month = date.getMonth()
   return {
     value: month,
     name: monthNames[month]

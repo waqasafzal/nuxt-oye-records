@@ -9,7 +9,8 @@
           <div class="account__artist col-md-6" v-for="artist in user.artists">
             <nuxt-link :to="{name: 'account-artists-slug', params: {slug: artist.slug}}">
               <img :src="artist.thumbnailUrl"/>
-              {{ artist.name }}
+              <div>{{ artist.name }}</div>
+              <div>{{ artist.homeLabel }}</div>
             </nuxt-link>
           </div>
         </div>
@@ -64,6 +65,7 @@
             artists {
               name
               slug
+              homeLabel
               thumbnailUrl(width: 1200, height: 300)
               charts(month: $month) {
                 edges {

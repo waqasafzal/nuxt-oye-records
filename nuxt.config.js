@@ -114,7 +114,8 @@ module.exports = {
   plugins: [
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-resource'},
-    {src: '~plugins/vue-cookie', ssr: false}
+    {src: '~plugins/vue-cookie', ssr: false},
+    {src: '~plugins/vue-social-sharing'}
   ],
   router: {
     middleware: ['apollo', 'check-auth'],
