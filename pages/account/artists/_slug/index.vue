@@ -86,6 +86,16 @@
         artistImage: artist.image
       }
     },
+    watch: {
+      $route ({params}) {
+//        this.release = ''
+        let slug = params.slug
+        console.log('watch route ' + slug)
+//        client.query(createReleaseDetailsQuery(slug)).then(({data}) => {
+//          this.release = data.release
+//        })
+      }
+    },
     computed: {
       headers () {
         if (process.browser) {
@@ -121,6 +131,7 @@
     },
     mounted () {
       var artist = this.artist
+      console.log('mounted ' + typeof artist.name === 'undefined')
       if (typeof artist.name === 'undefined') {
         const slug = this.$route.params['slug']
         client.query({

@@ -3,17 +3,6 @@
     <div @click="proceedChartsForm" class="button">
       <template v-if="editChartsMode">
         Save {{ currentMonth }} charts
-
-
-
-
-
-
-
-
-
-
-
       </template>
       <template v-else>
         <template v-if="typeof currentCharts.pk !== 'undefined'">Edit {{ currentMonth }} charts</template>
@@ -120,6 +109,18 @@
   }
   Vue.component('dropzone', component)
 
+  const createReleasesList = function () {
+    var releases = []
+    for (var i = 0; i < 10; i++) {
+      releases.push({
+        release: {
+          value: ''
+        }
+      })
+    }
+    return releases
+  }
+
   export default {
     components: {LoadingSpinner},
     name: 'ChartsEditor',
@@ -127,18 +128,10 @@
       artist: Object
     },
     data: function () {
-      var releases = []
-      for (var i = 0; i < 10; i++) {
-        releases.push({
-          release: {
-            value: ''
-          }
-        })
-      }
       return {
         editChartsMode: false,
         currentCharts: {
-          releases: releases
+          releases: createReleasesList()
         },
         currentChartsImageUrl: '',
         currentChartItem: -1,
@@ -284,23 +277,30 @@
           }
         }).then(({data}) => {
           var chart = data.chart
-          for (var i = 0; i < chart['releases'].length; i++) {
-            var item = chart['releases'][i]['release']
-            vm.currentCharts['releases'][i]['release'] = {
-              result: item,
-              value: vm.valueOf(item)
+          if (chart) {
+            for (var i = 0; i < chart['releases'].length; i++) {
+              if (chart['releases'][i]) {}
+              var item = chart['releases'][i]['release']
+              vm.currentCharts['releases'][i]['release'] = {
+                result: item,
+                value: vm.valueOf(item)
+              }
+            }
+            vm.currentCharts.pk = chart.pk
+            vm.currentCharts.imageUrl = chart.imageUrl
+            vm.currentChartsImageUrl = chart.imageUrl
+            // For some reason the input field is not reactively rendered otherwise
+            vm.imageUploadPayload = JSON.stringify({
+              target: {
+                type: 'charts',
+                id: chart.pk
+              }
+            })
+          } else {
+            vm.currentCharts = {
+              releases: createReleasesList()
             }
           }
-          vm.currentCharts.pk = chart.pk
-          vm.currentCharts.imageUrl = chart.imageUrl
-          vm.currentChartsImageUrl = chart.imageUrl
-          // For some reason the input field is not reactively rendered otherwise
-          vm.imageUploadPayload = JSON.stringify({
-            target: {
-              type: 'charts',
-              id: chart.pk
-            }
-          })
         })
       }
     },
