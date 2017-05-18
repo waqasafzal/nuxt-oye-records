@@ -22,7 +22,7 @@
 
             </nuxt-link>
           </template>
-          <template v-if="release.mainGenreSub">
+          <template v-if="release.mainGenreSub && release.mainGenreSub.parentGenre">
             /
             <nuxt-link
                 :to="{name: 'genres-slug-subslug', params: {slug: release.mainGenreSub.parentGenre.slug, subslug: release.mainGenreSub.slug}}">
@@ -92,7 +92,7 @@
                           :to="{name: 'genres-slug', params: {slug: genre.slug}}">{{ genre.name
                         }}</nuxt-link>
                     </template>
-                    <template v-else>
+                    <template v-else-if="genre.parentGenre">
                       <nuxt-link
                           :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug}}">{{ genre.name
                         }}</nuxt-link>
