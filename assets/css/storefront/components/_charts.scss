@@ -1,4 +1,5 @@
 $chart-item-padding: 25px;
+$bestseller-item-padding: 7px;
 
 .charts {
   &-infobox {
@@ -224,6 +225,111 @@ $chart-item-padding: 25px;
       margin-left: auto;
       justify-content: space-between;
       width: 145px;
+    }
+  }
+  &__overview {
+    &__bestsellers {
+      margin-top: 3em;
+      background-color: rgba(232, 230, 224, 0.3);
+      display: flex;
+      flex-direction: column;
+      padding: $chart-item-padding;
+      position: relative;
+      .release-item {
+        font-size: $font-size-sm;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 60px;
+        border-bottom: 1px solid #e8e6e0;
+        position: relative;
+        &:last-child {
+          border-bottom: none;
+        }
+        &:hover{
+          .release-thumb-box {
+            .release-thumb {
+              .chart-list-play {
+                display: inline-block;
+              }
+            }
+          }
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: -25px;
+            width: calc(100% + 50px);
+            height: calc(100% + 1px);
+            background-color: black;
+            opacity: 0.1;
+          }
+        }
+        .release-thumb-box {
+          padding: $bestseller-item-padding+3px $bestseller-item-padding $bestseller-item-padding 0px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          position: relative;
+          flex: 0 0 50px;
+          .release-thumb {
+            position: relative;
+            height: 100%;
+            img {
+              position: absolute;
+              margin: auto;
+              top: 0px;
+              left: 0px;
+              width: 40px;
+              height: 40px;
+            }
+            .chart-list-play {
+              display: none;
+              z-index: 1;
+              position: absolute;
+              margin: auto;
+              top: 0px;
+              left: 0px;
+            }
+          }
+        }
+      }
+      .release-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        padding: $bestseller-item-padding;
+        .release-title {
+          opacity: 0.5;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 14px;
+          line-height: 14px;
+        }
+        .release-artist {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 14px;
+          line-height: 14px;
+        }
+      }
+      .release-price-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .release-price {
+          color: $brand-color-green;
+          width: 60px;
+          text-align: right;
+          margin-left: auto;
+        }
+
+      }
+      &__header {
+        font-size: $font-size-h3;
+      }
     }
   }
 }
