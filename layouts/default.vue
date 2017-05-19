@@ -39,6 +39,12 @@
       },
       closeMobileMenu () {
         this.isOpenMobileMenu = false
+      },
+      onClosePlaylist () {
+        this.noScroll = false
+      },
+      onOpenPlaylist () {
+        this.noScroll = true
       }
     },
     beforeCreate () {

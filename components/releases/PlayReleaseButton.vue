@@ -3,9 +3,10 @@
                :size="size"
                :foreground="foreground"
                :background="background"
-               v-if="hasTracks"
+               v-if="displayOnly || hasTracks"
                @play="playRelease"
                @pause="onPause"
+               :displayOnly="displayOnly"
   ></play-button>
 </template>
 
@@ -32,6 +33,10 @@
       background: {
         type: String,
         default: '#313532'
+      },
+      displayOnly: {
+        type: Boolean,
+        default: false
       }
     },
     data: function () {
@@ -41,6 +46,9 @@
     },
     methods: {
       playRelease () {
+        if (this.displayOnly) {
+          return
+        }
         if (this.playableRelease && (!this.playableRelease.tracks || this.playableRelease.tracks.length === 0)) {
           this.fetchRelease()
         } else {
@@ -71,6 +79,9 @@
         })
       },
       onPause () {
+        if (this.displayOnly) {
+          return
+        }
         this.$store.commit(types.PAUSE_TRACK)
       }
     },

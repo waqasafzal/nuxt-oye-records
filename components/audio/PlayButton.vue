@@ -1,5 +1,5 @@
 <template>
-  <div class="play-release-button" :style="playReleaseStyle" @click.prevent="onClick">
+  <div :class="[displayOnly ? '' : 'play-release-button']" :style="playReleaseStyle" @click.prevent="onClick">
     <div :style="arrowStyle">
       <template v-if="active">
         <div :style="pauseStyle"></div>
@@ -27,6 +27,10 @@
       background: {
         type: String,
         default: '#313532'
+      },
+      displayOnly: {
+        type: Boolean,
+        default: false
       }
     },
     data: function () {
@@ -40,6 +44,9 @@
     },
     computed: {
       active () {
+        if (this.displayOnly) {
+          return false
+        }
         let player = this.$store.state.player
         return this.release && player.playing && player.currentTrack.release.slug === this.release.slug
       },
@@ -61,7 +68,7 @@
         let style = {
           width: 0,
           height: 0,
-          borderRadius: `${this.baseSize / 16}px`,
+          borderRadius: `${this.baseSize > 20 ? (this.baseSize / 16) : 0}px`,
           borderTop: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
           borderBottom: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
           borderRight: `${this.baseSize / 4}px solid ${this.foregroundColor}`,

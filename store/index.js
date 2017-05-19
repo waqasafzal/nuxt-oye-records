@@ -23,7 +23,8 @@ const store = new Vuex.Store({
       position: 0,
       nextTrack: null,
       currentTrack: null,
-      playing: false
+      playing: false,
+      playlistVisible: false
     },
     search: {
       query: null,
@@ -69,13 +70,23 @@ const store = new Vuex.Store({
     [types.PLAY_TRACK]: (state, track) => {
       let player = state.player
       let changing = player.currentTrack !== track
+      var position = -1
       if (track && changing) {
-        player.history.push(track)
+        for (var i = 0; player.history.length; i++) {
+          if (player.history[i] === track) {
+            position = i
+            break
+          }
+        }
+        if (position === -1) {
+          player.history.push(track)
+          position = player.history.length - 1
+        }
       }
       player.playing = true
       player.currentTrack = track
       if (changing) {
-        player.position = player.history.length - 1
+        player.position = position
       }
     },
     [types.PAUSE_TRACK]: (state) => {
@@ -97,7 +108,7 @@ const store = new Vuex.Store({
       let player = state.player
       if (player) {
         let pos = player.position
-        if (pos < player.history.length) {
+        if (pos < player.history.length - 1) {
           player.position = player.position + 1
         }
         if (player.position < player.history.length) {
@@ -152,6 +163,9 @@ const store = new Vuex.Store({
       if (!updated) {
         userArtists.push(artist)
       }
+    },
+    [types.SET_PLAYLIST_VISIBLE]: (state, isVisible) => {
+      state.player.playlistVisible = isVisible
     }
   },
 

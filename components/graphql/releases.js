@@ -15,6 +15,7 @@ export const tracksFragment = gql`
             artistFirstName
             artistLastName
             title
+            label
         }
     }
 `

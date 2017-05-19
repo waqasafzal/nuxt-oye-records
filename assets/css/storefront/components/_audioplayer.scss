@@ -38,12 +38,6 @@
       .track-info {
         padding-bottom: 5px;
         display: inline-flex;
-        .track-artist {
-          color: $gray-color-2
-        }
-        .track-title {
-          color: $gray-color-1
-        }
       }
       .track-time {
         display: inline-flex;
@@ -75,10 +69,102 @@
   }
 }
 
+.playlist {
+  background-color: $brand-color-black;
+  color: $gray-color-1;
+  position: fixed;
+  bottom: 60px;
+  z-index: 9;
+  height: 50%;
+  width: 100%;
+  font-size: $font-size-sm;
+  overflow-y: scroll;
+  &__item {
+    display: flex;
+    height: 60px;
+    border-bottom: 1px solid #414242;
+    position: relative;
+    &:hover:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      background-color: white;
+      opacity: 0.1;
+    }
+  }
+  .play-box {
+    position: relative;
+    width: 146px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:last-child {
+      border-right: none;
+    }
+    .playing {
+      border: 2px solid $brand-color-green;
+      border-radius: 12px;
+      height: 24px;
+      width: 24px;
+      padding-top: 1px;
+      * div {
+        border-right-color: $brand-color-green !important;
+      }
+    }
+  }
+  .track-info {
+    width: 80%;
+    display: flex;
+    padding-left: 1.5em;
+    align-items: center;
+    .playlist-position {
+      margin-right: 0.5em;
+    }
+  }
+  .release {
+    &-title {
+      width: 376px;
+      display: flex;
+      align-items: center;
+    }
+    &-label {
+      width: 250px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.close-playlist {
+  //box-sizing:border-box;
+  margin: auto;
+  width:14px;
+  height:14px;
+  background:
+          -webkit-linear-gradient(-45deg, transparent 0%, transparent 48%, white 48%,  white 52%, transparent 52%, transparent 100%),
+          -webkit-linear-gradient(45deg, transparent 0%, transparent 48%, white 48%,  white 52%, transparent 52%, transparent 100%);
+
+}
+
 .ap {
   &__element {
     border-right: 1px solid #414242;
   }
+}
+
+.track-artist {
+  color: $gray-color-2
+}
+.track-title {
+  color: $gray-color-1
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {

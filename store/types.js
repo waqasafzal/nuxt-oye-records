@@ -11,6 +11,7 @@ export const LOGOUT_USER = 'LOGOUT_USER'
 export const CART_UPDATING = 'CART_UPDATING'
 
 export const PLAY_TRACK = 'PLAY_TRACK'
+export const SET_PLAYLIST_VISIBLE = 'SET_PLAYLIST_VISIBLE'
 export const PAUSE_TRACK = 'PAUSE_TRACK'
 export const ADD_TRACK = 'ADD_TRACK'
 export const PLAY_BACKWARD = 'PLAY_BACKWARD'

@@ -72,12 +72,10 @@
                         v-cloak inline-template>
           <div>
             <network network="facebook">
-              <!--<i class="fa fa-fw fa-facebook"></i>-->
               <img class="fa fa-facebook" src="~assets/images/Facebook.svg" />
             </network>
             <network network="twitter">
               <img class="fa fa-twitter" src="~assets/images/Twitter.svg" />
-              <!--<i class="fa fa-fw fa-twitter"></i> Twitter-->
             </network>
           </div>
         </social-sharing>
@@ -125,22 +123,10 @@
           <template v-if="track.releasePosition">
             <div class="release-detail__tracklist__position">{{ track.releasePosition }}</div>
           </template>
-          <template v-if="track.title">
-            {{ track.title }}
-
-
-
-
-          </template>
-          <template v-else>
-            Track {{track.position + 1}}
-
-
-
-
-          </template>
+          <template v-if="track.title">{{ track.title }}</template>
+          <template v-else>Track {{track.position + 1}}</template>
           <div class="release-detail__tracklist__item play">
-            <play-release-button :release="release" background="transparent" foreground="#313532"></play-release-button>
+            <play-release-button :displayOnly="true" :release="release" background="transparent" foreground="#313532"></play-release-button>
           </div>
         </div>
       </div>
