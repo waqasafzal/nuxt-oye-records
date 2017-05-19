@@ -9,12 +9,13 @@
         </div>
         <div class="track-info">
           <div class="playlist-position">{{ i + 1 }}.</div>
-          <div class="track-artist">{{track.release.artistLastName}}</div>&nbsp;-&nbsp;<div class="track-title">{{track.title}}</div>
+          <div class="track-artist">{{track.release.artistLastName}}</div>&nbsp;-&nbsp;
+          <div class="track-title">
+            <template v-if="track.title">{{track.title}}</template>
+            <template v-else>Track {{track.position + 1}}</template>
+          </div>
         </div>
-        <div class="release-title">
-          <template v-if="track.release.title">{{track.release.title}}</template>
-          <template v-else>Track {{track.position + 1}}</template>
-        </div>
+        <div class="release-title">{{track.release.title}}</div>
         <div class="release-label">{{track.release.label}}</div>
       </div>
     </div>
