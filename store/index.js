@@ -72,7 +72,7 @@ const store = new Vuex.Store({
       let changing = player.currentTrack !== track
       var position = -1
       if (track && changing) {
-        for (var i = 0; player.history.length; i++) {
+        for (var i = 0; i < player.history.length; i++) {
           if (player.history[i] === track) {
             position = i
             break
