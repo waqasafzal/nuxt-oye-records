@@ -102,9 +102,19 @@
           Release Date
           <p>{{ release.releasedAt }}</p>
         </div>
-        <div class="product__details__detail">
+        <div v-if="release.catalogueNumber" class="product__details__detail">
           Cat No
           <p>{{ release.catalogueNumber }}</p>
+        </div>
+        <div v-if="release.chartedBy" class="product__details__detail">
+          Charted By
+          <p>
+            <span :key="'chart-' + i"
+                  v-for="(publisher, i) in release.chartedBy">
+              {{ i > 0 ? ' / ' : ''}}
+              <nuxt-link :to="{name: 'charts-slug', params: {slug: publisher.currentCharts.slug}}">{{ publisher.name }}</nuxt-link>
+            </span>
+          </p>
         </div>
       </div>
       <div class="col-md-6 col-12 release-detail__tracklist">
@@ -143,6 +153,7 @@
   import PlayReleaseButton from '../../../components/releases/PlayReleaseButton'
   import client from '../../../plugins/apollo'
   import { createReleaseDetailsQuery } from '../../../components/releases/queries'
+  import NuxtLink from '../../../.nuxt/components/nuxt-link'
 
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
@@ -152,7 +163,7 @@
   export default {
     name: 'ReleaseDetailView',
     props: ['id', 'slug', 'subslug'],
-    components: {PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
+    components: {NuxtLink, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
     data: function () {
       return {
         release: '',

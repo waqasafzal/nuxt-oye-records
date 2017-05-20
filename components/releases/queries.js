@@ -8,6 +8,12 @@ export const createReleaseDetailsQuery = function (slug) {
     query: gql`query Release($slug: String!) {
         release (slug: $slug){
             ...ReleaseDetails
+            chartedBy {
+                name
+                currentCharts(releaseSlug: $slug) {
+                    slug
+                }
+            }
         }
     }
     ${releaseDetails}
