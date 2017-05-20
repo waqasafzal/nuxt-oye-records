@@ -47,14 +47,22 @@
     mounted () {
       let storeQuery = this.$store.state.query
       if (this.query && (this.releaseResults.length < this.releasesTotal || typeof storeQuery === 'undefined')) {
+        console.log('search from mounted')
         this.loadMore(false)
       }
       window.onscroll = this.checkInfiniteScrolling
     },
+    beforeUpdate () {
+      console.log('beforeUpdate')
+    },
+    updated () {
+      console.log('updated')
+    },
     methods: {
       checkInfiniteScrolling () {
-        if (!this.loadingReleases && (this.releaseResults.length < this.releasesTotal) &&
+        if (this.$el.offsetHeight > 0 && !this.loadingReleases && (this.releaseResults.length < this.releasesTotal) &&
           (window.innerHeight + window.scrollY) >= this.$el.offsetHeight) {
+          console.log('search from checkInfinite')
           this.loadMore(true)
         }
       },

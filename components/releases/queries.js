@@ -14,6 +14,18 @@ export const createReleaseDetailsQuery = function (slug) {
                     slug
                 }
             }
+            artistReleases: related(relatedType: "artist") {
+                ...ReleaseDetails
+                hasTracks
+            }
+            labelReleases: related(relatedType: "label") {
+                ...ReleaseDetails
+                hasTracks
+            }
+            soldReleases: related(relatedType: "sold") {
+                ...ReleaseDetails
+                hasTracks
+            }
         }
     }
     ${releaseDetails}

@@ -14,9 +14,11 @@
             /
 
 
+
             <nuxt-link
                 :to="{name: 'genres-slug', params: {slug: release.mainGenre.slug}}">
               {{ release.mainGenre.name }}
+
 
 
 
@@ -24,9 +26,11 @@
           </template>
           <template v-if="release.mainGenreSub && release.mainGenreSub.parentGenre">
             /
+
             <nuxt-link
                 :to="{name: 'genres-slug-subslug', params: {slug: release.mainGenreSub.parentGenre.slug, subslug: release.mainGenreSub.slug}}">
               {{ release.mainGenreSub.name }}
+
             </nuxt-link>
           </template>
         </div>
@@ -72,16 +76,17 @@
                         v-cloak inline-template>
           <div>
             <network network="facebook">
-              <img class="fa fa-facebook" src="~assets/images/Facebook.svg" />
+              <img class="fa fa-facebook" src="~assets/images/Facebook.svg"/>
             </network>
             <network network="twitter">
-              <img class="fa fa-twitter" src="~assets/images/Twitter.svg" />
+              <img class="fa fa-twitter" src="~assets/images/Twitter.svg"/>
             </network>
           </div>
         </social-sharing>
         <h4>Details</h4>
         <div class="product__details__detail">
           Genre
+
           <p>
                   <span :key="genre.pk" v-for="(genre, i) in release.genres">
                     {{ i > 0 ? ' / ' : ''}}
@@ -106,13 +111,15 @@
           Cat No
           <p>{{ release.catalogueNumber }}</p>
         </div>
-        <div v-if="release.chartedBy" class="product__details__detail">
+        <div v-if="release.chartedBy && release.chartedBy.length > 0" class="product__details__detail">
           Charted By
+
           <p>
             <span :key="'chart-' + i"
                   v-for="(publisher, i) in release.chartedBy">
               {{ i > 0 ? ' / ' : ''}}
-              <nuxt-link :to="{name: 'charts-slug', params: {slug: publisher.currentCharts.slug}}">{{ publisher.name }}</nuxt-link>
+              <nuxt-link :to="{name: 'charts-slug', params: {slug: publisher.currentCharts.slug}}">{{ publisher.name
+              }}</nuxt-link>
             </span>
           </p>
         </div>
@@ -121,9 +128,11 @@
         <h4>
           <template v-if="release.tracks.length > 0">
             Tracklist
+
           </template>
           <template v-else>
             No Tracklist Available
+
           </template>
         </h4>
         <div class="release-detail__tracklist__item"
@@ -136,11 +145,36 @@
           <template v-if="track.title">{{ track.title }}</template>
           <template v-else>Track {{track.position + 1}}</template>
           <div class="release-detail__tracklist__item play">
-            <play-release-button :displayOnly="true" :release="release" background="transparent" foreground="#313532"></play-release-button>
+            <play-release-button :displayOnly="true" :release="release" background="transparent"
+                                 foreground="#313532"></play-release-button>
           </div>
         </div>
       </div>
     </div>
+    <template v-if="release.artistReleases.length > 0">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="release-detail__related__header">More from <span>{{ release.name }}</span></h3>
+        </div>
+      </div>
+      <release-list :releases="release.artistReleases"></release-list>
+    </template>
+    <template v-if="release.labelReleases.length > 0">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="release-detail__related__header">More from <span>{{ release.label }}</span></h3>
+        </div>
+      </div>
+      <release-list :releases="release.labelReleases"></release-list>
+    </template>
+    <template v-if="release.soldReleases.length > 0">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="release-detail__related__header">Other people bought</h3>
+        </div>
+      </div>
+      <release-list :releases="release.soldReleases"></release-list>
+    </template>
   </div>
 </template>
 
@@ -154,6 +188,7 @@
   import client from '../../../plugins/apollo'
   import { createReleaseDetailsQuery } from '../../../components/releases/queries'
   import NuxtLink from '../../../.nuxt/components/nuxt-link'
+  import ReleaseList from '../../../components/releases/ReleaseList'
 
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
@@ -163,7 +198,7 @@
   export default {
     name: 'ReleaseDetailView',
     props: ['id', 'slug', 'subslug'],
-    components: {NuxtLink, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
+    components: {ReleaseList, NuxtLink, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
     data: function () {
       return {
         release: '',

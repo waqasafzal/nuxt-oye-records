@@ -24,6 +24,7 @@ export const releaseDetails = gql`
     fragment ReleaseDetails on ArtikelType {
         pk
         title
+        name
         artistFirstName
         artistLastName
         description

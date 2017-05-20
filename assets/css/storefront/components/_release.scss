@@ -89,4 +89,11 @@ $font-factor: 0.9;
       padding-right: 15px !important;
     }
   }
+  &__related {
+    &__header {
+      span {
+        color: $brand-color-green
+      }
+    }
+  }
 }
