@@ -26,7 +26,8 @@ export const getCart = ({commit}) => new Promise((resolve, reject) => {
             ...OyeCart
         }
     },
-    ${oyeCart}`
+    ${oyeCart}`,
+    fetchPolicy: 'network-only'
   })
   .then(({data}) => {
     if (data.cart.cookie) {
@@ -228,21 +229,40 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
   commit(types.SET_QUERY, {query})
 })
 
-// export const saveCharts = ({commit}, args) => new Promise((resolve, reject) => {
-//   apolloClient.mutate({
-//     mutation: gql`mutation ($charts: JSONString!) {
-//         saveCharts(charts: $charts) {
-//             ok
-//         }
-//     }`,
-//     variables: {
-//       charts: args.charts
-//     }
-//   }).then(({data}) => {
-//     addCartAlertMessage('Charts were successfully saved.', 'info')
-//
-//     const r = data && data.removeRelease.cart
-//     commit(types.SET_CART, r || null)
-//     return resolve(r)
-//   }).catch(er => reject(er))
-// })
+export const enterCheckout = ({commit}, args) => new Promise((resolve, reject) => {
+  apolloClient.query({
+    query: gql`query Profile {
+        profile {
+            firstName
+            lastName
+            shippingAddresses {
+                firstName
+                lastName
+                city
+                companyName
+                country
+                zipCode
+            }
+            paymentMethods {
+                id
+            }
+        }
+    }`,
+    fetchPolicy: 'network-only'
+  }).then(({data}) => {
+    let profile = data.profile
+    if (profile) {
+      if (profile.shippingAddresses && profile.shippingAddresses.length > 0) {
+        commit(types.SET_USER_SHIPPING_ADDRESSES, {
+          shippingAddresses: profile.shippingAddresses
+        })
+      }
+      if (profile.paymentMethods && profile.paymentMethods.length > 0) {
+        commit(types.SET_USER_PAYMENT_METHODS, {
+          paymentMethods: profile.paymentMethods
+        })
+      }
+    }
+    commit(types.ENTER_CHECKOUT)
+  })
+})

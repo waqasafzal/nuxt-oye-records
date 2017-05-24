@@ -87,8 +87,10 @@
         `,
         variables: {
           month: getCurrentMonth().value
-        }
+        },
+        fetchPolicy: 'network-only'
       }).then(({data}) => {
+        console.log('set artists')
         vm.$store.commit(types.SET_USER_ARTISTS, {
           artists: data.account.artists
         })

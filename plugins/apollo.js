@@ -3,12 +3,8 @@
  */
 
 import 'babel-polyfill'
-// import Vue from 'vue'
-// import VueApollo from 'vue-apollo'
 import { ApolloClient, createNetworkInterface } from 'apollo-client'
 import 'isomorphic-fetch'
-
-// Vue.use(VueApollo)
 
 let hostUrl = __API__
 
@@ -23,9 +19,5 @@ let networkInterface = createNetworkInterface({
 const apolloClient = new ApolloClient({
   networkInterface: networkInterface
 })
-//
-// const apolloProvider = new VueApollo({
-//   defaultClient: apolloClient
-// })
 
 export default apolloClient

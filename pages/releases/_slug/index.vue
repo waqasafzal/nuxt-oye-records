@@ -145,7 +145,7 @@
           <template v-if="track.title">{{ track.title }}</template>
           <template v-else>Track {{track.position + 1}}</template>
           <div class="release-detail__tracklist__item play">
-            <play-release-button :displayOnly="true" :release="release" background="transparent"
+            <play-release-button :size="24" :displayOnly="true" :release="release" background="transparent"
                                  foreground="#313532"></play-release-button>
           </div>
         </div>

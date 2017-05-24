@@ -70,11 +70,16 @@ $font-factor: 0.9;
       &:hover {
         cursor: pointer;
         color: $link-hover-color;
+        .play {
+          * div {
+            border-right-color: $brand-color-green !important;
+          }
+        }
       }
       .play {
         display: inline-block;
         border: 0px;
-        top: -0.2em;
+        top: 0px;
         right: 0px;
         position:absolute;
       }

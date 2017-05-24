@@ -37,7 +37,7 @@ export const ReleasePagingMixin = function (filterBy) {
     },
     methods: {
       checkInfiniteScrolling () {
-        if (!this.loading && !(this.releases && this.releases.pageInfo && !this.releases.pageInfo.hasNextPage) &&
+        if (this.$el.offsetHeight > 0 && !this.loading && !(this.releases && this.releases.pageInfo && !this.releases.pageInfo.hasNextPage) &&
           (window.innerHeight + window.scrollY) >= this.$el.offsetHeight) {
           if (this.releases && this.releases.pageInfo && this.releases.pageInfo.hasNextPage) {
             this.loadMore()

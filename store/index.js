@@ -14,9 +14,15 @@ const store = new Vuex.Store({
   state: {
     cart: null,
     cartUpdating: false,
+    checkout: {
+      address: null,
+      payment: null,
+      guest: null
+    },
     user: {
       authenticated: false,
-      artists: []
+      artists: [],
+      shippingAddresses: []
     },
     player: {
       history: [],
@@ -39,7 +45,8 @@ const store = new Vuex.Store({
         total: 0
       }
     },
-    alerts: null
+    alerts: null,
+    checkoutActive: false
   },
 
   mutations: {
@@ -166,6 +173,18 @@ const store = new Vuex.Store({
     },
     [types.SET_PLAYLIST_VISIBLE]: (state, isVisible) => {
       state.player.playlistVisible = isVisible
+    },
+    [types.SET_USER_SHIPPING_ADDRESSES]: (state, args) => {
+      state.user.shippingAddresses = args.shippingAddresses
+    },
+    [types.SET_USER_PAYMENT_METHODS]: (state, paymentMethods) => {
+      state.user.paymentMethods = paymentMethods
+    },
+    [types.ENTER_CHECKOUT]: (state) => {
+      state.checkoutActive = true
+    },
+    [types.FINISH_CHECKOUT]: (state) => {
+      state.checkoutActive = false
     }
   },
 

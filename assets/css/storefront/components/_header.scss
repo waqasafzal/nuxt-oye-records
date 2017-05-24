@@ -235,16 +235,16 @@
             padding-right: $global-padding * 0.9;
             font-size: 1rem;
             &:hover {
-              color: rgba(48,196,108,1);
+              color: rgba(48, 196, 108, 1);
             }
           }
           .router-link-active {
-             color: rgba(48,196,108,1);
-             border-width: 0 0 1px;
-             border-style: solid;
-             //padding-bottom: 5px;
+            color: rgba(48, 196, 108, 1);
+            border-width: 0 0 1px;
+            border-style: solid;
+            //padding-bottom: 5px;
 
-           }
+          }
         }
       }
     }
@@ -278,5 +278,87 @@
         }
       }
     }
+  }
+  &__checkout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+.checkout {
+  &__navbar {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    .nav-item {
+      &:first-child {
+        .checkout-state {
+          .checkout-num {
+            &:before {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .active {
+      .checkout-state {
+        .checkout-num {
+          background-color: $brand-color-green;
+          &:before {
+            background-color: $brand-color-green;
+          }
+        }
+        .checkout-name {
+          color: $brand-color-green;
+        }
+      }
+    }
+  }
+}
+
+.checkout-state {
+  color: #313532;
+  padding-top: $global-padding * 0.9;
+  padding-left: $global-padding * 0.9;
+  padding-right: $global-padding * 0.9;
+  font-size: $font-size-sm;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  flex-grow: 1;
+  :last-child {
+    flex-basis: 0;
+    flex-grow: 0;
+    flex-shrink: 1;
+  }
+  .checkout-num {
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+    background-color: $gray-color-3;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: .9em;
+      width: 12em;
+      margin-left: -12em;
+      height: 1px;
+      background: $gray-color-2;
+      z-index: -1;
+    }
+  }
+  .checkout-name {
+    color: $gray-color-3;
+    text-align: center;
   }
 }

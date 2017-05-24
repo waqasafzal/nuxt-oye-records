@@ -59,7 +59,8 @@
             </div>
             <div class="col-2 cart__line__cell">
               <p class="flex-align-right cart-cell-center">
-                <release-price :price="line.release.price"></release-price>
+                {{ line.lineTotal }} &euro;
+                <!--<release-price :price="line.release.price"></release-price>-->
               </p>
             </div>
             <div class="cart-item-delete col-1 cart__line__cell">
@@ -95,7 +96,7 @@
             </nuxt-link>
           </div>
           <div class="col-4">
-            <nuxt-link to="/checkout/login">
+            <nuxt-link :to="{name: 'checkout'}">
               <div class="cart__checkout-button">
                 <span>Go to checkout</span>
               </div>
