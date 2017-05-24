@@ -10,16 +10,20 @@
             </div>
             <div class="genres__menu__column__body">
               <template v-for="(genre, j) in mainGenre.genres">
-                <nuxt-link
-                    class="genres__menu__column__body__item"
-                    :to="{name: 'genres-slug', params: {slug: genre.slug, genre: genre}}">{{ genre.name }}</nuxt-link>
-                <template v-for="(subGenre, k) in genre.subgenres">
+                <template v-if="genre.parentGenre">
                   <nuxt-link class="genres__menu__column__body__item"
-                               v-if="subGenre.name != genre.name"
-                               :to="{name: 'genres-slug-subslug', params: {slug: genre.slug, subslug: subGenre.slug, genre: subGenre}}">
-                    {{ subGenre.name }}
+                               v-if="genre.parentGenre.name != genre.name"
+                               :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug, genre: genre}}">
+                    {{ genre.name }}
                   </nuxt-link>
                 </template>
+                <template v-else>
+                  <nuxt-link
+                      class="genres__menu__column__body__item"
+                      :to="{name: 'genres-slug', params: {slug: genre.slug, genre: genre}}">{{ genre.name }}</nuxt-link>
+                </template>
+                <!--<template v-for="(subGenre, k) in genre.subgenres">-->
+                <!--</template>-->
               </template>
             </div>
           </div>

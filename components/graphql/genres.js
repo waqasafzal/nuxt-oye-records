@@ -9,9 +9,7 @@ export const mainGenres = gql`
             pk
             slug
             name
-            subgenres {
-                pk
-                name
+            parentGenre {
                 slug
             }
         }
