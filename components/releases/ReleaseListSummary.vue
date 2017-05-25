@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 release-list-summary" v-if="releases">
+  <div class="release-list-summary" v-if="releases">
     <div class="release-list-summary__header">
       <h3>
         <template v-if="status === 'new' && genre">Latest </template>
