@@ -55,6 +55,7 @@
 
 <style lang="scss">
   .add-to-cart-button {
+    cursor: pointer;
     &:hover:after {
        content: '';
        position: absolute;

@@ -189,7 +189,9 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
   let type = args.type
   let mutationType = args.append ? types.ADD_SEARCH_RESULTS : types.SET_SEARCH_RESULTS
   let query = args.query
+
   if (query) {
+    commit(types.INCREMENT_SEARCH_LOADING)
     if (type === 'releases') {
       if (!args.append) {
         commit(types.SET_SEARCH_RESULTS, {
@@ -200,13 +202,13 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
           }
         })
       }
-      commit(types.SET_SEARCH_LOADING)
       callReleaseSearchQuery(query, args.size, args.page || 1, args.fields, ({data}) => {
         let rearchResults = data.search
         commit(mutationType, {search: rearchResults, type: type})
         resolve({
           search: rearchResults
         })
+        commit(types.DECREMENT_SEARCH_LOADING)
       })
     } else if (type === 'artists') {
       callArtistSearchQuery(query, args.size, ({data}) => {
@@ -215,6 +217,7 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
         resolve({
           search: rearchResults
         })
+        commit(types.DECREMENT_SEARCH_LOADING)
       })
     }
   } else {

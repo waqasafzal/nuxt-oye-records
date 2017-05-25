@@ -76,11 +76,13 @@
     data: function () {
       return {
         duration: 0,
-        currentTime: 0,
-        showPlaylist: false
+        currentTime: 0
       }
     },
     computed: {
+      showPlaylist () {
+        return this.$store.state.player.playlistVisible
+      },
       duration: function () {
         return this.audio ? this.audio.duration : ''
       },
@@ -183,8 +185,7 @@
         }
       },
       onBurgerClick () {
-        this.showPlaylist = !this.showPlaylist
-        this.$store.commit(types.SET_PLAYLIST_VISIBLE, this.showPlaylist)
+        this.$store.commit(types.SET_PLAYLIST_VISIBLE, !this.$store.state.player.playlistVisible)
       }
     },
     mounted: function () {

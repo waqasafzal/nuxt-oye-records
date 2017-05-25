@@ -106,5 +106,10 @@ $font-size-xs-fixed: 12px;
       
     }
   }
+  &__spinner {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+  }
 }
 

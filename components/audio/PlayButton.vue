@@ -108,6 +108,7 @@
 
 <style lang="scss">
   .play-release-button {
+    cursor: pointer;
     &:hover:after {
       content: '';
       position: absolute;

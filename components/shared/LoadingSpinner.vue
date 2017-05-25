@@ -1,7 +1,7 @@
 <template>
   <div class="row loader" v-if="loading">
     <div class="col-12">
-      <img src="../../assets/images/loader.svg"/>
+      <img src="../../assets/images/load_more.svg"/>
     </div>
   </div>
 </template>

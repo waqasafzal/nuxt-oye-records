@@ -27,7 +27,7 @@
     },
     computed: {
       loadingReleases () {
-        return this.$store.state.search.loading
+        return this.$store.state.search.loading > 0
       },
       query () {
         let storeQuery = this.$store.state.search.query

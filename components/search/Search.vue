@@ -6,11 +6,15 @@
       <div class="mobile-close-search hidden-md-up">
         <img src="../../assets/images/close-icon.svg">
       </div>
-      <input @focus="showResults" @blur="onBlur" autocomplete="off" v-model="query" class="form-control search-input"
+      <input v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
              type="text" name="q">
+      <!--<div class=""-->
       <button class="btn btn-link" type="submit">
         <img src="../../assets/images/search-icon.svg">
       </button>
+      <div class="search__spinner" v-if="loading">
+        <img src="../../assets/images/search_loader.svg" />
+      </div>
     </form>
     <div v-if="resultsVisible && hasResults" class="search__results">
       <div v-if="artistsResults.length > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
@@ -19,7 +23,12 @@
           <nuxt-link v-if="item.artist" class="search__results__item"
                      :to="{name:'search', query: { q: item.artist.name, fields: JSON.stringify(['artist_name'])}}">
             <div class="search__artist__image">
-              <img :src="item.artist.smallThumbnailUrl"/>
+              <template v-if="item.artist.smallThumbnailUrl">
+                <img :src="item.artist.smallThumbnailUrl"/>
+              </template>
+              <template v-else>
+                <img src="../../assets/images/defaults/Default_User.png" />
+              </template>
             </div>
             <div class="search__release__infos">
               <div class="search__release__name">
@@ -69,11 +78,14 @@
   import * as types from '../../store/types'
   import { getPageSize } from '../utils'
 
+  import { mixin as clickaway } from 'vue-clickaway'
+
   const MAX_ARTISTS = 2
   const MAX_RELEASES = 3
 
   export default {
     name: 'Search',
+    mixins: [ clickaway ],
     data: function () {
       return {
         query: '',
@@ -97,6 +109,9 @@
       }
     },
     computed: {
+      loading () {
+        return this.$store.state.search.loading > 0
+      },
       hasResults () {
         return this.releasesTotal > 0 || this.releaseResults.length > 0
       },
