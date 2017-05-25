@@ -8,7 +8,7 @@
   a {
     color: $body-color;
     position: relative;
-    display: block;
+    display: flex;
     &:hover {
       text-decoration: none;
     }

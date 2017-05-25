@@ -37,7 +37,7 @@
       </div>
       <div @click="onCartClick" class="ap__element button-box link-box">
         <div class="add-to-cart">
-          <cart-svg></cart-svg>
+          <img src="../../assets/images/cart_small_white.svg" />
         </div>
       </div>
       <audio id="music" ref="music">

@@ -4,7 +4,7 @@
       <release-item :release="getRelease(release)"
                     v-for="(release, i) in getReleases(releases)"
                     :key="i"
-                    class="col-12 col-sm-6 col-md-3 col-lg-2 product-list">
+                    class="col-6 col-sm-6 col-md-3 col-lg-2 product-list">
       </release-item>
     </div>
     <loading-spinner :loading="loading"></loading-spinner>

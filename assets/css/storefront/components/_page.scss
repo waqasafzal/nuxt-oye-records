@@ -94,18 +94,6 @@
     a {
       color: $body-color;
       text-decoration: none;
-      &:hover:after {
-        content: '';
-        position: absolute;
-        top: 0px;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: $brand-color-green;
-        opacity: 0.1;
-        cursor: pointer;
-        pointer-events: none;
-      }
     }
   }
 
