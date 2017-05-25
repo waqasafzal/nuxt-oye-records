@@ -41,7 +41,6 @@
 
 <script>
   import ReleaseList from '../../../components/releases/ReleaseList.vue'
-//  import gql from 'graphql-tag'
   import {getReleaseListColumnNumber} from '../../../components/utils'
   import ReleaseItem from '../../../components/releases/ReleaseItem'
   import Dropdown from '../../../components/shared/Dropdown'

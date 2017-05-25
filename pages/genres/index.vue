@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="row" :key="i" v-for="(genre, i) in metaGenres">
-      <release-list-summary :releases="genreReleases[genre.name]" pageSize="2" status="new" :title="genre.name" :genre="genre"></release-list-summary>
+      <release-list-summary :releases="genre.releases" pageSize="2" status="new" :title="genre.name" :genre="genre"></release-list-summary>
     </div>
   </div>
 </template>
@@ -42,7 +42,7 @@
   import client from '../../plugins/apollo'
   import ReleaseListSummary from '../../components/releases/ReleaseListSummary'
   import { createMainGenresQuery } from '../../components/genres/queries'
-  import { createReleaseListQuery } from '../../components/releases/queries'
+//  import { createReleaseListQuery } from '../../components/releases/queries'
 
   export default {
     components: {ReleaseListSummary},
@@ -64,24 +64,25 @@
       }
     },
     async asyncData ({params}) {
-      let genres = await client.query(createMainGenresQuery())
+      let genres = await client.query(createMainGenresQuery(12))
       let metaGenres = genres.data.metaGenres
-      var genreReleases = {}
-      for (var i = 0; i < metaGenres.length; i++) {
-        let genre = metaGenres[i]
-        let options = {
-          first: 12,
-          filterBy: JSON.stringify({
-            genres: genre.genres.map(x => x.slug)
-          })
-        }
-        let releaseListResult = await client.query(createReleaseListQuery(options))
-        let releases = releaseListResult.data.releases
-        genreReleases[genre.name] = releases
-      }
+//      var genreReleases = {}
+//      for (var i = 0; i < metaGenres.length; i++) {
+//        let genre = metaGenres[i]
+//        let options = {
+//          first: 12,
+//          filterBy: JSON.stringify({
+//            genres: genre.genres.map(x => x.slug)
+//          })
+//        }
+//        let releaseListResult = await client.query(createReleaseListQuery(options))
+//        let releases = releaseListResult.data.releases
+//        genreReleases[genre.name] = releases
+//      }
       return {
-        metaGenres: metaGenres,
-        genreReleases: genreReleases
+        metaGenres: metaGenres
+//        ,
+//        genreReleases: genreReleases
       }
     }
 //    apollo: {
