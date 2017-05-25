@@ -9,7 +9,7 @@
             <span>menu</span>
           </div>
           <nuxt-link to="/">
-            <img src="../../assets/images/oye-logo.svg" alt="Oye Records"
+            <img src="../../assets/images/oye_logo.svg" alt="Oye Records"
                  height="50">
           </nuxt-link>
         </div>

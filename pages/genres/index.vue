@@ -66,48 +66,9 @@
     async asyncData ({params}) {
       let genres = await client.query(createMainGenresQuery(12))
       let metaGenres = genres.data.metaGenres
-//      var genreReleases = {}
-//      for (var i = 0; i < metaGenres.length; i++) {
-//        let genre = metaGenres[i]
-//        let options = {
-//          first: 12,
-//          filterBy: JSON.stringify({
-//            genres: genre.genres.map(x => x.slug)
-//          })
-//        }
-//        let releaseListResult = await client.query(createReleaseListQuery(options))
-//        let releases = releaseListResult.data.releases
-//        genreReleases[genre.name] = releases
-//      }
       return {
         metaGenres: metaGenres
-//        ,
-//        genreReleases: genreReleases
       }
     }
-//    apollo: {
-//      // Query with parameters
-//      metaGenres () {
-//        return {
-//          query: gql`query MainGenres {
-//            metaGenres {
-//              ...MainGenres
-//            }
-//          }
-//          ${mainGenres}
-//          `,
-//          variables () {
-//            return {
-//              first: this.count,
-//              filterBy: this.filterBy
-//            }
-//          },
-//          loadingKey: 'loadingQueriesCount',
-//          loadingChangeCb (isLoading, countModifier) {
-//            this.loading = isLoading
-//          }
-//        }
-//      }
-//    }
   }
 </script>

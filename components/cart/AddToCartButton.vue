@@ -1,11 +1,6 @@
 <template>
   <div v-if="release" class="add-to-cart-button" @click.prevent="addToCart" :style="addToCartButtonStyle">
-    <template v-if="release.availability.status !== 'out'">
-      Add to cart
-    </template>
-    <template v-else>
-      Preorder now
-    </template>
+    {{ orderAction }}
   </div>
 </template>
 
@@ -33,6 +28,16 @@
         return {
           height: `${this.baseSize}px`,
           lineHeight: `${this.baseSize}px`
+        }
+      },
+      orderAction () {
+        let status = this.release.availability.status
+        if (status === 'out') {
+          return 'Backorder now'
+        } else if (status === 'upcoming') {
+          return 'Preorder now'
+        } else {
+          return 'Add to cart'
         }
       }
     },
