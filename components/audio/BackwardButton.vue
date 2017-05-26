@@ -83,6 +83,7 @@
 
 <style lang="scss">
   .play-backward-button {
+    cursor: pointer;
     &:hover:after {
       content: '';
       position: absolute;

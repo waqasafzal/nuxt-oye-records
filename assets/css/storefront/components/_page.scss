@@ -87,12 +87,18 @@
       display: block;
       font-size: 3em;
       color: #313532;
+      max-width: 60%;
+      overflow: hidden;
+      text-overflow: ellipsis;
       opacity: 0.4;
       line-height: 1em;
     }
     &__artist {
       padding-top: .2em;
       display: block;
+      max-width: 60%;
+      overflow: hidden;
+      text-overflow: ellipsis;
       font-size: 3em;
     }
     a {
@@ -150,6 +156,8 @@
           opacity: .5;
           width: 40%;
           height: 68px;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         &__image {
           display: inline-block;
