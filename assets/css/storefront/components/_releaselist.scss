@@ -6,7 +6,6 @@
   flex-direction: column;
   overflow: hidden;
   padding-top: .4em;
-  //margin-bottom: 1em;
   &__header {
     position: relative;
     padding-top: 0.5em;
@@ -133,9 +132,12 @@
       &:hover {
         opacity: 1;
         background-color: $brand-color-green !important;
+        &:after {
+          opacity: 0;
+        }
       }
     }
-    .release-list-image:after {
+    .release-list-image:before {
       content: "";
       width: 100%;
       height: 100%;

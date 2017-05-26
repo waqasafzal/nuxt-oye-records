@@ -129,6 +129,7 @@
       background-color: $white;
       z-index: 4;
       border-bottom: 1px solid $gray;
+      height: inherit;
     }
     .static {
       position: static;
