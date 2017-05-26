@@ -161,7 +161,12 @@ $bestseller-item-padding: 7px;
       margin-right: 0.3em;
       margin-top: 0;
       &__add-to-cart {
-        width: 8em;
+        width: 9em;
+        font-size: $font-size-sm;
+        letter-spacing: 1px;
+        img {
+          margin-right: 3px;
+        }
       }
     }
     &__publisher-box {

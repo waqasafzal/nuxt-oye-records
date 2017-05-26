@@ -1,6 +1,6 @@
 <template>
   <transition name="from-bottom" @enter="onEnter">
-    <div v-on-clickaway="onClickaway" class="playlist" ref="playlist">
+    <div class="playlist" ref="playlist">
       <div @click="playTrack(track)" :ref="'track-'+i" class="playlist__item" v-for="(track, i) in tracks">
         <div class="play-box">
           <div :class="[isPlaying(i) ? 'playing': '']">
@@ -26,8 +26,6 @@
   import PlayReleaseButton from '../releases/PlayReleaseButton'
   import * as types from '../../store/types'
 
-  import { mixin as clickaway } from 'vue-clickaway'
-
   var elementInViewport = function (el) {
     return true
   }
@@ -41,7 +39,6 @@
 
   export default {
     components: {PlayReleaseButton},
-    mixins: [clickaway],
     name: 'Playlist',
     data: function () {
       return {
@@ -76,9 +73,6 @@
             }
           }
         }
-      },
-      onClickaway () {
-        this.$store.commit(types.SET_PLAYLIST_VISIBLE, false)
       }
     },
     mounted () {

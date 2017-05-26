@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on-clickaway="onClickaway" >
     <playlist v-if="showPlaylist"></playlist>
     <div id="audioplayer" v-show="currentTrack">
       <div class="ap__element button-box audio-control">
@@ -58,6 +58,7 @@
   import CartSvg from '../shared/Cart'
   import NuxtLink from '../../.nuxt/components/nuxt-link'
   import Playlist from './Playlist'
+  import { mixin as clickaway } from 'vue-clickaway'
 
   const convertTimeHHMMSS = (val) => {
     if (val > 0) {
@@ -73,6 +74,7 @@
   export default {
     components: {Playlist, NuxtLink, CartSvg, BackwardButton, ForwardButton, PlayButton, PlayReleaseButton, TrackDisplay},
     name: 'AudioPlayer',
+    mixins: [clickaway],
     data: function () {
       return {
         duration: 0,
@@ -186,6 +188,9 @@
       },
       onBurgerClick () {
         this.$store.commit(types.SET_PLAYLIST_VISIBLE, !this.$store.state.player.playlistVisible)
+      },
+      onClickaway () {
+        this.$store.commit(types.SET_PLAYLIST_VISIBLE, false)
       }
     },
     mounted: function () {

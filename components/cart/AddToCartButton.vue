@@ -1,6 +1,7 @@
 <template>
   <div v-if="release" class="add-to-cart-button" @click.prevent="addToCart" :style="addToCartButtonStyle">
-    {{ orderAction }}
+    <img :style="imgStyle" src="../../assets/images/cart_small_white.svg" />
+    <span>{{ orderAction }}</span>
   </div>
 </template>
 
@@ -38,6 +39,13 @@
           return 'Preorder now'
         } else {
           return 'Add to cart'
+        }
+      },
+      imgStyle () {
+        return {
+          width: `${this.baseSize / 3}px`,
+          marginRight: `${this.baseSize / 4.8}px`,
+          marginTop: `${-1 * this.baseSize / 12}px`
         }
       }
     },
