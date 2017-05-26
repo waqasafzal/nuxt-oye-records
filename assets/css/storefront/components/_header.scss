@@ -32,9 +32,9 @@
         padding: 0 $global-padding / 2;
         line-height: 1.9rem;
         a {
-          color: $body-color;
-          font-size: 0.7rem;
-          text-transform: uppercase;
+          color: $brand-color-black;
+          font-size: $font-size-sm;
+          opacity: 0.6;
         }
       }
     }
@@ -72,6 +72,9 @@
   }
   &__brand {
     padding: $global-padding * 1 0;
+    height: 103px;
+    display: flex;
+    flex-direction: column;
     @include media-breakpoint-down(sm) {
       position: fixed;
       top: 0;
@@ -206,6 +209,10 @@
         }
       }
     }
+    &-box {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
   }
   &__menu {
     .navigation {
@@ -233,7 +240,8 @@
             padding-top: $global-padding * 0.9;
             padding-left: $global-padding * 0.9;
             padding-right: $global-padding * 0.9;
-            font-size: 1rem;
+            font-size: 15px;
+            letter-spacing: 1px;
             &:hover {
               color: rgba(48, 196, 108, 1);
             }

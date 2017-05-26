@@ -1,8 +1,6 @@
 <template>
   <div class="col-md-6 login__form">
     <h3>Log in</h3>
-    <!--<form v-on:submit="submit" novalidate>-->
-    <!--{% csrf_token %}-->
     <form id="loginForm" method="post" @submit.prevent="submit">
       <fieldset>
         <div class="form-group">
@@ -28,7 +26,6 @@
         </router-link>
       </div>
     </div>
-    <!--</form>-->
   </div>
 </template>
 
@@ -56,8 +53,8 @@
         login(this, credentials, '/account/details')
 
         // Leave no trace
-        this.credentials.password = ''
-        this.credentials.login = ''
+//        this.credentials.password = ''
+//        this.credentials.login = ''
       }
     }
   }

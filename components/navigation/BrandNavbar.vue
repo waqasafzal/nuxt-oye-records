@@ -1,6 +1,6 @@
 <template>
   <div class="navbar__brand">
-    <div class="container">
+    <div class="container navbar__brand-box">
       <div class="row no-gutters">
         <div class="col-8 col-md-1 navbar__logo">
           <div class="menu-icon-mobile hidden-md-up">
