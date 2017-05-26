@@ -3,7 +3,7 @@
   position: fixed;
   z-index: 10;
   height: 60px;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
   display: flex;
   .button-box {
@@ -19,6 +19,13 @@
     &:last-child {
       border-right: none;
     }
+    .add-to-cart {
+      img {
+        height: 20px;
+        width: 20px;
+      }
+    }
+
   }
   .control-item {
     display: flex;

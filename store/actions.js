@@ -209,6 +209,8 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
           search: rearchResults
         })
         commit(types.DECREMENT_SEARCH_LOADING)
+      }, () => {
+        commit(types.DECREMENT_SEARCH_LOADING)
       })
     } else if (type === 'artists') {
       callArtistSearchQuery(query, args.size, ({data}) => {
@@ -217,6 +219,8 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
         resolve({
           search: rearchResults
         })
+        commit(types.DECREMENT_SEARCH_LOADING)
+      }, () => {
         commit(types.DECREMENT_SEARCH_LOADING)
       })
     }

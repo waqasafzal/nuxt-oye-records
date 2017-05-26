@@ -187,11 +187,9 @@ const store = new Vuex.Store({
     },
     [types.DECREMENT_SEARCH_LOADING]: (state) => {
       state.search.loading--
-      console.log('decrement: ' + state.search.loading)
     },
     [types.INCREMENT_SEARCH_LOADING]: (state) => {
       state.search.loading++
-      console.log('increment: ' + state.search.loading)
     }
   },
 
@@ -204,6 +202,9 @@ const store = new Vuex.Store({
     },
     artists (state) {
       return state.user && state.user.authenticated && state.user.artists
+    },
+    cartItemCount (state) {
+      return state.cart && state.cart.quantity || 0
     }
   },
 

@@ -2,13 +2,12 @@
   <div class="navbar__search">
     <img class="hidden-md-up mobile-search-icon float-right"
          src="../../assets/images/search-icon.svg">
-    <form @submit.prevent="onSubmit" class="form-inline navbar__brand__search">
+    <form @submit.prevent="onSubmit" :class="['form-inline', 'navbar__brand__search', searchActive ? 'active': '']">
       <div class="mobile-close-search hidden-md-up">
         <img src="../../assets/images/close-icon.svg">
       </div>
       <input v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
              type="text" name="q">
-      <!--<div class=""-->
       <button class="btn btn-link" type="submit">
         <img src="../../assets/images/search-icon.svg">
       </button>
@@ -109,6 +108,9 @@
       }
     },
     computed: {
+      searchActive () {
+        return this.resultsVisible && this.query
+      },
       loading () {
         return this.$store.state.search.loading > 0
       },
