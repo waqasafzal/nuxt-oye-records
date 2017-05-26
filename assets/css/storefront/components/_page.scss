@@ -33,6 +33,10 @@
     letter-spacing: 1px;
     margin-top: 5px;
     min-height: 500px;
+    padding-left: 9999px;
+    padding-right: 9999px;
+    margin-left: -9999px;
+    margin-right: -9999px;
 
     &__content {
       padding-left: 120px;
