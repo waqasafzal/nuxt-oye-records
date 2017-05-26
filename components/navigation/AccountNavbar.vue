@@ -1,8 +1,13 @@
 <template>
   <div class="navbar__account hidden-sm-down">
-    <div class="container">
+    <div class="container navbar__account-row">
       <div class="navbar__account__oye">
-
+        <div class="ah-link navbar__account__oye__newsletter">
+          <nuxt-link to="/">Newsletter</nuxt-link>
+        </div>
+        <div class="ah-link navbar__oye__faq">
+          <nuxt-link to="/">Questions & Help</nuxt-link>
+        </div>
       </div>
       <div class="float-right navbar__account__buttons">
         <template v-if="user.authenticated">
@@ -26,8 +31,8 @@
           <nuxt-link :class="[isVisibleCart ? 'hover': '']" to="/cart" class="cart-link">
             <span class="cart-label hidden-sm-down">My Cart</span>
             <div class="cart-icon-box">
-              <img class="navbar__account__cart__icon"
-                   src="../../assets/images/cart.svg" alt="Cart">
+              <!--<cart-svg></cart-svg>-->
+              <img src="../../assets/images/cart.svg" />
             </div>
           </nuxt-link>
           <span :class="['badge', cartCount === undefined ? 'empty': '']">
@@ -43,8 +48,11 @@
 <script>
   import { logout } from '~/utils/auth'
   import { fetchCart } from '../../components/cart/fetch-cart-mixin'
+  import CartSvg from '../shared/Cart'
+  import NuxtLink from '../../.nuxt/components/nuxt-link'
 
   export default {
+    components: {NuxtLink, CartSvg},
     name: 'AccountNavbar',
     props: ['isOpenMobile'],
     mixins: [fetchCart],

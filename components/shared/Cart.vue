@@ -1,61 +1,22 @@
 <template>
-  <svg class="add-to-cart-svg" viewBox="0 0 35 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
-    <title>icon_cart_02</title>
-    <desc>Created using Figma</desc>
-    <g id="Canvas" transform="translate(-2038 1328)" figma:type="canvas">
-      <g id="icon_cart_02" style="mix-blend-mode:normal;" figma:type="frame">
-        <g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
-          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
-            <use xlink:href="#path0_fill" transform="translate(2045.84 -1313.83)" fill="#333333" style="mix-blend-mode:normal;"/>
-          </g>
-        </g>
-        <g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
-          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
-            <use xlink:href="#path1_fill" transform="translate(2044.28 -1323.32)" fill="#333333" style="mix-blend-mode:normal;"/>
-          </g>
-        </g>
-        <g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
-          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
-            <use xlink:href="#path2_fill" transform="translate(2046.1 -1303.38)" fill="#333333" style="mix-blend-mode:normal;"/>
-          </g>
-        </g>
-        <g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
-          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
-            <use xlink:href="#path3_fill" transform="translate(2063.27 -1303.38)" fill="#333333" style="mix-blend-mode:normal;"/>
-          </g>
-        </g>
-        <g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
-          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
-            <use xlink:href="#path4_fill" transform="translate(2038.04 -1328)" fill="#333333" style="mix-blend-mode:normal;"/>
-          </g>
-        </g>
-        <g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
-          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
-            <use xlink:href="#path5_fill" transform="translate(2046.29 -1317.67)" fill="#333333" style="mix-blend-mode:normal;"/>
-          </g>
-        </g>
-        <g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
-          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
-            <use xlink:href="#path6_fill" transform="translate(2053.47 -1322.8)" fill="#333333" style="mix-blend-mode:normal;"/>
-          </g>
-        </g>
-        <g id="Group" style="mix-blend-mode:normal;" figma:type="frame">
-          <g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
-            <use xlink:href="#path7_fill" transform="translate(2061.1 -1322.8)" fill="#333333" style="mix-blend-mode:normal;"/>
+  <svg class="add-to-cart-svg" width="13px" height="13px" viewBox="0 0 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon / cart</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+      <g id="Header-Navigation" transform="translate(-1347.000000, -14.000000)" fill="#313532">
+        <g id="Icon-/-cart">
+          <g transform="translate(1347.000000, 14.000000)">
+            <g>
+              <path d="M12.0594716,3.61701677 L12.0594716,3.61701677 C11.865852,3.37903075 11.5750814,3.24115358 11.2686118,3.24206366 L3.52928832,3.24206366 L3.18618803,1.64236989 C3.15160497,1.10382983 2.70452799,0.683372697 2.16416777,0.682462616 L1.14032735,0.682462616 C0.457767077,0.682462616 0.457767077,1.70630303 1.14032735,1.70630303 L2.16416777,1.70630303 C2.16416777,1.74179617 2.16780809,1.77819938 2.17486121,1.81300996 L3.71062184,8.97989287 C3.72654825,9.02061896 3.74361225,9.0606625 3.75953866,9.10161612 C3.78979883,9.1557659 3.82711213,9.20468272 3.87056846,9.24904914 C3.90082864,9.27498643 3.93450161,9.29705588 3.97113234,9.31480244 C3.98887891,9.32640597 4.00753556,9.33709941 4.02619221,9.34688278 C4.08489239,9.37077239 4.14791546,9.38419607 4.2118486,9.38510615 L10.4490844,9.38510615 C10.937115,9.38419607 11.3573446,9.04018569 11.4533581,8.56216598 L12.2728855,4.46680431 C12.3331783,4.16647779 12.2551389,3.85432022 12.0594716,3.61701677 L12.0594716,3.61701677 Z M10.4490844,8.36126574 L4.62616269,8.36126574 L3.74975529,4.26590407 L11.2686118,4.26590407 L10.4490844,8.36126574 Z" id="Fill-1"></path>
+              <path d="M5.23568902,12.4566274 L5.23568902,12.4566274 C4.32378849,12.4566274 3.86715566,11.35361 4.51149256,10.708363 C5.15673955,10.0640261 6.25952943,10.5208865 6.25952943,11.432787 C6.25861935,11.9979469 5.80107645,12.4548072 5.23568902,12.4566274 L5.23568902,12.4566274 Z" id="Fill-2"></path>
+              <path d="M9.33105068,12.4566274 L9.33105068,12.4566274 C8.41915015,12.4566274 7.96251733,11.35361 8.60685423,10.708363 C9.25210121,10.0640261 10.3548911,10.5208865 10.3548911,11.432787 C10.353981,11.9979469 9.89643811,12.4548072 9.33105068,12.4566274 L9.33105068,12.4566274 Z" id="Fill-3"></path>
+            </g>
           </g>
         </g>
       </g>
     </g>
-    <defs>
-      <path id="path0_fill" d="M 21.6798 8.89357L 2.94701 8.89357C 1.51887 8.89357 1.10758e-07 7.85922 1.10758e-07 5.94475C 1.10758e-07 4.08472 1.43358 3.0558 2.82724 2.99955L 22.2187 0.0162459C 22.9773 -0.0998925 23.6868 0.419101 23.7993 1.17582C 23.9154 1.93253 23.3983 2.64206 22.6397 2.76001L 3.16114 5.75784C 3.07222 5.76873 3.04682 5.77598 2.96697 5.77236C 2.90709 5.77961 2.82906 5.80139 2.78551 5.82135C 2.78188 5.8395 2.77643 5.88123 2.77643 5.94475C 2.77643 6.00826 2.78188 6.04818 2.78551 6.06452C 2.83995 6.09718 2.94883 6.11351 2.94883 6.11351L 21.6798 6.11351C 22.4456 6.11351 23.0698 6.73776 23.0698 7.50354C 23.0698 8.26933 22.4437 8.89357 21.6798 8.89357Z"/>
-      <path id="path1_fill" d="M 4.50916 15.2631C 3.88129 15.2631 3.32237 14.8385 3.1645 14.2143L 0.0432792 1.72574C -0.0637859 1.31019 0.0305764 0.872853 0.295517 0.535326C 0.558643 0.197799 0.961498 2.35361e-07 1.39157 2.35361e-07L 26.365 2.35361e-07C 26.7896 2.35361e-07 27.1943 0.197798 27.4574 0.53351C 27.7205 0.871038 27.8149 1.31019 27.7096 1.72393L 25.3379 11.2128C 25.2036 11.7554 24.7535 12.1637 24.2037 12.249L 4.72329 15.2486C 4.65071 15.2559 4.57812 15.2631 4.50916 15.2631ZM 3.16631 2.77643L 5.54896 12.3107L 22.8645 9.64675L 24.583 2.77643L 3.16631 2.77643Z"/>
-      <path id="path2_fill" d="M 2.68752 5.37503C 4.17179 5.37503 5.37503 4.17179 5.37503 2.68751C 5.37503 1.20324 4.17179 0 2.68752 0C 1.20324 0 0 1.20324 0 2.68751C 0 4.17179 1.20324 5.37503 2.68752 5.37503Z"/>
-      <path id="path3_fill" d="M 2.68751 5.37503C 4.17179 5.37503 5.37503 4.17179 5.37503 2.68751C 5.37503 1.20324 4.17179 0 2.68751 0C 1.20324 0 0 1.20324 0 2.68751C 0 4.17179 1.20324 5.37503 2.68751 5.37503Z"/>
-      <path id="path4_fill" d="M 7.63247 7.45826C 7.05359 7.45826 6.51101 7.08989 6.31684 6.50919L 5.07198 2.77462L 1.39003 2.77462C 0.624244 2.77462 2.76896e-08 2.154 2.76896e-08 1.38822C 2.76896e-08 0.622429 0.624244 -5.88403e-08 1.39003 -5.88403e-08L 6.07186 -5.88403e-08C 6.6707 -5.88403e-08 7.19877 0.382894 7.38749 0.949068L 8.94992 5.6309C 9.19127 6.35858 8.79748 7.14251 8.07162 7.38568C 7.92645 7.43467 7.77764 7.45826 7.63247 7.45826Z"/>
-      <path id="path5_fill" d="M 23.0698 1.73663L 0.869223 1.73663C 0.390152 1.73663 -3.59964e-07 1.34829 -3.59964e-07 0.869223C -3.59964e-07 0.390152 0.390152 3.46119e-07 0.869223 3.46119e-07L 23.0698 3.46119e-07C 23.5489 3.46119e-07 23.939 0.390152 23.939 0.869223C 23.939 1.34829 23.5489 1.73663 23.0698 1.73663Z"/>
-      <path id="path6_fill" d="M 0.867408 13.757C 0.388337 13.757 -2.76896e-08 13.3704 -2.76896e-08 12.8914L -2.76896e-08 0.869223C -2.76896e-08 0.388338 0.388337 -3.04585e-07 0.867408 -3.04585e-07C 1.34648 -3.04585e-07 1.73663 0.388338 1.73663 0.869223L 1.73663 12.8914C 1.73482 13.3704 1.34648 13.757 0.867408 13.757Z"/>
-      <path id="path7_fill" d="M 0.869223 11.5794C 0.390152 11.5794 8.30687e-07 11.1892 8.30687e-07 10.7101L 8.30687e-07 0.869223C 8.30687e-07 0.388338 0.390152 -3.04585e-07 0.869223 -3.04585e-07C 1.34829 -3.04585e-07 1.73845 0.388338 1.73845 0.869223L 1.73845 10.712C 1.73845 11.191 1.34829 11.5794 0.869223 11.5794Z"/>
-    </defs>
   </svg>
 </template>
 
@@ -68,9 +29,9 @@
 
 <style lang="scss">
   .add-to-cart-svg {
-    height: 100%;
-    * path {
-      fill: white;
-    }
+    /*height: 100%;*/
+    /** path {*/
+      /*fill: white;*/
+    /*}*/
   }
 </style>
