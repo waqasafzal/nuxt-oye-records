@@ -451,7 +451,7 @@
       text-align: center;
       cursor: default;
       &.empty {
-        background-color: $dark-gray;
+        background-color: $gray-color-2;
       }
       @include media-breakpoint-down(sm) {
         right: 0;
