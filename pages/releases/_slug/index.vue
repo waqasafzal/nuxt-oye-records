@@ -218,7 +218,7 @@
           {
             hid: 'url',
             property: 'og:url',
-            content: this.currentRoute
+            content: this.currentRoute + '?autoplay=1'
           },
           {
             hid: 'type',
