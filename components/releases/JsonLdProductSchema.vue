@@ -29,7 +29,7 @@
             'target': [
               {
                 '@type': 'EntryPoint',
-                'urlTemplate': this.releaseUrl + '?autoplay=true',
+                'urlTemplate': this.releaseUrl + '?autoplay=1',
                 'actionPlatform': [
                   'http://schema.org/DesktopWebPlatform',
                   'http://schema.org/IOSPlatform',

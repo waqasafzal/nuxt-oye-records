@@ -239,11 +239,14 @@
       }
     },
     watch: {
-      $route ({params}) {
+      $route ({params, query}) {
         this.release = ''
         let slug = params.slug
         client.query(createReleaseDetailsQuery(slug)).then(({data}) => {
           this.release = data.release
+          if (query.autoplay === '1') {
+            this.playRelease()
+          }
         })
       }
     },
@@ -272,6 +275,13 @@
       },
       back () {
         this.$router.go(-1)
+      },
+      playRelease () {
+        if (this.release.tracks) {
+          this.$store.dispatch('playRelease', {
+            release: this.release
+          })
+        }
       }
     },
     computed: {
@@ -326,6 +336,12 @@
       },
       releaseImage: function () {
         return this.release && __API__ + this.release.thumbnailUrl
+      }
+    },
+    mounted () {
+      let autoplay = this.$route.query.autoplay
+      if (autoplay === '1') {
+        this.playRelease()
       }
     }
   }
