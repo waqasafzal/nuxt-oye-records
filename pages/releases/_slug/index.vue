@@ -70,7 +70,7 @@
     <div class="row product__secondary-infos">
       <div class="col-md-6 col-12 product__details">
         <h4>Share Article</h4>
-        <social-sharing class="social-sharing" :url="currentRoute"
+        <social-sharing class="social-sharing" :url="currentRoute + '?autoplay=1'"
                         :title="pageTitle"
                         :description="release.description"
                         v-cloak inline-template>
@@ -218,7 +218,7 @@
           {
             hid: 'url',
             property: 'og:url',
-            content: this.currentRoute + '?autoplay=1'
+            content: this.currentRoute
           },
           {
             hid: 'type',
