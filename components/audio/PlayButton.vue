@@ -69,7 +69,6 @@
           width: 0,
           height: 0,
           borderRadius: '1px',
-//          borderRadius: `${this.baseSize > 20 ? (this.baseSize / 16) : 0}px`,
           borderTop: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
           borderBottom: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
           borderRight: `${this.baseSize / 4}px solid ${this.foregroundColor}`,
@@ -96,10 +95,8 @@
     methods: {
       onClick () {
         if (this.active) {
-//          this.active = false
           this.$emit('pause')
         } else {
-//          this.active = true
           this.$emit('play')
         }
       }
@@ -109,7 +106,7 @@
 
 <style lang="scss">
   .play-release-button {
-    cursor: po;
+    cursor: pointer;
     &:hover:after {
       content: '';
       position: absolute;

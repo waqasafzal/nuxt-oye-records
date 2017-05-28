@@ -2,27 +2,26 @@
   <div>
     <div class="row frontpage__teaser">
       <div class="col-12 frontpage__teaser__content">
-        <div class="outer">
-          <div class="inner" @mouseenter="disableSlider" @mouseleave="enableSlider">
-            <template v-for="(release, i) in featuredReleases">
-              <transition name="from-right">
-                <div :key="'release-'+i"
-                     v-if="i === currentFeature"
-                     class="slide"
-                     :style="`background-image: url(${release.thumbnailUrl})`">
-                  <nuxt-link :to="{name: 'releases-slug', params: {slug: release.slug}}">
-                    <div style="height: 100%;">
-                      <div class="feature-category">New In Stock</div>
-                      <div class="frontpage__teaser__artist">{{ release.artistFirstName }} {{ release.artistLastName}}
-                      </div>
-                      <div class="frontpage__teaser__title">{{ release.title }}</div>
-                      <release-button-bar :release="release" :size=48></release-button-bar>
+        <div class="slider" @mouseenter="disableSlider" @mouseleave="enableSlider">
+          <template v-for="(release, i) in featuredReleases">
+            <transition name="from-right">
+              <div :key="'release-'+i"
+                   v-if="i === currentFeature"
+                   class="slide"
+                   :style="`background-image: url(${release.thumbnailUrl})`">
+                <nuxt-link :to="{name: 'releases-slug', params: {slug: release.slug}}">
+                  <div style="height: 100%;">
+                    <div class="feature-category">New In Stock</div>
+                    <div class="frontpage__teaser__artist">{{ release.artistFirstName }} {{ release.artistLastName}}
+
                     </div>
-                  </nuxt-link>
-                </div>
-              </transition>
-            </template>
-          </div>
+                    <div class="frontpage__teaser__title">{{ release.title }}</div>
+                    <release-button-bar :release="release" :size=48></release-button-bar>
+                  </div>
+                </nuxt-link>
+              </div>
+            </transition>
+          </template>
         </div>
       </div>
     </div>
@@ -80,17 +79,28 @@
 
 <style>
   @keyframes left-to-right-in {
-    from {margin-left: -100%;}
-    to {margin-left: 0;}
+    from {
+      margin-left: -100%;
+    }
+    to {
+      margin-left: 0;
+    }
   }
+
   @keyframes left-to-right-out {
-    from {margin-left: 0;}
-    to {margin-left: 100%;}
+    from {
+      margin-left: 0;
+    }
+    to {
+      margin-left: 100%;
+    }
   }
+
   .from-right-enter-active {
     animation-name: left-to-right-in;
     animation-duration: 1s;
   }
+
   .from-right-leave-active {
     animation-name: left-to-right-out;
     animation-duration: 1s;

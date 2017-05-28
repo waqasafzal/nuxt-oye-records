@@ -115,7 +115,7 @@ const store = new Vuex.Store({
       let player = state.player
       if (player) {
         let pos = player.position
-        if (pos < player.history.length - 1) {
+        if (pos < player.history.length) {
           player.position = player.position + 1
         }
         if (player.position < player.history.length) {
@@ -151,9 +151,6 @@ const store = new Vuex.Store({
       state.search.query = query
       state.search.fields = fields
     },
-    // [types.SET_SEARCH_LOADING]: (state) => {
-    //   state.search.loading++
-    // },
     [types.SET_USER_ARTISTS]: (state, {artists}) => {
       state.user.artists = artists
     },

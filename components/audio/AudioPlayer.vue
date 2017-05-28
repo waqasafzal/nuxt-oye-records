@@ -30,7 +30,12 @@
             <div class="track-time__total">{{ time(duration / 1000) }}</div>
           </div>
         </nuxt-link>
-        <input v-model="currentTime" :style="" class="position-slider" type="range" :max="duration"></input>
+        <div class="position-slider">
+          <input v-model="currentTime" type="range" :max="duration"></input>
+          <div class="slider">
+            <div class="slider-fill" :style="sliderStyle"></div>
+          </div>
+        </div>
       </div>
       <div class="ap__element button-box link-box" @click="onBurgerClick">
         <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
@@ -109,6 +114,11 @@
           return this.player.history.length
         } else {
           return 0
+        }
+      },
+      sliderStyle: function () {
+        return {
+          width: `${100 * this.currentTime / this.duration}%`
         }
       }
     },
