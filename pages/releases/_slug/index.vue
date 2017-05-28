@@ -90,15 +90,11 @@
           <p>
                   <span :key="genre.pk" v-for="(genre, i) in release.genres">
                     {{ i > 0 ? ' / ' : ''}}
-                    <template v-if="genre.subgenres">
-                      <nuxt-link
-                          :to="{name: 'genres-slug', params: {slug: genre.slug}}">{{ genre.name
-                        }}</nuxt-link>
+                    <template v-if="genre.parentGenre">
+                      <nuxt-link :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug}}">{{ genre.name}}</nuxt-link>
                     </template>
-                    <template v-else-if="genre.parentGenre">
-                      <nuxt-link
-                          :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug}}">{{ genre.name
-                        }}</nuxt-link>
+                    <template v-else-if="genre.subgenres">
+                      <nuxt-link :to="{name: 'genres-slug', params: {slug: genre.slug}}">{{ genre.name}}</nuxt-link>
                     </template>
                   </span>
           </p>
