@@ -1,6 +1,6 @@
 <template>
   <div>
-    <front-page-teasers :mainRelease="mainRelease"
+    <front-page-teasers :featuredReleases="featuredReleases"
                         :singleRelease="singleOfTheWeek"
                         :albumRelease="albumOfTheWeek"
     ></front-page-teasers>
@@ -73,7 +73,7 @@
         preReleases: data.preReleases,
         newReleases: data.newReleases,
         backReleases: data.backReleases,
-        mainRelease: data.features.features && data.features.features[0],
+        featuredReleases: data.features.features,
         singleOfTheWeek: data.features.singleOfTheWeek,
         albumOfTheWeek: data.features.albumOfTheWeek
       }

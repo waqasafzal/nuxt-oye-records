@@ -1,18 +1,29 @@
 <template>
   <div>
-    <div class="row frontpage__teaser" v-if="mainRelease">
-      <div class="col-12 frontpage__teaser__content" :style="`background-image: url(${mainRelease.thumbnailUrl})`">
-        <nuxt-link :to="{name: 'releases-slug', params: {slug: mainRelease.slug}}">
-          <div style="height: 100%;">
-            <div class="feature-category">
-              New In Stock
-
-            </div>
-            <div class="frontpage__teaser__artist">{{ mainRelease.artistFirstName }} {{ mainRelease.artistLastName }}</div>
-            <div class="frontpage__teaser__title">{{ mainRelease.title }}</div>
-            <release-button-bar :release="mainRelease" :size=48></release-button-bar>
+    <div class="row frontpage__teaser">
+      <div class="col-12 frontpage__teaser__content">
+        <div class="outer">
+          <div class="inner" @mouseenter="disableSlider" @mouseleave="enableSlider">
+            <template v-for="(release, i) in featuredReleases">
+              <transition name="from-right">
+                <div :key="'release-'+i"
+                     v-if="i === currentFeature"
+                     class="slide"
+                     :style="`background-image: url(${release.thumbnailUrl})`">
+                  <nuxt-link :to="{name: 'releases-slug', params: {slug: release.slug}}">
+                    <div style="height: 100%;">
+                      <div class="feature-category">New In Stock</div>
+                      <div class="frontpage__teaser__artist">{{ release.artistFirstName }} {{ release.artistLastName}}
+                      </div>
+                      <div class="frontpage__teaser__title">{{ release.title }}</div>
+                      <release-button-bar :release="release" :size=48></release-button-bar>
+                    </div>
+                  </nuxt-link>
+                </div>
+              </transition>
+            </template>
           </div>
-        </nuxt-link>
+        </div>
       </div>
     </div>
     <div class="row frontpage__weekly__panel">
@@ -34,7 +45,54 @@
 
   export default {
     components: {ReleaseButtonBar, WeekFeature},
-    props: ['mainRelease', 'singleRelease', 'albumRelease'],
-    name: 'FrontPageTeasers'
+    props: ['featuredReleases', 'singleRelease', 'albumRelease'],
+    name: 'FrontPageTeasers',
+    data: function () {
+      return {
+        currentFeature: 0,
+        sliderDisabled: false
+      }
+    },
+    methods: {
+      incrementRelease () {
+        if (!this.sliderDisabled) {
+          if (this.featuredReleases) {
+            if (this.currentFeature < this.featuredReleases.length - 1) {
+              this.currentFeature++
+            } else if (this.currentFeature === this.featuredReleases.length - 1) {
+              this.currentFeature = 0
+            }
+          }
+        }
+      },
+      disableSlider () {
+        this.sliderDisabled = true
+      },
+      enableSlider () {
+        this.sliderDisabled = false
+      }
+    },
+    mounted () {
+      window.setInterval(this.incrementRelease, 5000)
+    }
   }
 </script>
+
+<style>
+  @keyframes left-to-right-in {
+    from {margin-left: -100%;}
+    to {margin-left: 0;}
+  }
+  @keyframes left-to-right-out {
+    from {margin-left: 0;}
+    to {margin-left: 100%;}
+  }
+  .from-right-enter-active {
+    animation-name: left-to-right-in;
+    animation-duration: 1s;
+  }
+  .from-right-leave-active {
+    animation-name: left-to-right-out;
+    animation-duration: 1s;
+  }
+</style>

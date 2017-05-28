@@ -25,9 +25,13 @@
     letter-spacing: 0px !important;
   }
 }
+
 .frontpage {
   &__teaser {
     position: relative;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
     margin-bottom: 200px;
     background-color: rgba(248,247,245,1);
     letter-spacing: 1px;
@@ -39,20 +43,13 @@
     margin-right: -9999px;
 
     &__content {
+      position: relative;
       padding-left: 120px;
       padding-top: 202px;
       padding-right: 120px;
       margin-bottom: 12em;
-      display: block;
+      //display: block;
       height: 560px;
-      -moz-background-size: 30%;
-      -webkit-background-size: 30%;
-      //background-size: 30%;
-      margin-right: 30px;
-      background-origin: content-box;
-      background-position: right bottom;
-      background-repeat: no-repeat;
-      background-size: auto 100%;
       margin-left: auto;
       margin-right: auto;
       max-width: 1600px;
@@ -64,6 +61,46 @@
         background-position: 0 250px;
         background-size: 100% auto;
         height: 450px;
+      }
+
+      .outer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .inner {
+        position: relative;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        white-space: pre;
+        height: 100%;
+        width: 100%;
+
+        //&:hover {
+        //  .slide {
+        //    -webkit-animation-play-state: paused;
+        //    -moz-animation-play-state: paused;
+        //    -o-animation-play-state: paused;
+        //    animation-play-state: paused;
+        //  }
+        //}
+
+        .slide {
+          position: absolute;
+          -moz-background-size: 30%;
+          -webkit-background-size: 30%;
+          background-origin: content-box;
+          background-position: right bottom;
+          background-repeat: no-repeat;
+          background-size: auto 100%;
+          white-space: normal !important;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          //margin-left: 0;
+          //margin-right: 120px;
+        }
       }
     }
     &__news-label {
