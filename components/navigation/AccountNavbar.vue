@@ -29,15 +29,16 @@
         <!--<div class="navbar__account__cart float-right" v-on:mouseenter="showCart" v-on:mouseleave="hideCart">-->
         <div class="ah-link cart">
           <nuxt-link :class="[isVisibleCart ? 'hover': '']" to="/cart" class="cart-link">
-            <span class="cart-label hidden-sm-down">My Cart</span>
+            <span class="cart-label hidden-sm-down">
+              <span>My Cart</span>
+              <template v-if="cartCount > 0"> ({{ cartCount }})</template>
+            </span>
             <div class="cart-icon-box">
               <!--<cart-svg></cart-svg>-->
               <img src="../../assets/images/cart.svg" />
             </div>
           </nuxt-link>
           <span :class="['badge', cartCount === 0 ? 'empty': '']">
-                <template v-if="cartCount > 0">{{ cartCount }}</template>
-                <template v-else>0</template>
               </span>
         </div>
       </div>

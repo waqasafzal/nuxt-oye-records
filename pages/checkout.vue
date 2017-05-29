@@ -6,21 +6,21 @@
 </template>
 
 <script>
-  import CheckoutMethod from '~/components/checkout/CheckoutMethod'
-//  import Vue from 'vue'
-
-//  Vue.component('checkout', CheckoutMethod)
+//  import CheckoutMethod from '~/components/checkout/CheckoutMethod'
+  import CheckoutPayment from '~/components/checkout/CheckoutPayment'
 
   export default {
     name: 'Checkout',
+    head: {
+      script: [
+        {src: 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'}
+      ]
+    },
     data: function () {
       return {
-        currentCheckoutView: CheckoutMethod
+        currentCheckoutView: CheckoutPayment
       }
     },
-//    components: {
-//      'checkout': CheckoutMethod
-//    },
     mounted () {
       this.calculateCheckoutState()
     },

@@ -440,18 +440,19 @@
     flex-direction: row;
     justify-content: space-between;
     .badge {
+      display: inherit !important;
       position: absolute;
-      top: 4px;
-      padding: 4px;
-      right: 22px;
+      top: 12px;
+      padding: 3px;
+      right: 32px;
       background-color: $brand-color-green;
       border-radius: 100px;
       color: $white;
-      width: 16px;
-      height: 16px;
+      width: 6px;
+      height: 6px;
       text-align: center;
       cursor: default;
-      &.empty {
+      .empty {
         background-color: $gray-color-2;
       }
       @include media-breakpoint-down(sm) {
@@ -485,7 +486,7 @@
 }
 
 .cart-label {
-  margin-right: 1em;
+  margin-right: 0.5em;
 }
 
 .add-to-cart-svg {
