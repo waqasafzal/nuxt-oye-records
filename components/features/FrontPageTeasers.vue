@@ -4,7 +4,7 @@
       <div class="col-12 frontpage__teaser__content">
         <div class="slider" @mouseenter="disableSlider" @mouseleave="enableSlider">
           <template v-for="(release, i) in featuredReleases">
-            <transition name="from-right">
+            <transition name="slide-fade" mode="out-in">
               <div :key="'release-'+i"
                    v-if="i === currentFeature"
                    class="slide"
@@ -105,4 +105,18 @@
     animation-name: left-to-right-out;
     animation-duration: 1s;
   }
+
+  .slide-fade-enter, .slide-fade-leave-to {
+    opacity: 0;
+  }
+  .slide-fade-enter-active, .slide-fade-leave-active {
+    transition: opacity 1s;
+  }
+  /*.fade-enter-to, .fade-leave {*/
+    /*opacity: 1;*/
+  /*}*/
+  /*.fade-enter-to {*/
+    /*opacity: 1;*/
+  /*}*/
+
 </style>
