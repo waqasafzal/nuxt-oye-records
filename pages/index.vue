@@ -8,7 +8,7 @@
     <release-list-summary status="pre" :releases="preReleases" :title="`Coming Soon`"></release-list-summary>
     <h3>DJ Charts</h3>
     <div class="row">
-      <chart-item class="col-6 col-md-3" :chart="chart.node" v-for="(chart, i) in charts.edges"></chart-item>
+      <chart-item class="col-6 col-md-3" :chart="chart.node" :key="'chart-'+i" v-for="(chart, i) in charts.edges"></chart-item>
     </div>
     <release-list-summary status="back" :releases="backReleases" :title="`Back In Stock`"></release-list-summary>
   </div>

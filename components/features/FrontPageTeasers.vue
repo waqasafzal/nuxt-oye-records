@@ -9,16 +9,20 @@
                    v-if="i === currentFeature"
                    class="slide"
                    :style="`background-image: url(${release.thumbnailUrl})`">
-                <nuxt-link :to="{name: 'releases-slug', params: {slug: release.slug}}">
-                  <div style="height: 100%;">
-                    <div class="feature-category">New In Stock</div>
+                <div style="height: 100%;">
+                  <div class="feature-category">
+                    <!--New In Stock-->
+                    <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
+                  </div>
+                  <nuxt-link :key="'release-'+i" :to="{name: 'releases-slug', params: {slug: release.slug}}">
                     <div class="frontpage__teaser__artist">{{ release.artistFirstName }} {{ release.artistLastName}}
+
 
                     </div>
                     <div class="frontpage__teaser__title">{{ release.title }}</div>
                     <release-button-bar :release="release" :size=48></release-button-bar>
-                  </div>
-                </nuxt-link>
+                  </nuxt-link>
+                </div>
               </div>
             </transition>
           </template>
@@ -109,14 +113,16 @@
   .slide-fade-enter, .slide-fade-leave-to {
     opacity: 0;
   }
+
   .slide-fade-enter-active, .slide-fade-leave-active {
     transition: opacity 1s;
   }
+
   /*.fade-enter-to, .fade-leave {*/
-    /*opacity: 1;*/
+  /*opacity: 1;*/
   /*}*/
   /*.fade-enter-to {*/
-    /*opacity: 1;*/
+  /*opacity: 1;*/
   /*}*/
 
 </style>
