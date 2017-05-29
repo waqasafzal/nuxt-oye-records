@@ -11,27 +11,12 @@
         <div class="release-detail__breadcrumb">
           <nuxt-link to="/">Home</nuxt-link>
           <template v-if="release.mainGenre">
-            /
-
-
-
-            <nuxt-link
-                :to="{name: 'genres-slug', params: {slug: release.mainGenre.slug}}">
-              {{ release.mainGenre.name }}
-
-
-
-
-            </nuxt-link>
+            <span>/</span>
+            <nuxt-link :to="{name: 'genres-slug', params: {slug: release.mainGenre.slug}}">{{ release.mainGenre.name }}</nuxt-link>
           </template>
           <template v-if="release.mainGenreSub && release.mainGenreSub.parentGenre">
-            /
-
-            <nuxt-link
-                :to="{name: 'genres-slug-subslug', params: {slug: release.mainGenreSub.parentGenre.slug, subslug: release.mainGenreSub.slug}}">
-              {{ release.mainGenreSub.name }}
-
-            </nuxt-link>
+            <span>/</span>
+            <nuxt-link :to="{name: 'genres-slug-subslug', params: {slug: release.mainGenreSub.parentGenre.slug, subslug: release.mainGenreSub.slug}}">{{ release.mainGenreSub.name }}</nuxt-link>
           </template>
         </div>
       </div>
@@ -85,18 +70,17 @@
         </social-sharing>
         <h4>Details</h4>
         <div class="product__details__detail">
-          Genre
-
+          <span>Genre</span>
           <p>
-                  <span :key="genre.pk" v-for="(genre, i) in release.genres">
-                    {{ i > 0 ? ' / ' : ''}}
-                    <template v-if="genre.parentGenre">
-                      <nuxt-link :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug}}">{{ genre.name}}</nuxt-link>
-                    </template>
-                    <template v-else-if="genre.subgenres">
-                      <nuxt-link :to="{name: 'genres-slug', params: {slug: genre.slug}}">{{ genre.name}}</nuxt-link>
-                    </template>
-                  </span>
+            <span :key="genre.pk" v-for="(genre, i) in release.genres">
+              <span>{{ i > 0 ? ' / ' : ''}}</span>
+              <template v-if="genre.parentGenre">
+                <nuxt-link :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug}}">{{ genre.name}}</nuxt-link>
+              </template>
+              <template v-else-if="genre.subgenres">
+                <nuxt-link :to="{name: 'genres-slug', params: {slug: genre.slug}}">{{ genre.name}}</nuxt-link>
+              </template>
+            </span>
           </p>
         </div>
         <div class="product__details__detail">

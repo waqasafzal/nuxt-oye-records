@@ -10,21 +10,10 @@
             </div>
             <template v-if="artistCharts.edges.length > 0">
               <div class="row">
-                <nuxt-link :to="{name: 'charts-slug', params: {slug: chart.node.slug}}"
-                           class="col-sm-12 col-md-6 charts-infobox"
-                           :key="'chart-'+i"
-                           v-for="(chart, i) in artistCharts.edges">
-                  <img :src="chart.node.imageUrl"/>
-                  <template v-if="chart.node.artist">
-                    <div class="charts-infobox__name">{{ chart.node.artist.name }}</div>
-                    <template v-if="chart.node.name">{{ chart.node.name }}</template>
-                    <div class="charts-infobox__label">{{ chart.node.artist.homeLabel }}</div>
-                  </template>
-                  <template v-else>
-                    <div class="charts-infobox__name">{{ chart.node.user.firstName }}</div>
-                    <template v-if="chart.node.name">{{ chart.node.name }}</template>
-                  </template>
-                </nuxt-link>
+                <chart-item :chart="chart.node"
+                            class="col-sm-12 col-md-6 charts-infobox"
+                            :key="'chart-'+i"
+                            v-for="(chart, i) in artistCharts.edges"></chart-item>
               </div>
             </template>
             <template v-else>No DJ Charts for {{ currentMonth.name }}</template>
@@ -32,21 +21,10 @@
               <h3>Staff Charts - {{ currentMonth.name }}</h3>
             </div>
             <div class="row">
-              <nuxt-link :to="{name: 'charts-slug', params: {slug: chart.node.slug}}"
-                         class="col-sm-12 col-md-6 charts-infobox"
-                         :key="'staff-chart-'+i"
-                         v-for="(chart, i) in staffCharts.edges">
-                <img :src="chart.node.imageUrl"/>
-                <div class="charts-infobox__name">
-                  <template v-if="chart.node.artist">{{ chart.node.artist.name }}</template>
-                  <template v-else>{{ chart.node.user.firstName }}</template>
-                  <template v-if="chart.node.name">{{ chart.node.name }}</template>
-                </div>
-              </nuxt-link>
+              <chart-item :chart="chart.node" class="col-sm-12 col-md-6 charts-infobox"
+                          :key="'chart-'+i"
+                          v-for="(chart, i) in staffCharts.edges"></chart-item>
             </div>
-          </div>
-          <div class="col-4">
-            <div>Bestseller - {{ currentMonth.name }}</div>
           </div>
         </div>
         <div class="col-12 col-md-3 offset-md-1">
@@ -88,11 +66,12 @@
   import ReleasePrice from '../../components/releases/ReleasePrice'
   import PlayReleaseButton from '../../components/releases/PlayReleaseButton'
   import NuxtLink from '../../.nuxt/components/nuxt-link'
+  import ChartItem from '../../components/charts/ChartItem'
 
   const currentMonth = getCurrentMonth()
 
   export default {
-    components: {NuxtLink, PlayReleaseButton, ReleasePrice},
+    components: {ChartItem, NuxtLink, PlayReleaseButton, ReleasePrice},
     name: 'ChartsIndex',
     data: function () {
       return {
