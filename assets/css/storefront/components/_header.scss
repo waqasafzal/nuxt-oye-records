@@ -475,7 +475,7 @@
       height: 6px;
       text-align: center;
       cursor: default;
-      .empty {
+      &.empty {
         background-color: $gray-color-2;
       }
       @include media-breakpoint-down(sm) {
