@@ -1,24 +1,17 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-      <div class="page__header">
-        <div class="search">
-          {{ releasesTotal }} results for <strong>{{ query }}</strong>
-        </div>
-      </div>
-      <template v-if="releaseResults">
-        <release-list :releases="releaseResults" :loading="loadingReleases"></release-list>
-      </template>
-    </div>
-  </div>
+  <query-result-page :releasesTotal="releasesTotal"
+                     :query="query"
+                     :loadingReleases="loadingReleases"
+                     :releaseResults="releaseResults"></query-result-page>
 </template>
 
 <script>
   import ReleaseList from '../components/releases/ReleaseList'
   import { getPageSize } from '../components/utils'
+  import QueryResultPage from '../components/search/QueryResultPage'
 
   export default {
-    components: {ReleaseList},
+    components: {QueryResultPage, ReleaseList},
     name: 'SearchPage',
     data: function () {
       return {

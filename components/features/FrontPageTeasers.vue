@@ -11,7 +11,6 @@
                    :style="`background-image: url(${release.thumbnailUrl})`">
                 <div style="height: 100%;">
                   <div class="feature-category">
-                    <!--New In Stock-->
                     <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                   </div>
                   <nuxt-link :key="'release-'+i" :to="{name: 'releases-slug', params: {slug: release.slug}}">

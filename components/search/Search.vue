@@ -20,7 +20,7 @@
         <div class="search__results__header">Artists</div>
         <div @click="setQuery(item.artist.name, ['artist_name'])" class="search__results__row" v-for="item in artistsResults">
           <nuxt-link v-if="item.artist" class="search__results__item"
-                     :to="{name:'search', query: { q: item.artist.name, fields: JSON.stringify(['artist_name'])}}">
+                     :to="{name:'artists-query', params: { query: item.artist.name }}">
             <div class="search__artist__image">
               <template v-if="item.artist.smallThumbnailUrl">
                 <img :src="item.artist.smallThumbnailUrl"/>
@@ -115,7 +115,7 @@
         return this.$store.state.search.loading > 0
       },
       hasResults () {
-        return this.releasesTotal > 0 || this.releaseResults.length > 0
+        return this.releasesTotal > 0 || this.releaseResults.length > 0 || this.artistsResults.length > 0
       },
       hasMore () {
         return this.releasesTotal > MAX_RELEASES || this.artistsTotal.length > MAX_ARTISTS

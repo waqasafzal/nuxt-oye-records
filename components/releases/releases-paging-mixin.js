@@ -5,10 +5,13 @@ import { createReleaseListQuery } from './queries'
 const DEFAULT_PAGE_SIZE = 5
 
 export const ReleasePagingMixin = function (filterBy) {
-  var asyncData = async function ({params}) {
-    let {data} = await client.query(createReleaseListQuery({filterBy: filterBy}))
-    return {
-      releases: data.releases
+  var asyncData = async function () {}
+  if (filterBy) {
+    asyncData = async function ({params}) {
+      let {data} = await client.query(createReleaseListQuery({filterBy: filterBy}))
+      return {
+        releases: data.releases
+      }
     }
   }
 
@@ -59,7 +62,7 @@ export const ReleasePagingMixin = function (filterBy) {
         var vm = this
         client.query(createReleaseListQuery({
           first: this.count,
-          filterBy: filterBy,
+          filterBy: filterBy || this.filterBy,
           after: this.cursor
         })).then(({data}) => {
           vm.loading = false

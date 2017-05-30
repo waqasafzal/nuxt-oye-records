@@ -92,8 +92,7 @@
           <p>{{ release.catalogueNumber }}</p>
         </div>
         <div v-if="release.chartedBy && release.chartedBy.length > 0" class="product__details__detail">
-          Charted By
-
+          <span>Charted By</span>
           <p>
             <span :key="'chart-' + i"
                   v-for="(publisher, i) in release.chartedBy">
@@ -107,12 +106,10 @@
       <div class="col-md-6 col-12 release-detail__tracklist">
         <h4>
           <template v-if="release.tracks.length > 0">
-            Tracklist
-
+            <span>Tracklist</span>
           </template>
           <template v-else>
-            No Tracklist Available
-
+            <span>No Tracklist Available</span>
           </template>
         </h4>
         <div class="release-detail__tracklist__item"
@@ -134,7 +131,7 @@
     <template v-if="release.artistReleases.length > 0">
       <div class="row">
         <div class="col-12">
-          <h3 class="release-detail__related__header">More from <span>{{ release.name }}</span></h3>
+          <h3 class="release-detail__related__header">More from <nuxt-link :to="{name: 'artists-query', params: {query: release.name }}">{{ release.name }}</nuxt-link></h3>
         </div>
       </div>
       <release-list :releases="release.artistReleases"></release-list>
@@ -142,7 +139,7 @@
     <template v-if="release.labelReleases.length > 0">
       <div class="row">
         <div class="col-12">
-          <h3 class="release-detail__related__header">More from <span>{{ release.label }}</span></h3>
+          <h3 class="release-detail__related__header">More from <nuxt-link :to="{name: 'labels-query', params: {query: release.label }}">{{ release.label }}</nuxt-link></h3>
         </div>
       </div>
       <release-list :releases="release.labelReleases"></release-list>
