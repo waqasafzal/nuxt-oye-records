@@ -6,9 +6,11 @@
     ></front-page-teasers>
     <release-list-summary status="new" :releases="newReleases" :title="`New Releases`"></release-list-summary>
     <release-list-summary status="pre" :releases="preReleases" :title="`Coming Soon`"></release-list-summary>
-    <h3>DJ Charts</h3>
-    <div class="row">
-      <chart-item class="col-6 col-md-3" :chart="chart.node" :key="'chart-'+i" v-for="(chart, i) in charts.edges"></chart-item>
+    <div class="charts__summary">
+      <h3><nuxt-link :to="{name: 'charts'}">Charts</nuxt-link></h3>
+      <div class="row">
+        <chart-item class="col-6 col-md-3" :chart="chart.node" :key="'chart-'+i" v-for="(chart, i) in charts.edges"></chart-item>
+      </div>
     </div>
     <release-list-summary status="back" :releases="backReleases" :title="`Back In Stock`"></release-list-summary>
   </div>
@@ -22,9 +24,10 @@
   import ReleaseList from '../components/releases/ReleaseList'
   import { release, tracksFragment } from '../components/graphql/releases'
   import ChartItem from '../components/charts/ChartItem'
+  import NuxtLink from '../.nuxt/components/nuxt-link'
 
   export default {
-    components: {ChartItem, ReleaseListSummary, FrontPageTeasers},
+    components: {NuxtLink, ChartItem, ReleaseListSummary, FrontPageTeasers},
     name: 'OyeIndex',
     async asyncData ({params}) {
       var filterByNew = JSON.stringify({status: 'new'})

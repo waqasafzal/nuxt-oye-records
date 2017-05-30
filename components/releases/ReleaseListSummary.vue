@@ -3,13 +3,13 @@
     <div class="release-list-summary__header">
       <h3>
         <template v-if="status === 'new' && genre">Latest </template>
-        {{ title }}
+        <template v-if="getRoute()">
+          <nuxt-link :to="getRoute()">{{ title }}</nuxt-link>
+        </template>
+        <template v-else>
+          <span>{{ title }}</span>
+        </template>
       </h3>
-      <nuxt-link v-if="getRoute()" :to="getRoute()" class="release-list-summary__header__more">
-        View all
-        <template v-if="genre">{{ title }}</template>
-        <img src="../../assets/images/arrow_right_grey.svg"/>
-      </nuxt-link>
     </div>
     <release-list :releases="releases" :loading="loading"></release-list>
   </div>
@@ -17,6 +17,7 @@
 
 <script>
   import ReleaseList from './ReleaseList'
+  import NuxtLink from '../../.nuxt/components/nuxt-link'
 
   var getReleaseListColumnNumber
   if (process.BROWSER_BUILD) {
@@ -29,7 +30,7 @@
   }
 
   export default {
-    components: {ReleaseList},
+    components: {NuxtLink, ReleaseList},
     props: ['pageSize', 'status', 'title', 'genre', 'releases'],
     name: 'ReleaseListSummary',
     data: function () {

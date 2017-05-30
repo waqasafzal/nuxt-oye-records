@@ -337,4 +337,13 @@ $bestseller-item-padding: 7px;
       }
     }
   }
+  &__summary {
+    h3 {
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+    padding-bottom: 3em;
+    border-bottom: 1px solid $gray-color-2;
+  }
 }

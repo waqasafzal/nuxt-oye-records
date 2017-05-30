@@ -171,8 +171,11 @@
       color: $gray-color-1;
     }
     a {
-      color: $gray-color-1;
+      //color: $bra;
       text-transform: capitalize;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
