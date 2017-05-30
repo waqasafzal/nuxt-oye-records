@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import store from '../../store'
 import jwtDecode from 'jwt-decode'
+import * as types from '../../store/types'
 
 // URL and endpoint constants
 const LOGIN_URL = __API__ + '/oye/api-token-auth/'
@@ -84,6 +85,7 @@ export const unsetToken = () => {
       authenticated: false
     }
   })
+  store.commit(types.SET_CART, null)
 }
 
 export const getUserFromCookie = (req) => {

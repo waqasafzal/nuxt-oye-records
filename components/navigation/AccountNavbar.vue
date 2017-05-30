@@ -36,10 +36,9 @@
             <div class="cart-icon-box">
               <!--<cart-svg></cart-svg>-->
               <img src="../../assets/images/cart.svg" />
+              <span :class="['badge', cartCount === 0 ? 'empty': '']"></span>
             </div>
           </nuxt-link>
-          <span :class="['badge', cartCount === 0 ? 'empty': '']">
-              </span>
         </div>
       </div>
     </div>
