@@ -1,7 +1,7 @@
 <template>
   <query-result-page :releasesTotal="releasesTotal"
                      :query="query"
-                     :loadingReleases="loadingReleases"
+                     :loadingReleases="loading"
                      :releaseResults="releases"></query-result-page>
 </template>
 
@@ -18,9 +18,8 @@
     data: function () {
       return {
         filterBy: JSON.stringify({
-          label: this.query
-        }),
-        loadingReleases: false
+          label: this.$route.params.query
+        })
       }
     },
     computed: {
@@ -40,11 +39,6 @@
       return {
         releases: data.releases,
         query: params.query
-      }
-    },
-    methods: {
-      loadMore () {
-
       }
     }
   }
