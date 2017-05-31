@@ -40,16 +40,27 @@
 </template>
 
 <script>
-  import ReleaseList from '../../../components/releases/ReleaseList.vue'
-  import {getReleaseListColumnNumber} from '../../../components/utils'
-  import ReleaseItem from '../../../components/releases/ReleaseItem'
-  import Dropdown from '../../../components/shared/Dropdown'
-  import LoadingSpinner from '../../../components/shared/LoadingSpinner'
-  import client from '../../../plugins/apollo'
-  import { createReleaseListQuery } from '../../../components/releases/queries'
-  import { createGenreQuery } from '../../../components/genres/queries'
+  import ReleaseList from '~/components/releases/ReleaseList.vue'
+  import {getReleaseListColumnNumber} from '~/components/utils'
+  import ReleaseItem from '~/components/releases/ReleaseItem'
+  import Dropdown from '~/components/shared/Dropdown'
+  import LoadingSpinner from '~/components/shared/LoadingSpinner'
+  import client from '~/plugins/apollo'
+  import { createReleaseListQuery } from '~/components/releases/queries'
+  import { createGenreQuery } from '~/components/genres/queries'
+  import {ReleasePagingMixin} from '~/components/releases/releases-paging-mixin'
 
   const MAX_BESTSELLERS = 40
+
+  const releaseFilterParams = function (params) {
+    let releaseFilterParams = {}
+    if (params.subslug) {
+      releaseFilterParams['subgenres'] = [params.subslug]
+    } else if (params.slug) {
+      releaseFilterParams['genres'] = [params.slug]
+    }
+    return releaseFilterParams
+  }
 
   export default {
     components: {
@@ -60,6 +71,7 @@
     },
     name: 'GenreDetailPage',
     props: ['genre'],
+    mixins: [ReleasePagingMixin()],
     data: function () {
       var genreId = this.genreId
       var isSubgenre = typeof this.subGenreId !== 'undefined'
@@ -77,20 +89,17 @@
         genreSlug: this.slug,
         genreSubslug: this.subslug,
         bsPageSize: getReleaseListColumnNumber() * (2 / 3),
-        currentSlide: 1
+        currentSlide: 1,
+        filterBy: JSON.stringify(releaseFilterParams(this.$route.params))
       }
     },
     async asyncData ({params}) {
-      let releaseFilterParams = {}
-      if (params.subslug) {
-        releaseFilterParams['subgenres'] = [params.subslug]
-      } else if (params.slug) {
-        releaseFilterParams['genres'] = [params.slug]
-      }
-      let genreReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)}))
+      var filterParams = releaseFilterParams(params)
 
-      releaseFilterParams['status'] = 'bestsellers'
-      let bestsellerReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)}))
+      let genreReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))
+
+      filterParams['status'] = 'bestsellers'
+      let bestsellerReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))
 
       let options = {
         slug: params.subslug || params.slug,
@@ -105,9 +114,6 @@
       }
     },
     computed: {
-      filterBy: function () {
-        return this.getFilterByParameter()
-      },
       pages: function () {
         if (this.bestsellers.edges) {
           return Math.ceil(this.bestsellers.edges.length / this.bsPageSize)
@@ -115,18 +121,6 @@
       }
     },
     methods: {
-      getFilterByParameter (status) {
-        let filterBy = {}
-        if (status) {
-          filterBy['status'] = status
-        }
-        if (this.subGenreId) {
-          filterBy['subgenres'] = [this.subGenreId]
-        } else if (this.genreId) {
-          filterBy['genres'] = [this.genreId]
-        }
-        return JSON.stringify(filterBy)
-      },
       getPageSize (status) {
         if (status === 'bestsellers') {
           return MAX_BESTSELLERS
