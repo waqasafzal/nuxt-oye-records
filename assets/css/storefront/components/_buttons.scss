@@ -4,9 +4,13 @@ a.btn {
 .btn {
   transition: 0.3s;
   border-radius: $button-border-radius;
-  text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 20px;
+  line-height: 24px;
   cursor: pointer;
+  height: 52px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
   &.home__button {
     text-transform: uppercase;
     font-size: $font-size-h3;
@@ -20,12 +24,21 @@ a.btn {
     }
   }
   &.primary {
-    background-color: $blue;
+    background-color: $brand-color-green;
     color: $white;
-    padding: $global-padding $global-padding * 4;
+    //width: 266px;
+    padding: 0 $global-padding * 4;
+    font-weight: 300;
     &:hover {
-      background-color: darken($blue, 10%);
+      background-color: darken($brand-color-green, 5%);
     }
+    //input[type="submit"] {
+    //  background-color: transparent;
+    //  padding: inherit;
+    //  //width: 100%;
+    //  height: 100%;
+    //  border: none;
+    //}
   }
   &.secondary {
     border: 1px solid $blue;
@@ -56,5 +69,11 @@ a.btn {
     vertical-align: baseline;
     color: $gray;
     text-transform: none;
+  }
+  &-text {
+    position: absolute;
+    margin: auto;
+    background-color: $brand-color-green;
+    color: $white;
   }
 }

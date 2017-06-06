@@ -1,5 +1,6 @@
 .form-control, select, input {
   color: $body-color;
+  background-color: white;
   border-radius: 2px;
   border: 1px solid $gray;
   &:focus {
@@ -44,7 +45,89 @@
 .passIcon {
   max-width: 15px;
   position: absolute;
-  top: 2.8rem;
   right: 0.5rem;
   cursor: pointer;
+  top: 22px;
+}
+
+input {
+  font-family: inherit !important;
+  &:placeholder-shown {
+    border-color: $gray-color-2;
+  }
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+  }
+}
+
+input[type=text], input[type=password], input[type=submit] {
+  height: 56px;
+}
+
+select.form-control {
+  height: 56px !important;
+  font-family: inherit !important;
+  margin-bottom: auto;
+  margin-top: auto;
+  -webkit-appearance: none;
+  background-image: url('../../images/arrow_down.png');
+  background-repeat: no-repeat;
+  background-size: 10px;
+  background-position: right 15px center;
+  background-color: white;
+}
+
+
+.form-control {
+  padding-left: 16.5px;
+  &:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+    border-color: $brand-color-black;
+  }
+  margin-right: 21px;
+  &:last-child {
+    margin-right: inherit;
+  }
+  &.password {
+    margin-right: inherit;
+  }
+}
+
+.form-group {
+  margin-bottom: 15.5px;
+  display: flex;
+  flex-direction: row;
+  &:last-child {
+    margin-bottom: 24px;
+  }
+}
+
+.form-field {
+  &__zip {
+    flex: 0 0 154px;
+  }
+  &__number {
+    flex: 0 0 90px;
+  }
+}
+
+.checkbox-panel {
+  width: 100%;
+  margin-bottom: auto;
+  margin-top: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  color: $gray-color-1;
+  label {
+    margin-bottom: auto;
+    margin-top: auto;
+  }
+  input {
+    width: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    margin-right: 8px;
+  }
+
 }

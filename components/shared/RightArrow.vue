@@ -1,0 +1,24 @@
+<template>
+  <svg class="right-arrow" viewBox="0 0 11 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Styleguide" transform="translate(-280.000000, -1787.000000)" fill-rule="nonzero" fill="#30C46C">
+        <path d="M288.564098,1790.2487 L280.99498,1790.2487 L280.99498,1791.32217 L288.564639,1791.32217 L286.255694,1793.6307 L287.007578,1794.38258 L290.603954,1790.78572 L287.007578,1787.18883 L286.255694,1787.94071 L288.564098,1790.2487 Z" id="Combined-Shape"></path>
+      </g>
+    </g>
+  </svg>
+</template>
+
+<script>
+  export default {
+    name: 'RightArrow'
+  }
+</script>
+
+<style lang="scss">
+  .right-arrow {
+    * path {
+      fill: white;
+    }
+  }
+</style>

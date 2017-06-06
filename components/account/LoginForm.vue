@@ -1,45 +1,72 @@
 <template>
-  <div class="col-md-6 login__form">
-    <h3>Log in</h3>
-    <form id="loginForm" method="post" @submit.prevent="submit">
+  <div class="col-md-6 login__form__panel">
+    <h3>I already have an account</h3>
+    <form ref="login" id="login" class="login__form" method="post" @submit.prevent="submit" autocomplete="off">
       <fieldset>
         <div class="form-group">
-          <label class="form-control-label" for="id_login">Username</label>
-          <input class="form-control" id="id_login" maxlength="75" name="username" title="" type="text"
-                 v-model="credentials.login" required/>
+          <input class="form-control"
+                 id="id_login"
+                 maxlength="75"
+                 name="username"
+                 type="text"
+                 v-model="credentials.login"
+                 placeholder="Username"
+                 autocomplete="off"
+                 required/>
         </div>
         <div class="form-group relative">
-          <label class="form-control-label" for="id_password">
-            Password
-          </label>
-          <input class="form-control" id="id_password" name="password" title="" type="password"
-                 v-model="credentials.password" required/>
-          <img class="passIcon" src="../../assets/images/pass-invisible.svg"/>
+          <template v-if="passwordVisible">
+            <!--suppress XmlDuplicatedId -->
+            <input class="form-control password"
+                   id="id_password"
+                   name="password"
+                   type="text"
+                   v-model="credentials.password"
+                   placeholder="Password"
+                   autocomplete="off"
+                   required/>
+          </template>
+          <template v-else>
+            <!--suppress XmlDuplicatedId -->
+            <input class="form-control password"
+                   id="id_password"
+                   name="password"
+                   type="password"
+                   v-model="credentials.password"
+                   placeholder="Password"
+                   required/>
+          </template>
+          <img @click="togglePasswordVisible" class="passIcon" src="../../assets/images/pass-invisible.svg"/>
         </div>
       </fieldset>
-      <input class="btn primary" type="submit" value="Log In"/>
-    </form>
-    <div class="row login__btn-group">
-      <div class="col-sm-12">
-        <router-link :to="{name: 'account-reset'}">
-          Forgot password?
-        </router-link>
+      <div>
+        <proceed-button type="submit" form="login" class="btn primary">Login</proceed-button>
       </div>
-    </div>
+    </form>
+    <nuxt-link :to="{name: 'account-reset'}">
+      Lost your password?
+    </nuxt-link>
   </div>
 </template>
 
 <script>
   import { login } from '~/utils/auth'
+  import ProceedButton from '../shared/ProceedButton'
   export default {
+    components: {ProceedButton},
     name: 'LoginForm',
+    props: {
+      redirect: String,
+      default: '/account/details'
+    },
     data: function () {
       return {
         credentials: {
           email: '',
           login: '',
           password: ''
-        }
+        },
+        passwordVisible: false
       }
     },
     methods: {
@@ -50,11 +77,10 @@
         }
         // We need to pass the component's this context
         // to properly make use of http in the auth service
-        login(this, credentials, '/account/details')
-
-        // Leave no trace
-//        this.credentials.password = ''
-//        this.credentials.login = ''
+        login(this, credentials, this.redirect === '#' ? null : this.redirect)
+      },
+      togglePasswordVisible () {
+        this.passwordVisible = !this.passwordVisible
       }
     }
   }

@@ -1,11 +1,13 @@
 <template>
-  <keep-alive>
-    Hello
-    <component :is="currentCheckoutView"></component>
-  </keep-alive>
+  <div class="checkout">
+    <keep-alive>
+      <component :is="currentCheckoutView"></component>
+    </keep-alive>
+  </div>
 </template>
 
 <script>
+
   import CheckoutMethod from '~/components/checkout/CheckoutMethod'
   import CheckoutPayment from '~/components/checkout/CheckoutPayment'
   import CheckoutAddresses from '~/components/checkout/CheckoutAddresses'
@@ -18,31 +20,17 @@
         {src: 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'}
       ]
     },
-//    data: function () {
-//      var currentCheckoutView
-//      if (!this.$store.state.user.authenticated && !this.$store.state.checkout.guest) {
-//        currentCheckoutView = CheckoutMethod
-//      } else if (!this.$store.state.checkout.address) {
-//        currentCheckoutView = CheckoutAdresses
-//      } else if (!this.$store.state.checkout.payment) {
-//        currentCheckoutView = CheckoutPayment
-//      } else {
-//        currentCheckoutView = CheckoutReview
-//      }
-//      return {
-//        currentCheckoutView: currentCheckoutView
-//      }
-//    },
     computed: {
       currentCheckoutView () {
         var currentCheckoutView
-        if (!this.$store.state.user.authenticated && !this.$store.state.checkout.guest) {
+        let checkoutState = this.$store.getters.getCheckoutState
+        if (checkoutState === 1) {
           currentCheckoutView = CheckoutMethod
-        } else if (!this.$store.state.checkout.address) {
+        } else if (checkoutState === 2) {
           currentCheckoutView = CheckoutAddresses
-        } else if (!this.$store.state.checkout.payment) {
+        } else if (checkoutState === 3) {
           currentCheckoutView = CheckoutPayment
-        } else {
+        } else if (checkoutState === 4) {
           currentCheckoutView = OrderReview
         }
         return currentCheckoutView

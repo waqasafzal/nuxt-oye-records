@@ -3,28 +3,28 @@
     <template v-if="isCheckout">
       <div class="navbar__checkout navigation">
         <div class="checkout__navbar">
-          <div class="nav-item active">
+          <div class="nav-item active clickable">
             <div class="checkout-state">
-              <div class="checkout-num">1</div>
-              <div class="checkout-name">Checkout Method</div>
+              <div class="checkout-num" @click="setCheckoutState(1)">1</div>
+              <div class="checkout-name" @click="setCheckoutState(1)">Checkout Method</div>
             </div>
           </div>
-          <div :class="['nav-item', hasCheckoutMethod ? 'active': '', hasCheckoutMethod ? 'clickable': '']">
+          <div :class="['nav-item', checkoutState > 1 ? 'active': '', hasCheckoutMethod ? 'clickable': '']">
             <div class="checkout-state">
-              <div class="checkout-num">2</div>
-              <div class="checkout-name">Address / Shipping</div>
+              <div class="checkout-num" @click="setCheckoutState(2)">2</div>
+              <div class="checkout-name" @click="setCheckoutState(2)">Address / Shipping</div>
             </div>
           </div>
-          <div :class="['nav-item', hasShipping ? 'active': '', hasShipping ? 'clickable': '']">
+          <div :class="['nav-item', checkoutState > 2 ? 'active': '', hasShipping ? 'clickable': '']">
             <div class="checkout-state">
-              <div class="checkout-num">3</div>
-              <div class="checkout-name">Payment</div>
+              <div class="checkout-num" @click="setCheckoutState(3)">3</div>
+              <div class="checkout-name" @click="setCheckoutState(3)">Payment</div>
             </div>
           </div>
-          <div :class="['nav-item', hasPayment ? 'active': '', hasPayment ? 'clickable': '']">
+          <div :class="['nav-item', checkoutState > 3 ? 'active': '', hasPayment ? 'clickable': '']">
             <div class="checkout-state">
-              <div class="checkout-num">4</div>
-              <div class="checkout-name">Order Review</div>
+              <div class="checkout-num" @click="setCheckoutState(4)">4</div>
+              <div class="checkout-name" @click="setCheckoutState(4)">Order Review</div>
             </div>
           </div>
         </div>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+  import * as types from '../../store/types'
   export default {
     name: 'MainNavbar',
     props: ['isOpenMobile'],
@@ -69,14 +70,26 @@
         return this.$route.name === 'checkout'
       },
       hasShipping () {
-        return this.user.shippingAddresses && this.user.shippingAddresses.length > 0
+        return this.$store.state.shippingAddressConfirmed
       },
       hasPayment () {
         return this.$store.state.paymentMethods && this.$store.state.paymentMethods.length > 0
       },
       isHomeUrl () {
         return this.$route.path === '/'
+      },
+      checkoutState () {
+        return this.$store.getters.getCheckoutState
       }
+    },
+    methods: {
+      setCheckoutState (value) {
+        if (value <= this.$store.getters.getMaximumCheckoutState) {
+          this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, value)
+        }
+      }
+    },
+    mounted () {
     }
   }
 </script>

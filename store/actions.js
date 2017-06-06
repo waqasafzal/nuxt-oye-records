@@ -236,19 +236,23 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
   commit(types.SET_QUERY, {query})
 })
 
-export const enterCheckout = ({commit}, args) => new Promise((resolve, reject) => {
+export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
   apolloClient.query({
     query: gql`query Profile {
         profile {
             firstName
             lastName
             shippingAddresses {
+                id
                 firstName
                 lastName
                 city
-                companyName
+                company
+                street
+                number
                 country
-                zipCode
+                zip
+                addressExtra
             }
             paymentMethods {
                 id
@@ -264,12 +268,21 @@ export const enterCheckout = ({commit}, args) => new Promise((resolve, reject) =
           shippingAddresses: profile.shippingAddresses
         })
       }
+      if (profile.billingAddresses && profile.billingAddresses.length > 0) {
+        commit(types.SET_USER_BILLING_ADDRESSES, {
+          billingAddresses: profile.billingAddresses
+        })
+      }
       if (profile.paymentMethods && profile.paymentMethods.length > 0) {
         commit(types.SET_USER_PAYMENT_METHODS, {
           paymentMethods: profile.paymentMethods
         })
       }
     }
-    commit(types.ENTER_CHECKOUT)
   })
+})
+
+export const enterCheckout = (store, args) => new Promise((resolve, reject) => {
+  store.dispatch('getProfile', args)
+  store.commit(types.ENTER_CHECKOUT)
 })

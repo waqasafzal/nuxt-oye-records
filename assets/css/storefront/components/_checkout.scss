@@ -1,14 +1,26 @@
 .checkout {
   margin-bottom: $global-margin * 5;
+  padding-top: 48px;
+  &__content {
+    border: 1px solid $gray-color-2;
+    &__col {
+      border-right: 1px solid $gray-color-2;
+      padding-bottom: 48px;
+      padding-left: 71px;
+      padding-right: 71px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      &:last-child {
+        border: none;
+      }
+    }
+  }
   h2, h3 {
-    text-transform: uppercase;
     margin: $global-margin * 2 0;
   }
   hr {
     margin: $global-margin * 3 0 $global-margin * 2;
-  }
-  .btn {
-    margin-top: $global-margin;
   }
   &__edit-link {
     margin-top: $global-margin;
@@ -172,6 +184,11 @@
           text-align: left;
         }
       }
+    }
+  }
+  &__addresses {
+    &__content {
+      color: $gray-color-1;
     }
   }
 }

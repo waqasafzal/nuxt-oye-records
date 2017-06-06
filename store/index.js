@@ -9,20 +9,42 @@ import * as types from './types'
 
 Vue.use(Vuex)
 
+var isAddressComplete = function (address) {
+  let complete = (
+    address &&
+    address.firstName.length > 0 &&
+    address.lastName.length > 0 &&
+    address.street.length > 0 &&
+    (address.number.length > 0 || address.number > 0) &&
+    address.zip.length > 0 &&
+    address.city.length > 0 &&
+    address.country && address.country.length > 0
+  )
+  return complete
+}
+
 const store = new Vuex.Store({
 
   state: {
     cart: null,
     cartUpdating: false,
+    checkoutState: null,
+    shippingAddress: null,
+    shippingAddressIsComplete: false,
+    shippingAddressConfirmed: false,
+    billingAddress: null,
+    billingAddressIsComplete: false,
+    shippingOptions: null,
     checkout: {
-      address: null,
+      billingAddress: null,
       payment: null,
       guest: null
     },
     user: {
       authenticated: false,
       artists: [],
-      shippingAddresses: []
+      shippingAddresses: [],
+      billingAddresses: []
     },
     player: {
       history: [],
@@ -172,6 +194,29 @@ const store = new Vuex.Store({
     },
     [types.SET_USER_SHIPPING_ADDRESSES]: (state, args) => {
       state.user.shippingAddresses = args.shippingAddresses
+      if (!state.shippingAddress && args.shippingAddresses.length > 0) {
+        let address = args.shippingAddresses[0]
+        state.shippingAddress = address
+        let complete = isAddressComplete(address)
+        state.shippingAddressIsComplete = complete
+        state.shippingAddressConfirmed = complete
+      }
+    },
+    [types.SET_USER_BILLING_ADDRESSES]: (state, args) => {
+      state.user.billingAddresses = args.billingAddresses
+      if (!state.billingAddress && args.billingAddresses.length > 0) {
+        state.billingAddress = args.shippingAddresses[0]
+      }
+    },
+    [types.SET_SHIPPING_ADDRESS]: (state, address) => {
+      state.shippingAddress = address
+      let complete = isAddressComplete(address)
+      state.shippingAddressIsComplete = complete
+    },
+    [types.SET_BILLING_ADDRESS]: (state, address) => {
+      state.billingAddress = address
+      let complete = isAddressComplete(address)
+      state.billingAddressIsComplete = complete
     },
     [types.SET_USER_PAYMENT_METHODS]: (state, paymentMethods) => {
       state.user.paymentMethods = paymentMethods
@@ -187,6 +232,20 @@ const store = new Vuex.Store({
     },
     [types.INCREMENT_SEARCH_LOADING]: (state) => {
       state.search.loading++
+    },
+    [types.SET_GUEST_CHECKOUT]: (state) => {
+      state.checkout.guest = true
+    },
+    [types.SET_SHIPPING_OPTIONS]: (state, shippingOptions) => {
+      state.shippingOptions = shippingOptions
+    },
+    [types.SET_SHIPPING_ADDRESS_CONFIRMED]: (state) => {
+      if (state.shippingAddress && isAddressComplete(state.shippingAddress)) {
+        state.shippingAddressConfirmed = true
+      }
+    },
+    [types.SET_CURRENT_CHECKOUT_STATE]: (state, checkoutState) => {
+      state.checkoutState = checkoutState
     }
   },
 
@@ -202,6 +261,54 @@ const store = new Vuex.Store({
     },
     cartItemCount (state) {
       return state.cart && state.cart.quantity || 0
+    },
+    isShippingAddressComplete (state) {
+      return state.shippingAddressIsComplete
+    },
+    isBillingAddressComplete (state) {
+      return state.billingAddressIsComplete
+    },
+    getShippingCountry (state) {
+      return state.shippingAddress && state.shippingAddress.country
+    },
+    getShippingOptions (state) {
+      return state.shippingOptions || []
+    },
+    getShippingAddress (state) {
+      return state.shippingAddress ||
+        state.user.shippingAddresses && state.user.shippingAddresses.length > 0 && state.user.shippingAddresses[0]
+    },
+    getBillingAddress (state) {
+      return state.billingAddress
+    },
+    getCheckoutState (state) {
+      if (state.checkoutState) {
+        return state.checkoutState
+      }
+      var checkoutState = 1
+      if (state.user.authenticated || state.checkout.guest) {
+        checkoutState = 2
+      }
+      if (checkoutState === 2 && state.shippingAddressConfirmed) {
+        checkoutState = 3
+      }
+      if (checkoutState === 3 && state.paymentConfirmed) {
+        checkoutState = 4
+      }
+      return checkoutState
+    },
+    getMaximumCheckoutState (state) {
+      var checkoutState = 1
+      if (state.user.authenticated || state.checkout.guest) {
+        checkoutState = 2
+      }
+      if (checkoutState === 2 && state.shippingAddressConfirmed) {
+        checkoutState = 3
+      }
+      if (checkoutState === 3 && state.paymentConfirmed) {
+        checkoutState = 4
+      }
+      return checkoutState
     }
   },
 

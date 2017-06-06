@@ -39,4 +39,9 @@ export const oyeCart = gql`
             preorder
         }
         cookie
+        shippingOptions {
+            id
+            name
+            price
+        }
     }`

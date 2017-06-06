@@ -16,6 +16,7 @@ export const login = (context, creds, redirect) => {
     setToken(data.token)
     context.$store.dispatch('getCart')
 
+    context.$store.dispatch('getProfile')
     // Redirect to a specified route
     if (redirect) {
       context.$router.push(redirect)

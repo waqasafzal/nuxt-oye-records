@@ -13,13 +13,13 @@
     margin-bottom: $global-margin * 2;
   }
   p, a {
-    color: $gray;  
+    color: $gray;
   }
   a:not(.btn) {
     text-decoration: underline;
   }
   .btn {
-    padding: $global-padding / 2 $global-padding * 2.5;
+    //padding: $global-padding / 2 $global-padding * 2.5;
     font-size: 1rem;
     text-transform: uppercase;
     margin: auto;
@@ -27,7 +27,6 @@
     font-family: $font-family-sans-serif;
   }
   &__btn-group {
-    text-align: center;
     img {
       display: block;
       margin: 0 auto;
@@ -51,21 +50,34 @@
     }
   }
   &__form {
-    background: $light-gray;
-    padding: $global-padding * 2 $global-padding * 5;
-    @include media-breakpoint-down(md) {
-      padding: $global-padding * 2;
-    }
-    a {
-      color: $body-color;
-      text-decoration: none;
-      font-size: 0.8rem;
-      &:hover {
-        text-decoration: underline;
+    margin-bottom: 16.6px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &__panel {
+      a {
+        //color: $body-color;
+        color: $brand-color-green;
+        text-decoration: none;
+        font-size: $font-size-sm;
+        &:hover {
+          text-decoration: underline;
+        }
       }
-    }
-    .form-group {
-      text-align: left;
+      background: transparent;
+      padding: $global-padding * 2 $global-padding * 5;
+      margin-bottom: 15.5px;
+      @include media-breakpoint-down(md) {
+        padding: $global-padding * 2;
+      }
+      h3 {
+        text-transform: uppercase;
+        margin-bottom: 27px;
+      }
+      .form-group {
+        text-align: left;
+      }
     }
   }
   &__btn-group {

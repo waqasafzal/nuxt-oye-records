@@ -24,11 +24,7 @@
           Change
         </div>
       </div>
-
     </div>
-    <!--<div class="artist__infos">-->
-      <!--<h3>Artist Info</h3>-->
-    <!--</div>-->
     <div class="artist__charts">
       <h3>Charts</h3>
       <charts-editor :artist="artist"></charts-editor>
@@ -86,16 +82,6 @@
         artistImage: artist.image
       }
     },
-    watch: {
-      $route ({params}) {
-//        this.release = ''
-        let slug = params.slug
-        console.log('watch route ' + slug)
-//        client.query(createReleaseDetailsQuery(slug)).then(({data}) => {
-//          this.release = data.release
-//        })
-      }
-    },
     computed: {
       headers () {
         if (process.browser) {
@@ -131,7 +117,6 @@
     },
     mounted () {
       var artist = this.artist
-      console.log('mounted ' + typeof artist.name === 'undefined')
       if (typeof artist.name === 'undefined') {
         const slug = this.$route.params['slug']
         client.query({
