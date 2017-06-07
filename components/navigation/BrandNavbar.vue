@@ -14,7 +14,7 @@
           </nuxt-link>
         </div>
         <main-navbar class="col-2 col-md-8"></main-navbar>
-        <search class="col-2 col-md-3"></search>
+        <search v-if="!isCheckout" class="col-2 col-md-3"></search>
       </div>
     </div>
   </div>
@@ -55,6 +55,9 @@
       },
       closeMobileNav () {
         this.$emit('closemenu')
+      },
+      isCheckout () {
+        return this.$route.name === 'checkout'
       }
     },
     computed: {
