@@ -17,3 +17,17 @@ export const callSaveAddress = function (id, addressDict, callback) {
     }
   }).then(callback)
 }
+
+export const addressFragment = gql`
+  fragment Address on AddressType {
+    id
+    firstName
+    lastName
+    city
+    company
+    street
+    number
+    country
+    zip
+    addressExtra
+  }`

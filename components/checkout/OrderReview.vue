@@ -1,5 +1,11 @@
 <template>
-  <div>Order Review</div>
+  <div class="checkout__content">
+    <div class="row">
+      <div class="col-12 checkout__content__col">
+        <h3>Review your order</h3>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

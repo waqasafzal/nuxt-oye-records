@@ -16,6 +16,7 @@ import { oyeCart } from '../components/graphql/cart'
 
 import { addCartAlertMessage } from '../components/shared/utils'
 import { callArtistSearchQuery, callReleaseSearchQuery } from '../components/search/queries'
+import { addressFragment } from '~/components/graphql/user'
 
 // const apolloClient = Apollo.defaultClient
 
@@ -243,22 +244,19 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
             firstName
             lastName
             shippingAddresses {
-                id
-                firstName
-                lastName
-                city
-                company
-                street
-                number
-                country
-                zip
-                addressExtra
+                ...Address
             }
+            billingAddresses {
+                ...Address
+            }
+            
             paymentMethods {
                 id
             }
         }
-    }`,
+    }
+    ${addressFragment}
+    `,
     fetchPolicy: 'network-only'
   }).then(({data}) => {
     let profile = data.profile

@@ -19,10 +19,7 @@
                           @address-changed="onBillingAddressChanged"></address-form>
           </template>
           <template v-else>
-            <div class="checkout__addresses__content">
-              Same as billing address
-
-            </div>
+            <div class="checkout__addresses__content">Same as billing address</div>
           </template>
         </div>
         <div class="shipping-model__panel">
@@ -30,10 +27,15 @@
           <template v-if="cartShippingOptions.length > 0">
             <form class="checkout__addresses__content">
               <template v-for="(shippingOption, i) in cartShippingOptions">
-                <input type="radio"
-                       name="shipping"
-                       v-model="shippingMethod"
-                       :value="shippingOption.name"> {{shippingOption.name}} ({{shippingOption.price}} &euro;) <br>
+                <div class="radio">
+                  <label>
+                    <input type="radio"
+                           name="shipping"
+                           v-model="shippingMethod"
+                           :value="shippingOption">
+                    <span>{{shippingOption.name}} ({{shippingOption.price}} &euro;)</span>
+                  </label>
+                </div>
               </template>
             </form>
           </template>
@@ -94,8 +96,12 @@
     watch: {
       cartShippingOptions (value) {
         if (value.length > 0) {
-          this.shippingMethod = value[0].name
+          this.shippingMethod = value[0]
         }
+      },
+      shippingMethod (value) {
+        console.log('shippingMethod ' + value.id)
+        this.$store.commit(types.SET_SHIPPING_OPTION, value)
       }
     },
     methods: {
@@ -209,10 +215,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .float-right-bottom {
-    margin-top: auto;
-    margin-left: auto;
-  }
-</style>

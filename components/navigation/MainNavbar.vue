@@ -3,7 +3,7 @@
     <template v-if="isCheckout">
       <div class="navbar__checkout navigation">
         <div class="checkout__navbar">
-          <div class="nav-item active clickable">
+          <div :class="['nav-item', 'active', canSelectCheckout ? 'clickable': '']">
             <div class="checkout-state">
               <div class="checkout-num" @click="setCheckoutState(1)">1</div>
               <div class="checkout-name" @click="setCheckoutState(1)">Checkout Method</div>
@@ -63,6 +63,9 @@
       user () {
         return this.$store.state.user
       },
+      canSelectCheckout () {
+        return this.$store.state.checkout.guest
+      },
       hasCheckoutMethod () {
         return this.user.authenticated || this.$store.state.checkout.guest
       },
@@ -73,7 +76,7 @@
         return this.$store.state.shippingAddressConfirmed
       },
       hasPayment () {
-        return this.$store.state.paymentMethods && this.$store.state.paymentMethods.length > 0
+        return this.$store.state.paymentOptionConfirmed
       },
       isHomeUrl () {
         return this.$route.path === '/'
@@ -84,6 +87,10 @@
     },
     methods: {
       setCheckoutState (value) {
+        if (value === 1 && !this.canSelectCheckout) {
+          // do nothing
+          return
+        }
         if (value <= this.$store.getters.getMaximumCheckoutState) {
           this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, value)
         }

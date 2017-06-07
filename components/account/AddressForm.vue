@@ -103,6 +103,7 @@
       stateAddress (value) {
         if (!this.country) {
           this.country = value.country
+          this.$emit('country-selected', this.country)
         }
         console.log('stateAddress')
         let address = this.getAddressData()

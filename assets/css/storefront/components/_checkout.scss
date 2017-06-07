@@ -18,6 +18,7 @@
   }
   h2, h3 {
     margin: $global-margin * 2 0;
+    text-transform: uppercase;
   }
   hr {
     margin: $global-margin * 3 0 $global-margin * 2;
@@ -191,4 +192,8 @@
       color: $gray-color-1;
     }
   }
+}
+
+.proceed-btn-payment {
+  margin-top: 48px !important;
 }
