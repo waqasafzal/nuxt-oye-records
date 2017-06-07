@@ -88,3 +88,8 @@ body {
   margin-top: auto;
   margin-left: auto;
 }
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+}

@@ -8,7 +8,7 @@
                  src="../../assets/images/mobile-bar.svg" v-on:click="toggleMobileNav" v-on-clickaway="closeMobileNav">
             <span>menu</span>
           </div>
-          <nuxt-link to="/">
+          <nuxt-link :class="[isCheckout ? 'not-active': '']" to="/">
             <img src="../../assets/images/oye_logo.svg" alt="Oye Records"
                  height="50">
           </nuxt-link>
@@ -68,4 +68,3 @@
     }
   }
 </script>
-
