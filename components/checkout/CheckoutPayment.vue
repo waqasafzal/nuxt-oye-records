@@ -70,11 +70,11 @@
       },
       getPaymentImages (paymentRef) {
         if (paymentRef === 'paypal') {
-          return [paypalLogoSmall]
-        } else if (paymentRef === 'card') {
-          return [visaLogoSmall, mastercardLogoSmall]
+          return [paypalLogoSmall()]
+        } else if (paymentRef === 'creditcard') {
+          return [visaLogoSmall(), mastercardLogoSmall()]
         } else if (paymentRef === 'sofort') {
-          return [sofortLogoSmall]
+          return [sofortLogoSmall()]
         }
         return []
       },
