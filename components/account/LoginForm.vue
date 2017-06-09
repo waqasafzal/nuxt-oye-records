@@ -11,7 +11,6 @@
                  type="text"
                  v-model="credentials.login"
                  placeholder="Username"
-                 autocomplete="off"
                  required/>
         </div>
         <div class="form-group relative">
@@ -56,8 +55,10 @@
     components: {ProceedButton},
     name: 'LoginForm',
     props: {
-      redirect: String,
-      default: '/account/details'
+      redirect: {
+        type: String,
+        default: '/account/details'
+      }
     },
     data: function () {
       return {

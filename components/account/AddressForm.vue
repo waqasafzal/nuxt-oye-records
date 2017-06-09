@@ -105,7 +105,6 @@
           this.country = value.country
           this.$emit('country-selected', this.country)
         }
-        console.log('stateAddress')
         let address = this.getAddressData()
         if (!addressEquals(this.address, address)) {
           this.address = address
@@ -140,7 +139,6 @@
         }
 
         if (this.stateAddress && this.stateAddress.country) {
-          console.log(`stateAddress.country ${this.stateAddress.country}`)
           address['country'] = this.stateAddress.country
         } else if (this.country) {
           console.log(`this.country ${this.country}`)
@@ -165,7 +163,6 @@
             newAddress['country'] = this.country
           }
           if (!addressEquals(newAddress, vm.stateAddress)) {
-            console.log(JSON.stringify(newAddress) + '\n<-\n' + JSON.stringify(vm.stateAddress))
             vm.$emit('address-changed', newAddress)
           }
         }, {

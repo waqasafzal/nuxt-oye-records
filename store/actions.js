@@ -294,6 +294,7 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
                 id
                 price
                 porto
+                paymentType
             }
         }
     }

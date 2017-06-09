@@ -34,6 +34,7 @@ const store = new Vuex.Store({
     shippingAddressIsComplete: false,
     shippingAddressConfirmed: false,
     paymentOptionConfirmed: false,
+    selectedPaymentOption: null,
     billingAddress: null,
     billingAddressIsComplete: false,
     shippingOptions: null,
@@ -268,6 +269,9 @@ const store = new Vuex.Store({
     },
     [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
       state.unpaidOrder = unpaidOrder
+    },
+    [types.SET_SELECTED_PAYMENT_OPTION]: (state, paymentOption) => {
+      state.selectedPaymentOption = paymentOption
     }
   },
 
@@ -305,14 +309,16 @@ const store = new Vuex.Store({
     },
     getCheckoutState (state) {
       if (state.unpaidOrder) {
-        console.log(state.unpaidOrder)
         return 5
       }
       if (state.checkoutState) {
         return state.checkoutState
       }
-      var checkoutState = 1
-      if (state.user.authenticated || state.checkout.guest) {
+      var checkoutState = 0
+      if (state.checkoutActive) {
+        checkoutState = 1
+      }
+      if (checkoutState === 1 && state.user.authenticated || state.checkout.guest) {
         checkoutState = 2
       }
       if (checkoutState === 2 && state.shippingAddressConfirmed) {
@@ -325,11 +331,13 @@ const store = new Vuex.Store({
     },
     getMaximumCheckoutState (state) {
       if (state.unpaidOrder) {
-        console.log(state.unpaidOrder)
         return 5
       }
-      var checkoutState = 1
-      if (state.user.authenticated || state.checkout.guest) {
+      var checkoutState = 0
+      if (state.checkoutActive) {
+        checkoutState = 1
+      }
+      if (checkoutState === 1 && state.user.authenticated || state.checkout.guest) {
         checkoutState = 2
       }
       if (checkoutState === 2 && state.shippingAddressConfirmed) {

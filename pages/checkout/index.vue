@@ -7,7 +7,7 @@
 </template>
 
 <script>
-
+  import CheckoutImpossible from '~/components/checkout/CheckoutImpossible'
   import CheckoutMethod from '~/components/checkout/CheckoutMethod'
   import CheckoutPayment from '~/components/checkout/CheckoutPayment'
   import CheckoutAddresses from '~/components/checkout/CheckoutAddresses'
@@ -23,7 +23,7 @@
     },
     computed: {
       currentCheckoutView () {
-        var currentCheckoutView
+        var currentCheckoutView = CheckoutImpossible
         let checkoutState = this.$store.getters.getCheckoutState
         if (checkoutState === 1) {
           currentCheckoutView = CheckoutMethod
@@ -41,6 +41,7 @@
     },
     mounted () {
       this.calculateCheckoutState()
+      // checkout?authResult=PENDING&merchantReference=117134&merchantSig=rAu7yMZaVtYJ%2B7IZK5dKC9JJWitDvuK6lbiN6du1zoQ%3D&paymentMethod=sepadirectdebit&pspReference=8514970348545135&shopperLocale=de_DE&skinCode=ru4CHIJf
     },
     methods: {
       calculateCheckoutState () {

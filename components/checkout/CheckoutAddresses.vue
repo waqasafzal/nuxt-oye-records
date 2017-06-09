@@ -100,7 +100,6 @@
         }
       },
       shippingMethod (value) {
-        console.log('shippingMethod ' + value.id)
         this.$store.commit(types.SET_SHIPPING_OPTION, value)
       }
     },

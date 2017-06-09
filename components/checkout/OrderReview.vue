@@ -42,18 +42,22 @@
       billingId () {
         let address = this.$store.billingAddress
         return address && address.id
+      },
+      paymentOption () {
+        return this.$store.state.selectedPaymentOption
       }
     },
     methods: {
       onProceed () {
         apolloClient.mutate({
-          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID) {
-            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId) {
+          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String) {
+            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment) {
               order {
                 id
                 price
                 porto
                 isPaid
+                paymentType
               }
               notInStock {
                 quantity
@@ -75,11 +79,13 @@
             billingId: this.billingId,
             shippingId: this.shippingId,
             cartId: this.cartId,
-            porto: this.porto
+            porto: this.porto,
+            payment: this.paymentOption.id
           }
         }).then(
           ({data}) => {
-            if (!data.placeOrder.order.isPaid) {
+            let order = data.placeOrder.order
+            if (!order.isPaid) {
               this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
               this.$store.commit(types.ADD_ALERT, {
                 level: 'info',

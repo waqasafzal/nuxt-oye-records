@@ -8,7 +8,7 @@
             <label>
               <input type="radio" name="payment" v-model="selectedPayment" :value="option">
               <span>{{option.name}}</span>
-              <img :src="image" v-for="(image, i) in getPaymentImages(option.id)"/>
+              <img :src="image" v-for="(image, j) in option.logos"/>
             </label>
           </div>
         </template>
@@ -51,6 +51,7 @@
             paymentOptions(country: $country) {
               id
               name
+              logos
             }
           }
           `,
@@ -107,6 +108,9 @@
       },
       shippingOption (option) {
         this.selectPaymentByShippingOption(option)
+      },
+      selectedPayment (payment) {
+        this.$store.commit(types.SET_SELECTED_PAYMENT_OPTION, payment)
       }
     },
     mounted () {
