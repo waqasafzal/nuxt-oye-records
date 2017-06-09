@@ -87,6 +87,7 @@ export const unsetToken = () => {
     }
   })
   store.commit(types.SET_CART, null)
+  store.commit(types.SET_UNPAID_ORDER, null)
 }
 
 export const getUserFromCookie = (req) => {

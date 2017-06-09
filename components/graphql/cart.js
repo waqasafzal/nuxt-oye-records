@@ -3,6 +3,7 @@
  */
 
 import gql from 'graphql-tag'
+import {release} from '~/components/graphql/releases'
 
 export const oyeCart = gql`
     fragment OyeCart on OyeCartType {
@@ -10,27 +11,19 @@ export const oyeCart = gql`
         quantity
         totalAvailable
         totalAvailableNet
-        lines {
+        lines(preorder: false) {
             release {
-                pk
-                slug
-                artistFirstName
-                artistLastName
-                title
-                price {
-                    currency
-                    gross
-                }
-                availability {
-                    priceRange {
-                        minPrice {
-                            gross
-                        }
-                        maxPrice {
-                            gross
-                        }
-                    }
-                }
+                ...Release
+            }
+            quantity
+            smallImageUrl
+            notAvailable
+            lineTotal
+            preorder
+        }
+        preorderLines: lines(preorder: true) {
+            release {
+                ...Release
             }
             quantity
             smallImageUrl
@@ -44,4 +37,6 @@ export const oyeCart = gql`
             name
             price
         }
-    }`
+    }
+  ${release}
+`

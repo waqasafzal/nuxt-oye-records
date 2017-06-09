@@ -98,41 +98,6 @@
       }
     }
   }
-  &__review {
-    background-color: $light-gray;
-    padding: $global-padding $global-padding * 2;
-    border-radius: 3px;
-    h3 {
-      margin: $global-margin 0;
-    }
-    &__section {
-      border-top: 1px solid $gray;
-      padding-top: $global-padding;
-    }
-    &__tittle {
-      margin-bottom: $global-margin * 2;
-    }
-    &__variant {
-      color: $skull-gray;
-    }
-    &__voucher {
-      position: relative;
-      .btn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: $global-padding / 2 $global-padding * 2;
-        margin-top: 0;
-        background-color: $white;
-      }
-      &-form {
-        margin-bottom: $global-margin;
-      }
-    }
-    @include media-breakpoint-down(sm) {
-      margin-top: $global-margin * 3;
-    } 
-  }
   &__thankyoupage {
     text-align: center;
     margin-top: $global-margin * 6;
@@ -191,6 +156,10 @@
     &__content {
       color: $gray-color-1;
     }
+  }
+  &__review {
+    display: flex;
+    flex-direction: column;
   }
 }
 

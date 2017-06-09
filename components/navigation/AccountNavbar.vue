@@ -47,7 +47,7 @@
 
 <script>
   import { logout } from '~/utils/auth'
-  import { fetchCart } from '../../components/cart/fetch-cart-mixin'
+  import { fetchCart, fetchUserProfile } from '../../components/cart/fetch-cart-mixin'
   import CartSvg from '../shared/Cart'
   import NuxtLink from '../../.nuxt/components/nuxt-link'
 
@@ -55,7 +55,7 @@
     components: {NuxtLink, CartSvg},
     name: 'AccountNavbar',
     props: ['isOpenMobile'],
-    mixins: [fetchCart],
+    mixins: [fetchCart, fetchUserProfile],
     computed: {
       user () {
         return this.$store.state.user

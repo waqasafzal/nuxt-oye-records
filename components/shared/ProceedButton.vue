@@ -41,13 +41,14 @@
       justify-content: space-around;
     }
     &__text {
-      /*letter-spacing: 1px;*/
+      margin-left: auto;
     }
     .proceed-right {
       margin-bottom: auto;
       margin-top: auto;
       height: 15px;
       margin-left: 8px;
+      margin-right: auto;
     }
   }
 </style>

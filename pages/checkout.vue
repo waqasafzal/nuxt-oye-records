@@ -12,6 +12,7 @@
   import CheckoutPayment from '~/components/checkout/CheckoutPayment'
   import CheckoutAddresses from '~/components/checkout/CheckoutAddresses'
   import OrderReview from '~/components/checkout/OrderReview'
+  import PayOrder from '~/components/checkout/PayOrder'
 
   export default {
     name: 'Checkout',
@@ -32,6 +33,8 @@
           currentCheckoutView = CheckoutPayment
         } else if (checkoutState === 4) {
           currentCheckoutView = OrderReview
+        } else if (checkoutState === 5) {
+          currentCheckoutView = PayOrder
         }
         return currentCheckoutView
       }

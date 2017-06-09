@@ -114,6 +114,7 @@ export const release = gql`
         label
         artistFirstName
         artistLastName
+        name
         price {
             currency
             gross

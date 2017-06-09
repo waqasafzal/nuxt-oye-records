@@ -1,4 +1,6 @@
 .cart {
+  display: flex;
+  flex-direction: column;
   h3 {
     text-transform: uppercase;
     color: $skull-gray;
@@ -19,7 +21,7 @@
     padding: $global-padding * 2;
     margin-top: 0px !important;
 
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid $gray-color-2;
     &.last {
       border-bottom-color: $skull-gray;
     }
@@ -99,15 +101,56 @@
   }
   &__total {
     height: 9em;
+    display: flex;
+    flex-direction: column;
     background-color: $gray-color-2;
     padding: $global-padding * 2;
+    margin-right: inherit;
+    margin-left: inherit;
     p {
       margin-bottom: 0;
     }
+    .row {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+  &__backorder {
+    opacity: 0.6;
+    padding: $global-padding * 2;
+    h4 {
+      margin-bottom: $global-padding;
+    }
   }
   &__subtotal {
-    height: 9em;
     padding: $global-padding * 2;
+    .row {
+      .cart__line__cell {
+        padding-bottom: $global-padding * 2;
+        padding-top: $global-padding * 2;
+        border-bottom: 1px solid $gray-color-2;
+      }
+      &:first-child {
+        .cart__line__cell {
+          padding-top: inherit;
+        }
+      }
+      &:last-child {
+        .cart__line__cell {
+          padding-bottom: inherit;
+          border-bottom: inherit;
+        }
+      }
+    }
+  }
+  &__vat {
+    font-size: $font-size-sm;
+    &__title {
+      color: $brand-color-green;
+    }
+    &__amount {
+      color: $gray-color-1;
+    }
   }
   &__delivery-info {
     margin-top: $global-margin * 2;
@@ -160,10 +203,11 @@
     border-radius: 2px;
     background-color: $brand-color-green;
     color: white;
+    width: 100%;
     height: 64px;
     line-height: 64px;
     text-align: center;
-    span {
+    a {
       display: inline-block;
       vertical-align: middle;
     }
@@ -214,4 +258,9 @@
   display: inline-block;
   vertical-align: middle;
   height: 100%;
+}
+
+.place-order-btn {
+  margin-top: 2rem !important;
+  margin-bottom: 4rem;
 }

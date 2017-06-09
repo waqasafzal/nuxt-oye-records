@@ -55,15 +55,15 @@
       },
       closeMobileNav () {
         this.$emit('closemenu')
-      },
-      isCheckout () {
-        return this.$route.name === 'checkout'
       }
     },
     computed: {
       cartCount () {
         var cart = this.$store.state.cart
         return cart ? cart.quantity : 0
+      },
+      isCheckout () {
+        return this.$route.name === 'checkout'
       }
     }
   }

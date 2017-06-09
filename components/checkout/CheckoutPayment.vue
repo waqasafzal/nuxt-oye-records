@@ -58,12 +58,7 @@
             country: country
           }
         }).then(({data}) => {
-          var paymentOptions = data.paymentOptions.slice()
-          paymentOptions.push({
-            id: 'store',
-            name: 'Pay on pickup'
-          })
-          this.$store.commit(types.SET_PAYMENT_OPTIONS, paymentOptions)
+          this.$store.commit(types.SET_PAYMENT_OPTIONS, data.paymentOptions)
           if (data.paymentOptions.length > 0) {
             if (this.shippingOption) {
               this.selectPaymentByShippingOption(this.shippingOption)
@@ -86,8 +81,7 @@
       selectPaymentByShippingOption (shippingOption) {
         if (shippingOption.id === '-1') {
           for (var i = 0; i < this.paymentOptions.length; i++) {
-            if (this.paymentOptions[i].id === 'store') {
-              console.log('select store payment')
+            if (this.paymentOptions[i].id === 'cash') {
               this.selectedPayment = this.paymentOptions[i]
               break
             }
@@ -101,7 +95,7 @@
         if (option.id === 'forward' && isPickupOption) {
           return false
         }
-        return option.id !== 'store' || this.shippingOption && this.shippingOption.id === '-1'
+        return option.id !== 'cash' || this.shippingOption && this.shippingOption.id === '-1'
       },
       onProceed () {
         this.$store.commit(types.SET_PAYMENT_OPTION_CONFIRMED)

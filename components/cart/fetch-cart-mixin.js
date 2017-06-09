@@ -5,16 +5,17 @@
 const fetchCart = {
   mounted () {
     const store = this.$store
-    return new Promise((resolve, reject) => {
-      if (store.state.cart) {
-        resolve()
-      } else {
-        return store
-          .dispatch('getCart')
-          .catch(e => console.log(e))
-      }
-    })
+    if (!store.state.cart) {
+      store.dispatch('getCart').catch(e => console.log(e))
+    }
   }
 }
 
-export {fetchCart}
+const fetchUserProfile = {
+  mounted () {
+    const store = this.$store
+    store.dispatch('getProfile').catch(e => console.log(e))
+  }
+}
+
+export {fetchCart, fetchUserProfile}

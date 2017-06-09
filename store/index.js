@@ -29,6 +29,7 @@ const store = new Vuex.Store({
     cart: null,
     cartUpdating: false,
     checkoutState: null,
+    unpaidOrder: null,
     shippingAddress: null,
     shippingAddressIsComplete: false,
     shippingAddressConfirmed: false,
@@ -264,6 +265,9 @@ const store = new Vuex.Store({
     [types.SET_PAYMENT_OPTION_CONFIRMED]: (state) => {
       state.paymentOptionConfirmed = true
       state.checkoutState = 4
+    },
+    [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
+      state.unpaidOrder = unpaidOrder
     }
   },
 
@@ -300,6 +304,10 @@ const store = new Vuex.Store({
       return state.billingAddress
     },
     getCheckoutState (state) {
+      if (state.unpaidOrder) {
+        console.log(state.unpaidOrder)
+        return 5
+      }
       if (state.checkoutState) {
         return state.checkoutState
       }
@@ -316,6 +324,10 @@ const store = new Vuex.Store({
       return checkoutState
     },
     getMaximumCheckoutState (state) {
+      if (state.unpaidOrder) {
+        console.log(state.unpaidOrder)
+        return 5
+      }
       var checkoutState = 1
       if (state.user.authenticated || state.checkout.guest) {
         checkoutState = 2
@@ -333,6 +345,9 @@ const store = new Vuex.Store({
     },
     getShippingOption (state) {
       return state.shippingOption
+    },
+    getUnpaidOrder (state) {
+      return state.unpaidOrder
     }
   },
 

@@ -21,23 +21,61 @@ import { addressFragment } from '~/components/graphql/user'
 // const apolloClient = Apollo.defaultClient
 
 export const getCart = ({commit}) => new Promise((resolve, reject) => {
-  apolloClient.query({
-    query: gql`query OyeCart {
-        cart {
-            ...OyeCart
+  apolloClient.mutate({
+    mutation: gql`mutation OyeCart {
+        syncCart {
+            cart {
+              ...OyeCart
+            }
+            removedItems {
+                quantity
+                release {
+                    slug
+                    title
+                    name
+                }
+            }
+            addedItems {
+                quantity
+                release {
+                    title
+                    name
+                }
+            }
         }
     },
     ${oyeCart}`,
     fetchPolicy: 'network-only'
   })
   .then(({data}) => {
-    if (data.cart.cookie) {
-      Vue.cookie.set('cart', data.cart.cookie, true)
+    let cart = data.syncCart.cart
+    if (cart.cookie) {
+      Vue.cookie.set('cart', cart.cookie, true)
     }
-    commit(types.SET_CART, data.cart)
-    const r = data && data.cart
-    commit(types.SET_CART, r || null)
-    return resolve(r)
+    commit(types.SET_CART, cart)
+    let addedItems = data.syncCart.addedItems
+    if (addedItems) {
+      for (let i = 0; i < addedItems.length; i++) {
+        let item = addedItems[i]
+        let release = item.release
+        commit(types.ADD_ALERT, {
+          level: 'warning',
+          message: `Release '${release.name} - ${release.title}' is on stock again. Added ${item.quantity} item${item.quantity > 1 ? 's' : ''} to order.`
+        })
+      }
+    }
+    let removedItems = data.syncCart.removedItems
+    if (removedItems) {
+      for (let i = 0; i < removedItems.length; i++) {
+        let item = removedItems[i]
+        let release = item.release
+        commit(types.ADD_ALERT, {
+          level: 'warning',
+          message: `Release '${release.name} - ${release.title}' does not have enough items on stock. Moved ${item.quantity} item${item.quantity > 1 ? 's' : ''} for preorder.`
+        })
+      }
+    }
+    return resolve(cart)
   })
   .catch(er => reject(er))
 })
@@ -249,9 +287,13 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
             billingAddresses {
                 ...Address
             }
-            
             paymentMethods {
                 id
+            }
+            unpaidOrder {
+                id
+                price
+                porto
             }
         }
     }
@@ -275,6 +317,9 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
         commit(types.SET_USER_PAYMENT_METHODS, {
           paymentMethods: profile.paymentMethods
         })
+      }
+      if (profile.unpaidOrder) {
+        commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
       }
     }
   })
