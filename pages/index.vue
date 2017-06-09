@@ -24,10 +24,9 @@
   import ReleaseList from '../components/releases/ReleaseList'
   import { release, tracksFragment } from '../components/graphql/releases'
   import ChartItem from '../components/charts/ChartItem'
-  import NuxtLink from '../.nuxt/components/nuxt-link'
 
   export default {
-    components: {NuxtLink, ChartItem, ReleaseListSummary, FrontPageTeasers},
+    components: {ChartItem, ReleaseListSummary, FrontPageTeasers},
     name: 'OyeIndex',
     async asyncData ({params}) {
       var filterByNew = JSON.stringify({status: 'new'})

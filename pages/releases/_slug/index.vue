@@ -164,7 +164,6 @@
   import PlayReleaseButton from '../../../components/releases/PlayReleaseButton'
   import client from '../../../plugins/apollo'
   import { createReleaseDetailsQuery } from '../../../components/releases/queries'
-  import NuxtLink from '../../../.nuxt/components/nuxt-link'
   import ReleaseList from '../../../components/releases/ReleaseList'
 
   var SocialSharing = require('vue-social-sharing')
@@ -175,7 +174,7 @@
   export default {
     name: 'ReleaseDetailView',
     props: ['id', 'slug', 'subslug'],
-    components: {ReleaseList, NuxtLink, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
+    components: {ReleaseList, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
     data: function () {
       return {
         release: '',

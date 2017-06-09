@@ -61,7 +61,6 @@
   import BackwardButton from './BackwardButton'
   import * as types from '../../store/types'
   import CartSvg from '../shared/Cart'
-  import NuxtLink from '../../.nuxt/components/nuxt-link'
   import Playlist from './Playlist'
   import { mixin as clickaway } from 'vue-clickaway'
 
@@ -77,7 +76,7 @@
   const PRECISION_FACTOR = 1000
 
   export default {
-    components: {Playlist, NuxtLink, CartSvg, BackwardButton, ForwardButton, PlayButton, PlayReleaseButton, TrackDisplay},
+    components: {Playlist, CartSvg, BackwardButton, ForwardButton, PlayButton, PlayReleaseButton, TrackDisplay},
     name: 'AudioPlayer',
     mixins: [clickaway],
     data: function () {

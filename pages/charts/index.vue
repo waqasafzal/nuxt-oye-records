@@ -65,13 +65,12 @@
   import { releasePlayerInfo } from '../../components/graphql/releases'
   import ReleasePrice from '../../components/releases/ReleasePrice'
   import PlayReleaseButton from '../../components/releases/PlayReleaseButton'
-  import NuxtLink from '../../.nuxt/components/nuxt-link'
   import ChartItem from '../../components/charts/ChartItem'
 
   const currentMonth = getCurrentMonth()
 
   export default {
-    components: {ChartItem, NuxtLink, PlayReleaseButton, ReleasePrice},
+    components: {ChartItem, PlayReleaseButton, ReleasePrice},
     name: 'ChartsIndex',
     data: function () {
       return {

@@ -134,11 +134,10 @@
 <script>
   import ReleasePrice from '~/components/releases/ReleasePrice'
   import ProceedButton from '../shared/ProceedButton'
-  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
   import { roundFixed } from '../../utils/math'
 
   export default {
-    components: {NuxtLink, ProceedButton, ReleasePrice},
+    components: {ProceedButton, ReleasePrice},
     name: 'CartContent',
     props: {
       review: {

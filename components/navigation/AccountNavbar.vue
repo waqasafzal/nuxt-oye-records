@@ -49,10 +49,9 @@
   import { logout } from '~/utils/auth'
   import { fetchCart, fetchUserProfile } from '../../components/cart/fetch-cart-mixin'
   import CartSvg from '../shared/Cart'
-  import NuxtLink from '../../.nuxt/components/nuxt-link'
 
   export default {
-    components: {NuxtLink, CartSvg},
+    components: {CartSvg},
     name: 'AccountNavbar',
     props: ['isOpenMobile'],
     mixins: [fetchCart, fetchUserProfile],

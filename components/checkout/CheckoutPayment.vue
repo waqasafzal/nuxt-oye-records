@@ -106,7 +106,6 @@
         this.getPaymentOptions(value)
       },
       shippingOption (option) {
-        console.log('watch shipping Option ' + option.id)
         this.selectPaymentByShippingOption(option)
       }
     },

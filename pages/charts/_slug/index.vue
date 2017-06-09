@@ -74,11 +74,10 @@
   import { getMonthFromString } from '~/utils/date'
   import ReleasePrice from '../../../components/releases/ReleasePrice'
   import ReleaseButtonBar from '../../../components/releases/ReleaseButtonBar'
-  import NuxtLink from '../../../.nuxt/components/nuxt-link'
   import { createChartsDetailQuery } from '../../../components/charts/queries'
 
   export default {
-    components: {NuxtLink, ReleaseButtonBar, ReleasePrice},
+    components: {ReleaseButtonBar, ReleasePrice},
     name: 'ChartsDetailPage',
     computed: {
       name () {

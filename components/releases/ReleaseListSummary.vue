@@ -17,7 +17,6 @@
 
 <script>
   import ReleaseList from './ReleaseList'
-  import NuxtLink from '../../.nuxt/components/nuxt-link'
 
   var getReleaseListColumnNumber
   if (process.BROWSER_BUILD) {
@@ -30,7 +29,7 @@
   }
 
   export default {
-    components: {NuxtLink, ReleaseList},
+    components: {ReleaseList},
     props: ['pageSize', 'status', 'title', 'genre', 'releases'],
     name: 'ReleaseListSummary',
     data: function () {
