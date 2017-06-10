@@ -90,9 +90,12 @@
         },
         fetchPolicy: 'network-only'
       }).then(({data}) => {
-        vm.$store.commit(types.SET_USER_ARTISTS, {
-          artists: data.account.artists
-        })
+        let account = data.account
+        if (account) {
+          vm.$store.commit(types.SET_USER_ARTISTS, {
+            artists: account.artists
+          })
+        }
       })
     }
   }
