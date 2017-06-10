@@ -87,6 +87,7 @@
             let order = data.placeOrder.order
             if (!order.isPaid) {
               this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
+              this.$store.commit(types.SET_UNPAID_ORDER, order)
               this.$store.commit(types.ADD_ALERT, {
                 level: 'info',
                 message: 'Your order has been placed. Please fulfill order with payment.'

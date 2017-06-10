@@ -1,55 +1,53 @@
 <template>
-  <div class="row">
-    <div class="col-12 checkout__content__col">
-      <h3>Card Payment</h3>
-      <div>Pay Order {{ totalAmount }} &euro;</div>
-      <p>Credit Card Test data</p>
-      <p>Number: 2223 0000 4841 0010</p>
-      <p>CVC: 737</p>
-      <form ref="adyen-encrypted-form" method="post" @submit.prevent id="adyen-encrypted-form">
-        <div class="form-group owner">
-          <label for="owner">Card Holder</label>
-          <input type="text" id="owner" class="form-control" data-encrypted-name="holderName">
-        </div>
-        <div class="form-group cvc">
-          <label for="cvc">CVC</label>
-          <input type="text" id="cvc" class="form-control" autocomplete="off" data-encrypted-name="cvc">
-        </div>
-        <div class="form-group">
-          <label for="cardNumber">Card Number</label>
-          <input type="text" id="cardNumber" class="form-control" data-encrypted-name="number">
-        </div>
-        <div class="form-group">
-          <label for="expiryMonth">Month</label>
-          <select id="expiryMonth" data-encrypted-name="expiryMonth">
-            <option value="1">January</option>
-            <option value="2">February </option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="expiryYear">Year</label>
-          <select id="expiryYear" data-encrypted-name="expiryYear">
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-          </select>
-        </div>
-        <input type="hidden" :value="timestamp" data-encrypted-name="generationtime"/>
-      </form>
-      <proceed-button class="float-right-bottom" type="submit" form="adyen-encrypted-form">Pay Order</proceed-button>
-    </div>
+  <div>
+    <h3>Card Payment</h3>
+    <div>Pay Order {{ totalAmount }} &euro;</div>
+    <p>Credit Card Test data</p>
+    <p>Number: 2223 0000 4841 0010</p>
+    <p>CVC: 737</p>
+    <form ref="adyen-encrypted-form" method="post" @submit.prevent id="adyen-encrypted-form">
+      <div class="form-group owner">
+        <label for="owner">Card Holder</label>
+        <input type="text" id="owner" class="form-control" data-encrypted-name="holderName">
+      </div>
+      <div class="form-group cvc">
+        <label for="cvc">CVC</label>
+        <input type="text" id="cvc" class="form-control" autocomplete="off" data-encrypted-name="cvc">
+      </div>
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" class="form-control" data-encrypted-name="number">
+      </div>
+      <div class="form-group">
+        <label for="expiryMonth">Month</label>
+        <select id="expiryMonth" data-encrypted-name="expiryMonth">
+          <option value="1">January</option>
+          <option value="2">February </option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="expiryYear">Year</label>
+        <select id="expiryYear" data-encrypted-name="expiryYear">
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+        </select>
+      </div>
+      <input type="hidden" :value="timestamp" data-encrypted-name="generationtime"/>
+    </form>
+    <proceed-button class="float-right-bottom" type="submit" form="adyen-encrypted-form">Pay Order</proceed-button>
   </div>
 </template>
 

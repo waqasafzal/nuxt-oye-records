@@ -7,6 +7,10 @@
 </template>
 
 <script>
+  import apolloClient from '~/plugins/apollo'
+  import gql from 'graphql-tag'
+  import store from '~/store'
+  import * as types from '~/store/types'
   import CheckoutImpossible from '~/components/checkout/CheckoutImpossible'
   import CheckoutMethod from '~/components/checkout/CheckoutMethod'
   import CheckoutPayment from '~/components/checkout/CheckoutPayment'
@@ -39,9 +43,19 @@
         return currentCheckoutView
       }
     },
+    async asyncData ({params}) {
+      var {data} = await apolloClient.query({
+        query: gql`query Country {
+          countries {
+            name
+          }
+        }
+        `
+      })
+      store.commit(types.SET_COUNTRIES, data.countries)
+    },
     mounted () {
       this.calculateCheckoutState()
-      // checkout?authResult=PENDING&merchantReference=117134&merchantSig=rAu7yMZaVtYJ%2B7IZK5dKC9JJWitDvuK6lbiN6du1zoQ%3D&paymentMethod=sepadirectdebit&pspReference=8514970348545135&shopperLocale=de_DE&skinCode=ru4CHIJf
     },
     methods: {
       calculateCheckoutState () {

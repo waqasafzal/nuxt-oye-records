@@ -28,6 +28,7 @@ const store = new Vuex.Store({
   state: {
     cart: null,
     cartUpdating: false,
+    countries: null,
     checkoutState: null,
     unpaidOrder: null,
     shippingAddress: null,
@@ -272,6 +273,9 @@ const store = new Vuex.Store({
     },
     [types.SET_SELECTED_PAYMENT_OPTION]: (state, paymentOption) => {
       state.selectedPaymentOption = paymentOption
+    },
+    [types.SET_COUNTRIES]: (state, countries) => {
+      state.countries = countries
     }
   },
 

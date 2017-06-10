@@ -52,6 +52,7 @@
               level: 'info',
               message: 'The payment could be verified.'
             })
+            this.$store.commit(types.SET_UNPAID_ORDER, null)
             this.$router.push('/')
           } else {
             this.$store.commit(types.ADD_ALERT, {

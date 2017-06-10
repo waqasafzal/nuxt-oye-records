@@ -66,7 +66,6 @@
     data: function () {
       return {
         differentBilling: false,
-        countries: [],
         shippingOptions: [],
         shippingMethod: null,
         billingAddressChanged: false,
@@ -91,6 +90,9 @@
       },
       billingAddress () {
         return this.$store.state.billingAddress
+      },
+      countries () {
+        return this.$store.state.countries
       }
     },
     watch: {
@@ -197,16 +199,6 @@
       }
     },
     mounted () {
-      apolloClient.query({
-        query: gql`query Country {
-          countries {
-            name
-          }
-        }
-        `
-      }).then(({data}) => {
-        this.countries = data.countries
-      })
       let shippingOptions = this.$store.getters.getShippingOptions
       if (shippingOptions.length > 0) {
         this.shippingMethod = shippingOptions[0].name
