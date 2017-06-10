@@ -83,6 +83,7 @@ export const unsetToken = () => {
   if (process.SERVER_BUILD) return
   window.localStorage.removeItem('token')
   window.localStorage.removeItem('user')
+  console.log('delete vue cookie')
   Vue.cookie.delete('jwt')
   store.dispatch('setUser', {
     user: {
