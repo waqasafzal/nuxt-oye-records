@@ -110,6 +110,7 @@
         this.differentBilling = value
       },
       onShippingAddressChanged (address) {
+        console.log('shipping address changed')
         this.$store.commit(types.SET_SHIPPING_ADDRESS, address)
         if (!this.differentBilling) {
           this.$store.commit(types.SET_BILLING_ADDRESS, address)
@@ -118,10 +119,12 @@
         this.shippingAddressChanged = true
       },
       onBillingAddressChanged (address) {
+        console.log('billing address changed')
         this.billingAddress = address
         this.billingAddressChanged = true
       },
       onCountrySelected (country) {
+        console.log('country selected')
         let vm = this
         apolloClient.query({
           query: gql`query CartShippingOption($countryName: String!) {

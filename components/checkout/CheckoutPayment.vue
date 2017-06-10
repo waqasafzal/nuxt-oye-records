@@ -88,7 +88,9 @@
             }
           }
         } else {
-          this.selectedPayment = this.paymentOptions[0]
+          if (this.paymentOptions) {
+            this.selectedPayment = this.paymentOptions[0]
+          }
         }
       },
       showOption (option) {
