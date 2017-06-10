@@ -14,6 +14,7 @@ export const login = (context, creds, redirect) => {
   context.$http.post(LOGIN_URL, creds).then(response => {
     let data = response.data
     setToken(data.token)
+    console.log('get cookie here: ' + context.$cookie.get('jwt'))
     context.$store.dispatch('getCart')
 
     context.$store.dispatch('getProfile')
