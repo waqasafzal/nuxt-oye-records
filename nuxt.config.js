@@ -109,10 +109,11 @@ module.exports = {
       new webpack.DefinePlugin({
         __API__: apiHost
       })
-    ]
+    ],
+    vendor: ['vue-cookie']
   },
   plugins: [
-    {src: '~plugins/vue-cookie', ssr: false},
+    {src: '~plugins/vue-cookie', ssr: false, injectAs: 'cookie'},
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-resource'},
     {src: '~plugins/vue-social-sharing'}
