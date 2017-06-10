@@ -57,7 +57,7 @@
             req.options.headers = {}  // Create the header object if needed.
           }
 
-          var jwt = Vue.cookie.get('jwt')
+          var jwt = this.$cookie.get('jwt')
 
           console.log('jwt ' + jwt)
           if (jwt) {
@@ -69,7 +69,7 @@
               console.log('no headers')
             }
           }
-          var cart = Vue.cookie.get('cart')
+          var cart = this.$cookie.get('cart')
           if (cart) {
             req.options.headers['X-CART-TOKEN'] = cart
           }
