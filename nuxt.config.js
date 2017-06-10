@@ -119,7 +119,7 @@ module.exports = {
     {src: '~plugins/vue-social-sharing'}
   ],
   router: {
-    middleware: ['apollo', 'check-auth', 'payment-duty'],
+    middleware: ['check-auth', 'payment-duty'],
     extendRoutes (routes, resolve) {
       routes.push(
         {
