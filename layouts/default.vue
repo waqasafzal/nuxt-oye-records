@@ -51,7 +51,6 @@
       console.log('mounted default layout')
       client.networkInterface.use([{
         applyMiddleware (req, next) {
-
           console.log('applyMiddleware...')
 
           if (!req.options.headers) {
