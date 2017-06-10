@@ -15,6 +15,8 @@ export const login = (context, creds, redirect) => {
     let data = response.data
     setToken(data.token)
     console.log('get cookie here: ' + context.$cookie.get('jwt'))
+    console.log('get cart here: ' + context.$cookie.get('cart'))
+    console.log('get csrftoken here: ' + context.$cookie.get('csrftoken'))
     context.$store.dispatch('getCart')
 
     context.$store.dispatch('getProfile')
@@ -69,10 +71,10 @@ export const setToken = (token) => {
   window.localStorage.setItem('token', token)
   let decodedToken = jwtDecode(token)
   window.localStorage.setItem('user', JSON.stringify(decodedToken))
-  // console.log('set vue cookie jwt ' + token)
-  // Vue.cookie.set('jwt', token)
+  console.log('set vue cookie jwt ' + token)
+  Vue.cookie.set('jwt', token)
 
-  // console.log('cookie jwt was saved ' + Vue.cookie.get('jwt'))
+  console.log('cookie jwt was saved ' + Vue.cookie.get('jwt'))
 
   store.dispatch('setUser', {
     user: Object.assign({authenticated: true}, decodedToken)
