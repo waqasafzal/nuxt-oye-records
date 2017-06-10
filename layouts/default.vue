@@ -47,8 +47,9 @@
         this.noScroll = true
       }
     },
-    beforeCreate () {
+    mounted () {
       console.log('mounted default layout')
+      var vm = this
       client.networkInterface.use([{
         applyMiddleware (req, next) {
           console.log('applyMiddleware...')
@@ -57,7 +58,7 @@
             req.options.headers = {}  // Create the header object if needed.
           }
 
-          var jwt = Vue.cookie.get('jwt')
+          var jwt = vm.$cookie.get('jwt')
 
           console.log('jwt ' + jwt)
           if (jwt) {
@@ -69,7 +70,7 @@
               console.log('no headers')
             }
           }
-          var cart = Vue.cookie.get('cart')
+          var cart = vm.$cookie.get('cart')
           if (cart) {
             req.options.headers['X-CART-TOKEN'] = cart
           }
