@@ -26,28 +26,28 @@ networkInterface.use([{
     let cookie = Vue.cookie
     if (typeof cookie === 'undefined') {
       console.log('Vue.cookie does not exist')
-      return
-    }
+    } else {
 
-    if (!req.options.headers) {
-      req.options.headers = {}  // Create the header object if needed.
-    }
-
-    var jwt = cookie.get('jwt')
-
-    console.log('jwt ' + jwt)
-    if (jwt) {
-      var header = getAuthHeader()
-      if (header) {
-        console.log(`set apollo auth header ${header}`)
-        req.options.headers['Authorization'] = header
-      } else {
-        console.log('no headers')
+      if (!req.options.headers) {
+        req.options.headers = {}  // Create the header object if needed.
       }
-    }
-    var cart = cookie.get('cart')
-    if (cart) {
-      req.options.headers['X-CART-TOKEN'] = cart
+
+      var jwt = cookie.get('jwt')
+
+      console.log('jwt ' + jwt)
+      if (jwt) {
+        var header = getAuthHeader()
+        if (header) {
+          console.log(`set apollo auth header ${header}`)
+          req.options.headers['Authorization'] = header
+        } else {
+          console.log('no headers')
+        }
+      }
+      var cart = cookie.get('cart')
+      if (cart) {
+        req.options.headers['X-CART-TOKEN'] = cart
+      }
     }
     next()
   }
