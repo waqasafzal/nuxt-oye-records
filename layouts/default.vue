@@ -58,6 +58,7 @@
           if (jwt) {
             var header = getAuthHeader()
             if (header) {
+              console.log(`set apollo auth header ${header}`)
               req.options.headers['Authorization'] = header
             }
           }
