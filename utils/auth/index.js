@@ -68,10 +68,10 @@ export const setToken = (token) => {
   window.localStorage.setItem('token', token)
   let decodedToken = jwtDecode(token)
   window.localStorage.setItem('user', JSON.stringify(decodedToken))
-  console.log('set vue cookie jwt ' + token)
-  Vue.cookie.set('jwt', token)
+  // console.log('set vue cookie jwt ' + token)
+  // Vue.cookie.set('jwt', token)
 
-  console.log('cookie jwt was saved ' + Vue.cookie.get('jwt'))
+  // console.log('cookie jwt was saved ' + Vue.cookie.get('jwt'))
 
   store.dispatch('setUser', {
     user: Object.assign({authenticated: true}, decodedToken)
