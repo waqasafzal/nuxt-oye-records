@@ -51,22 +51,15 @@
       console.log('mounted default layout')
       client.networkInterface.use([{
         applyMiddleware (req, next) {
-          console.log('applyMiddleware...')
-
           if (!req.options.headers) {
             req.options.headers = {}  // Create the header object if needed.
           }
 
           var jwt = Vue.cookie.get('jwt')
-
-          console.log('jwt ' + jwt)
           if (jwt) {
             var header = getAuthHeader()
             if (header) {
-              console.log(`set apollo auth header ${header}`)
               req.options.headers['Authorization'] = header
-            } else {
-              console.log('no headers')
             }
           }
           var cart = Vue.cookie.get('cart')
