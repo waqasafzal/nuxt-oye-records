@@ -27,7 +27,6 @@ networkInterface.use([{
     if (typeof cookie === 'undefined') {
       console.log('Vue.cookie does not exist')
     } else {
-
       if (!req.options.headers) {
         req.options.headers = {}  // Create the header object if needed.
       }
