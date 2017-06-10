@@ -47,7 +47,7 @@
         this.noScroll = true
       }
     },
-    beforeCreate () {
+    created () {
       console.log('mounted default layout')
       client.networkInterface.use([{
         applyMiddleware (req, next) {
