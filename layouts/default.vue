@@ -20,7 +20,7 @@
   import Alerts from '../components/shared/Alerts'
   import AccountNavbar from '../components/navigation/AccountNavbar'
   import client from '../plugins/apollo'
-//  import Vue from 'vue'
+  import Vue from 'vue'
   import {getAuthHeader} from '~/utils/auth'
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
@@ -47,18 +47,18 @@
         this.noScroll = true
       }
     },
-    mounted () {
+    beforeCreate () {
       console.log('mounted default layout')
-      var vm = this
       client.networkInterface.use([{
         applyMiddleware (req, next) {
+
           console.log('applyMiddleware...')
 
           if (!req.options.headers) {
             req.options.headers = {}  // Create the header object if needed.
           }
 
-          var jwt = vm.$cookie.get('jwt')
+          var jwt = Vue.cookie.get('jwt')
 
           console.log('jwt ' + jwt)
           if (jwt) {
@@ -70,7 +70,7 @@
               console.log('no headers')
             }
           }
-          var cart = vm.$cookie.get('cart')
+          var cart = Vue.cookie.get('cart')
           if (cart) {
             req.options.headers['X-CART-TOKEN'] = cart
           }
