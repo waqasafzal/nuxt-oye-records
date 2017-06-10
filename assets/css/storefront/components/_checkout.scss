@@ -161,6 +161,13 @@
     display: flex;
     flex-direction: column;
   }
+  &__payment {
+    &__method {
+      &.radio {
+        display: flex;
+      }
+    }
+  }
 }
 
 .proceed-btn-payment {

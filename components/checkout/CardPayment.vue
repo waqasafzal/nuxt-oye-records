@@ -2,9 +2,10 @@
   <div>
     <h3>Card Payment</h3>
     <div>Pay Order {{ totalAmount }} &euro;</div>
-    <p>Credit Card Test data</p>
+    <p><strong>Credit Card Test data</strong></p>
     <p>Number: 2223 0000 4841 0010</p>
     <p>CVC: 737</p>
+    <p>Expiry 10/2020</p>
     <form ref="adyen-encrypted-form" method="post" @submit.prevent id="adyen-encrypted-form">
       <div class="form-group owner">
         <label for="owner">Card Holder</label>
