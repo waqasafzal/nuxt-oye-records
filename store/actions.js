@@ -17,8 +17,7 @@ import { oyeCart } from '../components/graphql/cart'
 import { addCartAlertMessage } from '../components/shared/utils'
 import { callArtistSearchQuery, callReleaseSearchQuery } from '../components/search/queries'
 import { addressFragment } from '~/components/graphql/user'
-
-// const apolloClient = Apollo.defaultClient
+import { cardDataFragment } from '../components/graphql/payments'
 
 export const getCart = ({commit}) => new Promise((resolve, reject) => {
   apolloClient.mutate({
@@ -288,7 +287,12 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
                 ...Address
             }
             paymentMethods {
-                id
+                reference
+                ... on CardMethodType {
+                    cardData {
+                        ...CardData
+                    }
+                } 
             }
             unpaidOrder {
                 id
@@ -299,6 +303,7 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
         }
     }
     ${addressFragment}
+    ${cardDataFragment}
     `,
     fetchPolicy: 'network-only'
   }).then(({data}) => {
