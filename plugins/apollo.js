@@ -2,14 +2,15 @@
  * Created by tillkolter on 28/04/17.
  */
 
-// import Vue from 'vue'
+import Vue from 'vue'
 import 'babel-polyfill'
 import { ApolloClient, createNetworkInterface } from 'apollo-client'
 import 'isomorphic-fetch'
+import { getAuthHeader } from '../utils/auth/index'
 
 let hostUrl = __API__
 
-let networkInterface = createNetworkInterface({
+const networkInterface = createNetworkInterface({
   uri: hostUrl + '/graphql',
   transportBatching: true,
   opts: {
@@ -17,7 +18,43 @@ let networkInterface = createNetworkInterface({
   }
 })
 
-const apolloClient = new ApolloClient({
+// if (process.BROWSER) {
+networkInterface.use([{
+  applyMiddleware (req, next) {
+    console.log('applyMiddleware...')
+
+    let cookie = Vue.cookie
+    if (typeof cookie === 'undefined') {
+      console.log('Vue.cookie does not exist')
+      return
+    }
+
+    if (!req.options.headers) {
+      req.options.headers = {}  // Create the header object if needed.
+    }
+
+    var jwt = cookie.get('jwt')
+
+    console.log('jwt ' + jwt)
+    if (jwt) {
+      var header = getAuthHeader()
+      if (header) {
+        console.log(`set apollo auth header ${header}`)
+        req.options.headers['Authorization'] = header
+      } else {
+        console.log('no headers')
+      }
+    }
+    var cart = cookie.get('cart')
+    if (cart) {
+      req.options.headers['X-CART-TOKEN'] = cart
+    }
+    next()
+  }
+}])
+// }
+
+var apolloClient = new ApolloClient({
   networkInterface: networkInterface
 })
 //

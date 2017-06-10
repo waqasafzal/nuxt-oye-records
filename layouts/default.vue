@@ -19,9 +19,9 @@
   import BrandNavbar from '../components/navigation/BrandNavbar'
   import Alerts from '../components/shared/Alerts'
   import AccountNavbar from '../components/navigation/AccountNavbar'
-  import client from '../plugins/apollo'
+//  import client from '../plugins/apollo'
 //  import Vue from 'vue'
-  import {getAuthHeader} from '~/utils/auth'
+//  import {getAuthHeader} from '~/utils/auth'
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
 
@@ -46,36 +46,36 @@
       onOpenPlaylist () {
         this.noScroll = true
       }
-    },
-    created () {
-      console.log('mounted default layout')
-      client.networkInterface.use([{
-        applyMiddleware (req, next) {
-          console.log('applyMiddleware...')
-
-          if (!req.options.headers) {
-            req.options.headers = {}  // Create the header object if needed.
-          }
-
-          var jwt = this.$cookie.get('jwt')
-
-          console.log('jwt ' + jwt)
-          if (jwt) {
-            var header = getAuthHeader()
-            if (header) {
-              console.log(`set apollo auth header ${header}`)
-              req.options.headers['Authorization'] = header
-            } else {
-              console.log('no headers')
-            }
-          }
-          var cart = this.$cookie.get('cart')
-          if (cart) {
-            req.options.headers['X-CART-TOKEN'] = cart
-          }
-          next()
-        }
-      }])
+//    },
+//    beforeCreate () {
+//      console.log('mounted default layout')
+//      client.networkInterface.use([{
+//        applyMiddleware (req, next) {
+//          console.log('applyMiddleware...')
+//
+//          if (!req.options.headers) {
+//            req.options.headers = {}  // Create the header object if needed.
+//          }
+//
+//          var jwt = Vue.cookie.get('jwt')
+//
+//          console.log('jwt ' + jwt)
+//          if (jwt) {
+//            var header = getAuthHeader()
+//            if (header) {
+//              console.log(`set apollo auth header ${header}`)
+//              req.options.headers['Authorization'] = header
+//            } else {
+//              console.log('no headers')
+//            }
+//          }
+//          var cart = Vue.cookie.get('cart')
+//          if (cart) {
+//            req.options.headers['X-CART-TOKEN'] = cart
+//          }
+//          next()
+//        }
+//      }])
 //    },
 //    mounted () {
 //      console.log('mounted default layout')

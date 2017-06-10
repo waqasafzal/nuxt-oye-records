@@ -112,9 +112,9 @@ module.exports = {
     ]
   },
   plugins: [
+    {src: '~plugins/vue-cookie', ssr: false},
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-resource'},
-    {src: '~plugins/vue-cookie', ssr: false},
     {src: '~plugins/vue-social-sharing'}
   ],
   router: {
