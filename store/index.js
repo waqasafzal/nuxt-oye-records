@@ -36,6 +36,7 @@ const store = new Vuex.Store({
     shippingAddressConfirmed: false,
     paymentOptionConfirmed: false,
     selectedPaymentOption: null,
+    selectedPaymentMethod: null,
     billingAddress: null,
     billingAddressIsComplete: false,
     shippingOptions: null,
@@ -276,6 +277,9 @@ const store = new Vuex.Store({
     },
     [types.SET_COUNTRIES]: (state, countries) => {
       state.countries = countries
+    },
+    [types.SET_SELECTED_PAYMENT_METHOD]: (state, method) => {
+      state.selectedPaymentMethod = method
     }
   },
 

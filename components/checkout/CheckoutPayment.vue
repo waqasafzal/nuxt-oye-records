@@ -4,7 +4,7 @@
       <div class="col-12 checkout__content__col">
         <h3>Choose payment method</h3>
         <div class="row">
-          <div :class="[availableMethods ? 'col-6': 'col-12']">
+          <div :class="[availableMethods && availableMethods.length > 0 ? 'col-6': 'col-12']">
             <template v-for="(option, i) in paymentOptions">
               <div class="radio" v-show="showOption(option)">
                 <label>
@@ -15,7 +15,7 @@
               </div>
             </template>
           </div>
-          <div v-if="availableMethods" class="col-6">
+          <div v-if="availableMethods && availableMethods.length" class="col-6">
             <h4>Saved payment methods</h4>
             <div class="radio checkout__payment__method" v-for="(method, i) in availableMethods">
               <input type="radio" name="payment-method" v-model="selectedPaymentMethod" :value="method">

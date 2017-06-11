@@ -287,6 +287,7 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
                 ...Address
             }
             paymentMethods {
+                id
                 reference
                 ... on CardMethodType {
                     cardData {
