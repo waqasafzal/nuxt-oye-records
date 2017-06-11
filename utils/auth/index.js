@@ -5,6 +5,7 @@ import * as types from '../../store/types'
 
 // URL and endpoint constants
 const LOGIN_URL = __API__ + '/oye/api-token-auth/'
+const LOGOUT_URL = __API__ + '/oye/api-token-logout/'
 const SIGNUP_URL = __API__ + '/oye/signup/'
 
 // User object will let us check authentication status
@@ -43,8 +44,22 @@ export const signup = (context, creds, redirect) => {
 }
 
 // To log out, we just need to remove the token
-export const logout = function () {
+export const logout = function (context) {
   unsetToken()
+  context.$http.post(LOGOUT_URL, {}, {
+    Authorization: getAuthHeader()
+  }).then(response => {
+    context.$store.dispatch('addAlert', {
+      message: 'You have been logged out.',
+      level: 'info'
+    })
+  }, err => {
+    context.$store.dispatch('addAlert', {
+      message: 'You could not log out correctly. Please try again.',
+      level: 'error'
+    })
+    console.error('err: ' + err)
+  })
 }
 
 // The object to be passed as a header for authenticated requests

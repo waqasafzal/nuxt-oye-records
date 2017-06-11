@@ -70,7 +70,7 @@
     },
     methods: {
       logout: function () {
-        logout()
+        logout(this)
       }
     }
   }
