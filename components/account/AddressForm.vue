@@ -60,7 +60,6 @@
         <select class="form-control"
                 name="country"
                 v-model.lazy="address.country"
-                @change="onCountrySelected"
                 :value="address.country"
                 required>
           <option :value="country.name" v-for="(country, i) in countries">{{country.name}}</option>
@@ -119,9 +118,6 @@
         this.seperateBilling = !this.seperateBilling
         this.$emit('seperate-billing-changed', this.seperateBilling)
       },
-      onCountrySelected (e) {
-        this.$emit('country-selected', e.target.value)
-      },
       getAddressData () {
         let address = {
           firstName: this.stateAddress && this.stateAddress.firstName || '',
@@ -141,7 +137,6 @@
         if (this.stateAddress && this.stateAddress.country) {
           address['country'] = this.stateAddress.country
         } else if (this.country) {
-          console.log(`this.country ${this.country}`)
           address['country'] = this.country
         } else {
           address['country'] = ''

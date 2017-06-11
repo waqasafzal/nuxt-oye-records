@@ -69,6 +69,7 @@
               name
               logos
               methods {
+              id
                 reference
                 ... on CardMethodType {
                   cardData {
@@ -153,6 +154,9 @@
         if (this.availableMethods) {
           this.selectedPaymentMethod = this.availableMethods[0]
         }
+      },
+      selectedPaymentMethod (method) {
+        this.$store.commit(types.SET_SELECTED_PAYMENT_METHOD, method)
       }
     },
     mounted () {

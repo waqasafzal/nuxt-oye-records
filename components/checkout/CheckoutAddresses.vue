@@ -5,7 +5,6 @@
         <h3>Shipping Address</h3>
         <address-form :countries="countries"
                       :stateAddress="shippingAddress"
-                      @country-selected="onCountrySelected"
                       @seperate-billing-changed="onSeperateBillingChanged"
                       @address-changed="onShippingAddressChanged"></address-form>
       </div>
@@ -103,28 +102,8 @@
       },
       shippingMethod (value) {
         this.$store.commit(types.SET_SHIPPING_OPTION, value)
-      }
-    },
-    methods: {
-      onSeperateBillingChanged (value) {
-        this.differentBilling = value
       },
-      onShippingAddressChanged (address) {
-        console.log('shipping address changed')
-        this.$store.commit(types.SET_SHIPPING_ADDRESS, address)
-        if (!this.differentBilling) {
-          this.$store.commit(types.SET_BILLING_ADDRESS, address)
-          this.billingAddressChanged = true
-        }
-        this.shippingAddressChanged = true
-      },
-      onBillingAddressChanged (address) {
-        console.log('billing address changed')
-        this.billingAddress = address
-        this.billingAddressChanged = true
-      },
-      onCountrySelected (country) {
-        console.log('country selected')
+      shippingCountry (value) {
         let vm = this
         apolloClient.query({
           query: gql`query CartShippingOption($countryName: String!) {
@@ -137,7 +116,7 @@
             }
           }`,
           variables: {
-            countryName: country
+            countryName: value
           },
           fetchPolicy: 'network-only'
         }).then(({data}) => {
@@ -145,6 +124,24 @@
           vm.shippingOptions = cart.shippingOptions
           vm.$store.commit(types.SET_SHIPPING_OPTIONS, cart.shippingOptions)
         })
+      }
+    },
+    methods: {
+      onSeperateBillingChanged (value) {
+        this.differentBilling = value
+      },
+      onShippingAddressChanged (address) {
+        this.$store.commit(types.SET_SHIPPING_ADDRESS, address)
+        if (!this.differentBilling) {
+          this.$store.commit(types.SET_BILLING_ADDRESS, address)
+          this.billingAddressChanged = true
+        }
+        this.shippingAddressChanged = true
+      },
+      onBillingAddressChanged (address) {
+        console.log('billing address changed')
+        this.billingAddress = address
+        this.billingAddressChanged = true
       },
       onProceed () {
         let addressDict = {}

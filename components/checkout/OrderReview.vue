@@ -8,7 +8,11 @@
       </div>
       <cart-content :review="true"></cart-content>
     </div>
-    <proceed-button class="float-right-bottom place-order-btn" @click="onProceed">Place Order</proceed-button>
+    <template v-if="!selectedPaymentMethod">
+      <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Place Order</proceed-button>
+    </template>
+    <template v-else>
+      <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Pay Order</proceed-button></template>
   </div>
 </template>
 
@@ -45,13 +49,16 @@
       },
       paymentOption () {
         return this.$store.state.selectedPaymentOption
+      },
+      selectedPaymentMethod () {
+        return this.$store.state.selectedPaymentMethod
       }
     },
     methods: {
-      onProceed () {
+      onPlaceOrder () {
         apolloClient.mutate({
-          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String) {
-            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment) {
+          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID) {
+            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId) {
               order {
                 id
                 price
@@ -80,7 +87,8 @@
             shippingId: this.shippingId,
             cartId: this.cartId,
             porto: this.porto,
-            payment: this.paymentOption.id
+            payment: this.paymentOption.id,
+            paymentMethodId: this.selectedPaymentMethod && this.selectedPaymentMethod.id
           }
         }).then(
           ({data}) => {
@@ -99,6 +107,11 @@
                 this.$store.commit(types.ADD_ALERT, {
                   level: 'info',
                   message: 'Your order has been placed. We will inform you via mail, when your package is ready for pickup'
+                })
+              } else {
+                this.$store.commit(types.ADD_ALERT, {
+                  level: 'info',
+                  message: 'Your order has been paid and will be shipped soon.'
                 })
               }
             }
