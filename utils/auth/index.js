@@ -91,6 +91,7 @@ export const unsetToken = () => {
 
 export const getUserFromCookie = (req) => {
   if (!req.headers.cookie) return
+  console.log('getUserFromCookie')
   const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
   if (!jwtCookie) return
   const jwt = jwtCookie.split('=')[1]
@@ -103,6 +104,7 @@ export const getUserFromCookie = (req) => {
 }
 
 export const getUserFromLocalStorage = () => {
+  console.log('getUserFromLocalStorage')
   const json = window.localStorage.user
   if (json) {
     var userData = JSON.parse(json)
