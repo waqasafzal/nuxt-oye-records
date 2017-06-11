@@ -1,11 +1,9 @@
 <template>
   <div>
-    <span>Payment Type {{ order.paymentType }}</span>
     <form method="post" action="https://test.adyen.com/hpp/skipDetails.shtml" id="adyenForm" name="adyenForm" target="_parent">
       <input type="hidden" :name="key" :value="value" v-for="(value, key) in paymentFormData" />
-      <!--<input type="submit" value="Pay" />-->
     </form>
-    <button type="submit" form="adyenForm"><img :src="image" v-for="(image, i) in getLogos(order.paymentType)" /></button>
+    <button type="submit" form="adyenForm">Pay <img :src="image" v-for="(image, i) in getLogos(order.paymentType)" /></button>
   </div>
 </template>
 
@@ -49,7 +47,12 @@
         let options = this.$store.getters.getPaymentOptions
         for (var i = 0; i < options.length; i++) {
           if (options[i].id === this.order.paymentType) {
-            return options[i].logos
+            let variantLogos = options[i].logos
+            let logos = []
+            for (var j = 0; j < variantLogos.length; j++) {
+              logos.push(variantLogos[j].logo)
+            }
+            return logos
           }
         }
         return []
