@@ -44,6 +44,7 @@
       }
     },
     async asyncData ({params}) {
+      console.log('async?')
       var {data} = await apolloClient.query({
         query: gql`query Country {
           countries {
@@ -53,6 +54,7 @@
         `
       })
       store.commit(types.SET_COUNTRIES, data.countries)
+      return {}
     },
     mounted () {
       this.calculateCheckoutState()

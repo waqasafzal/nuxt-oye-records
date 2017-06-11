@@ -45,10 +45,10 @@ export const signup = (context, creds, redirect) => {
 
 // To log out, we just need to remove the token
 export const logout = function (context) {
-  unsetToken()
   context.$http.post(LOGOUT_URL, {}, {
     Authorization: getAuthHeader()
   }).then(response => {
+    unsetToken()
     context.$store.dispatch('addAlert', {
       message: 'You have been logged out.',
       level: 'info'
