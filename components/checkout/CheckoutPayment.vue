@@ -159,8 +159,10 @@
       },
       selectedPayment (payment) {
         this.$store.commit(types.SET_SELECTED_PAYMENT_OPTION, payment)
-        if (this.availableMethods) {
+        if (this.availableMethods && this.availableMethods.length > 0) {
           this.selectedPaymentMethod = this.availableMethods[0]
+        } else {
+          this.selectedPaymentMethod = null
         }
       },
       selectedPaymentMethod (method) {
