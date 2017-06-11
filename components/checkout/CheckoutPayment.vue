@@ -10,16 +10,20 @@
                 <label>
                   <input type="radio" name="payment" v-model="selectedPayment" :value="option">
                   <span>{{option.name}}</span>
-                  <img :src="image" v-for="(image, j) in option.logos"/>
+                  <img :src="image.logo" v-for="(image, j) in option.logos"/>
                 </label>
               </div>
             </template>
           </div>
           <div v-if="availableMethods && availableMethods.length" class="col-6">
-            <h4>Saved payment methods</h4>
+            <h4>Saved {{ selectedPayment.name }} payments</h4>
             <div class="radio checkout__payment__method" v-for="(method, i) in availableMethods">
-              <input type="radio" name="payment-method" v-model="selectedPaymentMethod" :value="method">
-              <component :key="`paymentMethod-${selectedPayment.id}-${i}`" :is="paymentMethodComponent(selectedPayment)" :data="getPaymentData(selectedPayment, method)" ></component>
+              <input type="radio" class="payment__method" name="payment-method" v-model="selectedPaymentMethod" :value="method">
+              <component :key="`paymentMethod-${selectedPayment.id}-${i}`" :is="paymentMethodComponent(selectedPayment)" :data="getPaymentData(selectedPayment, method)" :variant="method.variant"></component>
+            </div>
+            <div class="radio checkout__payment__method">
+              <input type="radio" class="payment__method" name="payment-methd" v-model="selectedPaymentMethod"/>
+              <span>New payment data ...</span>
             </div>
           </div>
         </div>
@@ -67,10 +71,14 @@
             paymentOptions(country: $country) {
               id
               name
-              logos
+              logos {
+                logo
+                variant
+              }
               methods {
-              id
+                id
                 reference
+                variant
                 ... on CardMethodType {
                   cardData {
                     number

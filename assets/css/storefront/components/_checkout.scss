@@ -165,8 +165,37 @@
     &__method {
       &.radio {
         display: flex;
+        span {
+          margin-top: auto;
+          margin-bottom: auto;
+        }
       }
     }
+  }
+}
+
+.payment {
+  &__card {
+    display: flex;
+    flex-direction: row;
+    &__element {
+      margin-right: 16px;
+      &:last-child {
+        margin-right: inherit;
+      }
+    }
+    &__image {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    &__info {
+      margin-bottom: auto;
+      margin-top: auto;
+    }
+  }
+  &__method {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
   }
 }
 
