@@ -62,6 +62,7 @@
                 v-model.lazy="address.country"
                 :value="address.country"
                 required>
+          <option value="" disabled selected>Select your country</option>
           <option :value="country.name" v-for="(country, i) in countries">{{country.name}}</option>
         </select>
       </div>
