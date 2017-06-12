@@ -33,8 +33,8 @@ const store = new Vuex.Store({
     paymentOptionConfirmed: false,
     selectedPaymentOption: null,
     selectedPaymentMethod: null,
-    billingAddress: null,
-    billingAddressIsComplete: false,
+    // billingAddress: null,
+    // billingAddressIsComplete: false,
     shippingOptions: null,
     shippingOption: null,
     paymentOptions: null,
@@ -44,10 +44,10 @@ const store = new Vuex.Store({
         complete: false,
         confirmed: false
       },
-      // shippingAddressIsComplete: false,
-      // shippingAddressConfirmed: false,
-
-      billingAddress: null,
+      billingAddress: {
+        address: null,
+        complete: false
+      },
       payment: null,
       guest: null,
       checkoutState: null
@@ -216,9 +216,9 @@ const store = new Vuex.Store({
     },
     [types.SET_USER_BILLING_ADDRESSES]: (state, args) => {
       state.user.billingAddresses = args.billingAddresses
-      if (!state.billingAddress && args.billingAddresses.length > 0) {
+      if (!state.checkout.billingAddress.address && args.billingAddresses.length > 0) {
         let address = args.billingAddresses[0]
-        state.billingAddress = address
+        state.checkout.billingAddress.address = address
         let complete = isAddressComplete(address)
         state.checkout.shippingAddress.complete = complete
         state.checkout.shippingAddress.confirmed = complete
@@ -230,9 +230,9 @@ const store = new Vuex.Store({
       state.checkout.shippingAddress.complete = complete
     },
     [types.SET_BILLING_ADDRESS]: (state, address) => {
-      state.billingAddress = address
+      state.checkout.billingAddress.address = address
       let complete = isAddressComplete(address)
-      state.billingAddressIsComplete = complete
+      state.checkout.billingAddress.complete = complete
     },
     [types.SET_USER_PAYMENT_METHODS]: (state, paymentMethods) => {
       state.user.paymentMethods = paymentMethods
@@ -309,7 +309,7 @@ const store = new Vuex.Store({
       return state.checkout.shippingAddress.complete
     },
     isBillingAddressComplete (state) {
-      return state.billingAddressIsComplete
+      return state.checkout.billingAddress.complete
     },
     isShippingAddressConfirmed (state) {
       return state.checkout.shippingAddress && state.checkout.shippingAddress.confirmed
@@ -326,7 +326,11 @@ const store = new Vuex.Store({
         state.user.shippingAddresses && state.user.shippingAddresses.length > 0 && state.user.shippingAddresses[0]
     },
     getBillingAddress (state) {
-      return state.billingAddress
+      return state.checkout && state.checkout.billingAddress && state.checkout.billingAddress.address
+    },
+    getBillingCountry (state) {
+      let address = store.getters.getBillingAddress
+      return address && address.country
     },
     getCheckoutState (state) {
       if (state.unpaidOrder) {

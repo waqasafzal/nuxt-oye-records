@@ -124,6 +124,7 @@
     },
     watch: {
       country (value) {
+        console.log('country changed')
         this.getPaymentOptions(value)
       },
       shippingOption (option) {
@@ -143,7 +144,7 @@
     },
     mounted () {
       if (this.country) {
-        this.$store.dispatch('getPaymentOptions', {country: this.country})
+        console.log('country is set on mounted')
         this.getPaymentOptions(this.country)
       }
     }

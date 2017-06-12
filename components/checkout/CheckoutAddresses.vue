@@ -88,7 +88,7 @@
         return this.$store.getters.getShippingAddress
       },
       billingAddress () {
-        return this.$store.state.billingAddress
+        return this.$store.getters.getBillingAddress
       },
       countries () {
         return this.$store.state.countries

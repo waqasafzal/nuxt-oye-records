@@ -44,7 +44,7 @@
         return address && address.id
       },
       billingId () {
-        let address = this.$store.billingAddress
+        let address = this.$store.getters.getBillingAddress
         return address && address.id
       },
       paymentOption () {
