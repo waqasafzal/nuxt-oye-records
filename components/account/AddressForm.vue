@@ -31,7 +31,7 @@
                v-model="address.street"
                required />
         <input class="form-control form-field__number"
-               type="number"
+               type="text"
                placeholder="Number *"
                v-model.number="address.number"
                required />
@@ -50,7 +50,7 @@
                v-model="address.city"
                required />
         <input class="form-control form-field__zip"
-               type="number"
+               type="text"
                name="zip"
                placeholder="Zip *"
                v-model.number="address.zip"
