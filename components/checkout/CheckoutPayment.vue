@@ -143,7 +143,6 @@
     },
     mounted () {
       if (this.country) {
-        console.log('country is set on mounted')
         this.getPaymentOptions(this.country)
       }
     }

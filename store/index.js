@@ -11,7 +11,6 @@ import { getInitialUserProfile, getInitialUser, getInitialCheckout } from './uti
 Vue.use(Vuex)
 
 var isAddressComplete = function (address) {
-  console.log(JSON.stringify(address))
   let complete = (
     address &&
     address.firstName.length > 0 &&

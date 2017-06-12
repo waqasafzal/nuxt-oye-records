@@ -104,7 +104,7 @@
         this.$store.commit(types.SET_SHIPPING_OPTION, value)
       },
       shippingCountry (value) {
-        this.$store.dispatch('setShippingCountry', value).then(shippingOptions => {
+        this.$store.dispatch('setShippingCountry', {country: value}).then(shippingOptions => {
           this.$store.commit(types.SET_SHIPPING_OPTIONS, shippingOptions)
         })
       }
