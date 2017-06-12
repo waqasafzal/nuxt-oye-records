@@ -44,7 +44,6 @@
       }
     },
     async asyncData ({params}) {
-      console.log('async?')
       var {data} = await apolloClient.query({
         query: gql`query Country {
           countries {

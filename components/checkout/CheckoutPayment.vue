@@ -88,7 +88,7 @@
         return []
       },
       selectPaymentByShippingOption (shippingOption) {
-        if (shippingOption.id === '-1') {
+        if (shippingOption && shippingOption.id === '-1') {
           for (var i = 0; i < this.paymentOptions.length; i++) {
             if (this.paymentOptions[i].id === 'cash') {
               this.selectedPayment = this.paymentOptions[i]
@@ -124,7 +124,6 @@
     },
     watch: {
       country (value) {
-        console.log('country changed')
         this.getPaymentOptions(value)
       },
       shippingOption (option) {

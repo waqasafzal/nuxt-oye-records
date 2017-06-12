@@ -48,10 +48,10 @@
         return address && address.id
       },
       paymentOption () {
-        return this.$store.state.selectedPaymentOption
+        return this.$store.getters.getSelectedPaymentOption
       },
       selectedPaymentMethod () {
-        return this.$store.state.selectedPaymentMethod
+        return this.$store.getters.getSelectedPaymentMethod
       }
     },
     methods: {

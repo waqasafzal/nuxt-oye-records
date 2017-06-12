@@ -107,26 +107,6 @@
         this.$store.dispatch('setShippingCountry', value).then(shippingOptions => {
           this.$store.commit(types.SET_SHIPPING_OPTIONS, shippingOptions)
         })
-//        let vm = this
-//        apolloClient.query({
-//          query: gql`query CartShippingOption($countryName: String!) {
-//            cart {
-//              shippingOptions(countryName: $countryName) {
-//                id
-//                price
-//                name
-//              }
-//            }
-//          }`,
-//          variables: {
-//            countryName: value
-//          },
-//          fetchPolicy: 'network-only'
-//        }).then(({data}) => {
-//          let cart = data.cart
-//          vm.shippingOptions = cart.shippingOptions
-//          vm.$store.commit(types.SET_SHIPPING_OPTIONS, cart.shippingOptions)
-//        })
       }
     },
     methods: {
@@ -142,7 +122,6 @@
         this.shippingAddressChanged = true
       },
       onBillingAddressChanged (address) {
-        console.log('billing address changed')
         this.billingAddress = address
         this.billingAddressChanged = true
       },
@@ -153,9 +132,11 @@
             addressDict = this.shippingAddress
             addressDict['isBilling'] = true
             addressDict['isShipping'] = true
-            callSaveAddress(this.shippingAddress.id, addressDict, () => {
+            callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
               this.billingAddressChanged = false
               this.shippingAddressChanged = false
+              this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
+              this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
               this.$store.dispatch('addAlert', {
                 message: 'Shipping and billing address have been saved.'
               })
@@ -163,8 +144,9 @@
           } else {
             addressDict = this.shippingAddress
             addressDict['isShipping'] = true
-            callSaveAddress(this.shippingAddress.id, addressDict, () => {
+            callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
               this.shippingAddressChanged = false
+              this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
               this.$store.dispatch('addAlert', {
                 message: 'Shipping address has been saved.'
               })
@@ -172,8 +154,9 @@
 
             addressDict = this.billingAddress
             addressDict['isBilling'] = true
-            callSaveAddress(this.billingAddress.id, addressDict, () => {
+            callSaveAddress(this.billingAddress.id, addressDict, ({data}) => {
               this.billingAddressChanged = false
+              this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
               this.$store.dispatch('addAlert', {
                 message: 'Billing address has been saved.'
               })
@@ -182,8 +165,9 @@
         } else if (this.shippingAddressChanged) {
           addressDict = this.shippingAddress
           addressDict['isShipping'] = true
-          callSaveAddress(this.shippingAddress.id, addressDict, () => {
+          callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
             this.shippingAddressChanged = false
+            this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
             this.$store.dispatch('addAlert', {
               message: 'Shipping address has been saved.'
             })
@@ -191,8 +175,9 @@
         } else if (this.billingAddressChanged) {
           addressDict = this.shippingAddress
           addressDict['isBilling'] = true
-          callSaveAddress(this.shippingAddress.id, addressDict, () => {
+          callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
             this.billingAddressChanged = false
+            this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
             this.$store.dispatch('addAlert', {
               message: 'Billing address has been saved.'
             })

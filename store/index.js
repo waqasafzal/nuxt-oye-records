@@ -6,6 +6,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
 import * as types from './types'
+import { getInitialUserProfile, getInitialUser, getInitialCheckout } from './utils'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,7 @@ var isAddressComplete = function (address) {
     address.lastName.length > 0 &&
     address.street.length > 0 &&
     (address.number.length > 0 || address.number > 0) &&
-    address.zip.length > 0 &&
+    (address.zip.length > 0 || address.zip > 0) &&
     address.city.length > 0 &&
     address.country && address.country.length > 0
   )
@@ -29,35 +30,9 @@ const store = new Vuex.Store({
     cart: null,
     cartUpdating: false,
     countries: null,
-    unpaidOrder: null,
-    paymentOptionConfirmed: false,
-    selectedPaymentOption: null,
-    selectedPaymentMethod: null,
-    // billingAddress: null,
-    // billingAddressIsComplete: false,
-    shippingOptions: null,
-    shippingOption: null,
-    paymentOptions: null,
-    checkout: {
-      shippingAddress: {
-        address: null,
-        complete: false,
-        confirmed: false
-      },
-      billingAddress: {
-        address: null,
-        complete: false
-      },
-      payment: null,
-      guest: null,
-      checkoutState: null
-    },
-    user: {
-      authenticated: false,
-      artists: [],
-      shippingAddresses: [],
-      billingAddresses: []
-    },
+    checkout: getInitialCheckout(),
+    user: getInitialUser(),
+    userProfile: getInitialUserProfile(),
     player: {
       history: [],
       position: 0,
@@ -205,34 +180,28 @@ const store = new Vuex.Store({
       state.player.playlistVisible = isVisible
     },
     [types.SET_USER_SHIPPING_ADDRESSES]: (state, args) => {
-      state.user.shippingAddresses = args.shippingAddresses
-      if (!state.checkout.shippingAddress.address && args.shippingAddresses.length > 0) {
+      state.userProfile.shipping.addresses = args.shippingAddresses
+      if (!state.checkout.shipping.address && args.shippingAddresses.length > 0) {
         let address = args.shippingAddresses[0]
-        state.checkout.shippingAddress.address = address
-        let complete = isAddressComplete(address)
-        state.checkout.shippingAddress.complete = complete
-        state.checkout.shippingAddress.confirmed = complete
+        state.checkout.shipping.address = address
+        state.checkout.shipping.confirmed = store.getters.isShippingAddressComplete
       }
     },
     [types.SET_USER_BILLING_ADDRESSES]: (state, args) => {
-      state.user.billingAddresses = args.billingAddresses
-      if (!state.checkout.billingAddress.address && args.billingAddresses.length > 0) {
+      state.userProfile.billing.addresses = args.billingAddresses
+      if (!state.checkout.billing.address && args.billingAddresses.length > 0) {
         let address = args.billingAddresses[0]
-        state.checkout.billingAddress.address = address
+        state.checkout.billing.address = address
         let complete = isAddressComplete(address)
-        state.checkout.shippingAddress.complete = complete
-        state.checkout.shippingAddress.confirmed = complete
+        state.checkout.shipping.confirmed = complete
       }
     },
     [types.SET_SHIPPING_ADDRESS]: (state, address) => {
-      state.checkout.shippingAddress.address = address
-      let complete = isAddressComplete(address)
-      state.checkout.shippingAddress.complete = complete
+      state.checkout.shipping.address = address
+      state.checkout.shipping.address.complete = store.getters.isShippingAddressComplete
     },
     [types.SET_BILLING_ADDRESS]: (state, address) => {
-      state.checkout.billingAddress.address = address
-      let complete = isAddressComplete(address)
-      state.checkout.billingAddress.complete = complete
+      state.checkout.billing.address = address
     },
     [types.SET_USER_PAYMENT_METHODS]: (state, paymentMethods) => {
       state.user.paymentMethods = paymentMethods
@@ -253,15 +222,15 @@ const store = new Vuex.Store({
       state.checkout.guest = true
     },
     [types.SET_SHIPPING_OPTIONS]: (state, shippingOptions) => {
-      state.shippingOptions = shippingOptions
+      state.userProfile.shipping.options = shippingOptions
     },
     [types.SET_SHIPPING_OPTION]: (state, shippingOption) => {
-      state.shippingOption = shippingOption
+      state.checkout.shipping.option = shippingOption
     },
     [types.SET_SHIPPING_ADDRESS_CONFIRMED]: (state) => {
-      let address = state.checkout.shippingAddress.address
+      let address = state.checkout.shipping.address
       if (address && isAddressComplete(address)) {
-        state.checkout.shippingAddress.confirmed = true
+        state.checkout.shipping.confirmed = true
         state.checkout.checkoutState = 3
       }
     },
@@ -269,26 +238,44 @@ const store = new Vuex.Store({
       state.checkout.checkoutState = checkoutState
     },
     [types.SET_PAYMENT_OPTIONS]: (state, paymentOptions) => {
-      state.paymentOptions = paymentOptions
+      state.checkout.payment.options = paymentOptions
     },
     [types.SET_PAYMENT_OPTION_CONFIRMED]: (state) => {
-      state.paymentOptionConfirmed = true
+      state.checkout.payment.confirmed = true
       state.checkout.checkoutState = 4
     },
     [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
-      state.unpaidOrder = unpaidOrder
+      state.checkout.unpaidOrder = unpaidOrder
+      window.localStorage.setItem('unpaid', JSON.stringify(unpaidOrder))
       if (unpaidOrder && unpaidOrder.shippingCountry) {
         state.shippingCountry = unpaidOrder.shippingCountry
       }
     },
     [types.SET_SELECTED_PAYMENT_OPTION]: (state, paymentOption) => {
-      state.selectedPaymentOption = paymentOption
+      state.checkout.payment.option = paymentOption
     },
     [types.SET_COUNTRIES]: (state, countries) => {
       state.countries = countries
     },
     [types.SET_SELECTED_PAYMENT_METHOD]: (state, method) => {
-      state.selectedPaymentMethod = method
+      state.checkout.payment.method = method
+    },
+    [types.RESET_USER_DATA]: (state) => {
+      state.user = getInitialUser()
+      state.userProfile = getInitialUserProfile()
+      state.checkout = getInitialCheckout()
+      window.localStorage.removeItem('unpaid')
+    },
+    [types.SET_SHIPPING_ADDRESS_ID]: (state, id) => {
+      if (state.checkout.shipping.address) {
+        state.checkout.shipping.address.id = id
+      }
+    },
+    [types.SET_BILLING_ADDRESS_ID]: (state, id) => {
+      console.log('SET_BILLING_ADDRESS_ID' + id)
+      if (state.checkout.billing.address) {
+        state.checkout.billing.address.id = id
+      }
     }
   },
 
@@ -306,34 +293,39 @@ const store = new Vuex.Store({
       return state.cart && state.cart.quantity || 0
     },
     isShippingAddressComplete (state) {
-      return state.checkout.shippingAddress.complete
+      let address = state.checkout.shipping.address
+      return address && isAddressComplete(address)
     },
     isBillingAddressComplete (state) {
-      return state.checkout.billingAddress.complete
+      let address = state.checkout.billing.address
+      return address && isAddressComplete(address)
     },
     isShippingAddressConfirmed (state) {
-      return state.checkout.shippingAddress && state.checkout.shippingAddress.confirmed
+      return state.checkout.shipping.address && state.checkout.shipping.confirmed
+    },
+    isPaymentOptionConfirmed (state) {
+      return state.checkout.payment.confirmed
     },
     getShippingCountry (state) {
       let address = store.getters.getShippingAddress
       return address && address.country
     },
     getShippingOptions (state) {
-      return state.shippingOptions || []
+      return state.userProfile.shipping.options || []
     },
     getShippingAddress (state) {
-      return state.checkout.shippingAddress.address ||
-        state.user.shippingAddresses && state.user.shippingAddresses.length > 0 && state.user.shippingAddresses[0]
+      return state.checkout.shipping.address ||
+        state.userProfile.shipping.addresses && state.userProfile.shipping.addresses.length > 0 && state.userProfile.shipping.addresses[0]
     },
     getBillingAddress (state) {
-      return state.checkout && state.checkout.billingAddress && state.checkout.billingAddress.address
+      return state.checkout.billing.address
     },
     getBillingCountry (state) {
       let address = store.getters.getBillingAddress
       return address && address.country
     },
     getCheckoutState (state) {
-      if (state.unpaidOrder) {
+      if (store.getters.getUnpaidOrder) {
         return 5
       }
       if (state.checkout.checkoutState) {
@@ -346,16 +338,16 @@ const store = new Vuex.Store({
       if (checkoutState === 1 && state.user.authenticated || state.checkout.guest) {
         checkoutState = 2
       }
-      if (checkoutState === 2 && state.checkout.shippingAddress.confirmed) {
+      if (checkoutState === 2 && store.getters.isShippingAddressConfirmed) {
         checkoutState = 3
       }
-      if (checkoutState === 3 && state.paymentOptionConfirmed) {
+      if (checkoutState === 3 && store.getters.isPaymentOptionConfirmed) {
         checkoutState = 4
       }
       return checkoutState
     },
     getMaximumCheckoutState (state) {
-      if (state.unpaidOrder) {
+      if (store.getters.getUnpaidOrder) {
         return 5
       }
       var checkoutState = 0
@@ -365,22 +357,28 @@ const store = new Vuex.Store({
       if (checkoutState === 1 && state.user.authenticated || state.checkout.guest) {
         checkoutState = 2
       }
-      if (checkoutState === 2 && state.checkout.shippingAddress.confirmed) {
+      if (checkoutState === 2 && store.getters.isShippingAddressConfirmed) {
         checkoutState = 3
       }
-      if (checkoutState === 3 && state.paymentOptionConfirmed) {
+      if (checkoutState === 3 && store.getters.isPaymentOptionConfirmed) {
         checkoutState = 4
       }
       return checkoutState
     },
     getPaymentOptions (state) {
-      return state.paymentOptions
+      return state.checkout.payment.options
     },
     getShippingOption (state) {
-      return state.shippingOption
+      return state.checkout.shipping.option
     },
     getUnpaidOrder (state) {
-      return state.unpaidOrder
+      return state.checkout.unpaidOrder
+    },
+    getSelectedPaymentOption (state) {
+      return state.checkout.payment.option
+    },
+    getSelectedPaymentMethod (state) {
+      return state.checkout.payment.method
     }
   },
 

@@ -95,18 +95,11 @@ export const unsetToken = () => {
   window.localStorage.removeItem('token')
   window.localStorage.removeItem('user')
   Vue.cookie.delete('jwt')
-  store.dispatch('setUser', {
-    user: {
-      authenticated: false
-    }
-  })
-  store.commit(types.SET_CART, null)
-  store.commit(types.SET_UNPAID_ORDER, null)
+  store.commit(types.RESET_USER_DATA)
 }
 
 export const getUserFromCookie = (req) => {
   if (!req.headers.cookie) return
-  console.log('getUserFromCookie')
   const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
   if (!jwtCookie) return
   const jwt = jwtCookie.split('=')[1]
@@ -119,7 +112,6 @@ export const getUserFromCookie = (req) => {
 }
 
 export const getUserFromLocalStorage = () => {
-  console.log('getUserFromLocalStorage')
   const json = window.localStorage.user
   if (json) {
     var userData = JSON.parse(json)

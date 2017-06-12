@@ -350,7 +350,6 @@ export const enterCheckout = (store, args) => new Promise((resolve, reject) => {
 })
 
 export const setShippingCountry = (store, args) => new Promise((resolve, reject) => {
-  console.log('action: setShippingCountry')
   apolloClient.query({
     query: gql`query CartShippingOption($countryName: String) {
         cart {
@@ -374,7 +373,7 @@ export const setShippingCountry = (store, args) => new Promise((resolve, reject)
 
 export const getPaymentOptions = ({commit}, args) => new Promise((resolve, reject) => {
   apolloClient.query({
-    query: gql`query PaymentMethods($country: String!) {
+    query: gql`query PaymentMethods($country: String) {
         paymentOptions(country: $country) {
             id
             name

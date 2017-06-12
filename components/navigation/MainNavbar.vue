@@ -76,7 +76,7 @@
         return this.$store.getters.isShippingAddressConfirmed
       },
       hasPayment () {
-        return this.$store.state.paymentOptionConfirmed
+        return this.$store.getters.isPaymentOptionConfirmed
       },
       isHomeUrl () {
         return this.$route.path === '/'
