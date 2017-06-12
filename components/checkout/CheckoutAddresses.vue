@@ -85,7 +85,7 @@
         return this.$store.getters.isShippingAddressComplete
       },
       shippingAddress () {
-        return this.$store.state.shippingAddress
+        return this.$store.getters.getShippingAddress
       },
       billingAddress () {
         return this.$store.state.billingAddress

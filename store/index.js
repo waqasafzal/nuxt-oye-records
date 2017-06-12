@@ -30,9 +30,6 @@ const store = new Vuex.Store({
     cartUpdating: false,
     countries: null,
     unpaidOrder: null,
-    shippingAddress: null,
-    shippingAddressIsComplete: false,
-    shippingAddressConfirmed: false,
     paymentOptionConfirmed: false,
     selectedPaymentOption: null,
     selectedPaymentMethod: null,
@@ -42,6 +39,14 @@ const store = new Vuex.Store({
     shippingOption: null,
     paymentOptions: null,
     checkout: {
+      shippingAddress: {
+        address: null,
+        complete: false,
+        confirmed: false
+      },
+      // shippingAddressIsComplete: false,
+      // shippingAddressConfirmed: false,
+
       billingAddress: null,
       payment: null,
       guest: null,
@@ -201,12 +206,12 @@ const store = new Vuex.Store({
     },
     [types.SET_USER_SHIPPING_ADDRESSES]: (state, args) => {
       state.user.shippingAddresses = args.shippingAddresses
-      if (!state.shippingAddress && args.shippingAddresses.length > 0) {
+      if (!state.checkout.shippingAddress.address && args.shippingAddresses.length > 0) {
         let address = args.shippingAddresses[0]
-        state.shippingAddress = address
+        state.checkout.shippingAddress.address = address
         let complete = isAddressComplete(address)
-        state.shippingAddressIsComplete = complete
-        state.shippingAddressConfirmed = complete
+        state.checkout.shippingAddress.complete = complete
+        state.checkout.shippingAddress.confirmed = complete
       }
     },
     [types.SET_USER_BILLING_ADDRESSES]: (state, args) => {
@@ -215,14 +220,14 @@ const store = new Vuex.Store({
         let address = args.billingAddresses[0]
         state.billingAddress = address
         let complete = isAddressComplete(address)
-        state.shippingAddressIsComplete = complete
-        state.shippingAddressConfirmed = complete
+        state.checkout.shippingAddress.complete = complete
+        state.checkout.shippingAddress.confirmed = complete
       }
     },
     [types.SET_SHIPPING_ADDRESS]: (state, address) => {
-      state.shippingAddress = address
+      state.checkout.shippingAddress.address = address
       let complete = isAddressComplete(address)
-      state.shippingAddressIsComplete = complete
+      state.checkout.shippingAddress.complete = complete
     },
     [types.SET_BILLING_ADDRESS]: (state, address) => {
       state.billingAddress = address
@@ -254,8 +259,9 @@ const store = new Vuex.Store({
       state.shippingOption = shippingOption
     },
     [types.SET_SHIPPING_ADDRESS_CONFIRMED]: (state) => {
-      if (state.shippingAddress && isAddressComplete(state.shippingAddress)) {
-        state.shippingAddressConfirmed = true
+      let address = state.checkout.shippingAddress.address
+      if (address && isAddressComplete(address)) {
+        state.checkout.shippingAddress.confirmed = true
         state.checkout.checkoutState = 3
       }
     },
@@ -300,19 +306,23 @@ const store = new Vuex.Store({
       return state.cart && state.cart.quantity || 0
     },
     isShippingAddressComplete (state) {
-      return state.shippingAddressIsComplete
+      return state.checkout.shippingAddress.complete
     },
     isBillingAddressComplete (state) {
       return state.billingAddressIsComplete
     },
+    isShippingAddressConfirmed (state) {
+      return state.checkout.shippingAddress && state.checkout.shippingAddress.confirmed
+    },
     getShippingCountry (state) {
-      return state.shippingAddress && state.shippingAddress.country
+      let address = store.getters.getShippingAddress
+      return address && address.country
     },
     getShippingOptions (state) {
       return state.shippingOptions || []
     },
     getShippingAddress (state) {
-      return state.shippingAddress ||
+      return state.checkout.shippingAddress.address ||
         state.user.shippingAddresses && state.user.shippingAddresses.length > 0 && state.user.shippingAddresses[0]
     },
     getBillingAddress (state) {
@@ -332,7 +342,7 @@ const store = new Vuex.Store({
       if (checkoutState === 1 && state.user.authenticated || state.checkout.guest) {
         checkoutState = 2
       }
-      if (checkoutState === 2 && state.shippingAddressConfirmed) {
+      if (checkoutState === 2 && state.checkout.shippingAddress.confirmed) {
         checkoutState = 3
       }
       if (checkoutState === 3 && state.paymentOptionConfirmed) {
@@ -351,7 +361,7 @@ const store = new Vuex.Store({
       if (checkoutState === 1 && state.user.authenticated || state.checkout.guest) {
         checkoutState = 2
       }
-      if (checkoutState === 2 && state.shippingAddressConfirmed) {
+      if (checkoutState === 2 && state.checkout.shippingAddress.confirmed) {
         checkoutState = 3
       }
       if (checkoutState === 3 && state.paymentOptionConfirmed) {

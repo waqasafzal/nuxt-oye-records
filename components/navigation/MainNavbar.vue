@@ -73,7 +73,7 @@
         return this.$route.name === 'checkout'
       },
       hasShipping () {
-        return this.$store.state.shippingAddressConfirmed
+        return this.$store.getters.isShippingAddressConfirmed
       },
       hasPayment () {
         return this.$store.state.paymentOptionConfirmed

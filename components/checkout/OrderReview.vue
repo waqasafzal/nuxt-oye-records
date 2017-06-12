@@ -40,7 +40,7 @@
         return shippingOption && shippingOption.price
       },
       shippingId () {
-        let address = this.$store.shippingAddress
+        let address = this.$store.getters.getShippingAddress
         return address && address.id
       },
       billingId () {
