@@ -2,18 +2,18 @@
   <div class="row">
     <div class="col-12">
       <div class="page__header">New Releases</div>
-      <template v-if="releasedToday.edges.length > 0">
+      <div class="release-list-panel" v-if="releasedToday.edges.length > 0">
         <h3>Released Today</h3>
         <release-list :releases="releasedToday"></release-list>
-      </template>
-      <template v-if="releasedLast7.edges.length > 0">
+      </div>
+      <div class="release-list-panel" v-if="releasedLast7.edges.length > 0">
         <h3>Released last 7 days</h3>
         <release-list :releases="releasedLast7"></release-list>
-      </template>
-      <template v-if="releasedLast30.edges.length > 0">
+      </div>
+      <div class="release-list-panel" v-if="releasedLast30.edges.length > 0">
         <h3>Released last 30 days</h3>
         <release-list :releases="releasedLast30"></release-list>
-      </template>
+      </div>
       <h3>All Releases</h3>
       <release-list id="releaselist" :releases="releases" :loading="loading"></release-list>
     </div>
