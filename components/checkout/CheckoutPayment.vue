@@ -34,8 +34,6 @@
 </template>
 
 <script>
-  import apolloClient from '~/plugins/apollo'
-  import gql from 'graphql-tag'
   import * as types from '../../store/types'
   import ProceedButton from '../shared/ProceedButton'
   import { mastercardLogoSmall, paypalLogoSmall, sofortLogoSmall, visaLogoSmall } from '../../utils/logos'
@@ -66,41 +64,15 @@
     },
     methods: {
       getPaymentOptions (country) {
-        apolloClient.query({
-          query: gql`query PaymentMethods($country: String!) {
-            paymentOptions(country: $country) {
-              id
-              name
-              logos {
-                logo
-                variant
-              }
-              methods {
-                id
-                reference
-                variant
-                ... on CardMethodType {
-                  cardData {
-                    number
-                    expiryMonth
-                    expiryYear
-                    holderName
-                  }
-                }
-              }
-            }
-          }
-          `,
-          variables: {
-            country: country
-          }
-        }).then(({data}) => {
-          this.$store.commit(types.SET_PAYMENT_OPTIONS, data.paymentOptions)
-          if (data.paymentOptions.length > 0) {
+        this.$store.dispatch('getPaymentOptions', {
+          country: country
+        }).then((paymentOptions) => {
+          this.$store.commit(types.SET_PAYMENT_OPTIONS, paymentOptions)
+          if (paymentOptions.length > 0) {
             if (this.shippingOption) {
               this.selectPaymentByShippingOption(this.shippingOption)
             } else {
-              this.selectedPayment = data.paymentOptions[0]
+              this.selectedPayment = paymentOptions[0]
             }
           }
         })
@@ -171,6 +143,7 @@
     },
     mounted () {
       if (this.country) {
+        this.store.dispatch('getPaymentOptions', this.country)
         this.getPaymentOptions(this.country)
       }
     }

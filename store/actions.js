@@ -24,7 +24,7 @@ export const getCart = ({commit}) => new Promise((resolve, reject) => {
     mutation: gql`mutation OyeCart {
         syncCart {
             cart {
-              ...OyeCart
+                ...OyeCart
             }
             removedItems {
                 quantity
@@ -274,7 +274,7 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
   commit(types.SET_QUERY, {query})
 })
 
-export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
+export const getProfile = (store, args) => new Promise((resolve, reject) => {
   apolloClient.query({
     query: gql`query Profile {
         profile {
@@ -293,13 +293,16 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
                     cardData {
                         ...CardData
                     }
-                } 
+                }
             }
             unpaidOrder {
                 id
                 price
                 porto
                 paymentType
+                shippingAddress {
+                    country
+                }
             }
         }
     }
@@ -311,22 +314,31 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
     let profile = data.profile
     if (profile) {
       if (profile.shippingAddresses && profile.shippingAddresses.length > 0) {
-        commit(types.SET_USER_SHIPPING_ADDRESSES, {
+        store.commit(types.SET_USER_SHIPPING_ADDRESSES, {
           shippingAddresses: profile.shippingAddresses
         })
       }
       if (profile.billingAddresses && profile.billingAddresses.length > 0) {
-        commit(types.SET_USER_BILLING_ADDRESSES, {
+        store.commit(types.SET_USER_BILLING_ADDRESSES, {
           billingAddresses: profile.billingAddresses
         })
       }
       if (profile.paymentMethods && profile.paymentMethods.length > 0) {
-        commit(types.SET_USER_PAYMENT_METHODS, {
+        store.commit(types.SET_USER_PAYMENT_METHODS, {
           paymentMethods: profile.paymentMethods
         })
       }
       if (profile.unpaidOrder) {
-        commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
+        store.commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
+        if (profile.unpaidOrder && profile.unpaidOrder.shippingAddress) {
+          let country = profile.unpaidOrder.shippingAddress.country
+          store.dispatch('setShippingCountry', {
+            country: country
+          })
+          store.dispatch('getPaymentOptions', {
+            country: country
+          })
+        }
       }
     }
   })
@@ -335,4 +347,62 @@ export const getProfile = ({commit}, args) => new Promise((resolve, reject) => {
 export const enterCheckout = (store, args) => new Promise((resolve, reject) => {
   store.dispatch('getProfile', args)
   store.commit(types.ENTER_CHECKOUT)
+})
+
+export const setShippingCountry = (store, args) => new Promise((resolve, reject) => {
+  console.log('action: setShippingCountry')
+  apolloClient.query({
+    query: gql`query CartShippingOption($countryName: String) {
+        cart {
+            shippingOptions(countryName: $countryName) {
+                id
+                price
+                name
+            }
+        }
+    }`,
+    variables: {
+      countryName: args.country
+    }
+  }).then(({data}) => {
+    // resolve(data.cart.shippingOptions)
+    // let cart = data.cart
+    // vm.shippingOptions = cart.shippingOptions
+    store.commit(types.SET_SHIPPING_OPTIONS, data.cart.shippingOptions)
+  })
+})
+
+export const getPaymentOptions = ({commit}, args) => new Promise((resolve, reject) => {
+  apolloClient.query({
+    query: gql`query PaymentMethods($country: String!) {
+        paymentOptions(country: $country) {
+            id
+            name
+            logos {
+                logo
+                variant
+            }
+            methods {
+                id
+                reference
+                variant
+                ... on CardMethodType {
+                    cardData {
+                        number
+                        expiryMonth
+                        expiryYear
+                        holderName
+                    }
+                }
+            }
+        }
+    }
+    `,
+    variables: {
+      country: args.country
+    }
+  }).then(({data}) => {
+    commit(types.SET_PAYMENT_OPTIONS, data.paymentOptions)
+    resolve(data.paymentOptions)
+  })
 })

@@ -271,6 +271,9 @@ const store = new Vuex.Store({
     },
     [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
       state.unpaidOrder = unpaidOrder
+      if (unpaidOrder && unpaidOrder.shippingCountry) {
+        state.shippingCountry = unpaidOrder.shippingCountry
+      }
     },
     [types.SET_SELECTED_PAYMENT_OPTION]: (state, paymentOption) => {
       state.selectedPaymentOption = paymentOption

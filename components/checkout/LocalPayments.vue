@@ -45,14 +45,16 @@
       },
       getLogos (paymentType) {
         let options = this.$store.getters.getPaymentOptions
-        for (var i = 0; i < options.length; i++) {
-          if (options[i].id === this.order.paymentType) {
-            let variantLogos = options[i].logos
-            let logos = []
-            for (var j = 0; j < variantLogos.length; j++) {
-              logos.push(variantLogos[j].logo)
+        if (options) {
+          for (var i = 0; i < options.length; i++) {
+            if (options[i].id === this.order.paymentType) {
+              let variantLogos = options[i].logos
+              let logos = []
+              for (var j = 0; j < variantLogos.length; j++) {
+                logos.push(variantLogos[j].logo)
+              }
+              return logos
             }
-            return logos
           }
         }
         return []

@@ -52,8 +52,8 @@
 
 <script>
   import AddressForm from '../account/AddressForm'
-  import apolloClient from '~/plugins/apollo'
-  import gql from 'graphql-tag'
+//  import apolloClient from '~/plugins/apollo'
+//  import gql from 'graphql-tag'
   import ProceedButton from '../shared/ProceedButton'
   import * as types from '../../store/types'
   import { addressEquals } from '../../utils/address'
@@ -104,26 +104,29 @@
         this.$store.commit(types.SET_SHIPPING_OPTION, value)
       },
       shippingCountry (value) {
-        let vm = this
-        apolloClient.query({
-          query: gql`query CartShippingOption($countryName: String!) {
-            cart {
-              shippingOptions(countryName: $countryName) {
-                id
-                price
-                name
-              }
-            }
-          }`,
-          variables: {
-            countryName: value
-          },
-          fetchPolicy: 'network-only'
-        }).then(({data}) => {
-          let cart = data.cart
-          vm.shippingOptions = cart.shippingOptions
-          vm.$store.commit(types.SET_SHIPPING_OPTIONS, cart.shippingOptions)
+        this.$store.dispatch('setShippingCountry', value).then(shippingOptions => {
+          this.$store.commit(types.SET_SHIPPING_OPTIONS, shippingOptions)
         })
+//        let vm = this
+//        apolloClient.query({
+//          query: gql`query CartShippingOption($countryName: String!) {
+//            cart {
+//              shippingOptions(countryName: $countryName) {
+//                id
+//                price
+//                name
+//              }
+//            }
+//          }`,
+//          variables: {
+//            countryName: value
+//          },
+//          fetchPolicy: 'network-only'
+//        }).then(({data}) => {
+//          let cart = data.cart
+//          vm.shippingOptions = cart.shippingOptions
+//          vm.$store.commit(types.SET_SHIPPING_OPTIONS, cart.shippingOptions)
+//        })
       }
     },
     methods: {
