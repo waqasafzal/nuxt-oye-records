@@ -143,7 +143,7 @@
     },
     mounted () {
       if (this.country) {
-        this.store.dispatch('getPaymentOptions', this.country)
+        this.$store.dispatch('getPaymentOptions', {country: this.country})
         this.getPaymentOptions(this.country)
       }
     }

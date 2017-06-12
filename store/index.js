@@ -29,7 +29,6 @@ const store = new Vuex.Store({
     cart: null,
     cartUpdating: false,
     countries: null,
-    checkoutState: null,
     unpaidOrder: null,
     shippingAddress: null,
     shippingAddressIsComplete: false,
@@ -45,7 +44,8 @@ const store = new Vuex.Store({
     checkout: {
       billingAddress: null,
       payment: null,
-      guest: null
+      guest: null,
+      checkoutState: null
     },
     user: {
       authenticated: false,
@@ -256,18 +256,18 @@ const store = new Vuex.Store({
     [types.SET_SHIPPING_ADDRESS_CONFIRMED]: (state) => {
       if (state.shippingAddress && isAddressComplete(state.shippingAddress)) {
         state.shippingAddressConfirmed = true
-        state.checkoutState = 3
+        state.checkout.checkoutState = 3
       }
     },
     [types.SET_CURRENT_CHECKOUT_STATE]: (state, checkoutState) => {
-      state.checkoutState = checkoutState
+      state.checkout.checkoutState = checkoutState
     },
     [types.SET_PAYMENT_OPTIONS]: (state, paymentOptions) => {
       state.paymentOptions = paymentOptions
     },
     [types.SET_PAYMENT_OPTION_CONFIRMED]: (state) => {
       state.paymentOptionConfirmed = true
-      state.checkoutState = 4
+      state.checkout.checkoutState = 4
     },
     [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
       state.unpaidOrder = unpaidOrder
@@ -322,8 +322,8 @@ const store = new Vuex.Store({
       if (state.unpaidOrder) {
         return 5
       }
-      if (state.checkoutState) {
-        return state.checkoutState
+      if (state.checkout.checkoutState) {
+        return state.checkout.checkoutState
       }
       var checkoutState = 0
       if (state.checkoutActive) {
