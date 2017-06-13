@@ -456,6 +456,22 @@
     color: #CBCBCB;
     &:hover {
       color: $brand-color-black !important;
+      .cart-icon-box {
+        .cart-svg {
+          * path {
+            fill: $brand-color-black;
+          }
+          #Symbols {
+            opacity:1;
+          }
+        }
+        .badge {
+          background-color: darken($brand-color-green, 20) !important;
+          &.empty {
+            background-color: darken($gray-color-2, 20) !important;
+          }
+        }
+      }
     }
   }
 }
@@ -477,7 +493,7 @@
       top: 2px;
       padding: 3px;
       right: -2px;
-      background-color: $brand-color-green;
+      background-color: lighten($brand-color-green, 10);
       border-radius: 100px;
       color: $white;
       width: 6px;

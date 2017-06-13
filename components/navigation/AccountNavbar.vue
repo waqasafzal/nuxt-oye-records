@@ -34,8 +34,7 @@
               <template v-if="cartCount > 0"> ({{ cartCount }})</template>
             </span>
             <div class="cart-icon-box">
-              <!--<cart-svg></cart-svg>-->
-              <img src="../../assets/images/cart.svg" />
+              <cart-svg></cart-svg>
               <span :class="['badge', cartCount === 0 ? 'empty': '']"></span>
             </div>
           </nuxt-link>
