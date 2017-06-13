@@ -8,6 +8,7 @@ var utils = require('./build/utils')
 
 var apiHost = "'http://localhost:8000'"
 
+console.log('NODE_ENV ' + process.env.NODE_ENV)
 var setupAPI = function () {
   apiHost = "'http://localhost:8000'"
   switch (process.env.NODE_ENV) {
