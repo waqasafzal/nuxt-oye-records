@@ -12,7 +12,13 @@ var setupAPI = function () {
   apiHost = "'http://localhost:8000'"
   switch (process.env.NODE_ENV) {
     case 'production':
-      apiHost = "'https://oye-records.com'"
+      // apiHost = "'https://oye-records.com'"
+      if (process.env.INSECURE) {
+        apiHost = "'http://oye.kolter.it'"
+      } else {
+        apiHost = "'https://oye.kolter.it'"
+      }
+
       break
     case 'testing':
       if (process.env.INSECURE) {
