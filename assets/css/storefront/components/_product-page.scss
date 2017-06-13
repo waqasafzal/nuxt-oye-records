@@ -70,19 +70,19 @@
       bottom: 0px;
       margin-right: 4px;
       &.available {
-        background-color: #158037;
+        background-color: $brand-color-green;
       }
       &.few {
-        background-color: #b3a32f;
+        background-color: $brand-secondary-color-yellow;
       }
-      &.bla {
-        background-color: black;
+      &.preorder {
+        background-color: $brand-secondary-color-blue;
       }
       &.one {
-        background-color: #f47f10;
+        background-color: $brand-secondary-color-yellow;
       }
       &.out {
-        background-color: #c06;
+        background-color: $brand-secondary-color-red;
 
       }
     }
