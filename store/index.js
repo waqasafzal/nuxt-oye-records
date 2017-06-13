@@ -16,8 +16,8 @@ var isAddressComplete = function (address) {
     address.firstName.length > 0 &&
     address.lastName.length > 0 &&
     address.street.length > 0 &&
-    (address.number.length > 0 || address.number > 0) &&
-    (address.zip.length > 0 || address.zip > 0) &&
+    (address.number && (address.number.length > 0 || address.number > 0)) &&
+    (address.zip && (address.zip.length > 0 || address.zip > 0)) &&
     address.city.length > 0 &&
     address.country && address.country.length > 0
   )
