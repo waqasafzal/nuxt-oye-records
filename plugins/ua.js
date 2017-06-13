@@ -8,7 +8,7 @@ Vue.use(VueAnalytics, {
   appVersion: '1.0', // Mandatory
   trackingId: 'UA-100941329-1', // Mandatory
   debug: true, // Whether or not display console logs debugs (optional)
-  vueRouter: router, // Pass the router instance to automatically sync with router (optional)
+  vueRouter: router // , // Pass the router instance to automatically sync with router (optional)
   // ignoredViews: ['homepage'], // If router, you can exclude some routes name (case insensitive) (optional)
   // globalDimensions: [ // Optional
   //   {dimension: 1, value: 'MyDimensionValue'},
