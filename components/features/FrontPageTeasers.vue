@@ -6,10 +6,9 @@
           <template v-for="(release, i) in featuredReleases">
             <transition name="slide-fade" mode="out-in">
               <div :key="'release-'+i"
-                   v-if="i === currentFeature"
-                   class="slide"
-                   :style="`background-image: url(${release.thumbnailUrl})`">
-                <div style="height: 100%;">
+                   v-show="i === currentFeature"
+                   class="slide">
+                <div class="slide__inner" :style="`background-image: url(${release.thumbnailUrl})`">
                   <div class="feature-category">
                     <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                   </div>
@@ -72,10 +71,23 @@
       },
       enableSlider () {
         this.sliderDisabled = false
+      },
+      startAutopager () {
+        if (!this.autopager) {
+          this.autopager = window.setInterval(this.incrementRelease, 5000)
+        }
+      },
+      stopAutopager () {
+        if (this.autopager) {
+          window.clearInterval(this.autopager)
+          this.autopager = undefined
+        }
       }
     },
     mounted () {
-      window.setInterval(this.incrementRelease, 5000)
+      window.addEventListener('focus', this.startAutopager)
+      window.addEventListener('blur', this.stopAutopager)
+      this.startAutopager()
     }
   }
 </script>
