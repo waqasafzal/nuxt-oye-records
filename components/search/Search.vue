@@ -2,69 +2,66 @@
   <div class="navbar__search">
     <img class="hidden-md-up mobile-search-icon float-right"
          src="../../assets/images/search-icon.svg">
-    <form @submit.prevent="onSubmit" :class="['form-inline', 'navbar__brand__search', searchActive ? 'active': '']">
-      <div class="mobile-close-search hidden-md-up">
-        <img src="../../assets/images/close-icon.svg">
-      </div>
-      <input v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
-             type="text" name="q">
-      <button class="btn btn-link" type="submit">
-        <img src="../../assets/images/search-icon.svg">
-      </button>
-      <div class="search__spinner" v-if="loading">
-        <img src="../../assets/images/search_loader.svg" />
-      </div>
-    </form>
-    <div v-if="resultsVisible && hasResults" class="search__results">
-      <div v-if="artistsResults.length > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
-        <div class="search__results__header">Artists</div>
-        <div @click="setQuery(item.artist.name, ['artist_name'])" class="search__results__row" v-for="item in artistsResults">
-          <nuxt-link v-if="item.artist" class="search__results__item"
-                     :to="{name:'artists-query', params: { query: item.artist.name }}">
-            <div class="search__artist__image">
-              <template v-if="item.artist.smallThumbnailUrl">
-                <img :src="item.artist.smallThumbnailUrl"/>
-              </template>
-              <template v-else>
-                <img src="../../assets/images/defaults/Default_User.png" />
-              </template>
-            </div>
-            <div class="search__release__infos">
-              <div class="search__release__name">
-                {{ item.artist.name }}
-              </div>
-            </div>
-          </nuxt-link>
+    <div :class="['navbar__brand__search', searchActive ? 'active': '']">
+      <form @submit.prevent="onSubmit" :class="['form-inline']">
+        <div class="mobile-close-search hidden-md-up">
+          <img src="../../assets/images/close-icon.svg">
         </div>
-      </div>
-      <div v-if="releasesTotal > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
-        <div class="search__results__header">Releases</div>
-        <div @click="hideResults" class="search__results__row" v-for="item in releaseResults">
-          <nuxt-link v-if="item.release" class="search__results__item"
-                     :to="{name:'releases-slug', params: {slug: item.release.slug}}">
-            <div class="search__release__image">
-              <img :src="item.release.smallThumbnailUrl"/>
-            </div>
-            <div class="search__release__infos">
-              <div class="search__release__name">
-                <template v-if="item.release.artistFirstName">{{item.release.artistFirstName}} </template>
-                {{item.release.artistLastName}}
-
-              </div>
-              <div class="search__release__title">
-                {{item.release.title}}
-
-              </div>
-            </div>
-          </nuxt-link>
+        <input v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
+               type="text" name="q">
+        <button class="btn btn-link" type="submit">
+          <img src="../../assets/images/search-icon.svg">
+        </button>
+        <div class="search__spinner" v-if="loading">
+          <img src="../../assets/images/search_loader.svg" />
         </div>
-      </div>
-      <div>
-        <div @mouseover="disableBlur" @mouseleave="enableBlur" v-if="hasMore" @click="hideResults"
-             class="search__results__item search__results__more">
-          <nuxt-link :to="{name: 'search', params: {initialQuery: query, intialReleaseResults: releaseResults}}">
-            + More Search Results
-          </nuxt-link>
+      </form>
+      <div v-if="resultsVisible && hasResults" class="search__results">
+        <div v-if="artistsResults.length > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
+          <div class="search__results__header">Artists</div>
+          <div @click="setQuery(item.artist.name, ['artist_name'])" class="search__results__row" v-for="item in artistsResults">
+            <nuxt-link v-if="item.artist" class="search__results__item"
+                       :to="{name:'artists-query', params: { query: item.artist.name }}">
+              <div class="search__artist__image">
+                <template v-if="item.artist.smallThumbnailUrl">
+                  <img :src="item.artist.smallThumbnailUrl"/>
+                </template>
+                <template v-else>
+                  <img src="../../assets/images/defaults/Default_User.png" />
+                </template>
+              </div>
+              <div class="search__release__infos">
+                <div class="search__release__name">{{ item.artist.name }}</div>
+              </div>
+            </nuxt-link>
+          </div>
+        </div>
+        <div v-if="releasesTotal > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
+          <div class="search__results__header">Releases</div>
+          <div @click="hideResults" class="search__results__row" v-for="item in releaseResults">
+            <nuxt-link v-if="item.release" class="search__results__item"
+                       :to="{name:'releases-slug', params: {slug: item.release.slug}}">
+              <div class="search__release__image">
+                <img :src="item.release.smallThumbnailUrl"/>
+              </div>
+              <div class="search__release__infos">
+                <div class="search__release__name">
+                  <template v-if="item.release.artistFirstName">{{item.release.artistFirstName}} </template>
+                  {{item.release.artistLastName}}
+
+                </div>
+                <div class="search__release__title">{{item.release.title}}</div>
+              </div>
+            </nuxt-link>
+          </div>
+        </div>
+        <div>
+          <div @mouseover="disableBlur" @mouseleave="enableBlur" v-if="hasMore" @click="hideResults"
+               class="search__results__item search__results__more">
+            <nuxt-link :to="{name: 'search', params: {initialQuery: query, intialReleaseResults: releaseResults}}">
+              + More Search Results
+            </nuxt-link>
+          </div>
         </div>
       </div>
     </div>

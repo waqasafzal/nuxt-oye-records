@@ -3,7 +3,7 @@ $font-size-xs-fixed: 12px;
 
 .search {
   &__results {
-    margin-top: 42px;
+    margin-top: 12px;
     z-index: 1;
     background-color: white;
     padding: 0 10px;
@@ -109,7 +109,7 @@ $font-size-xs-fixed: 12px;
   &__spinner {
     position: absolute;
     top: 5px;
-    right: 15px;
+    right: 30px;
   }
 }
 
