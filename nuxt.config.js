@@ -8,7 +8,12 @@ var utils = require('./build/utils')
 
 var apiHost = "'http://localhost:8000'"
 
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = 'production'
+}
+
 console.log('NODE_ENV ' + process.env.NODE_ENV)
+
 var setupAPI = function () {
   apiHost = "'http://localhost:8000'"
   switch (process.env.NODE_ENV) {
@@ -119,16 +124,15 @@ module.exports = {
     ],
     vendor: ['vue-cookie']
   },
-  modules: [
-    ['@nuxtjs/google-analytics', { ua: 'UA-100941329-1' }]
-  ],
+  // modules: [
+  //   ['@nuxtjs/google-analytics', { ua: 'UA-100941329-1' }]
+  // ],
   plugins: [
     {src: '~plugins/vue-cookie', ssr: false, injectAs: 'cookie'},
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-resource'},
-    {src: '~plugins/vue-social-sharing'}
-    // ,
-    // {src: '~plugins/ga', ssr: false }
+    {src: '~plugins/vue-social-sharing'},
+    {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
   ],
   router: {
     middleware: ['check-auth', 'check-unpaid', 'payment-duty'],
