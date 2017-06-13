@@ -13,10 +13,7 @@
                     <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                   </div>
                   <nuxt-link :key="'release-'+i" :to="{name: 'releases-slug', params: {slug: release.slug}}">
-                    <div class="frontpage__teaser__artist">{{ release.artistFirstName }} {{ release.artistLastName}}
-
-
-                    </div>
+                    <div class="frontpage__teaser__artist">{{ release.artistFirstName }} {{ release.artistLastName}}</div>
                     <div class="frontpage__teaser__title">{{ release.title }}</div>
                     <release-button-bar :release="release" :size=48></release-button-bar>
                   </nuxt-link>
@@ -85,8 +82,15 @@
       }
     },
     mounted () {
-      window.addEventListener('focus', this.startAutopager)
-      window.addEventListener('blur', this.stopAutopager)
+      var vm = this
+      window.addEventListener('visibilitychange', function () {
+        let state = document.visibilityState
+        if (state === 'visible') {
+          vm.startAutopager()
+        } else {
+          vm.stopAutopager()
+        }
+      })
       this.startAutopager()
     }
   }
