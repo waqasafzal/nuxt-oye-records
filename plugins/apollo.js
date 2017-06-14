@@ -15,9 +15,16 @@ const networkInterface = createNetworkInterface({
     credentials: 'same-origin'
   }
 })
+//
 
-var apolloClient = new ApolloClient({
+const apolloClient = new ApolloClient({
   networkInterface: networkInterface
 })
 
 export default apolloClient
+
+// export default ({app}) => {
+//   app.apolloClient = new ApolloClient({
+//     networkInterface: networkInterface
+//   })
+// }
