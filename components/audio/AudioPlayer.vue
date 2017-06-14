@@ -141,7 +141,7 @@
       currentTrack: function (val) {
         let release = this.currentTrack.release
         if (this.playing) {
-          this.trackEvent('Audio', 'play-track', `${release.name} - ${release.title}`, this.currentTrack.position + 1)
+          this.$ua.trackEvent('Audio', 'play-track', `${release.name} - ${release.title}`, this.currentTrack.position + 1)
         }
       }
     },
@@ -149,7 +149,7 @@
       pauseAudio () {
         var music = this.$refs.music
         let release = this.currentTrack.release
-        this.trackEvent('Audio', 'pause-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`, parseInt(music.currentTime))
+        this.$ua.trackEvent('Audio', 'pause-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`, parseInt(music.currentTime))
         music.pause()
       },
       playAudio () {
