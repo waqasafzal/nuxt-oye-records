@@ -54,7 +54,8 @@
             req.options.headers = {}  // Create the header object if needed.
           }
 
-          console.log('Vue.cookie' + Vue.cookie)
+          console.log(this)
+          console.log('Vue.cookie ' + this.$cookie)
           var jwt = this.$cookie.get('jwt')
           console.log('Vue.cookie correct')
 
