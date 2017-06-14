@@ -1,5 +1,5 @@
 <template>
-    <script v-text="productSchema" type="application/ld+json" />
+  <script v-text="productSchema" type="application/ld+json"></script>
 </template>
 
 <script>

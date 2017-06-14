@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <!-- a placeholder for the google analytics script -->
+    <script></script>
     <account-navbar></account-navbar>
     <header class="navbar" role="navigation">
       <brand-navbar :isOpenMobile="isOpenMobileMenu" v-on:togglemenu="onToggleMobileMenu"
