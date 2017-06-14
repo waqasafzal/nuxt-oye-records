@@ -24,7 +24,7 @@ var isAddressComplete = function (address) {
   return complete
 }
 
-const store = new Vuex.Store({
+const store = () => new Vuex.Store({
 
   state: {
     cart: null,

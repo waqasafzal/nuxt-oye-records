@@ -89,9 +89,6 @@
       showPlaylist () {
         return this.$store.state.player.playlistVisible
       },
-      duration: function () {
-        return this.audio ? this.audio.duration : ''
-      },
       player: function () {
         return this.$store.state.player
       },
