@@ -54,7 +54,10 @@
             req.options.headers = {}  // Create the header object if needed.
           }
 
+          console.log('Vue.cookie' + Vue.cookie)
           var jwt = Vue.cookie.get('jwt')
+          console.log('Vue.cookie correct')
+
           if (jwt) {
             var header = getAuthHeader()
             if (header) {
