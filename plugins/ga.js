@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
         },
         i[r].l = 1*new Date();
       a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
+        m = s.querySelectorAll('script:not([type="application/ld+json"])')[0];
         a.async = 1;
         a.src = g;
         m.parentNode.insertBefore(a,m)

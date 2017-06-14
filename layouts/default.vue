@@ -1,14 +1,5 @@
 <template>
   <div id="app">
-    <!-- a placeholder for the google analytics script -->
-    <!--<div>-->
-      <script>
-        // eslint-disable-next-line no-unused-vars
-        var nothing = function () {
-          console.log('never called. never do nothing')
-        }
-      </script>
-    <!--</div>-->
     <account-navbar></account-navbar>
     <header class="navbar" role="navigation">
       <brand-navbar :isOpenMobile="isOpenMobileMenu" v-on:togglemenu="onToggleMobileMenu"

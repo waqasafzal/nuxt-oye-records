@@ -132,7 +132,8 @@ module.exports = {
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-resource'},
     {src: '~plugins/vue-social-sharing'},
-    {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
+    // {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
+    {src: '~plugins/ga', ssr: false}
   ],
   router: {
     middleware: ['check-auth', 'check-unpaid', 'payment-duty'],
