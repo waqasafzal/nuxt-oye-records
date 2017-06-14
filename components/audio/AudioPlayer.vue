@@ -140,7 +140,7 @@
       currentTrack: function (val) {
         let release = this.currentTrack.release
         if (this.$ua && this.playing) {
-          this.$ua.trackEvent('Audio', 'play-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`)
+          this.$ua.trackEvent('Audio', 'play-track', `${release.name} - ${release.title}`, this.currentTrack.position + 1)
         }
       }
     },
