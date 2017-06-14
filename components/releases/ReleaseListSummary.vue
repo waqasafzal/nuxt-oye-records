@@ -10,6 +10,11 @@
           <span>{{ title }}</span>
         </template>
       </h3>
+      <nuxt-link v-if="getRoute()" :to="getRoute()" class="release-list-summary__header__more">
+        View all
+        <template v-if="genre">{{ title }}</template>
+        <img src="../../assets/images/arrow_right_grey.svg"/>
+      </nuxt-link>
     </div>
     <release-list :releases="releases" :loading="loading"></release-list>
   </div>
