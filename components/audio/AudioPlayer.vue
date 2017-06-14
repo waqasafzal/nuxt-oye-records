@@ -155,7 +155,6 @@
       },
       playAudio () {
         var music = this.$refs.music
-        let release = this.currentTrack.release
         music.play()
       },
       backwards () {
