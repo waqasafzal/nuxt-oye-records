@@ -63,6 +63,7 @@
   import CartSvg from '../shared/Cart'
   import Playlist from './Playlist'
   import { mixin as clickaway } from 'vue-clickaway'
+  import GoogleAnalytics from '~/mixins/ga'
 
   const convertTimeHHMMSS = (val) => {
     if (val > 0) {
@@ -78,7 +79,7 @@
   export default {
     components: {Playlist, CartSvg, BackwardButton, ForwardButton, PlayButton, PlayReleaseButton, TrackDisplay},
     name: 'AudioPlayer',
-    mixins: [clickaway],
+    mixins: [clickaway, GoogleAnalytics],
     data: function () {
       return {
         duration: 0,
@@ -139,8 +140,8 @@
       },
       currentTrack: function (val) {
         let release = this.currentTrack.release
-        if (this.$ua && this.playing) {
-          this.$ua.trackEvent('Audio', 'play-track', `${release.name} - ${release.title}`, this.currentTrack.position + 1)
+        if (this.playing) {
+          this.trackEvent('Audio', 'play-track', `${release.name} - ${release.title}`, this.currentTrack.position + 1)
         }
       }
     },
@@ -148,9 +149,7 @@
       pauseAudio () {
         var music = this.$refs.music
         let release = this.currentTrack.release
-        if (this.$ua) {
-          this.$ua.trackEvent('Audio', 'pause-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`, parseInt(music.currentTime))
-        }
+        this.trackEvent('Audio', 'pause-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`, parseInt(music.currentTime))
         music.pause()
       },
       playAudio () {

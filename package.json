@@ -5,6 +5,7 @@
   "author": "Till Kolter <till.kolter@gmail.com>",
   "private": true,
   "dependencies": {
+    "@nuxtjs/google-analytics": "^0.2.0",
     "apollo-client": "^1.0.1",
     "babel-polyfill": "^6.23.0",
     "graphql-tag": "^2.0.0",

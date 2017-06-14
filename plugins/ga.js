@@ -3,10 +3,11 @@ import router from '~router'
 /*
  ** Only run on client-side and only in production mode
  */
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
   /*
    ** Include Google Analytics Script
    */
+export default ({app}) => {
   (
     function(i,s,o,g,r,a,m) {
       i['GoogleAnalyticsObject'] = r;
@@ -30,7 +31,8 @@ if (process.env.NODE_ENV === 'production') {
   /*
    ** Every time the route changes (fired on initialization too)
    */
-  router.afterEach((to, from) => {
+  app.router.afterEach((to, from) => {
+    console.log(`afterEach ${to} ${from}`)
     /*
      ** We tell Google Analytic to add a page view
      */
@@ -38,3 +40,4 @@ if (process.env.NODE_ENV === 'production') {
     ga('send', 'pageview')
   })
 }
+// }

@@ -16,10 +16,12 @@
   import client from '../../plugins/apollo'
   import PlayButton from '../audio/PlayButton'
   import * as types from '../../store/types'
+  import GoogleAnalytics from '~/mixins/ga'
 
   export default {
     components: {PlayButton},
     name: 'PlayReleaseButton',
+    mixins: [GoogleAnalytics],
     props: {
       release: Object,
       size: {
@@ -52,11 +54,7 @@
         if (this.playableRelease && (!this.playableRelease.tracks || this.playableRelease.tracks.length === 0)) {
           this.fetchRelease()
         } else {
-          if (this.$ua) {
-            this.$ua.trackEvent('Audio', 'play-release', `${this.playableRelease.name} - ${this.playableRelease.title}`)
-          } else {
-            console.warn('no Universal Analytics :(')
-          }
+          this.trackEvent('Audio', 'play-release', `${this.playableRelease.name} - ${this.playableRelease.title}`)
           this.$store.dispatch('playRelease', {
             release: this.playableRelease
           }).then(track => {
