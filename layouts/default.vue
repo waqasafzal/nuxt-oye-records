@@ -55,7 +55,7 @@
           }
 
           console.log('Vue.cookie' + Vue.cookie)
-          var jwt = Vue.cookie.get('jwt')
+          var jwt = this.$cookie.get('jwt')
           console.log('Vue.cookie correct')
 
           if (jwt) {
