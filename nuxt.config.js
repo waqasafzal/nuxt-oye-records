@@ -8,7 +8,7 @@ var utils = require('./build/utils')
 
 var apiHost = "'http://localhost:8000'"
 
-if (!process.env.NODE_ENV) {
+if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
   process.env.NODE_ENV = 'production'
 }
 

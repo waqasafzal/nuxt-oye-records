@@ -2,7 +2,8 @@
   <div id="app">
     <!-- a placeholder for the google analytics script -->
     <script>
-      nothing = function () {
+      // eslint-disable-next-line no-unused-vars
+      var nothing = function () {
         console.log('never called. never do nothing')
       }
     </script>
