@@ -52,7 +52,7 @@
         if (this.playableRelease && (!this.playableRelease.tracks || this.playableRelease.tracks.length === 0)) {
           this.fetchRelease()
         } else {
-          this.$ua.trackEvent('Audio', 'play-position', `${this.playableRelease.name} - ${this.playableRelease.title}`)
+          this.$ua.trackEvent('Audio', 'play-release', `${this.playableRelease.name} - ${this.playableRelease.title}`)
           this.$store.dispatch('playRelease', {
             release: this.playableRelease
           }).then(track => {
