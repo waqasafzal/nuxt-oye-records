@@ -141,10 +141,18 @@
     methods: {
       pauseAudio () {
         var music = this.$refs.music
+        let release = this.currentTrack.release
+        if (this.$ua) {
+          this.$ua.trackEvent('Audio', 'pause-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`, parseInt(music.currentTime))
+        }
         music.pause()
       },
       playAudio () {
         var music = this.$refs.music
+        let release = this.currentTrack.release
+        if (this.$ua) {
+          this.$ua.trackEvent('Audio', 'play-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`, parseInt(music.currentTime))
+        }
         music.play()
       },
       backwards () {

@@ -55,6 +55,10 @@
         return this.$store.state.player.position === position
       },
       playTrack (track) {
+        let release = track.release
+        if (this.$ua) {
+          this.$ua.trackEvent('Audio', 'play-track', `${release.name} - ${release.title} - ${track.position + 1}`, 0)
+        }
         this.$store.dispatch('playTrack', {
           track: track
         }).then(track => {
