@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-ua'
-// const router = new VueRouter({routes, mode, linkActiveClass})
 
 Vue.use(VueAnalytics, {
   appName: 'Oye Kolter', // Mandatory
