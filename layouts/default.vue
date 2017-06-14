@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <!-- a placeholder for the google analytics script -->
-    <script></script>
+    <script>
+      nothing = function () {
+        console.log('never called. never do nothing')
+      }
+    </script>
     <account-navbar></account-navbar>
     <header class="navbar" role="navigation">
       <brand-navbar :isOpenMobile="isOpenMobileMenu" v-on:togglemenu="onToggleMobileMenu"
