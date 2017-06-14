@@ -136,6 +136,12 @@
         if (diff > 1 || diff < -1) {
           this.audio.currentTime = number
         }
+      },
+      currentTrack: function (val) {
+        let release = this.currentTrack.release
+        if (this.$ua && this.playing) {
+          this.$ua.trackEvent('Audio', 'play-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`)
+        }
       }
     },
     methods: {
@@ -150,9 +156,6 @@
       playAudio () {
         var music = this.$refs.music
         let release = this.currentTrack.release
-        if (this.$ua) {
-          this.$ua.trackEvent('Audio', 'play-track', `${release.name} - ${release.title} - ${this.currentTrack.position + 1}`, parseInt(music.currentTime))
-        }
         music.play()
       },
       backwards () {
