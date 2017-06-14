@@ -13,7 +13,7 @@
                     <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                   </div>
                   <nuxt-link :key="'release-'+i" :to="{name: 'releases-slug', params: {slug: release.slug}}">
-                    <div class="frontpage__teaser__artist">{{ release.artistFirstName }} {{ release.artistLastName}}</div>
+                    <div class="frontpage__teaser__artist">{{ release.name }}</div>
                     <div class="frontpage__teaser__title">{{ release.title }}</div>
                     <release-button-bar :release="release" :size=48></release-button-bar>
                   </nuxt-link>
