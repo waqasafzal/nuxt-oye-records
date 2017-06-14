@@ -2,7 +2,11 @@ import Vue from 'vue'
 import VueAnalytics from 'vue-ua'
 // const router = new VueRouter({routes, mode, linkActiveClass})
 
-Vue.use(VueAnalytics)
+Vue.use(VueAnalytics, {
+  appName: 'Oye Kolter', // Mandatory
+  appVersion: '1.0', // Mandatory
+  trackingId: 'UA-100941329-1' // Mandatory
+})
 
 export default ({ app, store }) => {
   app.ua = new VueAnalytics({
