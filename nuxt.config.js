@@ -124,9 +124,9 @@ module.exports = {
     ],
     vendor: ['vue-cookie']
   },
-  modules: [
-    ['@nuxtjs/google-analytics', { ua: 'UA-100941329-1' }]
-  ],
+  // modules: [
+  //   ['@nuxtjs/google-analytics', { ua: 'UA-100941329-1' }]
+  // ],
   plugins: [
     {src: '~plugins/vue-cookie', ssr: false, injectAs: 'cookie'},
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
