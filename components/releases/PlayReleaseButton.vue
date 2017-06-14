@@ -52,7 +52,11 @@
         if (this.playableRelease && (!this.playableRelease.tracks || this.playableRelease.tracks.length === 0)) {
           this.fetchRelease()
         } else {
-//          this.$ua.trackEvent('Audio', 'play-release', `${this.playableRelease.name} - ${this.playableRelease.title}`)
+          if (this.$ua) {
+            this.$ua.trackEvent('Audio', 'play-release', `${this.playableRelease.name} - ${this.playableRelease.title}`)
+          } else {
+            console.warn('no Universal Analytics :(')
+          }
           this.$store.dispatch('playRelease', {
             release: this.playableRelease
           }).then(track => {
