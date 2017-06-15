@@ -13,7 +13,7 @@
       <div class="genres__detail__bestseller__header" v-if="detailGenre">Bestseller {{ detailGenre.name }}</div>
       <div class="genres__detail__bestseller__carousel row"
            v-if="!bsLoading && (bestsellers.length > 0 || bestsellers.edges)">
-        <div class="col-12">
+        <div class="col-12" @mouseenter="disableSlider" @mouseleave="enableSlider">
           <transition-group name="blend">
             <div :class="'carousel__item'" :key="p" v-for="p in pages" v-if="p === currentSlide" transition="blend">
               <release-item v-for="(release, i) in getBestsellers(p)"
@@ -81,6 +81,7 @@
       return {
         releases: [],
         bestsellers: [],
+        sliderDisabled: false,
         loading: false,
         bsLoading: false,
         relevantGenreId: genreId,
@@ -143,6 +144,34 @@
           this.currentSlide = index
         }
       },
+      disableSlider () {
+        this.sliderDisabled = true
+      },
+      enableSlider () {
+        this.sliderDisabled = false
+      },
+      incrementSlide () {
+        if (!this.sliderDisabled) {
+          if (this.pages) {
+            if (this.currentSlide < this.pages) {
+              this.currentSlide++
+            } else if (this.currentSlide === this.pages) {
+              this.currentSlide = 1
+            }
+          }
+        }
+      },
+      startAutopager () {
+        if (!this.autopager) {
+          this.autopager = window.setInterval(this.incrementSlide, 5000)
+        }
+      },
+      stopAutopager () {
+        if (this.autopager) {
+          window.clearInterval(this.autopager)
+          this.autopager = undefined
+        }
+      },
       onSelected (value) {
         let location = {
           name: 'genres-slug-subslug',
@@ -202,6 +231,18 @@
           vm.bsLoading = false
         })
       }
+    },
+    mounted () {
+      var vm = this
+      window.addEventListener('visibilitychange', function () {
+        let state = document.visibilityState
+        if (state === 'visible') {
+          vm.startAutopager()
+        } else {
+          vm.stopAutopager()
+        }
+      })
+      this.startAutopager()
     }
   }
 </script>
