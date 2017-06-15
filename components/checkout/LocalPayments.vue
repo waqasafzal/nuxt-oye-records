@@ -9,6 +9,7 @@
 
 <script>
   import gql from 'graphql-tag'
+  import apolloClient from '~/plugins/apollo'
 
   const baseUrl = __API__.includes('localhost') ? 'http://localhost:3000' : __API__
 
@@ -29,7 +30,7 @@
     },
     methods: {
       getPublicPaymentData () {
-        this.$apollo.query({
+        apolloClient.query({
           query: gql`query PaymentData($orderId: ID!, $resultUrl: String) {
                   paymentFormData(orderId: $orderId, resultUrl: $resultUrl)
                 }

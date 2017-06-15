@@ -13,14 +13,13 @@
 <script>
   import gql from 'graphql-tag'
   import {releaseDetails} from '../graphql/releases'
+  import client from '../../plugins/apollo'
   import PlayButton from '../audio/PlayButton'
   import * as types from '../../store/types'
-  import GoogleAnalytics from '~/mixins/ga'
 
   export default {
     components: {PlayButton},
     name: 'PlayReleaseButton',
-    mixins: [GoogleAnalytics],
     props: {
       release: Object,
       size: {
@@ -53,7 +52,6 @@
         if (this.playableRelease && (!this.playableRelease.tracks || this.playableRelease.tracks.length === 0)) {
           this.fetchRelease()
         } else {
-          this.$ua.trackEvent('Audio', 'play-release', `${this.playableRelease.name} - ${this.playableRelease.title}`)
           this.$store.dispatch('playRelease', {
             release: this.playableRelease
           }).then(track => {
@@ -64,7 +62,7 @@
       },
       fetchRelease () {
         var vm = this
-        this.$apollo.query({
+        client.query({
           query: gql`query Release($slug: String!) {
             release (slug: $slug){
               ...ReleaseDetails

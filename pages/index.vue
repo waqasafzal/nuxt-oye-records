@@ -20,6 +20,7 @@
   import gql from 'graphql-tag'
   import FrontPageTeasers from '../components/features/FrontPageTeasers'
   import ReleaseListSummary from '../components/releases/ReleaseListSummary'
+  import client from '../plugins/apollo'
   import ReleaseList from '../components/releases/ReleaseList'
   import { release, tracksFragment } from '../components/graphql/releases'
   import ChartItem from '../components/charts/ChartItem'
@@ -27,11 +28,11 @@
   export default {
     components: {ChartItem, ReleaseListSummary, FrontPageTeasers},
     name: 'OyeIndex',
-    async asyncData ({app, params}) {
+    async asyncData ({params}) {
       var filterByNew = JSON.stringify({status: 'new'})
       var filterByBack = JSON.stringify({status: 'back'})
       var filterByPre = JSON.stringify({status: 'pre'})
-      let {data} = await app.apollo.query({
+      let {data} = await client.query({
         query: gql`query FrontPageReleases($filterByNew: JSONString!, $filterByBack: JSONString!, $filterByPre: JSONString!) {
           newReleases: releases(first: 12, filterBy: $filterByNew) {
               ...Releases

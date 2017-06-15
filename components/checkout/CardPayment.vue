@@ -53,6 +53,7 @@
 </template>
 
 <script>
+  import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import ProceedButton from '../shared/ProceedButton'
   import { getAuthHeader } from '../../utils/auth/index'
@@ -131,7 +132,7 @@
       }
     },
     mounted () {
-      this.$apollo.query({
+      apolloClient.query({
         query: gql`query PaymentInfo {
             timestamp
         }

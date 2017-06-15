@@ -3,6 +3,6 @@ import VueCookie from 'vue-cookie'
 
 Vue.use(VueCookie)
 
-export default ({app}) => {
-  app.cookie = VueCookie
-}
+const cookie = VueCookie
+
+export default cookie

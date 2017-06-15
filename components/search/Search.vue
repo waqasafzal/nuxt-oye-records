@@ -137,14 +137,12 @@
             this.queryCount += 1
             var identifier = this.queryCount
             this.$store.dispatch('search', {
-              app: this,
               query: this.query,
               type: 'releases',
               size: getPageSize(),
               identifier: identifier
             })
             this.$store.dispatch('search', {
-              app: this,
               query: this.query,
               type: 'artists',
               size: 2

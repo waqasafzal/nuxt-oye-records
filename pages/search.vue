@@ -54,7 +54,6 @@
       loadMore (append) {
         this.page += 1
         this.$store.dispatch('search', {
-          app: this,
           type: 'releases',
           fields: this.fields,
           query: this.query,

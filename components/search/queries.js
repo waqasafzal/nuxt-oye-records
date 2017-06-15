@@ -1,8 +1,9 @@
+import client from '~plugins/apollo'
 import gql from 'graphql-tag'
 import { release } from '../graphql/releases'
 import { artistFragment } from '../graphql/artists'
 
-export const callReleaseSearchQuery = function (client, query, size, page, fields, callback, errorCallback) {
+export const callReleaseSearchQuery = function (query, size, page, fields, callback, errorCallback) {
   client.query({
     query: gql`query Search($query: String!, $size: Int!, $page: Int, $fields: JSONString) {
         search(query: $query, size: $size, page: $page, docType: "release", fields: $fields) {
@@ -29,7 +30,7 @@ export const callReleaseSearchQuery = function (client, query, size, page, field
   }).then(callback).catch(errorCallback)
 }
 
-export const callArtistSearchQuery = function (client, query, size, callback, errorCallback) {
+export const callArtistSearchQuery = function (query, size, callback, errorCallback) {
   client.query({
     query: gql`query Search($query: String!, $size: Int!) {
         search(query: $query, size: $size, docType: "artist") {

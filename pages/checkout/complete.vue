@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import * as types from '../../store/types'
 
@@ -32,7 +33,7 @@
           }
         }
         this.verificationStatus = 'verifying'
-        this.$apollo.mutate({
+        apolloClient.mutate({
           mutation: gql`mutation VerifyOrder($merchantSig: String!, $params: JSONString!) {
             verifyOrder(merchantSig: $merchantSig, transactionParams: $params) {
               ok

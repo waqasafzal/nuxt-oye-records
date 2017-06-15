@@ -20,6 +20,7 @@
   import CartContent from '../cart/CartContent'
   import ProceedButton from '../shared/ProceedButton'
   import * as types from '../../store/types'
+  import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import { oyeCart } from '../graphql/cart'
 
@@ -55,7 +56,7 @@
     },
     methods: {
       onPlaceOrder () {
-        this.$apollo.mutate({
+        apolloClient.mutate({
           mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID) {
             placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId) {
               order {

@@ -52,6 +52,8 @@
 
 <script>
   import AddressForm from '../account/AddressForm'
+//  import apolloClient from '~/plugins/apollo'
+//  import gql from 'graphql-tag'
   import ProceedButton from '../shared/ProceedButton'
   import * as types from '../../store/types'
   import { addressEquals } from '../../utils/address'

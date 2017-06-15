@@ -35,6 +35,7 @@
 
 <script>
   import Vue from 'vue'
+  import client from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import {getCurrentMonth} from '~/utils/date'
   import * as types from '~/store/types'
@@ -118,7 +119,7 @@
       var artist = this.artist
       if (typeof artist.name === 'undefined') {
         const slug = this.$route.params['slug']
-        this.$apollo.query({
+        client.query({
           query: gql`query Artist($slug: String!, $month: Int!) {
             artist(slug: $slug) {
               pk

@@ -128,12 +128,12 @@ module.exports = {
   //   ['@nuxtjs/google-analytics', { ua: 'UA-100941329-1' }]
   // ],
   plugins: [
-    {src: '~plugins/vue-cookie', ssr: false},
-    {src: '~plugins/apollo.js'},
+    {src: '~plugins/vue-cookie', ssr: false, injectAs: 'cookie'},
+    {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-resource'},
     {src: '~plugins/vue-social-sharing'},
-    {src: '~plugins/ua', ssr: false}
-    // {src: '~plugins/ga', ssr: false}
+    // {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
+    {src: '~plugins/ga', ssr: false}
   ],
   router: {
     middleware: ['check-auth', 'check-unpaid', 'payment-duty'],
