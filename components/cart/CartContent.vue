@@ -172,6 +172,7 @@
         let quantity = line.quantity
         if (targetValue !== quantity) {
           this.$store.dispatch('updateCart', {
+            app: this,
             release: line.release,
             preorder: line.preorder,
             // line.quantity is not trustworthy since the value is not changed at the fist call
@@ -181,6 +182,7 @@
       },
       onDelete: function (line) {
         this.$store.dispatch('removeCartLine', {
+          app: this,
           pk: line.release.pk,
           preorder: line.preorder
         })

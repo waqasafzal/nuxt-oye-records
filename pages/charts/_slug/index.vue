@@ -70,7 +70,6 @@
 </template>
 
 <script>
-  import client from '~/plugins/apollo'
   import { getMonthFromString } from '~/utils/date'
   import ReleasePrice from '../../../components/releases/ReleasePrice'
   import ReleaseButtonBar from '../../../components/releases/ReleaseButtonBar'
@@ -117,15 +116,15 @@
     watch: {
       $route (options) {
         let params = options.params
-        client.query(createChartsDetailQuery(params.slug)).then(
+        this.$apollo.query(createChartsDetailQuery(params.slug)).then(
           ({data}) => {
             this.chart = data.chart
           }
         )
       }
     },
-    async asyncData ({params}) {
-      var {data} = await client.query(createChartsDetailQuery(params.slug))
+    async asyncData ({app, params}) {
+      var {data} = await app.apollo.query(createChartsDetailQuery(params.slug))
       return {
         chart: data.chart
       }

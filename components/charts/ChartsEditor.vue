@@ -87,7 +87,6 @@
   import { getAuthHeader } from '~/utils/auth/index'
   import { addCartAlertMessage } from '../shared/utils'
   import { callReleaseSearchQuery } from '../search/queries'
-  import client from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import Vue from 'vue'
   import LoadingSpinner from '../shared/LoadingSpinner'
@@ -192,7 +191,7 @@
           this.searchLoading = true
           let fieldsList = ['artist_name', 'title', 'label']
           var fields = JSON.stringify(fieldsList)
-          callReleaseSearchQuery(release.value, 25, 1, fields, ({data}) => {
+          callReleaseSearchQuery(this.$apollo, release.value, 25, 1, fields, ({data}) => {
             this.currentResults = data.search.results
             this.searchLoading = false
           })
@@ -221,7 +220,7 @@
         this.currentChartItem = -1
       },
       onSaveCharts () {
-        client.mutate({
+        this.$apollo.mutate({
           mutation: gql`mutation ($charts: JSONString!, $artistId: Int) {
             saveCharts(charts: $charts, artistId: $artistId) {
                 ok
@@ -248,7 +247,7 @@
       },
       queryCharts () {
         var vm = this
-        client.query({
+        this.$apollo.query({
           query: gql`query Chart($artistId: Int) {
             chart(artistId: $artistId) {
                pk

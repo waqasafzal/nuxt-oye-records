@@ -45,7 +45,6 @@
   import ReleaseItem from '~/components/releases/ReleaseItem'
   import Dropdown from '~/components/shared/Dropdown'
   import LoadingSpinner from '~/components/shared/LoadingSpinner'
-  import client from '~/plugins/apollo'
   import { createReleaseListQuery } from '~/components/releases/queries'
   import { createGenreQuery } from '~/components/genres/queries'
   import {ReleasePagingMixin} from '~/components/releases/releases-paging-mixin'
@@ -93,19 +92,19 @@
         filterBy: JSON.stringify(releaseFilterParams(this.$route.params))
       }
     },
-    async asyncData ({params}) {
+    async asyncData ({app, params}) {
       var filterParams = releaseFilterParams(params)
 
-      let genreReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))
+      let genreReleases = await app.apollo.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))
 
       filterParams['status'] = 'bestsellers'
-      let bestsellerReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))
+      let bestsellerReleases = await app.apollo.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))
 
       let options = {
         slug: params.subslug || params.slug,
         isSubgenre: typeof params.subslug !== 'undefined'
       }
-      let detailGenreResults = await client.query(createGenreQuery(options))
+      let detailGenreResults = await app.apollo.query(createGenreQuery(options))
 
       return {
         detailGenre: detailGenreResults.data.detailGenre,
@@ -164,7 +163,7 @@
         let subslug = params.subslug
 
         if (typeof this.detailGenre === 'undefined') {
-          client.query(
+          this.$apollo.query(
             createGenreQuery({
               slug: subslug || slug,
               sub: typeof subslug === 'undefined'
@@ -185,7 +184,7 @@
         var vm = this
         this.loading = true
         this.releases = []
-        client.query(
+        this.$apollo.query(
           createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)})
         ).then(({data}) => {
           vm.loading = false
@@ -195,7 +194,7 @@
         releaseFilterParams['status'] = 'bestsellers'
         this.bestsellers = []
         this.bsLoading = true
-        client.query(
+        this.$apollo.query(
           createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)})
         ).then(({data}) => {
           vm.bestsellers = data.releases

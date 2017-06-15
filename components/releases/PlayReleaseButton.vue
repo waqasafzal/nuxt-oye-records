@@ -13,7 +13,6 @@
 <script>
   import gql from 'graphql-tag'
   import {releaseDetails} from '../graphql/releases'
-  import client from '../../plugins/apollo'
   import PlayButton from '../audio/PlayButton'
   import * as types from '../../store/types'
   import GoogleAnalytics from '~/mixins/ga'
@@ -65,7 +64,7 @@
       },
       fetchRelease () {
         var vm = this
-        client.query({
+        this.$apollo.query({
           query: gql`query Release($slug: String!) {
             release (slug: $slug){
               ...ReleaseDetails

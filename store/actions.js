@@ -19,8 +19,8 @@ import { callArtistSearchQuery, callReleaseSearchQuery } from '../components/sea
 import { addressFragment } from '~/components/graphql/user'
 import { cardDataFragment } from '../components/graphql/payments'
 
-export const getCart = ({commit}) => new Promise((resolve, reject) => {
-  apolloClient.mutate({
+export const getCart = ({commit}, args) => new Promise((resolve, reject) => {
+  args.app.$apollo.mutate({
     mutation: gql`mutation OyeCart {
         syncCart {
             cart {
@@ -80,7 +80,7 @@ export const getCart = ({commit}) => new Promise((resolve, reject) => {
 })
 
 export const addToCart = ({commit}, args) => new Promise((resolve, reject) => {
-  apolloClient.mutate(
+  args.app.$apollo.mutate(
     {
       mutation: gql`mutation ($releasePk: ID!, $quantity: Int!) {
           addToCart(releasePk: $releasePk, quantity: $quantity) {
@@ -117,7 +117,8 @@ export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
   commit(types.CART_UPDATING, true)
   let release = args.release
   let quantity = args.quantity
-  apolloClient.mutate({
+  let app = args.app
+  app.$apollo.mutate({
     mutation: gql`mutation ($releasePk: ID!, $quantity: Int! $preorder: Boolean) {
         updateCart(releasePk: $releasePk, quantity: $quantity, preorder: $preorder) {
             cart {
@@ -156,14 +157,15 @@ export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
     }
 
     const r = data && data.updateCart.cart
-    Vue.cookie.set('cart', data.updateCart.cart.cookie, true)
+    app.$cookie.set('cart', data.updateCart.cart.cookie, true)
     commit(types.SET_CART, r || null)
     return resolve(r)
   }).catch(er => reject(er))
 })
 
 export const removeCartLine = ({commit}, args) => new Promise((resolve, reject) => {
-  apolloClient.mutate({
+  let app = args.app
+  app.$apollo.mutate({
     mutation: gql`mutation ($releasePk: ID!, $preorder: Boolean) {
         removeRelease(releasePk: $releasePk, preorder: $preorder) {
             cart {
@@ -180,7 +182,7 @@ export const removeCartLine = ({commit}, args) => new Promise((resolve, reject) 
     addCartAlertMessage('Article successfully removed from cart.', 'info')
 
     const r = data && data.removeRelease.cart
-    Vue.cookie.set('cart', data.removeRelease.cart.cookie, true)
+    app.$cookie.set('cart', data.removeRelease.cart.cookie, true)
     commit(types.SET_CART, r || null)
     return resolve(r)
   }).catch(er => reject(er))
@@ -240,7 +242,7 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
           }
         })
       }
-      callReleaseSearchQuery(query, args.size, args.page || 1, args.fields, ({data}) => {
+      callReleaseSearchQuery(args.app.$apollo, query, args.size, args.page || 1, args.fields, ({data}) => {
         let rearchResults = data.search
         commit(mutationType, {search: rearchResults, type: type})
         resolve({
@@ -251,7 +253,7 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
         commit(types.DECREMENT_SEARCH_LOADING)
       })
     } else if (type === 'artists') {
-      callArtistSearchQuery(query, args.size, ({data}) => {
+      callArtistSearchQuery(args.app.$apollo, query, args.size, ({data}) => {
         let rearchResults = data.search
         commit(mutationType, {search: rearchResults, type: type})
         resolve({
@@ -275,7 +277,8 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
 })
 
 export const getProfile = (store, args) => new Promise((resolve, reject) => {
-  apolloClient.query({
+  let app = args.app
+  app.$apollo.query({
     query: gql`query Profile {
         profile {
             firstName
@@ -333,9 +336,11 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
         if (profile.unpaidOrder && profile.unpaidOrder.shippingAddress) {
           let country = profile.unpaidOrder.shippingAddress.country
           store.dispatch('setShippingCountry', {
+            app: app,
             country: country
           })
           store.dispatch('getPaymentOptions', {
+            app: app,
             country: country
           })
         }
@@ -350,7 +355,7 @@ export const enterCheckout = (store, args) => new Promise((resolve, reject) => {
 })
 
 export const setShippingCountry = (store, args) => new Promise((resolve, reject) => {
-  apolloClient.query({
+  args.app.$apollo.query({
     query: gql`query CartShippingOption($countryName: String) {
         cart {
             shippingOptions(countryName: $countryName) {

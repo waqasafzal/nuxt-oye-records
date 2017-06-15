@@ -44,7 +44,6 @@
 </template>
 
 <script>
-  import client from '../../plugins/apollo'
   import ReleaseListSummary from '../../components/releases/ReleaseListSummary'
   import { createMainGenresQuery } from '../../components/genres/queries'
 
@@ -67,8 +66,8 @@
         }
       }
     },
-    async asyncData ({params}) {
-      let genres = await client.query(createMainGenresQuery(12))
+    async asyncData ({app, params}) {
+      let genres = await app.apollo.query(createMainGenresQuery(12))
       let metaGenres = genres.data.metaGenres
       return {
         metaGenres: metaGenres

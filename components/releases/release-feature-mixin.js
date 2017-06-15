@@ -7,8 +7,8 @@ export const ReleaseFeature = {
       release: null
     }
   },
-  async asyncData ({params}) {
-    var {data} = await client.query(createReleaseBaseDetailsQuery(params.slug))
+  async asyncData ({app, params}) {
+    var {data} = await app.apollo.query(createReleaseBaseDetailsQuery(params.slug))
     return {
       release: data.release
     }

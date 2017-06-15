@@ -7,7 +7,6 @@
 </template>
 
 <script>
-  import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import store from '~/store'
   import * as types from '~/store/types'
@@ -43,8 +42,8 @@
         return currentCheckoutView
       }
     },
-    async asyncData ({params}) {
-      var {data} = await apolloClient.query({
+    async asyncData ({app, params}) {
+      var {data} = await app.apollo.query({
         query: gql`query Country {
           countries {
             name
@@ -60,7 +59,7 @@
     },
     methods: {
       calculateCheckoutState () {
-        this.$store.dispatch('enterCheckout')
+        this.$store.dispatch('enterCheckout', {app: this})
       }
     }
   }

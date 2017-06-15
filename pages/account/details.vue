@@ -26,7 +26,6 @@
 <script>
   import Vue from 'vue'
   import ChartsEditor from '~/components/charts/ChartsEditor'
-  import client from '~/plugins/apollo'
   import { getCurrentMonth } from '~/utils/date'
   import * as types from '~/store/types'
   import gql from 'graphql-tag'
@@ -59,7 +58,7 @@
     },
     mounted () {
       var vm = this
-      client.query({
+      this.$apollo.query({
         query: gql`query Account($month: Int!) {
           account {
             artists {

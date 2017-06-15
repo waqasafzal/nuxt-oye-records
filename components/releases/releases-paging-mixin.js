@@ -7,8 +7,8 @@ const DEFAULT_PAGE_SIZE = 5
 export const ReleasePagingMixin = function (filterBy) {
   var asyncData = async function () {}
   if (filterBy) {
-    asyncData = async function ({params}) {
-      let {data} = await client.query(createReleaseListQuery({filterBy: filterBy}))
+    asyncData = async function ({app, params}) {
+      let {data} = await app.apollo.query(createReleaseListQuery({filterBy: filterBy}))
       return {
         releases: data.releases
       }

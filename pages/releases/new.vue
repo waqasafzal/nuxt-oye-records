@@ -24,7 +24,6 @@
 <script>
   import Vue from 'vue'
   import {ReleasePagingMixin} from '../../components/releases/releases-paging-mixin'
-  import client from '~/plugins/apollo'
 
   import ReleasePage from '../../components/releases/ReleasePage.vue'
   import { createReleaseListQuery } from '../../components/releases/queries'
@@ -45,7 +44,8 @@
   export default {
     name: 'NewReleases',
     mixins: [ReleasePagingMixin(filterBy)],
-    asyncData: async function ({params}) {
+    asyncData: async function ({app, params}) {
+      let client = app.apollo
       let releasedTodayResults = await client.query(createReleaseListQuery({filterBy: filterByPeriod(1)}))
       let releasedLast7Results = await client.query(createReleaseListQuery({filterBy: filterByPeriod(7)}))
       let releasedLast30Results = await client.query(createReleaseListQuery({filterBy: filterByPeriod(30)}))

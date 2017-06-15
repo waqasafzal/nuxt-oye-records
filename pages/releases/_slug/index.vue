@@ -162,7 +162,6 @@
   import ReleaseButtonBar from '../../../components/releases/ReleaseButtonBar'
   import ReleaseDescription from '../../../components/releases/ReleaseDescription'
   import PlayReleaseButton from '../../../components/releases/PlayReleaseButton'
-  import client from '../../../plugins/apollo'
   import { createReleaseDetailsQuery } from '../../../components/releases/queries'
   import ReleaseList from '../../../components/releases/ReleaseList'
 
@@ -218,7 +217,7 @@
       $route ({params, query}) {
         this.release = ''
         let slug = params.slug
-        client.query(createReleaseDetailsQuery(slug)).then(({data}) => {
+        this.$apollo.query(createReleaseDetailsQuery(slug)).then(({data}) => {
           this.release = data.release
           if (query.autoplay === '1') {
             this.playRelease()
@@ -226,8 +225,8 @@
         })
       }
     },
-    async asyncData ({params}) {
-      let {data} = await client.query(createReleaseDetailsQuery(params.slug))
+    async asyncData ({app, params}) {
+      let {data} = await app.apollo.query(createReleaseDetailsQuery(params.slug))
       return {
         release: data.release
       }
@@ -237,6 +236,7 @@
       },
       addToCart (pk) {
         this.$store.dispatch('addToCart', {
+          app: this,
           pk: pk,
           quantity: this.quantity
         }).catch(e => console.log(e))

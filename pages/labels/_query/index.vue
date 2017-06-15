@@ -6,7 +6,6 @@
 </template>
 
 <script>
-  import apolloClient from '~/plugins/apollo'
   import {ReleasePagingMixin} from '../../../components/releases/releases-paging-mixin'
   import { createReleaseListQuery } from '../../../components/releases/queries'
   import QueryResultPage from '../../../components/search/QueryResultPage'
@@ -27,11 +26,11 @@
         return this.releases.edges.length
       }
     },
-    asyncData: async function ({params}) {
+    asyncData: async function ({app, params}) {
       let filterBy = JSON.stringify({
         label: params.query
       })
-      let {data} = await apolloClient.query(
+      let {data} = await app.apollo.query(
         createReleaseListQuery({
           filterBy: filterBy
         })

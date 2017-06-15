@@ -196,6 +196,7 @@
         if (this.currentTrack) {
           let release = this.currentTrack.release
           this.$store.dispatch('addToCart', {
+            app: this,
             pk: release.pk,
             quantity: 1
           })

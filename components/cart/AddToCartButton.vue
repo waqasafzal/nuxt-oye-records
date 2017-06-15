@@ -52,6 +52,7 @@
     methods: {
       addToCart () {
         this.$store.dispatch('addToCart', {
+          app: this,
           pk: this.release.pk,
           quantity: this.quantity || 1
         }).catch(e => console.log(e))

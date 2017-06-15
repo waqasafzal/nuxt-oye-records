@@ -60,7 +60,6 @@
 
 <script>
   import { getCurrentMonth } from '~/utils/date'
-  import client from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import { releasePlayerInfo } from '../../components/graphql/releases'
   import ReleasePrice from '../../components/releases/ReleasePrice'
@@ -77,8 +76,8 @@
         currentMonth: currentMonth
       }
     },
-    async asyncData ({params}) {
-      var charts = await client.query({
+    async asyncData ({app, params}) {
+      var charts = await app.apollo.query({
         query: gql`query Charts ($month: Int!, $filterBy: JSONString!) {
           artistCharts: charts(category:"artist", month: $month) {
             edges {

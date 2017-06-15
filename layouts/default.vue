@@ -19,10 +19,6 @@
   import BrandNavbar from '../components/navigation/BrandNavbar'
   import Alerts from '../components/shared/Alerts'
   import AccountNavbar from '../components/navigation/AccountNavbar'
-  import { getAuthHeader } from '../utils/auth/index'
-  import client from '../plugins/apollo'
-  import Vue from 'vue'
-
   var AudioPlayer = require('../components/audio/AudioPlayer')
 
   export default {
@@ -46,32 +42,6 @@
       onOpenPlaylist () {
         this.noScroll = true
       }
-    },
-    beforeCreate () {
-      client.networkInterface.use([{
-        applyMiddleware (req, next) {
-          if (!req.options.headers) {
-            req.options.headers = {}  // Create the header object if needed.
-          }
-
-          console.log(this)
-          console.log('Vue.cookie ' + this.$cookie)
-          var jwt = this.$cookie.get('jwt')
-          console.log('Vue.cookie correct')
-
-          if (jwt) {
-            var header = getAuthHeader()
-            if (header) {
-              req.options.headers['Authorization'] = header
-            }
-          }
-          var cart = Vue.cookie.get('cart')
-          if (cart) {
-            req.options.headers['X-CART-TOKEN'] = cart
-          }
-          next()
-        }
-      }])
     }
   }
 </script>
