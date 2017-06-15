@@ -3,7 +3,7 @@ import router from '~router'
 /*
  ** Only run on client-side and only in production mode
  */
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
   /*
    ** Include Google Analytics Script
    */
@@ -37,4 +37,4 @@ if (process.env.NODE_ENV === 'production') {
     ga('set', 'page', to.fullPath)
     ga('send', 'pageview')
   })
-}
+// }
