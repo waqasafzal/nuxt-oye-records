@@ -12,6 +12,7 @@ export const tracksFragment = gql`
         release {
             pk
             slug
+            name
             artistFirstName
             artistLastName
             title
@@ -97,6 +98,7 @@ export const releasePlayerInfo = gql`
     fragment ReleasePlayerInfo on ArtikelType {
         pk
         title
+        name
         artistFirstName
         artistLastName
         tracks {
