@@ -12,7 +12,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "node-fetch": "^1.6.3",
-    "nuxt": "file:../nuxt.js",
+    "nuxt": "v0.10.7",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "vue": "~2.2.6",
