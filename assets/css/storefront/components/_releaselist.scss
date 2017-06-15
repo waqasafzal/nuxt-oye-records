@@ -167,14 +167,33 @@
       position: absolute;
       right: 0;
       bottom: 0;
-      display: inline-block;
+      display: flex;
+      flex-direction: row;
       color: $gray-color-1;
+      &:hover {
+        border-bottom: 1px solid $brand-color-green;
+        margin-bottom: -1px;
+        .right-arrow {
+          * path {
+            fill: $brand-color-green;
+          }
+        }
+      }
+      .right-arrow {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 8px;
+        height: 10px;
+        * path {
+          fill: $gray-color-1;
+        }
+      }
     }
     a {
-      //color: $bra;
       text-transform: capitalize;
       &:hover {
-        text-decoration: underline;
+        text-decoration: none;
+        border-bottom: 1px solid $brand-color-green;
       }
     }
   }

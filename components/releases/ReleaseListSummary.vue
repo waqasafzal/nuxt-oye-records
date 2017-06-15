@@ -13,7 +13,7 @@
       <nuxt-link v-if="getRoute()" :to="getRoute()" class="release-list-summary__header__more">
         View all
         <template v-if="genre">{{ title }}</template>
-        <img src="../../assets/images/arrow_right_grey.svg"/>
+        <right-arrow></right-arrow>
       </nuxt-link>
     </div>
     <release-list :releases="releases" :loading="loading"></release-list>
@@ -22,6 +22,7 @@
 
 <script>
   import ReleaseList from './ReleaseList'
+  import RightArrow from '../shared/RightArrow'
 
   var getReleaseListColumnNumber
   if (process.BROWSER_BUILD) {
@@ -34,7 +35,7 @@
   }
 
   export default {
-    components: {ReleaseList},
+    components: {RightArrow, ReleaseList},
     props: ['pageSize', 'status', 'title', 'genre', 'releases'],
     name: 'ReleaseListSummary',
     data: function () {
