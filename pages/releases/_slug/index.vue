@@ -254,6 +254,7 @@
       },
       playRelease () {
         if (this.release.tracks) {
+          this.trackEvent('Audio', 'play-release', `${this.release.name} - ${this.release.title}`)
           this.$store.dispatch('playRelease', {
             release: this.release
           })
