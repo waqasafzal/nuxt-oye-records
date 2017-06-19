@@ -18,6 +18,8 @@ import { addCartAlertMessage } from '../components/shared/utils'
 import { callArtistSearchQuery, callReleaseSearchQuery } from '../components/search/queries'
 import { addressFragment } from '~/components/graphql/user'
 import { cardDataFragment } from '../components/graphql/payments'
+import { validateEmail } from '../utils/forms'
+import { setToken } from '../utils/auth/index'
 
 export const getCart = ({commit}) => new Promise((resolve, reject) => {
   apolloClient.mutate({
@@ -403,5 +405,76 @@ export const getPaymentOptions = ({commit}, args) => new Promise((resolve, rejec
   }).then(({data}) => {
     commit(types.SET_PAYMENT_OPTIONS, data.paymentOptions)
     resolve(data.paymentOptions)
+  })
+})
+
+export const validateUserForm = ({commit}, args) => new Promise((resolve, reject) => {
+  let user = args.user
+  let ok = true
+  if (!user.name) {
+    commit(types.SET_USER_FORM_NAME_ERROR, 'Username should not be empty')
+    ok = false
+  }
+  let password = user.password
+  if (!password || password.length < 8) {
+    commit(types.SET_USER_FORM_PWD_ERROR, 'Password should have at least 8 characters')
+    ok = false
+  } else if (password.search(/[!#$%^&+=?]/) < 0 || password.search(/[0-9]/) < 0) {
+    commit(types.SET_USER_FORM_PWD_ERROR, 'Password must contain at least one digit and one of these special chars: !#$%^&+=?')
+    ok = false
+  } else {
+    commit(types.SET_USER_FORM_PWD_ERROR, null)
+  }
+  if (password && password !== user.passwordConfirm) {
+    commit(types.SET_USER_FORM_PWD_CONFIRM_ERROR, 'Password confirmation does not match')
+    ok = false
+  } else {
+    commit(types.SET_USER_FORM_PWD_CONFIRM_ERROR, null)
+  }
+  if (!user.email) {
+    commit(types.SET_USER_FORM_EMAIL_ERROR, 'Email should not be empty')
+    ok = false
+  } else {
+    var valid = validateEmail(user.email)
+    if (!valid) {
+      commit(types.SET_USER_FORM_EMAIL_ERROR, 'Email pattern is not valid')
+      ok = false
+    } else {
+      commit(types.SET_USER_FORM_EMAIL_ERROR, null)
+    }
+  }
+  return resolve(ok)
+})
+
+export const createNewUser = ({commit}, args) => new Promise((resolve, reject) => {
+  let user = args.user
+  let shippingAddress = args.shippingAddress
+  let billingAddress = args.billingAddress
+
+  apolloClient.mutate({
+    mutation: gql`mutation RegisterUser($email: String!,$username: String!, $password: String!, $shippingAddress: AddressInputType, $billingAddress: AddressInputType) {
+        registerUser(email: $email, username: $username, password: $password, shippingAddress: $shippingAddress, billingAddress: $billingAddress) {
+            errorStatus
+            userProfile {
+                firstName
+                lastName
+            }
+            token
+        }
+    }`,
+    variables: {
+      username: user.name,
+      email: user.email,
+      password: user.password,
+      shippingAddress: shippingAddress,
+      billingAddress: billingAddress
+    }
+  }).then(({data}) => {
+    if (data.registerUser.errorStatus) {
+      console.log(data.registerUser.errorStatus)
+    } else {
+      setToken(data.registerUser.token)
+      resolve(data.registerUser)
+    }
   })
 })

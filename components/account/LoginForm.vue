@@ -38,8 +38,13 @@
           <img @click="togglePasswordVisible" class="passIcon" src="../../assets/images/pass-invisible.svg"/>
         </div>
       </fieldset>
-      <div>
-        <proceed-button type="submit" form="login" class="btn primary">Login</proceed-button>
+      <div class="row btn-row">
+        <div class="col-12 col-md-6 login__form__btn__login">
+          <button type="submit" form="login" class="btn primary">Login</button>
+        </div>
+        <div class="col-12 col-md-6 login__form__btn__register">
+          <button type="button" @click="onRegister" class="btn ">Register</button>
+        </div>
       </div>
     </form>
     <nuxt-link :to="{name: 'account-reset'}">
@@ -51,6 +56,7 @@
 <script>
   import { login } from '~/utils/auth'
   import ProceedButton from '../shared/ProceedButton'
+  import * as types from '../../store/types'
   export default {
     components: {ProceedButton},
     name: 'LoginForm',
@@ -82,6 +88,9 @@
       },
       togglePasswordVisible () {
         this.passwordVisible = !this.passwordVisible
+      },
+      onRegister () {
+        this.$store.commit(types.SET_CHECKOUT_REGISTER_USER)
       }
     }
   }

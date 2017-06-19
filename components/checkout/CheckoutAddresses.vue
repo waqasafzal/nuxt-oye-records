@@ -6,7 +6,12 @@
         <address-form :countries="countries"
                       :stateAddress="shippingAddress"
                       @seperate-billing-changed="onSeperateBillingChanged"
-                      @address-changed="onShippingAddressChanged"></address-form>
+                      @address-changed="onShippingAddressChanged">
+        </address-form>
+        <template v-if="register">
+          <h3>Create User Account</h3>
+          <register-form @user-changed="onUserRegistrationChanged" :submit="false"></register-form>
+        </template>
       </div>
       <div class="col-md-6 checkout__content__col">
         <div class="billing-address__form__panel">
@@ -52,15 +57,14 @@
 
 <script>
   import AddressForm from '../account/AddressForm'
-//  import apolloClient from '~/plugins/apollo'
-//  import gql from 'graphql-tag'
   import ProceedButton from '../shared/ProceedButton'
   import * as types from '../../store/types'
   import { addressEquals } from '../../utils/address'
   import { callSaveAddress } from '../graphql/user'
+  import RegisterForm from '../account/RegisterForm'
 
   export default {
-    components: {ProceedButton, AddressForm},
+    components: {RegisterForm, ProceedButton, AddressForm},
     name: 'CheckoutAddress',
     data: function () {
       return {
@@ -92,6 +96,9 @@
       },
       countries () {
         return this.$store.state.countries
+      },
+      register () {
+        return this.$store.getters.isRegisterCheckout
       }
     },
     watch: {
@@ -125,23 +132,73 @@
         this.billingAddress = address
         this.billingAddressChanged = true
       },
+      onUserRegistrationChanged (value) {
+        this.user = value
+      },
       onProceed () {
         let addressDict = {}
-        if (this.billingAddressChanged && this.shippingAddressChanged) {
-          if (addressEquals(this.shippingAddress, this.billingAddress)) {
-            addressDict = this.shippingAddress
-            addressDict['isBilling'] = true
-            addressDict['isShipping'] = true
-            callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
-              this.billingAddressChanged = false
-              this.shippingAddressChanged = false
-              this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
-              this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
-              this.$store.dispatch('addAlert', {
-                message: 'Shipping and billing address have been saved.'
+        if (this.register) {
+          var billingAddress = {}
+          Object.assign(billingAddress, this.billingAddress)
+          delete billingAddress['complete']
+
+          var shippingAddress = {}
+          Object.assign(shippingAddress, this.shippingAddress)
+          delete shippingAddress['complete']
+
+          this.$store.dispatch('validateUserForm', {user: this.user}).then(result => {
+            if (result) {
+              this.$store.dispatch('createNewUser', {
+                user: this.user,
+                billingAddress: billingAddress,
+                shippingAddress: shippingAddress
+              }).then(({data}) => {
+                this.$store.dispatch('addAlert', {
+                  level: 'info',
+                  message: 'Your account has been registered, but you can continue shopping. ' +
+                  'Please confirm your email address within the next 24 hours.'
+                })
+                this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
               })
-            })
-          } else {
+            }
+          })
+        } else {
+          if (this.billingAddressChanged && this.shippingAddressChanged) {
+            if (addressEquals(this.shippingAddress, this.billingAddress)) {
+              addressDict = this.shippingAddress
+              addressDict['isBilling'] = true
+              addressDict['isShipping'] = true
+              callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
+                this.billingAddressChanged = false
+                this.shippingAddressChanged = false
+                this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
+                this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
+                this.$store.dispatch('addAlert', {
+                  message: 'Shipping and billing address have been saved.'
+                })
+              })
+            } else {
+              addressDict = this.shippingAddress
+              addressDict['isShipping'] = true
+              callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
+                this.shippingAddressChanged = false
+                this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
+                this.$store.dispatch('addAlert', {
+                  message: 'Shipping address has been saved.'
+                })
+              })
+
+              addressDict = this.billingAddress
+              addressDict['isBilling'] = true
+              callSaveAddress(this.billingAddress.id, addressDict, ({data}) => {
+                this.billingAddressChanged = false
+                this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
+                this.$store.dispatch('addAlert', {
+                  message: 'Billing address has been saved.'
+                })
+              })
+            }
+          } else if (this.shippingAddressChanged) {
             addressDict = this.shippingAddress
             addressDict['isShipping'] = true
             callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
@@ -151,10 +208,10 @@
                 message: 'Shipping address has been saved.'
               })
             })
-
-            addressDict = this.billingAddress
+          } else if (this.billingAddressChanged) {
+            addressDict = this.shippingAddress
             addressDict['isBilling'] = true
-            callSaveAddress(this.billingAddress.id, addressDict, ({data}) => {
+            callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
               this.billingAddressChanged = false
               this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
               this.$store.dispatch('addAlert', {
@@ -162,28 +219,8 @@
               })
             })
           }
-        } else if (this.shippingAddressChanged) {
-          addressDict = this.shippingAddress
-          addressDict['isShipping'] = true
-          callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
-            this.shippingAddressChanged = false
-            this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
-            this.$store.dispatch('addAlert', {
-              message: 'Shipping address has been saved.'
-            })
-          })
-        } else if (this.billingAddressChanged) {
-          addressDict = this.shippingAddress
-          addressDict['isBilling'] = true
-          callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
-            this.billingAddressChanged = false
-            this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
-            this.$store.dispatch('addAlert', {
-              message: 'Billing address has been saved.'
-            })
-          })
+          this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
         }
-        this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
       }
     },
     mounted () {

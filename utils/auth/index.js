@@ -58,6 +58,7 @@ export const logout = function (context) {
       message: 'You could not log out correctly. Please try again.',
       level: 'error'
     })
+    unsetToken()
     console.error('err: ' + err)
   })
 }

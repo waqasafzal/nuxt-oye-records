@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="float-right navbar__account__buttons">
-        <template v-if="user.authenticated">
+        <template v-if="isAuthenticated">
           <div class="ah-link">
             <nuxt-link :to="{name: 'account-details'}">Your account</nuxt-link>
           </div>
@@ -55,8 +55,8 @@
     props: ['isOpenMobile'],
     mixins: [fetchCart, fetchUserProfile],
     computed: {
-      user () {
-        return this.$store.state.user
+      isAuthenticated () {
+        return this.$store.getters.isAuthenticated
       },
       cartCount () {
         return this.$store.getters.cartItemCount

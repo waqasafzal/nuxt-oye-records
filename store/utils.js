@@ -35,6 +35,17 @@ export const getInitialCheckout = function () {
     },
     unpaidOrder: null,
     guest: null,
-    checkoutState: null
+    checkoutState: null,
+    register: false
   }
 }
+
+export const getInitialUserForm = function () {
+  return {
+    name: null,
+    password: null,
+    passwordConfirmation: null,
+    email: null
+  }
+}
+

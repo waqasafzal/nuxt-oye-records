@@ -93,3 +93,15 @@ body {
   pointer-events: none;
   cursor: default;
 }
+
+.md-no-right-padding {
+  @include media-breakpoint-up(md) {
+    padding-right: 0px;
+  }
+}
+
+.md-no-left-padding {
+  @include media-breakpoint-up(md) {
+    padding-left: 0px;
+  }
+}

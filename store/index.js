@@ -6,7 +6,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
 import * as types from './types'
-import { getInitialUserProfile, getInitialUser, getInitialCheckout } from './utils'
+import { getInitialUserProfile, getInitialUser, getInitialCheckout, getInitialUserForm } from './utils'
 
 Vue.use(Vuex)
 
@@ -55,7 +55,8 @@ const store = new Vuex.Store({
       }
     },
     alerts: null,
-    checkoutActive: false
+    checkoutActive: false,
+    userFormErrors: getInitialUserForm()
   },
 
   mutations: {
@@ -272,10 +273,24 @@ const store = new Vuex.Store({
       }
     },
     [types.SET_BILLING_ADDRESS_ID]: (state, id) => {
-      console.log('SET_BILLING_ADDRESS_ID' + id)
       if (state.checkout.billing.address) {
         state.checkout.billing.address.id = id
       }
+    },
+    [types.SET_CHECKOUT_REGISTER_USER]: (state) => {
+      state.checkout.register = true
+    },
+    [types.SET_USER_FORM_NAME_ERROR]: (state, error) => {
+      state.userFormErrors.name = error
+    },
+    [types.SET_USER_FORM_PWD_ERROR]: (state, error) => {
+      state.userFormErrors.password = error
+    },
+    [types.SET_USER_FORM_PWD_CONFIRM_ERROR]: (state, error) => {
+      state.userFormErrors.passwordConfirmation = error
+    },
+    [types.SET_USER_FORM_EMAIL_ERROR]: (state, error) => {
+      state.userFormErrors.email = error
     }
   },
 
@@ -335,7 +350,7 @@ const store = new Vuex.Store({
       if (state.checkoutActive) {
         checkoutState = 1
       }
-      if (checkoutState === 1 && state.user.authenticated || state.checkout.guest) {
+      if (checkoutState === 1 && state.user.authenticated || state.checkout.guest || state.checkout.register) {
         checkoutState = 2
       }
       if (checkoutState === 2 && store.getters.isShippingAddressConfirmed) {
@@ -354,7 +369,7 @@ const store = new Vuex.Store({
       if (state.checkoutActive) {
         checkoutState = 1
       }
-      if (checkoutState === 1 && state.user.authenticated || state.checkout.guest) {
+      if (checkoutState === 1 && state.user.authenticated || state.checkout.guest || state.checkout.register) {
         checkoutState = 2
       }
       if (checkoutState === 2 && store.getters.isShippingAddressConfirmed) {
@@ -379,6 +394,21 @@ const store = new Vuex.Store({
     },
     getSelectedPaymentMethod (state) {
       return state.checkout.payment.method
+    },
+    isRegisterCheckout (state) {
+      return state.checkout.register
+    },
+    getUserFormNameError (state) {
+      return state.userFormErrors.name
+    },
+    getUserFormPasswordError (state) {
+      return state.userFormErrors.password
+    },
+    getUserFormPasswordConfirmationError (state) {
+      return state.userFormErrors.passwordConfirmation
+    },
+    getUserFormEmailError (state) {
+      return state.userFormErrors.email
     }
   },
 

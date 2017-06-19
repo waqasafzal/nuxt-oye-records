@@ -7,7 +7,7 @@ a.btn {
   font-size: 20px;
   line-height: 24px;
   cursor: pointer;
-  height: 52px;
+  height: 56px;
   text-align: center;
   vertical-align: middle;
   position: relative;
@@ -75,5 +75,10 @@ a.btn {
     margin: auto;
     background-color: $brand-color-green;
     color: $white;
+  }
+  &-row {
+    margin-left: 0px;
+    margin-right: 0px;
+    justify-content: space-between;
   }
 }
