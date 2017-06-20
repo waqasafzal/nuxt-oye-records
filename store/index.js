@@ -265,6 +265,7 @@ const store = new Vuex.Store({
       state.user = getInitialUser()
       state.userProfile = getInitialUserProfile()
       state.checkout = getInitialCheckout()
+      state.cart = null
       window.localStorage.removeItem('unpaid')
     },
     [types.SET_SHIPPING_ADDRESS_ID]: (state, id) => {

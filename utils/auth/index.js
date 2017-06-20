@@ -111,6 +111,7 @@ export const unsetToken = () => {
   window.localStorage.removeItem('user')
   Vue.cookie.delete('jwt')
   store.commit(types.RESET_USER_DATA)
+  store.dispatch('getCart')
 }
 
 export const getUserFromCookie = (req) => {
