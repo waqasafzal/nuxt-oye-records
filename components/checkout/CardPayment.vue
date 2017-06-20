@@ -126,8 +126,6 @@
             })
             console.log('err: ' + err)
           })
-        } else {
-          console.error('form element does not exist')
         }
       }
     },

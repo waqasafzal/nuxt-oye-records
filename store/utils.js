@@ -36,7 +36,8 @@ export const getInitialCheckout = function () {
     unpaidOrder: null,
     guest: null,
     checkoutState: null,
-    register: false
+    register: false,
+    focussedInput: null
   }
 }
 

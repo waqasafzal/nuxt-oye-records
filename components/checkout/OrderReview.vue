@@ -1,13 +1,8 @@
 <template>
   <div class="checkout__review">
-    <div class="checkout__content">
-      <div class="row">
-        <div class="col-12 checkout__content__col">
-          <h3>Review your order</h3>
-        </div>
-      </div>
-      <cart-content :review="true"></cart-content>
-    </div>
+    <h3>Review your order</h3>
+    <checkout-overview class="checkout__overview"></checkout-overview>
+    <cart-content :review="true"></cart-content>
     <template v-if="!selectedPaymentMethod">
       <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Place Order</proceed-button>
     </template>
@@ -23,9 +18,10 @@
   import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import { oyeCart } from '../graphql/cart'
+  import CheckoutOverview from './CheckoutOverview'
 
   export default {
-    components: {ProceedButton, CartContent},
+    components: {CheckoutOverview, ProceedButton, CartContent},
     name: 'OrderReview',
     computed: {
       isSelfCollector () {

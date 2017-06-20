@@ -1,6 +1,48 @@
 .checkout {
   margin-bottom: $global-margin * 5;
   padding-top: 48px;
+  &__overview {
+    margin-bottom: 2rem;
+  }
+  &__param {
+    padding-left: 2rem;
+    padding-right: 17px;
+    padding-top: 27px;
+    padding-bottom: 34px;
+    height: 100%;
+    border: 1px solid $gray-color-2;
+    .payment__card__element {
+      font-size: 12px;
+      margin-right: inherit;
+      font-weight: normal;
+    }
+    h4 {
+      font-size: 16px;
+      margin-bottom: 27px;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+    p {
+      margin: inherit;
+      line-height: 24px;
+      font-size: 16px;
+      font-weight: normal;
+    }
+    .change-link {
+      cursor: pointer;
+      font-size: 12px;
+      height: 16px;
+      color: $brand-color-green;
+      &:hover {
+        border-bottom: 1px solid $brand-color-green;
+      }
+    }
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
   &__content {
     border: 1px solid $gray-color-2;
     &__col {
@@ -160,6 +202,9 @@
   &__review {
     display: flex;
     flex-direction: column;
+    .cart {
+      border: 1px solid $gray-color-2;
+    }
   }
   &__payment {
     &__method {

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-6 checkout__content__col">
         <h3>Shipping Address</h3>
-        <address-form :countries="countries"
+        <address-form :focussed="isShippingAddressFocussed" :countries="countries"
                       :stateAddress="shippingAddress"
                       @seperate-billing-changed="onSeperateBillingChanged"
                       @address-changed="onShippingAddressChanged">
@@ -17,7 +17,8 @@
         <div class="billing-address__form__panel">
           <h3>Billing Address</h3>
           <template v-if="differentBilling">
-            <address-form :countries="countries"
+            <address-form :focussed="isBillingAddressFocussed"
+                          :countries="countries"
                           :stateAddress="billingAddress"
                           addressType="billing"
                           @address-changed="onBillingAddressChanged"></address-form>
@@ -34,6 +35,7 @@
                 <div class="radio">
                   <label>
                     <input type="radio"
+                           :ref="i === 0 ? 'first' : ''"
                            name="shipping"
                            v-model="shippingMethod"
                            :value="shippingOption">
@@ -99,6 +101,18 @@
       },
       register () {
         return this.$store.getters.isRegisterCheckout
+      },
+      focussedInput () {
+        return this.$store.getters.getCheckoutFocussedInput
+      },
+      isShippingAddressFocussed () {
+        return this.focussedInput === 'shippingAddress'
+      },
+      isBillingAddressFocussed () {
+        return this.focussedInput === 'billingAddress'
+      },
+      isShippingOptionFocussed () {
+        return this.focussedInput === 'shippingOption'
       }
     },
     watch: {
@@ -114,6 +128,16 @@
         this.$store.dispatch('setShippingCountry', {country: value}).then(shippingOptions => {
           this.$store.commit(types.SET_SHIPPING_OPTIONS, shippingOptions)
         })
+      },
+      isBillingAddressFocussed (value) {
+        if (value) {
+          this.differentBilling = true
+        }
+      },
+      isShippingOptionFocussed (value) {
+        if (value) {
+          this.$refs.first[0].focus()
+        }
       }
     },
     methods: {

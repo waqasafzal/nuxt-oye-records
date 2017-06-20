@@ -292,6 +292,22 @@ const store = new Vuex.Store({
     },
     [types.SET_USER_FORM_EMAIL_ERROR]: (state, error) => {
       state.userFormErrors.email = error
+    },
+    [types.CHANGE_PAYMENT_METHOD]: (state) => {
+      state.checkout.focussedInput = 'paymentMethod'
+      state.checkout.checkoutState = 3
+    },
+    [types.CHANGE_BILLING]: (state) => {
+      state.checkout.focussedInput = 'billingAddress'
+      state.checkout.checkoutState = 2
+    },
+    [types.CHANGE_SHIPPING]: (state) => {
+      state.checkout.focussedInput = 'shippingAddress'
+      state.checkout.checkoutState = 2
+    },
+    [types.CHANGE_SHIPPING_OPTION]: (state) => {
+      state.checkout.focussedInput = 'shippingOption'
+      state.checkout.checkoutState = 2
     }
   },
 
@@ -410,6 +426,9 @@ const store = new Vuex.Store({
     },
     getUserFormEmailError (state) {
       return state.userFormErrors.email
+    },
+    getCheckoutFocussedInput (state) {
+      return state.checkout.focussedInput
     }
   },
 

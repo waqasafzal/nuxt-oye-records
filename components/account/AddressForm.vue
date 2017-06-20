@@ -4,6 +4,8 @@
       <div class="form-group">
         <input class="form-control"
                type="text"
+               id="first"
+               ref="first"
                placeholder="First name *"
                v-model="address.firstName"
                required>
@@ -89,6 +91,10 @@
       countries: {
         type: Array,
         default: []
+      },
+      focussed: {
+        type: Boolean,
+        default: false
       }
     },
     data: function () {
@@ -112,6 +118,11 @@
       },
       countries (value) {
         this.address.country = this.country
+      },
+      focussed (value) {
+        if (value) {
+          this.focus()
+        }
       }
     },
     methods: {
@@ -143,6 +154,9 @@
           address['country'] = ''
         }
         return address
+      },
+      focus () {
+        this.$refs['first'].focus()
       }
     },
     mounted () {
@@ -163,7 +177,11 @@
           }
         }, {
           deep: true
-        })
+        }
+      )
+      if (this.focussed) {
+        this.focus()
+      }
     }
   }
 </script>
