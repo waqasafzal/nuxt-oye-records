@@ -204,7 +204,6 @@ const store = new Vuex.Store({
       if (!addressEquals(address, formerAddress)) {
         if (formerAddress) {
           state.checkout.shipping.changed = true
-          console.log('shipping changed')
         }
       }
       // state.checkout.shipping.address.complete = store.getters.isShippingAddressComplete
@@ -215,7 +214,6 @@ const store = new Vuex.Store({
       if (!addressEquals(address, formerAddress)) {
         if (formerAddress) {
           state.checkout.billing.changed = true
-          console.log('billing changed')
         }
       }
     },

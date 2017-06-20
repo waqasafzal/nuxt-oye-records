@@ -72,15 +72,6 @@
       calculateCheckoutState () {
         this.$store.dispatch('enterCheckout')
       }
-    },
-    beforeUpdate () {
-      console.log('beforeUpdate ' + this.currentCheckoutView.name)
-    },
-    updated () {
-      console.log('updated ' + this.currentCheckoutView.name)
-    },
-    destroyed () {
-      console.log('destroyed')
     }
   }
 </script>

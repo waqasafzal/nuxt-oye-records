@@ -286,12 +286,7 @@
         return message
       },
       releaseStatus: function () {
-        let status = this.release.availability.status
-        if (status === 'out' || status === 'upcoming') {
-          return 'out'
-        } else {
-          return status
-        }
+        return this.release.availability.status
       },
       pressingRegion: function () {
         return 'EU'
