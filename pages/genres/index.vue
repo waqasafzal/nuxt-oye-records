@@ -7,8 +7,7 @@
           <div class="genres__menu__column" :style="genresMenuColumnStyle" :key="i"
                v-for="(mainGenre, i) in metaGenres">
             <div class="genres__menu__column__head">
-              {{ mainGenre.name }}
-
+              <nuxt-link :to="{name: 'metagenres-slug', params: {slug: mainGenre.slug}}">{{ mainGenre.name }}</nuxt-link>
             </div>
             <div class="genres__menu__column__body">
               <template v-for="(genre, j) in mainGenre.genres">
@@ -39,6 +38,8 @@
                           :genre="genre"
                           :key="i"
                           v-for="(genre, i) in metaGenres">
+
+      <nuxt-link :to="{name: 'metagenres-slug', params: {slug: genre.slug}}">Latest {{ genre.name }}</nuxt-link>
     </release-list-summary>
   </div>
 </template>
@@ -47,9 +48,10 @@
   import client from '../../plugins/apollo'
   import ReleaseListSummary from '../../components/releases/ReleaseListSummary'
   import { createMainGenresQuery } from '../../components/genres/queries'
+  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
 
   export default {
-    components: {ReleaseListSummary},
+    components: {NuxtLink, ReleaseListSummary},
     name: 'GenreOverviewPage',
     data: function () {
       return {

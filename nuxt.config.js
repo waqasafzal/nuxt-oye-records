@@ -145,6 +145,13 @@ module.exports = {
           component: resolve(__dirname, 'pages/genres/_slug/index.vue')
         }
       )
+      routes.push(
+        {
+          name: 'metagenres-slug',
+          path: '/metagenres/:slug',
+          component: resolve(__dirname, 'pages/genres/_slug/index.vue')
+        }
+      )
     }
   },
   css: [

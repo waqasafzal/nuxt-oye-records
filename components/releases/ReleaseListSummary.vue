@@ -2,13 +2,15 @@
   <div class="release-list-summary" v-if="releases">
     <div class="release-list-summary__header">
       <h3>
-        <template v-if="status === 'new' && genre">Latest </template>
-        <template v-if="getRoute()">
-          <nuxt-link :to="getRoute()">{{ title }}</nuxt-link>
-        </template>
-        <template v-else>
-          <span>{{ title }}</span>
-        </template>
+          <slot>
+            <template v-if="status === 'new' && genre">Latest </template>
+            <template v-if="getRoute()">
+              <nuxt-link :to="getRoute()">{{ title }}</nuxt-link>
+            </template>
+            <template v-else>
+              <span>{{ title }}</span>
+            </template>
+          </slot>
       </h3>
       <nuxt-link v-if="getRoute()" :to="getRoute()" class="release-list-summary__header__more">
         View all

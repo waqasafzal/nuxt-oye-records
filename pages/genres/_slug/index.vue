@@ -52,9 +52,11 @@
 
   const MAX_BESTSELLERS = 40
 
-  const releaseFilterParams = function (params) {
+  const releaseFilterParams = function (params, route) {
     let releaseFilterParams = {}
-    if (params.subslug) {
+    if (route && route.name === 'metagenres-slug') {
+      releaseFilterParams['metagenres'] = [params.slug]
+    } else if (params.subslug) {
       releaseFilterParams['subgenres'] = [params.subslug]
     } else if (params.slug) {
       releaseFilterParams['genres'] = [params.slug]
@@ -91,11 +93,12 @@
         genreSubslug: this.subslug,
         bsPageSize: getReleaseListColumnNumber() * (2 / 3),
         currentSlide: 1,
-        filterBy: JSON.stringify(releaseFilterParams(this.$route.params))
+        filterBy: JSON.stringify(releaseFilterParams(this.$route.params, this.$route))
       }
     },
-    async asyncData ({params}) {
-      var filterParams = releaseFilterParams(params)
+    async asyncData ({route, params}) {
+      console.log('route name ' + route.name)
+      var filterParams = releaseFilterParams(params, route)
 
       let genreReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))
 
@@ -105,6 +108,9 @@
       let options = {
         slug: params.subslug || params.slug,
         isSubgenre: typeof params.subslug !== 'undefined'
+      }
+      if (route.name === 'metagenres-slug') {
+        options['meta'] = true
       }
       let detailGenreResults = await client.query(createGenreQuery(options))
 
@@ -173,11 +179,18 @@
         }
       },
       onSelected (value) {
-        let location = {
-          name: 'genres-slug-subslug',
-          params: {
-            slug: this.detailGenre.slug,
+        var location = {}
+        if (value.parentGenre) {
+          location['name'] = 'genres-slug-subslug'
+          location['params'] = {
+            slug: value.parentGenre.slug,
             subslug: value.slug,
+            genre: value
+          }
+        } else {
+          location['name'] = 'genres-slug'
+          location['params'] = {
+            slug: value.slug,
             genre: value
           }
         }

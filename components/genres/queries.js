@@ -26,12 +26,15 @@ export const createMainGenresQuery = function (first) {
 
 export const createGenreQuery = function (params) {
   return {
-    query: gql`query Genre($slug: ID!, $sub: Boolean) {
-        detailGenre: genre(slug: $slug, sub: $sub) {
+    query: gql`query Genre($slug: ID!, $sub: Boolean, $meta: Boolean) {
+        detailGenre: genre(slug: $slug, sub: $sub, meta: $meta) {
             pk
             name
             slug
             subgenres {
+                parentGenre {
+                    slug
+                }
                 pk
                 name
                 slug
@@ -40,7 +43,8 @@ export const createGenreQuery = function (params) {
     }`,
     variables: {
       slug: params.slug,
-      sub: params.isSubgenre || false
+      sub: params.isSubgenre || false,
+      meta: params.meta || false
     }
   }
 }
