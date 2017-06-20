@@ -5,7 +5,7 @@
         <div class="col-8 col-md-1 navbar__logo">
           <div class="menu-icon-mobile hidden-md-up">
             <img class="navbar__brand__menu-toggle closed open"
-                 src="../../assets/images/mobile-bar.svg" v-on:click="toggleMobileNav" v-on-clickaway="closeMobileNav">
+                 src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav" v-on-clickaway="closeMobileNav">
             <span>menu</span>
           </div>
           <nuxt-link :class="[isCheckout ? 'not-active': '']" to="/">
@@ -35,11 +35,6 @@
     mixins: [ clickaway ],
     data: function () {
       return {
-        user: {
-          is_authenticated: false,
-          is_staff: false
-        },
-        query: '',
         isVisibleCart: false
       }
     },

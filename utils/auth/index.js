@@ -12,7 +12,15 @@ const SIGNUP_URL = __API__ + '/oye/signup/'
 
 // Send a request to the login URL and save the returned JWT
 export const login = (context, creds, redirect) => {
-  context.$http.post(LOGIN_URL, creds).then(response => {
+  let headers = {}
+  var cart = context.$cookie.get('cart')
+  if (cart) {
+    headers['X-CART-TOKEN'] = cart
+  }
+
+  context.$http.post(LOGIN_URL, creds, {
+    headers: headers
+  }).then(response => {
     let data = response.data
     setToken(data.token)
     context.$store.dispatch('getCart')
@@ -45,9 +53,15 @@ export const signup = (context, creds, redirect) => {
 
 // To log out, we just need to remove the token
 export const logout = function (context) {
-  context.$http.post(LOGOUT_URL, {}, {
+  let headers = {
     Authorization: getAuthHeader()
-  }).then(response => {
+  }
+  var cart = context.$cookie.get('cart')
+  if (cart) {
+    headers['X-CART-TOKEN'] = cart
+  }
+
+  context.$http.post(LOGOUT_URL, {}, {headers: headers}).then(response => {
     unsetToken()
     context.$store.dispatch('addAlert', {
       message: 'You have been logged out.',

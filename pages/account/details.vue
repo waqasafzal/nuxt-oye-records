@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="account__staff_section">
+      <div v-if="user.isStaff" class="account__staff_section">
         <h3>Your Staff Settings</h3>
         <charts-editor v-if="user.canPublishCharts"></charts-editor>
       </div>

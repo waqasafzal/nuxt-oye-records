@@ -8,6 +8,8 @@ import 'isomorphic-fetch'
 
 let hostUrl = __API__
 
+console.log('hostUrl: ' + hostUrl)
+
 const networkInterface = createNetworkInterface({
   uri: hostUrl + '/graphql',
   transportBatching: true,
