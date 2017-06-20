@@ -55,6 +55,16 @@
       store.commit(types.SET_COUNTRIES, data.countries)
       return {}
     },
+    watch: {
+      currentCheckoutView (view) {
+        if (this.checkoutView === CheckoutAddresses) {
+          if (this.$store.getters.hasChangedAddresses) {
+            this.$store.dispatch('saveAddresses')
+          }
+        }
+        this.checkoutView = view
+      }
+    },
     mounted () {
       this.calculateCheckoutState()
     },
@@ -62,6 +72,15 @@
       calculateCheckoutState () {
         this.$store.dispatch('enterCheckout')
       }
+    },
+    beforeUpdate () {
+      console.log('beforeUpdate ' + this.currentCheckoutView.name)
+    },
+    updated () {
+      console.log('updated ' + this.currentCheckoutView.name)
+    },
+    destroyed () {
+      console.log('destroyed')
     }
   }
 </script>

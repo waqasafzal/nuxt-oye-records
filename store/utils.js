@@ -21,11 +21,13 @@ export const getInitialCheckout = function () {
   return {
     shipping: {
       address: null,
+      changed: false,
       confirmed: false,
       option: null
     },
     billing: {
-      address: null
+      address: null,
+      changed: false
     },
     payment: {
       option: null,

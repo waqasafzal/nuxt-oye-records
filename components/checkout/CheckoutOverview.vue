@@ -36,7 +36,7 @@
         let shippingOption = this.$store.getters.getShippingOption
         let lines = []
         if (shippingOption) {
-          lines.push(shippingOption.name)
+          lines.push(`${shippingOption.name} (${shippingOption.price}€)`)
         }
         return lines
       },

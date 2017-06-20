@@ -20,6 +20,8 @@ import { addressFragment } from '~/components/graphql/user'
 import { cardDataFragment } from '../components/graphql/payments'
 import { validateEmail } from '../utils/forms'
 import { setToken } from '../utils/auth/index'
+import { addressEquals } from '../utils/address'
+import { callSaveAddress } from '../components/graphql/user'
 
 export const getCart = ({commit}) => new Promise((resolve, reject) => {
   apolloClient.mutate({
@@ -477,4 +479,79 @@ export const createNewUser = ({commit}, args) => new Promise((resolve, reject) =
       resolve(data.registerUser)
     }
   })
+})
+
+export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
+  let shippingAddress = store.getters.getShippingAddress
+  let billingAddress = store.getters.getBillingAddress
+  let billingChanged = store.getters.hasBillingChanged
+  let shippingChanged = store.getters.hasShippingChanged
+
+  let addressDict = {}
+
+  var addressId
+
+  if (billingChanged && shippingChanged) {
+    if (addressEquals(shippingAddress, billingAddress)) {
+      addressDict = Object.assign({}, shippingAddress)
+      addressDict['isBilling'] = true
+      addressDict['isShipping'] = true
+      callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
+        // this.billingAddressChanged = false
+        // this.shippingAddressChanged = false
+        store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
+        store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
+        store.dispatch('addAlert', {
+          message: 'Shipping and billing address have been saved.'
+        })
+      })
+    } else {
+      addressDict = Object.assign({}, shippingAddress)
+      addressDict['isBilling'] = false
+      addressDict['isShipping'] = true
+      callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
+        // this.shippingAddressChanged = false
+        store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
+        store.dispatch('addAlert', {
+          message: 'Shipping address has been saved.'
+        })
+      })
+
+      addressDict = Object.assign({}, billingAddress)
+      addressDict['isShipping'] = false
+      addressDict['isBilling'] = true
+      addressId = billingAddress.id !== shippingAddress.id ? billingAddress.id : undefined
+      callSaveAddress(addressId, addressDict, ({data}) => {
+        // this.billingAddressChanged = false
+        store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
+        store.dispatch('addAlert', {
+          message: 'Billing address has been saved.'
+        })
+      })
+    }
+  } else if (shippingChanged) {
+    addressDict = Object.assign({}, shippingAddress)
+    addressDict['isBilling'] = false
+    addressDict['isShipping'] = true
+    callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
+      // this.shippingAddressChanged = false
+      store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
+      store.dispatch('addAlert', {
+        message: 'Shipping address has been saved.'
+      })
+    })
+  } else if (billingChanged) {
+    addressDict = Object.assign({}, billingAddress)
+    addressDict['isShipping'] = false
+    addressDict['isBilling'] = true
+    addressId = billingAddress.id !== shippingAddress.id ? billingAddress.id : undefined
+    callSaveAddress(addressId, addressDict, ({data}) => {
+      // this.billingAddressChanged = false
+      store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
+      store.dispatch('addAlert', {
+        message: 'Billing address has been saved.'
+      })
+    })
+  }
+  // store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
 })

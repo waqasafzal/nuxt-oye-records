@@ -7,6 +7,7 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as types from './types'
 import { getInitialUserProfile, getInitialUser, getInitialCheckout, getInitialUserForm } from './utils'
+import { addressEquals } from '../utils/address'
 
 Vue.use(Vuex)
 
@@ -198,11 +199,25 @@ const store = new Vuex.Store({
       }
     },
     [types.SET_SHIPPING_ADDRESS]: (state, address) => {
+      let formerAddress = state.checkout.shipping.address
       state.checkout.shipping.address = address
-      state.checkout.shipping.address.complete = store.getters.isShippingAddressComplete
+      if (!addressEquals(address, formerAddress)) {
+        if (formerAddress) {
+          state.checkout.shipping.changed = true
+          console.log('shipping changed')
+        }
+      }
+      // state.checkout.shipping.address.complete = store.getters.isShippingAddressComplete
     },
     [types.SET_BILLING_ADDRESS]: (state, address) => {
+      let formerAddress = state.checkout.billing.address
       state.checkout.billing.address = address
+      if (!addressEquals(address, formerAddress)) {
+        if (formerAddress) {
+          state.checkout.billing.changed = true
+          console.log('billing changed')
+        }
+      }
     },
     [types.SET_USER_PAYMENT_METHODS]: (state, paymentMethods) => {
       state.user.paymentMethods = paymentMethods
@@ -271,11 +286,13 @@ const store = new Vuex.Store({
     [types.SET_SHIPPING_ADDRESS_ID]: (state, id) => {
       if (state.checkout.shipping.address) {
         state.checkout.shipping.address.id = id
+        state.checkout.shipping.changed = false
       }
     },
     [types.SET_BILLING_ADDRESS_ID]: (state, id) => {
       if (state.checkout.billing.address) {
         state.checkout.billing.address.id = id
+        state.checkout.billing.changed = false
       }
     },
     [types.SET_CHECKOUT_REGISTER_USER]: (state) => {
@@ -429,6 +446,15 @@ const store = new Vuex.Store({
     },
     getCheckoutFocussedInput (state) {
       return state.checkout.focussedInput
+    },
+    hasBillingChanged (state) {
+      return state.checkout.billing.changed
+    },
+    hasShippingChanged (state) {
+      return state.checkout.shipping.changed
+    },
+    hasChangedAddresses (state) {
+      return store.getters.hasShippingChanged || store.getters.hasBillingChanged
     }
   },
 
