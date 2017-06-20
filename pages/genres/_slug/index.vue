@@ -97,7 +97,6 @@
       }
     },
     async asyncData ({route, params}) {
-      console.log('route name ' + route.name)
       var filterParams = releaseFilterParams(params, route)
 
       let genreReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))

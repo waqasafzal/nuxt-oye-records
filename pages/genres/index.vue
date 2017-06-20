@@ -16,7 +16,6 @@
                              v-if="genre.parentGenre.name != genre.name"
                              :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug, genre: genre}}">
                     {{ genre.name }}
-
                   </nuxt-link>
                 </template>
                 <template v-else>
@@ -48,10 +47,9 @@
   import client from '../../plugins/apollo'
   import ReleaseListSummary from '../../components/releases/ReleaseListSummary'
   import { createMainGenresQuery } from '../../components/genres/queries'
-  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
 
   export default {
-    components: {NuxtLink, ReleaseListSummary},
+    components: {ReleaseListSummary},
     name: 'GenreOverviewPage',
     data: function () {
       return {
