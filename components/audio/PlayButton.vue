@@ -1,18 +1,22 @@
 <template>
-  <div :class="[displayOnly ? '' : 'play-release-button']" :style="playReleaseStyle" @click.prevent="onClick">
-    <div :style="arrowStyle">
-      <template v-if="active">
-        <div :style="pauseStyle"></div>
-      </template>
-      <template v-else>
-        <div :style="arrowRightStyle"></div>
-      </template>
+  <div :class="['play-release-button']" :style="playReleaseStyle" @click.prevent="onClick">
+    <div class="play-release-inner">
+      <div :style="arrowStyle">
+        <template v-if="active">
+          <div :style="pauseStyle"></div>
+        </template>
+        <template v-else>
+          <play-svg :fill="foreground"></play-svg>
+        </template>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import PlaySvg from '../shared/PlaySvg'
   export default {
+    components: {PlaySvg},
     name: 'PlayButton',
     props: {
       release: Object,
@@ -61,7 +65,10 @@
       },
       arrowStyle: function () {
         return {
-          textAlign: 'center'
+          height: `${this.baseSize / 3}px`,
+          width: `${this.baseSize / 3}px`,
+          margin: 'auto',
+          display: 'flex'
         }
       },
       arrowRightStyle: function () {
@@ -81,9 +88,8 @@
       },
       pauseStyle: function () {
         let style = {
-          position: 'relative',
           width: `${this.baseSize / 2.6}px`,
-          height: `${this.baseSize / 2.4}px`,
+          height: `${this.baseSize / 2.8}px`,
           margin: '0px auto 0px auto',
           borderLeft: `${this.baseSize / 8}px solid white`,
           borderRight: `${this.baseSize / 8}px solid white`,
@@ -105,17 +111,25 @@
 </script>
 
 <style lang="scss">
-  .play-release-button {
-    cursor: pointer;
-    &:hover:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+  .play-release {
+    &-button {
+      cursor: pointer;
+      display: flex;
+      &:hover:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.5;
+      }
+    }
+    &-inner {
+      display: flex;
       height: 100%;
-      background-color: black;
-      opacity: 0.5;
+      width: 100%;
     }
   }
 </style>

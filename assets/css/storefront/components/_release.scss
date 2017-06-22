@@ -59,6 +59,9 @@ $font-factor: 0.9;
     padding-bottom: 8em;
     &__item {
       position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       max-height: 100px;
       vertical-align: middle;
       padding: $global-padding 0;
@@ -71,17 +74,18 @@ $font-factor: 0.9;
         cursor: pointer;
         color: $link-hover-color;
         .play {
-          * div {
-            border-right-color: $brand-color-green !important;
+          polygon {
+            fill: $brand-color-green !important;
           }
         }
       }
+      .title {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
       .play {
-        display: inline-block;
-        border: 0px;
-        top: 0px;
-        right: 0px;
-        position:absolute;
+        margin-top: auto;
+        margin-bottom: auto;
       }
     }
     &__position {

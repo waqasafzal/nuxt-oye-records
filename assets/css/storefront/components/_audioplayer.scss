@@ -133,9 +133,12 @@
       border-radius: 12px;
       height: 24px;
       width: 24px;
-      padding-top: 1px;
-      * div {
-        border-right-color: $brand-color-green !important;
+      polygon {
+        fill: $brand-color-green !important;
+      }
+      .play-release-button {
+        height: 100% !important;
+        width: 100% !important;
       }
     }
   }

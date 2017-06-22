@@ -116,13 +116,15 @@
              v-on:click="playTrack(track)"
              :key="i" v-for="(track, i) in release.tracks"
         >
-          <template v-if="track.releasePosition">
-            <div class="release-detail__tracklist__position">{{ track.releasePosition }}</div>
-          </template>
-          <template v-if="track.title">{{ track.title }}</template>
-          <template v-else>Track {{track.position + 1}}</template>
-          <div class="release-detail__tracklist__item play">
-            <play-release-button :size="24" :displayOnly="true" :release="release" background="transparent"
+          <class class="title">
+            <template v-if="track.releasePosition">
+              <div class="release-detail__tracklist__position">{{ track.releasePosition }}</div>
+            </template>
+            <template v-if="track.title">{{ track.title }}</template>
+            <template v-else>Track {{track.position + 1}}</template>
+          </class>
+          <div class="play">
+            <play-release-button :size="32" :displayOnly="true" :release="release" background="transparent"
                                  foreground="#313532"></play-release-button>
           </div>
         </div>

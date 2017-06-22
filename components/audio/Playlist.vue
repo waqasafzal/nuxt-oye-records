@@ -4,7 +4,7 @@
       <div @click="playTrack(track)" :ref="'track-'+i" class="playlist__item" v-for="(track, i) in tracks">
         <div class="play-box">
           <div :class="[isPlaying(i) ? 'playing': '']">
-            <play-release-button :size="18" :displayOnly="true" foreground="#EBE9E6" background="transparent"></play-release-button>
+            <play-release-button :size="24" :displayOnly="true" foreground="#EBE9E6" background="transparent"></play-release-button>
           </div>
         </div>
         <div class="track-info">
