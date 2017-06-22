@@ -46,17 +46,20 @@
           features {
             features {
               ...Release
+              featureImageUrl
               tracks {
                 ...Tracks
               }
             }
             singleOfTheWeek {
               ...Release
+              featureImageUrl
               tracks {
                 ...Tracks
               }
             }
             albumOfTheWeek {
+              featureImageUrl
               ...Release
               tracks {
                 ...Tracks

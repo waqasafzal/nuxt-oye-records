@@ -8,7 +8,7 @@
               <div :key="'release-'+i"
                    v-show="i === currentFeature"
                    class="slide">
-                <div class="slide__inner" :style="`background-image: url(${release.thumbnailUrl})`">
+                <div class="slide__inner" :style="`background-image: url(${release.featureImageUrl})`">
                   <div class="feature-category">
                     <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                   </div>
