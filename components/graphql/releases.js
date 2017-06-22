@@ -114,6 +114,10 @@ export const release = gql`
         title
         slug
         label
+        format
+        mainGenre {
+            name
+        }
         artistFirstName
         artistLastName
         name

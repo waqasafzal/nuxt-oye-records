@@ -3,6 +3,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   display: flex;
+  font-weight: normal;
   flex-direction: column;
   overflow: hidden;
   padding-top: .4em;
@@ -80,6 +81,10 @@
   .release-list {
     &-image {
       position: relative;
+      color: white;
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: normal;
       .release-list-play {
         position: absolute;
         margin: auto;
@@ -88,6 +93,20 @@
         top: 0;
         bottom: 0;
         display: none;
+      }
+      .format {
+        padding: 12px;
+        position: absolute;
+        display: none;
+        bottom: 0;
+        right: 0;
+      }
+      .genre {
+        padding: 12px;
+        position: absolute;
+        display: none;
+        top: 0;
+        left: 0;
       }
     }
     &-add {
@@ -137,16 +156,25 @@
         }
       }
     }
-    .release-list-image:before {
-      content: "";
-      width: 100%;
-      height: 100%;
-      opacity: 0.5;
-      background: $brand-color-black;
-      position: absolute;
-      pointer-events: none;
-      top: 0;
-      left: 0;
+    .release-list-image {
+      .format {
+        display: inherit;
+      }
+      .genre {
+        display: inherit;
+      }
+      &:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        //background: $brand-color-black;
+        background-color: #020202;
+        position: absolute;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+      }
     }
   }
 }
