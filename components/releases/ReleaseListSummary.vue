@@ -51,11 +51,13 @@
         var route
         if (this.status === 'new') {
           if (this.genre) {
+            route = {
+              params: {slug: this.genre.slug, genre: this.genre}
+            }
             if (this.genre.id) {
-              route = {
-                name: 'genres-slug',
-                params: {slug: this.genre.slug, genre: this.genre}
-              }
+              route['name'] = 'genres-slug'
+            } else {
+              route['name'] = 'metagenres-slug'
             }
           } else {
             route = {name: 'releases-new'}
