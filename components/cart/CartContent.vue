@@ -38,15 +38,21 @@
             </div>
             <div class="col-2 cart__line__cell">
               <div class="cart-cell-center flex-align-right">{{getPrice(line.release.price.gross)}} &euro;</div>
-              <!--<release-price :price="getPrice(line.release.price)"></release-price>-->
             </div>
             <div class="col-1"></div>
             <div class="col-1 cart__line__cell">
               <div class="cart__line__quantity cart-cell-center">
                 <form class="form-cart">
-                  <div :class="[line.quantity.errors ? 'has-error': '']" tabindex="-1">
-                    <input id="id_quantity" max="50" min="0" type="number"
-                           v-on:change.prevent="onChange($event, line)" :value="line.quantity" required>
+                  <div :class="['form-group', line.quantity.errors ? 'has-error': '']" tabindex="-1">
+                    <select class="form-control"
+                            name="id_quantity"
+                            v-model.lazy="line.quantity"
+                            @change="onChange(line)"
+                            :value="line.quantity" required>
+                      <option :value="n" v-for="n in getQuantityOptions(line.quantity)">{{ n }}</option>
+                    </select>
+                    <!--<input id="id_quantity" max="50" min="0" type="number"-->
+                           <!--v-on:change.prevent="onChange($event, line)" :value="line.quantity" required>-->
                   </div>
                 </form>
               </div>
@@ -144,6 +150,8 @@
   import ProceedButton from '../shared/ProceedButton'
   import { roundFixed } from '../../utils/math'
 
+  const MAX_QUANTITY = 5
+
   export default {
     components: {ProceedButton, ReleasePrice},
     name: 'CartContent',
@@ -181,17 +189,10 @@
       }
     },
     methods: {
-      onChange: function (e, line) {
-        let targetValue = parseInt(e.target.value)
-        let quantity = line.quantity
-        if (targetValue !== quantity) {
-          this.$store.dispatch('updateCart', {
-            release: line.release,
-            preorder: line.preorder,
-            // line.quantity is not trustworthy since the value is not changed at the fist call
-            quantity: targetValue
-          })
-        }
+      onChange (line) {
+        this.$store.dispatch('updateCart', {
+          line: line
+        })
       },
       onDelete: function (line) {
         this.$store.dispatch('removeCartLine', {
@@ -202,9 +203,12 @@
       getPrice: function (price) {
         let parsedPrice = parseFloat(price)
         if (this.vatExcluded) {
-          return roundFixed(parsedPrice * ((100 - this.vatRate) / 100), 2)
+          parsedPrice = parsedPrice * ((100 - this.vatRate) / 100)
         }
-        return parsedPrice
+        return roundFixed(parsedPrice, 2)
+      },
+      getQuantityOptions (lineQuantity) {
+        return lineQuantity > MAX_QUANTITY ? lineQuantity : MAX_QUANTITY
       }
     }
   }

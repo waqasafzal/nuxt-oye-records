@@ -119,8 +119,10 @@ export const addToCart = ({commit}, args) => new Promise((resolve, reject) => {
 
 export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
   commit(types.CART_UPDATING, true)
-  let release = args.release
-  let quantity = args.quantity
+  let line = args.line
+  let release = line.release
+  let preorder = line.preorder
+  let quantity = line.quantity
   apolloClient.mutate({
     mutation: gql`mutation ($releasePk: ID!, $quantity: Int! $preorder: Boolean) {
         updateCart(releasePk: $releasePk, quantity: $quantity, preorder: $preorder) {
@@ -135,7 +137,7 @@ export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
     variables: {
       releasePk: release.pk,
       quantity: quantity,
-      preorder: args.preorder
+      preorder: preorder
     }
   }).then(({data}) => {
     // dispatch an info that everything was correct
