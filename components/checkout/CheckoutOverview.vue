@@ -12,7 +12,7 @@
     <div class="col-12 col-md-3">
       <checkout-parameter @change="onChangePaymentMethod" :lines="paymentOptionLines">
         Payment Method
-        <component slot="extra" :is="paymentMethodComponent" :data="getPaymentMethodData(paymentMethod)" variant=""></component>
+        <component slot="extra" :is="paymentMethodComponent" :data="getPaymentMethodData(paymentMethod)" :variant="paymentOption.id"></component>
       </checkout-parameter>
     </div>
   </div>
@@ -21,9 +21,10 @@
 <script>
   import CheckoutParameter from './CheckoutParameter'
   import CardPaymentMethod from './CardPaymentMethod'
+  import LocalPaymentMethod from './LocalPaymentMethod'
   import * as types from '../../store/types'
   export default {
-    components: {CardPaymentMethod, CheckoutParameter},
+    components: {CardPaymentMethod, CheckoutParameter, LocalPaymentMethod},
     name: 'CheckoutOverview',
     computed: {
       shippingAddress () {
@@ -59,6 +60,8 @@
           if (this.paymentOption.id === 'creditcard') {
             return CardPaymentMethod
           }
+        } else {
+          return LocalPaymentMethod
         }
       }
     },
@@ -78,6 +81,7 @@
         if (this.paymentOption.id === 'creditcard') {
           return method.cardData
         }
+        return {}
       },
       onChangePaymentMethod () {
         this.$store.commit(types.CHANGE_PAYMENT_METHOD)

@@ -462,6 +462,24 @@ const store = new Vuex.Store({
     },
     isVatExcluded (state) {
       return state.checkout.isVatExcluded
+    },
+    getLogos (state) {
+      return paymentType => {
+        let options = store.getters.getPaymentOptions
+        if (options) {
+          for (var i = 0; i < options.length; i++) {
+            if (options[i].id === paymentType) {
+              let variantLogos = options[i].logos
+              let logos = []
+              for (var j = 0; j < variantLogos.length; j++) {
+                logos.push(variantLogos[j].logo)
+              }
+              return logos
+            }
+          }
+        }
+        return []
+      }
     }
   },
 
