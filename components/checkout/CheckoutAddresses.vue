@@ -5,6 +5,7 @@
         <h3>Shipping Address</h3>
         <address-form :focussed="isShippingAddressFocussed" :countries="countries"
                       :stateAddress="shippingAddress"
+                      :validation="shippingAddressValidation"
                       @seperate-billing-changed="onSeperateBillingChanged"
                       @address-changed="onShippingAddressChanged">
         </address-form>
@@ -19,6 +20,7 @@
           <template v-if="differentBilling">
             <address-form :focussed="isBillingAddressFocussed"
                           :countries="countries"
+                          :validation="billingAddressValidation"
                           :stateAddress="billingAddress"
                           addressType="billing"
                           @address-changed="onBillingAddressChanged"></address-form>
@@ -46,11 +48,13 @@
             </form>
           </template>
           <template v-else>
-            <span class="checkout__addresses__content">You must set shipping country before you can select shipping</span>
+            <span
+                class="checkout__addresses__content">You must set shipping country before you can select shipping</span>
           </template>
         </div>
         <div class="float-right-bottom">
-          <proceed-button :class="[allowProceed ? '': 'disabled']" @click="onProceed()">Proceed to payment</proceed-button>
+          <proceed-button @click="onProceed()">Proceed to payment
+          </proceed-button>
         </div>
       </div>
     </div>
@@ -61,9 +65,8 @@
   import AddressForm from '../account/AddressForm'
   import ProceedButton from '../shared/ProceedButton'
   import * as types from '../../store/types'
-//  import { addressEquals } from '../../utils/address'
-//  import { callSaveAddress } from '../graphql/user'
   import RegisterForm from '../account/RegisterForm'
+  import { getInitialUser } from '../../store/utils'
 
   export default {
     components: {RegisterForm, ProceedButton, AddressForm},
@@ -74,7 +77,8 @@
         shippingOptions: [],
         shippingMethod: null,
         billingAddressChanged: false,
-        shippingAddressChanged: false
+        shippingAddressChanged: false,
+        user: getInitialUser()
       }
     },
     computed: {
@@ -87,8 +91,11 @@
       selectedBillingAddress () {
         return this.$store.getters.getBillingAddress
       },
-      allowProceed () {
-        return this.$store.getters.isShippingAddressComplete
+      shippingAddressValidation () {
+        return this.$store.getters.getShippingAddressValidation
+      },
+      billingAddressValidation () {
+        return this.$store.getters.getBillingAddressValidation
       },
       shippingAddress () {
         return this.$store.getters.getShippingAddress
@@ -159,94 +166,67 @@
       onUserRegistrationChanged (value) {
         this.user = value
       },
-      onProceed () {
-//        let addressDict = {}
-        if (this.register) {
-          var billingAddress = {}
-          Object.assign(billingAddress, this.billingAddress)
-          delete billingAddress['complete']
+      async onProceed () {
+        var validateShippingAddress = this.$store.dispatch('validateAddress', {
+          address: this.shippingAddress,
+          type: 'shipping'
+        })
+        var isShippingValid = await validateShippingAddress
 
-          var shippingAddress = {}
-          Object.assign(shippingAddress, this.shippingAddress)
-          delete shippingAddress['complete']
+        var validateBillingAddress = this.$store.dispatch('validateAddress', {
+          address: this.billingAddress,
+          type: 'billing'
+        })
+        var isBillingValid = await validateBillingAddress
 
-          this.$store.dispatch('validateUserForm', {user: this.user}).then(result => {
-            if (result) {
-              this.$store.dispatch('createNewUser', {
-                user: this.user,
-                billingAddress: billingAddress,
-                shippingAddress: shippingAddress
-              }).then(({data}) => {
-                this.$store.dispatch('addAlert', {
-                  level: 'info',
-                  message: 'Your account has been registered, but you can continue shopping. ' +
-                  'Please confirm your email address within the next 24 hours.'
-                })
-                this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
+        var validateUser = this.$store.dispatch('validateUserForm', {user: this.user})
+        let isUserValid = await validateUser
+
+        if (isUserValid && isBillingValid && (!this.register || isUserValid)) {
+          if (this.register) {
+            var billingAddress = {}
+            Object.assign(billingAddress, this.billingAddress)
+            delete billingAddress['complete']
+
+            var shippingAddress = {}
+            Object.assign(shippingAddress, this.shippingAddress)
+            delete shippingAddress['complete']
+
+            this.$store.dispatch('createNewUser', {
+              user: this.user,
+              billingAddress: billingAddress,
+              shippingAddress: shippingAddress
+            }).then(({data}) => {
+              this.$store.dispatch('addAlert', {
+                level: 'info',
+                message: 'Your account has been registered, but you can continue shopping. ' +
+                'Please confirm your email address within the next 24 hours.'
               })
-            }
-          })
+              this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
+            })
+          } else {
+            this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
+          }
         } else {
-          this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
+          if (!isShippingValid) {
+            this.$store.dispatch('addAlert', {
+              level: 'error',
+              message: 'Your shipping data is incomplete'
+            })
+          }
+          if (!isBillingValid) {
+            this.$store.dispatch('addAlert', {
+              level: 'error',
+              message: 'Your billing data is incomplete'
+            })
+          }
+          if (!isUserValid) {
+            this.$store.dispatch('addAlert', {
+              level: 'error',
+              message: 'Your user data is invalid'
+            })
+          }
         }
-//          if (this.billingAddressChanged && this.shippingAddressChanged) {
-//            if (addressEquals(this.shippingAddress, this.billingAddress)) {
-//              addressDict = this.shippingAddress
-//              addressDict['isBilling'] = true
-//              addressDict['isShipping'] = true
-//              callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
-//                this.billingAddressChanged = false
-//                this.shippingAddressChanged = false
-//                this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
-//                this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
-//                this.$store.dispatch('addAlert', {
-//                  message: 'Shipping and billing address have been saved.'
-//                })
-//              })
-//            } else {
-//              addressDict = this.shippingAddress
-//              addressDict['isShipping'] = true
-//              callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
-//                this.shippingAddressChanged = false
-//                this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
-//                this.$store.dispatch('addAlert', {
-//                  message: 'Shipping address has been saved.'
-//                })
-//              })
-//
-//              addressDict = this.billingAddress
-//              addressDict['isBilling'] = true
-//              callSaveAddress(this.billingAddress.id, addressDict, ({data}) => {
-//                this.billingAddressChanged = false
-//                this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
-//                this.$store.dispatch('addAlert', {
-//                  message: 'Billing address has been saved.'
-//                })
-//              })
-//            }
-//          } else if (this.shippingAddressChanged) {
-//            addressDict = this.shippingAddress
-//            addressDict['isShipping'] = true
-//            callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
-//              this.shippingAddressChanged = false
-//              this.$store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
-//              this.$store.dispatch('addAlert', {
-//                message: 'Shipping address has been saved.'
-//              })
-//            })
-//          } else if (this.billingAddressChanged) {
-//            addressDict = this.shippingAddress
-//            addressDict['isBilling'] = true
-//            callSaveAddress(this.shippingAddress.id, addressDict, ({data}) => {
-//              this.billingAddressChanged = false
-//              this.$store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
-//              this.$store.dispatch('addAlert', {
-//                message: 'Billing address has been saved.'
-//              })
-//            })
-//          }
-//          this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
-//        }
       }
     },
     mounted () {

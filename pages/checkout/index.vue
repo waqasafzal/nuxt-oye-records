@@ -57,7 +57,7 @@
     },
     watch: {
       currentCheckoutView (view) {
-        if (this.checkoutView === CheckoutAddresses) {
+        if (this.checkoutView === CheckoutAddresses && this.checkoutView !== view) {
           if (this.$store.getters.hasChangedAddresses) {
             this.$store.dispatch('saveAddresses')
           }

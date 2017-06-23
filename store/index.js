@@ -370,6 +370,12 @@ const store = new Vuex.Store({
     getBillingAddress (state) {
       return state.checkout.billing.address
     },
+    getBillingAddressValidation (state) {
+      return state.checkout.billing.validation
+    },
+    getShippingAddressValidation (state) {
+      return state.checkout.shipping.validation
+    },
     getBillingCountry (state) {
       let address = store.getters.getBillingAddress
       return address && address.country

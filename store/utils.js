@@ -20,14 +20,16 @@ export const getInitialUser = function () {
 export const getInitialCheckout = function () {
   return {
     shipping: {
-      address: null,
+      address: getInitialAddress(),
       changed: false,
       confirmed: false,
-      option: null
+      option: null,
+      validation: getInitialAddress()
     },
     billing: {
-      address: null,
-      changed: false
+      address: getInitialAddress(),
+      changed: false,
+      validation: getInitialAddress()
     },
     payment: {
       option: null,
@@ -54,3 +56,14 @@ export const getInitialUserForm = function () {
   }
 }
 
+export const getInitialAddress = function () {
+  return {
+    firstName: '',
+    lastName: '',
+    street: '',
+    number: '',
+    zip: '',
+    city: '',
+    country: ''
+  }
+}

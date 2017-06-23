@@ -2,21 +2,21 @@
   <div class="register__form__panel">
     <form id="register">
       <fieldset>
-        <div class="form-group">
+        <div class="form-group input-validation">
           <input class="form-control" placeholder="Username *" name="newname" v-model="user.name" type="text" required>
-          <div v-if="usernameError">{{ usernameError }}</div>
+          <div v-if="usernameError" class="error">{{ usernameError }}</div>
         </div>
-        <div class="form-group">
+        <div class="form-group input-validation">
           <input class="form-control" placeholder="Email *" name="email" v-model="user.email" type="email"/>
-          <div v-if="emailError">{{ emailError }}</div>
+          <div v-if="emailError" class="error">{{ emailError }}</div>
         </div>
-        <div class="form-group">
+        <div class="form-group input-validation">
           <input class="form-control" placeholder="Password *" name="newpwd" v-model="user.password" type="password" required>
-          <div v-if="passwordError">{{ passwordError }}</div>
+          <div v-if="passwordError"  class="error">{{ passwordError }}</div>
         </div>
-        <div class="form-group">
+        <div class="form-group input-validation">
           <input class="form-control" placeholder="Confirm Password *" name="passwordConfirm" v-model="user.passwordConfirm" type="password"/>
-          <div v-if="passwordConfirmationError">{{ passwordConfirmationError }}</div>
+          <div v-if="passwordConfirmationError" class="error">{{ passwordConfirmationError }}</div>
         </div>
       </fieldset>
       <button type="submit" form="register" v-if="submit">Register</button>

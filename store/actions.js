@@ -420,7 +420,10 @@ export const validateUserForm = ({commit}, args) => new Promise((resolve, reject
   if (!user.name) {
     commit(types.SET_USER_FORM_NAME_ERROR, 'Username should not be empty')
     ok = false
+  } else {
+    commit(types.SET_USER_FORM_NAME_ERROR, null)
   }
+
   let password = user.password
   if (!password || password.length < 8) {
     commit(types.SET_USER_FORM_PWD_ERROR, 'Password should have at least 8 characters')
@@ -558,4 +561,72 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
     })
   }
   // store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
+})
+
+export const validateAddress = (store, args) => new Promise((resolve, reject) => {
+  let address = args.address
+  let addressType = args.type
+  let valid = true
+
+  let stateAddressValidation
+  switch (addressType) {
+    case 'billing':
+      stateAddressValidation = store.state.checkout.billing.validation
+      break
+    case 'shipping':
+      stateAddressValidation = store.state.checkout.shipping.validation
+      break
+  }
+
+  if (stateAddressValidation) {
+    if (address.firstName.length === 0) {
+      stateAddressValidation.firstName = 'Required field'
+      valid = false
+    } else {
+      stateAddressValidation.firstName = ''
+    }
+
+    if (address.lastName.length === 0) {
+      stateAddressValidation.lastName = 'Required field'
+      valid = false
+    } else {
+      stateAddressValidation.lastName = ''
+    }
+
+    if (address.street.length === 0) {
+      stateAddressValidation.street = 'Required field'
+      valid = false
+    } else {
+      stateAddressValidation.street = ''
+    }
+
+    if (address.number.length === 0) {
+      stateAddressValidation.number = 'Required field'
+      valid = false
+    } else {
+      stateAddressValidation.number = ''
+    }
+
+    if (address.zip.length === 0) {
+      stateAddressValidation.zip = 'Required field'
+      valid = false
+    } else {
+      stateAddressValidation.zip = ''
+    }
+
+    if (address.city.length === 0) {
+      stateAddressValidation.city = 'Required field'
+      valid = false
+    } else {
+      stateAddressValidation.city = ''
+    }
+
+    if (address.country.length === 0) {
+      stateAddressValidation.country = 'Required field'
+      valid = false
+    } else {
+      stateAddressValidation.country = ''
+    }
+    resolve(valid)
+  }
 })
