@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-6 login__form__panel">
+  <div class="col-12 col-md-6 login__form__panel">
     <h3>I already have an account</h3>
     <form ref="login" id="login" class="login__form" method="post" @submit.prevent="submit" autocomplete="off">
       <fieldset>
