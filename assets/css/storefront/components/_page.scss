@@ -111,7 +111,7 @@
       display: block;
       font-size: 3em;
       color: #313532;
-      max-width: 60%;
+      max-width: 50%;
       overflow-x: hidden;
       text-overflow: ellipsis;
       opacity: 0.4;
@@ -121,10 +121,11 @@
     &__artist {
       padding-top: .2em;
       display: block;
-      max-width: 60%;
+      max-width: 50%;
       overflow-x: hidden;
       text-overflow: ellipsis;
       font-size: 3em;
+      line-height: 1.2em;
     }
     a {
       color: $body-color;
