@@ -323,6 +323,9 @@ const store = new Vuex.Store({
     [types.CHANGE_SHIPPING_OPTION]: (state) => {
       state.checkout.focussedInput = 'shippingOption'
       state.checkout.checkoutState = 2
+    },
+    [types.SET_VAT_EXCLUDED]: (state, isVatExcluded) => {
+      state.checkout.isVatExcluded = isVatExcluded
     }
   },
 
@@ -453,6 +456,12 @@ const store = new Vuex.Store({
     },
     hasChangedAddresses (state) {
       return store.getters.hasShippingChanged || store.getters.hasBillingChanged
+    },
+    getVat (state) {
+      return state.cart && state.cart.vat
+    },
+    isVatExcluded (state) {
+      return state.checkout.isVatExcluded
     }
   },
 

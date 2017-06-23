@@ -9,6 +9,7 @@ export const oyeCart = gql`
     fragment OyeCart on OyeCartType {
         pk
         quantity
+        vat
         totalAvailable
         totalAvailableNet
         lines(preorder: false) {
@@ -33,9 +34,12 @@ export const oyeCart = gql`
         }
         cookie
         shippingOptions {
-            id
-            name
-            price
+            isVatExcluded
+            options {
+                id
+                name
+                price
+            }
         }
     }
   ${release}

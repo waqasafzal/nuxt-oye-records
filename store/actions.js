@@ -358,9 +358,12 @@ export const setShippingCountry = (store, args) => new Promise((resolve, reject)
     query: gql`query CartShippingOption($countryName: String) {
         cart {
             shippingOptions(countryName: $countryName) {
-                id
-                price
-                name
+                isVatExcluded
+                options {
+                  id
+                  price
+                  name
+                }
             }
         }
     }`,
@@ -371,7 +374,8 @@ export const setShippingCountry = (store, args) => new Promise((resolve, reject)
     // resolve(data.cart.shippingOptions)
     // let cart = data.cart
     // vm.shippingOptions = cart.shippingOptions
-    store.commit(types.SET_SHIPPING_OPTIONS, data.cart.shippingOptions)
+    store.commit(types.SET_SHIPPING_OPTIONS, data.cart.shippingOptions.options)
+    store.commit(types.SET_VAT_EXCLUDED, data.cart.shippingOptions.isVatExcluded)
   })
 })
 

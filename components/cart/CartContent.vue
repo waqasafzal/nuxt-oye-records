@@ -37,7 +37,8 @@
               </nuxt-link>
             </div>
             <div class="col-2 cart__line__cell">
-              <release-price class="cart-cell-center flex-align-right" :price="line.release.price"></release-price>
+              <div class="cart-cell-center flex-align-right">{{getPrice(line.release.price.gross)}} &euro;</div>
+              <!--<release-price :price="getPrice(line.release.price)"></release-price>-->
             </div>
             <div class="col-1"></div>
             <div class="col-1 cart__line__cell">
@@ -51,7 +52,7 @@
               </div>
             </div>
             <div class="col-2 cart__line__cell">
-              <p class="flex-align-right cart-cell-center">{{ line.lineTotal }} &euro;</p>
+              <p class="flex-align-right cart-cell-center">{{ getPrice(line.lineTotal) }} &euro;</p>
             </div>
             <div v-if="!review" class="cart-item-delete col-1 cart__line__cell">
               <div class="flex-align-right cart-cell-center" @click="onDelete(line)">&times;</div>
@@ -64,7 +65,7 @@
               <h4 class="cart-cell-center">Subtotal</h4>
             </div>
             <div class="col-1 cart__line__cell">
-              <h4 class="flex-align-right cart-cell-center text-right">{{ cart.totalAvailableNet }} &euro;</h4>
+              <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(cart.totalAvailableNet) }} &euro;</h4>
             </div>
           </div>
           <div v-if="review" class="row">
@@ -72,14 +73,21 @@
               <h4 class="cart-cell-center">Shipping</h4>
             </div>
             <div class="col-1 cart__line__cell">
-              <h4 class="flex-align-right cart-cell-center text-right">{{ shipping }} &euro;</h4>
+              <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(shipping) }} &euro;</h4>
             </div>
           </div>
           <div class="row cart__vat">
-            <div class="col-2 offset-8 cart__line__cell cart__vat__title">
-              <span class="cart-cell-center">incl. VAT (19%)</span>
+            <div :class="[vatExcluded ? 'col-3': 'col-2', 'offset-8', 'cart__line__cell', 'cart__vat__title']">
+              <span class="cart-cell-center">
+                <template v-if="!vatExcluded">
+                  incl. VAT (19%)
+                </template>
+                <template v-else>
+                  All prices exclude VAT as your selected shipping country is outside the EU.
+                </template>
+              </span>
             </div>
-            <div class="col-1 cart__line__cell cart__vat__amount">
+            <div v-if="!vatExcluded" class="col-1 cart__line__cell cart__vat__amount">
               <span class="flex-align-right cart-cell-center text-right">{{ vat }} &euro;</span>
             </div>
           </div>
@@ -90,7 +98,7 @@
               <h4 class="cart-cell-center">Total</h4>
             </div>
             <div class="col-1 cart__line__cell">
-              <h4 class="flex-align-right cart-cell-center text-right"><strong>{{ total }} &euro;</strong></h4>
+              <h4 class="flex-align-right cart-cell-center text-right"><strong>{{ getPrice(total) }} &euro;</strong></h4>
             </div>
           </div>
         </div>
@@ -159,8 +167,14 @@
         return this.$store.getters.getShippingOption && this.$store.getters.getShippingOption.price || '0.00'
       },
       vat () {
-        var value = (this.total / 100) * 19.0
+        var value = (this.total / 100) * this.vatRate
         return roundFixed(value)
+      },
+      vatRate () {
+        return this.$store.getters.getVat
+      },
+      vatExcluded () {
+        return this.$store.getters.isVatExcluded
       },
       total () {
         return roundFixed(parseFloat(this.cart.totalAvailable) + parseFloat(this.shipping))
@@ -184,6 +198,13 @@
           pk: line.release.pk,
           preorder: line.preorder
         })
+      },
+      getPrice: function (price) {
+        let parsedPrice = parseFloat(price)
+        if (this.vatExcluded) {
+          return roundFixed(parsedPrice * ((100 - this.vatRate) / 100), 2)
+        }
+        return parsedPrice
       }
     }
   }

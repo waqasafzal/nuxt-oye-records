@@ -48,13 +48,16 @@
       },
       selectedPaymentMethod () {
         return this.$store.getters.getSelectedPaymentMethod
+      },
+      vatExcluded () {
+        return this.$store.getters.isVatExcluded
       }
     },
     methods: {
       onPlaceOrder () {
         apolloClient.mutate({
-          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID) {
-            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId) {
+          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID, $vatExcluded: Boolean) {
+            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId, vatExcluded: $vatExcluded) {
               order {
                 id
                 price
@@ -83,6 +86,7 @@
             shippingId: this.shippingId,
             cartId: this.cartId,
             porto: this.porto,
+            vatExcluded: this.vatExcluded,
             payment: this.paymentOption.id,
             paymentMethodId: this.selectedPaymentMethod && this.selectedPaymentMethod.id
           }

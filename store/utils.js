@@ -39,7 +39,9 @@ export const getInitialCheckout = function () {
     guest: null,
     checkoutState: null,
     register: false,
-    focussedInput: null
+    focussedInput: null,
+    isVatExcluded: false,
+    vat: 19.0
   }
 }
 
