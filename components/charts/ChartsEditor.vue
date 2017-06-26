@@ -85,7 +85,7 @@
   import _ from 'lodash'
   import { getCurrentMonth } from '~/utils/date'
   import { getAuthHeader } from '~/utils/auth/index'
-  import { addCartAlertMessage } from '../shared/utils'
+//  import { addCartAlertMessage } from '../shared/utils'
   import { callReleaseSearchQuery } from '../search/queries'
   import client from '~/plugins/apollo'
   import gql from 'graphql-tag'
@@ -221,19 +221,23 @@
         this.currentChartItem = -1
       },
       onSaveCharts () {
-        client.mutate({
-          mutation: gql`mutation ($charts: JSONString!, $artistId: Int) {
-            saveCharts(charts: $charts, artistId: $artistId) {
-                ok
-            }
-        }`,
-          variables: {
-            charts: JSON.stringify(this.currentCharts),
-            artistId: this.artist && this.artist.pk
-          }
-        }).then(({data}) => {
-          addCartAlertMessage('Charts were successfully saved.', 'info')
+        this.$store.dispatch('saveChart', {
+          charts: JSON.stringify(this.currentCharts),
+          artistId: this.artist && this.artist.pk
         })
+//        client.mutate({
+//          mutation: gql`mutation ($charts: JSONString!, $artistId: Int) {
+//            saveCharts(charts: $charts, artistId: $artistId) {
+//                ok
+//            }
+//        }`,
+//          variables: {
+//            charts: JSON.stringify(this.currentCharts),
+//            artistId: this.artist && this.artist.pk
+//          }
+//        }).then(({data}) => {
+//          addCartAlertMessage('Charts were successfully saved.', 'info')
+//        })
       },
       enableBlur () {
         this.blurEnabled = true

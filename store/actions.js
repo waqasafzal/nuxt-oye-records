@@ -165,7 +165,9 @@ export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
     Vue.cookie.set('cart', data.updateCart.cart.cookie, true)
     commit(types.SET_CART, r || null)
     return resolve(r)
-  }).catch(er => reject(er))
+  }).catch(er => {
+    reject(er)
+  })
 })
 
 export const removeCartLine = ({commit}, args) => new Promise((resolve, reject) => {
@@ -631,4 +633,28 @@ export const validateAddress = (store, args) => new Promise((resolve, reject) =>
     }
     resolve(valid)
   }
+})
+
+export const saveChart = ({commit}, args) => new Promise((resolve, reject) => {
+  apolloClient.mutate({
+    mutation: gql`mutation ($charts: JSONString!, $artistId: Int) {
+        saveCharts(charts: $charts, artistId: $artistId) {
+            ok
+        }
+    }`,
+    variables: {
+      charts: args.charts,
+      artistId: args.artistId
+    }
+  }).then(({data}) => {
+    addCartAlertMessage('Charts were successfully saved.', 'info')
+  }).catch((err) => {
+    console.log(JSON.stringify(err))
+    for (var i = 0; i < err.graphQLErrors.length; i++) {
+      commit(types.ADD_ALERT, {
+        message: err.graphQLErrors[0].message,
+        level: 'error'
+      })
+    }
+  })
 })

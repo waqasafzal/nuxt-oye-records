@@ -69,14 +69,33 @@
           next()
         }
       }])
-      client.networkInterface.useAfter([{
-        applyAfterware ({ response }, next) {
-          if (response.status === 401) {
-            logout(vm)
+      client.networkInterface.useAfter([
+        {
+          applyAfterware ({ response }, next) {
+            if (response.status === 401) {
+              logout(vm)
+            }
+            next()
           }
-          next()
+        },
+        {
+          applyAfterware ({ response }, next) {
+            if (response.status === 200 && response.body.errors && response.body.errors.length > 0) {
+              response.json().then(
+                (json) => {
+                  for (var i = 0; i < json.errors.length; i++) {
+                    this.$store.commit('addAlert', {
+                      level: 'error',
+                      message: json.errors[i].message
+                    })
+                  }
+                }
+              )
+            }
+            next()
+          }
         }
-      }])
+      ])
     }
   }
 </script>
