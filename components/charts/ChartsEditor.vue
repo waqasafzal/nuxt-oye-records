@@ -85,7 +85,6 @@
   import _ from 'lodash'
   import { getCurrentMonth } from '~/utils/date'
   import { getAuthHeader } from '~/utils/auth/index'
-//  import { addCartAlertMessage } from '../shared/utils'
   import { callReleaseSearchQuery } from '../search/queries'
   import client from '~/plugins/apollo'
   import gql from 'graphql-tag'

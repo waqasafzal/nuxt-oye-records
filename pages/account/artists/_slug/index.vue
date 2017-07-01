@@ -40,7 +40,7 @@
   import {getCurrentMonth} from '~/utils/date'
   import * as types from '~/store/types'
   import { getAuthHeader } from '~/utils/auth/index'
-  import ChartsEditor from '../../../../components/charts/ChartsEditor'
+  import ChartsEditor from '~/components/charts/ChartsEditor'
 
   let component = {}
   if (process.browser) {
