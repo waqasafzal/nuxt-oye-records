@@ -6,13 +6,11 @@ global.fetch = fetch
 
 var utils = require('./build/utils')
 
-var apiHost = "'http://localhost:8000'"
+var apiHost = process.env.API_ROOT
 
 if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
   process.env.NODE_ENV = 'production'
 }
-
-console.log('NODE_ENV ' + process.env.NODE_ENV)
 
 var setupAPI = function () {
   apiHost = "'http://localhost:8000'"
@@ -40,7 +38,9 @@ var setupAPI = function () {
   }
 }
 
-setupAPI()
+if (!apiHost) {
+  setupAPI()
+}
 
 module.exports = {
   /*
