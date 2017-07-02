@@ -8,7 +8,7 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-var apiHost = process.env.API_ROOT
+var apiHost = "'http://localhost:3000'"
 
 var setupAPI = function () {
   apiHost = "'http://localhost:3000'"
@@ -26,9 +26,7 @@ var setupAPI = function () {
   }
 }
 
-if (!apiHost) {
-  setupAPI()
-}
+setupAPI()
 
 module.exports = {
   entry: {
