@@ -12,7 +12,7 @@ export const callReleaseSearchQuery = function (query, size, page, fields, callb
                 ... on ReleaseSearchResult {
                     release {
                         ...Release
-                        smallThumbnailUrl: thumbnailUrl(size:100)
+                        smallThumbnailUrl: thumbnailUrl(size:120)
                     }
                 }
             }
@@ -39,7 +39,7 @@ export const callArtistSearchQuery = function (query, size, callback, errorCallb
                 ... on ArtistSearchResult {
                     artist {
                         ...Artist
-                        smallThumbnailUrl: thumbnailUrl(size:100)
+                        smallThumbnailUrl: thumbnailUrl(size:120)
                     }
                 }
             }

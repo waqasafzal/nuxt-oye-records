@@ -133,7 +133,7 @@ export const release = gql`
                 minPrice { gross, grossLocalized, currency }
             }
         }
-        thumbnailUrl
+        thumbnailUrl(size: 380)
         discogsUrl
     }
 `

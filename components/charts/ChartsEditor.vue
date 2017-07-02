@@ -266,7 +266,7 @@
                  rank
                  release {
                    pk
-                   smallThumbnailUrl: thumbnailUrl(size: 100)
+                   smallThumbnailUrl: thumbnailUrl(size: 120)
                    artistFirstName
                    artistLastName
                    title
