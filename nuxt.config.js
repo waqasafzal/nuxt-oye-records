@@ -40,7 +40,11 @@ var setupAPI = function () {
   }
 }
 
-setupAPI()
+if (process.env.API_ROOT) {
+  apiHost = process.env.API_ROOT
+} else {
+  setupAPI()
+}
 
 module.exports = {
   /*
