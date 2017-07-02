@@ -6,7 +6,7 @@ global.fetch = fetch
 
 var utils = require('./build/utils')
 
-var apiHost = process.env.API_ROOT
+var apiHost
 
 if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
   process.env.NODE_ENV = 'production'
@@ -38,8 +38,10 @@ var setupAPI = function () {
   }
 }
 
-if (!apiHost) {
+if (!process.env.API_ROOT) {
   setupAPI()
+} else {
+  apiHost = process.env.API_ROOT
 }
 
 module.exports = {
