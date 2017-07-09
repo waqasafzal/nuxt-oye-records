@@ -182,7 +182,7 @@
         var validateUser = this.$store.dispatch('validateUserForm', {user: this.user})
         let isUserValid = await validateUser
 
-        if (isUserValid && isBillingValid && (!this.register || isUserValid)) {
+        if (isBillingValid && (!this.register || isUserValid)) {
           if (this.register) {
             var billingAddress = {}
             Object.assign(billingAddress, this.billingAddress)
