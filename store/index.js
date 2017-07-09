@@ -25,6 +25,18 @@ var isAddressComplete = function (address) {
   return complete
 }
 
+var isEmptyAddress = function (address) {
+  return !address || (
+    address.firstName === '' &&
+    address.lastName === '' &&
+    address.street === '' &&
+    address.number === '' &&
+    address.zip === '' &&
+    address.city === '' &&
+    address.country === ''
+  )
+}
+
 const store = new Vuex.Store({
 
   state: {
@@ -183,7 +195,8 @@ const store = new Vuex.Store({
     },
     [types.SET_USER_SHIPPING_ADDRESSES]: (state, args) => {
       state.userProfile.shipping.addresses = args.shippingAddresses
-      if (!state.checkout.shipping.address && args.shippingAddresses.length > 0) {
+      let shippingAddress = state.checkout.shipping.address
+      if (args.shippingAddresses.length > 0 && (!shippingAddress || isEmptyAddress(shippingAddress))) {
         let address = args.shippingAddresses[0]
         state.checkout.shipping.address = address
         state.checkout.shipping.confirmed = store.getters.isShippingAddressComplete
@@ -191,7 +204,8 @@ const store = new Vuex.Store({
     },
     [types.SET_USER_BILLING_ADDRESSES]: (state, args) => {
       state.userProfile.billing.addresses = args.billingAddresses
-      if (!state.checkout.billing.address && args.billingAddresses.length > 0) {
+      let billingAddress = state.checkout.billing.address
+      if (args.billingAddresses.length > 0 && (!billingAddress || isEmptyAddress(billingAddress))) {
         let address = args.billingAddresses[0]
         state.checkout.billing.address = address
         let complete = isAddressComplete(address)
