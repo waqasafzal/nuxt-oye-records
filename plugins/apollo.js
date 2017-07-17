@@ -10,7 +10,7 @@ let hostUrl = __API__
 
 const networkInterface = createNetworkInterface({
   uri: hostUrl + '/graphql',
-  transportBatching: true,
+  // transportBatching: true,
   opts: {
     credentials: 'same-origin'
   }
