@@ -7,7 +7,6 @@
         </template>
         <template v-else>
           <div :style="playStyle"></div>
-          <!--<play-svg :fill="foreground"></play-svg>-->
         </template>
       </div>
     </div>
@@ -65,8 +64,8 @@
       },
       arrowStyle: function () {
         return {
-          height: `${this.baseSize / 3}px`,
-          width: `${this.baseSize / 3}px`,
+//          height: `${this.baseSize / 3}px`,
+//          width: `${this.baseSize / 3}px`,
           margin: 'auto',
           display: 'flex'
         }
