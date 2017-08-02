@@ -14,6 +14,8 @@
       <div class="genres__detail__bestseller__carousel row"
            v-if="!bsLoading && (bestsellers.length > 0 || bestsellers.edges)">
         <div class="col-12" @mouseenter="disableSlider" @mouseleave="enableSlider">
+          <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/></div>
+          <div class="slider-right-control" @click="slideForward"><img src="~assets/images/Slider_Arrow_Right_Icon.svg"/></div>
           <transition-group name="blend">
             <div :class="'carousel__item'" :key="p" v-for="p in pages" v-if="p === currentSlide" transition="blend">
               <release-item v-for="(release, i) in getBestsellers(p)"
@@ -149,11 +151,23 @@
           this.currentSlide = index
         }
       },
+      slideBackward () {
+        this.decrementSlide()
+        this.stopAutopager()
+        this.startAutopager()
+      },
+      slideForward () {
+        this.incrementSlide()
+        this.stopAutopager()
+        this.startAutopager()
+      },
       disableSlider () {
-        this.sliderDisabled = true
+//        this.sliderDisabled = true
+        this.stopAutopager()
       },
       enableSlider () {
-        this.sliderDisabled = false
+//        this.sliderDisabled = false
+        this.startAutopager()
       },
       incrementSlide () {
         if (!this.sliderDisabled) {
@@ -162,6 +176,17 @@
               this.currentSlide++
             } else if (this.currentSlide === this.pages) {
               this.currentSlide = 1
+            }
+          }
+        }
+      },
+      decrementSlide () {
+        if (!this.sliderDisabled) {
+          if (this.pages) {
+            if (this.currentSlide > 1) {
+              this.currentSlide--
+            } else {
+              this.currentSlide = this.pages
             }
           }
         }

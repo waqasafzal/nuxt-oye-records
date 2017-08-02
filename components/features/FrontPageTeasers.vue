@@ -2,6 +2,8 @@
   <div>
     <div class="row frontpage__teaser">
       <div class="col-12 frontpage__teaser__content">
+        <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/></div>
+        <div class="slider-right-control" @click="slideForward"><img src="~assets/images/Slider_Arrow_Right_Icon.svg"/></div>
         <div class="slider" @mouseenter="disableSlider" @mouseleave="enableSlider">
           <template v-for="(release, i) in featuredReleases">
             <transition name="slide-fade" mode="out-in">
@@ -62,6 +64,27 @@
             }
           }
         }
+      },
+      decrementRelease () {
+        if (!this.sliderDisabled) {
+          if (this.featuredReleases) {
+            if (this.currentFeature > 0) {
+              this.currentFeature--
+            } else {
+              this.currentFeature = this.featuredReleases.length - 1
+            }
+          }
+        }
+      },
+      slideForward () {
+        this.incrementRelease()
+        this.stopAutopager()
+        this.startAutopager()
+      },
+      slideBackward () {
+        this.decrementRelease()
+        this.stopAutopager()
+        this.startAutopager()
       },
       disableSlider () {
         this.sliderDisabled = true

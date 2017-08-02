@@ -36,7 +36,7 @@
     background-color: rgba(248,247,245,1);
     letter-spacing: 1px;
     margin-top: 5px;
-    min-height: 500px;
+    height: 654px;
     padding-left: 9999px;
     padding-right: 9999px;
     margin-left: -9999px;
@@ -45,10 +45,11 @@
     &__content {
       position: relative;
       padding-left: 120px;
-      padding-top: 202px;
+      padding-top: 60px;
       padding-right: 120px;
-      margin-bottom: 12em;
-      height: 560px;
+      padding-bottom: 60px;
+      //margin-bottom: 12em;
+      height: 504px;
       margin-left: auto;
       margin-right: auto;
       max-width: 1600px;
@@ -71,6 +72,13 @@
         height: 100%;
         width: 100%;
 
+        &-right-control {
+          right: 60px;
+        }
+
+        &-left-control {
+          left: 60px;
+        }
 
         .slide {
           position: absolute;
@@ -211,4 +219,27 @@
 .feature-category {
   text-transform: uppercase;
   font-size: .9em;
+}
+
+
+.slider {
+  &-left-control {
+    position: absolute;
+    height: 75%;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    left: 0px;
+    cursor: pointer;
+  }
+  &-right-control {
+    position: absolute;
+    height: 75%;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    right: 0px;
+    cursor: pointer;
+  }
 }
