@@ -1,10 +1,5 @@
 <template>
   <div class="play-forward-button" :style="playReleaseStyle" @click.prevent="onClick">
-    <div :style="arrowStyle">
-      <div :style="arrowRightStyle">
-        <div :style="barStyle"></div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -38,38 +33,11 @@
         return {
           height: `${this.baseSize}px`,
           width: `${this.baseSize}px`,
-          transform: 'scaleX(-1)',
+          backgroundImage: `url(${require('~assets/images/Next_Icon.svg')})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
           borderRadius: '2px',
           backgroundColor: this.backgroundColor
-        }
-      },
-      arrowStyle: function () {
-        return {
-          textAlign: 'center'
-        }
-      },
-      arrowRightStyle: function () {
-        return {
-          width: 0,
-          height: 0,
-          borderRadius: `${this.baseSize / 16}px`,
-          borderTop: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
-          borderBottom: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
-          borderRight: `${this.baseSize / 4}px solid ${this.foregroundColor}`,
-          margin: `0px ${this.baseSize / 4}px 0px auto`,
-          position: 'relative',
-          right: `${this.baseSize * 0.1 / 2}px`,
-          top: `${(this.baseSize / 4) * this.ratio}px`
-        }
-      },
-      barStyle: function () {
-        return {
-          position: 'relative',
-          width: `${this.baseSize / 2.5}px`,
-          height: `${(this.baseSize / 2.5) * this.ratio}px`,
-          right: `${this.baseSize / 2.3}px`,
-          top: `${this.baseSize / -4.6}px`,
-          borderRight: `${this.baseSize / 10.2}px solid ${this.foregroundColor}`
         }
       }
     },

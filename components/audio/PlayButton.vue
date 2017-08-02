@@ -6,7 +6,8 @@
           <div :style="pauseStyle"></div>
         </template>
         <template v-else>
-          <play-svg :fill="foreground"></play-svg>
+          <div :style="playStyle"></div>
+          <!--<play-svg :fill="foreground"></play-svg>-->
         </template>
       </div>
     </div>
@@ -58,7 +59,6 @@
         return {
           height: `${this.baseSize}px`,
           width: `${this.baseSize}px`,
-          transform: 'scaleX(-1)',
           borderRadius: '2px',
           backgroundColor: this.backgroundColor
         }
@@ -71,29 +71,23 @@
           display: 'flex'
         }
       },
-      arrowRightStyle: function () {
-        let style = {
-          width: 0,
-          height: 0,
-          borderRadius: '1px',
-          borderTop: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
-          borderBottom: `${this.baseSize / (4 * this.ratio)}px solid transparent`,
-          borderRight: `${this.baseSize / 4}px solid ${this.foregroundColor}`,
-          margin: '0px auto 0px auto',
-          position: 'relative',
-          right: `${this.baseSize * 0.1 / 2}px`,
-          top: `${(this.baseSize / 4) * this.ratio}px`
-        }
-        return style
-      },
       pauseStyle: function () {
         let style = {
           width: `${this.baseSize / 2.6}px`,
           height: `${this.baseSize / 2.8}px`,
-          margin: '0px auto 0px auto',
-          borderLeft: `${this.baseSize / 8}px solid white`,
-          borderRight: `${this.baseSize / 8}px solid white`,
-          top: `${(this.baseSize / 3.5) * this.ratio}px`
+          backgroundImage: `url(${require('~assets/images/Pause_icon.svg')})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center'
+        }
+        return style
+      },
+      playStyle: function () {
+        let style = {
+          width: `${this.baseSize / 2.6}px`,
+          height: `${this.baseSize / 2.8}px`,
+          backgroundImage: `url(${require('~assets/images/play-white.svg')})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center'
         }
         return style
       }
