@@ -11,7 +11,7 @@
       </div>
       <div class="float-right navbar__account__buttons">
         <template v-if="isAuthenticated">
-          <div class="ah-link">
+          <div class="ah-link account-link">
             <nuxt-link :to="{name: 'account-details'}">Your account</nuxt-link>
           </div>
           <div class="ah-link">
@@ -19,14 +19,10 @@
           </div>
         </template>
         <template v-else>
-          <div class="ah-link">
-            <nuxt-link :to="{name: 'account-signup'}">Register</nuxt-link>
-          </div>
-          <div class="ah-link">
+          <div class="ah-link account-link">
             <nuxt-link :to="{name: 'account-login'}">Log in</nuxt-link>
           </div>
         </template>
-        <!--<div class="navbar__account__cart float-right" v-on:mouseenter="showCart" v-on:mouseleave="hideCart">-->
         <div class="ah-link cart">
           <nuxt-link :class="[isVisibleCart ? 'hover': '']" to="/cart" class="cart-link">
             <span class="cart-label hidden-sm-down">
@@ -74,3 +70,10 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .account-link {
+    justify-content: flex-end;
+    padding-right: 12px;
+  }
+</style>

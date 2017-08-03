@@ -5,9 +5,6 @@
   @include media-breakpoint-down(sm) {
     padding-top: 0;
   }
-  .col-md-6 {
-    text-align: center;
-  }
   h3 {
     text-transform: uppercase;
     margin-bottom: $global-margin * 2;
@@ -19,9 +16,7 @@
     text-decoration: underline;
   }
   .btn {
-    //padding: $global-padding / 2 $global-padding * 2.5;
     font-size: 1rem;
-    text-transform: uppercase;
     margin: auto;
     margin-top: $global-margin;
     font-family: $font-family-sans-serif;
@@ -88,7 +83,7 @@
         }
       }
       &__register {
-        padding-left: 12px;
+        padding-left: 0px;
         padding-right: 0px;
         button {
           width: 100%;
@@ -132,11 +127,28 @@
     .btn {
       padding: $global-padding / 2 $global-padding * 3;
       margin: auto;
-      text-transform: uppercase;
       font-family: $font-family-sans-serif;
     }
     img {
       padding-top: $global-padding * 2;
     }
+  }
+}
+
+.register-btn {
+  width: 50%;
+  background-color: white;
+  color: $brand-color-green;
+  border: 1px solid $brand-color-green;
+  text-align: center;
+  margin-top: auto;
+  vertical-align: middle;
+  height: 56px;
+  line-height: 56px;
+  font-size: 1rem !important;
+  cursor: pointer;
+  text-decoration: none !important;
+  &:hover {
+    background-color: lighten($brand-color-green, 40);
   }
 }

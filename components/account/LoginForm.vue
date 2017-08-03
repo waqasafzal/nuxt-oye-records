@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 col-md-6 login__form__panel">
-    <h3>I already have an account</h3>
+    <h3><slot>I already have an account</slot></h3>
     <form ref="login" id="login" class="login__form" method="post" @submit.prevent="submit" autocomplete="off">
       <fieldset>
         <div class="form-group">
@@ -42,7 +42,7 @@
         <div class="col-12 col-md-6 login__form__btn__login">
           <button type="submit" form="login" class="btn primary">Login</button>
         </div>
-        <div class="col-12 col-md-6 login__form__btn__register">
+        <div v-if="register" class="col-12 col-md-6 login__form__btn__register">
           <button type="button" @click="onRegister" class="btn ">Register</button>
         </div>
       </div>
@@ -64,6 +64,10 @@
       redirect: {
         type: String,
         default: '/account/details'
+      },
+      register: {
+        type: Boolean,
+        default: true
       }
     },
     data: function () {
