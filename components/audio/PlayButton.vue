@@ -6,7 +6,7 @@
           <div :style="pauseStyle"></div>
         </template>
         <template v-else>
-          <div :style="playStyle"></div>
+          <play-svg :style="playStyle" :fill="foreground"></play-svg>
         </template>
       </div>
     </div>
@@ -64,8 +64,8 @@
       },
       arrowStyle: function () {
         return {
-//          height: `${this.baseSize / 3}px`,
-//          width: `${this.baseSize / 3}px`,
+          height: `${this.baseSize / 3}px`,
+          width: `${this.baseSize / 3}px`,
           margin: 'auto',
           display: 'flex'
         }
@@ -82,11 +82,7 @@
       },
       playStyle: function () {
         let style = {
-          width: `${this.baseSize / 2.6}px`,
-          height: `${this.baseSize / 2.8}px`,
-          backgroundImage: `url(${require('~assets/images/play-white.svg')})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center'
+          marginLeft: `${this.baseSize / 12}px`
         }
         return style
       }
