@@ -269,6 +269,11 @@
 }
 
 .card-payment {
+  &__form {
+    border-bottom: 1px solid $gray-color-2;
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
   &__expiration {
     display: flex;
     flex-direction: row;

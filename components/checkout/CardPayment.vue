@@ -5,7 +5,7 @@
     <!--<p>Number: 2223 0000 4841 0010</p>-->
     <!--<p>CVC: 737</p>-->
     <!--<p>Expiry 10/2020</p>-->
-    <form ref="adyen-encrypted-form" method="post" @submit.prevent id="adyen-encrypted-form">
+    <form class="card-payment__form" ref="adyen-encrypted-form" method="post" @submit.prevent id="adyen-encrypted-form">
       <div class="form-group flex-column">
         <label for="cardNumber">Card Number</label>
         <input type="text" id="cardNumber" class="form-control" data-encrypted-name="number">
@@ -46,7 +46,9 @@
       </div>
       <input type="hidden" :value="timestamp" data-encrypted-name="generationtime"/>
     </form>
-    <proceed-button class="float-right-bottom" type="submit" form="adyen-encrypted-form">Pay Order</proceed-button>
+    <div style="display: flex">
+      <proceed-button class="float-right-bottom" type="submit" form="adyen-encrypted-form">Pay Order</proceed-button>
+    </div>
   </div>
 </template>
 
