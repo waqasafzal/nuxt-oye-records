@@ -11,7 +11,7 @@
         <input type="text" id="cardNumber" class="form-control" data-encrypted-name="number">
       </div>
       <div class="form-group flex-column owner">
-        <label for="owner">Card Holder</label>
+        <label for="owner">Name On Card</label>
         <input type="text" id="owner" class="form-control" data-encrypted-name="holderName">
       </div>
       <div class="form-group flex-row">
