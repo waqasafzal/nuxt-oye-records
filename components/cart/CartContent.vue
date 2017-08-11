@@ -30,8 +30,11 @@
                   <div class="release__name">{{ line.release.artistFirstName }} {{ line.release.artistLastName }}</div>
                   <div class="release__title">{{ line.release.title }}</div>
                   <div class="release__shipping">
-                    <template v-if="!line.preorder">Ready for shipping</template>
-                    <template v-else>Shipping as soon as possible</template>
+                    <template v-if="line.backorder">Shipping as soon as possible</template>
+                    <template v-else-if="line.release.availability.status === 'upcoming'">
+                      Preorder {{line.release.releasedAt}}
+                    </template>
+                    <template v-else>Ready for shipping</template>
                   </div>
                 </div>
               </nuxt-link>
@@ -51,8 +54,6 @@
                             :value="line.quantity" required>
                       <option :value="n" v-for="n in getQuantityOptions(line.quantity)">{{ n }}</option>
                     </select>
-                    <!--<input id="id_quantity" max="50" min="0" type="number"-->
-                           <!--v-on:change.prevent="onChange($event, line)" :value="line.quantity" required>-->
                   </div>
                 </form>
               </div>

@@ -2,8 +2,8 @@
   <div class="account__create__form">
     <form>
       <fieldset>
-        <div :class="['form-group', firstNameError ? 'has-danger': '']">
-          <div class="form-group-item">
+        <div class="form-group">
+          <div :class="['form-group-item', 'input-validation', firstNameError ? 'has-danger': '']">
             <input class="form-control"
                    type="text"
                    id="first"
@@ -13,7 +13,7 @@
                    required>
             <div v-if="firstNameError" class="error">{{ firstNameError }}</div>
           </div>
-          <div class="form-group-item">
+          <div :class="['form-group-item', 'input-validation', lastNameError ? 'has-danger': '']">
             <input class="form-control"
                    type="text"
                    placeholder="Last name *"
@@ -29,13 +29,13 @@
                    placeholder="Email account *"
                    v-model="account.email"
                    required>
-            <div v-if="lastNameError" class="error">{{ emailError }}</div>
+            <div v-if="emailError" class="error">{{ emailError }}</div>
           </div>
         </div>
-        <div :class="['form-group', firstNameError ? 'has-danger': '']">
-          <div class="form-group-item">
+        <div :class="['form-group']">
+          <div :class="['form-group-item', 'input-validation', passwordError ? 'has-danger': '']">
             <input class="form-control"
-                   type="text"
+                   type="password"
                    id="password"
                    ref="password"
                    placeholder="Password *"
@@ -43,9 +43,9 @@
                    required>
             <div v-if="passwordError" class="error">{{ passwordError }}</div>
           </div>
-          <div class="form-group-item">
+          <div :class="['form-group-item', 'input-validation', passwordConfirmationError ? 'has-danger': '']">
             <input class="form-control"
-                   type="text"
+                   type="password"
                    placeholder="Confirm password *"
                    v-model="account.passwordConfirmation"
                    required>
@@ -71,11 +71,12 @@
         </form>
       </div>
     </div>
-    <button class="account__create__btn btn primary">Create Account</button>
+    <button class="account__create__btn btn primary" @click="onSubmit">Create Account</button>
   </div>
 </template>
 
 <script>
+  import { signup } from '../../utils/auth/index'
   export default {
     name: 'CreateAccountForm',
     data: function () {
@@ -88,6 +89,47 @@
           passwordConfirmation: '',
           weekly: false,
           monthly: false
+        }
+      }
+    },
+    computed: {
+      firstNameError () {
+        return this.$store.getters.getUserFormFirstNameError
+      },
+      lastNameError () {
+        return this.$store.getters.getUserFormLastNameError
+      },
+      emailError () {
+        return this.$store.getters.getUserFormEmailError
+      },
+      passwordError () {
+        return this.$store.getters.getUserFormPasswordError
+      },
+      passwordConfirmationError () {
+        return this.$store.getters.getUserFormPasswordConfirmationError
+      }
+    },
+    methods: {
+      async onSubmit () {
+        let user = {
+          lastName: this.account.lastName,
+          firstName: this.account.firstName,
+          email: this.account.email,
+          password: this.account.password,
+          passwordConfirm: this.account.passwordConfirmation
+        }
+        var validateUser = this.$store.dispatch('validateUserForm', {
+          user: user
+        })
+        var isValid = await validateUser
+        if (isValid) {
+          signup(this, {
+            username: this.account.email,
+            email: this.account.email,
+            password: this.account.password,
+            first_name: this.account.firstName,
+            last_name: this.account.lastName
+          }, '/')
         }
       }
     }
@@ -141,6 +183,7 @@
       border-radius: 0px;
     }
   }
+
   .account__create {
     &__btn {
       margin-top: 2rem;

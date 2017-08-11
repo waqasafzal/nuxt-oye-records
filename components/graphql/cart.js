@@ -12,25 +12,27 @@ export const oyeCart = gql`
         vat
         totalAvailable
         totalAvailableNet
-        lines(preorder: false) {
+        lines(backorder: false) {
             release {
                 ...Release
+                releasedAt
             }
             quantity
             smallImageUrl
             notAvailable
             lineTotal
-            preorder
+            backorder
         }
-        preorderLines: lines(preorder: true) {
+        preorderLines: lines(backorder: true) {
             release {
                 ...Release
+                releasedAt
             }
             quantity
             smallImageUrl
             notAvailable
             lineTotal
-            preorder
+            backorder
         }
         cookie
         shippingOptions {

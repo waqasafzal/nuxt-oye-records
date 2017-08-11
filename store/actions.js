@@ -349,6 +349,7 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
         }
       }
     }
+    resolve(profile)
   })
 })
 
@@ -421,11 +422,28 @@ export const getPaymentOptions = ({commit}, args) => new Promise((resolve, rejec
 export const validateUserForm = ({commit}, args) => new Promise((resolve, reject) => {
   let user = args.user
   let ok = true
-  if (!user.name) {
+  if (typeof user.name !== 'undefined' && user.name === '') {
     commit(types.SET_USER_FORM_NAME_ERROR, 'Username should not be empty')
     ok = false
   } else {
     commit(types.SET_USER_FORM_NAME_ERROR, null)
+  }
+
+  if (typeof user.firstName !== 'undefined') {
+    if (user.firstName === '') {
+      commit(types.SET_USER_FORM_FIRST_NAME_ERROR, 'First name should not be empty!')
+      ok = false
+    } else {
+      commit(types.SET_USER_FORM_FIRST_NAME_ERROR, null)
+    }
+  }
+  if (typeof user.lastName !== 'undefined') {
+    if (user.lastName === '') {
+      commit(types.SET_USER_FORM_LAST_NAME_ERROR, 'Last name should not be empty!')
+      ok = false
+    } else {
+      commit(types.SET_USER_FORM_LAST_NAME_ERROR, null)
+    }
   }
 
   let password = user.password
@@ -658,3 +676,8 @@ export const saveChart = ({commit}, args) => new Promise((resolve, reject) => {
     }
   })
 })
+//
+//
+// export const registerUser = ({commit}, args) => new Promise((resolve, reject) => {
+//
+// })

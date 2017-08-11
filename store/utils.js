@@ -50,6 +50,8 @@ export const getInitialCheckout = function () {
 export const getInitialUserForm = function () {
   return {
     name: null,
+    firstName: null,
+    lastName: null,
     password: null,
     passwordConfirmation: null,
     email: null

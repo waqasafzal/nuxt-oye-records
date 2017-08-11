@@ -322,6 +322,12 @@ const store = new Vuex.Store({
     [types.SET_USER_FORM_EMAIL_ERROR]: (state, error) => {
       state.userFormErrors.email = error
     },
+    [types.SET_USER_FORM_FIRST_NAME_ERROR]: (state, error) => {
+      state.userFormErrors.firstName = error
+    },
+    [types.SET_USER_FORM_LAST_NAME_ERROR]: (state, error) => {
+      state.userFormErrors.lastName = error
+    },
     [types.CHANGE_PAYMENT_METHOD]: (state) => {
       state.checkout.focussedInput = 'paymentMethod'
       state.checkout.checkoutState = 3
@@ -464,6 +470,12 @@ const store = new Vuex.Store({
     },
     getUserFormEmailError (state) {
       return state.userFormErrors.email
+    },
+    getUserFormLastNameError (state) {
+      return state.userFormErrors.lastName
+    },
+    getUserFormFirstNameError (state) {
+      return state.userFormErrors.firstName
     },
     getCheckoutFocussedInput (state) {
       return state.checkout.focussedInput
