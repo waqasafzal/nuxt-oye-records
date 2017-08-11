@@ -16,7 +16,6 @@
 
 <script>
   import LoginForm from '../../components/account/LoginForm'
-  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
 
   const pirateImages = {
     oneTime: require('../../assets/images/pirate_login.png'),
@@ -24,7 +23,7 @@
   }
 
   export default {
-    components: {NuxtLink, LoginForm},
+    components: {LoginForm},
     name: 'Login',
     data: function () {
       return {
