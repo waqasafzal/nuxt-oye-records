@@ -336,9 +336,9 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
           paymentMethods: profile.paymentMethods
         })
       }
+      store.commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
       if (profile.unpaidOrder) {
-        store.commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
-        if (profile.unpaidOrder && profile.unpaidOrder.shippingAddress) {
+        if (profile.unpaidOrder.shippingAddress) {
           let country = profile.unpaidOrder.shippingAddress.country
           store.dispatch('setShippingCountry', {
             country: country
@@ -355,6 +355,7 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
 
 export const enterCheckout = (store, args) => new Promise((resolve, reject) => {
   store.dispatch('getProfile', args)
+  store.commit(types.SET_CURRENT_CHECKOUT_STATE, null)
   store.commit(types.ENTER_CHECKOUT)
 })
 

@@ -111,8 +111,7 @@
                 message: 'Your order has been paid.',
                 level: 'info'
               })
-              this.$store.commit(types.SET_UNPAID_ORDER, null)
-              this.$router.push('/')
+              this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
             } else if (resultCode === 'Received') {
               this.$store.dispatch('addAlert', {
                 message: 'Your payment has been received. Authorization from payment provider pending.',

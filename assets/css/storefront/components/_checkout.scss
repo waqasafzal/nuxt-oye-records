@@ -289,3 +289,31 @@
     width: 100px;
   }
 }
+
+.order-complete {
+  padding-top: 80px;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  h2 {
+    font-size: $font-size-h1;
+    text-transform: none;
+    margin-bottom: 0.1em;
+  }
+  h3 {
+    margin-top: 0.6em !important;
+    text-transform: none;
+  }
+  &__summary {
+    font-size: $font-size-h5;
+  }
+  &__number {
+    color: $brand-color-green;
+  }
+  a {
+    color: $brand-color-green;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -58,7 +58,9 @@
         return cart ? cart.quantity : 0
       },
       isCheckout () {
-        return this.$route.name === 'checkout'
+        return this.$route.name === 'checkout' &&
+          this.$store.getters.getCheckoutState &&
+          this.$store.getters.getCheckoutState !== 6
       }
     }
   }

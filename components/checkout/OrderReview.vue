@@ -93,9 +93,9 @@
         }).then(
           ({data}) => {
             let order = data.placeOrder.order
+            this.$store.commit(types.SET_UNPAID_ORDER, order)
             if (!order.isPaid) {
               this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
-              this.$store.commit(types.SET_UNPAID_ORDER, order)
               if (order.shippingCountry) {
                 this.$store.dispatch('setShippingCountry', order)
               }
@@ -104,19 +104,7 @@
                 message: 'Your order has been placed. Please fulfill order with payment.'
               })
             } else {
-              this.$store.commit(types.FINISH_CHECKOUT)
-              this.$router.push('/')
-              if (this.isSelfCollector) {
-                this.$store.commit(types.ADD_ALERT, {
-                  level: 'info',
-                  message: 'Your order has been placed. We will inform you via mail, when your package is ready for pickup'
-                })
-              } else {
-                this.$store.commit(types.ADD_ALERT, {
-                  level: 'info',
-                  message: 'Your order has been paid and will be shipped soon.'
-                })
-              }
+              this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
             }
             // set the new cart
             this.$store.commit(types.SET_CART, data.placeOrder.cart)

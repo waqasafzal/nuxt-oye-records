@@ -80,6 +80,9 @@ module.exports = {
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
       {href: 'https://fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
+    ],
+    script: [
+      {src: 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'}
     ]
   },
   /*

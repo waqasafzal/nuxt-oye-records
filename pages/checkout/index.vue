@@ -17,14 +17,10 @@
   import CheckoutAddresses from '~/components/checkout/CheckoutAddresses'
   import OrderReview from '~/components/checkout/OrderReview'
   import PayOrder from '~/components/checkout/PayOrder'
+  import OrderComplete from '~/components/checkout/OrderComplete'
 
   export default {
     name: 'Checkout',
-    head: {
-      script: [
-        {src: 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'}
-      ]
-    },
     computed: {
       currentCheckoutView () {
         var currentCheckoutView = CheckoutImpossible
@@ -39,6 +35,8 @@
           currentCheckoutView = OrderReview
         } else if (checkoutState === 5) {
           currentCheckoutView = PayOrder
+        } else if (checkoutState === 6) {
+          currentCheckoutView = OrderComplete
         }
         return currentCheckoutView
       }
