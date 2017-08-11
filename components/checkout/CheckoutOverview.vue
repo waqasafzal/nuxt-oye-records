@@ -78,7 +78,7 @@
         return lines
       },
       getPaymentMethodData (method) {
-        if (this.paymentOption.id === 'creditcard') {
+        if (method && this.paymentOption.id === 'creditcard') {
           return method.cardData
         }
         return {}

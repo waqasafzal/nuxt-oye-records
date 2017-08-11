@@ -1,9 +1,11 @@
 <template>
   <div class="checkout__content">
     <div class="row">
-      <div class="col-12 checkout__content__col">
-        <h2>Order Payment</h2>
-        <h3>You have an unpaid order over {{ totalAmount }} &euro;</h3>
+      <div class="col-12 checkout__content__col centered-form-panel pay-order__panel">
+        <div class="pay-order__header">
+          <h3>Order Payment</h3>
+          <div class="pay-order__summary">You have an unpaid order over {{ totalAmount }} &euro;</div>
+        </div>
         <component :is="selectedPaymentView"></component>
       </div>
     </div>
