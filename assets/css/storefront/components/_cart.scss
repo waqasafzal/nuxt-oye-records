@@ -195,11 +195,22 @@
   }
   &__empty {
     text-align: center;
-    img {
-      margin: $global-margin * 2 0;
+    background-color: $gray-color-3;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8em !important;
+    padding-top: 8em !important;
+    h1 {
+      margin-top: inherit !important;
+      margin-bottom: 1em !important;
     }
     .btn {
-      margin: $global-margin * 2 0 $global-margin * 5;
+      width: 200px;
+      line-height: 36px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: $font-size-h5;
+      font-weight: 300;
     }
   }
   &__checkout-button {

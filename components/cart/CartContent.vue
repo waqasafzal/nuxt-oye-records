@@ -143,7 +143,8 @@
     </template>
     <template v-else>
       <div class="cart__empty">
-        <h2>There are no products in your shopping cart.</h2>
+        <h1>Looks like your cart is empty.</h1>
+        <nuxt-link to="/"><div class="btn btn-primary">Start Shopping</div></nuxt-link>
       </div>
     </template>
   </div>
@@ -153,11 +154,12 @@
   import ReleasePrice from '~/components/releases/ReleasePrice'
   import ProceedButton from '../shared/ProceedButton'
   import { roundFixed } from '../../utils/math'
+  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
 
   const MAX_QUANTITY = 5
 
   export default {
-    components: {ProceedButton, ReleasePrice},
+    components: {NuxtLink, ProceedButton, ReleasePrice},
     name: 'CartContent',
     props: {
       review: {
