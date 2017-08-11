@@ -50,6 +50,7 @@
           }
           &__shipping {
             margin-top: 1em;
+            display: flex;
             opacity: 0.6;
             font-size: $font-size-xs;
           }

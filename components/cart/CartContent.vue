@@ -30,11 +30,14 @@
                   <div class="release__name">{{ line.release.artistFirstName }} {{ line.release.artistLastName }}</div>
                   <div class="release__title">{{ line.release.title }}</div>
                   <div class="release__shipping">
-                    <template v-if="line.backorder">Shipping as soon as possible</template>
-                    <template v-else-if="line.release.availability.status === 'upcoming'">
-                      Preorder {{line.release.releasedAt}}
-                    </template>
-                    <template v-else>Ready for shipping</template>
+                    <div :class="['product__info__availability', line.release.availability.status]"></div>
+                    <div>
+                      <template v-if="line.backorder">Shipping as soon as possible</template>
+                      <template v-else-if="line.release.availability.status === 'upcoming'">
+                        Preorder {{line.release.releasedAt}}
+                      </template>
+                      <template v-else>Ready for shipping</template>
+                    </div>
                   </div>
                 </div>
               </nuxt-link>
