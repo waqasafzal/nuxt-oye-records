@@ -129,7 +129,9 @@
             password: this.account.password,
             first_name: this.account.firstName,
             last_name: this.account.lastName
-          }, '/')
+          }, () => {
+            this.$emit('account-created')
+          })
         }
       }
     }

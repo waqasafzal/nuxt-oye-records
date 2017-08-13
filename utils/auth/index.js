@@ -38,23 +38,8 @@ export const login = (context, creds, redirect) => {
   })
 }
 
-export const signup = (context, creds, redirect) => {
-  context.$http.post(SIGNUP_URL, creds).then(response => {
-    let data = response.data
-
-    setToken(data.token)
-    context.$store.dispatch('getCart')
-    context.$store.dispatch('getProfile').then((profile) => {
-      context.$store.dispatch('addAlert', {
-        message: `You are now logged in as <em>${profile.firstName} ${profile.lastName}</em>`,
-        level: 'info'
-      })
-    })
-
-    if (redirect) {
-      context.$router.push(redirect)
-    }
-  }, (err) => {
+export const signup = (context, creds, callback) => {
+  context.$http.post(SIGNUP_URL, creds).then(callback, (err) => {
     context.error = err
   })
 }
