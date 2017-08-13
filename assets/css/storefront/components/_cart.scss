@@ -231,6 +231,11 @@
     }
   }
   &__bottom-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding-bottom: 10px;
     margin-top: $global-margin * 2;
     padding-right: $global-padding;
   }
