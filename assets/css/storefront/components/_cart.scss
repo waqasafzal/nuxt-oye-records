@@ -235,7 +235,7 @@
     bottom: 0;
     width: 100%;
     background-color: white;
-    padding-bottom: 10px;
+    padding-bottom: 1em;
     margin-top: $global-margin * 2;
     padding-right: $global-padding;
   }
@@ -277,9 +277,4 @@
   display: inline-block;
   vertical-align: middle;
   height: 100%;
-}
-
-.place-order-btn {
-  margin-top: 2rem !important;
-  margin-bottom: 4rem;
 }

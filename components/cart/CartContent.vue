@@ -124,22 +124,24 @@
           </div>
         </div>
       </template>
-      <template v-if="!review">
         <div class="cart__bottom-bar row">
-          <div class="col-8">
-            <nuxt-link class="cart__continue-button" to="/">
-              <div>
-                <span class="helper"></span>
-                <img src="../../assets/images/arrow_right_green.svg" class="arrow-rotated"/>
-                <span>Continue shopping</span>
+          <!--<template v-if="!review">-->
+            <slot>
+              <div class="col-8">
+                <nuxt-link class="cart__continue-button" to="/">
+                  <div>
+                    <span class="helper"></span>
+                    <img src="../../assets/images/arrow_right_green.svg" class="arrow-rotated"/>
+                    <span>Continue shopping</span>
+                  </div>
+                </nuxt-link>
               </div>
-            </nuxt-link>
-          </div>
-          <div class="col-4">
-            <proceed-button class="cart__checkout-button" @click="$router.push({name: 'checkout'})">Go to checkout</proceed-button>
-          </div>
+              <div class="col-4">
+                <proceed-button class="cart__checkout-button" @click="$router.push({name: 'checkout'})">Go to checkout</proceed-button>
+              </div>
+            </slot>
+          <!--</template>-->
         </div>
-      </template>
     </template>
     <template v-else>
       <div class="cart__empty">

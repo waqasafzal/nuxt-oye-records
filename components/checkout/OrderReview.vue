@@ -2,12 +2,16 @@
   <div class="checkout__review">
     <h3>Review your order</h3>
     <checkout-overview class="checkout__overview"></checkout-overview>
-    <cart-content :review="true"></cart-content>
-    <template v-if="!selectedPaymentMethod">
-      <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Place Order</proceed-button>
-    </template>
-    <template v-else>
-      <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Pay Order</proceed-button></template>
+    <cart-content :review="true">
+      <div class="col-12" style="display: flex; padding-right: 0px;">
+        <template v-if="!selectedPaymentMethod">
+          <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Place Order</proceed-button>
+        </template>
+        <template v-else>
+          <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Pay Order</proceed-button>
+        </template>
+      </div>
+    </cart-content>
   </div>
 </template>
 
