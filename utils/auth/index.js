@@ -30,11 +30,12 @@ export const login = (context, creds, redirect) => {
       context.$router.push(redirect)
     }
   }, err => {
-    context.$store.dispatch('addAlert', {
-      message: 'You did enter the wrong credentials',
-      level: 'error'
-    })
-    console.log('err: ' + err)
+    if (err.status === 400) {
+      context.$store.dispatch('addAlert', {
+        message: 'Unable to login with the provided credentials. <br/> Please make sure you spelled everything correctly and that your user is confirmed.',
+        level: 'error'
+      })
+    }
   })
 }
 
