@@ -251,6 +251,9 @@ const store = new Vuex.Store({
     },
     [types.SET_SHIPPING_OPTIONS]: (state, shippingOptions) => {
       state.userProfile.shipping.options = shippingOptions
+      if (shippingOptions.length > 0 && !state.userProfile.shipping.options) {
+        state.userProfile.shipping.option = shippingOptions[0]
+      }
     },
     [types.SET_SHIPPING_OPTION]: (state, shippingOption) => {
       state.checkout.shipping.option = shippingOption
@@ -360,7 +363,8 @@ const store = new Vuex.Store({
       return state.user && state.user.authenticated && state.user.artists
     },
     cartItemCount (state) {
-      return state.cart && state.cart.quantity || 0
+      var cart = store.getters.getCart
+      return cart && cart.quantity || 0
     },
     isShippingAddressComplete (state) {
       let address = state.checkout.shipping.address
@@ -402,12 +406,15 @@ const store = new Vuex.Store({
     },
     getCheckoutState (state) {
       let order = store.getters.getUnpaidOrder
+
       if (order && !order.isPaid) {
         return 5
       }
+
       if (state.checkout.checkoutState) {
         return state.checkout.checkoutState
       }
+
       var checkoutState = 0
       if (state.checkoutActive) {
         checkoutState = 1
@@ -446,7 +453,9 @@ const store = new Vuex.Store({
       return state.checkout.payment.options
     },
     getShippingOption (state) {
-      return state.checkout.shipping.option
+      let option = state.checkout.shipping.option
+      let options = store.getters.getShippingOptions
+      return option || options && options[0]
     },
     getUnpaidOrder (state) {
       return state.checkout.unpaidOrder
@@ -491,7 +500,8 @@ const store = new Vuex.Store({
       return store.getters.hasShippingChanged || store.getters.hasBillingChanged
     },
     getVat (state) {
-      return state.cart && state.cart.vat
+      var cart = store.getters.getCart
+      return cart && cart.vat
     },
     isVatExcluded (state) {
       return state.checkout.isVatExcluded
@@ -513,6 +523,13 @@ const store = new Vuex.Store({
         }
         return []
       }
+    },
+    getCart (state) {
+      var unpaid = state.checkout.unpaidOrder
+      if (unpaid) {
+        return unpaid.cart
+      }
+      return state.cart
     }
   },
 

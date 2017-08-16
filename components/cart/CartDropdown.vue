@@ -88,7 +88,7 @@
         return this.cart.lines
       },
       cart () {
-        return this.$store.state.cart
+        return this.$store.getters.getCart
       }
     },
     methods: {

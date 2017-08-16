@@ -261,10 +261,29 @@
   }
   &__header {
     margin-bottom: 3em;
+    position: relative;
   }
   &__summary {
     font-weight: 400;
     font-size: 1.5rem;
+  }
+  &__cancel {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    .close {
+      position: relative;
+      margin: auto;
+      margin-right: 5px;
+      width:14px;
+      height:14px;
+      background:
+              -webkit-linear-gradient(-45deg, transparent 0%, transparent 48%, $brand-color-black 48%,  $brand-color-black 52%, transparent 52%, transparent 100%),
+              -webkit-linear-gradient(45deg, transparent 0%, transparent 48%, $brand-color-black 48%,  $brand-color-black 52%, transparent 52%, transparent 100%);
+    }
   }
 }
 

@@ -1,10 +1,10 @@
 <template>
   <div class="navbar__search">
-    <img class="hidden-md-up mobile-search-icon float-right"
+    <img class="d-md-none mobile-search-icon float-right"
          src="../../assets/images/search-icon.svg">
     <div :class="['navbar__brand__search', searchActive ? 'active': '']">
       <form @submit.prevent="onSubmit" :class="['form-inline']">
-        <div class="mobile-close-search hidden-md-up">
+        <div class="mobile-close-search d-md-none">
           <img src="../../assets/images/close-icon.svg">
         </div>
         <input v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"

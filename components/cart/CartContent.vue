@@ -2,7 +2,7 @@
   <div class="cart">
     <template v-if="linesAvailable">
       <template v-if="cart.lines.length > 0">
-        <div class="cart__table-header hidden-sm-down">
+        <div class="cart__table-header d-sm-none">
           <div class="row">
             <div class="col-md-5">
               <h5>Release</h5>
@@ -53,7 +53,7 @@
                     <select class="form-control"
                             name="id_quantity"
                             v-model.lazy="line.quantity"
-                            @change="onChange(line)"
+                            @change="onChange(line, $event)"
                             :value="line.quantity" required>
                       <option :value="n" v-for="n in getQuantityOptions(line.quantity)">{{ n }}</option>
                     </select>
@@ -173,7 +173,7 @@
         return this.cart && (this.cart.lines.length > 0 || this.cart.preorderLines.length > 0)
       },
       cart () {
-        return this.$store.state.cart
+        return this.$store.getters.getCart
       },
       cartUpdating () {
         return this.$store.state.cartUpdating
@@ -196,9 +196,10 @@
       }
     },
     methods: {
-      onChange (line) {
+      onChange (line, event) {
         this.$store.dispatch('updateCart', {
-          line: line
+          line: line,
+          value: event.target.value
         })
       },
       onDelete: function (line) {

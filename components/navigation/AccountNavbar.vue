@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar__account hidden-sm-down">
+  <div class="navbar__account d-sm">
     <div class="container navbar__account-row">
       <div class="navbar__account__oye">
         <div class="ah-link navbar__account__oye__newsletter">
@@ -25,7 +25,7 @@
         </template>
         <div class="ah-link cart">
           <nuxt-link :class="[isVisibleCart ? 'hover': '']" to="/cart" class="cart-link">
-            <span class="cart-label hidden-sm-down">
+            <span class="cart-label d-sm">
               <span>My Cart</span>
               <template v-if="cartCount > 0"> ({{ cartCount }})</template>
             </span>

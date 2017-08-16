@@ -23,7 +23,7 @@ import { setToken } from '../utils/auth/index'
 import { addressEquals } from '../utils/address'
 import { callSaveAddress } from '../components/graphql/user'
 
-export const getCart = ({commit}) => new Promise((resolve, reject) => {
+export const getCart = ({commit, dispatch}) => new Promise((resolve, reject) => {
   apolloClient.mutate({
     mutation: gql`mutation OyeCart {
         syncCart {
@@ -55,7 +55,7 @@ export const getCart = ({commit}) => new Promise((resolve, reject) => {
     if (cart.cookie) {
       Vue.cookie.set('cart', cart.cookie, true)
     }
-    commit(types.SET_CART, cart)
+    dispatch('setCart', {cart: cart})
     let addedItems = data.syncCart.addedItems
     if (addedItems) {
       for (let i = 0; i < addedItems.length; i++) {
@@ -110,22 +110,22 @@ export const addToCart = ({commit}, args) => new Promise((resolve, reject) => {
   ).then(({data}) => {
     addCartAlertMessage('Article successfully added to cart.', 'info', true)
 
-    const r = data && data.addToCart.cart
+    const cart = data && data.addToCart.cart
     Vue.cookie.set('cart', data.addToCart.cart.cookie, true)
-    commit(types.SET_CART, r || null)
-    return resolve(r)
+    commit(types.SET_CART, cart || null)
+    return resolve(cart)
   }).catch(er => reject(er))
 })
 
 export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
   commit(types.CART_UPDATING, true)
   let line = args.line
+  let quantity = args.value
   let release = line.release
-  let preorder = line.preorder
-  let quantity = line.quantity
+  let backorder = line.backorder
   apolloClient.mutate({
-    mutation: gql`mutation ($releasePk: ID!, $quantity: Int! $preorder: Boolean) {
-        updateCart(releasePk: $releasePk, quantity: $quantity, preorder: $preorder) {
+    mutation: gql`mutation ($releasePk: ID!, $quantity: Int! $backorder: Boolean) {
+        updateCart(releasePk: $releasePk, quantity: $quantity, backorder: $backorder) {
             cart {
                 ...OyeCart
             }
@@ -137,7 +137,7 @@ export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
     variables: {
       releasePk: release.pk,
       quantity: quantity,
-      preorder: preorder
+      backorder: backorder
     }
   }).then(({data}) => {
     // dispatch an info that everything was correct
@@ -161,10 +161,10 @@ export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
       addCartAlertMessage(`Removed ${-1 * reorderQuantity} items from preorder.`, 'warning')
     }
 
-    const r = data && data.updateCart.cart
+    const cart = data && data.updateCart.cart
     Vue.cookie.set('cart', data.updateCart.cart.cookie, true)
-    commit(types.SET_CART, r || null)
-    return resolve(r)
+    commit(types.SET_CART, cart || null)
+    return resolve(cart)
   }).catch(er => {
     reject(er)
   })
@@ -311,9 +311,13 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
                 shippingAddress {
                     country
                 }
+                cart {
+                    ...OyeCart
+                }
             }
         }
     }
+    ${oyeCart}
     ${addressFragment}
     ${cardDataFragment}
     `,
@@ -677,8 +681,35 @@ export const saveChart = ({commit}, args) => new Promise((resolve, reject) => {
     }
   })
 })
-//
-//
-// export const registerUser = ({commit}, args) => new Promise((resolve, reject) => {
-//
-// })
+
+export const cancelOrder = ({commit}, args) => new Promise((resolve, reject) => {
+  apolloClient.mutate({
+    mutation: gql`mutation ($orderId: ID!) {
+        cancelOrder(orderId: $orderId) {
+            cart {
+                ...OyeCart
+            }
+        }
+    }
+    ${oyeCart}
+    `,
+    variables: {
+      orderId: args.id
+    }
+  }).then(
+    ({data}) => {
+      commit(types.SET_UNPAID_ORDER, null)
+      commit(types.SET_CART, data.cancelOrder.cart)
+      commit(types.SET_CURRENT_CHECKOUT_STATE, 4)
+    }
+  )
+})
+
+export const setCart = ({commit}, args) => new Promise((resolve, reject) => {
+  var cart = args.cart
+  commit(types.SET_CART, cart)
+  commit(types.SET_SHIPPING_OPTION, null)
+  if (cart && cart.shippingOptions) {
+    commit(types.SET_SHIPPING_OPTIONS, cart.shippingOptions.options)
+  }
+})

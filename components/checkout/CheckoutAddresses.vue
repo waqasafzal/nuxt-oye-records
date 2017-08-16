@@ -232,7 +232,7 @@
     mounted () {
       let shippingOptions = this.$store.getters.getShippingOptions
       if (shippingOptions.length > 0) {
-        this.shippingMethod = shippingOptions[0].name
+        this.shippingMethod = shippingOptions[0]
       }
     }
   }

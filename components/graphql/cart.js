@@ -5,6 +5,16 @@
 import gql from 'graphql-tag'
 import {release} from '~/components/graphql/releases'
 
+export const order = gql`
+    fragment Order on OrderType {
+        id
+        price
+        porto
+        isPaid
+        paymentType
+    }
+`
+
 export const oyeCart = gql`
     fragment OyeCart on OyeCartType {
         pk
@@ -44,5 +54,5 @@ export const oyeCart = gql`
             }
         }
     }
-  ${release}
+    ${release}
 `

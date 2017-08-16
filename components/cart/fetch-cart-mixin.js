@@ -5,7 +5,7 @@
 const fetchCart = {
   mounted () {
     const store = this.$store
-    if (!store.state.cart) {
+    if (!store.getters.getCart) {
       store.dispatch('getCart').catch(e => console.log(e))
     }
   }

@@ -42,7 +42,8 @@
         return lines
       },
       paymentOption () {
-        return this.$store.getters.getSelectedPaymentOption
+        let selectedPaymentOption = this.$store.getters.getSelectedPaymentOption
+        return selectedPaymentOption || this.$store.getters.getPaymentOptions[0]
       },
       paymentOptionLines () {
         let selectedPaymentOption = this.paymentOption

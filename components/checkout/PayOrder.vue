@@ -4,6 +4,9 @@
       <div class="col-12 checkout__content__col centered-form-panel pay-order__panel">
         <div class="pay-order__header">
           <h3>Order Payment</h3>
+          <div class="pay-order__cancel" @click="onCancel">
+              <div class="close"></div><span>Cancel</span>
+          </div>
           <div class="pay-order__summary">You have an unpaid order over {{ totalAmount }} &euro;</div>
         </div>
         <component :is="selectedPaymentView"></component>
@@ -36,6 +39,11 @@
       },
       order () {
         return this.$store.getters.getUnpaidOrder
+      }
+    },
+    methods: {
+      onCancel () {
+        this.$store.dispatch('cancelOrder', {id: this.order.id})
       }
     }
   }

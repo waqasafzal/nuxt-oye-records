@@ -21,7 +21,7 @@
   import * as types from '../../store/types'
   import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
-  import { oyeCart } from '../graphql/cart'
+  import { order, oyeCart } from '../graphql/cart'
   import CheckoutOverview from './CheckoutOverview'
 
   export default {
@@ -33,7 +33,7 @@
         return shippingOption && shippingOption.id === '-1'
       },
       cartId () {
-        return this.$store.state.cart.pk
+        return this.$store.getters.getCart.pk
       },
       porto () {
         let shippingOption = this.$store.getters.getShippingOption
@@ -63,11 +63,7 @@
           mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID, $vatExcluded: Boolean) {
             placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId, vatExcluded: $vatExcluded) {
               order {
-                id
-                price
-                porto
-                isPaid
-                paymentType
+                ...Order
               }
               notInStock {
                 quantity
@@ -82,6 +78,7 @@
               }
             }
           }
+          ${order}
           ${oyeCart}
           `,
           variables: {
@@ -111,7 +108,7 @@
               this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
             }
             // set the new cart
-            this.$store.commit(types.SET_CART, data.placeOrder.cart)
+//            this.$store.dispatch('setCart', {cart: data.placeOrder.cart})
           }
         )
       }

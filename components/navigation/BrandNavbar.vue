@@ -3,13 +3,13 @@
     <div class="container navbar__brand-box">
       <div class="row no-gutters">
         <div class="col-8 col-md-1 navbar__logo">
-          <div class="menu-icon-mobile hidden-md-up">
+          <div class="menu-icon-mobile d-md-none">
             <img class="navbar__brand__menu-toggle closed open"
                  src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav" v-on-clickaway="closeMobileNav">
             <span>menu</span>
           </div>
           <nuxt-link :class="[isCheckout ? 'not-active': '']" to="/">
-            <img src="../../assets/images/oye_logo.svg" alt="Oye Records"
+            <img :src="`${oyeLogo}`" alt="Oye Records"
                  height="50">
           </nuxt-link>
         </div>
@@ -29,13 +29,16 @@
 
   Vue.component('cart-dropdown', CartDropdown)
 
+  const oyeLogo = require('../../assets/images/oye_logo.svg')
+
   export default {
     components: {Search, MainNavbar},
     name: 'BrandNavbar',
     mixins: [ clickaway ],
     data: function () {
       return {
-        isVisibleCart: false
+        isVisibleCart: false,
+        oyeLogo: oyeLogo
       }
     },
     methods: {
@@ -54,7 +57,7 @@
     },
     computed: {
       cartCount () {
-        var cart = this.$store.state.cart
+        var cart = this.$store.state.getters.getCart
         return cart ? cart.quantity : 0
       },
       isCheckout () {
