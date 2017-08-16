@@ -23,6 +23,43 @@ import { setToken } from '../utils/auth/index'
 import { addressEquals } from '../utils/address'
 import { callSaveAddress } from '../components/graphql/user'
 
+function runEmailValidation (email, commit) {
+  var ok = true
+  if (!email) {
+    commit(types.SET_USER_FORM_EMAIL_ERROR, 'Email should not be empty')
+    ok = false
+  } else {
+    var valid = validateEmail(email)
+    if (!valid) {
+      commit(types.SET_USER_FORM_EMAIL_ERROR, 'Email pattern is not valid')
+      ok = false
+    } else {
+      commit(types.SET_USER_FORM_EMAIL_ERROR, null)
+    }
+  }
+  return ok
+}
+
+function runPasswordValidation (commit, password, passwordConfirm) {
+  var ok = true
+  if (!password || password.length < 8) {
+    commit(types.SET_USER_FORM_PWD_ERROR, 'Password should have at least 8 characters')
+    ok = false
+  } else if (password.search(/[!#$%^&+=?]/) < 0 || password.search(/[0-9]/) < 0) {
+    commit(types.SET_USER_FORM_PWD_ERROR, 'Password must contain at least one digit and one of these special chars: !#$%^&+=?')
+    ok = false
+  } else {
+    commit(types.SET_USER_FORM_PWD_ERROR, null)
+  }
+  if (password && password !== passwordConfirm) {
+    commit(types.SET_USER_FORM_PWD_CONFIRM_ERROR, 'Password confirmation does not match')
+    ok = false
+  } else {
+    commit(types.SET_USER_FORM_PWD_CONFIRM_ERROR, null)
+  }
+  return ok
+}
+
 export const getCart = ({commit, dispatch}) => new Promise((resolve, reject) => {
   apolloClient.mutate({
     mutation: gql`mutation OyeCart {
@@ -451,34 +488,9 @@ export const validateUserForm = ({commit}, args) => new Promise((resolve, reject
     }
   }
 
-  let password = user.password
-  if (!password || password.length < 8) {
-    commit(types.SET_USER_FORM_PWD_ERROR, 'Password should have at least 8 characters')
-    ok = false
-  } else if (password.search(/[!#$%^&+=?]/) < 0 || password.search(/[0-9]/) < 0) {
-    commit(types.SET_USER_FORM_PWD_ERROR, 'Password must contain at least one digit and one of these special chars: !#$%^&+=?')
-    ok = false
-  } else {
-    commit(types.SET_USER_FORM_PWD_ERROR, null)
-  }
-  if (password && password !== user.passwordConfirm) {
-    commit(types.SET_USER_FORM_PWD_CONFIRM_ERROR, 'Password confirmation does not match')
-    ok = false
-  } else {
-    commit(types.SET_USER_FORM_PWD_CONFIRM_ERROR, null)
-  }
-  if (!user.email) {
-    commit(types.SET_USER_FORM_EMAIL_ERROR, 'Email should not be empty')
-    ok = false
-  } else {
-    var valid = validateEmail(user.email)
-    if (!valid) {
-      commit(types.SET_USER_FORM_EMAIL_ERROR, 'Email pattern is not valid')
-      ok = false
-    } else {
-      commit(types.SET_USER_FORM_EMAIL_ERROR, null)
-    }
-  }
+  ok = ok && runPasswordValidation(user.password, user.passwordConfirm)
+  ok = ok && runEmailValidation(user.email, commit)
+
   return resolve(ok)
 })
 
@@ -712,4 +724,12 @@ export const setCart = ({commit}, args) => new Promise((resolve, reject) => {
   if (cart && cart.shippingOptions) {
     commit(types.SET_SHIPPING_OPTIONS, cart.shippingOptions.options)
   }
+})
+
+export const emailValidation = ({commit}, args) => new Promise((resolve, reject) => {
+  resolve(runEmailValidation(args.email, commit))
+})
+
+export const passwordValidation = ({commit}, args) => new Promise((resolve, reject) => {
+  resolve(runPasswordValidation(commit, args.password, args.passwordConfirm))
 })

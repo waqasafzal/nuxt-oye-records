@@ -7,6 +7,8 @@ import * as types from '../../store/types'
 const LOGIN_URL = __API__ + '/oye/api-token-auth/'
 const LOGOUT_URL = __API__ + '/oye/api-token-logout/'
 const SIGNUP_URL = __API__ + '/oye/signup/'
+const RESET_URL = __API__ + '/oye/password-reset/'
+const CHANGE_PASSWORD_URL = __API__ + '/oye/change-password/'
 
 // User object will let us check authentication status
 
@@ -78,7 +80,7 @@ export const getAuthHeader = () => {
     var decoded = jwtDecode(jwt)
     if (decoded) {
       if (jwtUpToDate(decoded)) {
-        return 'JWT ' + localStorage.getItem('token')
+        return 'JWT ' + jwt
       } else {
         unsetToken()
       }
@@ -88,7 +90,6 @@ export const getAuthHeader = () => {
 
 export const setToken = (token) => {
   if (process.SERVER_BUILD) return
-  window.localStorage.setItem('token', token)
   let decodedToken = jwtDecode(token)
   window.localStorage.setItem('user', JSON.stringify(decodedToken))
   Vue.cookie.set('jwt', token)
@@ -101,7 +102,6 @@ export const setToken = (token) => {
 
 export const unsetToken = () => {
   if (process.SERVER_BUILD) return
-  window.localStorage.removeItem('token')
   window.localStorage.removeItem('user')
   Vue.cookie.delete('jwt')
   store.commit(types.RESET_USER_DATA)
@@ -136,4 +136,18 @@ export const jwtUpToDate = (jwt) => {
   let expMs = jwt['exp'] * 1000
   let in30Secs = Date.now() + 30 * 1000
   return new Date(expMs) > new Date(in30Secs)
+}
+
+export const resetEmail = (context, email, callback) => {
+  context.$http.post(RESET_URL, {email: email}).then(callback)
+}
+
+export const changePassword = (context, password, callback) => {
+  context.$http.post(
+    CHANGE_PASSWORD_URL,
+    {password: password},
+    {headers: {
+      'Authorization': getAuthHeader()
+    }}
+  ).then(callback)
 }

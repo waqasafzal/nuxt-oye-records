@@ -1,8 +1,8 @@
 <template>
-  <div class="order-complete">
+  <div class="complete">
     <h2>Thank you for your order!</h2>
     <h3>Order number: <span class="order-complete__number">#{{orderNo}}</span></h3>
-    <div class="order-complete__summary">
+    <div class="complete__summary">
       Your order has been placed and is being processed.
       <div v-if="!isSelfCollector">When the item(s) are shipped, you will receive an
         email with the details. You can track this order
