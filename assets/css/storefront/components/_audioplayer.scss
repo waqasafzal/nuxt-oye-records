@@ -188,7 +188,7 @@
   color: $gray-color-1
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
+@media screen {
   input[type="range"] {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -198,6 +198,20 @@
     margin-top: -8px;
     background-color: transparent;
     border: none;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+
+  input[type=range]::-moz-range-thumb {
+    position: relative;
+    width: 0;
+    height: 0;
+  }
+
+  input[type=range]::-moz-focus-outer {
+    border: 0;
   }
 
   input[type='range']::-webkit-slider-runnable-track {
@@ -215,7 +229,7 @@
     position: relative;
     width: 1px;
     -webkit-appearance: none;
-    -moz-appearance: none;
+    //-moz-appearance: none;
     height: 22px;
     //cursor: e-resize;
   }
