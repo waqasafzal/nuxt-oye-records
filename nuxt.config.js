@@ -143,7 +143,7 @@ module.exports = {
     {src: '~plugins/ga', ssr: false}
   ],
   router: {
-    middleware: ['check-auth', 'check-unpaid', 'payment-duty'],
+    middleware: ['check-auth', 'payment-duty'],
     extendRoutes (routes, resolve) {
       routes.push(
         {

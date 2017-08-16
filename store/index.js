@@ -277,11 +277,6 @@ const store = new Vuex.Store({
     },
     [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
       state.checkout.unpaidOrder = unpaidOrder
-      if (unpaidOrder) {
-        window.localStorage.setItem('unpaid', JSON.stringify(unpaidOrder))
-      } else {
-        window.localStorage.removeItem('unpaid')
-      }
       if (unpaidOrder && unpaidOrder.shippingCountry) {
         state.shippingCountry = unpaidOrder.shippingCountry
       }
@@ -300,7 +295,6 @@ const store = new Vuex.Store({
       state.userProfile = getInitialUserProfile()
       state.checkout = getInitialCheckout()
       state.cart = null
-      window.localStorage.removeItem('unpaid')
     },
     [types.SET_SHIPPING_ADDRESS_ID]: (state, id) => {
       if (state.checkout.shipping.address) {
