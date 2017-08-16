@@ -38,8 +38,8 @@
           <img @click="togglePasswordVisible" class="passIcon" src="../../assets/images/pass-invisible.svg"/>
         </div>
       </fieldset>
-      <div class="row btn-row">
-        <div class="col-12 col-md-6 login__form__btn__login">
+      <div :class="['row', 'btn-row', !register ? 'no-gutters': '']">
+        <div :class="['col-12', 'col-md-6', register ? 'login__form__btn__login': '']">
           <button type="submit" form="login" class="btn primary">Login</button>
         </div>
         <div v-if="register" class="col-12 col-md-6 login__form__btn__register">

@@ -277,7 +277,11 @@ const store = new Vuex.Store({
     },
     [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
       state.checkout.unpaidOrder = unpaidOrder
-      window.localStorage.setItem('unpaid', JSON.stringify(unpaidOrder))
+      if (unpaidOrder) {
+        window.localStorage.setItem('unpaid', JSON.stringify(unpaidOrder))
+      } else {
+        window.localStorage.removeItem('unpaid')
+      }
       if (unpaidOrder && unpaidOrder.shippingCountry) {
         state.shippingCountry = unpaidOrder.shippingCountry
       }

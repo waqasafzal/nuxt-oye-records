@@ -70,24 +70,24 @@
           </div>
         </div>
         <div class="cart__subtotal">
-          <div class="row">
-            <div class="col-2 offset-8 cart__total__subtotal cart__line__cell">
+          <div class="row justify-content-end">
+            <div class="col-2 cart__total__subtotal cart__line__cell">
               <h4 class="cart-cell-center">Subtotal</h4>
             </div>
             <div class="col-1 cart__line__cell">
               <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(cart.totalAvailableNet) }} &euro;</h4>
             </div>
           </div>
-          <div v-if="review" class="row">
-            <div class="col-2 offset-8 cart__line__cell">
+          <div v-if="review" class="row justify-content-end">
+            <div class="col-2 cart__line__cell">
               <h4 class="cart-cell-center">Shipping</h4>
             </div>
             <div class="col-1 cart__line__cell">
               <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(shipping) }} &euro;</h4>
             </div>
           </div>
-          <div class="row cart__vat">
-            <div :class="[vatExcluded ? 'col-3': 'col-2', 'offset-8', 'cart__line__cell', 'cart__vat__title']">
+          <div class="row justify-content-end cart__vat">
+            <div :class="[vatExcluded ? 'col-3': 'col-2', 'cart__line__cell', 'cart__vat__title']">
               <span class="cart-cell-center">
                 <template v-if="!vatExcluded">
                   incl. VAT (19%)
@@ -103,8 +103,8 @@
           </div>
         </div>
         <div class="cart__total">
-          <div class="row">
-            <div class="col-2 offset-8 cart__line__cell">
+          <div class="row justify-content-end">
+            <div class="col-2 cart__line__cell">
               <h4 class="cart-cell-center">Total</h4>
             </div>
             <div class="col-1 cart__line__cell">
@@ -146,7 +146,7 @@
     <template v-else>
       <div class="cart__empty">
         <h1>Looks like your cart is empty.</h1>
-        <nuxt-link to="/"><div class="btn btn-primary">Start Shopping</div></nuxt-link>
+        <nuxt-link to="/"><div class="btn primary">Start Shopping</div></nuxt-link>
       </div>
     </template>
   </div>
