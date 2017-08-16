@@ -205,7 +205,7 @@
       onDelete: function (line) {
         this.$store.dispatch('removeCartLine', {
           pk: line.release.pk,
-          preorder: line.preorder
+          backorder: line.backorder
         })
       },
       getPrice: function (price) {

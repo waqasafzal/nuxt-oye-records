@@ -367,8 +367,7 @@ const store = new Vuex.Store({
       return state.user && state.user.authenticated && state.user.artists
     },
     cartItemCount (state) {
-      var cart = store.getters.getCart
-      return cart && cart.quantity || 0
+      return state.cart && state.cart.quantity || 0
     },
     isShippingAddressComplete (state) {
       let address = state.checkout.shipping.address
@@ -529,10 +528,6 @@ const store = new Vuex.Store({
       }
     },
     getCart (state) {
-      var unpaid = state.checkout.unpaidOrder
-      if (unpaid) {
-        return unpaid.cart
-      }
       return state.cart
     }
   },

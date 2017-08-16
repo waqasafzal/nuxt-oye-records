@@ -170,10 +170,10 @@ export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
   })
 })
 
-export const removeCartLine = ({commit}, args) => new Promise((resolve, reject) => {
+export const removeCartLine = ({commit, dispatch}, args) => new Promise((resolve, reject) => {
   apolloClient.mutate({
-    mutation: gql`mutation ($releasePk: ID!, $preorder: Boolean) {
-        removeRelease(releasePk: $releasePk, preorder: $preorder) {
+    mutation: gql`mutation ($releasePk: ID!, $backorder: Boolean) {
+        removeRelease(releasePk: $releasePk, backorder: $backorder) {
             cart {
                 ...OyeCart
             }
@@ -182,14 +182,14 @@ export const removeCartLine = ({commit}, args) => new Promise((resolve, reject) 
     ${oyeCart}`,
     variables: {
       releasePk: args.pk,
-      preorder: args.preorder
+      backorder: args.backorder
     }
   }).then(({data}) => {
     addCartAlertMessage('Article successfully removed from cart.', 'info')
 
     const r = data && data.removeRelease.cart
     Vue.cookie.set('cart', data.removeRelease.cart.cookie, true)
-    commit(types.SET_CART, r || null)
+    dispatch('setCart', {cart: r || null})
     return resolve(r)
   }).catch(er => reject(er))
 })
