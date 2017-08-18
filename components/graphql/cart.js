@@ -8,7 +8,11 @@ import {release} from '~/components/graphql/releases'
 export const order = gql`
     fragment Order on OrderType {
         id
+        pk
         price
+        date
+        total
+        status
         porto
         isPaid
         paymentType

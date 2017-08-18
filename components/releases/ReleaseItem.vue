@@ -25,7 +25,6 @@
             <add-to-cart-button :release="release" class="release__button-bar__add-to-cart release-list-add"></add-to-cart-button>
 
           </div>
-
         </div>
       </div>
     </nuxt-link>

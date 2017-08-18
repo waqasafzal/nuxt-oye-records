@@ -27,7 +27,6 @@ a.btn {
   &.primary {
     background-color: $brand-color-green;
     color: $white;
-    //width: 266px;
     padding: 0 $global-padding * 4;
     font-weight: 300;
     &:hover {
@@ -42,13 +41,13 @@ a.btn {
     //}
   }
   &.secondary {
-    border: 1px solid $blue;
-    padding: $global-padding $global-padding * 2;
+    border: 1px solid $brand-color-green;
+    padding: $global-padding $global-padding * 2 !important;
     background-color: transparent;
-    color: $blue;
+    color: $brand-color-green;
     &:hover {
-      border-color: darken($blue, 10%);
-      color: darken($blue, 10%);
+      border-color: darken($brand-color-green, 10%);
+      color: darken($brand-color-green, 10%);
     }
   }
   &.danger {
@@ -81,5 +80,15 @@ a.btn {
     margin-left: 0px;
     margin-right: 0px;
     justify-content: space-between;
+  }
+}
+
+.btn-next {
+  line-height: 16px;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  &.disabled {
+    cursor: not-allowed;
   }
 }

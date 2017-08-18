@@ -40,6 +40,7 @@ var isEmptyAddress = function (address) {
 const store = new Vuex.Store({
 
   state: {
+    accountView: 'Addresses',
     cart: null,
     cartUpdating: false,
     countries: null,
@@ -347,6 +348,9 @@ const store = new Vuex.Store({
     },
     [types.SET_VAT_EXCLUDED]: (state, isVatExcluded) => {
       state.checkout.isVatExcluded = isVatExcluded
+    },
+    [types.SET_CURRENT_ACCOUNT_VIEW]: (state, viewName) => {
+      state.accountView = viewName
     }
   },
 
