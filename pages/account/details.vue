@@ -1,6 +1,6 @@
 <template>
   <div class="account">
-    <h1>{{ currentItem }}</h1>
+    <h1>Account - {{ currentItem }}</h1>
     <div class="row no-gutters justify-content-between">
       <div class="col-2">
         <div class="account__nav">
