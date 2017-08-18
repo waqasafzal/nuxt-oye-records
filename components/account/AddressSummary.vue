@@ -7,8 +7,8 @@
     <div class="summary__body">
       <div class="name">{{address.firstName}} {{address.lastName}}</div>
       <div class="street">{{address.street}} {{address.number}}</div>
-      <div class="street">{{address.zip}} {{address.city}}</div>
-      <div class="street">{{address.country}}</div>
+      <div class="zip">{{address.zip}} {{address.city}}</div>
+      <div class="country">{{address.country}}</div>
       <loading-spinner :loading="loading"></loading-spinner>
     </div>
   </div>
@@ -22,7 +22,8 @@
     props: ['address'],
     data: function () {
       return {
-        loading: true
+        loading: false,
+        loaded: false
       }
     },
     methods: {
@@ -30,7 +31,11 @@
         this.$emit('change-address')
       }
     },
-    beforeMount () {
+    created () {
+      if (!this.loaded) {
+        this.loading = true
+        this.loaded = true
+      }
     },
     updated () {
       this.loading = false
