@@ -342,6 +342,7 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
             }
             unpaidOrder {
                 id
+                pk
                 price
                 porto
                 paymentType

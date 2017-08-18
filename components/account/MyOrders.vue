@@ -66,7 +66,7 @@
     computed: {
       loadingText () {
         if (this.isLoading) {
-          return 'Loading'
+          return 'Loading...'
         } else if (this.hasNext) {
           return 'Show more'
         } else {

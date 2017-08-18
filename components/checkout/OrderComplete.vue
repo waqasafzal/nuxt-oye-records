@@ -17,7 +17,7 @@
   export default {
     name: 'OrderComplete',
     data: function () {
-      var orderNo = this.$store.getters.getUnpaidOrder.id
+      var orderNo = this.$store.getters.getUnpaidOrder.pk
       this.$store.commit(types.SET_UNPAID_ORDER, null)
       return {
         orderNo: orderNo
