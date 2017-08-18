@@ -1,5 +1,5 @@
 <template>
-  <div class="account">
+  <div v-if="this.$store.getters.isAuthenticated" class="account">
     <h1>Account - {{ currentItem }}</h1>
     <div class="row no-gutters justify-content-between">
       <div class="col-2">
@@ -147,7 +147,7 @@
         this.currentItem = item
       },
       onLogout () {
-        logout(this)
+        logout(this, '/')
       }
     }
   }

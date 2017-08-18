@@ -48,7 +48,7 @@ export const signup = (context, creds, callback) => {
 }
 
 // To log out, we just need to remove the token
-export const logout = function (context) {
+export const logout = function (context, redirect) {
   let headers = {
     Authorization: getAuthHeader()
   }
@@ -71,6 +71,7 @@ export const logout = function (context) {
     unsetToken()
     console.error('err: ' + err)
   })
+  context.$router.push(redirect)
 }
 
 // The object to be passed as a header for authenticated requests
