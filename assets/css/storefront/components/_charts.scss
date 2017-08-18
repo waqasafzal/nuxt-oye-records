@@ -346,4 +346,26 @@ $bestseller-item-padding: 7px;
     padding-bottom: 3em;
     border-bottom: 1px solid $gray-color-2;
   }
+  &__table {
+    font-weight: normal;
+  }
+}
+
+.chart-row {
+  &__name {
+    color: $brand-color-green;
+  }
+  &__category {
+    text-transform: capitalize;
+  }
+}
+
+.add-charts-btn {
+  margin-top: auto;
+  margin-bottom: 2rem;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  font-size: $font-size-h5;
+  height: 42px;
+  line-height: 42px;
 }

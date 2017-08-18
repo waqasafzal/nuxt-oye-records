@@ -2,7 +2,7 @@
   <div class="order">
     <div class="d-flex justify-content-between">
       <h3>
-        Order #{{order.pk}}
+        Order #{{order.pk}} ({{order.date}})
       </h3>
       <div class="download">Download invoice</div>
     </div>

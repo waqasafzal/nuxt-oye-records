@@ -684,6 +684,7 @@ export const saveChart = ({commit}, args) => new Promise((resolve, reject) => {
     }
   }).then(({data}) => {
     addCartAlertMessage('Charts were successfully saved.', 'info')
+    resolve(data)
   }).catch((err) => {
     console.log(JSON.stringify(err))
     for (var i = 0; i < err.graphQLErrors.length; i++) {

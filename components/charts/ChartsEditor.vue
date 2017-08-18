@@ -223,20 +223,9 @@
         this.$store.dispatch('saveChart', {
           charts: JSON.stringify(this.currentCharts),
           artistId: this.artist && this.artist.pk
+        }).then(() => {
+          this.$emit('charts-saved')
         })
-//        client.mutate({
-//          mutation: gql`mutation ($charts: JSONString!, $artistId: Int) {
-//            saveCharts(charts: $charts, artistId: $artistId) {
-//                ok
-//            }
-//        }`,
-//          variables: {
-//            charts: JSON.stringify(this.currentCharts),
-//            artistId: this.artist && this.artist.pk
-//          }
-//        }).then(({data}) => {
-//          addCartAlertMessage('Charts were successfully saved.', 'info')
-//        })
       },
       enableBlur () {
         this.blurEnabled = true

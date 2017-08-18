@@ -20,6 +20,7 @@
   }
   &__menu-item {
     cursor: pointer;
+    font-weight: normal;
     &:hover {
       color: $brand-color-green;
     }

@@ -18,8 +18,10 @@
           <td>{{order.node.status}}</td>
           <td>{{order.node.total}}&euro;</td>
           <td class="d-flex">
-            <div :class="['close-btn', selectedOrder === order ? '': 'hidden']">
-              <div class="text">Close</div>
+            <div :class="['detail-btn', selectedOrder === order ? 'close': 'view']">
+              <div class="text">
+                {{selectedOrder === order ? 'Close': 'View'}}
+              </div>
             </div>
           </td>
         </tr>
