@@ -44,9 +44,7 @@
 </template>
 
 <script>
-  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
   export default {
-    components: {NuxtLink},
     name: 'Order',
     props: ['order']
   }
