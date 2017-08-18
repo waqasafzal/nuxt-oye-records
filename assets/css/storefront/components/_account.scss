@@ -20,5 +20,8 @@
   }
   &__menu-item {
     cursor: pointer;
+    &:hover {
+      color: $brand-color-green;
+    }
   }
 }

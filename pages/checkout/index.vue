@@ -7,10 +7,6 @@
 </template>
 
 <script>
-  import apolloClient from '~/plugins/apollo'
-  import gql from 'graphql-tag'
-  import store from '~/store'
-  import * as types from '~/store/types'
   import CheckoutImpossible from '~/components/checkout/CheckoutImpossible'
   import CheckoutMethod from '~/components/checkout/CheckoutMethod'
   import CheckoutPayment from '~/components/checkout/CheckoutPayment'
@@ -41,18 +37,18 @@
         return currentCheckoutView
       }
     },
-    async asyncData ({params}) {
-      var {data} = await apolloClient.query({
-        query: gql`query Country {
-          countries {
-            name
-          }
-        }
-        `
-      })
-      store.commit(types.SET_COUNTRIES, data.countries)
-      return {}
-    },
+//    async asyncData ({params}) {
+//      var {data} = await apolloClient.query({
+//        query: gql`query Country {
+//          countries {
+//            name
+//          }
+//        }
+//        `
+//      })
+//      store.commit(types.SET_COUNTRIES, data.countries)
+//      return {}
+//    },
     watch: {
       currentCheckoutView (view) {
         if (this.checkoutView === CheckoutAddresses && this.checkoutView !== view) {

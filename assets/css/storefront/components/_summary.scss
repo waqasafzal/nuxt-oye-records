@@ -1,0 +1,31 @@
+.summary {
+  border: 1px solid $gray-color-2;
+  height: 100%;
+  font-weight: normal;
+  &__header {
+    padding: 1rem 1.5rem;
+    background-color: $gray-color-2;
+    font-size: $font-size-sm !important;
+    line-height: 14px;
+    .category {
+      text-transform: uppercase;
+      margin-bottom: 0;
+      font-size: $font-size-sm !important;
+    }
+    .change {
+      color: $brand-color-green;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  &__body {
+    padding-top: 1.5rem;
+    padding-bottom: 4rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

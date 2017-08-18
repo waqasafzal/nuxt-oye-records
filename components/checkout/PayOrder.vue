@@ -43,7 +43,7 @@
     },
     methods: {
       onCancel () {
-        this.$store.dispatch('cancelOrder', {id: this.order.id})
+        this.$store.dispatch('cancelOrder', {id: this.order.pk})
       }
     }
   }

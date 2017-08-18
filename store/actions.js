@@ -734,3 +734,21 @@ export const emailValidation = ({commit}, args) => new Promise((resolve, reject)
 export const passwordValidation = ({commit}, args) => new Promise((resolve, reject) => {
   resolve(runPasswordValidation(commit, args.password, args.passwordConfirm))
 })
+
+export const getCountries = ({commit, state}, args) => new Promise((resolve, reject) => {
+  if (!state.countries) {
+    apolloClient.query({
+      query: gql`query Country {
+          countries {
+              name
+          }
+      }
+      `
+    }).then(({data}) => {
+      commit(types.SET_COUNTRIES, data.countries)
+      resolve(data.coutries)
+    })
+  } else {
+    resolve(state.countries)
+  }
+})

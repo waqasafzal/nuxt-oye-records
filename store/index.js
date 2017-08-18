@@ -393,7 +393,8 @@ const store = new Vuex.Store({
         state.userProfile.shipping.addresses && state.userProfile.shipping.addresses.length > 0 && state.userProfile.shipping.addresses[0]
     },
     getBillingAddress (state) {
-      return state.checkout.billing.address
+      return state.checkout.billing.address ||
+        state.userProfile.billing.addresses && state.userProfile.billing.addresses.length > 0 && state.userProfile.billing.addresses[0]
     },
     getBillingAddressValidation (state) {
       return state.checkout.billing.validation

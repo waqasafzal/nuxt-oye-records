@@ -83,7 +83,7 @@
         </select>
         <div v-if="countryError" class="error">{{ countryError }}</div>
       </div>
-      <div class="checkbox-panel" v-if="addressType === 'shipping'" @change="onSeperateBillingChange">
+      <div class="checkbox-panel" v-if="showToggle && addressType === 'shipping'" @change="onSeperateBillingChange">
         <input type="checkbox"
                id="seperate-billing"
                name="seperate-billing"/>
@@ -103,13 +103,13 @@
         type: String,
         default: 'shipping'
       },
-      countries: {
-        type: Array,
-        default: []
-      },
       focussed: {
         type: Boolean,
         default: false
+      },
+      showToggle: {
+        type: Boolean,
+        default: true
       },
       validation: Object
     },
@@ -118,7 +118,7 @@
       return {
         address: address,
         seperateBilling: false,
-        country: null
+        country: address.country
       }
     },
     computed: {
@@ -142,13 +142,15 @@
       },
       countryError () {
         return this.validation.country
+      },
+      countries () {
+        return this.$store.state.countries
       }
     },
     watch: {
       stateAddress (value) {
         if (!this.country) {
           this.country = value.country
-          this.$emit('country-selected', this.country)
         }
         let address = this.getAddressData()
         if (!addressEquals(this.address, address)) {
@@ -162,6 +164,9 @@
         if (value) {
           this.focus()
         }
+      },
+      country (value) {
+        this.$emit('country-selected', value)
       }
     },
     methods: {
@@ -221,6 +226,7 @@
       if (this.focussed) {
         this.focus()
       }
+      this.$store.dispatch('getCountries')
     }
   }
 </script>
