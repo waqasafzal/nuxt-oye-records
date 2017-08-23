@@ -43,7 +43,8 @@
       },
       paymentOption () {
         let selectedPaymentOption = this.$store.getters.getSelectedPaymentOption
-        return selectedPaymentOption || this.$store.getters.getPaymentOptions[0]
+        let paymentOptions = this.$store.getters.getPaymentOptions
+        return selectedPaymentOption || paymentOptions && paymentOptions[0]
       },
       paymentOptionLines () {
         let selectedPaymentOption = this.paymentOption
