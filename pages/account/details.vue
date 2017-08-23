@@ -88,6 +88,11 @@
         editChartsMode: false
       }
     },
+    watch: {
+      $route (options) {
+        this.processRoute(options)
+      }
+    },
     computed: {
       user () {
         return this.$store.state.user
@@ -109,6 +114,8 @@
       }
     },
     mounted () {
+      this.processRoute(this.$route)
+
       var vm = this
       client.query({
         query: gql`query Account($month: Int!) {
@@ -162,6 +169,13 @@
       },
       onChartsSaved () {
         this.editChartsMode = false
+      },
+      processRoute (route) {
+        let params = route.params
+        let item = params.page
+        if (item) {
+          this.$store.commit(types.SET_CURRENT_ACCOUNT_VIEW, item)
+        }
       }
     }
   }

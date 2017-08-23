@@ -12,8 +12,6 @@ if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
   process.env.NODE_ENV = 'production'
 }
 
-console.log('NODE_ENV ' + process.env.NODE_ENV)
-
 var setupAPI = function () {
   apiHost = "'http://localhost:8000'"
   switch (process.env.NODE_ENV) {

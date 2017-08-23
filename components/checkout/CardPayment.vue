@@ -128,7 +128,7 @@
               message: 'Your payment data was invalid.',
               level: 'error'
             })
-            console.log('err: ' + err)
+            console.error('err: ' + err)
           })
         }
       }

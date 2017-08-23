@@ -6,7 +6,7 @@
       Your order has been placed and is being processed.
       <div v-if="!isSelfCollector">When the item(s) are shipped, you will receive an
         email with the details. You can track this order
-        through <nuxt-link to="/">my orders</nuxt-link> page.</div>
+        through <nuxt-link :to="{name: 'account-details', params: {page: 'My Orders'}}">my orders</nuxt-link> page.</div>
       <div v-else>When the item(s) are ready for pick up, you will receive an email.</div>
     </div>
   </div>
