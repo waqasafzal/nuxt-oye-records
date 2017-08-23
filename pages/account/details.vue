@@ -18,28 +18,6 @@
       </div>
     </div>
   </div>
-  <!--<div class="row">-->
-    <!--<div class="col-12">-->
-      <!--<div class="page__header">Account</div>-->
-      <!--{{ user.name }}-->
-      <!--<div class="account__artists__section" v-if="user.artists && user.artists.length > 0">-->
-        <!--<h3>Your Artists</h3>-->
-        <!--<div class="account__artists row">-->
-          <!--<div class="account__artist col-md-6" v-for="artist in user.artists">-->
-            <!--<nuxt-link :to="{name: 'account-artists-slug', params: {slug: artist.slug}}">-->
-              <!--<img :src="artist.thumbnailUrl"/>-->
-              <!--<div>{{ artist.name }}</div>-->
-              <!--<div>{{ artist.homeLabel }}</div>-->
-            <!--</nuxt-link>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div v-if="user.isStaff" class="account__staff_section">-->
-        <!--<h3>Your Staff Settings</h3>-->
-        <!--<charts-editor v-if="user.canPublishCharts"></charts-editor>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
 </template>
 
 <script>
