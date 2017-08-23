@@ -120,7 +120,7 @@ export const getCart = ({commit, dispatch}) => new Promise((resolve, reject) => 
   .catch(er => reject(er))
 })
 
-export const addToCart = ({commit}, args) => new Promise((resolve, reject) => {
+export const addToCart = ({commit, dispatch}, args) => new Promise((resolve, reject) => {
   apolloClient.mutate(
     {
       mutation: gql`mutation ($releasePk: ID!, $quantity: Int!) {
@@ -149,12 +149,12 @@ export const addToCart = ({commit}, args) => new Promise((resolve, reject) => {
 
     const cart = data && data.addToCart.cart
     Vue.cookie.set('cart', data.addToCart.cart.cookie, true)
-    commit(types.SET_CART, cart || null)
+    dispatch('setCart', {cart: cart || null})
     return resolve(cart)
   }).catch(er => reject(er))
 })
 
-export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
+export const updateCart = ({commit, dispatch}, args) => new Promise((resolve, reject) => {
   commit(types.CART_UPDATING, true)
   let line = args.line
   let quantity = args.value
@@ -200,7 +200,7 @@ export const updateCart = ({commit}, args) => new Promise((resolve, reject) => {
 
     const cart = data && data.updateCart.cart
     Vue.cookie.set('cart', data.updateCart.cart.cookie, true)
-    commit(types.SET_CART, cart || null)
+    dispatch('setCart', {cart: cart || null})
     return resolve(cart)
   }).catch(er => {
     reject(er)
@@ -695,7 +695,7 @@ export const saveChart = ({commit}, args) => new Promise((resolve, reject) => {
   })
 })
 
-export const cancelOrder = ({commit}, args) => new Promise((resolve, reject) => {
+export const cancelOrder = ({commit, dispatch}, args) => new Promise((resolve, reject) => {
   apolloClient.mutate({
     mutation: gql`mutation ($orderId: ID!) {
         cancelOrder(orderId: $orderId) {
@@ -712,7 +712,7 @@ export const cancelOrder = ({commit}, args) => new Promise((resolve, reject) => 
   }).then(
     ({data}) => {
       commit(types.SET_UNPAID_ORDER, null)
-      commit(types.SET_CART, data.cancelOrder.cart)
+      dispatch('setCart', {cart: data.cancelOrder.cart})
       commit(types.SET_CURRENT_CHECKOUT_STATE, 4)
     }
   )
