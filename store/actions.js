@@ -489,7 +489,7 @@ export const validateUserForm = ({commit}, args) => new Promise((resolve, reject
     }
   }
 
-  ok = ok && runPasswordValidation(user.password, user.passwordConfirm)
+  ok = ok && runPasswordValidation(commit, user.password, user.passwordConfirm)
   ok = ok && runEmailValidation(user.email, commit)
 
   return resolve(ok)

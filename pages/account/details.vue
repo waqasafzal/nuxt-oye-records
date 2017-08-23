@@ -52,6 +52,7 @@
   import MyAddresses from '~/components/account/MyAddresses'
   import MyOrders from '~/components/account/MyOrders'
   import MyCharts from '~/components/account/MyCharts'
+  import MyArtists from '~/components/account/MyArtists'
   import { logout } from '../../utils/auth/index'
 
   let component = {}
@@ -72,14 +73,15 @@
   Vue.component('dropzone', component)
 
   export default {
-    components: {ChartsEditor, MyAddresses, MyCharts, MyOrders},
+    components: {ChartsEditor, MyAddresses, MyCharts, MyOrders, MyArtists},
     name: 'AccountDetails',
     middleware: 'authenticated',
     data: function () {
       var menuItems = [
         'Addresses',
         'My Orders',
-        'Charts'
+        'Charts',
+        'My Artists'
       ]
       return {
         menuItems: menuItems,
@@ -99,6 +101,8 @@
           return MyAddresses
         } else if (item === 'My Orders') {
           return MyOrders
+        } else if (item === 'My Artists') {
+          return MyArtists
         } else {
           return MyCharts
         }
