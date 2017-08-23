@@ -98,7 +98,7 @@
           var authHeader = getAuthHeader()
           this.$http.post(__API__ + '/oye/pay/', {
             paymentData: encryptedData,
-            orderId: this.order.id,
+            orderId: this.order.pk,
             orderPrice: this.order.price + this.order.porto
           }, {
             headers: {

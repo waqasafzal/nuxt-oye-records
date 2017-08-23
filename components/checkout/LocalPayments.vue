@@ -36,7 +36,7 @@
                 }
                 `,
           variables: {
-            orderId: this.order.id,
+            orderId: this.order.pk,
             resultUrl: this.resultUrl
           }
         }).then(({data}) => {
