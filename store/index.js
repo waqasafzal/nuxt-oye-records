@@ -408,13 +408,14 @@ const store = new Vuex.Store({
     },
     getCheckoutState (state) {
       let order = store.getters.getUnpaidOrder
+      let currentState = state.checkout.checkoutState
 
-      if (order && !order.isPaid) {
+      if (currentState !== 6 && order && !order.isPaid) {
         return 5
       }
 
-      if (state.checkout.checkoutState) {
-        return state.checkout.checkoutState
+      if (currentState) {
+        return currentState
       }
 
       var checkoutState = 0
