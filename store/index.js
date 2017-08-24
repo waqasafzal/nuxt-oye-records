@@ -44,6 +44,7 @@ const store = new Vuex.Store({
     cart: null,
     cartUpdating: false,
     countries: null,
+    orders: null,
     checkout: getInitialCheckout(),
     user: getInitialUser(),
     userProfile: getInitialUserProfile(),
@@ -351,6 +352,9 @@ const store = new Vuex.Store({
     },
     [types.SET_CURRENT_ACCOUNT_VIEW]: (state, viewName) => {
       state.accountView = viewName
+    },
+    [types.SET_ORDERS]: (state, orders) => {
+      state.userProfile.orders = orders
     }
   },
 
@@ -529,6 +533,9 @@ const store = new Vuex.Store({
     },
     getCart (state) {
       return state.cart
+    },
+    getOrders (state) {
+      return state.userProfile.orders || []
     }
   },
 

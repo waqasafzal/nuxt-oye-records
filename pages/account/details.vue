@@ -1,5 +1,5 @@
 <template>
-  <div v-if="this.$store.getters.isAuthenticated" class="account">
+  <div v-if="authenticated" class="account">
     <div class="d-flex flex-row justify-content-between">
       <h1>Account - {{ currentItem }}</h1>
       <button @click="onAddCharts" v-if="currentItem === 'Charts'" class="btn add-charts-btn primary">Add New Charts</button>
@@ -18,6 +18,9 @@
       </div>
     </div>
   </div>
+  <div v-else>
+    <logged-out></logged-out>
+  </div>
 </template>
 
 <script>
@@ -32,6 +35,7 @@
   import MyCharts from '~/components/account/MyCharts'
   import MyArtists from '~/components/account/MyArtists'
   import { logout } from '../../utils/auth/index'
+  import LoggedOut from '../../components/shared/LoggedOut'
 
   let component = {}
   if (process.browser) {
@@ -51,7 +55,7 @@
   Vue.component('dropzone', component)
 
   export default {
-    components: {ChartsEditor, MyAddresses, MyCharts, MyOrders, MyArtists},
+    components: {LoggedOut, ChartsEditor, MyAddresses, MyCharts, MyOrders, MyArtists},
     name: 'AccountDetails',
     middleware: 'authenticated',
     data: function () {
@@ -74,6 +78,9 @@
           menuItems.push('Artists')
         }
         return menuItems
+      },
+      authenticated () {
+        return this.$store.getters.isAuthenticated
       },
       user () {
         return this.$store.state.user

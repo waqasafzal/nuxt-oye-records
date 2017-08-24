@@ -52,20 +52,25 @@
   import Order from '../orders/Order'
   import { release } from '../graphql/releases'
   import LoadingSpinner from '../shared/LoadingSpinner'
+  import * as types from '../../store/types'
 
   export default {
     components: {LoadingSpinner, Order},
     data: function () {
       return {
-        hasNext: true,
         cursor: null,
-        orders: [],
         selectedOrder: null,
         isLoading: false
       }
     },
     name: 'MyOrders',
     computed: {
+      orders () {
+        return this.$store.getters.getOrders
+      },
+      hasNext () {
+        return this.orders && this.orders.hasNextPage || true
+      },
       loadingText () {
         if (this.isLoading) {
           return 'Loading...'
@@ -83,6 +88,9 @@
         } else {
           this.selectedOrder = order
         }
+      },
+      authenticated () {
+        return this.$store.getters.isAuthenticated
       },
       loadNextPage () {
         if (this.orders) {
@@ -127,18 +135,19 @@
             variables: {
               first: 25,
               after: this.cursor
-            }
+            },
+            fetchPolicy: 'network-only'
           }).then(({data}) => {
             this.isLoading = false
             var edges = []
             if (vm.orders['edges']) {
               edges = vm.orders['edges']
             }
-            vm.orders = {
+            let orders = {
               edges: [...edges, ...data.orders.edges],
               pageInfo: data.orders.pageInfo
             }
-            vm.hasNext = data.orders.pageInfo.hasNextPage
+            vm.$store.commit(types.SET_ORDERS, orders)
           })
         }
       },

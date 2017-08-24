@@ -6,14 +6,16 @@ export const getInitialUserProfile = function () {
     },
     billing: {
       addresses: []
-    }
+    },
+    orders: null
   }
 }
 
 export const getInitialUser = function () {
   return {
     authenticated: false,
-    artists: []
+    artists: [],
+    orders: null
   }
 }
 
