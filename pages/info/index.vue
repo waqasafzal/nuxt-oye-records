@@ -36,7 +36,7 @@
           'Privacy policy': Privacy,
           'Imprint': Imprint
         },
-        currentItem: 'Shipping & Delivery'
+        currentItem: 'Terms & Conditions'
       }
     },
     computed: {
