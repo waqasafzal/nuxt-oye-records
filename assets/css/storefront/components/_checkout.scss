@@ -356,3 +356,22 @@
     }
   }
 }
+
+.local-payment {
+  &-info {
+    margin-bottom: 2rem;
+    font-size: $font-size-h4;
+  }
+  &-selected {
+    margin-bottom: 1rem;
+    img {
+      margin-bottom: auto;
+      margin-top: auto;
+      margin-left: 1rem;
+    }
+    span {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+}

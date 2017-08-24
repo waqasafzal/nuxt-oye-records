@@ -3,17 +3,30 @@
     <form method="post" action="https://test.adyen.com/hpp/skipDetails.shtml" id="adyenForm" name="adyenForm" target="_parent">
       <input type="hidden" :name="key" :value="value" v-for="(value, key) in paymentFormData" />
     </form>
-    <button type="submit" form="adyenForm">Pay <img :src="image" v-for="(image, i) in getLogos(order.paymentType)" /></button>
+
+    <div class="d-flex flex-column local-payment-info">
+      <div class="d-flex flex-row local-payment-selected">
+        <span> Selected payment method: </span><img :src="image" v-for="(image, i) in getLogos(order.paymentType)" />
+      </div>
+      <span>Please click the button below to proceed with the external payment provider.</span>
+    </div>
+
+    <div class="d-flex justify-content-around">
+      <proceed-button type="submit" form="adyenForm">Pay</proceed-button>
+    </div>
+
   </div>
 </template>
 
 <script>
   import gql from 'graphql-tag'
   import apolloClient from '~/plugins/apollo'
+  import ProceedButton from '../shared/ProceedButton'
 
   const baseUrl = __API__.includes('localhost') ? 'http://localhost:3000' : __API__
 
   export default {
+    components: {ProceedButton},
     name: 'LocalPayment',
     data: function () {
       return {
