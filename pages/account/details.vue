@@ -55,14 +55,7 @@
     name: 'AccountDetails',
     middleware: 'authenticated',
     data: function () {
-      var menuItems = [
-        'Addresses',
-        'My Orders',
-        'Charts',
-        'My Artists'
-      ]
       return {
-        menuItems: menuItems,
         editChartsMode: false
       }
     },
@@ -72,6 +65,16 @@
       }
     },
     computed: {
+      menuItems () {
+        var menuItems = ['Addresses', 'Orders']
+        if (this.user.canPublishCharts) {
+          menuItems.push('Charts')
+        }
+        if (this.user.artists && this.user.artists.length > 0) {
+          menuItems.push('Artists')
+        }
+        return menuItems
+      },
       user () {
         return this.$store.state.user
       },
@@ -82,9 +85,9 @@
         var item = this.currentItem
         if (item === 'Addresses') {
           return MyAddresses
-        } else if (item === 'My Orders') {
+        } else if (item === 'Orders') {
           return MyOrders
-        } else if (item === 'My Artists') {
+        } else if (item === 'Artists') {
           return MyArtists
         } else {
           return MyCharts
@@ -140,7 +143,8 @@
         this.currentItem = item
       },
       onLogout () {
-        logout(this, '/')
+        let route = this.$router.resolve({name: 'account-login'}).href
+        logout(this, route)
       },
       onAddCharts () {
         this.editChartsMode = true

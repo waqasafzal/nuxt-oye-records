@@ -1,10 +1,7 @@
 <template>
-  <div class="checkout__content">
-    <div class="row">
-      <div class="col-12 checkout__content__col">
-        <h3>Verification status {{ verificationStatus }}</h3>
-      </div>
-    </div>
+  <div class="complete">
+    <h2>Payment Verification</h2>
+    <h3>Status {{ verificationStatus }}</h3>
   </div>
 </template>
 
@@ -12,6 +9,7 @@
   import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import * as types from '../../store/types'
+  import { order } from '../graphql/cart'
 
   export default {
     name: 'CompleteCheckout',
@@ -37,8 +35,12 @@
           mutation: gql`mutation VerifyOrder($merchantSig: String!, $params: JSONString!) {
             verifyOrder(merchantSig: $merchantSig, transactionParams: $params) {
               ok
+              order {
+                ...Order
+              }
             }
           }
+          ${order}
           `,
           variables: {
             merchantSig: merchantSig,
@@ -52,14 +54,14 @@
               level: 'info',
               message: 'The payment could be verified.'
             })
-            this.$store.commit(types.SET_UNPAID_ORDER, null)
-            this.$router.push('/')
+            this.$store.commit(types.SET_UNPAID_ORDER, data.verifyOrder.order)
+            this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
           } else {
             this.$store.commit(types.ADD_ALERT, {
               level: 'alert',
               message: 'The payment could not be verified. Please try again.'
             })
-            this.$router.push({name: 'checkout'})
+            this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 4)
           }
         })
       }

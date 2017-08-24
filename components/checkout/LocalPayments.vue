@@ -25,7 +25,7 @@
         return this.$store.getters.getUnpaidOrder
       },
       resultUrl () {
-        return baseUrl + this.$router.resolve({name: 'checkout-complete'}).href
+        return baseUrl + this.$router.resolve({name: 'checkout', query: {verify: true}}).href
       }
     },
     methods: {

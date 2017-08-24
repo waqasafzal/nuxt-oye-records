@@ -55,6 +55,10 @@
       },
       vatExcluded () {
         return this.$store.getters.isVatExcluded
+      },
+      isLocalPayment () {
+        let option = this.paymentOption
+        return !['creditcard', 'cash'].includes(option)
       }
     },
     methods: {

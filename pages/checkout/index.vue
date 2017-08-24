@@ -1,25 +1,26 @@
 <template>
   <div class="checkout">
     <keep-alive>
-      <component :is="currentCheckoutView"></component>
+      <component v-if="currentCheckoutView" :is="currentCheckoutView"></component>
     </keep-alive>
   </div>
 </template>
 
 <script>
-  import CheckoutImpossible from '~/components/checkout/CheckoutImpossible'
   import CheckoutMethod from '~/components/checkout/CheckoutMethod'
   import CheckoutPayment from '~/components/checkout/CheckoutPayment'
   import CheckoutAddresses from '~/components/checkout/CheckoutAddresses'
   import OrderReview from '~/components/checkout/OrderReview'
   import PayOrder from '~/components/checkout/PayOrder'
   import OrderComplete from '~/components/checkout/OrderComplete'
+  import OrderVerification from '~/components/checkout/OrderVerification'
+  import * as types from '../../store/types'
 
   export default {
     name: 'Checkout',
     computed: {
       currentCheckoutView () {
-        var currentCheckoutView = CheckoutImpossible
+        var currentCheckoutView = null
         let checkoutState = this.$store.getters.getCheckoutState
         if (checkoutState === 1) {
           currentCheckoutView = CheckoutMethod
@@ -33,22 +34,12 @@
           currentCheckoutView = PayOrder
         } else if (checkoutState === 6) {
           currentCheckoutView = OrderComplete
+        } else if (checkoutState === 7) {
+          currentCheckoutView = OrderVerification
         }
         return currentCheckoutView
       }
     },
-//    async asyncData ({params}) {
-//      var {data} = await apolloClient.query({
-//        query: gql`query Country {
-//          countries {
-//            name
-//          }
-//        }
-//        `
-//      })
-//      store.commit(types.SET_COUNTRIES, data.countries)
-//      return {}
-//    },
     watch: {
       currentCheckoutView (view) {
         if (this.checkoutView === CheckoutAddresses && this.checkoutView !== view) {
@@ -61,6 +52,10 @@
     },
     mounted () {
       this.calculateCheckoutState()
+      let query = this.$route.query
+      if (query.verify) {
+        this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 7)
+      }
     },
     methods: {
       calculateCheckoutState () {
