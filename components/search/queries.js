@@ -32,8 +32,8 @@ export const callReleaseSearchQuery = function (query, size, page, fields, callb
 
 export const callArtistSearchQuery = function (query, size, callback, errorCallback) {
   client.query({
-    query: gql`query Search($query: String!, $size: Int!) {
-        search(query: $query, size: $size, docType: "artist") {
+    query: gql`query Search($query: String!, $size: Int!, $fields: JSONString) {
+        search(query: $query, size: $size, docType: "artist", fields: $fields) {
             results {
                 highlight
                 ... on ArtistSearchResult {
@@ -50,7 +50,8 @@ export const callArtistSearchQuery = function (query, size, callback, errorCallb
     `,
     variables: {
       query: query,
-      size: size
+      size: size,
+      fields: JSON.stringify(['name'])
     }
   }).then(callback).catch(errorCallback)
 }
