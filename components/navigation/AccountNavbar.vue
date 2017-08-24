@@ -6,7 +6,7 @@
           <nuxt-link to="/">Newsletter</nuxt-link>
         </div>
         <div class="ah-link navbar__oye__faq">
-          <nuxt-link to="/">Questions & Help</nuxt-link>
+          <nuxt-link :to="{name: 'info'}">Customer Information</nuxt-link>
         </div>
       </div>
       <div class="float-right navbar__account__buttons">
