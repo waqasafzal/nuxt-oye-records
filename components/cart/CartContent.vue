@@ -125,22 +125,20 @@
         </div>
       </template>
         <div class="cart__bottom-bar row">
-          <!--<template v-if="!review">-->
-            <slot>
-              <div class="col-8">
-                <nuxt-link class="cart__continue-button" to="/">
-                  <div>
-                    <span class="helper"></span>
-                    <img src="../../assets/images/arrow_right_green.svg" class="arrow-rotated"/>
-                    <span>Continue shopping</span>
-                  </div>
-                </nuxt-link>
-              </div>
-              <div class="col-4">
-                <proceed-button class="cart__checkout-button" @click="$router.push({name: 'checkout'})">Go to checkout</proceed-button>
-              </div>
-            </slot>
-          <!--</template>-->
+          <slot>
+            <div class="col-8">
+              <nuxt-link class="cart__continue-button" to="/">
+                <div>
+                  <span class="helper"></span>
+                  <img src="../../assets/images/arrow_right_green.svg" class="arrow-rotated"/>
+                  <span>Continue shopping</span>
+                </div>
+              </nuxt-link>
+            </div>
+            <div class="col-4">
+              <proceed-button class="cart__checkout-button" @click="$router.push({name: 'checkout'})">Go to checkout</proceed-button>
+            </div>
+          </slot>
         </div>
     </template>
     <template v-else>
@@ -192,7 +190,11 @@
         return this.$store.getters.isVatExcluded
       },
       total () {
-        return roundFixed(parseFloat(this.cart.totalAvailable) + parseFloat(this.shipping))
+        if (this.review) {
+          return roundFixed(parseFloat(this.cart.totalAvailable) + parseFloat(this.shipping))
+        } else {
+          return roundFixed(parseFloat(this.cart.totalAvailable))
+        }
       }
     },
     methods: {
