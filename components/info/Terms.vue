@@ -124,41 +124,41 @@
           </li>
         </ul>
       </div>
-      <div>
-        <h3>9. Return instructions</h3>
-        <p>
-          9.1. The guidance provided in this section ("Return instructions") shall not be construed as a precondition for the effective exercise of the right of withdrawal.</p>
-        <p>
-          9.2. Customers are requested to notify the Seller of their intention to return the goods before sending the goods back to the Seller. This enables the Seller to track the goods quickly and efficiently. Customers are requested to send the goods as a prepaid package back to the Seller and to keep the proof of posting. The Seller shall refund the Customer for postage costs upon request, unless they are to be borne by the buyer. Customers are advised to prevent the goods from being damaged or contaminated. The goods should be returned to the Seller preferably in original packaging together with all the supplied accessories. Where the original packaging is no longer available, the goods should be placed in another suitable packaging to ensure they are adequately protected against transport damage.</p>
-      </div>
-      <div>
-        <h3>10. Warranty for material defects</h3>
-        <p>10.1. The warranty shall be governed by statutory provisions.</p>
-        <p>
-          10.2. The goods supplied by the Seller shall only be covered by a warranty if this has been expressly indicated by the Seller. Customers are informed about the warranty conditions prior to placing the order.</p>
-        <p>
-          10.3. If the Customer is an entrepreneur, the limitation period for warranty claims is one year and the Seller has the option to remedy the defect or to deliver a defect-free item as part of subsequent fulfilment. Obvious defects in the goods or service of the Seller must be reported immediately, in writing, within 14 days of receipt of the goods. If the defects are not reported in time, the goods shall be deemed approved.</p>
-      </div>
-      <div>
-        <h3>11. Diclaimers and Limitation of Liability</h3>
-        <p>
-          11.1. The following exclusions and limitations of liability apply with regard to Seller's liability for damage compensation, notwithstanding the other legal claim requirements.</p>
-        <p>
-          11.2. The Seller assume s unlimited liability if the cause of the damage is the result of intent or gross negligence.</p>
-        <p>
-          11.3. Furthermore, the Seller assume s liability for the slightly negligent breach of significant duties, whose breach places the achievement of the purpose of the Agreement at risk, or for the breach of duties whose fulfilment generally enables the execution of the Agreement and on whose compliance they regularly rely. However, in this case, the Seller shall only be liable for the foreseeable damage that might typically occur under the Agreement. The Seller is not liable for the slightly negligent breach of duties other than those stated in the above-mentioned sentences.</p>
-        <p>
-          11.4. The above-mentioned limitations of liability do not apply for loss of life, bodily injury or damages to health for a defect after assumption of a guarantee for the nature of the product and for fraudulent concealment of defects. Liability pursuant to the Product Liability Act remains unaffected.</p>
-        <p>
-          11.5. If the Seller liability is excluded or limited, this also applies for personal liability of its employees, representatives, agents or assistants.</p>
-      </div>
-      <div>
-        <h3>12.Saving the text of the contract</h3>
-        <p>
-          12.1.The Seller shall send the Customer an order confirmation containing all details of the order to the specified email address. With the order confirmation, the Customer shall receive a copy of the GTC in addition to the withdrawal policy, information on delivery costs and terms of payment and delivery. While we store the text of the purchase agreement, we do not make it available on the Internet.</p>
-        <p>
-          12.2.The Customer can also print the text of the contract before submitting the order to the Seller by using the print function of their browser.</p>
-      </div>
+    </div>
+    <div>
+      <h3>9. Return instructions</h3>
+      <p>
+        9.1. The guidance provided in this section ("Return instructions") shall not be construed as a precondition for the effective exercise of the right of withdrawal.</p>
+      <p>
+        9.2. Customers are requested to notify the Seller of their intention to return the goods before sending the goods back to the Seller. This enables the Seller to track the goods quickly and efficiently. Customers are requested to send the goods as a prepaid package back to the Seller and to keep the proof of posting. The Seller shall refund the Customer for postage costs upon request, unless they are to be borne by the buyer. Customers are advised to prevent the goods from being damaged or contaminated. The goods should be returned to the Seller preferably in original packaging together with all the supplied accessories. Where the original packaging is no longer available, the goods should be placed in another suitable packaging to ensure they are adequately protected against transport damage.</p>
+    </div>
+    <div>
+      <h3>10. Warranty for material defects</h3>
+      <p>10.1. The warranty shall be governed by statutory provisions.</p>
+      <p>
+        10.2. The goods supplied by the Seller shall only be covered by a warranty if this has been expressly indicated by the Seller. Customers are informed about the warranty conditions prior to placing the order.</p>
+      <p>
+        10.3. If the Customer is an entrepreneur, the limitation period for warranty claims is one year and the Seller has the option to remedy the defect or to deliver a defect-free item as part of subsequent fulfilment. Obvious defects in the goods or service of the Seller must be reported immediately, in writing, within 14 days of receipt of the goods. If the defects are not reported in time, the goods shall be deemed approved.</p>
+    </div>
+    <div>
+      <h3>11. Diclaimers and Limitation of Liability</h3>
+      <p>
+        11.1. The following exclusions and limitations of liability apply with regard to Seller's liability for damage compensation, notwithstanding the other legal claim requirements.</p>
+      <p>
+        11.2. The Seller assume s unlimited liability if the cause of the damage is the result of intent or gross negligence.</p>
+      <p>
+        11.3. Furthermore, the Seller assume s liability for the slightly negligent breach of significant duties, whose breach places the achievement of the purpose of the Agreement at risk, or for the breach of duties whose fulfilment generally enables the execution of the Agreement and on whose compliance they regularly rely. However, in this case, the Seller shall only be liable for the foreseeable damage that might typically occur under the Agreement. The Seller is not liable for the slightly negligent breach of duties other than those stated in the above-mentioned sentences.</p>
+      <p>
+        11.4. The above-mentioned limitations of liability do not apply for loss of life, bodily injury or damages to health for a defect after assumption of a guarantee for the nature of the product and for fraudulent concealment of defects. Liability pursuant to the Product Liability Act remains unaffected.</p>
+      <p>
+        11.5. If the Seller liability is excluded or limited, this also applies for personal liability of its employees, representatives, agents or assistants.</p>
+    </div>
+    <div>
+      <h3>12.Saving the text of the contract</h3>
+      <p>
+        12.1.The Seller shall send the Customer an order confirmation containing all details of the order to the specified email address. With the order confirmation, the Customer shall receive a copy of the GTC in addition to the withdrawal policy, information on delivery costs and terms of payment and delivery. While we store the text of the purchase agreement, we do not make it available on the Internet.</p>
+      <p>
+        12.2.The Customer can also print the text of the contract before submitting the order to the Seller by using the print function of their browser.</p>
     </div>
     <div>
       <h3>13.Data protection</h3>
