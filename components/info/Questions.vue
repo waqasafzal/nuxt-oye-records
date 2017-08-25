@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Contact</h3>
+    <h3>Mail</h3>
     <p>If you have questions regarding an order please contact us: <a href="mailto:order@oye-records.com">order@oye-records.com</a></p>
   </div>
 </template>
