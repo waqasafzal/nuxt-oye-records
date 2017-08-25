@@ -24,19 +24,21 @@
   import Shipping from '~/components/info/Shipping'
   import Imprint from '~/components/info/Imprint'
   import Terms from '~/components/info/Terms'
+  import Questions from '~/components/info/Questions'
 
   export default {
     name: 'CustomerInfo',
     data: function () {
       return {
         menuItems: {
+          'Questions': Questions,
           'Terms & Conditions': Terms,
           'Shipping & Delivery': Shipping,
           'Payment Methods': Payment,
           'Privacy policy': Privacy,
           'Imprint': Imprint
         },
-        currentItem: 'Terms & Conditions'
+        currentItem: 'Questions'
       }
     },
     computed: {
