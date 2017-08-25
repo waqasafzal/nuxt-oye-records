@@ -7,6 +7,8 @@
       margin: inherit;
       margin-bottom: 1rem;
     }
+    overflow: scroll;
+    max-height: 450px;
   }
   a {
     color: $brand-color-green;
