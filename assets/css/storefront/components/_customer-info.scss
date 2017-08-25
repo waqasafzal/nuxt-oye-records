@@ -8,6 +8,12 @@
       margin-bottom: 1rem;
     }
   }
+  a {
+    color: $brand-color-green;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .withdrawal {
