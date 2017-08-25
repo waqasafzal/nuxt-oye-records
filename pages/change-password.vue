@@ -7,7 +7,7 @@
           <div class="complete__summary">
             You are already logged in and can <nuxt-link to="/">continue shopping</nuxt-link> now.<br/>
             If you want to change your password again, please go to the
-            <nuxt-link to="account-details">Your Account</nuxt-link> section.
+            <nuxt-link :to="{name: 'account-details'}">Your Account</nuxt-link> section.
           </div>
         </div>
       </template>
