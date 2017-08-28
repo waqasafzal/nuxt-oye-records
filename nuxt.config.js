@@ -180,7 +180,6 @@ module.exports = {
       // generate(nextPage)
       return axios.get(cleanHostUrl + '/oye/api/releases?limit=-1')
         .then((res) => {
-          console.log(JSON.stringify(res.data))
           return res.data.map((release) => {
             return '/releases/' + release.slug
           })
