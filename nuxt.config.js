@@ -164,7 +164,7 @@ module.exports = {
     routes: function () {
       console.log(apiHost)
       let cleanHostUrl = apiHost.replace(/'/g, '')
-      var nextPage = cleanHostUrl + '/oye/api/releases?limit=80000'
+      var nextPage = cleanHostUrl + '/oye/api/releases?limit=1000'
       //
       // while (nextPage) {
       //
