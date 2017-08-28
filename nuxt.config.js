@@ -130,7 +130,7 @@ module.exports = {
     {src: '~plugins/vue-resource'},
     {src: '~plugins/vue-social-sharing'}
     // {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
-    // {src: '~plugins/ga', ssr: false}
+    {src: '~plugins/ga', ssr: false}
   ],
   router: {
     middleware: ['check-auth', 'payment-duty'],
