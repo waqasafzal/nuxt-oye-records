@@ -19,11 +19,15 @@
   import BrandNavbar from '../components/navigation/BrandNavbar'
   import Alerts from '../components/shared/Alerts'
   import AccountNavbar from '../components/navigation/AccountNavbar'
-  import { getAuthHeader, logout } from '../utils/auth/index'
+  import { getAuthHeader } from '../utils/auth/index'
   import client from '../plugins/apollo'
   import Vue from 'vue'
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
+
+//  if (process.env.NODE_ENV !== 'production') {
+//    require('longjohn')
+//  }
 
   export default {
     components: {AccountNavbar, Alerts, BrandNavbar, AudioPlayer},
@@ -48,7 +52,7 @@
       }
     },
     beforeCreate () {
-      var vm = this
+//      var vm = this
       client.networkInterface.use([{
         applyMiddleware (req, next) {
           if (!req.options.headers) {
@@ -56,11 +60,15 @@
           }
 
           var jwt = Vue.cookie.get('jwt')
+          var header = null
           if (jwt) {
-            var header = getAuthHeader()
-            if (header) {
-              req.options.headers['Authorization'] = header
-            }
+            header = getAuthHeader()
+          } else {
+            header = 'JWT ' + 'adsasd'
+          }
+          console.log('header: ' + JSON.stringify(header))
+          if (header) {
+            req.options.headers['Authorization'] = header
           }
           var cart = Vue.cookie.get('cart')
           if (cart) {
@@ -73,27 +81,9 @@
         {
           applyAfterware ({ response }, next) {
             if (response.status === 401) {
-              logout(vm)
             }
             next()
           }
-//        },
-//        {
-//          applyAfterware ({ response }, next) {
-//            if (response.status === 200 && response.body.errors && response.body.errors.length > 0) {
-//              response.json().then(
-//                (json) => {
-//                  for (var i = 0; i < json.errors.length; i++) {
-//                    this.$store.commit('addAlert', {
-//                      level: 'error',
-//                      message: json.errors[i].message
-//                    })
-//                  }
-//                }
-//              )
-//            }
-//            next()
-//          }
         }
       ])
     }

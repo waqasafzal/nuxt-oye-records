@@ -13,13 +13,12 @@
             </div>
             <div class="release-list-info">
               <div class="release-list-info__header">
-                <div class="release-list-info__header__artist-name"
-                     :title="release.artist_first_name">{{release.artistFirstName}} {{release.artistLastName}}
+                <div class="release-list-info__header__artist-name">{{release.artistFirstName}} {{release.artistLastName}}
                 </div>
                 <releaseprice :price="release.price" :availability="release.availability"
                               class="release-list-info__header__price"/>
               </div>
-              <span class="release-list-info__release-title" :title="release.title">{{release.title}}</span>
+              <span class="release-list-info__release-title">{{release.title}}</span>
               <span class="release-list-info__label">{{ release.label }}</span>
             </div>
             <add-to-cart-button :release="release" class="release__button-bar__add-to-cart release-list-add"></add-to-cart-button>

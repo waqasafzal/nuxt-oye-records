@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const axios = require('axios')
 const fetch = require('node-fetch')
 require('karma')
 
@@ -17,19 +18,10 @@ var setupAPI = function () {
   switch (process.env.NODE_ENV) {
     case 'production':
       // apiHost = "'https://oye-records.com'"
-      if (process.env.INSECURE) {
-        apiHost = "'http://oye.kolter.it'"
-      } else {
-        apiHost = "'https://oye.kolter.it'"
-      }
-
+      apiHost = "'https://oye.kolter.it'"
       break
     case 'testing':
-      if (process.env.INSECURE) {
-        apiHost = "'http://oye.kolter.it'"
-      } else {
-        apiHost = "'https://oye.kolter.it'"
-      }
+      apiHost = "'https://oye.kolter.it'"
       break
     case 'develop':
     default:
@@ -133,12 +125,12 @@ module.exports = {
   //   ['@nuxtjs/google-analytics', { ua: 'UA-100941329-1' }]
   // ],
   plugins: [
-    {src: '~plugins/vue-cookie', ssr: false, injectAs: 'cookie'},
+    {src: '~plugins/vue-cookie', injectAs: 'cookie'},
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-resource'},
-    {src: '~plugins/vue-social-sharing'},
+    {src: '~plugins/vue-social-sharing'}
     // {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
-    {src: '~plugins/ga', ssr: false}
+    // {src: '~plugins/ga', ssr: false}
   ],
   router: {
     middleware: ['check-auth', 'payment-duty'],
@@ -162,10 +154,44 @@ module.exports = {
   css: [
     {src: '~assets/css/storefront/storefront.scss', lang: 'scss'}
   ],
-  devProxy: {
-    'localhost:3000/media': 'http://local.oye.com:8000/',
-    'localhost:3000/admin': 'http://local.oye.com:8000/',
-    'localhost:3000/static/admin/css': 'http://local.oye.com:8000/',
-    'localhost:3000/oye': 'http://local.oye.com:8000/'
+  // devProxy: {
+  //   'localhost:3000/media': 'http://local.oye.com:8000/',
+  //   'localhost:3000/admin': 'http://local.oye.com:8000/',
+  //   'localhost:3000/static/admin/css': 'http://local.oye.com:8000/',
+  //   'localhost:3000/oye': 'http://local.oye.com:8000/'
+  // },
+  generate: {
+    routes: function () {
+      console.log(apiHost)
+      return axios.get(apiHost.replace(/'/g, '') + '/oye/api/releases')
+        .then((res) => {
+          console.log(res)
+          return res.data.results.map((release) => {
+            return 'releases/' + release
+          })
+        })
+    },
+    dir: 'test-pkg',
+    interval: 2000,
+    minify: {
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true,
+      decodeEntities: true,
+      minifyCSS: false,
+      minifyJS: false,
+      processConditionalComments: true,
+      removeAttributeQuotes: false,
+      removeComments: false,
+      removeEmptyAttributes: true,
+      removeOptionalTags: true,
+      removeRedundantAttributes: true,
+      removeScriptTypeAttributes: false,
+      removeStyleLinkTypeAttributes: false,
+      removeTagWhitespace: false,
+      sortAttributes: true,
+      sortClassName: true,
+      trimCustomFragments: true,
+      useShortDoctype: true
+    }
   }
 }
