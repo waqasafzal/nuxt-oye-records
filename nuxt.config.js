@@ -167,7 +167,7 @@ module.exports = {
         .then((res) => {
           console.log(res)
           return res.data.results.map((release) => {
-            return 'releases/' + release
+            return 'releases/' + release.slug
           })
         })
     },
