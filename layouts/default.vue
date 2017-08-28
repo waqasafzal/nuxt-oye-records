@@ -63,10 +63,12 @@
           var header = null
           if (jwt) {
             header = getAuthHeader()
-          } else {
-            header = 'JWT ' + 'adsasd'
           }
-          console.log('header: ' + JSON.stringify(header))
+
+//          else {
+//            header = 'JWT ' + 'adsasd'
+//          }
+//          console.log('header: ' + JSON.stringify(header))
           if (header) {
             req.options.headers['Authorization'] = header
           }
