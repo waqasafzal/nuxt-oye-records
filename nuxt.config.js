@@ -161,19 +161,15 @@ module.exports = {
   //   'localhost:3000/oye': 'http://local.oye.com:8000/'
   // },
   generate: {
-    routes: function () {
+    routes: function (callback) {
       console.log(apiHost)
       let cleanHostUrl = apiHost.replace(/'/g, '')
-      var nextPage = cleanHostUrl + '/oye/api/releases?limit=1000'
-      //
-      // while (nextPage) {
-      //
-      // }
-      return axios.get(nextPage)
+      var nextPage = cleanHostUrl + '/oye/api/releases?limit=80000'
+      axios.get(nextPage)
         .then((res) => {
           console.log(res)
           return res.data.results.map((release) => {
-            return 'releases/' + release.slug
+            return cleanHostUrl + '/releases/' + release.slug
           })
         })
     },
