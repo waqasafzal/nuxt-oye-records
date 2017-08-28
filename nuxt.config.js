@@ -128,7 +128,7 @@ module.exports = {
     {src: '~plugins/vue-cookie', injectAs: 'cookie'},
     {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
     {src: '~plugins/vue-resource'},
-    {src: '~plugins/vue-social-sharing'}
+    {src: '~plugins/vue-social-sharing'},
     // {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
     {src: '~plugins/ga', ssr: false}
   ],
