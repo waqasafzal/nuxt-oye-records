@@ -163,7 +163,13 @@ module.exports = {
   generate: {
     routes: function () {
       console.log(apiHost)
-      return axios.get(apiHost.replace(/'/g, '') + '/oye/api/releases')
+      let cleanHostUrl = apiHost.replace(/'/g, '')
+      var nextPage = cleanHostUrl + '/oye/api/releases?limit=80000'
+      //
+      // while (nextPage) {
+      //
+      // }
+      return axios.get(nextPage)
         .then((res) => {
           console.log(res)
           return res.data.results.map((release) => {
@@ -172,7 +178,7 @@ module.exports = {
         })
     },
     dir: 'test-pkg',
-    interval: 2000,
+    interval: 100,
     minify: {
       collapseBooleanAttributes: true,
       collapseWhitespace: true,
