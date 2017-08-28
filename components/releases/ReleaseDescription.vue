@@ -34,19 +34,23 @@
     },
     mounted () {
       let descriptions = document.getElementById('description')
-      let divHeight = descriptions.offsetHeight
-      let lineHeight = descriptions.style.lineHeight
-      if (!lineHeight) {
-        lineHeight = document.defaultView.getComputedStyle(descriptions, null).lineHeight
-      }
-      if (!lineHeight) {
-        lineHeight = 24
-      }
-      let lineHeightInt = parseInt(lineHeight)
-      let lines = divHeight / lineHeightInt
-      this.lines = lines
-      if (this.lines > 3) {
-        this.expanded = false
+      if (descriptions) {
+        let divHeight = descriptions.offsetHeight
+        let lineHeight = descriptions.style.lineHeight
+        if (!lineHeight) {
+          lineHeight = document.defaultView.getComputedStyle(descriptions, null).lineHeight
+        }
+        if (!lineHeight) {
+          lineHeight = 24
+        }
+        let lineHeightInt = parseInt(lineHeight)
+        let lines = divHeight / lineHeightInt
+        this.lines = lines
+        if (this.lines > 3) {
+          this.expanded = false
+        }
+      } else {
+        this.lines = 0
       }
     }
   }
