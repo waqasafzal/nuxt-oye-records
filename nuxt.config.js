@@ -178,7 +178,7 @@ module.exports = {
         })
     },
     dir: 'test-pkg',
-    interval: 500,
+    interval: 1000,
     minify: {
       collapseBooleanAttributes: true,
       collapseWhitespace: true,
