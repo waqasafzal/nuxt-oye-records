@@ -7,25 +7,25 @@ global.fetch = fetch
 
 var utils = require('./build/utils')
 
-var apiHost = "'http://localhost:8000'"
+var apiHost = '\'http://localhost:8000\''
 
 if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
   process.env.NODE_ENV = 'production'
 }
 
 var setupAPI = function () {
-  apiHost = "'http://localhost:8000'"
+  apiHost = '\'http://localhost:8000\''
   switch (process.env.NODE_ENV) {
     case 'production':
       // apiHost = "'https://oye-records.com'"
-      apiHost = "'https://oye.kolter.it'"
+      apiHost = '\'https://oye.kolter.it\''
       break
     case 'testing':
-      apiHost = "'https://oye.kolter.it'"
+      apiHost = '\'https://oye.kolter.it\''
       break
     case 'develop':
     default:
-      apiHost = "'http://localhost:8000'"
+      apiHost = '\'http://localhost:8000\''
       break
   }
 }
@@ -161,17 +161,31 @@ module.exports = {
   //   'localhost:3000/oye': 'http://local.oye.com:8000/'
   // },
   generate: {
-    routes: function (callback) {
-      console.log(apiHost)
+    routes: function () {
       let cleanHostUrl = apiHost.replace(/'/g, '')
-      var nextPage = cleanHostUrl + '/oye/api/releases?limit=80000'
-      axios.get(nextPage)
+      // var nextPage = cleanHostUrl + '/oye/api/releases?limit=-1'
+
+      // var generate = function (url) {
+      //   axios.get(url)
+      //     .then((res) => {
+      //       var nextPage = res.data.next
+      //       if (nextPage) {
+      //         generate(nextPage)
+      //       }
+      //       return res.data.results.map((release) => {
+      //         return '/releases/' + release.slug
+      //       })
+      //     })
+      // }
+      // generate(nextPage)
+      return axios.get(cleanHostUrl + '/oye/api/releases?limit=-1')
         .then((res) => {
-          console.log(res)
-          return res.data.results.map((release) => {
-            return cleanHostUrl + '/releases/' + release.slug
+          console.log(JSON.stringify(res.data))
+          return res.data.map((release) => {
+            return '/releases/' + release.slug
           })
         })
+      // }
     },
     dir: 'test-pkg',
     interval: 1000,
