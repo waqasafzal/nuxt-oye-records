@@ -1,14 +1,9 @@
 <template>
   <div class="card-payment">
-    <!--<div>Pay Order {{ totalAmount }} &euro;</div>-->
-    <!--<p><strong>Credit Card Test data</strong></p>-->
-    <!--<p>Number: 2223 0000 4841 0010</p>-->
-    <!--<p>CVC: 737</p>-->
-    <!--<p>Expiry 10/2020</p>-->
     <form class="card-payment__form" ref="adyen-encrypted-form" method="post" @submit.prevent id="adyen-encrypted-form">
       <div class="form-group flex-column">
         <label for="cardNumber">Card Number</label>
-        <input type="text" id="cardNumber" class="form-control" data-encrypted-name="number">
+        <input @keypress="onCardNumberChanged" ref="cardNumber" type="text" id="cardNumber" class="form-control" data-encrypted-name="number">
       </div>
       <div class="form-group flex-column owner">
         <label for="owner">Name On Card</label>
@@ -59,6 +54,7 @@
   import { getAuthHeader } from '../../utils/auth/index'
   import { roundFixed } from '../../utils/math'
   import * as types from '../../store/types'
+  import { creditCardFormat } from '~/utils/forms'
 
   const encryptedBlobFieldName = 'myBlobField'
 
@@ -90,6 +86,12 @@
       }
     },
     methods: {
+      onCardNumberChanged (e) {
+        let cardNumber = e.target.value
+        console.log('card number ' + cardNumber)
+        var cardNumberField = this.$refs['cardNumber']
+        cardNumberField.value = creditCardFormat(cardNumberField.value)
+      },
       onSubmit (e) {
         var form = this.$refs['adyen-encrypted-form']
         var element = form.elements[encryptedBlobFieldName]
