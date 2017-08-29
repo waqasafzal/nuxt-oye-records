@@ -267,11 +267,13 @@
       inStockMessage: function () {
         let status = this.release.availability.status
         var message = ''
-        if (status === 'out' || status === 'upcoming') {
+        if (['out', 'upcoming', 'deleted'].includes(status)) {
           if (status === 'out') {
             message = 'Out of stock'
-          } else {
+          } else if (status === 'upcoming') {
             message = 'Upcoming'
+          } else {
+            message = 'Deleted'
           }
         } else {
           if (status === 'one') {

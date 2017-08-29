@@ -33,7 +33,7 @@
       },
       orderAction () {
         let status = this.release.availability.status
-        if (status === 'out') {
+        if (['out', 'deleted'].includes(status)) {
           return 'Backorder now'
         } else if (status === 'upcoming') {
           return 'Preorder now'

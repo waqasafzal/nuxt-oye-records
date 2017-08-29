@@ -83,7 +83,7 @@
       &.one {
         background-color: $brand-secondary-color-yellow;
       }
-      &.out {
+      &.out, &.deleted {
         background-color: $brand-secondary-color-red;
 
       }
