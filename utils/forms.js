@@ -17,6 +17,9 @@ export const creditCardFormat = function (value) {
   }
 
   if (parts.length) {
+    if (v.length % 4 === 0) {
+      parts.push('')
+    }
     return parts.join(' ')
   } else {
     return value
