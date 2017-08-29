@@ -115,10 +115,11 @@
       </template>
       <template v-if="cart.preorderLines.length > 0">
         <div class="cart__backorder">
-          <h4>These items will be put into your backorder and will not be charged yet:</h4>
+          <h4>These items will be ordered for you but will not be charged yet:</h4>
           <div :key="'preorderLine' + i"
-               v-for="(line, i) in cart.preorderLines">
-            <nuxt-link :to="{name: 'releases-slug', params: {slug: line.release.slug}}">
+               v-for="(line, i) in cart.preorderLines" class="d-flex">
+            <div class="cart__backorder__delete" @click="onDelete(line)">Cancel</div>
+            <nuxt-link class="cart__backorder__name" :to="{name: 'releases-slug', params: {slug: line.release.slug}}">
               <span>{{ line.quantity }} &times; {{ line.release.name }} - {{ line.release.title}}</span>
             </nuxt-link>
           </div>

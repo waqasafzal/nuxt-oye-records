@@ -127,6 +127,20 @@
     h4 {
       margin-bottom: $global-padding;
     }
+    &__delete {
+      cursor: pointer;
+      background-color: $brand-secondary-color-red;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-right: 10px;
+      &:hover {
+        background-color: darken($brand-secondary-color-red, 10);
+      }
+    }
+    &__name {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
   }
   &__subtotal {
     padding: $global-padding * 2;
