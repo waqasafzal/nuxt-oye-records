@@ -222,7 +222,11 @@ export const removeCartLine = ({commit, dispatch}, args) => new Promise((resolve
       backorder: args.backorder
     }
   }).then(({data}) => {
-    addCartAlertMessage('Article successfully removed from cart.', 'info')
+    if (args.backorder) {
+      addCartAlertMessage('Article was removed from pre/back order.', 'info')
+    } else {
+      addCartAlertMessage('Article was removed from cart.', 'info')
+    }
 
     const r = data && data.removeRelease.cart
     Vue.cookie.set('cart', data.removeRelease.cart.cookie, true)
