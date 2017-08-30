@@ -17,7 +17,7 @@
             <div class="release__item">
               <img :src="release.node.smallImageUrl"/>
             </div>
-            <div class="release__infos d-flex flex-column">
+            <div class="release__infos d-flex flex-column vmargin-auto">
               <div class="d-flex flex-row">
                 <div class="release__name">{{ release.node.artistFirstName }} {{ release.node.artistLastName }}</div>
                 <div class="release__title">{{ release.node.title }}</div>
