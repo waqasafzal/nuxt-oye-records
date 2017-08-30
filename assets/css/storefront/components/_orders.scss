@@ -51,6 +51,7 @@
   }
   .release {
     &__infos {
+      margin-left: 1rem;
       flex-direction: row;
       font-size: $font-size-h5;
       line-height: 24px;
