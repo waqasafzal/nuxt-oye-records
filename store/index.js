@@ -353,8 +353,14 @@ const store = new Vuex.Store({
     [types.SET_CURRENT_ACCOUNT_VIEW]: (state, viewName) => {
       state.accountView = viewName
     },
-    [types.SET_ORDERS]: (state, orders) => {
+    [types.SET_PURCHASES]: (state, orders) => {
       state.userProfile.orders = orders
+    },
+    [types.SET_BACK_ORDERS]: (state, orders) => {
+      state.userProfile.backOrders = orders
+    },
+    [types.SET_AVAILABLE_ORDERS]: (state, orders) => {
+      state.userProfile.availableOrders = orders
     }
   },
 
@@ -534,8 +540,14 @@ const store = new Vuex.Store({
     getCart (state) {
       return state.cart
     },
-    getOrders (state) {
+    getPurchases (state) {
       return state.userProfile.orders || []
+    },
+    getBackOrders (state) {
+      return state.userProfile.backOrders || []
+    },
+    getAvailableOrders (state) {
+      return state.userProfile.availableOrders || []
     }
   },
 

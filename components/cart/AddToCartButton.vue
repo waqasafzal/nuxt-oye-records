@@ -1,7 +1,9 @@
 <template>
-  <div v-if="release" class="add-to-cart-button" @click.prevent="addToCart" :style="addToCartButtonStyle">
-    <img :style="imgStyle" src="../../assets/images/cart_small_white.svg" />
-    <span>{{ orderAction }}</span>
+  <div v-if="release" class="add-to-cart-button d-flex" @click.prevent="addToCart" :style="addToCartButtonStyle">
+    <div class="hmargin-auto">
+      <img :style="imgStyle" src="../../assets/images/cart_small_white.svg" />
+      <span>{{ orderAction }}</span>
+    </div>
   </div>
 </template>
 
@@ -54,6 +56,8 @@
         this.$store.dispatch('addToCart', {
           pk: this.release.pk,
           quantity: this.quantity || 1
+        }).then(() => {
+          this.$emit('added')
         }).catch(e => console.log(e))
       }
     }
@@ -63,6 +67,7 @@
 
 <style lang="scss">
   .add-to-cart-button {
+    position: relative;
     cursor: pointer;
     &:hover:after {
        content: '';

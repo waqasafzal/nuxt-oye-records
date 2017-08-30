@@ -7,7 +7,9 @@ export const getInitialUserProfile = function () {
     billing: {
       addresses: []
     },
-    orders: null
+    orders: null,
+    backOrders: null,
+    availableOrders: null
   }
 }
 

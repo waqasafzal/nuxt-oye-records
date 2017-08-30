@@ -756,3 +756,21 @@ export const getCountries = ({commit, state}, args) => new Promise((resolve, rej
     resolve(state.countries)
   }
 })
+
+export const removeBackOrder = ({commit, state}, args) => new Promise((resolve, reject) => {
+  apolloClient.mutate({
+    mutation: gql`mutation BackOrder($id: ID!) {
+        removeBackorder(id: $id) {
+            ok
+        }
+    }`,
+    variables: {
+      id: args.pk
+    }
+  }).then((data) => {
+    commit(types.ADD_ALERT, {
+      message: 'Deleted back order item.'
+    })
+    resolve(data)
+  })
+})

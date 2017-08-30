@@ -31,9 +31,10 @@
   import * as types from '~/store/types'
   import gql from 'graphql-tag'
   import MyAddresses from '~/components/account/MyAddresses'
-  import MyOrders from '~/components/account/MyOrders'
+  import MyPurchases from '~/components/account/MyPurchases'
   import MyCharts from '~/components/account/MyCharts'
   import MyArtists from '~/components/account/MyArtists'
+  import MyOrders from '~/components/account/MyOrders'
   import { logout } from '../../utils/auth/index'
   import LoggedOut from '../../components/shared/LoggedOut'
 
@@ -55,7 +56,7 @@
   Vue.component('dropzone', component)
 
   export default {
-    components: {LoggedOut, ChartsEditor, MyAddresses, MyCharts, MyOrders, MyArtists},
+    components: {LoggedOut, ChartsEditor, MyAddresses, MyCharts, MyPurchases, MyArtists},
     name: 'AccountDetails',
     middleware: 'authenticated',
     data: function () {
@@ -70,7 +71,7 @@
     },
     computed: {
       menuItems () {
-        var menuItems = ['Addresses', 'Orders']
+        var menuItems = ['Addresses', 'Purchases', 'Back/Pre Orders']
         if (this.user.canPublishCharts) {
           menuItems.push('Charts')
         }
@@ -92,10 +93,12 @@
         var item = this.currentItem
         if (item === 'Addresses') {
           return MyAddresses
-        } else if (item === 'Orders') {
-          return MyOrders
+        } else if (item === 'Purchases') {
+          return MyPurchases
         } else if (item === 'Artists') {
           return MyArtists
+        } else if (item === 'Back/Pre Orders') {
+          return MyOrders
         } else {
           return MyCharts
         }

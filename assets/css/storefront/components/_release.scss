@@ -14,7 +14,7 @@ $font-factor: 0.9;
       position: relative;
       background-color: $brand-color-green;
       border-radius: 2px;
-      display: inline-block;
+      display: inline-block !important;
       line-height: 48px;
       width: 12em;
       color: white;

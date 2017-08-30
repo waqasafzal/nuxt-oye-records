@@ -43,3 +43,53 @@
     cursor: pointer;
   }
 }
+
+.my-orders {
+  h3 {
+    margin-top: inherit;
+    margin-bottom: 1rem;
+  }
+  .release {
+    &__infos {
+      flex-direction: row;
+      font-size: $font-size-h5;
+      line-height: 24px;
+    }
+    &__title {
+      font-weight: 300;
+      opacity: 0.8;
+    }
+    &__label {
+      font-weight: 300;
+      //opacity: 0.8;
+      font-size: $font-size-sm;
+    }
+    &__name {
+      margin-right: 0.5rem;
+    }
+    &__price {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+  .delete {
+    opacity: 0.7;
+    font-size: $font-size-h2;
+    font-weight: 300;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .add-to-cart-button {
+    background-color: $brand-color-green;
+    font-weight: 300;
+    font-size: $font-size-sm;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    &:hover {
+      background-color: darken($brand-color-green, 10);
+      color: darken(white, 10)
+    }
+  }
+}
