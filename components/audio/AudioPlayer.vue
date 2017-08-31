@@ -204,7 +204,7 @@
       this.init()
 
       var vm = this
-      window.onkeydown = function (e) {
+      document.addEventListener('keydown', function (e) {
         var key = e.keyCode ? e.keyCode : e.which
 
         let lowerCase = e.target.tagName.toLowerCase()
@@ -215,12 +215,14 @@
           } else {
             vm.$store.commit(types.PLAY_TRACK, vm.currentTrack)
           }
-        } else if (key === 37) {
+        } else if (key === 37 && lowerCase !== 'input') {
+          e.preventDefault()
           vm.backwards()
-        } else if (key === 39) {
+        } else if (key === 39 && lowerCase !== 'input') {
+          e.preventDefault()
           vm.forwards()
         }
-      }
+      })
     }
   }
 

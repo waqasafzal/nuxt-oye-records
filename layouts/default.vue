@@ -64,11 +64,6 @@
           if (jwt) {
             header = getAuthHeader()
           }
-
-//          else {
-//            header = 'JWT ' + 'adsasd'
-//          }
-//          console.log('header: ' + JSON.stringify(header))
           if (header) {
             req.options.headers['Authorization'] = header
           }
@@ -88,6 +83,14 @@
           }
         }
       ])
+    },
+    mounted () {
+      document.addEventListener('keydown', function (e) {
+        var key = e.keyCode ? e.keyCode : e.which
+        if ([37, 39].includes(key)) {
+          e.preventDefault()
+        }
+      })
     }
   }
 </script>
