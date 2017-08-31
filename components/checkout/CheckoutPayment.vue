@@ -110,11 +110,12 @@
         }
       },
       showOption (option) {
-        let isPickupOption = this.shippingOption && this.shippingOption.id === '-1'
-        if (option.id === 'forward' && isPickupOption) {
-          return false
-        }
-        return option.id !== 'cash' || this.shippingOption && this.shippingOption.id === '-1'
+        return true
+//        let isPickupOption = this.shippingOption && this.shippingOption.id === '-1'
+//        if (option.id === 'forward' && isPickupOption) {
+//          return false
+//        }
+//        return option.id !== 'cash' || this.shippingOption && this.shippingOption.id === '-1'
       },
       onProceed () {
         this.$store.commit(types.SET_PAYMENT_OPTION_CONFIRMED)

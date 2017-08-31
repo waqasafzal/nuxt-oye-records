@@ -298,6 +298,18 @@ const store = new Vuex.Store({
     },
     [types.SET_SELECTED_PAYMENT_OPTION]: (state, paymentOption) => {
       state.checkout.payment.option = paymentOption
+      // if the payment option is cash reset the payment method
+      console.log('set selected payment option ' + paymentOption)
+      if (paymentOption.id === 'cash') {
+        let options = state.userProfile.shipping.options
+        for (var i = 0; i < options.length; i++) {
+          let shipping = options[i]
+          if (shipping.id === '-1') {
+            state.checkout.shipping.option = shipping
+            break
+          }
+        }
+      }
     },
     [types.SET_COUNTRIES]: (state, countries) => {
       state.countries = countries
