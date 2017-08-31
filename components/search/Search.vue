@@ -118,13 +118,16 @@
         return this.releasesTotal > MAX_RELEASES || this.artistsTotal.length > MAX_ARTISTS
       },
       releaseResults () {
-        return this.$store.state.search.releases.results.slice(0, MAX_RELEASES)
+        let search = this.$store.state.search
+        let results = [...search.catnoReleases.results, ...search.releases.results].slice(0, MAX_RELEASES)
+        return results
       },
       artistsResults () {
         return this.$store.state.search.artists.results.slice(0, MAX_ARTISTS)
       },
       releasesTotal () {
-        return this.$store.state.search.releases.total
+        let search = this.$store.state.search
+        return search.releases.total + search.catnoReleases.total
       },
       storeQuery () {
         return this.$store.state.search.query

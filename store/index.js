@@ -67,6 +67,10 @@ const store = new Vuex.Store({
       artists: {
         results: [],
         total: 0
+      },
+      catnoReleases: {
+        results: [],
+        total: 0
       }
     },
     alerts: null,
@@ -162,14 +166,23 @@ const store = new Vuex.Store({
         state.search.artists.total = search.total
       }
     },
+    [types.SET_CATNO_RESULTS]: (state, args) => {
+      let search = args.search
+      state.search.catnoReleases.results = search.results
+      state.search.catnoReleases.total = search.total
+    },
     [types.ADD_SEARCH_RESULTS]: (state, args) => {
       let type = args.type
       state.search.loading--
       if (type === 'releases') {
         let results = state.search.releases.results
         let search = args.search
-        state.search.releases.results = results.concat(search.results)
-        state.search.releases.total = search.total
+        if (args.head) {
+          state.search.releases.results = [...search.results, ...results]
+        } else {
+          state.search.releases.results = results.concat(search.results)
+        }
+        state.search.releases.total = state.search.releases.total + search.total
       }
     },
     [types.SET_QUERY]: (state, {query, fields}) => {

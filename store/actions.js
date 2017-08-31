@@ -290,14 +290,18 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
         })
       }
       callReleaseSearchQuery(query, args.size, args.page || 1, args.fields, ({data}) => {
-        let rearchResults = data.search
-        commit(mutationType, {search: rearchResults, type: type})
+        let searchResults = data.search
+        commit(mutationType, {search: searchResults, type: type})
         resolve({
-          search: rearchResults
+          search: searchResults
         })
         commit(types.DECREMENT_SEARCH_LOADING)
       }, () => {
         commit(types.DECREMENT_SEARCH_LOADING)
+      })
+      callReleaseSearchQuery(query, args.size, 1, JSON.stringify(['cat_no']), ({data}) => {
+        let searchResults = data.search
+        commit(types.SET_CATNO_RESULTS, {search: searchResults, type: type, head: true})
       })
     } else if (type === 'artists') {
       callArtistSearchQuery(query, args.size, ({data}) => {
