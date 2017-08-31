@@ -17,8 +17,8 @@
   export default {
     name: 'OrderComplete',
     data: function () {
-      var orderNo = this.$store.getters.getUnpaidOrder.pk
-      this.$store.commit(types.SET_UNPAID_ORDER, null)
+      let unpaidOrder = this.$store.getters.getUnpaidOrder
+      var orderNo = unpaidOrder.pk
       return {
         orderNo: orderNo
       }
@@ -27,6 +27,19 @@
       isSelfCollector () {
         let shippingOption = this.$store.getters.getShippingOption
         return shippingOption && shippingOption.id === '-1'
+      }
+    },
+    mounted () {
+      let unpaidOrder = this.$store.getters.getUnpaidOrder
+      this.$store.commit(types.SET_UNPAID_ORDER, null)
+
+      let purchases = this.$store.getters.getPurchases
+      if (purchases && purchases.edges) {
+        purchases = {
+          edges: [{node: unpaidOrder}, ...purchases.edges],
+          pageInfo: purchases.edges
+        }
+        this.$store.commit(types.SET_PURCHASES, purchases)
       }
     }
   }

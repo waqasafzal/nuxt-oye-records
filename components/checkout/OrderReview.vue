@@ -68,6 +68,13 @@
             placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId, vatExcluded: $vatExcluded) {
               order {
                 ...Order
+                releases {
+                  quantity
+                  release {
+                    ...Release
+                    smallImageUrl: thumbnailUrl(size: 100)
+                  }
+                }
               }
               notInStock {
                 quantity
