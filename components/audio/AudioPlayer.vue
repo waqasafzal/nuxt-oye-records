@@ -202,6 +202,24 @@
     mounted: function () {
       this.audio = this.$el.querySelectorAll('audio')[0]
       this.init()
+
+      var vm = this
+      window.onkeydown = function (e) {
+        var key = e.keyCode ? e.keyCode : e.which
+
+        if (key === 32) {
+          e.preventDefault()
+          if (vm.playing) {
+            vm.$store.commit(types.PAUSE_TRACK)
+          } else {
+            vm.$store.commit(types.PLAY_TRACK, vm.currentTrack)
+          }
+        } else if (key === 37) {
+          vm.backwards()
+        } else if (key === 39) {
+          vm.forwards()
+        }
+      }
     }
   }
 
