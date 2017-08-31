@@ -207,7 +207,8 @@
       window.onkeydown = function (e) {
         var key = e.keyCode ? e.keyCode : e.which
 
-        if (key === 32) {
+        let lowerCase = e.target.tagName.toLowerCase()
+        if (key === 32 && lowerCase !== 'input') {
           e.preventDefault()
           if (vm.playing) {
             vm.$store.commit(types.PAUSE_TRACK)
