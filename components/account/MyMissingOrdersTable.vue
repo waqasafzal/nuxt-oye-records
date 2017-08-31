@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>Outstanding</h3>
     <table class="table" v-if="items">
       <thead>
       <tr>
@@ -18,10 +19,8 @@
               <img :src="release.node.smallImageUrl"/>
             </div>
             <div class="release__infos d-flex flex-column vmargin-auto">
-              <div class="d-flex flex-row">
-                <div class="release__name">{{ release.node.artistFirstName }} {{ release.node.artistLastName }}</div>
-                <div class="release__title">{{ release.node.title }}</div>
-              </div>
+              <div class="release__name">{{ release.node.artistFirstName }} {{ release.node.artistLastName }}</div>
+              <div class="release__title">{{ release.node.title }}</div>
               <div class="release__label">{{ release.node.label }} </div>
             </div>
           </nuxt-link>
@@ -31,7 +30,7 @@
             <div class="release__price">{{getPrice(release.node.price.gross)}} &euro;</div>
           </div>
         </td>
-        <td><div @click="onDelete(release.node)" class="delete float-right">&times;</div></td>
+        <td style="width: 200px"><div @click="onDelete(release.node)" class="delete float-right">&times;</div></td>
       </tr>
       </tbody>
     </table>

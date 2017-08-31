@@ -759,7 +759,7 @@ export const getCountries = ({commit, state}, args) => new Promise((resolve, rej
 
 export const removeBackOrder = ({commit, state}, args) => new Promise((resolve, reject) => {
   apolloClient.mutate({
-    mutation: gql`mutation BackOrder($id: ID!) {
+    mutation: gql`mutation RemoveBackOrder($id: ID!) {
         removeBackorder(id: $id) {
             ok
         }
@@ -767,10 +767,28 @@ export const removeBackOrder = ({commit, state}, args) => new Promise((resolve, 
     variables: {
       id: args.pk
     }
-  }).then((data) => {
+  }).then((response) => {
     commit(types.ADD_ALERT, {
-      message: 'Deleted back order item.'
+      message: 'Deleted back order item'
     })
-    resolve(data)
+    resolve(response.data.removeBackorder)
+  })
+})
+
+export const removeReservation = ({commit, state}, args) => new Promise((resolve, reject) => {
+  apolloClient.mutate({
+    mutation: gql`mutation RemoveReservation($id: ID!) {
+        removeReservation(id: $id) {
+            ok
+        }
+    }`,
+    variables: {
+      id: args.pk
+    }
+  }).then((response) => {
+    commit(types.ADD_ALERT, {
+      message: 'Deleted reservation'
+    })
+    resolve(response.data.removeReservation)
   })
 })

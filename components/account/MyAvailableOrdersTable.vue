@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>In Stock</h3>
     <table class="table" v-if="items">
       <thead>
       <tr>
@@ -29,8 +30,11 @@
             <div class="release__price">{{getPrice(release.node.price.gross)}} &euro;</div>
           </div>
         </td>
-        <td>
-          <add-to-cart-button @added="onAdded(release.node)" :release="release.node"></add-to-cart-button>
+        <td style="width: 200px">
+          <div class="d-flex flex-row justify-content-between">
+            <add-to-cart-button @added="onAdded(release.node)" :release="release.node"></add-to-cart-button>
+            <div @click="onDelete(release.node)" class="delete vmargin-auto">&times;</div>
+          </div>
         </td>
       </tr>
       </tbody>
@@ -102,7 +106,19 @@
         let parsedPrice = parseFloat(price)
         return roundFixed(parsedPrice, 2)
       },
+      onDelete: function (release) {
+        this.$store.dispatch('removeReservation', {
+          pk: release.relatedId
+        }).then((data) => {
+          if (data.ok) {
+            this.removeReleaseItem(release)
+          }
+        })
+      },
       onAdded: function (release) {
+        this.removeReleaseItem(release)
+      },
+      removeReleaseItem (release) {
         var relatedId = release.relatedId
         var filteredItems = this.items.edges.filter(function (item) {
           return item.node.relatedId !== relatedId

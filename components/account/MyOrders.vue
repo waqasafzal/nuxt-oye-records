@@ -1,8 +1,6 @@
 <template>
   <div class="my-orders">
-    <h3>Available</h3>
     <my-available-orders-table></my-available-orders-table>
-    <h3>Outstanding</h3>
     <my-missing-orders-table></my-missing-orders-table>
   </div>
 </template>
