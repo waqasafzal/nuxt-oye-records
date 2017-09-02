@@ -13,17 +13,20 @@
       <div class="ap__element current-track">
         <nuxt-link v-if="currentTrack" class="current-track__info-box"
                    :to="{name: 'releases-slug', params: {slug: currentTrack.release.slug}}">
-          <div class="track-info">
-            <div class="track-artist">
-              <template v-if="currentTrack.release.artistFirstName">
-                {{ currentTrack.release.artistFirstName }}
-              </template>
-              {{ currentTrack.release.artistLastName }}&nbsp;-&nbsp;
+          <div class="track-info d-flex flex-column">
+            <div class="track-name d-flex flex-row">
+              <div class="track-artist">
+                <template v-if="currentTrack.release.artistFirstName">
+                  {{ currentTrack.release.artistFirstName }}
+                </template>
+                {{ currentTrack.release.artistLastName }}&nbsp;-&nbsp;
+              </div>
+              <div class="track-title">
+                <template v-if="currentTrack.title">{{ currentTrack.title }}</template>
+                <template v-else>Track {{ currentTrack.position + 1 }}</template>
+              </div>
             </div>
-            <div class="track-title">
-              <template v-if="currentTrack.title">{{ currentTrack.title }}</template>
-              <template v-else>Track {{ currentTrack.position + 1 }}</template>
-            </div>
+            <div class="release-title">{{ currentTrack.release.title }}</div>
           </div>
           <div class="track-time">
             <div class="track-time__remaining">{{ time(currentTime / 1000) }}&nbsp;/&nbsp;</div>

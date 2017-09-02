@@ -1,5 +1,5 @@
 <template>
-  <div v-if="release">
+  <div v-if="release" v-on:keyup.65="addToCart(release.pk)">
     <div class="release-detail__header row">
       <div class="col-12">
         <div class="release-detail__back">
@@ -167,6 +167,8 @@
   import client from '../../../plugins/apollo'
   import { createReleaseDetailsQuery } from '../../../components/releases/queries'
   import ReleaseList from '../../../components/releases/ReleaseList'
+  import GoogleAnalytics from '~/mixins/ga'
+  import * as types from '../../../store/types'
 
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
@@ -176,13 +178,16 @@
   export default {
     name: 'ReleaseDetailView',
     props: ['id', 'slug', 'subslug'],
+    mixins: [GoogleAnalytics],
     components: {ReleaseList, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
+
     data: function () {
       return {
         release: '',
         ajaxRequest: false,
-        quantity: '1',
-        csrftoken: ''
+        quantity: 1,
+        csrftoken: '',
+        playing: false
       }
     },
     head () {
@@ -236,6 +241,30 @@
     },
     methods: {
       onAddToCartSuccess () {
+      },
+      onAddToCart (e) {
+        var key = e.keyCode ? e.keyCode : e.which
+        let tagName = e.target.tagName.toLowerCase()
+
+        if (tagName !== 'input') {
+          if (key === 65) {
+            e.preventDefault()
+            this.quantity = 1
+            this.addToCart(this.release.pk)
+          } else if (key === 80) {
+            e.preventDefault()
+            if (this.playing) {
+              this.$store.commit(types.PAUSE_TRACK)
+              this.playing = false
+            } else {
+              this.playing = true
+              this.playRelease()
+              this.$store.dispatch('playRelease', {
+                release: this.playableRelease
+              })
+            }
+          }
+        }
       },
       addToCart (pk) {
         this.$store.dispatch('addToCart', {
@@ -318,11 +347,18 @@
         return this.release && __API__ + this.release.thumbnailUrl
       }
     },
+    beforeDestroy () {
+      document.removeEventListener('keyup', this.onAddToCart)
+    },
+    destroyed () {
+      console.log('destroyed')
+    },
     mounted () {
       let autoplay = this.$route.query.autoplay
       if (autoplay === '1') {
         this.playRelease()
       }
+      document.addEventListener('keyup', this.onAddToCart)
     }
   }
 </script>

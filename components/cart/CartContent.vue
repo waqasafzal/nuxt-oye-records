@@ -118,10 +118,10 @@
           <h4>These items will be ordered for you but will not be charged yet:</h4>
           <div :key="'preorderLine' + i"
                v-for="(line, i) in cart.preorderLines" class="d-flex cart-line">
-            <div class="cart__backorder__delete" @click="onDelete(line)">Cancel</div>
             <nuxt-link class="cart__backorder__name" :to="{name: 'releases-slug', params: {slug: line.release.slug}}">
               <span>{{ line.quantity }} &times; {{ line.release.name }} - {{ line.release.title}}</span>
             </nuxt-link>
+            <div class="cart__backorder__delete" @click="onDelete(line)">Cancel</div>
           </div>
         </div>
       </template>

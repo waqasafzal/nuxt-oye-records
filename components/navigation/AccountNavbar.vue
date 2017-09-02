@@ -31,7 +31,7 @@
             </span>
             <div class="cart-icon-box">
               <cart-svg></cart-svg>
-              <span :class="['badge', cartCount === 0 ? 'empty': '']"></span>
+              <span :class="['badge', cartCount === 0 ? reservationCount > 0 ? 'reserve': 'empty' : '']"></span>
             </div>
           </nuxt-link>
         </div>
@@ -56,6 +56,9 @@
       },
       cartCount () {
         return this.$store.getters.cartItemCount
+      },
+      reservationCount () {
+        return this.$store.getters.reservationCount
       }
     },
     data: function () {

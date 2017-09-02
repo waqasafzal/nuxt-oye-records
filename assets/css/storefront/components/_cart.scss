@@ -130,6 +130,14 @@
     .cart-line {
       padding-top: 4px;
       padding-bottom: 4px;
+      .cart__backorder__delete {
+        display: none;
+      }
+      &:hover {
+        .cart__backorder__delete {
+          display: inherit;
+        }
+      }
     }
     &__delete {
       cursor: pointer;
@@ -137,8 +145,9 @@
       padding-left: 10px;
       padding-right: 10px;
       margin-right: 10px;
+      margin-left: 10px;
       &:hover {
-        background-color: darken($brand-secondary-color-red, 10);
+        background-color: darken($brand-secondary-color-red, 20);
       }
     }
     &__name {
@@ -297,4 +306,8 @@
   display: inline-block;
   vertical-align: middle;
   height: 100%;
+}
+
+.form-group:last-child {
+  margin-bottom: inherit !important;
 }

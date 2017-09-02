@@ -98,9 +98,23 @@ const store = new Vuex.Store({
       state.user = null
     },
     [types.ADD_TRACK]: (state, track) => {
-      state.player.history.push(track)
+      var position = -1
+      let player = state.player
+      for (var i = 0; i < player.history.length; i++) {
+        if (player.history[i] === track) {
+          position = i
+        }
+      }
+
+      if (position === -1) {
+        state.player.history.push(track)
+        position = 0
+      }
+
       if (!state.player.currentTrack) {
-        state.player.currentTrack = track
+        player.position = position
+        player.currentTrack = track
+        player.playing = true
       }
     },
     [types.PLAY_TRACK]: (state, track) => {
@@ -401,6 +415,9 @@ const store = new Vuex.Store({
     },
     cartItemCount (state) {
       return state.cart && state.cart.quantity || 0
+    },
+    reservationCount (state) {
+      return state.cart && state.cart.preorderLines.length
     },
     isShippingAddressComplete (state) {
       let address = state.checkout.shipping.address

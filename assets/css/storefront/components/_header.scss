@@ -187,6 +187,10 @@
           &.empty {
             background-color: $dark-gray;
           }
+          &.reserve {
+            background-color: $brand-secondary-color-yellow !important;
+            //opacity: 90;
+          }
           @include media-breakpoint-down(sm) {
             right: 0;
           }
@@ -473,6 +477,9 @@
           &.empty {
             background-color: darken($gray-color-2, 20) !important;
           }
+          &.reserve {
+            background-color: darken($brand-secondary-color-yellow, 20) !important;
+          }
         }
       }
     }
@@ -505,6 +512,9 @@
       cursor: default;
       &.empty {
         background-color: $gray-color-2;
+      }
+      &.reserve {
+        background-color: $brand-secondary-color-yellow;
       }
       @include media-breakpoint-down(sm) {
         right: 0;

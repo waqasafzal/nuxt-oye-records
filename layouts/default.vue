@@ -25,10 +25,6 @@
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
 
-//  if (process.env.NODE_ENV !== 'production') {
-//    require('longjohn')
-//  }
-
   export default {
     components: {AccountNavbar, Alerts, BrandNavbar, AudioPlayer},
     name: 'app',
@@ -52,7 +48,6 @@
       }
     },
     beforeCreate () {
-//      var vm = this
       client.networkInterface.use([{
         applyMiddleware (req, next) {
           if (!req.options.headers) {

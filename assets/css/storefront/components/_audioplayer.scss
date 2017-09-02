@@ -2,7 +2,7 @@
   background-color: $brand-color-black;
   position: fixed;
   z-index: 10;
-  height: 60px;
+  height: 70px;
   bottom: 0;
   width: 100%;
   display: flex;
@@ -45,6 +45,18 @@
       .track-info {
         padding-bottom: 5px;
         display: inline-flex;
+
+        overflow: hidden;
+        //white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .release-title {
+        font-size: $font-size-sm;
+        line-height: $font-size-sm;
+        color: $gray-color-1;
+        overflow: hidden;
+        //white-space: nowrap;
+        text-overflow: ellipsis;
       }
       .track-time {
         display: inline-flex;
@@ -143,6 +155,15 @@
     }
   }
   .track-info {
+    width: 80%;
+    display: flex;
+    padding-left: 1.5em;
+    align-items: center;
+    .playlist-position {
+      margin-right: 0.5em;
+    }
+  }
+  .track-name {
     width: 80%;
     display: flex;
     padding-left: 1.5em;
