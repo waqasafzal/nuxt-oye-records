@@ -49,7 +49,7 @@
         </div>
       </div>
       <audio id="music" ref="music">
-        <source v-if="currentTrack" :src="currentTrack.url" type="audio/mpeg">
+        <source :ref="clip" v-if="currentTrack" :src="currentTrack.url" type="audio/mpeg">
       </audio>
     </div>
 
@@ -163,6 +163,7 @@
         let music = this.$refs.music
         console.log('reloadMusic' + music)
         if (this.audio) {
+          console.log(this.$refs.clip)
           if (music) {
             console.log('preload')
             music.load()
