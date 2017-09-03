@@ -350,9 +350,6 @@
     beforeDestroy () {
       document.removeEventListener('keyup', this.onAddToCart)
     },
-    destroyed () {
-      console.log('destroyed')
-    },
     mounted () {
       let autoplay = this.$route.query.autoplay
       if (autoplay === '1') {
