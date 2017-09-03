@@ -159,9 +159,10 @@
         this.$store.dispatch('nextTrack')
       },
       reloadMusic () {
-        console.log('reloadMusic')
         let music = this.$refs.music
+        console.log('reloadMusic' + music)
         if (music) {
+          console.log(this.currentTrack)
           music.load()
           music.play()
         }
