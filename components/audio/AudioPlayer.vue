@@ -162,12 +162,14 @@
       reloadMusic () {
         let music = this.$refs.music
         console.log('reloadMusic' + music)
-        if (music) {
-//          console.log(this.currentTrack)
-          music.load()
-          music.play()
-        }
         if (this.audio) {
+          if (music) {
+            console.log('preload')
+            music.load()
+            console.log('load')
+            music.play()
+            console.log('play')
+          }
           this.duration = this.audio.duration
         }
       },
