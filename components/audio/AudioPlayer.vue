@@ -49,7 +49,7 @@
         </div>
       </div>
       <audio id="music" ref="music">
-        <source :ref="clip" v-if="currentTrack" :src="currentTrack.url" type="audio/mpeg">
+        <source ref="clip" v-if="currentTrack" :src="currentTrack.url" type="audio/mpeg">
       </audio>
     </div>
 
