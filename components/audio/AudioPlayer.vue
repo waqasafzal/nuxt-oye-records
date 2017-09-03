@@ -210,18 +210,18 @@
       document.addEventListener('keydown', function (e) {
         var key = e.keyCode ? e.keyCode : e.which
 
-        let lowerCase = e.target.tagName.toLowerCase()
-        if (key === 32 && lowerCase !== 'input') {
+        let noText = e.target.type !== 'text'
+        if (key === 32 && noText) {
           e.preventDefault()
           if (vm.playing) {
             vm.$store.commit(types.PAUSE_TRACK)
           } else {
             vm.$store.commit(types.PLAY_TRACK, vm.currentTrack)
           }
-        } else if (key === 37 && lowerCase !== 'input') {
+        } else if (key === 37 && noText) {
           e.preventDefault()
           vm.backwards()
-        } else if (key === 39 && lowerCase !== 'input') {
+        } else if (key === 39 && noText) {
           e.preventDefault()
           vm.forwards()
         }

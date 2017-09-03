@@ -104,16 +104,17 @@
     &-button {
       cursor: pointer;
       display: flex;
-      &:hover:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-        opacity: 0.5;
-      }
+
+        &:hover:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: black;
+          opacity: 0.5;
+        }
     }
     &-inner {
       display: flex;

@@ -244,9 +244,9 @@
       },
       onAddToCart (e) {
         var key = e.keyCode ? e.keyCode : e.which
-        let tagName = e.target.tagName.toLowerCase()
+        let noText = e.target.type !== 'text'
 
-        if (tagName !== 'input') {
+        if (noText) {
           if (key === 65) {
             e.preventDefault()
             this.quantity = 1
