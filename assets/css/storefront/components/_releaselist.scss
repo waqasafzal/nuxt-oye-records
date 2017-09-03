@@ -67,6 +67,63 @@
   @include media-breakpoint-only(sm) {
     height: 400px;
   }
+  @include media-breakpoint-up(lg) {
+    .resizable-list-item-outer {
+      &:hover {
+        background-color: white;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-bottom: 5%;
+
+        width: 110%;
+        margin-top: -10px;
+        padding-top: 10px;
+        margin-left: -5%;
+        margin-right: -5%;
+        box-shadow:
+                0 2px 4px 0 rgba(0, 0, 0, 0.15),
+                0 3px 6px 0 rgba(0, 0, 0, 0.14);
+
+        z-index: 1;
+        .release-list-add {
+          display: block;
+        }
+        .release-list-info__label {
+          display: block;
+        }
+        .release-list-play {
+          display: inline-block;
+          &:hover {
+            opacity: 1;
+            background-color: $brand-color-green !important;
+            &:after {
+              opacity: 0;
+            }
+          }
+        }
+        .release-list-image {
+          .format {
+            display: inherit;
+          }
+          .genre {
+            display: inherit;
+          }
+          &:before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            //background: $brand-color-black;
+            background-color: #020202;
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
   @include media-breakpoint-down(md) {
     .resizable-list-item-outer {
       background-color: white;
@@ -179,59 +236,6 @@
   top: 0;
   left: 0;
   width: 100%;
-  &:hover {
-    background-color: white;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 5%;
-
-    width: 110%;
-    margin-top: -10px;
-    padding-top: 10px;
-    margin-left: -5%;
-    margin-right: -5%;
-    box-shadow:
-            0 2px 4px 0 rgba(0, 0, 0, 0.15),
-            0 3px 6px 0 rgba(0, 0, 0, 0.14);
-
-    z-index: 1;
-    .release-list-add {
-      display: block;
-    }
-    .release-list-info__label {
-      display: block;
-    }
-    .release-list-play {
-      display: inline-block;
-      &:hover {
-        opacity: 1;
-        background-color: $brand-color-green !important;
-        &:after {
-          opacity: 0;
-        }
-      }
-    }
-    .release-list-image {
-      .format {
-        display: inherit;
-      }
-      .genre {
-        display: inherit;
-      }
-      &:before {
-        content: "";
-        width: 100%;
-        height: 100%;
-        opacity: 0.8;
-        //background: $brand-color-black;
-        background-color: #020202;
-        position: absolute;
-        pointer-events: none;
-        top: 0;
-        left: 0;
-      }
-    }
-  }
 }
 
 .release-list-summary {
