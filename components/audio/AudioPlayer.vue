@@ -143,10 +143,12 @@
     },
     methods: {
       pauseAudio () {
+        console.log('pauseAudio')
         var music = this.$refs.music
         music.pause()
       },
       playAudio () {
+        console.log('playAudio')
         var music = this.$refs.music
         music.play()
       },
@@ -157,6 +159,7 @@
         this.$store.dispatch('nextTrack')
       },
       reloadMusic () {
+        console.log('reloadMusic')
         let music = this.$refs.music
         if (music) {
           music.load()
