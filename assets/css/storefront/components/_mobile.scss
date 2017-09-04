@@ -34,6 +34,10 @@
         max-width: 150px;
         max-height: 150px;
       }
+      @include media-breakpoint-down(xs) {
+        max-width: 120px;
+        max-height: 120px;
+      }
       @include media-breakpoint-up(md) {
         max-width: 300px;
         max-height: 300px;
