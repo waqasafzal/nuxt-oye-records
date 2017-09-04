@@ -14,7 +14,7 @@
           </nuxt-link>
         </div>
         <main-navbar class="col-2 col-md-9"></main-navbar>
-        <search v-if="!isCheckout" class="col-2 col-md-2"></search>
+        <search v-if="!isCheckout" class="col-2 col-md-2 d-lg-none"></search>
       </div>
     </div>
   </div>

@@ -76,15 +76,15 @@
         .slider-left-control {
           margin: auto;
           height: inherit;
-          @media screen and (max-width: 480px) and (orientation: portrait){
+          @include media-breakpoint-down(sm) {
             display: none;
           }
         }
         .slider-right-control {
           margin: auto;
           height: inherit;
-          @media screen and (max-width: 480px) and (orientation: portrait){
-            //display: none;
+          @include media-breakpoint-down(sm) {
+            display: none;
           }
         }
       }
