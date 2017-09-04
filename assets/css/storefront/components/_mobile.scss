@@ -61,7 +61,7 @@
     &__teaser {
       width: 100%;
       @include media-breakpoint-down(xs) {
-        max-height: 300px;
+        max-height: 550px;
       }
       max-height: 400px;
       padding-left: inherit;
@@ -181,15 +181,37 @@
       .title {
         width: 100%;
       }
-      .release-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        img {
-          height: 50px;
+      .release {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        .release__button-bar {
+          margin-top: auto;
+          padding: $global-padding;
         }
+        .release-image {
+          height: 100%;
+          img {
+            width: 100%;
+            height: auto;
+            padding: 1rem;
+          }
+          //position: absolute;
+          //top: 0;
+          //left: 0;
+          //height: 100%;
+          //width: 100%;
+          //img {
+          //  height: 50px;
+          //}
+        }
+        .release-info {
+          margin-top: 1rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
       }
       .release-info {
         position: relative;

@@ -3,7 +3,7 @@
     <div class="play" v-if="release.tracks.length > 0">
       <play-release-button :size=baseSize :release="release"></play-release-button>
     </div>
-    <add-to-cart-button :release="release" :size=baseSize class="release__button-bar__add-to-cart"></add-to-cart-button>
+    <add-to-cart-button :withTitle="withTitle" :release="release" :size=baseSize class="release__button-bar__add-to-cart"></add-to-cart-button>
   </div>
 </template>
 
@@ -18,6 +18,10 @@
       size: {
         type: Number,
         default: 36
+      },
+      withTitle: {
+        type: Boolean,
+        default: true
       }
     },
     name: 'ReleaseButtonBar',

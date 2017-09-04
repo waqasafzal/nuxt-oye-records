@@ -10,18 +10,40 @@
               <div :key="'release-'+i"
                    v-show="i === currentFeature"
                    class="slide">
-                <div class="slide__inner" :style="`background-image: url(${release.featureImageUrl})`">
-                  <div class="feature-category">
-                    <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
-                  </div>
-                  <nuxt-link class="release-info" :key="'release-'+i" :to="{name: 'releases-slug', params: {slug: release.slug}}">
-                    <div class="release-name">
-                      <div class="frontpage__teaser__artist">{{ release.name }}</div>
-                      <div class="frontpage__teaser__title">{{ release.title }}</div>
+                <template v-if="!$store.state.isMobile">
+                  <div class="slide__inner" :style="`background-image: url(${release.featureImageUrl})`">
+                    <div class="feature-category">
+                      <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                     </div>
-                    <release-button-bar :release="release" :size=48></release-button-bar>
-                  </nuxt-link>
-                </div>
+                    <nuxt-link class="release-info" :key="'release-'+i" :to="{name: 'releases-slug', params: {slug: release.slug}}">
+                      <div class="release-name">
+                        <div class="frontpage__teaser__artist">{{ release.name }}</div>
+                        <div class="frontpage__teaser__title">{{ release.title }}</div>
+                      </div>
+                      <release-button-bar :release="release" :size=48></release-button-bar>
+                    </nuxt-link>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="slide__inner">
+                    <div class="release">
+                      <div class="release-image">
+                        <img :src="release.featureImageUrl" />
+                      </div>
+                      <div class="release-action d-flex flex-row justify-content-between">
+                        <div class="release-info">
+                          <div class="release-artist">
+                            {{ release.name }}
+                          </div>
+                          <div class="release-artist">
+                            {{ release.title }}
+                          </div>
+                        </div>
+                      </div>
+                      <release-button-bar :size=48 :release="release" :withTitle="false"></release-button-bar>
+                    </div>
+                  </div>
+                </template>
               </div>
             </transition>
           </template>
@@ -44,9 +66,11 @@
 <script>
   import WeekFeature from './WeekFeature'
   import ReleaseButtonBar from '../releases/ReleaseButtonBar'
+  import PlayReleaseButton from '../releases/PlayReleaseButton'
+  import AddToCartButton from '../cart/AddToCartButton'
 
   export default {
-    components: {ReleaseButtonBar, WeekFeature},
+    components: {AddToCartButton, PlayReleaseButton, ReleaseButtonBar, WeekFeature},
     props: ['featuredReleases', 'singleRelease', 'albumRelease'],
     name: 'FrontPageTeasers',
     data: function () {
