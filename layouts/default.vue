@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="[isMobile ? 'mobile': '']">
-    <account-navbar></account-navbar>
+    <account-navbar v-if="!isMobile"></account-navbar>
     <header class="navbar" role="navigation">
       <brand-navbar :isOpenMobile="isOpenMobileMenu" v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
