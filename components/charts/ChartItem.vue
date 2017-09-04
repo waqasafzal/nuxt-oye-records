@@ -1,6 +1,8 @@
 <template>
   <nuxt-link :to="{name: 'charts-slug', params: {slug: chart.slug}}">
-    <img :src="chart.imageUrl"/>
+    <div class="chart-banner">
+      <img :src="chart.imageUrl"/>
+    </div>
     <template v-if="chart.artist">
       <div class="charts-infobox__name">{{ chart.artist.name }}</div>
       <template v-if="chart.name">{{ chart.name }}</template>
