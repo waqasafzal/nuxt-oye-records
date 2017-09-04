@@ -65,6 +65,7 @@ export const releaseDetails = gql`
         }
         slug
         thumbnailUrl
+        smallImageUrl: thumbnailUrl(size:400)
         addToCartUrl
         tracks {
             ...Tracks
@@ -125,6 +126,7 @@ export const release = gql`
             currency
             gross
         }
+        description
         hasTracks
         availability {
             status

@@ -3,7 +3,8 @@
     <div id="description" :class="[ expanded ? '' : 'product__info__description__stripped']">
       <vue-markdown>{{ release.description }}</vue-markdown>
     </div>
-    <div v-if="lines > 3" @click.prevent="toggleExpansion" class="product__info__description more">
+    <div v-if="lines > 7" @click.prevent="toggleExpansion" class="product__info__description more">
+      <!--{{lines}}-->
       <template v-if="!expanded">Read more</template>
       <template v-else>Read less</template>
     </div>
@@ -46,7 +47,7 @@
         let lineHeightInt = parseInt(lineHeight)
         let lines = divHeight / lineHeightInt
         this.lines = lines
-        if (this.lines > 3) {
+        if (this.lines > 7) {
           this.expanded = false
         }
       } else {

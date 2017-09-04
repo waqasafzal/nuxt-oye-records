@@ -17,7 +17,7 @@
       release: Object,
       size: {
         type: Number,
-        default: 32
+        default: 36
       }
     },
     name: 'ReleaseButtonBar',

@@ -1,0 +1,292 @@
+
+
+/* mixin for multiline */
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount;
+  //text-align: justify;
+  margin-right: 0em;
+  padding-right: 2em;
+  //&:before {
+  //  content: '...';
+  //  position: absolute;
+  //  right: 10px;
+  //  bottom: 0;
+  //}
+  //&:after {
+  //  content: '';
+  //  position: absolute;
+  //  right: 0;
+  //  width: 1em;
+  //  height: 1em;
+  //  margin-top: 0.2em;
+  //  background: transparent;
+  //}
+}
+
+.mobile {
+  .feature {
+    img {
+      max-width: 150px;
+      max-height: 150px;
+    }
+  }
+}
+
+.frontpage__weekly__item {
+  .mobile {
+    .feature {
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.mobile {
+  .frontpage {
+    &__teaser {
+      width: 100%;
+      max-height: 300px;
+      padding-left: inherit;
+      padding-right: inherit;
+      margin-left: inherit;
+      margin-right: inherit;
+
+      margin-bottom: inherit;
+      &__content {
+        height: 100%;
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-top: inherit;
+        @media screen and (max-width: 480px) and (orientation: portrait){
+          padding-left: inherit;
+          padding-right: inherit;
+        }
+        padding-left: 120px;
+        padding-right: 120px;
+        padding-bottom: inherit;
+        .slider-left-control {
+          margin: auto;
+          height: inherit;
+          @media screen and (max-width: 480px) and (orientation: portrait){
+            display: none;
+          }
+        }
+        .slider-right-control {
+          margin: auto;
+          height: inherit;
+          @media screen and (max-width: 480px) and (orientation: portrait){
+            //display: none;
+          }
+        }
+      }
+      &__artist {
+        width: 100%;
+        font-size: $font-size-h4;
+        @include multiLineEllipsis($lineHeight: $font-size-h4, $lineCount: 2, $bgColor: white);
+      }
+      &__title {
+        width: 100%;
+        font-size: $font-size-h4;
+        @include multiLineEllipsis($lineHeight: $font-size-h4, $lineCount: 2, $bgColor: white);
+      }
+    }
+    &__weekly {
+      &__panel {
+        margin-top: inherit;
+        min-height: inherit;
+      }
+      &__item {
+        &__cell {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+        *.add-to-cart-button {
+          width: 48px;
+          background-color: $brand-color-green;
+          img {
+            margin-right: auto !important;
+            margin-left: auto !important;
+          }
+        }
+        margin-bottom: inherit;
+        padding: 0.8rem;
+        img {
+          padding-bottom: inherit;
+          margin-right: 15px;
+          margin-left: 15px;
+          margin-top: -4px;
+        }
+        .feature {
+          width: 100%;
+        }
+        *.content {
+          padding: 1px;
+          .title {
+            height: $font-size-h5 * 2;
+            font-size: $font-size-h5;
+            overflow: hidden;
+            //text-overflow: ;
+            line-height: $font-size-h5;
+            white-space: pre-line;
+            margin-top: auto;
+          }
+          .name {
+            font-size: $font-size-h4;
+          }
+          .release-btn {
+            margin-right: .4rem;
+            &:last-child {
+              margin-right: inherit;
+            }
+            &-bar {
+              margin-top: auto;
+              margin-left: auto;
+              justify-content: flex-end;
+            }
+          }
+        }
+      }
+    }
+  }
+  .slide {
+    .slide__inner {
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding-top: $global-padding * 2;
+      padding-bottom: $global-padding * 2;
+      .artist {
+        width: 100%
+      }
+      .title {
+        width: 100%;
+      }
+      .release-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        img {
+          height: 50px;
+        }
+      }
+      .release-info {
+        position: relative;
+        justify-content: space-between;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        //.name {
+        //  position: absolute;
+        //  left: 0;
+        //  top: 0;
+        //  height: 100%;
+        //  width: 100%;
+        //}
+      }
+      img {
+        //width: auto;
+        //max-height: 250px;
+        height: 100%;
+        width: 100%;
+      }
+      .release-info {
+        //width: 80%;
+        .description {
+          font-size: $font-size-sm;
+          @include multiLineEllipsis($lineHeight: $font-size-h5, $lineCount: 3, $bgColor: transparent);
+        }
+        &-box {
+          //position: absolute;
+          //top: 0;
+          //left: 0;
+          width: 100%;
+          height: 100%;
+          margin-right: 4rem;
+          &:last-child {
+            margin-right: inherit;
+          }
+        }
+        .overlay {
+          .artist {
+
+          }
+        }
+      }
+    }
+  }
+  .release__button-bar__add-to-cart {
+    width: auto;
+  }
+
+  .list-item {
+    height: 270px !important;
+  }
+  .resizable-list-item-outer {
+    background-color: white;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+
+    width: 110%;
+    margin-top: -10px;
+    padding-top: 10px;
+    margin-left: -5%;
+    margin-right: -5%;
+    box-shadow:
+            0 2px 4px 0 rgba(0, 0, 0, 0.15),
+            0 3px 6px 0 rgba(0, 0, 0, 0.14);
+
+    z-index: 1;
+    .release-list-add {
+      display: block;
+    }
+    .release-list-info__label {
+      display: block;
+    }
+    .release-list-play {
+      display: inline-block !important;
+      //&:hover {
+      opacity: 1;
+      background-color: $brand-color-green !important;
+      //&:after {
+      //  opacity: 0;
+      //}
+      //}
+    }
+    .release-list-image {
+      .format {
+        display: inherit;
+      }
+      .genre {
+        display: inherit;
+      }
+      &:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        //background: $brand-color-black;
+        background-color: #020202;
+        position: absolute;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+
+.block-with-text {
+  @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);
+}

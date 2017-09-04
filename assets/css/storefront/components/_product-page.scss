@@ -167,6 +167,10 @@
   }
   &__gallery {
     padding-right: 2em;
+    margin-bottom: 2em;
+    &:last-child {
+      padding-right: inherit;
+    }
     .carousel-control {
       &-prev {
         img {

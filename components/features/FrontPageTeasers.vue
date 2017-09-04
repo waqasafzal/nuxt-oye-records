@@ -14,9 +14,11 @@
                   <div class="feature-category">
                     <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                   </div>
-                  <nuxt-link :key="'release-'+i" :to="{name: 'releases-slug', params: {slug: release.slug}}">
-                    <div class="frontpage__teaser__artist">{{ release.name }}</div>
-                    <div class="frontpage__teaser__title">{{ release.title }}</div>
+                  <nuxt-link class="release-info" :key="'release-'+i" :to="{name: 'releases-slug', params: {slug: release.slug}}">
+                    <div class="release-name">
+                      <div class="frontpage__teaser__artist">{{ release.name }}</div>
+                      <div class="frontpage__teaser__title">{{ release.title }}</div>
+                    </div>
                     <release-button-bar :release="release" :size=48></release-button-bar>
                   </nuxt-link>
                 </div>
@@ -27,11 +29,11 @@
       </div>
     </div>
     <div class="row frontpage__weekly__panel">
-      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 frontpage__weekly__item__cell">
         <week-feature class="frontpage__weekly__item" :release="singleRelease"
                       :category="`Single Of The Week`"></week-feature>
       </div>
-      <div class="col-xl-6 col-md-12 col-sm-12 frontpage__weekly__item__cell">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 frontpage__weekly__item__cell">
         <week-feature class="frontpage__weekly__item" :release="albumRelease"
                       :category="`Album Of The Week`"></week-feature>
       </div>

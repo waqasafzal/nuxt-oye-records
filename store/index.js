@@ -75,10 +75,14 @@ const store = new Vuex.Store({
     },
     alerts: null,
     checkoutActive: false,
-    userFormErrors: getInitialUserForm()
+    userFormErrors: getInitialUserForm(),
+    isMobile: false
   },
 
   mutations: {
+    changeMobile (state, isMobile) {
+      state.isMobile = isMobile
+    },
     [types.SET_CART]: (state, cart) => {
       state.cart = cart
     },
@@ -404,6 +408,7 @@ const store = new Vuex.Store({
   },
 
   getters: {
+    isMobile: state => state.isMobile,
     isAuthenticated (state) {
       return state.user && state.user.authenticated
     },

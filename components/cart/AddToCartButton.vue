@@ -2,7 +2,7 @@
   <div v-if="release" class="add-to-cart-button" @click.prevent="addToCart" :style="addToCartButtonStyle">
     <!--<div class="hmargin-auto">-->
       <img :style="imgStyle" src="../../assets/images/cart_small_white.svg" />
-      <span>{{ orderAction }}</span>
+      <span :style="textStyle" v-if="withTitle"> {{ orderAction }}</span>
     <!--</div>-->
   </div>
 </template>
@@ -18,7 +18,11 @@
       release: Object,
       size: {
         type: Number,
-        default: 32
+        default: 36
+      },
+      withTitle: {
+        type: Boolean,
+        default: true
       }
     },
     data: function () {
@@ -28,9 +32,32 @@
     },
     computed: {
       addToCartButtonStyle: function () {
-        return {
+        let style = {
           height: `${this.baseSize}px`,
-          lineHeight: `${this.baseSize}px`
+//          width: `${this.baseSize}px`,
+          lineHeight: `${this.baseSize / 2}px`,
+//          display: 'flex',
+          flexFlow: 'row',
+          overFlow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          marginTop: 'auto',
+          marginBottom: 'auto'
+
+        }
+        return style
+      },
+      textStyle () {
+        return {
+          marginLeft: '2px',
+          marginTop: 'auto',
+          marginBottom: 'auto',
+//          marginTop: '2px',
+          height: `${this.baseSize * 2 / 3}px`,
+          lineHeight: `${this.baseSize * 2 / 3}px`,
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
+          width: '100%'
         }
       },
       orderAction () {
@@ -69,6 +96,14 @@
   .add-to-cart-button {
     /*position: relative;*/
     cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    img {
+      /*margin-top: auto;*/
+      /*margin-bottom: auto;*/
+      margin-left: auto;
+      /*margin-right: auto;*/
+    }
     &:hover:after {
        content: '';
        position: absolute;

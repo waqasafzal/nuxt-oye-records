@@ -2,8 +2,8 @@ $font-factor: 0.9;
 
 .release {
   &__button-bar {
-    display: inline-block;
     position: relative;
+    display: flex;
     margin-top: $font-factor + em;
     .play {
       display: inline-block;
@@ -16,7 +16,8 @@ $font-factor: 0.9;
       border-radius: 2px;
       display: inline-block;
       line-height: 48px;
-      width: 12em;
+      //width: 12em;
+      padding: .5rem 2rem;
       color: white;
       text-align: center;
       font-size: $font-factor + em;
