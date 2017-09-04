@@ -30,8 +30,14 @@
 .mobile {
   .feature {
     img {
-      max-width: 150px;
-      max-height: 150px;
+      @include media-breakpoint-down(sm) {
+        max-width: 150px;
+        max-height: 150px;
+      }
+      @include media-breakpoint-up(md) {
+        max-width: 300px;
+        max-height: 300px;
+      }
     }
   }
 }

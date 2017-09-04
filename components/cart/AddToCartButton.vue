@@ -1,9 +1,12 @@
 <template>
-  <div v-if="release" class="add-to-cart-button" @click.prevent="addToCart" :style="addToCartButtonStyle">
-    <!--<div class="hmargin-auto">-->
-      <img :style="imgStyle" src="../../assets/images/cart_small_white.svg" />
+  <div v-if="release" class="add-to-cart-button" @click.prevent="addToCart"
+       :style="addToCartButtonStyle">
+    <div class="d-flex flex-row vmargin-auto">
+      <div style="width: auto; height: auto">
+        <img :style="imgStyle" src="../../assets/images/cart_small_white.svg"/>
+      </div>
       <span :style="textStyle" v-if="withTitle"> {{ orderAction }}</span>
-    <!--</div>-->
+    </div>
   </div>
 </template>
 
@@ -73,8 +76,10 @@
       imgStyle () {
         return {
           width: `${this.baseSize / 3}px`,
-          marginRight: `${this.baseSize / 4.8}px`,
-          marginTop: `${-1 * this.baseSize / 12}px`
+          marginRight: `${this.baseSize / 4.8}px`
+//          ,
+//          ,
+//          marginTop: `${-1 * this.baseSize / 16}rem`
         }
       }
     },
@@ -105,14 +110,14 @@
       /*margin-right: auto;*/
     }
     &:hover:after {
-       content: '';
-       position: absolute;
-       top: 0;
-       left: 0;
-       width: 100%;
-       height: 100%;
-       background-color: black;
-       opacity: 0.1;
-     }
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.1;
+    }
   }
 </style>
