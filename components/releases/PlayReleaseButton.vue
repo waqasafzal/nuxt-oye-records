@@ -59,12 +59,13 @@
           this.$store.dispatch('playRelease', {
             release: this.playableRelease
           }).then(track => {
-//            console.log('set track: ' + track)
+            console.log('set track: ' + track.url)
 //            this.play = track
           })
         }
       },
       fetchRelease () {
+        console.log('fetchrelease')
         var vm = this
         client.query({
           query: gql`query Release($slug: String!) {
@@ -78,8 +79,18 @@
             slug: this.playableRelease.slug
           }
         }).then((result) => {
-          vm.playableRelease = result.data.release
-          vm.playRelease()
+          let playableRelease = result.data.release
+          console.log('playyyy' + playableRelease)
+          vm.playableRelease = playableRelease
+//          vm.playRelease()
+          this.trackEvent('Audio', 'play-release', `${playableRelease.name} - ${playableRelease.title}`)
+
+          this.$store.dispatch('playRelease', {
+            release: playableRelease
+          }).then(track => {
+            console.log('set track: ' + track.url)
+//            this.play = track
+          })
         })
       },
       onPause () {

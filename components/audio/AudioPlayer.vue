@@ -101,7 +101,8 @@
       currentTrack: function () {
         let player = this.$store.state.player
         if (player && player.currentTrack) {
-          this.reloadMusic()
+//          console.log('')
+//          this.reloadMusic()
           return player.currentTrack
         }
       },
@@ -122,10 +123,16 @@
       }
     },
     watch: {
+      currentTrack (val) {
+        console.log('currentTrack changed ' + val.url)
+        this.reloadMusic()
+      },
       player: function (val) {
+        console.log('player changed' + val)
         this.reloadMusic()
       },
       playing: function (val) {
+        console.log('playing changed: ' + val)
         if (!val) {
           this.pauseAudio()
         } else {
@@ -161,9 +168,13 @@
       reloadMusic () {
         let music = this.$refs.music
         console.log('reloadMusic' + music)
-        if (this.audio) {
-          console.log(this.$refs.clip)
+        let clip = this.$refs.clip
+        if (this.audio + ' ' + clip) {
+          console.log(clip)
           if (music) {
+            clip.src = this.currentTrack.url
+            music.pause()
+
             console.log('preload')
             music.load()
             console.log('load')

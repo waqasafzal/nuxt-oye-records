@@ -241,12 +241,14 @@ export const playRelease = ({commit}, args) => new Promise((resolve, reject) => 
     for (var i = 0; i < release.tracks.length; i++) {
       var track = release.tracks[i]
       if (i === 0) {
+        console.log('play track ' + track)
         commit(types.PLAY_TRACK, track)
-        resolve(track)
       } else {
+        console.log('add track ' + track)
         commit(types.ADD_TRACK, track)
       }
     }
+    resolve(release)
   }
 })
 

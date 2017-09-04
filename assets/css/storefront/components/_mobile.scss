@@ -303,3 +303,28 @@
 .block-with-text {
   @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);
 }
+
+@media (min-width: 576px) {
+  .d-sm-none {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .d-md-none {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .d-lg-none {
+    display: none !important;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .d-xl-none {
+    display: none !important;
+  }
+}
