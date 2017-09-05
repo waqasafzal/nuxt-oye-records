@@ -31,24 +31,24 @@
       </div>
     </template>
     <template v-else>
-      <nav v-if="!$store.getters.hasMobileMenu || $store.state.showMobile" :class="['navigation']">
+      <nav @click="onClick" v-if="!$store.getters.hasMobileMenu || $store.state.showMobile" :class="['navigation']">
         <ul :class="['nav', 'navbar-nav', isHomeUrl ? 'no-border' : '']">
-          <li @click="onClick" class="nav-item" v-if="$store.getters.hasMobileMenu">
+          <li class="nav-item" v-if="$store.getters.hasMobileMenu">
             <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>
           </li>
-          <li @click="onClick" class="nav-item">
+          <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-new'}">New Releases</nuxt-link>
           </li>
-          <li @click="onClick" class="nav-item">
+          <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'genres'}">Genres</nuxt-link>
           </li>
-          <li @click="onClick" class="nav-item">
+          <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-upcoming'}">Upcoming</nuxt-link>
           </li>
-          <li @click="onClick" class="nav-item">
+          <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'charts'}">Charts</nuxt-link>
           </li>
-          <li @click="onClick" class="nav-item">
+          <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-used'}">Second Hand</nuxt-link>
           </li>
         </ul>
