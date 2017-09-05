@@ -71,7 +71,7 @@
   import ReleaseButtonBar from '../releases/ReleaseButtonBar'
   import PlayReleaseButton from '../releases/PlayReleaseButton'
   import AddToCartButton from '../cart/AddToCartButton'
-  import { swipedetect } from '../../utils/native'
+  import { swipedetect } from '~/utils/native'
 
   export default {
     components: {AddToCartButton, PlayReleaseButton, ReleaseButtonBar, WeekFeature},
