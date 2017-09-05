@@ -146,7 +146,7 @@
       })
       this.startAutopager()
 
-      var el = document.getElementById('swipezone')
+      var el = document.getElementById('app')
       swipedetect(el, function (swipedir) {
         // swipedir contains either "none", "left", "right", "top", or "down"
         console.log(`swipedir ${swipedir}`)
