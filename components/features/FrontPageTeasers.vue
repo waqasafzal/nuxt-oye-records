@@ -150,7 +150,7 @@
 //      swipedetect(el, function (swipedir) {
 //        // swipedir contains either "none", "left", "right", "top", or "down"
 //        console.log(`swipedir ${swipedir}`)
-////        el.innerHTML = 'Swiped <span style="color:yellow">' + swipedir + '</span>'
+//        el.innerHTML = 'Swiped <span style="color:yellow">' + swipedir + '</span>'
 //      })
     }
   }
