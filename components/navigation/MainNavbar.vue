@@ -31,7 +31,7 @@
       </div>
     </template>
     <template v-else>
-      <nav v-if="$store.state.showMobile" :class="['navigation']">
+      <nav v-if="!$store.getters.hasMobileMenu || $store.state.showMobile" :class="['navigation']">
         <ul :class="['nav', 'navbar-nav', isHomeUrl ? 'no-border' : '']">
           <li @click="onClick" class="nav-item" v-if="$store.getters.hasMobileMenu">
             <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>

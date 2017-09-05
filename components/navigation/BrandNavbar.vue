@@ -9,8 +9,7 @@
           </nuxt-link>
         </div>
         <main-navbar class="col-7 col-md-8"></main-navbar>
-        <search v-if="!isCheckout" cl
-                ass="col-1 col-md-2 d-lg-none"></search>
+        <search v-if="!isCheckout" class="col-1 col-md-2 d-md-none"></search>
         <div class="col-1 menu-icon-mobile d-md-none">
           <img class="navbar__brand__menu-toggle closed open"
                src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav" v-on-clickaway="closeMobileNav">
