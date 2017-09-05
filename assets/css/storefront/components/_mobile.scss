@@ -342,7 +342,7 @@
         margin-top: auto;
         margin-bottom: auto;
         padding: 0;
-        margin: 0;
+        //margin: 0;
         text-align: right;
         .nav-item {
           text-align: right;
@@ -355,7 +355,7 @@
             }
           }
           a {
-            font-size: $font-size-h2;
+            font-size: $font-size-h4;
             display: block;
             color: $gray-color-2 !important;
             &:hover {

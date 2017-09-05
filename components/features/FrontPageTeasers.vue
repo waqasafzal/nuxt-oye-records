@@ -10,8 +10,8 @@
               <div :key="'release-'+i"
                    v-show="i === currentFeature"
                    class="slide">
-                <template v-if="!$store.state.isSmallScreen">
-                  <div class="slide__inner" :style="`background-image: url(${release.featureImageUrl})`">
+                <template v-if="$store.state.isSmallScreen === false">
+                  <div class="slide__inner" :style="backgroundImage(release)">
                     <div class="feature-category">
                       <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                     </div>
@@ -132,8 +132,18 @@
           window.clearInterval(this.autopager)
           this.autopager = undefined
         }
+      },
+      backgroundImage (release) {
+        if (!this.$store.state.isSmallScreen) {
+          return {
+            backgroundImage: `url(${release.featureImageUrl})`
+          }
+        }
+        return {}
       }
     },
+//    computed: {
+//    },
     mounted () {
       var vm = this
       window.addEventListener('visibilitychange', function () {
