@@ -71,7 +71,7 @@
   import ReleaseButtonBar from '../releases/ReleaseButtonBar'
   import PlayReleaseButton from '../releases/PlayReleaseButton'
   import AddToCartButton from '../cart/AddToCartButton'
-  import { swipedetect } from '~/utils/native'
+//  import { swipedetect } from '~/utils/native'
 
   export default {
     components: {AddToCartButton, PlayReleaseButton, ReleaseButtonBar, WeekFeature},
@@ -146,12 +146,12 @@
       })
       this.startAutopager()
 
-      var el = document.getElementById('app')
-      swipedetect(el, function (swipedir) {
-        // swipedir contains either "none", "left", "right", "top", or "down"
-        console.log(`swipedir ${swipedir}`)
-//        el.innerHTML = 'Swiped <span style="color:yellow">' + swipedir + '</span>'
-      })
+//      var el = document.getElementById('app')
+//      swipedetect(el, function (swipedir) {
+//        // swipedir contains either "none", "left", "right", "top", or "down"
+//        console.log(`swipedir ${swipedir}`)
+////        el.innerHTML = 'Swiped <span style="color:yellow">' + swipedir + '</span>'
+//      })
     }
   }
 </script>
