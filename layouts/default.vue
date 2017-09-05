@@ -1,6 +1,6 @@
 <template>
-  <div id="app" :class="[isMobile ? 'mobile': '']">
-    <account-navbar v-if="!isMobile"></account-navbar>
+  <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
+    <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
     <header class="navbar" role="navigation">
       <brand-navbar :isOpenMobile="isOpenMobileMenu" v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
@@ -9,6 +9,7 @@
       <alerts></alerts>
       <div class="container maincontent page">
         <nuxt></nuxt>
+        <!--<mobile-menu v-if="isSmallScreen"></mobile-menu>-->
       </div>
       <audio-player></audio-player>
     </div>
@@ -22,18 +23,36 @@
   import { getAuthHeader } from '../utils/auth/index'
   import client from '../plugins/apollo'
   import Vue from 'vue'
+  import MobileMenu from '../components/navigation/MobileMenu'
+  import * as types from '../store/types'
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
 
   export default {
-    components: {AccountNavbar, Alerts, BrandNavbar, AudioPlayer},
+    components: {MobileMenu, AccountNavbar, Alerts, BrandNavbar, AudioPlayer},
     name: 'app',
     data: function () {
       return {
-        isOpenMobileMenu: false
+        isOpenMobileMenu: false,
+        isPortable: false
       }
     },
     methods: {
+      mediaChange (mq) {
+        console.log('mediaChange')
+        if (mq.matches) {
+          this.isPortable = false
+
+          console.log('bigger')
+          // window width is at least 500px
+          this.$store.commit(types.SET_SMALL_SCREEN, false)
+        } else {
+          console.log('smaller')
+          this.isPortable = true
+          // window width is less than 500px
+          this.$store.commit(types.SET_SMALL_SCREEN, true)
+        }
+      },
       onToggleMobileMenu () {
         this.isOpenMobileMenu = !this.isOpenMobileMenu
       },
@@ -50,6 +69,9 @@
     computed: {
       isMobile () {
         return this.$store.getters.isMobile
+      },
+      isSmallScreen () {
+        return this.$store.state.isSmallScreen
       }
     },
     beforeCreate () {
@@ -91,6 +113,11 @@
           e.preventDefault()
         }
       })
+
+      const mq = window.matchMedia('(min-width: 768px)')
+      mq.addListener(this.mediaChange)
+
+      this.$store.commit(types.SET_SMALL_SCREEN, screen.width < 768)
 
       var isTouch = false // var to indicate current input type (is touch versus no touch)
       var isTouchTimer

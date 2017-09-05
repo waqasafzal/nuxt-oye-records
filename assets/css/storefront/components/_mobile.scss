@@ -1,7 +1,5 @@
-
-
 /* mixin for multiline */
-@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white) {
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
@@ -76,7 +74,7 @@
         margin-top: auto;
         margin-bottom: auto;
         padding-top: inherit;
-        @media screen and (max-width: 480px) and (orientation: portrait){
+        @media screen and (max-width: 480px) and (orientation: portrait) {
           padding-left: inherit;
           padding-right: inherit;
         }
@@ -186,86 +184,99 @@
         flex-direction: column;
         justify-content: space-between;
         position: relative;
-        .release__button-bar {
-          margin-top: auto;
-          padding: $global-padding;
-        }
-        .release-image {
+        &-navigation {
+          position: absolute;
           height: 100%;
-          img {
-            width: 100%;
-            height: auto;
-            padding: 1rem;
+          width: 100%;
+          top: 0;
+          left: 0;
+          .play {
+            position: relative;
           }
-          //position: absolute;
-          //top: 0;
-          //left: 0;
-          //height: 100%;
-          //width: 100%;
-          //img {
-          //  height: 50px;
-          //}
+          .play-release-button {
+            margin: auto;
+          }
         }
-        .release-info {
-          margin-top: 1rem;
-          padding-left: 1rem;
-          padding-right: 1rem;
-        }
-
       }
-      .release-info {
-        position: relative;
-        justify-content: space-between;
+      &-image {
         height: 100%;
-        display: flex;
-        flex-direction: column;
-
-        //.name {
-        //  position: absolute;
-        //  left: 0;
-        //  top: 0;
-        //  height: 100%;
-        //  width: 100%;
+        img {
+          width: 100%;
+          height: auto;
+          padding: 1rem;
+        }
+        //position: absolute;
+        //top: 0;
+        //left: 0;
+        //height: 100%;
+        //width: 100%;
+        //img {
+        //  height: 50px;
         //}
       }
-      img {
-        //width: auto;
-        //max-height: 250px;
-        height: 100%;
-        width: 100%;
-      }
       .release-info {
-        //width: 80%;
-        .description {
-          font-size: $font-size-sm;
-          @include multiLineEllipsis($lineHeight: $font-size-h5, $lineCount: 3, $bgColor: transparent);
-        }
-        &-box {
-          //position: absolute;
-          //top: 0;
-          //left: 0;
-          width: 100%;
-          height: 100%;
-          margin-right: 4rem;
-          &:last-child {
-            margin-right: inherit;
-          }
-        }
-        .overlay {
-          .artist {
+        margin-top: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
 
-          }
+    }
+    .release-info {
+      position: relative;
+      justify-content: space-between;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      //.name {
+      //  position: absolute;
+      //  left: 0;
+      //  top: 0;
+      //  height: 100%;
+      //  width: 100%;
+      //}
+    }
+    img {
+      //width: auto;
+      //max-height: 250px;
+      height: 100%;
+      width: 100%;
+    }
+    .release-info {
+      //width: 80%;
+      .description {
+        font-size: $font-size-sm;
+        @include multiLineEllipsis($lineHeight: $font-size-h5, $lineCount: 3, $bgColor: transparent);
+      }
+      &-box {
+        //position: absolute;
+        //top: 0;
+        //left: 0;
+        width: 100%;
+        height: 100%;
+        margin-right: 4rem;
+        &:last-child {
+          margin-right: inherit;
+        }
+      }
+      .overlay {
+        .artist {
+
         }
       }
     }
   }
-  .release__button-bar__add-to-cart {
-    width: auto;
-  }
+}
 
-  .list-item {
-    height: 270px !important;
-  }
+.release__button-bar__add-to-cart {
+  width: auto;
+}
+
+.list-item {
+  height: 270px !important;
+}
+
+.mobile {
   .resizable-list-item-outer {
     background-color: white;
     padding-left: 5%;
@@ -277,9 +288,8 @@
     padding-top: 10px;
     margin-left: -5%;
     margin-right: -5%;
-    box-shadow:
-            0 2px 4px 0 rgba(0, 0, 0, 0.15),
-            0 3px 6px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15),
+    0 3px 6px 0 rgba(0, 0, 0, 0.14);
 
     z-index: 1;
     .release-list-add {
@@ -309,8 +319,8 @@
         content: "";
         width: 100%;
         height: 100%;
-        opacity: 0.8;
-        //background: $brand-color-black;
+        opacity: 0.4;
+        background: $brand-color-green;
         background-color: #020202;
         position: absolute;
         pointer-events: none;
@@ -319,11 +329,58 @@
       }
     }
   }
+  &.navbar__menu {
+    .navigation {
+      //height: inherit;
+      transition: 0.5s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      ul {
+        height: auto;
+        display: inline;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 0;
+        margin: 0;
+        text-align: right;
+        .nav-item {
+          text-align: right;
+          .nuxt-link-active {
+            color: $brand-color-green !important;
+          }
+          .nav-link {
+            &:hover {
+              color: lighten($brand-color-green, 20) !important;
+            }
+          }
+          a {
+            font-size: $font-size-h2;
+            display: block;
+            color: $gray-color-2 !important;
+            &:hover {
+              color: lighten($brand-color-green, 20) !important;
+            }
+          }
+        }
+        .nav {
+          .nav-bar {
+            height: inherit;
+          }
+        }
+      }
+    }
+  }
 }
-
 
 .block-with-text {
   @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);
+}
+
+@media (min-width: 324px) {
+  .d-xs-none {
+    display: none !important;
+  }
 }
 
 @media (min-width: 576px) {
@@ -344,9 +401,30 @@
   }
 }
 
-
 @media (min-width: 1200px) {
   .d-xl-none {
     display: none !important;
+  }
+}
+
+.mobile-menu {
+  background-color: $brand-color-black;
+  color: $gray-color-2;
+  font-weight: normal;
+  z-index: 10;
+  height: 100%;
+  top: 0;
+  right: 0;
+  width: 95%;
+  display: flex;
+  position: fixed;
+  font-weight: normal;
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30px;
+    color: $gray-color-2;
   }
 }

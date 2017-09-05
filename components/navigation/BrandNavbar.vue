@@ -2,19 +2,20 @@
   <div class="navbar__brand">
     <div class="container navbar__brand-box">
       <div class="row no-gutters">
-        <div class="col-8 col-md-1 navbar__logo">
-          <div class="menu-icon-mobile d-md-none">
-            <img class="navbar__brand__menu-toggle closed open"
-                 src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav" v-on-clickaway="closeMobileNav">
-            <span>menu</span>
-          </div>
+        <div class="col-2 col-md-1 navbar__logo">
           <nuxt-link :class="[isCheckout ? 'not-active': '']" to="/">
             <img :src="`${oyeLogo}`" alt="Oye Records"
                  height="50">
           </nuxt-link>
         </div>
-        <main-navbar class="col-2 col-md-9"></main-navbar>
-        <search v-if="!isCheckout" class="col-2 col-md-2 d-lg-none"></search>
+        <main-navbar class="col-7 col-md-8"></main-navbar>
+        <search v-if="!isCheckout" cl
+                ass="col-1 col-md-2 d-lg-none"></search>
+        <div class="col-1 menu-icon-mobile d-md-none">
+          <img class="navbar__brand__menu-toggle closed open"
+               src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav" v-on-clickaway="closeMobileNav">
+          <!--<span>menu</span>-->
+        </div>
       </div>
     </div>
   </div>
@@ -26,6 +27,7 @@
   import { mixin as clickaway } from 'vue-clickaway'
   import MainNavbar from './MainNavbar'
   import Search from '../search/Search'
+  import * as types from '../../store/types'
 
   Vue.component('cart-dropdown', CartDropdown)
 
@@ -38,6 +40,7 @@
     data: function () {
       return {
         isVisibleCart: false,
+        isVisibleMenu: false,
         oyeLogo: oyeLogo
       }
     },
@@ -50,9 +53,13 @@
       },
       toggleMobileNav () {
         this.$emit('togglemenu')
+        console.log('toggle ' + this.isVisibleMenu)
+        this.isVisibleMenu = !this.isVisibleMenu
+        this.$store.commit(types.SET_MOBILE_NAV, this.isVisibleMenu)
       },
       closeMobileNav () {
         this.$emit('closemenu')
+        this.isVisibleMenu = false
       }
     },
     computed: {

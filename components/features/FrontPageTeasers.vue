@@ -10,7 +10,7 @@
               <div :key="'release-'+i"
                    v-show="i === currentFeature"
                    class="slide">
-                <template v-if="!$store.state.isMobile">
+                <template v-if="!$store.state.isSmallScreen">
                   <div class="slide__inner" :style="`background-image: url(${release.featureImageUrl})`">
                     <div class="feature-category">
                       <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
@@ -29,18 +29,21 @@
                     <div class="release">
                       <div class="release-image">
                         <img :src="release.featureImageUrl" />
-                      </div>
-                      <div class="release-action d-flex flex-row justify-content-between">
-                        <div class="release-info">
-                          <div class="release-artist">
-                            {{ release.name }}
-                          </div>
-                          <div class="release-artist">
-                            {{ release.title }}
-                          </div>
+                        <div class="release-navigation d-flex">
+                          <play-release-button class="vmargin-auto" :size="100" :release="release"></play-release-button>
+                          <!--<release-button-bar :size=48 :release="release"></release-button-bar>-->
                         </div>
                       </div>
-                      <release-button-bar :size=48 :release="release" :withTitle="false"></release-button-bar>
+                    </div>
+                    <div class="release-action d-flex flex-row justify-content-between">
+                      <div class="release-info">
+                        <div class="release-artist">
+                          {{ release.name }}
+                        </div>
+                        <div class="release-artist">
+                          {{ release.title }}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </template>
@@ -68,6 +71,7 @@
   import ReleaseButtonBar from '../releases/ReleaseButtonBar'
   import PlayReleaseButton from '../releases/PlayReleaseButton'
   import AddToCartButton from '../cart/AddToCartButton'
+  import { swipedetect } from '../../utils/native'
 
   export default {
     components: {AddToCartButton, PlayReleaseButton, ReleaseButtonBar, WeekFeature},
@@ -141,6 +145,13 @@
         }
       })
       this.startAutopager()
+
+      var el = document.getElementById('swipezone')
+      swipedetect(el, function (swipedir) {
+        // swipedir contains either "none", "left", "right", "top", or "down"
+        console.log(`swipedir ${swipedir}`)
+//        el.innerHTML = 'Swiped <span style="color:yellow">' + swipedir + '</span>'
+      })
     }
   }
 </script>

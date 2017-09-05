@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar__menu">
+  <div :class="['navbar__menu', $store.getters.hasMobileMenu ? 'mobile': '']">
     <template v-if="isCheckout">
       <div class="navbar__checkout navigation">
         <div class="checkout__navbar">
@@ -31,21 +31,24 @@
       </div>
     </template>
     <template v-else>
-      <nav :class="['navigation', isOpenMobile ? 'open': '']">
+      <nav v-if="$store.state.showMobile" :class="['navigation']">
         <ul :class="['nav', 'navbar-nav', isHomeUrl ? 'no-border' : '']">
-          <li class="nav-item">
+          <li @click="onClick" class="nav-item" v-if="$store.getters.hasMobileMenu">
+            <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>
+          </li>
+          <li @click="onClick" class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-new'}">New Releases</nuxt-link>
           </li>
-          <li class="nav-item">
-            <nuxt-link class="nav-link" to="/genres">Genres</nuxt-link>
+          <li @click="onClick" class="nav-item">
+            <nuxt-link class="nav-link" :to="{name: 'genres'}">Genres</nuxt-link>
           </li>
-          <li class="nav-item">
+          <li @click="onClick" class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-upcoming'}">Upcoming</nuxt-link>
           </li>
-          <li class="nav-item">
+          <li @click="onClick" class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'charts'}">Charts</nuxt-link>
           </li>
-          <li class="nav-item">
+          <li @click="onClick" class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-used'}">Second Hand</nuxt-link>
           </li>
         </ul>
@@ -86,6 +89,10 @@
       }
     },
     methods: {
+      onClick (value) {
+        console.log('v')
+        this.$store.commit(types.SET_MOBILE_NAV, false)
+      },
       setCheckoutState (value) {
         if (value === 1 && !this.canSelectCheckout) {
           // do nothing
