@@ -31,7 +31,7 @@
       </div>
     </template>
     <template v-else>
-      <nav @click="onClick" v-if="!$store.getters.hasMobileMenu || $store.state.showMobile" :class="['navigation']">
+      <nav v-on-clickaway="onClick" @click="onClick" v-if="!$store.getters.hasMobileMenu || $store.state.showMobile" :class="['navigation']">
         <ul :class="['nav', 'navbar-nav', isHomeUrl ? 'no-border' : '']">
           <li class="nav-item" v-if="$store.getters.hasMobileMenu">
             <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>
@@ -58,10 +58,12 @@
 </template>
 
 <script>
+  import { mixin as clickaway } from 'vue-clickaway'
+
   import * as types from '../../store/types'
   export default {
     name: 'MainNavbar',
-    props: ['isOpenMobile'],
+    mixins: [ clickaway ],
     computed: {
       user () {
         return this.$store.state.user

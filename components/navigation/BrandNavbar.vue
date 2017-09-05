@@ -12,7 +12,7 @@
         <search v-if="!isCheckout" class="col-1 col-md-2"></search>
         <div class="col-1 menu-icon-mobile d-md-none">
           <img class="navbar__brand__menu-toggle closed open"
-               src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav" v-on-clickaway="closeMobileNav">
+               src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav">
           <!--<span>menu</span>-->
         </div>
       </div>
@@ -23,7 +23,6 @@
 <script>
   import Vue from 'vue'
   import CartDropdown from '../../components/cart/CartDropdown.vue'
-  import { mixin as clickaway } from 'vue-clickaway'
   import MainNavbar from './MainNavbar'
   import Search from '../search/Search'
   import * as types from '../../store/types'
@@ -35,7 +34,6 @@
   export default {
     components: {Search, MainNavbar},
     name: 'BrandNavbar',
-    mixins: [ clickaway ],
     data: function () {
       return {
         isVisibleCart: false,
@@ -52,16 +50,18 @@
       },
       toggleMobileNav () {
         this.$emit('togglemenu')
-        console.log('toggle ' + this.isVisibleMenu)
-        this.isVisibleMenu = !this.isVisibleMenu
-        this.$store.commit(types.SET_MOBILE_NAV, this.isVisibleMenu)
+        this.$store.commit(types.SET_MOBILE_NAV, !this.isVisibleMenu)
       },
       closeMobileNav () {
         this.$emit('closemenu')
         this.isVisibleMenu = false
+        this.$store.commit(types.SET_MOBILE_NAV, false)
       }
     },
     computed: {
+      isVisibleMenu () {
+        return this.$store.state.showMobile
+      },
       cartCount () {
         var cart = this.$store.state.getters.getCart
         return cart ? cart.quantity : 0

@@ -2,7 +2,7 @@
   <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
     <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
     <header class="navbar" role="navigation">
-      <brand-navbar :isOpenMobile="isOpenMobileMenu" v-on:togglemenu="onToggleMobileMenu"
+      <brand-navbar v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
     </header>
     <div class="background">
@@ -54,10 +54,10 @@
         }
       },
       onToggleMobileMenu () {
-        this.isOpenMobileMenu = !this.isOpenMobileMenu
+        this.$store.commit(types.SET_MOBILE_NAV, !this.isOpenMobileMenu)
       },
       closeMobileMenu () {
-        this.isOpenMobileMenu = false
+        this.$store.commit(types.SET_MOBILE_NAV, false)
       },
       onClosePlaylist () {
         this.noScroll = false
@@ -67,6 +67,9 @@
       }
     },
     computed: {
+      isOpenMobileMenu () {
+        return this.$store.state.showMobile
+      },
       isMobile () {
         return this.$store.getters.isMobile
       },
