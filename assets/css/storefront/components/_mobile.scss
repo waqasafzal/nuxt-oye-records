@@ -26,6 +26,9 @@
 }
 
 .mobile {
+  #audioplayer .current-track .position-slider .slider {
+    height: 10px;
+  }
   .feature {
     img {
       @include media-breakpoint-down(sm) {

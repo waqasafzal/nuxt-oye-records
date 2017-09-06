@@ -172,7 +172,7 @@
         let music = this.$refs.music
         console.log('reloadMusic' + music)
         let clip = this.$refs.clip
-        if (this.audio + ' ' + clip) {
+        if (this.audio) {
           console.log(clip)
           if (music) {
             clip.src = this.currentTrack.url
