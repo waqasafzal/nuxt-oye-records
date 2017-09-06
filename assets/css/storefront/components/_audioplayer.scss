@@ -4,6 +4,7 @@
   bottom: 0;
   width: 100%;
   display: flex;
+  padding: 0 $global-padding;
   .button-box {
     position: relative;
     width: 138px;
@@ -199,6 +200,9 @@
 .ap {
   &__element {
     border-right: 1px solid #414242;
+    &:last-child {
+      border-right: none;
+    }
   }
 }
 
