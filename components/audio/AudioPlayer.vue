@@ -127,15 +127,12 @@
     },
     watch: {
       currentTrack (val) {
-        console.log('currentTrack changed ' + val.url)
         this.reloadMusic()
       },
       player: function (val) {
-        console.log('player changed' + val)
         this.reloadMusic()
       },
       playing: function (val) {
-        console.log('playing changed: ' + val)
         if (!val) {
           this.pauseAudio()
         } else {
@@ -158,12 +155,10 @@
         this.currentTime = currentTime
       },
       pauseAudio () {
-        console.log('pauseAudio')
         var music = this.$refs.music
         music.pause()
       },
       playAudio () {
-        console.log('playAudio')
         var music = this.$refs.music
         music.play()
       },
@@ -175,19 +170,14 @@
       },
       reloadMusic () {
         let music = this.$refs.music
-        console.log('reloadMusic' + music)
         let clip = this.$refs.clip
         if (this.audio) {
           console.log(clip)
           if (music) {
             clip.src = this.currentTrack.url
             music.pause()
-
-            console.log('preload')
             music.load()
-            console.log('load')
             music.play()
-            console.log('play')
           }
           this.duration = this.audio.duration
         }
@@ -226,32 +216,34 @@
       },
       onClickaway () {
         this.$store.commit(types.SET_PLAYLIST_VISIBLE, false)
+      },
+      onKeyDown (e) {
+        var key = e.keyCode ? e.keyCode : e.which
+        let noText = e.target.type !== 'text'
+        if (key === 32 && noText) {
+          e.preventDefault()
+          if (this.playing) {
+            this.$store.commit(types.PAUSE_TRACK)
+          } else {
+            this.$store.commit(types.PLAY_TRACK, this.currentTrack)
+          }
+        } else if (key === 37 && noText) {
+          e.preventDefault()
+          this.backwards()
+        } else if (key === 39 && noText) {
+          e.preventDefault()
+          this.forwards()
+        }
       }
     },
     mounted: function () {
       this.audio = this.$el.querySelectorAll('audio')[0]
       this.init()
 
-      var vm = this
-      document.addEventListener('keydown', function (e) {
-        var key = e.keyCode ? e.keyCode : e.which
-
-        let noText = e.target.type !== 'text'
-        if (key === 32 && noText) {
-          e.preventDefault()
-          if (vm.playing) {
-            vm.$store.commit(types.PAUSE_TRACK)
-          } else {
-            vm.$store.commit(types.PLAY_TRACK, vm.currentTrack)
-          }
-        } else if (key === 37 && noText) {
-          e.preventDefault()
-          vm.backwards()
-        } else if (key === 39 && noText) {
-          e.preventDefault()
-          vm.forwards()
-        }
-      })
+      document.addEventListener('keydown', this.onKeyDown)
+    },
+    beforeDestroy () {
+      document.removeEventListener('keydown', this.onKeyDown)
     }
   }
 
