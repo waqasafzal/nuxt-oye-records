@@ -76,8 +76,17 @@
         position: absolute;
         width: 100%;
         height: 4px;
-        pointer-events: none;
         background-color: black;
+        &:after {
+          position: absolute;
+          content: "";
+          padding: 20px;
+          width: 100%;
+          height: 3px;
+          left: 0;
+          top: -15px;
+          cursor: e-resize;
+        }
       }
       .slider-fill {
         background-color: $brand-color-green;

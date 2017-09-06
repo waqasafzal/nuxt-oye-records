@@ -92,7 +92,6 @@
     },
     methods: {
       onClick (value) {
-        console.log('v')
         this.$store.commit(types.SET_MOBILE_NAV, false)
       },
       setCheckoutState (value) {

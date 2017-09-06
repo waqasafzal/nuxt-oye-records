@@ -11,7 +11,7 @@
             <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
           </div>
         </div>
-        <div class="ap__element current-track">
+        <div class="ap__element current-track" >
           <nuxt-link v-if="currentTrack" class="current-track__info-box"
                      :to="{name: 'releases-slug', params: {slug: currentTrack.release.slug}}">
             <div class="track-info d-flex row">
@@ -37,8 +37,8 @@
             </div>
           </nuxt-link>
           <div class="position-slider">
-            <input v-model="currentTime" type="range" :max="duration"></input>
-            <div class="slider">
+            <!--<input v-model="currentTime" type="range" :max="duration"></input>-->
+            <div class="slider" @click.capture="onClickSlider">
               <div class="slider-fill" :style="sliderStyle"></div>
             </div>
           </div>
@@ -152,6 +152,11 @@
       }
     },
     methods: {
+      onClickSlider (e) {
+        let offsetWidth = e.target.offsetParent.offsetWidth
+        let currentTime = this.duration * e.offsetX / offsetWidth
+        this.currentTime = currentTime
+      },
       pauseAudio () {
         console.log('pauseAudio')
         var music = this.$refs.music
