@@ -1,6 +1,6 @@
 <template>
   <div :class="['navbar__menu', $store.getters.hasMobileMenu ? 'mobile': '']">
-    <template v-if="isCheckout">
+    <template v-if="!$store.getters.hasMobileMenu && isCheckout">
       <div class="navbar__checkout navigation">
         <div class="checkout__navbar">
           <div :class="['nav-item', 'active', canSelectCheckout ? 'clickable': '']">

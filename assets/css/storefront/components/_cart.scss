@@ -260,12 +260,13 @@
     }
   }
   &__bottom-bar {
-    position: fixed;
     bottom: 0;
     z-index: 50;
-    width: 100%;
+    width: inherit;
+    margin-bottom: auto;
+    margin-right: auto;
     background-color: white;
-    padding: $global-padding;
+    padding: $global-padding * 2 $global-padding;
     margin-top: $global-margin * 2;
   }
   &__continue-button {

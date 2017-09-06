@@ -125,22 +125,27 @@
           </div>
         </div>
       </template>
-        <div class="cart__bottom-bar row">
-          <slot>
-            <div class="col-8">
-              <nuxt-link class="cart__continue-button" to="/">
-                <div>
-                  <span class="helper"></span>
-                  <img src="../../assets/images/arrow_right_green.svg" class="arrow-rotated"/>
-                  <span>Continue shopping</span>
-                </div>
-              </nuxt-link>
-            </div>
-            <div class="col-4">
-              <proceed-button class="cart__checkout-button" @click="$router.push({name: 'checkout'})">Go to checkout</proceed-button>
-            </div>
-          </slot>
-        </div>
+
+      <!--<div class="cart__bottom-bar-panel">-->
+        <!--<div class="cart__bottom-bar row" slot="bottom" >-->
+          <!--&lt;!&ndash;<>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-8">&ndash;&gt;-->
+              <!--&lt;!&ndash;<nuxt-link class="cart__continue-button" to="/">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<span class="helper"></span>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<img src="../../assets/images/arrow_right_green.svg" class="arrow-rotated"/>&ndash;&gt;-->
+                  <!--&lt;!&ndash;<span>Continue shopping</span>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</nuxt-link>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-4">&ndash;&gt;-->
+              <!--&lt;!&ndash;<slot name="control">&ndash;&gt;-->
+                <!--&lt;!&ndash;<proceed-button class="cart__checkout-button" @click="$router.push({name: 'checkout'})">Go to checkout</proceed-button>&ndash;&gt;-->
+              <!--&lt;!&ndash;</slot>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</>&ndash;&gt;-->
+        <!--</div>-->
+      <!--</div>-->
     </template>
     <template v-else>
       <div class="cart__empty">
@@ -155,6 +160,7 @@
   import ReleasePrice from '~/components/releases/ReleasePrice'
   import ProceedButton from '../shared/ProceedButton'
   import { roundFixed } from '../../utils/math'
+  import * as types from '../../store/types'
 
   const MAX_QUANTITY = 5
 
@@ -220,7 +226,22 @@
       },
       getQuantityOptions (lineQuantity) {
         return lineQuantity > MAX_QUANTITY ? lineQuantity : MAX_QUANTITY
+      },
+      pushCheckout () {
+        this.$router.push({name: 'checkout'})
       }
+    },
+    mounted () {
+      this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, true)
+      if (!this.review) {
+        this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [{f: this.pushCheckout, text: 'Go to checkout'}])
+        this.$store.commit(types.SET_BUTTON_BAR_SHOW, true)
+      }
+    },
+    beforeDestroy () {
+      this.$store.commit(types.SET_BUTTON_BAR_SHOW, false)
+      this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, true)
+      this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [])
     }
   }
 

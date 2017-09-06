@@ -6,12 +6,17 @@
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
     </header>
     <div class="background">
-      <alerts></alerts>
-      <div class="container maincontent page">
+      <div class="container-fluid maincontent page">
+        <alerts></alerts>
         <nuxt></nuxt>
-        <!--<mobile-menu v-if="isSmallScreen"></mobile-menu>-->
       </div>
-      <audio-player></audio-player>
+      <!--<mobile-menu v-if="isSmallScreen"></mobile-menu>-->
+    </div>
+    <div class="bottom">
+      <div class="container-fluid" style="padding-left: inherit; padding-right: inherit">
+          <primary-control-panel></primary-control-panel>
+        <audio-player></audio-player>
+      </div>
     </div>
   </div>
 </template>
@@ -25,11 +30,12 @@
   import Vue from 'vue'
   import MobileMenu from '../components/navigation/MobileMenu'
   import * as types from '../store/types'
+  import PrimaryControlPanel from '../components/shared/PrimaryControlPanel'
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
 
   export default {
-    components: {MobileMenu, AccountNavbar, Alerts, BrandNavbar, AudioPlayer},
+    components: {PrimaryControlPanel, MobileMenu, AccountNavbar, Alerts, BrandNavbar, AudioPlayer},
     name: 'app',
     data: function () {
       return {
@@ -101,7 +107,7 @@
       }])
       client.networkInterface.useAfter([
         {
-          applyAfterware ({ response }, next) {
+          applyAfterware ({response}, next) {
             if (response.status === 401) {
             }
             next()

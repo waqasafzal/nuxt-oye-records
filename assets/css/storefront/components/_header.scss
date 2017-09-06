@@ -16,6 +16,8 @@
     z-index: 20;
     height: 40px;
     display: flex;
+    right: 0;
+    top: 0;
     //flex-direction: column;
     font-size: $font-size-sm;
     //padding: $global-padding * 0.25 0;
@@ -199,8 +201,6 @@
     }
     &__menu-toggle {
       max-height: 22px;
-      padding-right: $global-padding;
-      padding-left: $global-padding;
     }
     &__search {
       width: 190px;
@@ -451,6 +451,8 @@
   border-left: 1px solid $gray-color-2;
   height: 100%;
   display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
   align-items: center;
   justify-content: center;
   &:first-child {

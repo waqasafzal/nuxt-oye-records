@@ -3,14 +3,6 @@
     <h3>Review your order</h3>
     <checkout-overview class="checkout__overview"></checkout-overview>
     <cart-content :review="true">
-      <div class="col-12" style="display: flex; padding-right: 0px;">
-        <template v-if="!selectedPaymentMethod">
-          <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Place Order</proceed-button>
-        </template>
-        <template v-else>
-          <proceed-button class="float-right-bottom place-order-btn" @click="onPlaceOrder">Pay Order</proceed-button>
-        </template>
-      </div>
     </cart-content>
   </div>
 </template>
@@ -27,6 +19,19 @@
   export default {
     components: {CheckoutOverview, ProceedButton, CartContent},
     name: 'OrderReview',
+    watch: {
+      selectedPaymentMethod (value) {
+        var button = {
+          f: this.onPlaceOrder
+        }
+        if (value) {
+          button['text'] = 'Pay Order'
+        } else {
+          button['text'] = 'Place Order'
+        }
+        this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [button])
+      }
+    },
     computed: {
       isSelfCollector () {
         let shippingOption = this.$store.getters.getShippingOption
@@ -123,6 +128,24 @@
           }
         )
       }
+    },
+    mounted () {
+      this.$store.commit(types.SET_BUTTON_BAR_SHOW, true)
+      this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, false)
+
+      var button = {
+        f: this.onPlaceOrder
+      }
+
+      if (this.selectedPaymentMethod) {
+        button['text'] = 'Pay Order'
+      } else {
+        button['text'] = 'Place Order'
+      }
+      this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [button])
+    },
+    beforeDestroy () {
+      this.$store.commit(types.SET_BUTTON_BAR_SHOW, false)
     }
   }
 </script>

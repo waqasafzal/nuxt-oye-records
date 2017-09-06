@@ -3,6 +3,7 @@
     <keep-alive>
       <component v-if="currentCheckoutView" :is="currentCheckoutView"></component>
     </keep-alive>
+    <checkout-buttons></checkout-buttons>
   </div>
 </template>
 
@@ -15,8 +16,11 @@
   import OrderComplete from '~/components/checkout/OrderComplete'
   import OrderVerification from '~/components/checkout/OrderVerification'
   import * as types from '../../store/types'
+  import CheckoutOverview from '../../components/checkout/CheckoutOverview'
+  import CheckoutButtons from '../../components/checkout/CheckoutButtons'
 
   export default {
+    components: {CheckoutButtons, CheckoutOverview},
     name: 'Checkout',
     computed: {
       currentCheckoutView () {

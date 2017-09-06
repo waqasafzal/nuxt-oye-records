@@ -41,6 +41,11 @@ const store = new Vuex.Store({
 
   state: {
     showMobile: false,
+    primaryButtonBar: {
+      showContinue: false,
+      buttons: [],
+      show: false
+    },
     accountView: 'Addresses',
     cart: null,
     cartUpdating: false,
@@ -416,6 +421,15 @@ const store = new Vuex.Store({
     },
     [types.SET_SMALL_SCREEN]: (state, isSmall) => {
       state.isSmallScreen = isSmall
+    },
+    [types.SET_BUTTON_BAR_CONTINUE]: (state, showContinue) => {
+      state.primaryButtonBar.showContinue = showContinue
+    },
+    [types.SET_BUTTON_BAR_BUTTONS]: (state, buttons) => {
+      state.primaryButtonBar.buttons = buttons
+    },
+    [types.SET_BUTTON_BAR_SHOW]: (state, show) => {
+      state.primaryButtonBar.show = show
     }
   },
 
