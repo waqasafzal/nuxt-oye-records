@@ -6,51 +6,52 @@
         </div>
         <div class="slider-right-control" @click="slideForward"><img src="~assets/images/Slider_Arrow_Right_Icon.svg"/>
         </div>
-        <div ref="slider" :class="['slider', animate ? 'animateXyz': '']" @mouseenter="disableSlider" @mouseleave="enableSlider">
+        <div ref="slider" :class="['slider', animate ? 'animateXyz': '']" @mouseenter="disableSlider"
+             @mouseleave="enableSlider">
           <!--<div :class="['holder', animate ? 'animateXyz': '']" ref="holder">-->
-            <template v-for="(release, i) in featuredReleases">
-              <transition :name="transitionName" mode="out-in">
-                <div :key="'release-'+i"
-                     v-show="i === currentFeature"
-                     ref="slide" :class="['slide', animate ? '': '']">
-                  <template v-if="$store.state.isSmallScreen === false">
-                    <div class="slide__inner" :style="backgroundImage(release)">
-                      <div class="feature-category">
-                        <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
-                      </div>
-                      <nuxt-link class="release-info" :key="'release-'+i"
-                                 :to="{name: 'releases-slug', params: {slug: release.slug}}">
-                        <div class="release-name">
-                          <div class="frontpage__teaser__artist">{{ release.name }}</div>
-                          <div class="frontpage__teaser__title">{{ release.title }}</div>
-                        </div>
-                        <release-button-bar :release="release" :size=48></release-button-bar>
-                      </nuxt-link>
+          <template v-for="(release, i) in featuredReleases">
+            <transition :name="transitionName" mode="out-in">
+              <div :key="'release-'+i"
+                   v-show="i === currentFeature"
+                   ref="slide" :class="['slide', animate ? '': '']">
+                <template v-if="$store.state.isSmallScreen === false">
+                  <div class="slide__inner" :style="backgroundImage(release)">
+                    <div class="feature-category">
+                      <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                     </div>
-                  </template>
-                  <template v-else>
-                    <div class="slide__inner">
-                      <div class="release">
-                        <div class="release-image">
-                          <img :src="release.featureImageUrl"/>
-                          <div class="release-navigation d-flex">
-                            <play-release-button class="vmargin-auto" :size="100"
-                                                 :release="release"></play-release-button>
-                            <!--<release-button-bar :size=48 :release="release"></release-button-bar>-->
-                          </div>
-                        </div>
+                    <nuxt-link class="release-info" :key="'release-'+i"
+                               :to="{name: 'releases-slug', params: {slug: release.slug}}">
+                      <div class="release-name">
+                        <div class="frontpage__teaser__artist">{{ release.name }}</div>
+                        <div class="frontpage__teaser__title">{{ release.title }}</div>
                       </div>
-                      <div class="release-action d-flex flex-row justify-content-between">
-                        <div class="release-info">
-                          <div class="release-artist">{{ release.name }}</div>
-                          <div class="release-artist">{{ release.title }}</div>
+                      <release-button-bar :release="release" :size=48></release-button-bar>
+                    </nuxt-link>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="slide__inner">
+                    <div class="release">
+                      <div class="release-image">
+                        <img :src="release.featureImageUrl"/>
+                        <div class="release-navigation d-flex">
+                          <play-release-button class="vmargin-auto" :size="100"
+                                               :release="release"></play-release-button>
+                          <!--<release-button-bar :size=48 :release="release"></release-button-bar>-->
                         </div>
                       </div>
                     </div>
-                  </template>
-                </div>
-              </transition>
-            </template>
+                    <div class="release-action d-flex flex-row justify-content-between">
+                      <div class="release-info">
+                        <div class="release-artist">{{ release.name }}</div>
+                        <div class="release-artist">{{ release.title }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </transition>
+          </template>
           <!--</div>-->
         </div>
       </div>
@@ -326,72 +327,75 @@
           end: function (event) {
             // Calculate the distance swiped.
             console.log(`${vm.currentFeature} ${this.slideWidth} ${this.movex}`)
-            var absMove = Math.abs(this.slideWidth - this.movex)
-            // Calculate the index. All other calculations are based on the index.
-            console.log(`${absMove} > ${this.slideWidth} this.slideWidth / 2 || ${this.longTouch} ${this.longTouch === false}) this.longTouch === false {}`)
+            if (this.movex) {
+              var absMove = Math.abs(this.movex)
+              console.log(`math abs ${this.slideWidth} - ${this.movex}`)
+              // Calculate the index. All other calculations are based on the index.
+              console.log(`${absMove} > ${this.slideWidth} this.slideWidth / 2 || ${this.longTouch} ${this.longTouch === false}) this.longTouch === false {}`)
 
-            console.log(`v-show="i === ${vm.currentFeature} || ${vm.nextLeft} === ${vm.currentFeature} || ${vm.nextRight} === ${vm.currentFeature}"`)
+              console.log(`v-show="i === ${vm.currentFeature} || ${vm.nextLeft} === ${vm.currentFeature} || ${vm.nextRight} === ${vm.currentFeature}"`)
 
 //            var newCurrent = null
-            var changed = false
-            if (absMove > this.slideWidth / 2) {
-              console.log(`${this.movex} ${vm.currentFeature} * ${this.slideWidth} && ${vm.currentFeature} < 2`)
-              if (this.movex > 0) {
-                console.log(`increment ${vm.currentFeature}`)
-                vm.incrementRelease(true)
+              var changed = false
+              if (absMove > this.slideWidth / 2) {
+                console.log(`${this.movex} ${vm.currentFeature} * ${this.slideWidth} && ${vm.currentFeature} < 2`)
+                if (this.movex > 0) {
+                  console.log(`increment ${vm.currentFeature}`)
+                  vm.incrementRelease(true)
 //                newCurrent = this.lastRight
-                changed = true
-              } else if (this.movex < 0) {
-                console.log(`decrement ${vm.currentFeature}`)
-                vm.decrementRelease(true)
-                changed = true
+                  changed = true
+                } else if (this.movex < 0) {
+                  console.log(`decrement ${vm.currentFeature}`)
+                  vm.decrementRelease(true)
+                  changed = true
 //                newCurrent = this.lastRight
+                } else {
+                }
               } else {
               }
-            } else {
-            }
-            // Move and animate the elements.
-            vm.animate = true
-            console.log(`${vm.currentFeature} ${this.slideWidth} r: ${this.lastRight} l: ${this.lastLeft} c: ${this.current}`)
+              // Move and animate the elements.
+              vm.animate = true
+              console.log(`${vm.currentFeature} ${this.slideWidth} r: ${this.lastRight} l: ${this.lastLeft} c: ${this.current}`)
 //            var s = this
 //
 //            if (!changed) {
 //
 //            }
-            if (this.lastRight) {
+              if (this.lastRight) {
 //              this.lastRight.style.left = 'inherit'
-              let left = parseInt(this.lastRight.style.left.split('px')[0])
-              if (changed) {
-                this.lastRight.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
-                this.current.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
-              } else {
-                let currentLeft = parseInt(this.current.style.left.split('px')[0])
-                console.log('right ==== not changed!')
-                this.lastRight.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
-                this.current.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
+                let left = parseInt(this.lastRight.style.left.split('px')[0])
+                if (changed) {
+                  this.lastRight.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
+                  this.current.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
+                } else {
+                  let currentLeft = parseInt(this.current.style.left.split('px')[0])
+                  console.log('right ==== not changed!')
+                  this.lastRight.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
+                  this.current.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
+                }
               }
-            }
-            if (this.lastLeft) {
-              let left = parseInt(this.lastLeft.style.left.split('px')[0])
-              if (changed) {
-                this.current.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
-                this.lastLeft.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
-              } else {
-                let currentLeft = parseInt(this.current.style.left.split('px')[0])
-                console.log('left ===== not changed!')
-                this.lastLeft.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
-                this.current.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
+              if (this.lastLeft) {
+                let left = parseInt(this.lastLeft.style.left.split('px')[0])
+                if (changed) {
+                  this.current.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
+                  this.lastLeft.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
+                } else {
+                  let currentLeft = parseInt(this.current.style.left.split('px')[0])
+                  console.log('left ===== not changed!')
+                  this.lastLeft.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
+                  this.current.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
+                }
               }
-            }
 
-            setTimeout(function () {
-              vm.touch = false
-            }, 300)
-            for (var i = 0; i < this.el.imgSlide.length; i++) {
-              console.log(`${i} ${i !== vm.currentFeature} current: ${vm.currentFeature} imgSlide: ${this.el.imgSlide[i]}`)
-              if (i !== vm.currentFeature) {
-                this.el.imgSlide[i].style.display = 'none'
-              }
+              setTimeout(function () {
+                vm.touch = false
+              }, 300)
+//              for (var i = 0; i < this.el.imgSlide.length; i++) {
+//              console.log(`${i} ${i !== vm.currentFeature} current: ${vm.currentFeature} imgSlide: ${this.el.imgSlide[i]}`)
+//                if (i !== vm.currentFeature) {
+//                  this.el.imgSlide[i].style.display = 'none'
+//                }
+//              }
             }
           }
         }
