@@ -326,7 +326,7 @@
           end: function (event) {
             // Calculate the distance swiped.
             console.log(`${vm.currentFeature} ${this.slideWidth} ${this.movex}`)
-            var absMove = Math.abs(vm.currentFeature * this.slideWidth - this.movex)
+            var absMove = Math.abs(this.slideWidth - this.movex)
             // Calculate the index. All other calculations are based on the index.
             console.log(`${absMove} > ${this.slideWidth} this.slideWidth / 2 || ${this.longTouch} ${this.longTouch === false}) this.longTouch === false {}`)
 
