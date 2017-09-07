@@ -1,5 +1,5 @@
 <template>
-  <div :class="['play-release-button']" :style="playReleaseStyle" @click.prevent="onClick">
+  <div :class="['play-release-button']" :style="playReleaseStyle" @touchmove.prevent="onClick" @click.prevent="onClick">
     <div class="play-release-inner">
       <div :style="arrowStyle">
         <template v-if="active">
