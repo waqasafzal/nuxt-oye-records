@@ -231,14 +231,17 @@
 
           bindUIEvents: function () {
             this.el.slider.addEventListener('touchstart', function (event) {
+              event.preventDefault()
               slider.start(event)
             })
 
             this.el.slider.addEventListener('touchmove', function (event) {
+              event.preventDefault()
               slider.move(event)
             })
 
             this.el.slider.addEventListener('touchend', function (event) {
+              event.preventDefault()
               slider.end(event)
             })
 
