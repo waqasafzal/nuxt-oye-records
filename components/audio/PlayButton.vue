@@ -78,6 +78,9 @@
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center'
         }
+        if (this.baseSize > 60) {
+          style['backgroundImage'] = `url(${require('~assets/images/Pause_icon_Big.svg')})`
+        }
         return style
       },
       playStyle: function () {

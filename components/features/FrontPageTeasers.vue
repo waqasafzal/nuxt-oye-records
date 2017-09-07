@@ -85,7 +85,8 @@
         currentFeature: 0,
         sliderDisabled: false,
         animate: false,
-        touch: false
+        touch: false,
+        direction: 0
 //        ,
 //        nextLeft: 0,
 //        nextRight: 0
@@ -93,7 +94,7 @@
     },
     computed: {
       transitionName () {
-        return this.touch ? '' : this.animate ? 'from-right' : 'slide-fade'
+        return this.touch ? '' : this.animate ? this.direction < 0 ? 'from-left' : 'from-right' : 'slide-fade'
       },
       nextLeft () {
         if (this.currentFeature > 0) {
@@ -310,7 +311,9 @@
               this.current.style.display = ''
               this.lastLeft.style.left = -1 * this.movex - this.slideWidth + 'px'
               this.lastLeft.style.display = ''
-            } else if (this.movex > 0) { // Makes the holder stop moving when there is no more content.
+              vm.direction = 1
+            } else if (this.movex > 0) {
+              vm.direction = -1
               this.lastRight = this.el.imgSlide[vm.nextRight]
               this.current = this.el.imgSlide[vm.currentFeature]
               console.log(`Left ${this.movex} ${this.lastRight} ${this.current}`)
@@ -329,7 +332,7 @@
             console.log(`${vm.currentFeature} ${this.slideWidth} ${this.movex}`)
             if (this.movex) {
               var absMove = Math.abs(this.movex)
-              console.log(`math abs ${this.slideWidth} - ${this.movex}`)
+              console.log(`math abs abs(${this.movex}`)
               // Calculate the index. All other calculations are based on the index.
               console.log(`${absMove} > ${this.slideWidth} this.slideWidth / 2 || ${this.longTouch} ${this.longTouch === false}) this.longTouch === false {}`)
 
@@ -342,6 +345,7 @@
                 if (this.movex > 0) {
                   console.log(`increment ${vm.currentFeature}`)
                   vm.incrementRelease(true)
+                  vm.direction = -1
 //                newCurrent = this.lastRight
                   changed = true
                 } else if (this.movex < 0) {
@@ -387,9 +391,24 @@
                 }
               }
 
+              var lastLeft = this.lastLeft
+              var lastRight = this.lastRight
+              var current = this.current
+
               setTimeout(function () {
                 vm.touch = false
+                vm.startAutopager()
+                lastLeft.style.transform = ''
+                lastLeft.style.left = ''
+                lastRight.style.transform = ''
+                lastRight.style.left = ''
+                current.style.transform = ''
+                current.style.left = ''
+                var style = this.el.imgSlide[this.currentFeature].style
+                style.left = ''
+                style.transform = ''
               }, 300)
+
 //              for (var i = 0; i < this.el.imgSlide.length; i++) {
 //              console.log(`${i} ${i !== vm.currentFeature} current: ${vm.currentFeature} imgSlide: ${this.el.imgSlide[i]}`)
 //                if (i !== vm.currentFeature) {
@@ -415,12 +434,30 @@
     }
   }
 
+  @keyframes right-to-left-in {
+    from {
+      margin-left: 100%;
+    }
+    to {
+      margin-left: 0;
+    }
+  }
+
   @keyframes left-to-right-out {
     from {
       margin-left: 0;
     }
     to {
       margin-left: 100%;
+    }
+  }
+
+  @keyframes right-to-left-out {
+    from {
+      margin-left: 0;
+    }
+    to {
+      margin-left: -100%;
     }
   }
 
@@ -435,11 +472,14 @@
   }
 
   .from-left-enter-active {
-    animation-name: left-to-right-out;
+    animation-name: right-to-left-in;
+    animation-duration: 1s;
   }
 
   .from-left-leave-active {
-    animation-name: left-to-right-out;
+    animation-name: right-to-left-out;
+    animation-duration: 1s;
+    transition: all .7s;
   }
 
   .slide-fade-enter, .slide-fade-leave-to {
