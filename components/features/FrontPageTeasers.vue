@@ -336,7 +336,7 @@
 
 //            var newCurrent = null
             var changed = false
-            if (absMove > this.slideWidth / 2 || this.longTouch === false) {
+            if (absMove > this.slideWidth / 2) {
               console.log(`${this.movex} ${vm.currentFeature} * ${this.slideWidth} && ${vm.currentFeature} < 2`)
               if (this.movex > 0) {
                 console.log(`increment ${vm.currentFeature}`)
