@@ -1,19 +1,21 @@
 <template>
-  <div class="navbar__brand">
-    <div class="container-fluid navbar__brand-box">
-      <div class="row no-gutters">
-        <div class="col-2 col-md-1 navbar__logo">
-          <nuxt-link to="/">
-            <img :src="`${oyeLogo}`" alt="Oye Records"
-                 height="50">
-          </nuxt-link>
-        </div>
-        <main-navbar class="col-8 col-md-9"></main-navbar>
-        <search v-if="!isCheckout" class="col-1 col-md-2"></search>
-        <div class="col-1 menu-icon-mobile d-md-none">
-          <img class="navbar__brand__menu-toggle closed open"
-               src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav">
-          <!--<span>menu</span>-->
+  <div class="container-fluid">
+    <div class="navbar__brand">
+      <div class="navbar__brand-box">
+        <div class="row no-gutters">
+          <div class="col-2 col-md-1 navbar__logo">
+            <nuxt-link to="/">
+              <img :src="`${oyeLogo}`" alt="Oye Records"
+                   height="50">
+            </nuxt-link>
+          </div>
+          <main-navbar class="col-8 col-md-9"></main-navbar>
+          <search v-if="!isCheckout" class="col-1 col-md-2"></search>
+          <div class="col-1 menu-icon-mobile d-md-none">
+            <img class="navbar__brand__menu-toggle closed open"
+                 src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav">
+            <!--<span>menu</span>-->
+          </div>
         </div>
       </div>
     </div>
