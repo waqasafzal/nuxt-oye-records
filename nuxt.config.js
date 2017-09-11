@@ -69,6 +69,7 @@ module.exports = {
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+      {href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css', rel: 'stylesheet', integrity: 'sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M', crossorigin: 'anonymous'},
       {href: 'https://fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
     ],
     script: [
@@ -131,6 +132,7 @@ module.exports = {
     {src: '~plugins/vue-social-sharing'},
     // {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
     {src: '~plugins/ga', ssr: false}
+    // {src: '~plugins/touch', ssr: false}
   ],
   router: {
     middleware: ['check-auth', 'payment-duty'],
@@ -154,12 +156,12 @@ module.exports = {
   css: [
     {src: '~assets/css/storefront/storefront.scss', lang: 'scss'}
   ],
-  // devProxy: {
-  //   'localhost:3000/media': 'http://local.oye.com:8000/',
-  //   'localhost:3000/admin': 'http://local.oye.com:8000/',
-  //   'localhost:3000/static/admin/css': 'http://local.oye.com:8000/',
-  //   'localhost:3000/oye': 'http://local.oye.com:8000/'
-  // },
+  devProxy: {
+    'localhost:3000/media': 'http://local.oye.com:8000/',
+    'localhost:3000/admin': 'http://local.oye.com:8000/',
+    'localhost:3000/static/admin/css': 'http://local.oye.com:8000/',
+    'localhost:3000/oye': 'http://local.oye.com:8000/'
+  },
   generate: {
     routes: function () {
       let cleanHostUrl = apiHost.replace(/'/g, '')
