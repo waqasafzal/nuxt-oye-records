@@ -114,7 +114,6 @@
     methods: {
       incrementRelease (force) {
         if (force || !this.sliderDisabled) {
-          console.log(`incrementRelease ${this.featuredReleases}}`)
           if (this.featuredReleases.length > 0) {
             if (this.currentFeature < this.featuredReleases.length - 1) {
               this.currentFeature++
@@ -122,13 +121,10 @@
               this.currentFeature = 0
             }
           }
-        } else {
-          console.log(`incrementRelease disabled`)
         }
       },
       decrementRelease (force) {
         if (force || !this.sliderDisabled) {
-          console.log(`decrementRelease ${this.featuredReleases}}`)
           if (this.featuredReleases.length > 0) {
             if (this.currentFeature > 0) {
               this.currentFeature--
@@ -157,13 +153,11 @@
         this.sliderDisabled = false
       },
       startAutopager () {
-        console.log('start autopager')
         if (!this.autopager) {
           this.autopager = window.setInterval(this.incrementRelease, 5000)
         }
       },
       stopAutopager () {
-        console.log('stop autopager')
         if (this.autopager) {
           window.clearInterval(this.autopager)
           this.autopager = undefined

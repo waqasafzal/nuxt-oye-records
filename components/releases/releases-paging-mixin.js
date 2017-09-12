@@ -31,14 +31,47 @@ export const ReleasePagingMixin = function (filterBy) {
         loadingQueriesCount: 0,
         releases: [],
         cursor: null,
-        showMoreEnabled: false
+        showMoreEnabled: false,
+        filterOptions: {}
       }
     },
     asyncData: asyncData,
     mounted: function () {
       window.onscroll = this.checkInfiniteScrolling
     },
+    watch: {
+      filterOptions (options) {
+        // console.log('filter options changed!')
+        var localFilter = this.filterBy
+        if (!localFilter) {
+          if (filterBy) {
+            localFilter = JSON.parse(filterBy)
+          } else {
+            localFilter = {}
+          }
+        } else {
+          localFilter = JSON.parse(localFilter)
+        }
+        if (options.days) {
+          localFilter['days'] = options.days
+        }
+        if (options.formats) {
+          localFilter['formats'] = options.formats
+        }
+        this.filterBy = JSON.stringify(localFilter)
+        this.releases = {
+          edges: []
+        }
+
+        this.cursor = null
+        this.loadMore()
+      }
+    },
     methods: {
+      onFilterChanged (filterOptions) {
+        console.log('release paging filter changed')
+        this.filterOptions = filterOptions
+      },
       checkInfiniteScrolling () {
         if (this.$el.offsetHeight > 0 && !this.loading && !(this.releases && this.releases.pageInfo && !this.releases.pageInfo.hasNextPage) &&
           (window.innerHeight + window.scrollY) >= this.$el.offsetHeight) {
@@ -62,7 +95,7 @@ export const ReleasePagingMixin = function (filterBy) {
         var vm = this
         client.query(createReleaseListQuery({
           first: this.count,
-          filterBy: filterBy || this.filterBy,
+          filterBy: this.filterBy || filterBy,
           after: this.cursor
         })).then(({data}) => {
           vm.loading = false

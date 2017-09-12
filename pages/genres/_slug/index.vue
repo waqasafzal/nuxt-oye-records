@@ -1,13 +1,13 @@
 <template>
   <div class="page">
     <div class="page__header" v-if="detailGenre">
-      {{ detailGenre.name }}
-
+        {{ detailGenre.name }}
       <dropdown class="genres__detail__subgenre__selector"
                 v-if="detailGenre.subgenres && detailGenre.subgenres.length > 0"
                 @selected="onSelected"
                 :values="detailGenre.subgenres">Select Subgenre
       </dropdown>
+      <filter-results-options class="float-right"></filter-results-options>
     </div>
     <div class="genres__detail__bestseller">
       <div class="genres__detail__bestseller__header" v-if="detailGenre">Bestseller {{ detailGenre.name }}</div>
@@ -51,6 +51,7 @@
   import { createReleaseListQuery } from '~/components/releases/queries'
   import { createGenreQuery } from '~/components/genres/queries'
   import {ReleasePagingMixin} from '~/components/releases/releases-paging-mixin'
+  import FilterResultsOptions from '../../../components/shared/FilterResultsOptions'
 
   const MAX_BESTSELLERS = 40
 
@@ -68,6 +69,7 @@
 
   export default {
     components: {
+      FilterResultsOptions,
       LoadingSpinner,
       Dropdown,
       ReleaseItem,

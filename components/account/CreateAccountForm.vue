@@ -151,41 +151,6 @@
     }
   }
 
-  .checkbox-label {
-    margin-bottom: 0px;
-    input[type=checkbox] {
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      border: 1px solid #cacece;
-      padding: 7px;
-      border-radius: 0px;
-      display: inline-block;
-      position: relative;
-      margin-right: 10px;
-      top: 2px;
-      &:checked {
-        background-color: white;
-        border: 1px solid #adb8c0;
-        color: #99a1a7;
-        &:after {
-          content: '\2713';
-          font-size: 14px;
-          position: absolute;
-          top: -3px;
-          left: 2px;
-          color: #30C46C;
-        }
-      }
-      &:focus {
-        outline: none;
-        background-color: white;
-      }
-    }
-    &:before {
-      border-radius: 0px;
-    }
-  }
-
   .account__create {
     &__btn {
       margin-top: 2rem;

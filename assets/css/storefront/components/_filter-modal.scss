@@ -1,0 +1,80 @@
+.filter {
+  &-options {
+    .btn {
+      height: 3rem;
+      background-color: $brand-color-black;
+      color: $gray-color-2;
+      font-size: $font-size-sm;
+      line-height: $font-size-sm;
+      border-radius: 2px;
+      padding: 1rem 2rem !important;
+      letter-spacing: 1px;
+      &:hover {
+        background-color: lighten($brand-color-black, 10);
+      }
+    }
+    input[type=radio] {
+      height: inherit;
+      margin-right: 0.5rem;
+    }
+    .form-group {
+      margin-bottom: 9.5px;
+    }
+  }
+  &-modal {
+    opacity: 1;
+    border-radius: 2px;
+    margin: auto;
+    font-weight: 300;
+    max-width: 650px;
+    width: 100%;
+    //transition: width 1s ease-in-out;
+    overflow: hidden;
+    background-color: $gray-color-5;
+    &__header {
+      background-color: $gray-color-2;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: 2 * $global-padding;
+      padding-right: $global-padding;
+      h4 {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      .close {
+        padding: $global-padding;
+        font-weight: 300;
+        font-size: $font-size-h2;
+        cursor: pointer;
+      }
+    }
+    &__body {
+      padding-top: $global-padding;
+      padding-left: 2 * $global-padding;
+      padding-right: $global-padding;
+      padding-bottom: 2 * $global-padding;
+    }
+  }
+  &-criterion {
+    font-size: $font-size-h5;
+    &__header {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    &__body {
+      font-weight: normal;
+    }
+  }
+}
+
+.modal-screen {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  height: 100%;
+  width: 100%;
+  background-color: transparentize($brand-color-black, .1);
+  display: flex;
+}
