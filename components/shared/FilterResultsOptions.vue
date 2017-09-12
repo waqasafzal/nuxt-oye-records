@@ -45,7 +45,6 @@
 </template>
 
 <script>
-  import { capitalizeFirstLetter } from '../../utils/string'
   const formats = ['Vinyl', 'CD', 'Cassette', 'Merch']
 
   export default {
@@ -106,9 +105,6 @@
         } else if (JSON.stringify(this.lastOptions) !== JSON.stringify(this.currentOptions)) {
           this.$emit('filter-changed', this.currentOptions)
         }
-      },
-      capitalizeFirstLetter (value) {
-        return capitalizeFirstLetter(value)
       },
       onKeyDown (e) {
         var key = e.keyCode ? e.keyCode : e.which
