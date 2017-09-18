@@ -9,6 +9,7 @@
     "babel-polyfill": "^6.23.0",
     "graphql-tag": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
+    "js-beautify": "1.6.14",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "node-fetch": "^1.6.3",
@@ -35,7 +36,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "HOST=0.0.0.0 PORT=3000 nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"

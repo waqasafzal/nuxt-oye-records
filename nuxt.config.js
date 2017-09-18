@@ -1,7 +1,5 @@
 const webpack = require('webpack')
-const axios = require('axios')
 const fetch = require('node-fetch')
-require('karma')
 
 global.fetch = fetch
 
@@ -179,7 +177,9 @@ module.exports = {
       //       })
       //     })
       // }
-      // generate(nextPage)
+      // generate(nextPage)karma
+
+      const axios = require('axios')
       return axios.get(cleanHostUrl + '/oye/api/releases?limit=-1')
         .then((res) => {
           return res.data.map((release) => {
