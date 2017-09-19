@@ -1,46 +1,46 @@
 <template>
   <div class="filter-options">
     <button class="btn" @click="toggleModal">&#43; Filter Results</button>
-    <!--<transition :duration="1000" name="unfold">-->
-      <div class="modal-screen" ref="modal-screen" v-show="showModal">
-        <div class="filter-modal">
-          <div class="filter-modal__header">
-            <h4>Filter Results</h4>
-            <div @click="toggleModal" class="close float-right">&times;</div>
-          </div>
-          <div class="row filter-modal__body">
-            <div class="col-12 col-md-3">
-              <div class="filter-criterion">
-                <div class="filter-criterion__header">Format</div>
-                <div class="filter-criterion__options">
-                  <form>
-                    <div class="form-group">
-                      <label for="format-all" class="checkbox-label"><input @click="onClickAll" type="checkbox" id="format-all"
-                                                                            v-model="allFormats"/>All</label>
-                    </div>
-                    <div class="form-group" v-for="f in formats">
-                      <label :for="`format-${f}`" class="checkbox-label"><input @click="onCheckboxClick" type="checkbox" :id="`format-${f}`"
-                                                                                :value="f" v-model="selectedFormats"/>{{f}}</label>
-                    </div>
-                  </form>
-                </div>
+    <div class="modal-screen" ref="modal-screen" v-show="showModal">
+      <div class="filter-modal">
+        <div class="filter-modal__header">
+          <h4>Filter Results</h4>
+          <div @click="toggleModal" class="close float-right">&times;</div>
+        </div>
+        <div class="row filter-modal__body">
+          <div class="col-12 col-md-3">
+            <div class="filter-criterion">
+              <div class="filter-criterion__header">Format</div>
+              <div class="filter-criterion__options">
+                <form>
+                  <div class="form-group">
+                    <label for="format-all" class="checkbox-label"><input @click="onClickAll" type="checkbox"
+                                                                          id="format-all"
+                                                                          v-model="allFormats"/>All</label>
+                  </div>
+                  <div class="form-group" v-for="f in formats">
+                    <label :for="`format-${f}`" class="checkbox-label"><input @click="onCheckboxClick" type="checkbox"
+                                                                              :id="`format-${f}`"
+                                                                              :value="f" v-model="selectedFormats"/>{{f}}</label>
+                  </div>
+                </form>
               </div>
             </div>
-            <div class="col-12 col-md-3">
-              <div class="filter-criterion">
-                <div class="filter-criterion__header">Date</div>
-                <div class="filter-criterion__options">
-                  <div v-for="value, key in daysOptions">
-                    <input type="radio" name="days" :value="parseInt(key)" :id="`days-${key}`" v-model="days"/>
-                    <label :for="`days-${key}`">{{value}}</label>
-                  </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="filter-criterion">
+              <div class="filter-criterion__header">Date</div>
+              <div class="filter-criterion__options">
+                <div v-for="value, key in daysOptions">
+                  <input type="radio" name="days" :value="parseInt(key)" :id="`days-${key}`" v-model="days"/>
+                  <label :for="`days-${key}`">{{value}}</label>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    <!--</transition>-->
+    </div>
   </div>
 </template>
 

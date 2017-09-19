@@ -1,5 +1,5 @@
 <template>
-  <releases-page @filter-changed="onFilterChanged" :status="status" :pageSize="pageSize" :releases="releases" :loading="loading"></releases-page>
+  <releases-page @genre-selected="onGenreChanged" @filter-changed="onFilterChanged" :status="status" :pageSize="pageSize" :releases="releases" :loading="loading"></releases-page>
 </template>
 
 <script>

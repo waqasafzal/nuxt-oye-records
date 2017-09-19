@@ -32,16 +32,17 @@ export const ReleasePagingMixin = function (filterBy) {
         releases: [],
         cursor: null,
         showMoreEnabled: false,
-        filterOptions: {}
+        filterOptions: {},
+        genreSlug: null,
+        filterBy: null
       }
     },
     asyncData: asyncData,
     mounted: function () {
       window.onscroll = this.checkInfiniteScrolling
     },
-    watch: {
-      filterOptions (options) {
-        // console.log('filter options changed!')
+    methods: {
+      reloadQuery () {
         var localFilter = this.filterBy
         if (!localFilter) {
           if (filterBy) {
@@ -52,25 +53,33 @@ export const ReleasePagingMixin = function (filterBy) {
         } else {
           localFilter = JSON.parse(localFilter)
         }
+
+        let options = this.filterOptions
         if (options.days) {
           localFilter['days'] = options.days
         }
         if (options.formats) {
           localFilter['formats'] = options.formats
         }
+
+        if (this.genreSlug) {
+          localFilter['metagenres'] = [this.genreSlug]
+        }
+
         this.filterBy = JSON.stringify(localFilter)
         this.releases = {
           edges: []
         }
-
         this.cursor = null
         this.loadMore()
-      }
-    },
-    methods: {
+      },
       onFilterChanged (filterOptions) {
-        console.log('release paging filter changed')
         this.filterOptions = filterOptions
+        this.reloadQuery()
+      },
+      onGenreChanged (genreSlug) {
+        this.genreSlug = genreSlug
+        this.reloadQuery()
       },
       checkInfiniteScrolling () {
         if (this.$el.offsetHeight > 0 && !this.loading && !(this.releases && this.releases.pageInfo && !this.releases.pageInfo.hasNextPage) &&

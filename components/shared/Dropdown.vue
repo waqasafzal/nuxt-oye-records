@@ -6,9 +6,9 @@
         <div class="dropdown__button__arrow"></div>
       </div>
     </div>
-    <div class="dropdown__values">
+    <div :class="['dropdown__values', this.hidden ? 'hidden': '']">
       <div class="dropdown__values__item"
-           v-for="value in values"
+           v-for="value in selectableValues"
            @click="onSelected(value)"
       >
         {{ display(value) }}
@@ -31,6 +31,32 @@
         default: 'name'
       }
     },
+    data: function () {
+      return {
+        hidden: false
+      }
+    },
+    computed: {
+      selectableValues () {
+        let selectable = []
+        for (var i = 0; i < this.values.length; i++) {
+          if (this.values[i] !== this.selected) {
+            selectable.push(this.values[i])
+          }
+        }
+        return selectable
+      }
+    },
+    watch: {
+      hidden (value) {
+        var vm = this
+        if (value) {
+          setTimeout(function () {
+            vm.hidden = false
+          }, 300)
+        }
+      }
+    },
     methods: {
       display (data) {
         if (data.hasOwnProperty(this.nameKey)) {
@@ -40,6 +66,8 @@
       },
       onSelected (value) {
         this.$emit('selected', value)
+        this.selected = value
+        this.hidden = true
       }
     }
   }
@@ -54,6 +82,9 @@
       border-bottom-left-radius: 0px;
       .dropdown__values {
         display: block;
+        &.hidden {
+          display: none;
+        }
       }
       .dropdown__button {
         opacity: 0.6;

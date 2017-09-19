@@ -3,6 +3,7 @@
     <div class="col-12">
       <div class="page__header">
         {{ category }}
+        <meta-genre-filter @slug-selected="onSlugSelected"></meta-genre-filter>
         <filter-results-options :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged" class="float-right"></filter-results-options>
       </div>
       <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
@@ -17,12 +18,13 @@
   import ReleaseList from './ReleaseList.vue'
   import NoResults from '../shared/NoResults.vue'
   import FilterResultsOptions from '../shared/FilterResultsOptions'
+  import MetaGenreFilter from '../genres/MetaGenreFilter'
 
   Vue.component('noresults', NoResults)
   Vue.component('release-list', ReleaseList)
 
   export default {
-    components: {FilterResultsOptions},
+    components: {MetaGenreFilter, FilterResultsOptions},
     name: 'ReleasePage',
     props: ['pageSize', 'status', 'releases', 'loading'],
     data: function () {
@@ -42,6 +44,9 @@
         if (filterOptions.formats) {
           this.filterBy['formats'] = filterOptions.formats
         }
+      },
+      onSlugSelected (slug) {
+        this.$emit('genre-selected', slug)
       }
     },
     computed: {

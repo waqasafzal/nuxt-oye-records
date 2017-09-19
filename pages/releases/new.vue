@@ -3,6 +3,8 @@
     <div class="col-12">
       <div class="page__header">
         New Releases
+
+        <meta-genre-filter @slug-selected="onGenreChanged"></meta-genre-filter>
         <filter-results-options @filter-changed="onFilterOptionsChanged" class="float-right"></filter-results-options>
       </div>
       <div class="release-list-panel" v-if="releasedToday.edges.length > 0">
@@ -26,12 +28,13 @@
 
 <script>
   import Vue from 'vue'
-  import {ReleasePagingMixin} from '../../components/releases/releases-paging-mixin'
+  import { ReleasePagingMixin } from '../../components/releases/releases-paging-mixin'
   import client from '~/plugins/apollo'
 
   import ReleasePage from '../../components/releases/ReleasePage.vue'
   import { createReleaseListQuery } from '../../components/releases/queries'
   import FilterResultsOptions from '../../components/shared/FilterResultsOptions'
+  import MetaGenreFilter from '../../components/genres/MetaGenreFilter'
 
   const filterBy = JSON.stringify({
     status: 'new'
@@ -47,7 +50,7 @@
   Vue.component('releases-page', ReleasePage)
 
   export default {
-    components: {FilterResultsOptions},
+    components: {MetaGenreFilter, FilterResultsOptions},
     name: 'NewReleases',
     mixins: [ReleasePagingMixin(filterBy)],
     asyncData: async function ({params}) {
@@ -62,36 +65,68 @@
         releases: data.releases
       }
     },
-    methods: {
-      onFilterOptionsChanged (options) {
-        this.onFilterChanged(options)
-        let days = options.days
+    watch: {
+      filterBy (value) {
+        let days = this.filterOptions.days
+
         this.releasedToday = {edges: []}
         this.releasedLast7 = {edges: []}
         this.releasedLast30 = {edges: []}
         if (days) {
-          if (days <= 1) {
-            client.query(createReleaseListQuery({filterBy: filterByPeriod(1)})).then(
+          if (days >= 1) {
+            client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(1)})).then(
               ({data}) => {
                 this.releasedToday = data.releases
               }
             )
           }
-          if (days <= 7) {
-            client.query(createReleaseListQuery({filterBy: filterByPeriod(days)})).then(
+          if (days >= 7) {
+            client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(days)})).then(
               ({data}) => {
                 this.releasedLast7 = data.releases
               }
             )
           }
-          if (days <= 31) {
-            client.query(createReleaseListQuery({filterBy: filterByPeriod(days)})).then(
+          if (days >= 31) {
+            client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(days)})).then(
               ({data}) => {
                 this.releasedLast30 = data.releases
               }
             )
           }
+        } else {
+          client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(1)})).then(
+            ({data}) => {
+              this.releasedToday = data.releases
+            }
+          )
+          client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(7)})).then(
+            ({data}) => {
+              this.releasedLast7 = data.releases
+            }
+          )
+          client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(30)})).then(
+            ({data}) => {
+              this.releasedLast30 = data.releases
+            }
+          )
         }
+      }
+    },
+    methods: {
+      onFilterOptionsChanged (options) {
+        this.onFilterChanged(options)
+      },
+      getFilterByPeriod (period) {
+        let filterByDict = {
+          status: 'new',
+          period: period
+        }
+        if (this.filterBy) {
+          filterByDict = JSON.parse(this.filterBy)
+          filterByDict['period'] = period
+        }
+        return JSON.stringify(filterByDict)
       }
     },
     data: function () {
