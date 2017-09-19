@@ -15,11 +15,11 @@
                 <div class="filter-criterion__options">
                   <form>
                     <div class="form-group">
-                      <label for="format-all" class="checkbox-label"><input type="checkbox" id="format-all"
+                      <label for="format-all" class="checkbox-label"><input @click="onClickAll" type="checkbox" id="format-all"
                                                                             v-model="allFormats"/>All</label>
                     </div>
                     <div class="form-group" v-for="f in formats">
-                      <label :for="`format-${f}`" class="checkbox-label"><input type="checkbox" :id="`format-${f}`"
+                      <label :for="`format-${f}`" class="checkbox-label"><input @click="onCheckboxClick" type="checkbox" :id="`format-${f}`"
                                                                                 :value="f" v-model="selectedFormats"/>{{f}}</label>
                     </div>
                   </form>
@@ -55,7 +55,8 @@
         selectedFormats: formats,
         formats: formats,
         allFormats: true,
-        days: []
+        days: [],
+        lastClicked: null
       }
     },
     props: {
@@ -94,6 +95,9 @@
           }
         } else {
           this.selectedFormats = []
+          if (this.lastClicked) {
+            this.selectedFormats.push(this.lastClicked)
+          }
         }
       }
     },
@@ -111,6 +115,12 @@
         if (key === 27) {
           this.showModal = false
         }
+      },
+      onCheckboxClick (e) {
+        this.lastClicked = e.target.value
+      },
+      onClickAll (e) {
+        this.lastClicked = null
       }
     },
     mounted () {
