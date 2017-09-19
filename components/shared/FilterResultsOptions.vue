@@ -9,23 +9,23 @@
             <div @click="toggleModal" class="close float-right">&times;</div>
           </div>
           <div class="row filter-modal__body">
-            <!--<div class="col-12 col-md-3">-->
-              <!--<div class="filter-criterion">-->
-                <!--<div class="filter-criterion__header">Format</div>-->
-                <!--<div class="filter-criterion__options">-->
-                  <!--<form>-->
-                    <!--<div class="form-group">-->
-                      <!--<label for="format-all" class="checkbox-label"><input type="checkbox" id="format-all"-->
-                                                                            <!--v-model="allFormats"/>All</label>-->
-                    <!--</div>-->
-                    <!--<div class="form-group" v-for="f in formats">-->
-                      <!--<label :for="`format-${f}`" class="checkbox-label"><input type="checkbox" :id="`format-${f}`"-->
-                                                                                <!--:value="f" v-model="selectedFormats"/>{{f}}</label>-->
-                    <!--</div>-->
-                  <!--</form>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
+            <div class="col-12 col-md-3">
+              <div class="filter-criterion">
+                <div class="filter-criterion__header">Format</div>
+                <div class="filter-criterion__options">
+                  <form>
+                    <div class="form-group">
+                      <label for="format-all" class="checkbox-label"><input type="checkbox" id="format-all"
+                                                                            v-model="allFormats"/>All</label>
+                    </div>
+                    <div class="form-group" v-for="f in formats">
+                      <label :for="`format-${f}`" class="checkbox-label"><input type="checkbox" :id="`format-${f}`"
+                                                                                :value="f" v-model="selectedFormats"/>{{f}}</label>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
             <div class="col-12 col-md-3">
               <div class="filter-criterion">
                 <div class="filter-criterion__header">Date</div>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-  const formats = ['Vinyl', 'CD', 'Cassette', 'Merch']
+  const formats = ['Vinyl', 'CD', 'Cassette', 'DJ Equipment', 'Merchandise', 'Magazine / Book']
 
   export default {
     name: 'FilterResultsOptions',
