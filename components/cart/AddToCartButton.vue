@@ -36,9 +36,9 @@
     computed: {
       addToCartButtonStyle: function () {
         let style = {
-          height: `${this.baseSize}px`,
+//          height: `${this.baseSize}px`,
 //          width: `${this.baseSize}px`,
-          lineHeight: `${this.baseSize / 2}px`,
+//          lineHeight: `${this.baseSize / 2}px`,
 //          display: 'flex',
           flexFlow: 'row',
           overFlow: 'hidden',
@@ -56,8 +56,8 @@
           marginTop: 'auto',
           marginBottom: 'auto',
 //          marginTop: '2px',
-//          height: `${this.baseSize * 2 / 3}px`,
-//          lineHeight: `${this.baseSize * 2 / 3}px`,
+          height: `${this.baseSize * 2 / 3}px`,
+          lineHeight: `${this.baseSize * 2 / 3 + 2}px`,
           textOverflow: 'ellipsis',
           overflow: 'hidden',
           width: '100%'
