@@ -2,9 +2,9 @@
   <div v-if="release" class="add-to-cart-button" @click.prevent="addToCart"
        :style="addToCartButtonStyle">
     <div class="d-flex flex-row vmargin-auto">
-      <div style="width: auto; height: auto">
-        <img :style="imgStyle" src="../../assets/images/cart_small_white.svg"/>
-      </div>
+      <!--<div style="width: auto; height: auto">-->
+      <img :style="imgStyle" src="../../assets/images/cart_small_white.svg"/>
+      <!--</div>-->
       <span :style="textStyle" v-if="withTitle"> {{ orderAction }}</span>
     </div>
   </div>
@@ -56,8 +56,8 @@
           marginTop: 'auto',
           marginBottom: 'auto',
 //          marginTop: '2px',
-          height: `${this.baseSize * 2 / 3}px`,
-          lineHeight: `${this.baseSize * 2 / 3}px`,
+//          height: `${this.baseSize * 2 / 3}px`,
+//          lineHeight: `${this.baseSize * 2 / 3}px`,
           textOverflow: 'ellipsis',
           overflow: 'hidden',
           width: '100%'
