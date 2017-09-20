@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-3 offset-md-1">
+        <div class="col-12 col-md-3 ml-md-auto">
           <div class="charts__overview__bestsellers">
             <div class="charts__overview__bestsellers__header">Bestseller {{ currentMonth.name }}</div>
             <div>
