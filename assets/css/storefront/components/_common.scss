@@ -1,3 +1,13 @@
 .green {
   color: $brand-color-green;
 }
+
+.container-fluid {
+  padding-left: 60px;
+  padding-right: 60px;
+  max-width: 1600px;
+  @include media-breakpoint-down(sm) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

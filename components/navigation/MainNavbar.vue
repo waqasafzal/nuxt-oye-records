@@ -6,7 +6,7 @@
           <div :class="['nav-item', 'active', canSelectCheckout ? 'clickable': '']">
             <div class="checkout-state">
               <div class="checkout-num" @click="setCheckoutState(1)">1</div>
-              <div class="checkout-name" @click="setCheckoutState(1)">Checkout Method</div>
+              <div class="checkout-name" @click="seDtCheckoutState(1)">Checkout Method</div>
             </div>
           </div>
           <div :class="['nav-item', checkoutState > 1 ? 'active': '', hasCheckoutMethod ? 'clickable': '']">

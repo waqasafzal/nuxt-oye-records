@@ -1,6 +1,6 @@
 <template>
-  <div class="container-fluid">
-    <div class="navbar__brand">
+  <div class="navbar__brand">
+    <div class="container-fluid">
       <div class="navbar__brand-box">
         <div class="row no-gutters">
           <div class="col-2 col-md-1 navbar__logo">
