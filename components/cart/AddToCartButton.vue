@@ -55,9 +55,8 @@
           marginLeft: '2px',
           marginTop: 'auto',
           marginBottom: 'auto',
-//          marginTop: '2px',
           height: `${this.baseSize * 2 / 3}px`,
-          lineHeight: `${this.baseSize * 2 / 3 + 2}px`,
+          lineHeight: `${this.baseSize * 2 / 3 + Math.round(this.baseSize / 24)}px`,
           textOverflow: 'ellipsis',
           overflow: 'hidden',
           width: '100%'
