@@ -221,6 +221,7 @@
         var key = e.keyCode ? e.keyCode : e.which
         let noText = e.target.type !== 'text'
         if (key === 32 && noText) {
+          console.log('prevent default')
           e.preventDefault()
           if (this.playing) {
             this.$store.commit(types.PAUSE_TRACK)
@@ -228,9 +229,11 @@
             this.$store.commit(types.PLAY_TRACK, this.currentTrack)
           }
         } else if (key === 37 && noText) {
+          console.log('prevent default')
           e.preventDefault()
           this.backwards()
         } else if (key === 39 && noText) {
+          console.log('prevent default')
           e.preventDefault()
           this.forwards()
         }

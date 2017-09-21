@@ -118,7 +118,8 @@
     mounted () {
       document.addEventListener('keydown', function (e) {
         var key = e.keyCode ? e.keyCode : e.which
-        if ([37, 39].includes(key)) {
+        let noText = e.target.type !== 'text'
+        if ([37, 39].includes(key) && noText) {
           e.preventDefault()
         }
       })

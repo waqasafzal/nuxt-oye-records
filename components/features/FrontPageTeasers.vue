@@ -19,7 +19,7 @@
                     <div class="feature-category">
                       <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
                     </div>
-                    <nuxt-link class="release-info" :key="'release-'+i"
+                    <nuxt-link class="release-info vmargin-auto" :key="'release-'+i"
                                :to="{name: 'releases-slug', params: {slug: release.slug}}">
                       <div class="release-name">
                         <div class="frontpage__teaser__artist">{{ release.name }}</div>
