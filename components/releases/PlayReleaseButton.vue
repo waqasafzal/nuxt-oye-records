@@ -59,8 +59,6 @@
           this.$store.dispatch('playRelease', {
             release: this.playableRelease
           }).then(track => {
-            console.log('set track: ' + track.url)
-//            this.play = track
           })
         }
       },
@@ -80,16 +78,12 @@
           }
         }).then((result) => {
           let playableRelease = result.data.release
-          console.log('playyyy' + playableRelease)
           vm.playableRelease = playableRelease
-//          vm.playRelease()
           this.trackEvent('Audio', 'play-release', `${playableRelease.name} - ${playableRelease.title}`)
 
           this.$store.dispatch('playRelease', {
             release: playableRelease
           }).then(track => {
-            console.log('set track: ' + track.url)
-//            this.play = track
           })
         })
       },

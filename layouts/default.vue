@@ -15,8 +15,8 @@
     <div class="bottom">
       <div class="container-fluid" style="padding-left: inherit; padding-right: inherit">
           <primary-control-panel></primary-control-panel>
-        <audio-player></audio-player>
       </div>
+      <audio-player></audio-player>
     </div>
   </div>
 </template>

@@ -36,9 +36,9 @@
     computed: {
       addToCartButtonStyle: function () {
         let style = {
-//          height: `${this.baseSize}px`,
+          height: `${this.baseSize}px`,
 //          width: `${this.baseSize}px`,
-//          lineHeight: `${this.baseSize / 2}px`,
+          lineHeight: `${this.baseSize / 2}px`,
 //          display: 'flex',
           flexFlow: 'row',
           overFlow: 'hidden',
