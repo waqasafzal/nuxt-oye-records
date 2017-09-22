@@ -39,7 +39,6 @@
           height: `${this.baseSize}px`,
 //          width: `${this.baseSize}px`,
           lineHeight: `${this.baseSize / 2}px`,
-          display: 'flex',
           flexFlow: 'row',
           overFlow: 'hidden',
           textOverflow: 'ellipsis',
@@ -76,9 +75,6 @@
         return {
           width: `${this.baseSize / 3}px`,
           marginRight: `${this.baseSize / 4.8}px`
-//          ,
-//          ,
-//          marginTop: `${-1 * this.baseSize / 16}rem`
         }
       }
     },
@@ -98,15 +94,11 @@
 
 <style lang="scss">
   .add-to-cart-button {
-    /*position: relative;*/
     cursor: pointer;
     display: flex;
     justify-content: space-around;
     img {
-      /*margin-top: auto;*/
-      /*margin-bottom: auto;*/
       margin-left: auto;
-      /*margin-right: auto;*/
     }
     &:hover:after {
       content: '';
