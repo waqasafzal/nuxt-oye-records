@@ -1,5 +1,5 @@
 <template>
-  <div v-on-clickaway="onClickaway">
+  <div v-show="showPlayer" v-on-clickaway="onClickaway">
     <playlist v-if="showPlaylist"></playlist>
     <div v-show="currentTrack">
       <div id="audioplayer">
@@ -95,24 +95,26 @@
       showPlaylist () {
         return this.$store.state.player.playlistVisible
       },
-      player: function () {
+      player () {
         return this.$store.state.player
       },
-      playing: function () {
+      playing () {
         return this.$store.state.player.playing
       },
-      currentTrack: function () {
+      currentTrack () {
         let player = this.$store.state.player
         if (player && player.currentTrack) {
-//          console.log('')
-//          this.reloadMusic()
           return player.currentTrack
         }
       },
-      playlistPos: function () {
+      showPlayer () {
+        let name = this.$route.name
+        return !['checkout', 'cart'].includes(name) && !name.startsWith('account')
+      },
+      playlistPos () {
         return this.player.currentTrack ? this.player.position + 1 : 0
       },
-      playlistLength: function () {
+      playlistLength () {
         if (this.player) {
           return this.player.history.length
         } else {
