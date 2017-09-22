@@ -48,8 +48,8 @@
 
 <style>
   .fade-leave-active {
-    transition: opacity 2s ease;
-    -webkit-transition: opacity 2s ease;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
   }
   .fade-enter-active {
     opacity: 0.5 !important;

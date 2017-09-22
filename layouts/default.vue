@@ -5,9 +5,9 @@
       <brand-navbar v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
     </header>
+    <alerts></alerts>
     <div class="background">
       <div class="container-fluid maincontent page">
-        <alerts></alerts>
         <nuxt></nuxt>
       </div>
       <!--<mobile-menu v-if="isSmallScreen"></mobile-menu>-->
