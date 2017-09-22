@@ -39,7 +39,7 @@
           height: `${this.baseSize}px`,
 //          width: `${this.baseSize}px`,
           lineHeight: `${this.baseSize / 2}px`,
-//          display: 'flex',
+          display: 'flex',
           flexFlow: 'row',
           overFlow: 'hidden',
           textOverflow: 'ellipsis',
