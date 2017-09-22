@@ -6,9 +6,11 @@
     <h3>OYE Records Prenzlauer Berg</h3>
     <p>Oderbergerstr. 4<br/>10435 Berlin<br/>Germany</p>
     <p>Phone: +49 (0)30 66647821</p>
+    <p> Mo-Fr 13-20h | Sa 12-19h</p>
     <h3>OYE Records Neukölln</h3>
     <p>Friedelstr. 49<br/>12047 Berlin<br/>Germany</p>
     <p>Phone:  +49 (0)30 89372815</p>
+    <p> Mo-Fr 13-20h | Sa 14-19h</p>
   </div>
 </template>
 
