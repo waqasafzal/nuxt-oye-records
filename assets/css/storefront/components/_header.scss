@@ -71,7 +71,10 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      width: 200px;
+      //width: 300px;
+      .ah-link {
+        width: 100px
+      }
     }
     &__oye {
       width: 200px;

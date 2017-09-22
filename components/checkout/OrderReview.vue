@@ -2,8 +2,13 @@
   <div class="checkout__review">
     <h3>Review your order</h3>
     <checkout-overview class="checkout__overview"></checkout-overview>
-    <cart-content :review="true">
-    </cart-content>
+    <cart-content :review="true"></cart-content>
+    <div v-show="placingOrder" class="placing-order">
+      <div class="vmargin-auto hmargin-auto">
+        <loading-spinner :loading="true"></loading-spinner>
+        <span class="loading-text">Placing order...</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,10 +20,16 @@
   import gql from 'graphql-tag'
   import { order, oyeCart } from '../graphql/cart'
   import CheckoutOverview from './CheckoutOverview'
+  import LoadingSpinner from '../shared/LoadingSpinner'
 
   export default {
-    components: {CheckoutOverview, ProceedButton, CartContent},
+    components: {LoadingSpinner, CheckoutOverview, ProceedButton, CartContent},
     name: 'OrderReview',
+    data: function () {
+      return {
+        placingOrder: false
+      }
+    },
     watch: {
       selectedPaymentMethod (value) {
         var button = {
@@ -68,6 +79,7 @@
     },
     methods: {
       onPlaceOrder () {
+        this.placingOrder = true
         apolloClient.mutate({
           mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID, $vatExcluded: Boolean) {
             placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId, vatExcluded: $vatExcluded) {
@@ -81,6 +93,7 @@
                   }
                 }
               }
+              paymentUrl
               notInStock {
                 quantity
                 release {
@@ -109,19 +122,26 @@
           }
         }).then(
           ({data}) => {
-            let order = data.placeOrder.order
-            this.$store.commit(types.SET_UNPAID_ORDER, order)
-            if (!order.isPaid) {
-              this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
-              if (order.shippingCountry) {
-                this.$store.dispatch('setShippingCountry', order)
-              }
-              this.$store.commit(types.ADD_ALERT, {
-                level: 'info',
-                message: 'Your order has been placed. Please fulfill order with payment.'
-              })
+            this.placingOrder = false
+            if (data.placeOrder.paymentUrl) {
+              this.$store.commit(types.SET_PAYPAL_PAYMENT_URL)
+              this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 8)
+              window.location.href = data.placeOrder.paymentUrl
             } else {
-              this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
+              let order = data.placeOrder.order
+              this.$store.commit(types.SET_UNPAID_ORDER, order)
+              if (!order.isPaid) {
+                this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
+                if (order.shippingCountry) {
+                  this.$store.dispatch('setShippingCountry', order)
+                }
+                this.$store.commit(types.ADD_ALERT, {
+                  level: 'info',
+                  message: 'Your order has been placed. Please fulfill order with payment.'
+                })
+              } else {
+                this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
+              }
             }
             // set the new cart
             this.$store.dispatch('setCart', {cart: data.placeOrder.cart})

@@ -22,18 +22,23 @@
       let params = this.$route.query
       if (params) {
         let merchantSig = params['merchantSig']
+        let paymentProvider = null
         if (merchantSig) {
-          var verifyParams = {}
-          for (let key in params) {
-            if (key !== 'merchantSig') {
-              verifyParams[key] = params[key]
-            }
-          }
+          paymentProvider = 'adyen'
+        } else if (params['provider'] === 'paypal') {
+          paymentProvider = 'paypal'
         }
+//          var verifyParams = {}
+//          for (let key in params) {
+//            if (key !== 'merchantSig') {
+//              verifyParams[key] = params[key]
+//            }
+//          }
+//        }
         this.verificationStatus = 'verifying'
         apolloClient.mutate({
-          mutation: gql`mutation VerifyOrder($merchantSig: String!, $params: JSONString!) {
-            verifyOrder(merchantSig: $merchantSig, transactionParams: $params) {
+          mutation: gql`mutation VerifyOrder($provider: String!, $params: JSONString!) {
+            verifyOrder(provider: $provider, transactionParams: $params) {
               ok
               order {
                 ...Order
@@ -43,8 +48,8 @@
           ${order}
           `,
           variables: {
-            merchantSig: merchantSig,
-            params: JSON.stringify(verifyParams)
+            provider: paymentProvider, // merchantSig,
+            params: JSON.stringify(params)
           }
         }).then(({data}) => {
           let verified = data.verifyOrder.ok

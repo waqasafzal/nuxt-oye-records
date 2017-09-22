@@ -430,6 +430,9 @@ const store = new Vuex.Store({
     },
     [types.SET_BUTTON_BAR_SHOW]: (state, show) => {
       state.primaryButtonBar.show = show
+    },
+    [types.SET_PAYPAL_PAYMENT_URL]: (state, paymentUrl) => {
+      state.checkout.payment.paypalPaymentUrl = paymentUrl
     }
   },
 

@@ -18,6 +18,7 @@
   import * as types from '../../store/types'
   import CheckoutOverview from '../../components/checkout/CheckoutOverview'
   import CheckoutButtons from '../../components/checkout/CheckoutButtons'
+  import PaypalRedirect from '../../components/checkout/PaypalRedirect'
 
   export default {
     components: {CheckoutButtons, CheckoutOverview},
@@ -40,6 +41,8 @@
           currentCheckoutView = OrderComplete
         } else if (checkoutState === 7) {
           currentCheckoutView = OrderVerification
+        } else if (checkoutState === 8) {
+          currentCheckoutView = PaypalRedirect
         }
         return currentCheckoutView
       }

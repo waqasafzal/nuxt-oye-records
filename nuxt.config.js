@@ -157,7 +157,7 @@ module.exports = {
   devProxy: {
     'localhost:3000/media': 'http://local.oye.com:8000/',
     'localhost:3000/admin': 'http://local.oye.com:8000/',
-    'localhost:3000/static/admin/css': 'http://local.oye.com:8000/',
+    'localhost:3000/static': 'http://local.oye.com:8000/',
     'localhost:3000/oye': 'http://local.oye.com:8000/'
   },
   generate: {

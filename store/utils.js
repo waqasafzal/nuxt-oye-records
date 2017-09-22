@@ -39,7 +39,8 @@ export const getInitialCheckout = function () {
       option: null,
       options: null,
       method: null,
-      confirmed: false
+      confirmed: false,
+      paypalPaymentUrl: null
     },
     unpaidOrder: null,
     guest: null,
