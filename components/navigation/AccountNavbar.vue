@@ -4,7 +4,7 @@
       <!--<div class="d-flex justify-content-between">-->
       <div class="navbar__account__oye">
         <div class="ah-link navbar__account__oye__newsletter">
-          <nuxt-link to="/">Newsletter</nuxt-link>
+          <nuxt-link :to="{name: 'newsletter'}">Newsletter</nuxt-link>
         </div>
         <div class="ah-link navbar__oye__faq">
           <nuxt-link :to="{name: 'info'}">Customer Information</nuxt-link>

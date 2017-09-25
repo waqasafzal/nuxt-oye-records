@@ -54,7 +54,7 @@
         </div>
       </fieldset>
     </form>
-    <div class="newsletter-form">
+    <div class="newsletter-flags">
       <h4>Subscribe to our newsletters</h4>
       <div class="newsletter-toggles">
         <form>
@@ -139,17 +139,7 @@
 </script>
 
 <style lang="scss">
-  .newsletter {
-    &-toggles {
-      margin-top: 0.5rem;
-      .form-group {
-        margin-bottom: 6px;
-      }
-    }
-    &-form {
-      margin-top: 0.5rem;
-    }
-  }
+
 
   .account__create {
     &__btn {

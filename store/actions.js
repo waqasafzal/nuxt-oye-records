@@ -811,3 +811,20 @@ export const checkIfMobile = (context) => {
 export const nuxtServerInit = ({commit}, context) => {
   commit('changeMobile', checkIfMobile(context))
 }
+
+export const subscribeNewsletter = ({commit}, args) => new Promise((resolve, reject) => {
+  apolloClient.mutate({
+    mutation: gql`mutation ($email: String!) {
+        registerNewsletter(email: $email) {
+            ok
+        }
+    }`,
+    variables: {
+      email: args.email
+    }
+  }).then(
+    ({data}) => {
+      resolve(data.registerNewsletter.ok)
+    }
+  )
+})

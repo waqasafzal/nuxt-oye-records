@@ -1,0 +1,21 @@
+.newsletter {
+  &-form {
+    margin-top: 2rem;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .email-input {
+      height: 90px;
+    }
+  }
+  &-toggles {
+    margin-top: 0.5rem;
+    .form-group {
+      margin-bottom: 6px;
+    }
+  }
+  &-flags {
+    margin-top: 0.5rem;
+  }
+}
