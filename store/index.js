@@ -303,7 +303,7 @@ const store = new Vuex.Store({
       let address = state.checkout.shipping.address
       if (address && isAddressComplete(address)) {
         state.checkout.shipping.confirmed = true
-        state.checkout.checkoutState = 3
+        store.commit(types.SET_CURRENT_CHECKOUT_STATE, 3)
       }
     },
     [types.SET_CURRENT_CHECKOUT_STATE]: (state, checkoutState) => {
@@ -315,7 +315,7 @@ const store = new Vuex.Store({
     },
     [types.SET_PAYMENT_OPTION_CONFIRMED]: (state) => {
       state.checkout.payment.confirmed = true
-      state.checkout.checkoutState = 4
+      store.commit(types.SET_CURRENT_CHECKOUT_STATE, 4)
     },
     [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
       state.checkout.unpaidOrder = unpaidOrder

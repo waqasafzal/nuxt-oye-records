@@ -152,6 +152,11 @@
         default: false
       }
     },
+    watch: {
+      linesAvailable (value) {
+        this.$store.commit(types.SET_BUTTON_BAR_SHOW, value)
+      }
+    },
     computed: {
       linesAvailable () {
         return this.cart && (this.cart.lines.length > 0 || this.cart.preorderLines.length > 0)
@@ -214,7 +219,7 @@
       this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, true)
       if (!this.review) {
         this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [{f: this.pushCheckout, text: 'Go to checkout'}])
-        this.$store.commit(types.SET_BUTTON_BAR_SHOW, true)
+        this.$store.commit(types.SET_BUTTON_BAR_SHOW, this.linesAvailable)
       }
     },
     beforeDestroy () {
