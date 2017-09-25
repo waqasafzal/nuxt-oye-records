@@ -3,13 +3,13 @@
     <div class="col-12">
       <div class="charts__header">
         <div class="page__header">
-          <template v-if="!isBestseller">
-            {{ name }}'s {{ chartsName(chart) }} Charts {{ chartsYear(chart) }}
-          </template>
-          <template v-else>
-            Bestseller - {{bestsellerHeader}}
-          </template>
+          {{ pageHeader }}
         </div>
+          <!--</template>-->
+          <!--<template v-else>-->
+            <!--Bestseller - {{bestsellerHeader}}-->
+          <!--</template>-->
+        <!--</div>-->
         <div class="charts__share">
           <div class="charts__share__row">
             <div>Share Charts</div>
@@ -94,8 +94,15 @@
       name () {
         return (this.chart.artist && this.chart.artist.name) || this.chart.user && this.chart.user.firstName || ''
       },
+      pageHeader: function () {
+        if (this.isBestseller) {
+          return `Bestseller - ${this.bestsellerHeader}`
+        } else {
+          return `${this.name}'s ${this.chartsName(this.chart)} Charts ${this.chartsYear(this.chart)}`
+        }
+      },
       pageTitle: function () {
-        return `OYE Records - ${this.name}'s ${this.chartsName(this.chart)} Charts ${this.chartsYear(this.chart)}`
+        return `OYE Records - ${this.pageHeader}`
       },
       currentRoute () {
         return __API__ + this.$route.path
