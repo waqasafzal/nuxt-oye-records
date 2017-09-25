@@ -10,7 +10,6 @@
       <div class="container-fluid maincontent page">
         <nuxt></nuxt>
       </div>
-      <!--<mobile-menu v-if="isSmallScreen"></mobile-menu>-->
     </div>
     <div class="bottom">
       <div class="container-fluid" style="padding-left: inherit; padding-right: inherit">

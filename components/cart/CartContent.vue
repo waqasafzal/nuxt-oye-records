@@ -125,27 +125,6 @@
           </div>
         </div>
       </template>
-
-      <!--<div class="cart__bottom-bar-panel">-->
-        <!--<div class="cart__bottom-bar row" slot="bottom" >-->
-          <!--&lt;!&ndash;<>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="col-8">&ndash;&gt;-->
-              <!--&lt;!&ndash;<nuxt-link class="cart__continue-button" to="/">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<span class="helper"></span>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<img src="../../assets/images/arrow_right_green.svg" class="arrow-rotated"/>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<span>Continue shopping</span>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-              <!--&lt;!&ndash;</nuxt-link>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="col-4">&ndash;&gt;-->
-              <!--&lt;!&ndash;<slot name="control">&ndash;&gt;-->
-                <!--&lt;!&ndash;<proceed-button class="cart__checkout-button" @click="$router.push({name: 'checkout'})">Go to checkout</proceed-button>&ndash;&gt;-->
-              <!--&lt;!&ndash;</slot>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--&lt;!&ndash;</>&ndash;&gt;-->
-        <!--</div>-->
-      <!--</div>-->
     </template>
     <template v-else>
       <div class="cart__empty">

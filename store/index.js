@@ -308,6 +308,7 @@ const store = new Vuex.Store({
     },
     [types.SET_CURRENT_CHECKOUT_STATE]: (state, checkoutState) => {
       state.checkout.checkoutState = checkoutState
+      state.primaryButtonBar.show = state.checkout.checkoutState === 4
     },
     [types.SET_PAYMENT_OPTIONS]: (state, paymentOptions) => {
       state.checkout.payment.options = paymentOptions
@@ -325,7 +326,6 @@ const store = new Vuex.Store({
     [types.SET_SELECTED_PAYMENT_OPTION]: (state, paymentOption) => {
       state.checkout.payment.option = paymentOption
       // if the payment option is cash reset the payment method
-      console.log('set selected payment option ' + paymentOption)
       if (paymentOption.id === 'cash') {
         let options = state.userProfile.shipping.options
         for (var i = 0; i < options.length; i++) {
@@ -384,19 +384,19 @@ const store = new Vuex.Store({
     },
     [types.CHANGE_PAYMENT_METHOD]: (state) => {
       state.checkout.focussedInput = 'paymentMethod'
-      state.checkout.checkoutState = 3
+      store.commit(types.SET_CURRENT_CHECKOUT_STATE, 3)
     },
     [types.CHANGE_BILLING]: (state) => {
       state.checkout.focussedInput = 'billingAddress'
-      state.checkout.checkoutState = 2
+      store.commit(types.SET_CURRENT_CHECKOUT_STATE, 2)
     },
     [types.CHANGE_SHIPPING]: (state) => {
       state.checkout.focussedInput = 'shippingAddress'
-      state.checkout.checkoutState = 2
+      store.commit(types.SET_CURRENT_CHECKOUT_STATE, 2)
     },
     [types.CHANGE_SHIPPING_OPTION]: (state) => {
       state.checkout.focussedInput = 'shippingOption'
-      state.checkout.checkoutState = 2
+      store.commit(types.SET_CURRENT_CHECKOUT_STATE, 2)
     },
     [types.SET_VAT_EXCLUDED]: (state, isVatExcluded) => {
       state.checkout.isVatExcluded = isVatExcluded

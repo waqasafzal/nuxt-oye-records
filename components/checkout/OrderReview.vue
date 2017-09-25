@@ -166,6 +166,12 @@
     },
     beforeDestroy () {
       this.$store.commit(types.SET_BUTTON_BAR_SHOW, false)
+    },
+    beforeUpdate () {
+      console.log('beforeUpdate')
+    },
+    update () {
+      console.log('update')
     }
   }
 </script>
