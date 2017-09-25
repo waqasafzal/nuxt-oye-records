@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-12">
       <div class="page__header">
-        {{ category }}
-        <meta-genre-filter @slug-selected="onSlugSelected"></meta-genre-filter>
-        <filter-results-options :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged" class="float-right"></filter-results-options>
+        <slot>{{ category }}</slot>
+        <meta-genre-filter v-if="showFilter" @slug-selected="onSlugSelected"></meta-genre-filter>
+        <filter-results-options v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged" class="float-right"></filter-results-options>
       </div>
       <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
     </div>
@@ -26,7 +26,16 @@
   export default {
     components: {MetaGenreFilter, FilterResultsOptions},
     name: 'ReleasePage',
-    props: ['pageSize', 'status', 'releases', 'loading'],
+    props: {
+      'pageSize': Number,
+      'status': String,
+      'releases': Object,
+      'loading': Boolean,
+      'showFilter': {
+        type: Boolean,
+        default: true
+      }
+    },
     data: function () {
       return {
         filterBy: JSON.stringify({

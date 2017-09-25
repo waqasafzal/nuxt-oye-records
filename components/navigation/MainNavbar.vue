@@ -51,6 +51,9 @@
           <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-used'}">Second Hand</nuxt-link>
           </li>
+          <li class="nav-item">
+            <nuxt-link class="nav-link" :to="{name: 'gear'}">DJ-Gear</nuxt-link>
+          </li>
         </ul>
       </nav>
     </template>
