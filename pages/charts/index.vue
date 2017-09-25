@@ -6,6 +6,17 @@
         <div class="col-12 col-md-8">
           <div class="release-list-summary">
             <div class="release-list-summary__header">
+              <h3>Bestseller</h3>
+            </div>
+            <div class="row">
+              <chart-item :chart="monthChart"
+                          class="col-sm-12 col-md-6 charts-infobox"
+              ></chart-item>
+              <chart-item :chart="weekChart"
+                          class="col-sm-12 col-md-6 charts-infobox"
+              ></chart-item>
+            </div>
+            <div class="release-list-summary__header">
               <h3>DJ Charts - {{ currentMonth.name }}</h3>
             </div>
             <template v-if="artistCharts.edges.length > 0">
@@ -75,6 +86,24 @@
     data: function () {
       return {
         currentMonth: currentMonth
+      }
+    },
+    computed: {
+      monthChart () {
+        return {
+          slug: `bestseller-${currentMonth.name.toLowerCase()}-${new Date().getFullYear()}`,
+          artist: {
+            name: `Bestseller - ${currentMonth.name}`
+          }
+        }
+      },
+      weekChart () {
+        return {
+          slug: `bestseller-week`,
+          artist: {
+            name: `Bestseller - Last 7 Days`
+          }
+        }
       }
     },
     async asyncData ({params}) {

@@ -14,7 +14,6 @@
           <div class="col-1 menu-icon-mobile d-md-none">
             <img class="navbar__brand__menu-toggle closed open"
                  src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav">
-            <!--<span>menu</span>-->
           </div>
         </div>
       </div>

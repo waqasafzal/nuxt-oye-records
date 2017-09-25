@@ -2,7 +2,14 @@
   <div class="row">
     <div class="col-12">
       <div class="charts__header">
-        <div class="page__header">{{ name }}'s {{ chartsName(chart) }} Charts {{ chartsYear(chart) }}</div>
+        <div class="page__header">
+          <template v-if="!isBestseller">
+            {{ name }}'s {{ chartsName(chart) }} Charts {{ chartsYear(chart) }}
+          </template>
+          <template v-else>
+            Bestseller - {{bestsellerHeader}}
+          </template>
+        </div>
         <div class="charts__share">
           <div class="charts__share__row">
             <div>Share Charts</div>
@@ -12,10 +19,10 @@
                             v-cloak inline-template>
               <div>
                 <network network="facebook">
-                  <img class="fa fa-facebook" src="~assets/images/Facebook.svg" />
+                  <img class="fa fa-facebook" src="~assets/images/Facebook.svg"/>
                 </network>
                 <network network="twitter">
-                  <img class="fa fa-twitter" src="~assets/images/Twitter.svg" />
+                  <img class="fa fa-twitter" src="~assets/images/Twitter.svg"/>
                 </network>
               </div>
             </social-sharing>
@@ -50,7 +57,7 @@
               <img :src="chart.imageUrl"/>
             </div>
             <div class="publisher-name">{{ name }}</div>
-            <div class="publisher-label">
+            <div class="publisher-label" v-if="!isBestseller">
               <template v-if="chart.artist">{{ chart.artist.homeLabel }}</template>
               <template v-else>OYE Staff</template>
             </div>
@@ -75,13 +82,17 @@
   import ReleasePrice from '../../../components/releases/ReleasePrice'
   import ReleaseButtonBar from '../../../components/releases/ReleaseButtonBar'
   import { createChartsDetailQuery } from '../../../components/charts/queries'
+  import gql from 'graphql-tag'
+  import { getMonthFromName } from '../../../utils/date'
+  import { releasePlayerInfo } from '../../../components/graphql/releases'
+  import { capitalizeFirstLetter } from '../../../utils/string'
 
   export default {
     components: {ReleaseButtonBar, ReleasePrice},
     name: 'ChartsDetailPage',
     computed: {
       name () {
-        return (this.chart.artist && this.chart.artist.name) || this.chart.user.firstName
+        return (this.chart.artist && this.chart.artist.name) || this.chart.user && this.chart.user.firstName || ''
       },
       pageTitle: function () {
         return `OYE Records - ${this.name}'s ${this.chartsName(this.chart)} Charts ${this.chartsYear(this.chart)}`
@@ -125,9 +136,72 @@
       }
     },
     async asyncData ({params}) {
-      var {data} = await client.query(createChartsDetailQuery(params.slug))
-      return {
-        chart: data.chart
+      let slug = params.slug
+      if (slug.startsWith('bestseller-')) {
+        var filterBy = null
+        var bestsellerHeader = ''
+        if (slug.endsWith('week')) {
+          filterBy = JSON.stringify({
+            status: 'bestsellers',
+            period: 7
+          })
+          bestsellerHeader = 'Last 7 days'
+        } else {
+          var parts = slug.split('-')
+          var monthName = parts[1]
+          var year = parts[2]
+          var month = getMonthFromName(monthName)
+          filterBy = JSON.stringify({
+            status: 'bestsellers',
+            year_month: `${year}-${month}`
+          })
+          bestsellerHeader = `${capitalizeFirstLetter(monthName)}`
+        }
+        var result = await client.query({
+          query: gql`query Bestseller($filterBy: JSONString!) {
+            releases(first: 10, filterBy: $filterBy) {
+                edges {
+                  node {
+                    slug
+                    name
+                    thumbnailUrl(size:120)
+                    ...ReleasePlayerInfo
+                    price {
+                        gross
+                    }
+                    availability {
+                      status
+                    }
+                  }
+                }
+              }
+            }
+          ${releasePlayerInfo}`,
+          variables: {
+            filterBy: filterBy
+          }
+        })
+        var edges = result.data.releases.edges
+        var releases = []
+        for (var i = 0; i < edges.length; i++) {
+          releases.push({
+            rank: i,
+            release: edges[i].node
+          })
+        }
+        return {
+          chart: {
+            releases: releases
+          },
+          isBestseller: true,
+          bestsellerHeader: bestsellerHeader
+        }
+      } else {
+        var {data} = await client.query(createChartsDetailQuery(slug))
+        return {
+          chart: data.chart,
+          isBestseller: false
+        }
       }
     },
     head () {

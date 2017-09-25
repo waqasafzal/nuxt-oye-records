@@ -106,7 +106,8 @@ $bestseller-item-padding: 7px;
       }
     }
     &__rank {
-      width: 40px;
+      width: 5%;
+      //width: 40px;
       padding: $chart-item-padding;
       font-size: $font-size-h2;
       text-align: center;
@@ -137,7 +138,7 @@ $bestseller-item-padding: 7px;
       }
     }
     &__price {
-      width: 160px;
+      min-width: 105px;
       padding: $chart-item-padding;
       display: flex;
       text-align: right;
@@ -150,7 +151,7 @@ $bestseller-item-padding: 7px;
       display: flex;
       justify-content: center;
       flex-direction: column;
-      width: 380px;
+      min-width: 220px;
       height: auto;
       &:hover {
         opacity: 1;
