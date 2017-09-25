@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="bottom">
-      <div class="container-fluid" style="padding-left: inherit; padding-right: inherit">
+      <div class="container-fluid">
           <primary-control-panel></primary-control-panel>
       </div>
       <audio-player></audio-player>
