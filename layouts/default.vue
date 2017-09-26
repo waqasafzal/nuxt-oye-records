@@ -30,11 +30,10 @@
   import MobileMenu from '../components/navigation/MobileMenu'
   import * as types from '../store/types'
   import PrimaryControlPanel from '../components/shared/PrimaryControlPanel'
-
-  var AudioPlayer = require('../components/audio/AudioPlayer')
+  import AudioPlayer from '../components/audio/AudioPlayer'
 
   export default {
-    components: {PrimaryControlPanel, MobileMenu, AccountNavbar, Alerts, BrandNavbar, AudioPlayer},
+    components: {AudioPlayer, PrimaryControlPanel, MobileMenu, AccountNavbar, Alerts, BrandNavbar},
     name: 'app',
     data: function () {
       return {
