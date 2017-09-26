@@ -40,14 +40,14 @@ var heapdump = require('heapdump')
 //
 //      var heapdump = require('heapdump')
 //
-setInterval(function () {
-  heapdump.writeSnapshot(function (err, filename) {
-    console.log('dump written to', filename)
-    if (err) {
-      console.log(err)
-    }
-  })
-}, 600000)
+// setInterval(function () {
+//   heapdump.writeSnapshot(function (err, filename) {
+//     console.log('dump written to', filename)
+//     if (err) {
+//       console.log(err)
+//     }
+//   })
+// }, 600000)
 
 module.exports = {
   /*
