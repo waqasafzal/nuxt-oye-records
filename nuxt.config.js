@@ -34,6 +34,17 @@ if (process.env.API_ROOT) {
   setupAPI()
 }
 
+var heapdump = require('heapdump')
+
+setInterval(function () {
+  heapdump.writeSnapshot(function (err, filename) {
+    console.log('dump written to', filename)
+    if (err) {
+      console.log(err)
+    }
+  })
+}, 600000)
+
 module.exports = {
   /*
    ** Headers of the page
