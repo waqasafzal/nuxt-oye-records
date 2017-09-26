@@ -153,7 +153,6 @@
 
       document.addEventListener('touchstart', addtouchclass, false) // this event only gets called when input type is touch
       document.addEventListener('mouseover', removetouchclass, false) // this event gets called when input type is everything from touch to mouse/ trackpad
-
     }
   }
 </script>
