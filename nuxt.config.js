@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const webpack = require('webpack')
 const fetch = require('node-fetch')
 
@@ -34,6 +35,20 @@ if (process.env.API_ROOT) {
   setupAPI()
 }
 
+var heapdump = require('heapdump')
+
+//
+//      var heapdump = require('heapdump')
+//
+setInterval(function () {
+  heapdump.writeSnapshot(function (err, filename) {
+    console.log('dump written to', filename)
+    if (err) {
+      console.log(err)
+    }
+  })
+}, 600000)
+
 module.exports = {
   /*
    ** Headers of the page
@@ -67,7 +82,12 @@ module.exports = {
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
-      {href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css', rel: 'stylesheet', integrity: 'sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M', crossorigin: 'anonymous'},
+      {
+        href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css',
+        rel: 'stylesheet',
+        integrity: 'sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M',
+        crossorigin: 'anonymous'
+      },
       {href: 'https://fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
     ],
     script: [

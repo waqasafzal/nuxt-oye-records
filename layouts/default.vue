@@ -30,7 +30,6 @@
   import MobileMenu from '../components/navigation/MobileMenu'
   import * as types from '../store/types'
   import PrimaryControlPanel from '../components/shared/PrimaryControlPanel'
-  import * as heapdump from 'heapdump'
 
   var AudioPlayer = require('../components/audio/AudioPlayer')
 
@@ -154,17 +153,7 @@
 
       document.addEventListener('touchstart', addtouchclass, false) // this event only gets called when input type is touch
       document.addEventListener('mouseover', removetouchclass, false) // this event gets called when input type is everything from touch to mouse/ trackpad
-//
-//      var heapdump = require('heapdump')
-//
-      setInterval(function () {
-        heapdump.writeSnapshot(function (err, filename) {
-          console.log('dump written to', filename)
-          if (err) {
-            console.log(err)
-          }
-        })
-      }, 600000)
+
     }
   }
 </script>
