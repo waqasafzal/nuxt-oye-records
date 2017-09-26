@@ -13,7 +13,7 @@
     </div>
     <div class="bottom">
       <div class="container-fluid">
-          <primary-control-panel></primary-control-panel>
+        <primary-control-panel></primary-control-panel>
       </div>
       <audio-player></audio-player>
     </div>
@@ -153,6 +153,17 @@
 
       document.addEventListener('touchstart', addtouchclass, false) // this event only gets called when input type is touch
       document.addEventListener('mouseover', removetouchclass, false) // this event gets called when input type is everything from touch to mouse/ trackpad
+
+      var heapdump = require('heapdump')
+
+      setInterval(function () {
+        heapdump.writeSnapshot(function (err, filename) {
+          console.log('dump written to', filename)
+          if (err) {
+            console.log(err)
+          }
+        })
+      }, 600000)
     }
   }
 </script>
