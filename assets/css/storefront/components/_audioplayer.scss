@@ -107,6 +107,11 @@
     }
     &__btn {
       position: relative;
+      &.play {
+        &:hover {
+          background-color: $brand-color-green-hover !important;
+        }
+      }
     }
   }
 }

@@ -9,6 +9,9 @@ $font-factor: 0.9;
       display: inline-block;
       position: relative;
       margin-right: 10px;
+      .play-release-button:hover {
+        background-color: $brand-color-black-hover !important;
+      }
     }
     &__add-to-cart {
       position: relative;

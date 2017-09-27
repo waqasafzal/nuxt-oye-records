@@ -8,7 +8,7 @@
             <div class="release-list-image">
               <div class="genre" v-if="release.mainGenre">{{release.mainGenre.name}}</div>
               <img class="img-responsive" :src="release.thumbnailUrl" alt=""/>
-              <play-release-button :size="size" class="release-list-play" :release="release"></play-release-button>
+              <play-release-button background="#30C46C" :size="size" class="release-list-play" :release="release"></play-release-button>
               <div class="format">{{release.format}}</div>
             </div>
             <div class="release-list-info">

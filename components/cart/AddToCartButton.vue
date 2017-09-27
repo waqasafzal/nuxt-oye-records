@@ -100,15 +100,8 @@
     img {
       margin-left: auto;
     }
-    &:hover:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: black;
-      opacity: 0.1;
+    &:hover {
+      background-color: #29AB5D !important;
     }
   }
 </style>

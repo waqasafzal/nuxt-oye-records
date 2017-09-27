@@ -34,8 +34,8 @@
       },
       background: {
         type: String,
-//        default: '#313532'
-        default: '#30C46C'
+        default: '#313532'
+//        default: '#30C46C'
       },
       displayOnly: {
         type: Boolean,

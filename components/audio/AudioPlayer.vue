@@ -7,7 +7,7 @@
           <div class="audio-control__buttons">
             <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
             <play-button :release="currentTrack && currentTrack.release" ref="playBtn" @play="onPlay" @pause="onPause"
-                         class="audio-control__btn" background="#30C46C"></play-button>
+                         class="audio-control__btn play" background="#30C46C"></play-button>
             <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
           </div>
         </div>
@@ -231,11 +231,9 @@
             this.$store.commit(types.PLAY_TRACK, this.currentTrack)
           }
         } else if (key === 37 && noText) {
-          console.log('prevent default')
           e.preventDefault()
           this.backwards()
         } else if (key === 39 && noText) {
-          console.log('prevent default')
           e.preventDefault()
           this.forwards()
         }
