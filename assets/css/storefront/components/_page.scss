@@ -43,11 +43,7 @@
 
     &__content {
       position: relative;
-      padding-left: 120px;
-      padding-top: 60px;
-      padding-right: 120px;
-      padding-bottom: 60px;
-      //margin-bottom: 12em;
+      padding: 60px;
       height: 504px;
       margin-left: auto;
       margin-right: auto;
@@ -72,11 +68,11 @@
         width: 100%;
 
         &-right-control {
-          right: 60px;
+          right: 0;
         }
 
         &-left-control {
-          left: 60px;
+          left: 0;
         }
 
         .slide {
@@ -231,7 +227,7 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-right: auto;
-    left: 0px;
+    left: -15px;
     cursor: pointer;
   }
   &-right-control {
@@ -240,7 +236,7 @@
     display: flex;
     margin-top: auto;
     margin-bottom: auto;
-    right: 0px;
+    right: -15px;
     cursor: pointer;
   }
 }
