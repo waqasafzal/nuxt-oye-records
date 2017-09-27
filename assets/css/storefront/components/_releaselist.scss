@@ -100,7 +100,7 @@
           display: inline-block;
           &:hover {
             opacity: 1;
-            background-color: $brand-color-green !important;
+            background-color: $brand-color-green-hover !important;
             &:after {
               opacity: 0;
             }
