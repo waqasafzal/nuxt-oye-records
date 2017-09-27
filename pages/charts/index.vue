@@ -94,7 +94,8 @@
           slug: `bestseller-${currentMonth.name.toLowerCase()}-${new Date().getFullYear()}`,
           artist: {
             name: `Bestseller - ${currentMonth.name}`
-          }
+          },
+          imageUrl: this.monthlyBestsellerThumb
         }
       },
       weekChart () {
@@ -102,7 +103,8 @@
           slug: `bestseller-week`,
           artist: {
             name: `Bestseller - Last 7 Days`
-          }
+          },
+          imageUrl: this.weeklyBestsellerThumb
         }
       }
     },
@@ -152,6 +154,8 @@
               }
             }
           }
+          weeklyBestsellerThumb: defaultThumbnailUrl(imageType: "charts", tag: "weekly", width: 410, height: 208)
+          monthlyBestsellerThumb: defaultThumbnailUrl(imageType: "charts", tag: "monthly", width: 410, height: 208)
         }
         ${releasePlayerInfo}`,
         variables: {
@@ -165,7 +169,9 @@
       return {
         artistCharts: charts.data.artistCharts,
         staffCharts: charts.data.staffCharts,
-        bestsellers: charts.data.bestsellers
+        bestsellers: charts.data.bestsellers,
+        weeklyBestsellerThumb: charts.data.weeklyBestsellerThumb,
+        monthlyBestsellerThumb: charts.data.monthlyBestsellerThumb
       }
     }
   }

@@ -311,10 +311,12 @@
               color: rgba(48, 196, 108, 1);
             }
           }
-          .router-link-active {
-            color: rgba(48, 196, 108, 1);
-            border-width: 0 0 1px;
-            border-style: solid;
+          .router-link-active, .nuxt-link-active {
+            span {
+              color: rgba(48, 196, 108, 1);
+              border-width: 0 0 1px;
+              border-style: solid;
+            }
             //padding-bottom: 5px;
 
           }

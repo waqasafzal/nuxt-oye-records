@@ -147,7 +147,8 @@
       if (slug.startsWith('bestseller-')) {
         var filterBy = null
         var bestsellerHeader = ''
-        if (slug.endsWith('week')) {
+        let isWeekly = slug.endsWith('week')
+        if (isWeekly) {
           filterBy = JSON.stringify({
             status: 'bestsellers',
             period: 7
@@ -165,7 +166,7 @@
           bestsellerHeader = `${capitalizeFirstLetter(monthName)}`
         }
         var result = await client.query({
-          query: gql`query Bestseller($filterBy: JSONString!) {
+          query: gql`query Bestseller($filterBy: JSONString!, $imageTag: String!) {
             releases(first: 10, filterBy: $filterBy) {
                 edges {
                   node {
@@ -182,10 +183,12 @@
                   }
                 }
               }
+              defaultThumbnailUrl(imageType: "charts", tag: $imageTag, width: 600, height: 384)
             }
           ${releasePlayerInfo}`,
           variables: {
-            filterBy: filterBy
+            filterBy: filterBy,
+            imageTag: isWeekly ? 'weekly' : 'monthly'
           }
         })
         var edges = result.data.releases.edges
@@ -198,7 +201,8 @@
         }
         return {
           chart: {
-            releases: releases
+            releases: releases,
+            imageUrl: result.data.defaultThumbnailUrl
           },
           isBestseller: true,
           bestsellerHeader: bestsellerHeader

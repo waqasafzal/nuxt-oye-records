@@ -34,25 +34,25 @@
       <nav v-on-clickaway="onClick" @click="onClick" v-if="!$store.getters.hasMobileMenu || $store.state.showMobile" :class="['navigation']">
         <ul :class="['nav', 'navbar-nav']">
           <li class="nav-item" v-if="$store.getters.hasMobileMenu">
-            <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>
+            <nuxt-link class="nav-link" to="/" exact><span>Home</span></nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" :to="{name: 'releases-new'}">New Releases</nuxt-link>
+            <nuxt-link class="nav-link" :to="{name: 'releases-new'}"><span>New Releases</span></nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" :to="{name: 'genres'}">Genres</nuxt-link>
+            <nuxt-link class="nav-link" :to="{name: 'genres'}"><span>Genres</span></nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" :to="{name: 'releases-upcoming'}">Upcoming</nuxt-link>
+            <nuxt-link class="nav-link" :to="{name: 'releases-upcoming'}"><span>Upcoming</span></nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" :to="{name: 'charts'}">Charts</nuxt-link>
+            <nuxt-link class="nav-link" :to="{name: 'charts'}"><span>Charts</span></nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" :to="{name: 'releases-used'}">Second Hand</nuxt-link>
+            <nuxt-link class="nav-link" :to="{name: 'releases-used'}"><span>Second Hand</span></nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link class="nav-link" :to="{name: 'gear'}">DJ-Gear</nuxt-link>
+            <nuxt-link class="nav-link" :to="{name: 'gear'}"><span>DJ-Gear</span></nuxt-link>
           </li>
         </ul>
       </nav>

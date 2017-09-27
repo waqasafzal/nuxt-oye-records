@@ -13,7 +13,7 @@
     data: function () {
       return {
         genres: [],
-        selectedGenreName: 'Filter Genre'
+        selectedGenreName: 'Select Genre'
       }
     },
     computed: {
