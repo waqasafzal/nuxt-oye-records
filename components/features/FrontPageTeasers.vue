@@ -417,6 +417,9 @@
         }
         slider.init()
       }
+    },
+    beforeDestroy () {
+      window.clearInterval(this.autopager)
     }
   }
 </script>
