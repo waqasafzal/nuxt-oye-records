@@ -31,17 +31,21 @@
     },
     data: function () {
       return {
-        show: true
+        show: true,
+        disableAlertTimeout: undefined
       }
     },
     mounted: function () {
       var vm = this
-      setTimeout(
+      this.disableAlertTimeout = setTimeout(
         function () {
           vm.show = false
         },
         3000
       )
+    },
+    beforeDestroy () {
+      clearTimeout(this.disableAlertTimeout)
     }
   }
 </script>

@@ -33,7 +33,8 @@
     },
     data: function () {
       return {
-        hidden: false
+        hidden: false,
+        hideDropdownTimeout: null
       }
     },
     computed: {
@@ -49,9 +50,10 @@
     },
     watch: {
       hidden (value) {
+        clearTimeout(this.hideDropdownTimeout)
         var vm = this
         if (value) {
-          setTimeout(function () {
+          this.hideDropdownTimeout = setTimeout(function () {
             vm.hidden = false
           }, 300)
         }
@@ -69,6 +71,9 @@
         this.selected = value
         this.hidden = true
       }
+    },
+    beforeDestroyed () {
+      clearTimeout(this.hideDropdownTimeout)
     }
   }
 </script>

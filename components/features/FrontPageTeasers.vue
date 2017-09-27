@@ -220,6 +220,8 @@
           lastLeft: undefined,
           lastRight: undefined,
           current: undefined,
+          slideLongTouchTimeout: undefined,
+          startAutopagerTimeout: undefined,
 
           // continued
 
@@ -228,6 +230,7 @@
           },
 
           bindUIEvents: function () {
+            clearTimeout(this.sliderLongTouchTimeout)
             this.el.slider.addEventListener('touchstart', function (event) {
               slider.start(event)
             })
@@ -242,16 +245,17 @@
             })
 
             this.longTouch = false
-            setTimeout(function () {
+            this.sliderLongTouchTimeout = setTimeout(function () {
               // Since the root of setTimout is window we can’t reference this. That’s why this variable says window.slider in front of it.
               slider.longTouch = true
             }, 250)
           },
 
           start: function (event) {
+            clearTimeout(this.sliderLongTouchTimeout)
             // Test for flick.
             this.longTouch = false
-            setTimeout(function () {
+            this.sliderLongTouchTimeout = setTimeout(function () {
               slider.longTouch = true
             }, 250)
 
@@ -278,11 +282,9 @@
             // Continuously return touch position.
             this.touchmovex = event.targetTouches[0].pageX
             // Calculate distance to translate holder.
-            console.log(`${this.touchstartx} - ${this.touchmovex}`)
             this.movex = (this.touchstartx - this.touchmovex)
             // Defines the speed the images should move at.
             var panx = 100 - this.movex / 6
-            console.log(`movex ${this.movex}`)
 
             if (this.current) {
               this.current.style.transform = ''
@@ -302,7 +304,6 @@
             if (this.movex < 0) {
               this.lastLeft = this.el.imgSlide[vm.nextLeft]
               this.current = this.el.imgSlide[vm.currentFeature]
-              console.log(`Right ${this.movex} ${this.lastLeft} ${this.current}`)
               this.current.style.left = -1 * this.movex + 'px'
               this.current.style.display = ''
               this.lastLeft.style.left = -1 * this.movex - this.slideWidth + 'px'
@@ -312,7 +313,6 @@
               vm.direction = -1
               this.lastRight = this.el.imgSlide[vm.nextRight]
               this.current = this.el.imgSlide[vm.currentFeature]
-              console.log(`Left ${this.movex} ${this.lastRight} ${this.current}`)
               this.current.style.left = -1 * this.movex + 'px'
               this.current.style.display = ''
               this.lastRight.style.left = -1 * this.movex + this.slideWidth + 'px'
@@ -320,11 +320,12 @@
             }
             vm.touch = true
             console.log(`panx ${panx}`)
-//            }
           },
 
           end: function (event) {
             // Calculate the distance swiped.
+            clearTimeout(this.startAutopagerTimeout)
+
             console.log(`${vm.currentFeature} ${this.slideWidth} ${this.movex}`)
             if (this.movex) {
               var absMove = Math.abs(this.movex)
@@ -391,7 +392,7 @@
               var lastRight = this.lastRight
               var current = this.current
 
-              setTimeout(function () {
+              this.startAutopagerTimeout = setTimeout(function () {
                 vm.touch = false
                 vm.startAutopager()
                 lastLeft.style.transform = ''
