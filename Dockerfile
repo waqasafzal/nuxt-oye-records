@@ -4,7 +4,7 @@ ADD . /app
 WORKDIR /app
 
 RUN npm install
-RUN node-gyp rebuild
+# RUN node-gyp rebuild
 
 ARG APP_API="'https://oye-records.com'"
 ARG APP_NODE_ENV=production
