@@ -229,6 +229,8 @@
         padding-right: $global-padding;
         &:focus {
           background-color: white;
+          border: 1px $brand-color-black;
+          outline: inherit;
         }
       }
       .btn {
@@ -271,7 +273,7 @@
         }
       }
       &.active {
-        width: 150% !important;
+        width: 120% !important;
       }
     }
     &-box {
