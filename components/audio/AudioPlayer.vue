@@ -175,7 +175,9 @@
         let clip = this.$refs.clip
         if (this.audio) {
           if (music) {
-            clip.src = this.currentTrack.url
+            if (clip) {
+              clip.src = this.currentTrack.url
+            }
             music.pause()
             music.load()
             music.play()
