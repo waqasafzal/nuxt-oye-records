@@ -6,7 +6,7 @@ const fetchCart = {
   mounted () {
     const store = this.$store
     if (!store.getters.getCart) {
-      store.dispatch('getCart').catch(e => console.log(e))
+      store.dispatch('getCart').catch(e => console.error(e))
     }
   }
 }
@@ -14,7 +14,7 @@ const fetchCart = {
 const fetchUserProfile = {
   mounted () {
     const store = this.$store
-    store.dispatch('getProfile').catch(e => console.log(e))
+    store.dispatch('getProfile').catch(e => console.error(e))
   }
 }
 

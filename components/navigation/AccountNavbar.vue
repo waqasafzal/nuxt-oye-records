@@ -13,7 +13,7 @@
       <div class="float-right navbar__account__buttons">
         <template v-if="isAuthenticated">
           <div class="ah-link account-link">
-            <nuxt-link :to="{name: 'account-details'}">Your account</nuxt-link>
+            <nuxt-link :to="{name: 'account-details'}">My account</nuxt-link>
           </div>
           <div class="ah-link">
             <nuxt-link to="/" @click.native="logout()">Log out</nuxt-link>

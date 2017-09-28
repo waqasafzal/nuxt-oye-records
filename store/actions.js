@@ -241,10 +241,8 @@ export const playRelease = ({commit}, args) => new Promise((resolve, reject) => 
     for (var i = 0; i < release.tracks.length; i++) {
       var track = release.tracks[i]
       if (i === 0) {
-        console.log('play track ' + track)
         commit(types.PLAY_TRACK, track)
       } else {
-        console.log('add track ' + track)
         commit(types.ADD_TRACK, track)
       }
     }
@@ -530,7 +528,7 @@ export const createNewUser = ({commit}, args) => new Promise((resolve, reject) =
     }
   }).then(({data}) => {
     if (data.registerUser.errorStatus) {
-      console.log(data.registerUser.errorStatus)
+      console.error(`Can not register user ${data.registerUser.errorStatus}`)
     } else {
       setToken(data.registerUser.token)
       resolve(data.registerUser)

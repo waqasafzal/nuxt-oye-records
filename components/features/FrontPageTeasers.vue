@@ -134,8 +134,6 @@
               this.currentFeature = this.featuredReleases.length - 1
             }
           }
-        } else {
-          console.log(`decrementRelease disabled`)
         }
       },
       slideForward () {
@@ -284,7 +282,6 @@
             // Calculate distance to translate holder.
             this.movex = (this.touchstartx - this.touchmovex)
             // Defines the speed the images should move at.
-            var panx = 100 - this.movex / 6
 
             if (this.current) {
               this.current.style.transform = ''
@@ -319,34 +316,23 @@
               this.lastRight.style.display = ''
             }
             vm.touch = true
-            console.log(`panx ${panx}`)
           },
 
           end: function (event) {
             // Calculate the distance swiped.
             clearTimeout(this.startAutopagerTimeout)
-
-            console.log(`${vm.currentFeature} ${this.slideWidth} ${this.movex}`)
             if (this.movex) {
               var absMove = Math.abs(this.movex)
-              console.log(`math abs abs(${this.movex}`)
               // Calculate the index. All other calculations are based on the index.
-              console.log(`${absMove} > ${this.slideWidth} this.slideWidth / 2 || ${this.longTouch} ${this.longTouch === false}) this.longTouch === false {}`)
-
-              console.log(`v-show="i === ${vm.currentFeature} || ${vm.nextLeft} === ${vm.currentFeature} || ${vm.nextRight} === ${vm.currentFeature}"`)
-
 //            var newCurrent = null
               var changed = false
               if (absMove > this.slideWidth / 2) {
-                console.log(`${this.movex} ${vm.currentFeature} * ${this.slideWidth} && ${vm.currentFeature} < 2`)
                 if (this.movex > 0) {
-                  console.log(`increment ${vm.currentFeature}`)
                   vm.incrementRelease(true)
                   vm.direction = -1
 //                newCurrent = this.lastRight
                   changed = true
                 } else if (this.movex < 0) {
-                  console.log(`decrement ${vm.currentFeature}`)
                   vm.decrementRelease(true)
                   changed = true
 //                newCurrent = this.lastRight
@@ -370,7 +356,6 @@
                   this.current.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
                 } else {
                   let currentLeft = parseInt(this.current.style.left.split('px')[0])
-                  console.log('right ==== not changed!')
                   this.lastRight.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
                   this.current.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
                 }
@@ -382,7 +367,6 @@
                   this.lastLeft.style.transform = 'translate3d(' + -1 * left + 'px,0,0)'
                 } else {
                   let currentLeft = parseInt(this.current.style.left.split('px')[0])
-                  console.log('left ===== not changed!')
                   this.lastLeft.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
                   this.current.style.transform = `translate3d(${-1 * currentLeft}px, 0, 0)`
                 }

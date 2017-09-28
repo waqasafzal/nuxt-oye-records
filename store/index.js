@@ -146,7 +146,6 @@ const store = new Vuex.Store({
       }
       player.playing = true
       player.currentTrack = track
-      console.log('actions; ' + track.title + ' ' + position)
       if (changing) {
         player.position = position
       }

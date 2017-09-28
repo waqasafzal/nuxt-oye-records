@@ -109,7 +109,7 @@
       },
       showPlayer () {
         let name = this.$route.name
-        return !['checkout', 'cart'].includes(name) && !name.startsWith('account')
+        return name === null || !['checkout', 'cart'].includes(name) && !name.startsWith('account')
       },
       playlistPos () {
         return this.player.currentTrack ? this.player.position + 1 : 0
@@ -174,7 +174,6 @@
         let music = this.$refs.music
         let clip = this.$refs.clip
         if (this.audio) {
-          console.log(clip)
           if (music) {
             clip.src = this.currentTrack.url
             music.pause()
@@ -223,7 +222,6 @@
         var key = e.keyCode ? e.keyCode : e.which
         let noText = e.target.type !== 'text'
         if (key === 32 && noText) {
-          console.log('prevent default')
           e.preventDefault()
           if (this.playing) {
             this.$store.commit(types.PAUSE_TRACK)

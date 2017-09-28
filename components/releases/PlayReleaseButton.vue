@@ -64,7 +64,6 @@
         }
       },
       fetchRelease () {
-        console.log('fetchrelease')
         var vm = this
         client.query({
           query: gql`query Release($slug: String!) {

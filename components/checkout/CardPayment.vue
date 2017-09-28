@@ -87,8 +87,6 @@
     },
     methods: {
       onCardNumberChanged (e) {
-        let cardNumber = e.target.value
-        console.log('card number ' + cardNumber)
         var cardNumberField = this.$refs['cardNumber']
         cardNumberField.value = creditCardFormat(cardNumberField.value)
       },
