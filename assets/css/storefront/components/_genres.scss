@@ -1,9 +1,14 @@
 .genres {
   &__menu {
     width: 100%;
-
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     &__column {
+      width: 100%;
       vertical-align: top;
+      padding-bottom: 1em;
       padding-left: 0.8em;
       display: inline-block;
       *display: inline;

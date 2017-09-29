@@ -58,12 +58,9 @@
       }
     },
     computed: {
-      genresColumnWidth: function () {
-        return Math.floor(12 / this.metaGenres.length)
-      },
       genresMenuColumnStyle: function () {
         return {
-          width: (100 / this.metaGenres.length) + '%'
+//          width: (100 / this.metaGenres.length) + '%'
         }
       }
     },
