@@ -6,7 +6,7 @@
         <div class="resizable-list-item-outer">
           <div class="resizable-list-item-inner">
             <div class="release-list-image">
-              <nuxt-link class="genre" v-if="release.mainGenre" :to="{name: 'genres-slug', params: {slug: release.mainGenre.slug}}"><span>{{release.mainGenre.name}}</span></nuxt-link>
+              <div @click.prevent="onGenreClick(release.mainGenre)" class="genre" v-if="release.mainGenre"><span>{{release.mainGenre.name}}</span></div>
               <img class="img-responsive" :src="release.thumbnailUrl" alt=""/>
               <play-release-button background="#30C46C" :size="size" class="release-list-play" :release="release"></play-release-button>
               <div class="format">{{release.format}}</div>
@@ -37,13 +37,12 @@
   import JsonLdProductSchema from './JsonLdProductSchema.vue'
   import PlayReleaseButton from './PlayReleaseButton'
   import AddToCartButton from '../cart/AddToCartButton'
-  import NuxtLink from '../../.nuxt/components/nuxt-link'
 
   Vue.component('releaseprice', ReleasePrice)
 
   export default {
     name: 'ReleaseItem',
-    components: {NuxtLink, AddToCartButton, PlayReleaseButton, JsonLdProductSchema},
+    components: {AddToCartButton, PlayReleaseButton, JsonLdProductSchema},
     props: ['release'],
     data: function () {
       return {
@@ -51,6 +50,9 @@
       }
     },
     methods: {
+      onGenreClick (genre) {
+        this.$router.push({name: 'genres-slug', params: {slug: genre.slug}})
+      },
       getSchema () {
         const release = this.$data.release
         let data = {
