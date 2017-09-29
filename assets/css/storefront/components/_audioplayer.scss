@@ -20,11 +20,14 @@
     &:last-child {
       border-right: none;
     }
-    .add-to-cart {
+    &.add-to-cart {
       cursor: pointer;
       img {
         height: 20px;
         width: 20px;
+      }
+      &:hover {
+        background-color: $brand-color-green;
       }
     }
 

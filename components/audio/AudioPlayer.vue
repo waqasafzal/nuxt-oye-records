@@ -48,10 +48,12 @@
             </div>
           </div>
         </div>
-        <div @click="onCartClick" class="ap__element button-box link-box">
-          <div class="add-to-cart">
+        <div @click="onCartClick" class="ap__element button-box add-to-cart">
+          <!--<div class="add-to-cart">-->
+          <div>
             <img src="../../assets/images/cart_small_white.svg"/>
           </div>
+          <!--</div>-->
         </div>
         <div class="ap__element button-box link-box" @click="onBurgerClick">
           <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>

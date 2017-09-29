@@ -38,12 +38,8 @@
           0 0.75em 0 0 $gray-color-2;
 }
 
-.add-to-cart {
-  //height: 1.1em;
-}
-
 .link-box {
-  pointer: cursor;
+  cursor: pointer;
   &:hover:after {
     content: '';
     position: absolute;
