@@ -1,8 +1,9 @@
 <template>
-  <div v-show="showPlayer" v-on-clickaway="onClickaway">
-    <playlist v-if="showPlaylist"></playlist>
-    <div v-show="currentTrack">
-      <div id="audioplayer">
+  <div>
+    <!--<div class="audio-panel" v-show="showPlayer" v-on-clickaway="onClickaway">-->
+      <playlist v-if="showPlayer && showPlaylist"></playlist>
+  <transition name="player-from-bottom">
+      <div v-show="showPlayer && currentTrack" class="audioplayer" id="audioplayer">
         <div class="ap__element button-box audio-control">
           <div class="audio-control__buttons">
             <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
@@ -11,7 +12,7 @@
             <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
           </div>
         </div>
-        <div class="ap__element current-track" >
+        <div class="ap__element current-track">
           <nuxt-link v-if="currentTrack" class="current-track__info-box"
                      :to="{name: 'releases-slug', params: {slug: currentTrack.release.slug}}">
             <div class="track-info d-flex row">
@@ -20,8 +21,12 @@
                   <template v-if="currentTrack.release.artistFirstName">
                     {{ currentTrack.release.artistFirstName }}
 
+
+
                   </template>
                   {{ currentTrack.release.artistLastName }}&nbsp;-&nbsp;
+
+
 
                 </div>
                 <div class="track-title">
@@ -43,20 +48,23 @@
             </div>
           </div>
         </div>
-        <div class="ap__element button-box link-box" @click="onBurgerClick">
-          <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
-        </div>
         <div @click="onCartClick" class="ap__element button-box link-box">
           <div class="add-to-cart">
             <img src="../../assets/images/cart_small_white.svg"/>
           </div>
         </div>
+        <div class="ap__element button-box link-box" @click="onBurgerClick">
+          <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
+        </div>
+        <div @click="onClose" class="ap_element button-box link-box">
+          <div class="close-playlist"/>
+        </div>
       </div>
+  </transition>
       <audio id="music" ref="music">
         <source ref="clip" v-if="currentTrack" :src="currentTrack.url" type="audio/mpeg">
       </audio>
     </div>
-  </div>
 </template>
 
 <script>
@@ -88,7 +96,8 @@
     data: function () {
       return {
         duration: 0,
-        currentTime: 0
+        currentTime: 0,
+        visible: true
       }
     },
     computed: {
@@ -109,7 +118,7 @@
       },
       showPlayer () {
         let name = this.$route.name
-        return name === null || !['checkout', 'cart'].includes(name) && !name.startsWith('account')
+        return this.visible && (name === null || !['checkout', 'cart'].includes(name) && !name.startsWith('account'))
       },
       playlistPos () {
         return this.player.currentTrack ? this.player.position + 1 : 0
@@ -128,6 +137,11 @@
       }
     },
     watch: {
+      showPlayer (value) {
+        if (!value) {
+          this.onPause()
+        }
+      },
       currentTrack (val) {
         this.reloadMusic()
       },
@@ -161,6 +175,7 @@
         music.pause()
       },
       playAudio () {
+        this.visible = true
         var music = this.$refs.music
         music.play()
       },
@@ -220,22 +235,27 @@
       onClickaway () {
         this.$store.commit(types.SET_PLAYLIST_VISIBLE, false)
       },
+      onClose () {
+        this.visible = false
+      },
       onKeyDown (e) {
-        var key = e.keyCode ? e.keyCode : e.which
-        let noText = e.target.type !== 'text'
-        if (key === 32 && noText) {
-          e.preventDefault()
-          if (this.playing) {
-            this.$store.commit(types.PAUSE_TRACK)
-          } else {
-            this.$store.commit(types.PLAY_TRACK, this.currentTrack)
+        if (this.visible) {
+          var key = e.keyCode ? e.keyCode : e.which
+          let noText = e.target.type !== 'text'
+          if (key === 32 && noText) {
+            e.preventDefault()
+            if (this.playing) {
+              this.$store.commit(types.PAUSE_TRACK)
+            } else {
+              this.$store.commit(types.PLAY_TRACK, this.currentTrack)
+            }
+          } else if (key === 37 && noText) {
+            e.preventDefault()
+            this.backwards()
+          } else if (key === 39 && noText) {
+            e.preventDefault()
+            this.forwards()
           }
-        } else if (key === 37 && noText) {
-          e.preventDefault()
-          this.backwards()
-        } else if (key === 39 && noText) {
-          e.preventDefault()
-          this.forwards()
         }
       }
     },
@@ -252,3 +272,17 @@
 
 </script>
 
+
+<style lang="scss">
+  .player-from-bottom-enter-active {
+    transition: margin-bottom 1s;
+  }
+
+  .player-from-bottom-leave-active {
+    transition: margin-bottom 1s;
+  }
+
+  .player-from-bottom-enter, .player-from-bottom-leave-to {
+    margin-bottom: -100%;
+  }
+</style>

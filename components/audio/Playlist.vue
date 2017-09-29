@@ -89,15 +89,15 @@
 
 <style>
   .from-bottom-enter-active {
-    transition: all .3s;
+    transition: margin-bottom 1s ease-out;
   }
 
   .from-bottom-leave-active {
-    height: 0;
-    transition: all .1s;
+    /*max-height: -100%;*/
+    transition: margin-bottom 1s;
   }
 
-  .from-bottom-enter {
-    height: 0;
+  .from-bottom-enter, .from-bottom-leave-to {
+    margin-bottom: calc(-50% + 70px);
   }
 </style>

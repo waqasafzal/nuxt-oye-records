@@ -118,6 +118,7 @@ export const release = gql`
         format
         mainGenre {
             name
+            slug
         }
         artistFirstName
         artistLastName

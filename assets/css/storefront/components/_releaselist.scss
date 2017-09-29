@@ -85,9 +85,8 @@
         padding-top: 10px;
         margin-left: -5%;
         margin-right: -5%;
-        box-shadow:
-                0 2px 4px 0 rgba(0, 0, 0, 0.15),
-                0 3px 6px 0 rgba(0, 0, 0, 0.14);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15),
+        0 3px 6px 0 rgba(0, 0, 0, 0.14);
 
         z-index: 1;
         .release-list-add {
@@ -143,9 +142,8 @@
         padding-top: 10px;
         margin-left: -5%;
         margin-right: -5%;
-        box-shadow:
-                0 2px 4px 0 rgba(0, 0, 0, 0.15),
-                0 3px 6px 0 rgba(0, 0, 0, 0.14);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15),
+        0 3px 6px 0 rgba(0, 0, 0, 0.14);
 
         z-index: 1;
         .release-list-add {
@@ -227,6 +225,12 @@
         display: none;
         top: 0;
         left: 0;
+        color: white !important;
+        &:hover {
+          span {
+            border-bottom: 1px solid white;
+          }
+        }
       }
     }
     &-add {

@@ -3,6 +3,8 @@
   height: 70px;
   bottom: 0;
   width: 100%;
+  position: fixed;
+  z-index: 10;
   display: flex;
   padding: 0 $global-padding;
   .button-box {
@@ -44,21 +46,15 @@
       justify-content: space-between;
       font-size: 12px;
       .track-info {
-        //padding-bottom: 5px;
         min-width: 80%;
-        //display: inline-flex;
         //
         overflow: hidden;
         white-space: nowrap;
-        //text-overflow: ellipsis;
       }
       .release-title {
         font-size: $font-size-sm;
         line-height: $font-size-sm;
         color: $gray-color-1;
-        //overflow: hidden;
-        //white-space: nowrap;
-        //text-overflow: ellipsis;
       }
       .track-time {
         display: inline-flex;
@@ -114,13 +110,18 @@
       }
     }
   }
+  .close {
+    background:
+            -webkit-linear-gradient(-45deg, transparent 0%, transparent 48%, $gray-color-2 48%, $gray-color-2 52%, transparent 52%, transparent 100%),
+            -webkit-linear-gradient(45deg, transparent 0%, transparent 48%, $gray-color-2 48%, $gray-color-2 52%, transparent 52%, transparent 100%);
+  }
 }
 
 .playlist {
   background-color: $brand-color-black;
   color: $gray-color-1;
   position: fixed;
-  bottom: 70px;
+  bottom: 0;
   z-index: 9;
   max-height: 50%;
   width: 100%;
@@ -141,6 +142,9 @@
       border-radius: 2px;
       background-color: white;
       opacity: 0.1;
+    }
+    &:last-child {
+      margin-bottom: 70px;
     }
   }
   .play-box {
@@ -204,11 +208,10 @@
 
 .close-playlist {
   margin: auto;
-  width:14px;
-  height:14px;
-  background:
-          -webkit-linear-gradient(-45deg, transparent 0%, transparent 48%, white 48%,  white 52%, transparent 52%, transparent 100%),
-          -webkit-linear-gradient(45deg, transparent 0%, transparent 48%, white 48%,  white 52%, transparent 52%, transparent 100%);
+  width: 14px;
+  height: 14px;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 48%, white 48%, white 52%, transparent 52%, transparent 100%),
+  -webkit-linear-gradient(45deg, transparent 0%, transparent 48%, white 48%, white 52%, transparent 52%, transparent 100%);
 
 }
 
@@ -224,6 +227,7 @@
 .track-artist {
   color: $gray-color-2
 }
+
 .track-title {
   color: $gray-color-1
 }
@@ -279,13 +283,16 @@
 input[type="range"]::-moz-range-progress {
   background-color: #43e5f7;
 }
+
 input[type="range"]::-moz-range-track {
   background-color: #9a905d;
 }
+
 /* IE*/
 input[type="range"]::-ms-fill-lower {
   background-color: #43e5f7;
 }
+
 input[type="range"]::-ms-fill-upper {
   background-color: #9a905d;
 }
