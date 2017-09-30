@@ -231,7 +231,7 @@
         transition: width 1s;
         &:focus {
           background-color: white;
-          border: 1px solid $brand-color-black;
+          border: 1px solid $gray-color-1;
           //outline: inherit;
         }
       }

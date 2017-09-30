@@ -89,6 +89,8 @@ $font-size-xs-fixed: 12px;
     &__name {
       size: $font-size-sm-fixed;
       line-height: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &__title {
       position: relative;
