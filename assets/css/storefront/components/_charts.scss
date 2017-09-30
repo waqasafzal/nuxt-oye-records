@@ -2,6 +2,21 @@ $chart-item-padding: 25px;
 $bestseller-item-padding: 7px;
 
 .charts {
+  &-archive {
+    &__month {
+      h2 {
+        font-weight: 300;
+        font-size: $font-size-h3;
+        padding: 2.4rem 0;
+        margin-bottom: inherit;
+      }
+      border-bottom: 1px solid $gray-color-3;
+      margin-top: 0.4rem;
+      .charts-infobox {
+        margin-bottom: 2rem;
+      }
+    }
+  }
   &-infobox {
     height: 268px;
     margin-bottom: 3em;

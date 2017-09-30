@@ -18,6 +18,10 @@
             </div>
             <div class="release-list-summary__header">
               <h3>DJ Charts - {{ currentMonth.name }}</h3>
+              <nuxt-link class="release-list-summary__header__more" :to="{name: 'charts-archive-category', params: {category: 'artist'}}">
+                <span>DJ Chart Archive</span>
+                <right-arrow></right-arrow>
+              </nuxt-link>
             </div>
             <template v-if="artistCharts.edges.length > 0">
               <div class="row">
@@ -30,6 +34,10 @@
             <template v-else>No DJ Charts for {{ currentMonth.name }}</template>
             <div class="release-list-summary__header">
               <h3>Staff Charts - {{ currentMonth.name }}</h3>
+              <nuxt-link class="release-list-summary__header__more" :to="{name: 'charts-archive-category', params: {category: 'staff'}}">
+                <span>Staff Chart Archive</span>
+                <right-arrow></right-arrow>
+              </nuxt-link>
             </div>
             <div class="row">
               <chart-item :chart="chart.node" class="col-sm-12 col-md-6 charts-infobox"
@@ -77,11 +85,12 @@
   import ReleasePrice from '../../components/releases/ReleasePrice'
   import PlayReleaseButton from '../../components/releases/PlayReleaseButton'
   import ChartItem from '../../components/charts/ChartItem'
+  import RightArrow from '../../components/shared/RightArrow'
 
   const currentMonth = getCurrentMonth()
 
   export default {
-    components: {ChartItem, PlayReleaseButton, ReleasePrice},
+    components: {RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
     name: 'ChartsIndex',
     data: function () {
       return {
