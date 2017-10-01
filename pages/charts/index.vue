@@ -39,11 +39,14 @@
                 <right-arrow></right-arrow>
               </nuxt-link>
             </div>
-            <div class="row">
-              <chart-item :chart="chart.node" class="col-sm-12 col-md-6 charts-infobox"
-                          :key="'chart-'+i"
-                          v-for="(chart, i) in staffCharts.edges"></chart-item>
-            </div>
+            <template v-if="staffCharts.edges.length > 0">
+              <div class="row">
+                <chart-item :chart="chart.node" class="col-sm-12 col-md-6 charts-infobox"
+                            :key="'chart-'+i"
+                            v-for="(chart, i) in staffCharts.edges"></chart-item>
+              </div>
+            </template>
+            <template v-else>No Staff Charts for {{ currentMonth.name }}</template>
           </div>
         </div>
         <div class="col-12 col-md-3 ml-md-auto">
