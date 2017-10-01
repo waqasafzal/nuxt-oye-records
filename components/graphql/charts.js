@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export const createChartsArchiveQuery = function (category, cursor) {
   return {
     query: gql`query ChartsArchive($category: String, $cursor: String) {
-        charts(category: $category, after: $cursor) {
+        charts(first: 25, category: $category, after: $cursor) {
             edges {
                 node {
                     pk

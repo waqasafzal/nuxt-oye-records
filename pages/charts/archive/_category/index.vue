@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="page__header">All {{getHeader()}}</div>
-    <div class="charts-archive" v-if="chartsMap">
-      <template v-for="(yearMap, year) in chartsMap">
-        <div class="charts-archive__month" v-for="(monthMap, month) in yearMap">
-          <h2>{{month}} &mdash; {{year}}</h2>
+    <div class="charts-archive" v-if="sortedCharts">
+      <template v-for="(yearMap, i) in sortedCharts">
+        <div class="charts-archive__month" v-for="(monthMap, month) in yearMap[1]">
+          <h2>{{month}} &mdash; {{yearMap[0]}}</h2>
           <div class="row">
             <chart-item :chart="chart"
                         class="col-sm-6 col-md-4 charts-infobox"
@@ -14,6 +14,7 @@
         </div>
       </template>
     </div>
+    <loading-spinner :loading="loading"></loading-spinner>
   </div>
 </template>
 
@@ -22,9 +23,10 @@
   import ChartItem from '~/components/charts/ChartItem'
   import { appendCharts } from '~/utils/charts'
   import { createChartsArchiveQuery } from '~/components/graphql/charts'
+  import LoadingSpinner from '~/components/shared/LoadingSpinner'
 
   export default {
-    components: {ChartItem},
+    components: {LoadingSpinner, ChartItem},
     name: 'ChartsArchive',
     async asyncData ({params}) {
       let {data} = await client.query(createChartsArchiveQuery(params.category))
@@ -42,7 +44,21 @@
         charts: '',
         chartsMap: {},
         hasNextPage: true,
-        cursor: null
+        cursor: null,
+        loading: false
+      }
+    },
+    computed: {
+      sortedCharts () {
+        let keysSorted = Object.keys(this.chartsMap).sort(function (a, b) {
+          return b - a
+        })
+        let sortedCharts = []
+        for (var j = 0; j < keysSorted.length; j++) {
+          let year = keysSorted[j]
+          sortedCharts.push([year, this.chartsMap[year]])
+        }
+        return sortedCharts
       }
     },
     methods: {
@@ -66,12 +82,16 @@
         var vm = this
         client.query(createChartsArchiveQuery(this.category, this.cursor)).then(
           ({data}) => {
+            vm.loading = false
             vm.chartsMap = appendCharts(vm.chartsMap, data.charts.edges)
             vm.hasNextPage = data.charts.pageInfo.hasNextPage
             vm.cursor = data.charts.pageInfo.endCursor
           }
         )
       }
+    },
+    mounted () {
+      window.onscroll = this.checkInfiniteScrolling
     }
   }
 </script>

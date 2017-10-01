@@ -24,5 +24,7 @@ export const appendCharts = function (oldChartsMap, chartsEdges) {
     }
     monthCharts.push(chart.node)
   }
+
   return chartsMap
 }
+
