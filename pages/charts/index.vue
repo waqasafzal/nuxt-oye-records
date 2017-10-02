@@ -17,7 +17,7 @@
               ></chart-item>
             </div>
             <div class="release-list-summary__header">
-              <h3>DJ Charts - {{ currentMonth.name }}</h3>
+              <h3>DJ Charts &mdash; {{ currentMonth.name }}</h3>
               <nuxt-link class="release-list-summary__header__more" :to="{name: 'charts-archive-category', params: {category: 'artist'}}">
                 <span>DJ Chart Archive</span>
                 <right-arrow></right-arrow>
@@ -33,7 +33,7 @@
             </template>
             <template v-else>No DJ Charts for {{ currentMonth.name }}</template>
             <div class="release-list-summary__header">
-              <h3>Staff Charts - {{ currentMonth.name }}</h3>
+              <h3>Staff Charts &mdash; {{ currentMonth.name }}</h3>
               <nuxt-link class="release-list-summary__header__more" :to="{name: 'charts-archive-category', params: {category: 'staff'}}">
                 <span>Staff Chart Archive</span>
                 <right-arrow></right-arrow>
@@ -79,6 +79,15 @@
               </nuxt-link>
             </div>
           </div>
+          <div class="charts__detail__more-charts">
+            <h3>Genre Charts &mdash; {{ currentMonth.name }}</h3>
+            <div class="chart-related" v-for="genre in genres">
+              <nuxt-link :to="{name: 'charts-slug', params: {slug:`bestseller-genre-${genre.slug}-${currentMonth.name.toLowerCase()}-${new Date().getFullYear()}`}}">
+                <right-arrow></right-arrow>
+                <span>{{genre.name}}</span>
+              </nuxt-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -95,15 +104,17 @@
   import ChartItem from '../../components/charts/ChartItem'
   import RightArrow from '../../components/shared/RightArrow'
   import PlaySvg from '../../components/shared/PlaySvg'
+  import NuxtLink from '../../.nuxt/components/nuxt-link'
 
   const currentMonth = getCurrentMonth()
 
   export default {
-    components: {PlaySvg, RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
+    components: {NuxtLink, PlaySvg, RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
     name: 'ChartsIndex',
     data: function () {
       return {
-        currentMonth: currentMonth
+        currentMonth: currentMonth,
+        genres: []
       }
     },
     computed: {
@@ -185,6 +196,10 @@
           }
           weeklyBestsellerThumb: defaultThumbnailUrl(imageType: "charts", tag: "weekly", width: 410, height: 208)
           monthlyBestsellerThumb: defaultThumbnailUrl(imageType: "charts", tag: "monthly", width: 410, height: 208)
+          metaGenres {
+            name
+            slug
+          }
         }
         ${releasePlayerInfo}`,
         variables: {
@@ -200,7 +215,8 @@
         staffCharts: charts.data.staffCharts,
         bestsellers: charts.data.bestsellers,
         weeklyBestsellerThumb: charts.data.weeklyBestsellerThumb,
-        monthlyBestsellerThumb: charts.data.monthlyBestsellerThumb
+        monthlyBestsellerThumb: charts.data.monthlyBestsellerThumb,
+        genres: charts.data.metaGenres
       }
     }
   }

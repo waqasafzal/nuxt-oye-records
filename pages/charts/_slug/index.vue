@@ -5,11 +5,6 @@
         <div class="page__header">
           {{ pageHeader }}
         </div>
-          <!--</template>-->
-          <!--<template v-else>-->
-            <!--Bestseller - {{bestsellerHeader}}-->
-          <!--</template>-->
-        <!--</div>-->
         <div class="charts__share">
           <div class="charts__share__row">
             <div>Share Charts</div>
@@ -96,13 +91,13 @@
       },
       pageHeader: function () {
         if (this.isBestseller) {
-          return `Bestseller - ${this.bestsellerHeader}`
+          return `Bestseller \u2014 ${this.bestsellerHeader}`
         } else {
           return `${this.name}'s ${this.chartsName(this.chart)} Charts ${this.chartsYear(this.chart)}`
         }
       },
       pageTitle: function () {
-        return `OYE Records - ${this.pageHeader}`
+        return `OYE Records \u2014 ${this.pageHeader}`
       },
       currentRoute () {
         return __API__ + this.$route.path
@@ -144,26 +139,61 @@
     },
     async asyncData ({params}) {
       let slug = params.slug
-      if (slug.startsWith('bestseller-')) {
+      var parts = slug.split('-')
+      var monthName
+      var year
+      var month
+      var imageTag = ''
+      if (parts[0] === 'bestseller') {
         var filterBy = null
         var bestsellerHeader = ''
-        let isWeekly = slug.endsWith('week')
-        if (isWeekly) {
+        if (parts[1] === 'genre') {
+          imageTag = 'monthly'
+          var genreSlug = parts.slice(2, parts.length - 2).join('-')
+          monthName = parts[parts.length - 2]
+          year = parts[parts.length - 1]
+          month = getMonthFromName(monthName)
           filterBy = JSON.stringify({
             status: 'bestsellers',
-            period: 7
-          })
-          bestsellerHeader = 'Last 7 days'
-        } else {
-          var parts = slug.split('-')
-          var monthName = parts[1]
-          var year = parts[2]
-          var month = getMonthFromName(monthName)
-          filterBy = JSON.stringify({
-            status: 'bestsellers',
+            metagenres: [genreSlug],
             year_month: `${year}-${month}`
           })
-          bestsellerHeader = `${capitalizeFirstLetter(monthName)}`
+          let genreNameResponse = await client.query({
+            query: gql`query GenreNames {
+                metaGenres {
+                    name
+                    slug
+                }
+            }`
+          })
+          let genreName = ''
+          for (var j = 0; j < genreNameResponse.data.metaGenres.length; j++) {
+            let genre = genreNameResponse.data.metaGenres[j]
+            if (genre.slug === genreSlug) {
+              genreName = genre.name
+            }
+          }
+          bestsellerHeader = `${genreName} \u2014 ${capitalizeFirstLetter(monthName)} ${year}`
+        } else {
+          let isWeekly = slug.endsWith('week')
+          if (isWeekly) {
+            imageTag = 'weekly'
+            filterBy = JSON.stringify({
+              status: 'bestsellers',
+              period: 7
+            })
+            bestsellerHeader = 'Last 7 days'
+          } else {
+            imageTag = 'monthly'
+            monthName = parts[1]
+            year = parts[2]
+            month = getMonthFromName(monthName)
+            filterBy = JSON.stringify({
+              status: 'bestsellers',
+              year_month: `${year}-${month}`
+            })
+            bestsellerHeader = `${capitalizeFirstLetter(monthName)} ${year}`
+          }
         }
         var result = await client.query({
           query: gql`query Bestseller($filterBy: JSONString!, $imageTag: String!) {
@@ -188,7 +218,7 @@
           ${releasePlayerInfo}`,
           variables: {
             filterBy: filterBy,
-            imageTag: isWeekly ? 'weekly' : 'monthly'
+            imageTag: imageTag
           }
         })
         var edges = result.data.releases.edges

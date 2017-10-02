@@ -211,6 +211,15 @@ $bestseller-item-padding: 7px;
       }
       .chart-related {
         margin-bottom: 1em;
+        .right-arrow {
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-right: 8px;
+          height: 10px;
+          * path {
+            fill: $brand-color-green
+          }
+        }
       }
     }
   }
@@ -370,6 +379,22 @@ $bestseller-item-padding: 7px;
               fill: $brand-color-green !important;
             }
           }
+        }
+      }
+    }
+    &__genre-charts {
+      .charts-link {
+        a {
+          display: flex;
+        }
+      }
+      .right-arrow {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 8px;
+        height: 10px;
+        * path {
+          fill: $brand-color-green
         }
       }
     }
