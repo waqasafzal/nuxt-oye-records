@@ -75,7 +75,7 @@
                 </div>
                 <div class="release-price-box">
                   <release-price class="release-price" :price="release.node.price"></release-price>
-                  <add-to-cart-button></add-to-cart-button>
+                  <add-to-cart-button :release="release.node"></add-to-cart-button>
                 </div>
               </nuxt-link>
             </div>
@@ -190,6 +190,9 @@
                 ...ReleasePlayerInfo
                 price {
                     gross
+                }
+                availability {
+                  status
                 }
               }
             }

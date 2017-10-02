@@ -285,6 +285,9 @@ $bestseller-item-padding: 7px;
               }
             }
           }
+          .add-to-cart-button {
+            display: inherit;
+          }
           &:after {
             content: '';
             position: absolute;
@@ -323,6 +326,9 @@ $bestseller-item-padding: 7px;
               top: 0px;
               left: 0px;
             }
+            .add-to-cart {
+
+            }
           }
         }
       }
@@ -350,13 +356,36 @@ $bestseller-item-padding: 7px;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        position: relative;
+        min-width: 80px;
         .release-price {
           color: $brand-color-green;
           width: 60px;
           text-align: right;
           margin-left: auto;
+          position: absolute;
+          right: 0;
         }
-
+        .add-to-cart-button {
+          position: absolute;
+          right: 0;
+          display: none;
+          z-index: 1;
+          background-color: $brand-color-green;
+          color: white;
+          height: 20px !important;
+          line-height: 20px !important;
+          border-radius: 2px;
+          font-size: 10px;
+          padding: 0 8px;
+          span {
+            height: inherit !important;
+            line-height: inherit !important;
+          }
+          img {
+            display: none;
+          }
+        }
       }
       &__header {
         font-size: $font-size-h3;

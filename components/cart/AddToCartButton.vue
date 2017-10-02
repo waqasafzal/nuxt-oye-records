@@ -37,7 +37,6 @@
       addToCartButtonStyle: function () {
         let style = {
           height: `${this.baseSize}px`,
-//          width: `${this.baseSize}px`,
           lineHeight: `${this.baseSize / 2}px`,
           flexFlow: 'row',
           overFlow: 'hidden',
@@ -68,7 +67,7 @@
         } else if (status === 'upcoming') {
           return 'Preorder'
         } else {
-          return 'Add to cart'
+          return 'Add To Cart'
         }
       },
       imgStyle () {
