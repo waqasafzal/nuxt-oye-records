@@ -104,12 +104,11 @@
   import ChartItem from '../../components/charts/ChartItem'
   import RightArrow from '../../components/shared/RightArrow'
   import PlaySvg from '../../components/shared/PlaySvg'
-  import NuxtLink from '../../.nuxt/components/nuxt-link'
 
   const currentMonth = getCurrentMonth()
 
   export default {
-    components: {NuxtLink, PlaySvg, RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
+    components: {PlaySvg, RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
     name: 'ChartsIndex',
     data: function () {
       return {
