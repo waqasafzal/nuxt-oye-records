@@ -350,6 +350,26 @@ $bestseller-item-padding: 7px;
       }
       &__header {
         font-size: $font-size-h3;
+        display: flex;
+        justify-content: space-between;
+        .play {
+          svg {
+            width: 8px;
+          }
+          display: flex;
+          margin-top: auto;
+          margin-bottom: auto;
+          height: 100%;
+        }
+        &:hover {
+          cursor: pointer;
+          color: $brand-color-green;
+          .play {
+            polygon {
+              fill: $brand-color-green !important;
+            }
+          }
+        }
       }
     }
   }

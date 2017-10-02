@@ -51,7 +51,12 @@
         </div>
         <div class="col-12 col-md-3 ml-md-auto">
           <div class="charts__overview__bestsellers">
-            <div class="charts__overview__bestsellers__header">Bestseller {{ currentMonth.name }}</div>
+            <div @click="onPlayBestsellers" class="charts__overview__bestsellers__header">
+              <span>Bestseller {{ currentMonth.name }}</span>
+              <div class="play">
+                <play-svg fill="#313532"></play-svg>
+              </div>
+            </div>
             <div>
               <nuxt-link :to="{name:'releases-slug', params: {slug: release.node.slug}}"
                          class="release-item"
@@ -89,11 +94,12 @@
   import PlayReleaseButton from '../../components/releases/PlayReleaseButton'
   import ChartItem from '../../components/charts/ChartItem'
   import RightArrow from '../../components/shared/RightArrow'
+  import PlaySvg from '../../components/shared/PlaySvg'
 
   const currentMonth = getCurrentMonth()
 
   export default {
-    components: {RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
+    components: {PlaySvg, RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
     name: 'ChartsIndex',
     data: function () {
       return {
@@ -117,6 +123,17 @@
             name: `Bestseller - Last 7 Days`
           },
           imageUrl: this.weeklyBestsellerThumb
+        }
+      }
+    },
+    methods: {
+      onPlayBestsellers () {
+        for (var nodeId in this.bestsellers.edges) {
+          var bestseller = this.bestsellers.edges[nodeId].node
+          this.$store.dispatch('playRelease', {
+            release: bestseller,
+            play: false
+          })
         }
       }
     },

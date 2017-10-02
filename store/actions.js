@@ -237,10 +237,11 @@ export const removeCartLine = ({commit, dispatch}, args) => new Promise((resolve
 
 export const playRelease = ({commit}, args) => new Promise((resolve, reject) => {
   var release = args.release
+  var play = typeof args.play === 'undefined' || args.play
   if (release) {
     for (var i = 0; i < release.tracks.length; i++) {
       var track = release.tracks[i]
-      if (i === 0) {
+      if (i === 0 && play) {
         commit(types.PLAY_TRACK, track)
       } else {
         commit(types.ADD_TRACK, track)
