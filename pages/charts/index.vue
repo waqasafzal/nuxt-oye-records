@@ -75,6 +75,7 @@
                 </div>
                 <div class="release-price-box">
                   <release-price class="release-price" :price="release.node.price"></release-price>
+                  <add-to-cart-button></add-to-cart-button>
                 </div>
               </nuxt-link>
             </div>
@@ -104,16 +105,16 @@
   import ChartItem from '../../components/charts/ChartItem'
   import RightArrow from '../../components/shared/RightArrow'
   import PlaySvg from '../../components/shared/PlaySvg'
+  import AddToCartButton from '../../components/cart/AddToCartButton'
 
   const currentMonth = getCurrentMonth()
 
   export default {
-    components: {PlaySvg, RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
+    components: {AddToCartButton, PlaySvg, RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
     name: 'ChartsIndex',
     data: function () {
       return {
-        currentMonth: currentMonth,
-        genres: []
+        currentMonth: currentMonth
       }
     },
     computed: {
