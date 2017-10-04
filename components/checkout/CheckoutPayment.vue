@@ -1,33 +1,41 @@
 <template>
   <div class="row checkout__content">
-    <div class="col-12 checkout__content__col">
+    <div class="col-md-6 col-12 checkout__content__col">
+      <!--<div class="row">-->
       <h3>Choose payment method</h3>
-      <div class="row">
-        <div :class="[availableMethods && availableMethods.length > 0 ? 'col-6': 'col-12']">
-          <template v-for="(option, i) in paymentOptions">
-            <div class="radio" v-show="showOption(option)">
-              <label>
-                <input type="radio" name="payment" v-model="selectedPayment" :value="option">
-                <span>{{option.name}}</span>
-                <img :src="image.logo" v-for="(image, j) in option.logos"/>
-              </label>
-            </div>
-          </template>
+      <!--<div class="col-md-6 col-12 payment-methods">-->
+      <template v-for="(option, i) in paymentOptions">
+        <div class="radio" v-show="showOption(option)">
+          <label>
+            <input type="radio" name="payment" v-model="selectedPayment" :value="option">
+            <span>{{option.name}}</span>
+            <img :src="image.logo" v-for="(image, j) in option.logos"/>
+          </label>
         </div>
-        <div v-if="availableMethods && availableMethods.length" class="col-6">
-          <h4>Saved {{ selectedPayment.name }} payments</h4>
-          <div class="radio checkout__payment__method" v-for="(method, i) in availableMethods">
-            <input type="radio" class="payment__method" name="payment-method" v-model="selectedPaymentMethod" :value="method">
-            <component :key="`paymentMethod-${selectedPayment.id}-${i}`" :is="paymentMethodComponent(selectedPayment)" :data="getPaymentData(selectedPayment, method)" :variant="method.variant"></component>
-          </div>
-          <div class="radio checkout__payment__method">
-            <input type="radio" class="payment__method" name="payment-methd" v-model="selectedPaymentMethod"/>
-            <span>New payment data ...</span>
-          </div>
-        </div>
-      </div>
-      <proceed-button @click="onProceed" :class="['proceed-btn-payment', 'float-right-bottom', !selectedPayment ? 'disabled': '']">Review your order</proceed-button>
+      </template>
+      <!--</div>-->
     </div>
+    <div class="col-md-6 col-12 checkout__content__col">
+      <template v-if="availableMethods && availableMethods.length > 0">
+        <h3>Saved {{ selectedPayment.name }} payments</h3>
+        <div class="radio checkout__payment__method" v-for="(method, i) in availableMethods">
+          <input type="radio" class="payment__method" name="payment-method" v-model="selectedPaymentMethod"
+                 :value="method">
+          <component @deleted="onPaymentDeleted(method)" :key="`paymentMethod-${selectedPayment.id}-${i}`" :is="paymentMethodComponent(selectedPayment)"
+                     :data="getPaymentData(selectedPayment, method)" :variant="method.variant" :objectId="method.id"></component>
+        </div>
+        <div class="radio checkout__payment__method">
+          <input type="radio" class="payment__method" name="payment-method" v-model="selectedPaymentMethod"/>
+          <span>New payment data ...</span>
+        </div>
+      </template>
+      <proceed-button @click="onProceed"
+                      :class="['float-right-bottom', !selectedPayment ? 'disabled': '']">
+        Review your order
+
+      </proceed-button>
+    </div>
+    <!--</div>-->
   </div>
 </template>
 
@@ -111,14 +119,19 @@
       },
       showOption (option) {
         return true
-//        let isPickupOption = this.shippingOption && this.shippingOption.id === '-1'
-//        if (option.id === 'forward' && isPickupOption) {
-//          return false
-//        }
-//        return option.id !== 'cash' || this.shippingOption && this.shippingOption.id === '-1'
       },
       onProceed () {
         this.$store.commit(types.SET_PAYMENT_OPTION_CONFIRMED)
+      },
+      onPaymentDeleted (method) {
+        this.$store.commit(types.DELETE_PAYMENT_METHOD, method)
+        if (this.selectedPayment && this.selectedPayment.methods.includes(method)) {
+          this.selectedPayment = Object.assign({}, this.selectedPayment)
+          let methods = this.selectedPayment.methods
+          for (var i = 0; i < methods.length; i++) {
+            this.selectedPayment.methods = methods.filter(item => item !== method)
+          }
+        }
       }
     },
     watch: {

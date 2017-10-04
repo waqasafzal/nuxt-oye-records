@@ -432,6 +432,20 @@ const store = new Vuex.Store({
     },
     [types.SET_PAYPAL_PAYMENT_URL]: (state, paymentUrl) => {
       state.checkout.payment.paypalPaymentUrl = paymentUrl
+    },
+    [types.DELETE_PAYMENT_METHOD]: (state, method) => {
+      var options = state.checkout.payment.options
+      var optionsCopy = []
+      for (var i = 0; i < options.length; i++) {
+        let option = Object.assign({}, options[i])
+        let methods = option.methods
+        if (methods && methods.includes(method)) {
+          option.methods = methods.filter(item => item !== method)
+          // break
+        }
+        optionsCopy.push(option)
+      }
+      state.checkout.payment.options = optionsCopy
     }
   },
 
