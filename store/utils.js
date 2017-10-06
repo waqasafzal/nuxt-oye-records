@@ -44,6 +44,7 @@ export const getInitialCheckout = function () {
     },
     unpaidOrder: null,
     guest: null,
+    guestEmail: null,
     checkoutState: null,
     register: false,
     focussedInput: null,

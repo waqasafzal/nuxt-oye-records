@@ -5,7 +5,9 @@
         <address-form :focussed="isShippingAddressFocussed" :countries="countries"
                       :stateAddress="shippingAddress"
                       :validation="shippingAddressValidation"
+                      :includeEmail="isGuestCheckout"
                       @seperate-billing-changed="onSeperateBillingChanged"
+                      @email-changed="onEmailChanged"
                       @address-changed="onShippingAddressChanged">
         </address-form>
         <template v-if="register">
@@ -81,7 +83,8 @@
         shippingMethod: null,
         billingAddressChanged: false,
         shippingAddressChanged: false,
-        user: getInitialUser()
+        user: getInitialUser(),
+        guestEmail: ''
       }
     },
     computed: {
@@ -123,6 +126,9 @@
       },
       isShippingOptionFocussed () {
         return this.focussedInput === 'shippingOption'
+      },
+      isGuestCheckout () {
+        return this.$store.state.checkout.guest
       }
     },
     watch: {
@@ -189,10 +195,19 @@
         })
         var isBillingValid = await validateBillingAddress
 
+        var isEmailValid = true
+        if (this.isGuestCheckout) {
+          var emailValidation = this.$store.dispatch('emailValidation', {email: this.guestEmail})
+          isEmailValid = await emailValidation
+        }
+
         var validateUser = this.$store.dispatch('validateUserForm', {user: this.user})
         let isUserValid = await validateUser
 
-        if (isBillingValid && (!this.register || isUserValid)) {
+        if (isShippingValid && isBillingValid && (!this.register || isUserValid) && isEmailValid) {
+          if (this.isGuestCheckout) {
+            this.$store.commit(types.SET_GUEST_EMAIL, this.guestEmail)
+          }
           if (this.register) {
             var billingAddress = {}
             Object.assign(billingAddress, this.billingAddress)
@@ -201,7 +216,6 @@
             var shippingAddress = {}
             Object.assign(shippingAddress, this.shippingAddress)
             delete shippingAddress['complete']
-
             this.$store.dispatch('createNewUser', {
               user: this.user,
               billingAddress: billingAddress,
@@ -217,26 +231,10 @@
           } else {
             this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
           }
-        } else {
-          if (!isShippingValid) {
-            this.$store.dispatch('addAlert', {
-              level: 'error',
-              message: 'Your shipping data is incomplete'
-            })
-          }
-          if (!isBillingValid) {
-            this.$store.dispatch('addAlert', {
-              level: 'error',
-              message: 'Your billing data is incomplete'
-            })
-          }
-          if (!isUserValid) {
-            this.$store.dispatch('addAlert', {
-              level: 'error',
-              message: 'Your user data is invalid'
-            })
-          }
         }
+      },
+      onEmailChanged (value) {
+        this.guestEmail = value
       }
     },
     mounted () {

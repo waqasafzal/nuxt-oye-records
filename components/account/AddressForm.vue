@@ -72,6 +72,16 @@
           <div v-if="zipError" class="error">{{ zipError }}</div>
         </div>
       </div>
+      <div v-if="includeEmail" class="form-group">
+        <div :class="['form-group-item', 'input-validation', emailError ? 'has-danger' : '']">
+          <input class="form-control"
+                 type="email"
+                 placeholder="Email *"
+                 v-model="email"
+                 required />
+          <div v-if="emailError" class="error">{{ emailError }}</div>
+        </div>
+      </div>
       <div :class="['form-group', 'input-validation', countryError ? 'has-danger' : '']">
         <select class="form-control has-danger"
                 name="country"
@@ -111,6 +121,10 @@
         type: Boolean,
         default: true
       },
+      includeEmail: {
+        type: Boolean,
+        default: false
+      },
       validation: Object
     },
     data: function () {
@@ -118,7 +132,8 @@
       return {
         address: address,
         seperateBilling: false,
-        country: address.country
+        country: address.country,
+        email: ''
       }
     },
     computed: {
@@ -136,6 +151,9 @@
       },
       zipError () {
         return this.validation.zip
+      },
+      emailError () {
+        return this.$store.getters.getUserFormEmailError
       },
       cityError () {
         return this.validation.city
@@ -167,6 +185,9 @@
       },
       country (value) {
         this.$emit('country-selected', value)
+      },
+      email (value) {
+        this.$emit('email-changed', value)
       }
     },
     methods: {

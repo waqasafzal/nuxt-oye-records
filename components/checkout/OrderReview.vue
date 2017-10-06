@@ -81,8 +81,8 @@
       onPlaceOrder () {
         this.placingOrder = true
         apolloClient.mutate({
-          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID, $vatExcluded: Boolean) {
-            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId, vatExcluded: $vatExcluded) {
+          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID, $vatExcluded: Boolean, $email: String) {
+            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId, vatExcluded: $vatExcluded, email: $email) {
               order {
                 ...Order
                 releases {
@@ -118,7 +118,8 @@
             porto: this.porto,
             vatExcluded: this.vatExcluded,
             payment: this.paymentOption.id,
-            paymentMethodId: this.selectedPaymentMethod && this.selectedPaymentMethod.id
+            paymentMethodId: this.selectedPaymentMethod && this.selectedPaymentMethod.id,
+            email: this.$store.state.checkout.guestEmail
           }
         }).then(
           ({data}) => {

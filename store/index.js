@@ -446,6 +446,9 @@ const store = new Vuex.Store({
         optionsCopy.push(option)
       }
       state.checkout.payment.options = optionsCopy
+    },
+    [types.SET_GUEST_EMAIL]: (state, email) => {
+      state.checkout.guestEmail = email
     }
   },
 
