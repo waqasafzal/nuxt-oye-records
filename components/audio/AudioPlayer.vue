@@ -3,7 +3,7 @@
     <!--<div class="audio-panel" v-show="showPlayer" v-on-clickaway="onClickaway">-->
       <playlist v-if="showPlayer && showPlaylist"></playlist>
   <transition name="player-from-bottom">
-      <div v-show="showPlayer && currentTrack" class="audioplayer" id="audioplayer">
+      <div v-show="showPlayer" class="audioplayer" id="audioplayer">
         <div class="ap__element button-box audio-control">
           <div class="audio-control__buttons">
             <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
@@ -99,7 +99,7 @@
       return {
         duration: 0,
         currentTime: 0,
-        visible: true
+        visible: false
       }
     },
     computed: {
