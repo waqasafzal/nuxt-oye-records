@@ -33,7 +33,7 @@
         <td style="width: 200px">
           <div class="d-flex flex-row justify-content-between">
             <add-to-cart-button @added="onAdded(release.node)" :release="release.node"></add-to-cart-button>
-            <div @click="onDelete(release.node)" class="delete vmargin-auto">&times;</div>
+            <div @click="onDelete(release.node)" class="close-detail vmargin-auto">&times;</div>
           </div>
         </td>
       </tr>
