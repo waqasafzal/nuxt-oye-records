@@ -41,14 +41,14 @@
                            v-model="shippingMethod"
                            :value="shippingOption">
                     <span>{{shippingOption.name}} ({{shippingOption.price}} &euro;)</span>
+                    <img :src="getShippingIcon(shippingOption)" />
                   </label>
                 </div>
               </template>
             </form>
           </template>
           <template v-else>
-            <span
-                class="checkout__addresses__content">You must set shipping country before you can select shipping</span>
+            <span class="checkout__addresses__content">You must set shipping country before you can select shipping</span>
           </template>
         </div>
         <div class="float-right-bottom">
@@ -65,6 +65,11 @@
   import * as types from '../../store/types'
   import RegisterForm from '../account/RegisterForm'
   import { getInitialUser } from '../../store/utils'
+
+  const shippingIcons = {
+    dhl: require('../../assets/images/shipping/icon_dhl.png'),
+    pickup: require('../../assets/images/shipping/icon_storepickup.png')
+  }
 
   export default {
     components: {RegisterForm, ProceedButton, AddressForm},
@@ -163,6 +168,13 @@
       },
       onUserRegistrationChanged (value) {
         this.user = value
+      },
+      getShippingIcon (option) {
+        if (option.name === 'DHL') {
+          return shippingIcons.dhl
+        } else if (option.name.includes('Pickup')) {
+          return shippingIcons.pickup
+        }
       },
       async onProceed () {
         var validateShippingAddress = this.$store.dispatch('validateAddress', {
