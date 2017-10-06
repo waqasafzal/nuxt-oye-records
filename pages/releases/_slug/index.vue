@@ -168,8 +168,6 @@
   import ReleaseList from '../../../components/releases/ReleaseList'
   import GoogleAnalytics from '~/mixins/ga'
   import * as types from '../../../store/types'
-  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
-
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
 
@@ -179,7 +177,7 @@
     name: 'ReleaseDetailView',
     props: ['id', 'slug', 'subslug'],
     mixins: [GoogleAnalytics],
-    components: {NuxtLink, ReleaseList, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
+    components: {ReleaseList, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
 
     data: function () {
       return {
