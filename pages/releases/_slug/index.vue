@@ -32,10 +32,9 @@
         </div>
       </div>
       <div class="col-md-6 col-12 product__info">
-        <h2
-            class="product__info__artist">{{ release.artistFirstName }} {{ release.artistLastName }}</h2>
+        <h2 class="product__info__artist"><nuxt-link :to="{name: 'artists-query', params: {query: release.name}}">{{ release.artistFirstName }} {{ release.artistLastName }}</nuxt-link></h2>
         <h2 class="product__info__name">{{ release.title }}</h2>
-        <h5 class="product__info__label">{{ release.label }}</h5>
+        <h5 class="product__info__label"><nuxt-link :to="{name: 'labels-query', params: {query: release.label}}">{{ release.label }}</nuxt-link></h5>
 
         <div class="product__info__price">
           <release-price :price="release.price"></release-price>
@@ -169,6 +168,7 @@
   import ReleaseList from '../../../components/releases/ReleaseList'
   import GoogleAnalytics from '~/mixins/ga'
   import * as types from '../../../store/types'
+  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
 
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
@@ -179,7 +179,7 @@
     name: 'ReleaseDetailView',
     props: ['id', 'slug', 'subslug'],
     mixins: [GoogleAnalytics],
-    components: {ReleaseList, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
+    components: {NuxtLink, ReleaseList, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},
 
     data: function () {
       return {
