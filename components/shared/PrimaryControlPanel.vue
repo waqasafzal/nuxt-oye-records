@@ -38,10 +38,9 @@
 
 <script>
   import ProceedButton from './ProceedButton'
-  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
   import * as types from '../../store/types'
   export default {
-    components: {NuxtLink, ProceedButton},
+    components: {ProceedButton},
     name: 'PrimaryControlPanel',
     data () {
       return {
