@@ -79,75 +79,79 @@
     },
     methods: {
       onPlaceOrder () {
-        this.placingOrder = true
-        apolloClient.mutate({
-          mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID, $vatExcluded: Boolean, $email: String) {
-            placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId, vatExcluded: $vatExcluded, email: $email) {
-              order {
-                ...Order
-                releases {
-                  quantity
-                  release {
-                    ...Release
-                    smallImageUrl: thumbnailUrl(size: 100)
+        if (!this.$store.state.checkout.termsAgreed) {
+          this.$store.dispatch('addAlert', {level: 'error', message: 'You must agree to the terms of conditions to proceed.'})
+        } else {
+          this.placingOrder = true
+          apolloClient.mutate({
+            mutation: gql`mutation PlaceOrder($cartId: ID!, $isSelfCollector: Boolean, $porto: Float, $shippingId: ID, $billingId: ID, $payment: String, $paymentMethodId: ID, $vatExcluded: Boolean, $email: String) {
+              placeOrder(cartId: $cartId, isSelfCollector: $isSelfCollector, porto: $porto, billingId: $billingId, shippingId: $shippingId, payment: $payment, paymentMethodId: $paymentMethodId, vatExcluded: $vatExcluded, email: $email) {
+                order {
+                  ...Order
+                  releases {
+                    quantity
+                    release {
+                      ...Release
+                      smallImageUrl: thumbnailUrl(size: 100)
+                    }
                   }
                 }
-              }
-              paymentUrl
-              notInStock {
-                quantity
-                release {
-                  slug
-                  name
-                  title
+                paymentUrl
+                notInStock {
+                  quantity
+                  release {
+                    slug
+                    name
+                    title
+                  }
                 }
-              }
-              cart {
-                ...OyeCart
+                cart {
+                  ...OyeCart
+                }
               }
             }
-          }
-          ${order}
-          ${oyeCart}
-          `,
-          variables: {
-            isSelfCollector: this.isSelfCollector,
-            billingId: this.billingId,
-            shippingId: this.shippingId,
-            cartId: this.cartId,
-            porto: this.porto,
-            vatExcluded: this.vatExcluded,
-            payment: this.paymentOption.id,
-            paymentMethodId: this.selectedPaymentMethod && this.selectedPaymentMethod.id,
-            email: this.$store.state.checkout.guestEmail
-          }
-        }).then(
-          ({data}) => {
-            this.placingOrder = false
-            if (data.placeOrder.paymentUrl) {
-              this.$store.commit(types.SET_PAYPAL_PAYMENT_URL)
-              this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 8)
-              window.location.href = data.placeOrder.paymentUrl
-            } else {
-              let order = data.placeOrder.order
-              this.$store.commit(types.SET_UNPAID_ORDER, order)
-              if (!order.isPaid) {
-                this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
-                if (order.shippingCountry) {
-                  this.$store.dispatch('setShippingCountry', order)
-                }
-                this.$store.commit(types.ADD_ALERT, {
-                  level: 'info',
-                  message: 'Your order has been placed. Please fulfill order with payment.'
-                })
+            ${order}
+            ${oyeCart}
+            `,
+            variables: {
+              isSelfCollector: this.isSelfCollector,
+              billingId: this.billingId,
+              shippingId: this.shippingId,
+              cartId: this.cartId,
+              porto: this.porto,
+              vatExcluded: this.vatExcluded,
+              payment: this.paymentOption.id,
+              paymentMethodId: this.selectedPaymentMethod && this.selectedPaymentMethod.id,
+              email: this.$store.state.checkout.guestEmail
+            }
+          }).then(
+            ({data}) => {
+              this.placingOrder = false
+              if (data.placeOrder.paymentUrl) {
+                this.$store.commit(types.SET_PAYPAL_PAYMENT_URL)
+                this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 8)
+                window.location.href = data.placeOrder.paymentUrl
               } else {
-                this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
+                let order = data.placeOrder.order
+                this.$store.commit(types.SET_UNPAID_ORDER, order)
+                if (!order.isPaid) {
+                  this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
+                  if (order.shippingCountry) {
+                    this.$store.dispatch('setShippingCountry', order)
+                  }
+                  this.$store.commit(types.ADD_ALERT, {
+                    level: 'info',
+                    message: 'Your order has been placed. Please fulfill order with payment.'
+                  })
+                } else {
+                  this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
+                }
               }
+              // set the new cart
+              this.$store.dispatch('setCart', {cart: data.placeOrder.cart})
             }
-            // set the new cart
-            this.$store.dispatch('setCart', {cart: data.placeOrder.cart})
-          }
-        )
+          )
+        }
       }
     },
     mounted () {

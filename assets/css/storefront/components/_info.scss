@@ -1,0 +1,22 @@
+.info {
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 2rem;
+    background-color: $gray-color-2;
+    line-height: 32px;
+    .selected {
+      color: $brand-color-green;
+    }
+    a {
+      color: $brand-color-black;
+      &:hover {
+        color: $brand-color-green
+      }
+    }
+    .nuxt-link-active {
+      color: $brand-color-green;
+    }
+  }
+}

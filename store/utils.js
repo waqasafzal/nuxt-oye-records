@@ -49,6 +49,7 @@ export const getInitialCheckout = function () {
     register: false,
     focussedInput: null,
     isVatExcluded: false,
+    termsAgreed: false,
     vat: 19.0
   }
 }

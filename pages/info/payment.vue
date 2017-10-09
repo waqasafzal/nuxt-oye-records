@@ -15,7 +15,7 @@
     <p>
       Paypal is the option for a fast, easy and safe payment of your online order. You need to be registered on Paypal in order to be able to use this service. During the ordering process you will be redirected to the Paypal website after choosing it as payment method. You will then be able to log in and link up the account with your creditcard or your bank account. These details will only be saved on Paypal and will be available for any further purchase without having to enter them again.</p>
     <h4>Bank Transfer</h4>
-    
+
     <p>You will receive an order confirmation per email. This email contains the invoice amount and your order number, as well as further important order information. As soon as we receive the total amount your order will be shipped (according to the availability of the items) within 24h (working days).</p>
 
     <p>Account holder: Lovis Willenberg</p>

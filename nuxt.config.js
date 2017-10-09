@@ -150,7 +150,6 @@ module.exports = {
     {src: '~plugins/vue-social-sharing'},
     // {src: '~plugins/ua', ssr: false, injectAs: 'ua'}
     {src: '~plugins/ga', ssr: false}
-    // {src: '~plugins/touch', ssr: false}
   ],
   router: {
     middleware: ['check-auth', 'payment-duty'],

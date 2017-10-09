@@ -449,6 +449,9 @@ const store = new Vuex.Store({
     },
     [types.SET_GUEST_EMAIL]: (state, email) => {
       state.checkout.guestEmail = email
+    },
+    [types.SET_TERMS_AGREED]: (state, agreed) => {
+      state.checkout.termsAgreed = agreed
     }
   },
 

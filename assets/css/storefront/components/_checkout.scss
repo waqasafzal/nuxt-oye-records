@@ -254,6 +254,11 @@
       }
     }
   }
+  &__toc {
+    a {
+      color: $brand-color-green;
+    }
+  }
 }
 
 .payment {

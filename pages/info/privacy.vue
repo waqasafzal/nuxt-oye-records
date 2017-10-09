@@ -1,7 +1,7 @@
 <template>
   <div class="privacy">
-  <h3>1. General Information</h3>
-  <p><strong>1.1. </strong>This Privacy Policy has been designed to inform you and notify you of the kinds, the scope and the purpose, as well as your rights concerning your data collected and processed within the scope of this website provided by Oye Records UG (haftungsbeschr&auml;nkt), Oderbergerstr. 4, D 10435 Berlin, Germany (hereinafter also referred to as "Provider") as data processor.</p>
+    <h3>1. General Information</h3>
+    <p><strong>1.1. </strong>This Privacy Policy has been designed to inform you and notify you of the kinds, the scope and the purpose, as well as your rights concerning your data collected and processed within the scope of this website provided by Oye Records UG (haftungsbeschr&auml;nkt), Oderbergerstr. 4, D 10435 Berlin, Germany (hereinafter also referred to as "Provider") as data processor.</p>
     <p><strong>1.2. </strong>"You" and "your" refer to you, as a user of the website. "We", "us", and "our" refer to the Provider</p>
     <h3>2. Data processing and data security</h3>
     <p><strong>2.1. </strong>We will collect, process and use personally identifiable data beyond the scope already permitted by law and without your required further consent only to the extent necessary for the conclusion and execution of a contractual relationship, performing requests or for billing purposes. </p>
