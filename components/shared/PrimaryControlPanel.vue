@@ -17,13 +17,13 @@
           </div>
           <span>
             I acknowledge the
-            <nuxt-link target="_blank" :to="{name: 'info-toc'}">Terms</nuxt-link>
+            <nuxt-link target="_blank" :to="{name: 'info-terms-and-conditions'}">Terms</nuxt-link>
             and
             <nuxt-link target="_blank"
                        :to="{name: 'info-privacy'}">privacy policy
             </nuxt-link>
             of OYE Records and agree to them.<br/>
-            <nuxt-link :to="{path: 'info/toc#cancel'}" target="_blank">Here you can find more information on your right of withdrawal.</nuxt-link>
+            <nuxt-link :to="{path: 'info/terms-and-conditions#cancel'}" target="_blank">Here you can find more information on your right of withdrawal.</nuxt-link>
           </span>
         </div>
       </div>

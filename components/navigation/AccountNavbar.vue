@@ -9,6 +9,9 @@
         <div class="ah-link navbar__oye__faq">
           <nuxt-link :to="{name: 'info'}">Customer Information</nuxt-link>
         </div>
+        <div class="ah-link">
+          <nuxt-link :to="{name: 'info-imprint'}">Imprint</nuxt-link>
+        </div>
       </div>
       <div class="float-right navbar__account__buttons">
         <template v-if="isAuthenticated">

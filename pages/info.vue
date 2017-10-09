@@ -1,7 +1,7 @@
 <template>
   <div class="info">
     <div class="d-flex flex-row justify-content-between">
-      <h1>Info - {{ menuItems[currentAccountView] }}</h1>
+      <h1>Info &mdash; {{ menuItems[currentAccountView] }}</h1>
     </div>
     <div class="row no-gutters justify-content-start">
       <div class="col-3">
@@ -25,7 +25,7 @@
       return {
         menuItems: {
           'questions': 'Questions',
-          'toc': 'Terms & Conditions',
+          'terms-and-conditions': 'Terms & Conditions',
           'shipping': 'Shipping & Delivery',
           'payment': 'Payment Methods',
           'privacy': 'Privacy policy',
