@@ -4,7 +4,7 @@
       <h3>
         Order #{{order.pk}} ({{order.date}})
       </h3>
-      <div class="download">Download invoice</div>
+      <div @click="onDownload" class="download">Download invoice</div>
     </div>
     <div class="cart__lines">
       <div class="cart__line" v-for="quantified in order.releases">
@@ -46,8 +46,26 @@
 </template>
 
 <script>
+  import { getAuthHeader } from '../../utils/auth/index'
   export default {
     name: 'Order',
-    props: ['order']
+    props: ['order'],
+    methods: {
+      onDownload () {
+        console.log('download')
+        let config = {
+          headers: {
+            Authorization: getAuthHeader()
+          }
+        }
+        var orderPk = this.order.pk
+        this.$http.post(__API__ + `/oye/invoice-sign/`, {orderId: this.order.pk}, config).then(
+          data => {
+            var token = data.body.token
+            window.open(__API__ + `/oye/invoice/${orderPk}.pdf?token=${token}`)
+          }
+        )
+      }
+    }
   }
 </script>
