@@ -62,7 +62,7 @@
         this.$http.post(__API__ + `/oye/invoice-sign/`, {orderId: this.order.pk}, config).then(
           data => {
             var token = data.body.token
-            window.open(__API__ + `/oye/invoice/${orderPk}.pdf?token=${token}`)
+            window.open(__API__ + `/oye/invoice/${orderPk}.pdf?token=${token}`, '_self')
           }
         )
       }
