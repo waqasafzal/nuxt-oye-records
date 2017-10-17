@@ -1,5 +1,10 @@
 <template>
   <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
+    <div class="force-bigger-screen d-md-none">
+      The mobile version is coming soon.<br/>
+      Please open the beta shop on a device with a bigger
+      screen or bounce to the classic shop <a href="http://oye-records.com" target="_blank">here.</a>
+    </div>
     <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
     <header class="navbar" role="navigation">
       <brand-navbar v-on:togglemenu="onToggleMobileMenu"
