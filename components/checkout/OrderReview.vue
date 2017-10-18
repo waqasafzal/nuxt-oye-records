@@ -152,7 +152,6 @@
                     }
                     this.$store.commit(types.SET_PURCHASES, purchases)
                   }
-
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
                 }
               }
