@@ -144,6 +144,15 @@
                     message: 'Your order has been placed. Please fulfill order with payment.'
                   })
                 } else {
+                  let purchases = this.$store.getters.getPurchases
+                  if (purchases && purchases.edges) {
+                    purchases = {
+                      edges: [{node: order}, ...purchases.edges],
+                      pageInfo: purchases.edges
+                    }
+                    this.$store.commit(types.SET_PURCHASES, purchases)
+                  }
+
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
                 }
               }

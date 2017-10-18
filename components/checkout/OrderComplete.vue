@@ -43,17 +43,7 @@
       }
     },
     mounted () {
-      let unpaidOrder = this.$store.getters.getUnpaidOrder
       this.$store.commit(types.SET_UNPAID_ORDER, null)
-
-      let purchases = this.$store.getters.getPurchases
-      if (purchases && purchases.edges) {
-        purchases = {
-          edges: [{node: unpaidOrder}, ...purchases.edges],
-          pageInfo: purchases.edges
-        }
-        this.$store.commit(types.SET_PURCHASES, purchases)
-      }
     }
   }
 </script>
