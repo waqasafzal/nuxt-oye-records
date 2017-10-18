@@ -28,7 +28,7 @@
     },
     watch: {
       order (value) {
-        if (value && !this.lastOrderNo) {
+        if (value) {
           this.lastOrderNo = value.pk
         }
       }
