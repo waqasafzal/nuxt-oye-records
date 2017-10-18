@@ -1,7 +1,7 @@
 <template>
   <div class="complete">
     <h2>Thank you for your order!</h2>
-    <h3>Order number: <span class="order-complete__number">#{{orderNo}}</span></h3>
+    <h3>Order number: <span class="order-complete__number">#{{lastOrderNo}}</span></h3>
     <div class="complete__summary">
       Your order has been placed and is being processed.
       <div v-if="!isSelfCollector">When the item(s) are shipped, you will receive an
@@ -18,15 +18,28 @@
     name: 'OrderComplete',
     data: function () {
       let unpaidOrder = this.$store.getters.getUnpaidOrder
-      var orderNo = unpaidOrder.pk
+      var lastOrderNo
+      if (unpaidOrder) {
+        lastOrderNo = unpaidOrder.pk
+      }
       return {
-        orderNo: orderNo
+        lastOrderNo: lastOrderNo
+      }
+    },
+    watch: {
+      order (value) {
+        if (value && !this.lastOrderNo) {
+          this.lastOrderNo = value.pk
+        }
       }
     },
     computed: {
       isSelfCollector () {
         let shippingOption = this.$store.getters.getShippingOption
         return shippingOption && shippingOption.id === '-1'
+      },
+      order () {
+        return this.$store.getters.getUnpaidOrder
       }
     },
     mounted () {
