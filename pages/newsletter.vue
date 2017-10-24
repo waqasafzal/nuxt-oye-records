@@ -15,18 +15,6 @@
           </div>
         </div>
       </fieldset>
-      <fieldset>
-        <div class="form-group">
-          <label class="checkbox-label">
-            <input type="checkbox" name="weekly" v-model="weekly">Weekly News
-            </label>
-        </div>
-        <div class="form-group">
-          <label class="checkbox-label">
-            <input type="checkbox" name="monthly" v-model="monthly">Monthly Bestsellers
-            </label>
-        </div>
-      </fieldset>
       <div class="btn-row">
         <button class="btn primary" type="submit" form="newsletter-form">Subscribe</button>
       </div>
@@ -41,9 +29,7 @@
     name: 'Newsletter',
     data: function () {
       return {
-        email: '',
-        weekly: true,
-        monthly: true
+        email: ''
       }
     },
     computed: {
