@@ -38,9 +38,11 @@
   }
   .download {
     color: $brand-color-green;
-    text-decoration: underline;
     font-size: $font-size-xs-fixed;
     cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
