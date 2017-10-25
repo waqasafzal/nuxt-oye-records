@@ -1,11 +1,14 @@
 <template>
   <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
+    <div class="header">
+      <cookie-law theme="oye" position="top" v-if="isMounted"></cookie-law>
+      <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
+    </div>
     <div class="force-bigger-screen d-md-none">
       The mobile version is coming soon.<br/>
       Please open the beta shop on a device with a bigger
       screen or bounce to the classic shop <a href="http://oye-records.com" target="_blank">here.</a>
     </div>
-    <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
     <header class="navbar" role="navigation">
       <brand-navbar v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
@@ -43,7 +46,8 @@
     data: function () {
       return {
         isOpenMobileMenu: false,
-        isPortable: false
+        isPortable: false,
+        isMounted: false
       }
     },
     methods: {
@@ -119,6 +123,7 @@
       ])
     },
     mounted () {
+      this.isMounted = true
       document.addEventListener('keydown', function (e) {
         var key = e.keyCode ? e.keyCode : e.which
         let noText = e.target.type !== 'text'
