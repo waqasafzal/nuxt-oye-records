@@ -42,7 +42,7 @@
             <nuxt-link v-if="item.label" class="search__results__item"
                        :to="{name:'labels-query', params: { query: item.label.name }}">
               <div class="search__artist__image">
-                <img src="../../assets/images/defaults/Default_User.png" />
+                <img src="../../assets/images/defaults/Default_Cover.png" />
               </div>
               <div class="search__release__infos">
                 <div class="search__release__name">{{ item.label.name }}</div>
