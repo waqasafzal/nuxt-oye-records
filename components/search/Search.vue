@@ -92,7 +92,7 @@
 
   const MAX_ARTISTS = 2
   const MAX_RELEASES = 3
-  const MAX_LABELS = 2
+  const MAX_LABELS = 1
 
   export default {
     name: 'Search',
