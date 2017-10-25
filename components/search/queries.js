@@ -55,3 +55,24 @@ export const callArtistSearchQuery = function (query, size, callback, errorCallb
     }
   }).then(callback).catch(errorCallback)
 }
+
+export const callLabelSearchQuery = function (query, size, callback, errorCallback) {
+  client.query({
+    query: gql`query LabelSearch($query: String!, $size: Int!) {
+        search(query: $query, size: $size, docType: "label") {
+            results {
+                highlight
+                ... on LabelSearchResult {
+                    label {
+                        name
+                    }
+                }
+            }
+        }
+    }`,
+    variables: {
+      query: query,
+      size: size
+    }
+  }).then(callback).catch(errorCallback)
+}

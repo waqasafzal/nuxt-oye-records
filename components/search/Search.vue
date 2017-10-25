@@ -36,6 +36,20 @@
             </nuxt-link>
           </div>
         </div>
+        <div v-if="labelResults.length > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
+          <div class="search__results__header">Labels</div>
+          <div @click="hideResults" class="search__results__row" v-for="item in labelResults">
+            <nuxt-link v-if="item.label" class="search__results__item"
+                       :to="{name:'labels-query', params: { query: item.label.name }}">
+              <div class="search__artist__image">
+                <img src="../../assets/images/defaults/Default_User.png" />
+              </div>
+              <div class="search__release__infos">
+                <div class="search__release__name">{{ item.label.name }}</div>
+              </div>
+            </nuxt-link>
+          </div>
+        </div>
         <div v-if="releasesTotal > 0" @mouseover="disableBlur" @mouseleave="enableBlur">
           <div class="search__results__header">Releases</div>
           <div @click="hideResults" class="search__results__row" v-for="item in releaseResults">
@@ -78,6 +92,7 @@
 
   const MAX_ARTISTS = 2
   const MAX_RELEASES = 3
+  const MAX_LABELS = 2
 
   export default {
     name: 'Search',
@@ -125,6 +140,9 @@
       artistsResults () {
         return this.$store.state.search.artists.results.slice(0, MAX_ARTISTS)
       },
+      labelResults () {
+        return this.$store.state.search.labels.results.slice(0, MAX_LABELS)
+      },
       releasesTotal () {
         let search = this.$store.state.search
         return search.releases.total + search.catnoReleases.total
@@ -150,6 +168,11 @@
               type: 'artists',
               size: 2
             })
+            this.$store.dispatch('search', {
+              query: this.query,
+              type: 'labels',
+              size: 2
+            })
           } else {
             this.$store.commit(types.SET_SEARCH_RESULTS, {
               type: 'releases',
@@ -160,6 +183,13 @@
             })
             this.$store.commit(types.SET_SEARCH_RESULTS, {
               type: 'artists',
+              search: {
+                total: 0,
+                results: []
+              }
+            })
+            this.$store.commit(types.SET_SEARCH_RESULTS, {
+              type: 'labels',
               search: {
                 total: 0,
                 results: []

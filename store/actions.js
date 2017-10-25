@@ -15,7 +15,7 @@ import apolloClient from '../plugins/apollo'
 import { oyeCart } from '../components/graphql/cart'
 
 import { addCartAlertMessage } from '../components/shared/utils'
-import { callArtistSearchQuery, callReleaseSearchQuery } from '../components/search/queries'
+import { callArtistSearchQuery, callLabelSearchQuery, callReleaseSearchQuery } from '../components/search/queries'
 import { addressFragment } from '~/components/graphql/user'
 import { cardDataFragment } from '../components/graphql/payments'
 import { validateEmail } from '../utils/forms'
@@ -306,13 +306,20 @@ export const search = ({commit}, args) => new Promise((resolve, reject) => {
       })
     } else if (type === 'artists') {
       callArtistSearchQuery(query, args.size, ({data}) => {
-        let rearchResults = data.search
-        commit(mutationType, {search: rearchResults, type: type})
+        let searchResults = data.search
+        commit(mutationType, {search: searchResults, type: type})
         resolve({
-          search: rearchResults
+          search: searchResults
         })
         commit(types.DECREMENT_SEARCH_LOADING)
       }, () => {
+        commit(types.DECREMENT_SEARCH_LOADING)
+      })
+    } else if (type === 'labels') {
+      callLabelSearchQuery(query, args.size, ({data}) => {
+        let searchResults = data.search
+        commit(mutationType, {search: searchResults, type: type})
+        resolve({search: searchResults})
         commit(types.DECREMENT_SEARCH_LOADING)
       })
     }

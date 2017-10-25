@@ -20,9 +20,7 @@
       </div>
     </form>
   </div>
-</template>actio
-
-
+</template>
 
 <script>
   export default {
