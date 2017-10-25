@@ -2,11 +2,16 @@
   <div v-if="release">
     <nuxt-link :to="{name: 'releases-slug', params: { slug: release.slug }}">
       <template v-if="!$store.state.isSmallScreen">
-        <div class="frontpage__weekly__item__content" v-if="release" :style="contentStyle">
-          <div class="feature-category">{{ category }}</div>
-          <div class="frontpage__weekly__item__content__artist">{{ release.name }}</div>
-          <div class="frontpage__weekly__item__content__title">{{ release.title }}</div>
-          <release-button-bar :release="release"></release-button-bar>
+        <div class="frontpage__weekly__item__content d-flex flex-row" v-if="release">
+          <div class="frontpage__weekly__item__info">
+            <div class="feature-category">{{ category }}</div>
+            <div class="frontpage__weekly__item__content__artist">{{ release.name }}</div>
+            <div class="frontpage__weekly__item__content__title">{{ release.title }}</div>
+            <release-button-bar :release="release"></release-button-bar>
+          </div>
+          <div class="frontpage__weekly__item__image">
+            <img :src="release.featureImageUrl" />
+          </div>
         </div>
       </template>
       <template v-else>

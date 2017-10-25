@@ -59,11 +59,11 @@
       </div>
     </div>
     <div class="row frontpage__weekly__panel">
-      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 frontpage__weekly__item__cell">
+      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
         <week-feature class="frontpage__weekly__item" :release="singleRelease"
                       :category="`Single Of The Week`"></week-feature>
       </div>
-      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 frontpage__weekly__item__cell">
+      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
         <week-feature class="frontpage__weekly__item" :release="albumRelease"
                       :category="`Album Of The Week`"></week-feature>
       </div>
