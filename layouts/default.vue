@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
     <div class="header">
-      <cookie-law theme="oye" position="top" v-if="isMounted"></cookie-law>
+      <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
       <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
     </div>
     <div class="force-bigger-screen d-md-none">
