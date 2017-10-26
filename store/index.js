@@ -213,7 +213,7 @@ const store = new Vuex.Store({
         } else {
           state.search.releases.results = results.concat(search.results)
         }
-        state.search.releases.total = state.search.releases.total + search.total
+        state.search.releases.total = search.total
       }
     },
     [types.SET_QUERY]: (state, {query, fields}) => {
