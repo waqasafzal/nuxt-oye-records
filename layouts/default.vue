@@ -126,8 +126,8 @@
       this.isMounted = true
       document.addEventListener('keydown', function (e) {
         var key = e.keyCode ? e.keyCode : e.which
-        let noText = e.target.type !== 'text'
-        if ([37, 39].includes(key) && noText) {
+        let noForm = !e.target.form
+        if ([37, 39].includes(key) && noForm) {
           e.preventDefault()
         }
       })
