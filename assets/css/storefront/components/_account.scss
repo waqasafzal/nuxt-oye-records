@@ -25,4 +25,34 @@
       color: $brand-color-green;
     }
   }
+  &__customer-data {
+    tr {
+      height: 80px !important;
+      cursor: default !important;
+      &:hover {
+        background-color: inherit !important;
+      }
+    }
+    td {
+      border-top: inherit !important;
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
+      span {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+    }
+    .data-value {
+      min-width: 200px;
+    }
+    .edit {
+      min-width: 80px;
+      text-align: right;
+    }
+    .customer-email {
+      .form-control {
+        padding-left: inherit !important;
+      }
+    }
+  }
 }

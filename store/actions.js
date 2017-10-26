@@ -341,6 +341,7 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
         profile {
             firstName
             lastName
+            email
             shippingAddresses {
                 ...Address
             }
@@ -406,6 +407,9 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
           })
         }
       }
+      if (profile.email) {
+        store.commit(types.SET_USER_EMAIL, profile.email)
+      }
     }
     resolve(profile)
   })
@@ -424,9 +428,9 @@ export const setShippingCountry = (store, args) => new Promise((resolve, reject)
             shippingOptions(countryName: $countryName) {
                 isVatExcluded
                 options {
-                  id
-                  price
-                  name
+                    id
+                    price
+                    name
                 }
             }
         }
@@ -831,6 +835,26 @@ export const subscribeNewsletter = ({commit}, args) => new Promise((resolve, rej
   }).then(
     ({data}) => {
       resolve(data.registerNewsletter.ok)
+    }
+  )
+})
+
+export const updateUser = ({commit, dispatch}, args) => new Promise((resolve, reject) => {
+  apolloClient.mutate({
+    mutation: gql`mutation UpdateUser($email: String) {
+        updateUser(email: $email) {
+            ok
+        }
+    }`,
+    variables: args
+  }).then(
+    result => {
+      if (result.data.updateUser.ok) {
+        resolve(true)
+        dispatch('addAlert', {
+          message: 'Saved customer data'
+        })
+      }
     }
   )
 })

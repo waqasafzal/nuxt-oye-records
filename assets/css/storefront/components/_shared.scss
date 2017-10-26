@@ -151,3 +151,11 @@ body {
     }
   }
 }
+
+.link {
+  color: $brand-color-green;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}

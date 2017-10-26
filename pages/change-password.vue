@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import PasswordResetForm from '../components/PasswordResetForm'
+  import PasswordResetForm from '../components/account/PasswordResetForm'
   export default {
     components: {PasswordResetForm},
     name: 'ChangeResetPassword',

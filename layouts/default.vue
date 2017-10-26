@@ -126,7 +126,7 @@
       this.isMounted = true
       document.addEventListener('keydown', function (e) {
         var key = e.keyCode ? e.keyCode : e.which
-        let noForm = !e.target.form
+        let noForm = e.target.tagName.toLowerCase() !== 'input'
         if ([37, 39].includes(key) && noForm) {
           e.preventDefault()
         }
