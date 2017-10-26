@@ -4,6 +4,10 @@
       <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
       <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
     </div>
+    <div id="alpha-warning">
+      ATTENTION: This is the Alpha version of the new OYE Records webshop.<br/>
+      You <strong>can not</strong> buy any records here. Please visit our <a href="https://oye-records.com/">current website</a>
+    </div>
     <div class="force-bigger-screen d-md-none">
       The mobile version is coming soon.<br/>
       Please open the beta shop on a device with a bigger

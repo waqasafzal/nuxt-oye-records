@@ -159,3 +159,12 @@ body {
     text-decoration: underline;
   }
 }
+
+#alpha-warning {
+  position: fixed;
+  top: 150px;
+  left: 350px;
+  margin-right: auto;
+  background: $brand-secondary-color-red;
+  color: white;
+}
