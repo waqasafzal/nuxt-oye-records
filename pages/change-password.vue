@@ -5,9 +5,8 @@
         <div class="complete">
           <h2>Your password has been changed!</h2>
           <div class="complete__summary">
-            You are already logged in and can <nuxt-link to="/">continue shopping</nuxt-link> now.<br/>
-            If you want to change your password again, please go to the
-            <nuxt-link :to="{name: 'account-details'}">Your Account</nuxt-link> section.
+            Your password has been changed. Please go to the <nuxt-link :to="{name: 'account-login'}">login</nuxt-link>
+            section or <nuxt-link to="/">continue shopping</nuxt-link> and login on checkout.
           </div>
         </div>
       </template>
@@ -50,7 +49,6 @@
   import { changePassword } from '../utils/auth/index'
   export default {
     name: 'ChangeResetPassword',
-    middleware: ['authenticated'],
     data: function () {
       return {
         password: '',
@@ -68,17 +66,25 @@
     },
     methods: {
       onConfirmPassword () {
+        let userHash = this.$route.query.user
+        let token = this.$route.query.token
         this.$store.dispatch(
           'passwordValidation',
           {password: this.password, passwordConfirm: this.passwordConfirm}
         ).then(
           isValid => {
             if (isValid) {
-              changePassword(this, this.password, () => {
+              let params = {password: this.password, token: token, uidb64: userHash}
+              changePassword(this, params, () => {
                 this.passwordChanged = true
                 this.$store.dispatch('addAlert', {
                   message: 'Successfully reset your password!',
                   level: 'info'
+                })
+              }, () => {
+                this.$store.dispatch('addAlert', {
+                  message: 'Something is wrong with your credentials',
+                  level: 'error'
                 })
               })
             }

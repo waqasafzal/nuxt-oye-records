@@ -35,6 +35,7 @@
   import MyCharts from '~/components/account/MyCharts'
   import MyArtists from '~/components/account/MyArtists'
   import MyOrders from '~/components/account/MyOrders'
+  import CustomerData from '~/components/account/CustomerData'
   import { logout } from '../../utils/auth/index'
   import LoggedOut from '../../components/shared/LoggedOut'
 
@@ -71,7 +72,7 @@
     },
     computed: {
       menuItems () {
-        var menuItems = ['Addresses', 'Purchases', 'Back/Pre Orders']
+        var menuItems = ['Customer Data', 'Addresses', 'Purchases', 'Back/Pre Orders']
         if (this.user.canPublishCharts) {
           menuItems.push('Charts')
         }
@@ -99,6 +100,8 @@
           return MyArtists
         } else if (item === 'Back/Pre Orders') {
           return MyOrders
+        } else if (item === 'Customer Data') {
+          return CustomerData
         } else {
           return MyCharts
         }

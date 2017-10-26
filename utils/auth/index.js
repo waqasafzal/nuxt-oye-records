@@ -143,12 +143,12 @@ export const resetEmail = (context, email, callback) => {
   context.$http.post(RESET_URL, {email: email}).then(callback)
 }
 
-export const changePassword = (context, password, callback) => {
+export const changePassword = (context, params, callback, errorCallback) => {
   context.$http.post(
     CHANGE_PASSWORD_URL,
-    {password: password},
+    params,
     {headers: {
       'Authorization': getAuthHeader()
     }}
-  ).then(callback)
+  ).then(callback).catch(errorCallback)
 }
