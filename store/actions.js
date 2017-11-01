@@ -395,18 +395,18 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
           paymentMethods: profile.paymentMethods
         })
       }
-      store.commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
-      if (profile.unpaidOrder) {
-        if (profile.unpaidOrder.shippingAddress) {
-          let country = profile.unpaidOrder.shippingAddress.country
-          store.dispatch('setShippingCountry', {
-            country: country
-          })
-          store.dispatch('getPaymentOptions', {
-            country: country
-          })
-        }
-      }
+      // store.commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
+      // if (profile.unpaidOrder) {
+      //   if (profile.unpaidOrder.shippingAddress) {
+      //     let country = profile.unpaidOrder.shippingAddress.country
+      //     store.dispatch('setShippingCountry', {
+      //       country: country
+      //     })
+      //     store.dispatch('getPaymentOptions', {
+      //       country: country
+      //     })
+      //   }
+      // }
       if (profile.email) {
         store.commit(types.SET_USER_EMAIL, profile.email)
       }
