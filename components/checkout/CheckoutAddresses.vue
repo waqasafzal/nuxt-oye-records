@@ -233,7 +233,7 @@
           }
         } else {
           this.$store.dispatch('addAlert', {
-            level: alert,
+            level: 'error',
             message: 'Please make sure that all required data is correct.'
           })
         }
