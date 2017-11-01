@@ -639,49 +639,49 @@ export const validateAddress = (store, args) => new Promise((resolve, reject) =>
   }
 
   if (stateAddressValidation) {
-    if (address.firstName.length === 0) {
+    if (!address.firstName || address.firstName.length === 0) {
       stateAddressValidation.firstName = 'Required field'
       valid = false
     } else {
       stateAddressValidation.firstName = ''
     }
 
-    if (address.lastName.length === 0) {
+    if (!address.lastName || address.lastName.length === 0) {
       stateAddressValidation.lastName = 'Required field'
       valid = false
     } else {
       stateAddressValidation.lastName = ''
     }
 
-    if (address.street.length === 0) {
+    if (!address.street || address.street.length === 0) {
       stateAddressValidation.street = 'Required field'
       valid = false
     } else {
       stateAddressValidation.street = ''
     }
 
-    if (address.number.length === 0) {
+    if (!address.number || address.number.length === 0) {
       stateAddressValidation.number = 'Required field'
       valid = false
     } else {
       stateAddressValidation.number = ''
     }
 
-    if (address.zip.length === 0) {
+    if (!address.zip || address.zip.length === 0) {
       stateAddressValidation.zip = 'Required field'
       valid = false
     } else {
       stateAddressValidation.zip = ''
     }
 
-    if (address.city.length === 0) {
+    if (!address.city || address.city.length === 0) {
       stateAddressValidation.city = 'Required field'
       valid = false
     } else {
       stateAddressValidation.city = ''
     }
 
-    if (address.country.length === 0) {
+    if (!address.country || address.country.length === 0) {
       stateAddressValidation.country = 'Required field'
       valid = false
     } else {

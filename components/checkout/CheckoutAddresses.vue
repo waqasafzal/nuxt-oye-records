@@ -54,7 +54,7 @@
           </template>
         </div>
         <div class="float-right-bottom">
-          <proceed-button @click="onProceed()">Proceed to payment
+          <proceed-button @click="onProceed">Proceed to payment
           </proceed-button>
         </div>
       </div>
@@ -231,6 +231,11 @@
           } else {
             this.$store.commit(types.SET_SHIPPING_ADDRESS_CONFIRMED)
           }
+        } else {
+          this.$store.dispatch('addAlert', {
+            level: alert,
+            message: 'Please make sure that all required data is correct.'
+          })
         }
       },
       onEmailChanged (value) {
