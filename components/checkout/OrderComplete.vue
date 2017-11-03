@@ -23,7 +23,8 @@
         lastOrderNo = unpaidOrder.pk
       }
       return {
-        lastOrderNo: lastOrderNo
+        lastOrderNo: lastOrderNo,
+        isSelfCollector: false
       }
     },
     watch: {
@@ -34,16 +35,18 @@
       }
     },
     computed: {
-      isSelfCollector () {
-        let shippingOption = this.$store.getters.getShippingOption
-        return shippingOption && shippingOption.id === '-1'
-      },
       order () {
         return this.$store.getters.getUnpaidOrder
       }
     },
     mounted () {
       this.$store.commit(types.SET_UNPAID_ORDER, null)
+
+      // set the current self collector property
+      let shippingOption = this.$store.getters.getShippingOption
+      this.isSelfCollector = shippingOption && shippingOption.id === '-1'
+      // get new cart object from server
+      this.$store.dispatch('getCart')
     }
   }
 </script>

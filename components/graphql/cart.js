@@ -34,6 +34,7 @@ export const oyeCart = gql`
             quantity
             smallImageUrl
             notAvailable
+            pricePerItem
             lineTotal
             backorder
         }

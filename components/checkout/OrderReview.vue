@@ -155,8 +155,6 @@
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
                 }
               }
-              // set the new cart
-              this.$store.dispatch('setCart', {cart: data.placeOrder.cart})
             }
           )
         }

@@ -297,8 +297,8 @@ const store = new Vuex.Store({
     },
     [types.SET_SHIPPING_OPTIONS]: (state, shippingOptions) => {
       state.userProfile.shipping.options = shippingOptions
-      if (shippingOptions.length > 0 && !state.userProfile.shipping.options) {
-        state.userProfile.shipping.option = shippingOptions[0]
+      if (shippingOptions.length > 0 && !state.checkout.shipping.option) {
+        state.checkout.shipping.option = shippingOptions[0]
       }
     },
     [types.SET_SHIPPING_OPTION]: (state, shippingOption) => {

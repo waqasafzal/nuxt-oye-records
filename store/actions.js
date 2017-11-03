@@ -741,9 +741,13 @@ export const cancelOrder = ({commit, dispatch}, args) => new Promise((resolve, r
 export const setCart = ({commit}, args) => new Promise((resolve, reject) => {
   var cart = args.cart
   commit(types.SET_CART, cart)
-  commit(types.SET_SHIPPING_OPTION, null)
   if (cart && cart.shippingOptions) {
-    commit(types.SET_SHIPPING_OPTIONS, cart.shippingOptions.options)
+    let options = cart.shippingOptions.options
+    commit(types.SET_SHIPPING_OPTIONS, options)
+    if (options.length > 0) {
+      commit(types.SET_SHIPPING_OPTION, options[0])
+    }
+    commit(types.SET_VAT_EXCLUDED, cart.shippingOptions.isVatExcluded)
   }
 })
 

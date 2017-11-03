@@ -43,7 +43,7 @@
               </nuxt-link>
             </div>
             <div class="col-2 cart__line__cell">
-              <div class="cart-cell-center flex-align-right">{{getPrice(line.release.price.gross)}} &euro;</div>
+              <div class="cart-cell-center flex-align-right">{{getPrice(line.pricePerItem)}} &euro;</div>
             </div>
             <div class="col-1"></div>
             <div class="col-1 cart__line__cell">
@@ -170,8 +170,11 @@
       shipping () {
         return this.$store.getters.getShippingOption && this.$store.getters.getShippingOption.price || '0.00'
       },
+      totalNet () {
+        return this.total / (1 + this.vatRate / 100)
+      },
       vat () {
-        var value = (this.total / 100) * this.vatRate
+        let value = (this.total - this.totalNet)
         return roundFixed(value)
       },
       vatRate () {
