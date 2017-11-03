@@ -15,6 +15,7 @@ export const order = gql`
         status
         porto
         isPaid
+        isSelfCollector
         paymentType
     }
 `

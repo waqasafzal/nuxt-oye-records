@@ -134,7 +134,7 @@
               } else {
                 let order = data.placeOrder.order
                 this.$store.commit(types.SET_UNPAID_ORDER, order)
-                if (!order.isPaid) {
+                if (!order.isPaid && !order.isSelfCollector) {
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
                   if (order.shippingCountry) {
                     this.$store.dispatch('setShippingCountry', order)

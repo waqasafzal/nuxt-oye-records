@@ -43,6 +43,10 @@
     &:hover {
       text-decoration: underline;
     }
+    &.disabled {
+      color: $brand-secondary-color-red;
+      cursor: not-allowed;
+    }
   }
 }
 

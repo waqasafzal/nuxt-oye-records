@@ -4,52 +4,66 @@
       <h3>
         Order #{{order.pk}} ({{order.date}})
       </h3>
-      <div @click="onDownload" class="download">Download invoice</div>
+      <div @click="onDownload" v-if="!order.isSelfCollector || order.isPaid" class="download">Download invoice</div>
+      <div class="download disabled" v-else>Invoice available after pickup</div>
     </div>
-    <div class="cart__lines">
-      <div class="cart__line" v-for="quantified in order.releases">
-        <nuxt-link :to="{name: 'releases-slug', params: {'slug': quantified.release.slug}}">
+    <template v-if="loading">
+      <loading-spinner :loading="loading"></loading-spinner>
+    </template>
+    <template v-else-if="cart">
+      <div class="cart__lines">
+        <div class="cart__line" v-for="cartLine in cart.lines">
+          <nuxt-link :to="{name: 'releases-slug', params: {'slug': cartLine.release.slug}}">
 
-          <div class="row">
-            <div class="col-2">
-              <img class="" :src="quantified.release.smallImageUrl" />
-            </div>
-            <div class="col-4">
-              <div class="cart__line__product__info">
-                <div class="release__name">{{ quantified.release.artistFirstName }} {{ quantified.release.artistLastName }}</div>
-                <div class="release__title">{{ quantified.release.title }}</div>
-                <div v-if="order.status === 'Paid'" class="release__shipping">
-                  <div :class="['product__info__availability', quantified.release.availability.status]"></div>
-                  <div>
-                    <template v-if="quantified.release.availability.status === 'out'">
-                      <span>Shipping as soon as possible</span>
-                    </template>
-                    <template v-else-if="quantified.release.availability.status === 'upcoming'">
-                      <span>Preorder {{quantified.release.releasedAt}}</span>
-                    </template>
-                    <template v-else>Ready for shipping</template>
+            <div class="row">
+              <div class="col-2">
+                <img class="" :src="cartLine.smallImageUrl"/>
+              </div>
+              <div class="col-4">
+                <div class="cart__line__product__info">
+                  <div class="release__name">{{ cartLine.release.artistFirstName}} {{ cartLine.release.artistLastName }}</div>
+                  <div class="release__title">{{ cartLine.release.title }}</div>
+                  <div v-if="order.status === 'Paid'" class="release__shipping">
+                    <div :class="['product__info__availability', cartLine.release.availability.status]"></div>
+                    <div>
+                      <template v-if="cartLine.release.availability.status === 'out'">
+                        <span>Shipping as soon as possible</span>
+                      </template>
+                      <template v-else-if="cartLine.release.availability.status === 'upcoming'">
+                        <span>Preorder {{cartLine.release.releasedAt}}</span>
+                      </template>
+                      <template v-else>Ready for shipping</template>
+                    </div>
                   </div>
                 </div>
               </div>
+              <div class="col-4">{{cartLine.quantity}}x</div>
+              <div class="col-2">{{cartLine.release.price.gross}}&euro;</div>
             </div>
-            <div class="col-4">
-              {{quantified.quantity}}x
-            </div>
-            <div class="col-2">
-              {{quantified.release.price.gross}}&euro;
-            </div>
-          </div>
-        </nuxt-link>
+          </nuxt-link>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
   import { getAuthHeader } from '../../utils/auth/index'
+  import apolloClient from '~/plugins/apollo'
+  import gql from 'graphql-tag'
+  import LoadingSpinner from '../shared/LoadingSpinner'
+  import { oyeCart } from '../graphql/cart'
+
   export default {
+    components: {LoadingSpinner},
     name: 'Order',
     props: ['order'],
+    data () {
+      return {
+        cart: undefined,
+        loading: false
+      }
+    },
     methods: {
       onDownload () {
         console.log('download')
@@ -66,6 +80,27 @@
           }
         )
       }
+    },
+    mounted () {
+      this.loading = true
+      let vm = this
+      apolloClient.query({
+        query: gql`query Order($pk: ID!) {
+          order(pk: $pk) {
+            cart {
+                ...OyeCart
+            }
+          }
+        }
+        ${oyeCart}`,
+        variables: {
+          pk: this.order.pk
+        }
+      }).then(({data}) => {
+        vm.loading = false
+        let order = data.order
+        vm.cart = order.cart
+      })
     }
   }
 </script>

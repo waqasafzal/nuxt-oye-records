@@ -43,9 +43,8 @@
 
 <script>
   import gql from 'graphql-tag'
-  import { order, oyeCart } from '../graphql/cart'
+  import { order } from '../graphql/cart'
   import Order from '../orders/Order'
-  import { release } from '../graphql/releases'
   import LoadingSpinner from '../shared/LoadingSpinner'
   import { SimplePagination } from '~/components/graphql/mixins'
   import * as types from '../../store/types'
@@ -94,16 +93,6 @@
                   cursor
                   node {
                     ...Order
-                    cart {
-                        ...OyeCart
-                    }
-                    releases {
-                      quantity
-                      release {
-                        ...Release
-                        smallImageUrl: thumbnailUrl(size: 100)
-                      }
-                    }
                   }
                 }
                 pageInfo {
@@ -111,8 +100,6 @@
                 }
               }
             }
-            ${release}
-            ${oyeCart}
             ${order}`,
           variables: {
             first: 25
