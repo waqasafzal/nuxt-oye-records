@@ -139,6 +139,7 @@
         this.getPaymentOptions(value)
       },
       shippingOption (option) {
+        console.log('shipping option ' + option)
         this.selectPaymentByShippingOption(option)
       },
       selectedPayment (payment) {
