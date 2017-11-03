@@ -52,8 +52,8 @@
 
 <style>
   .fade-leave-active {
-    transition: opacity 1s ease;
-    -webkit-transition: opacity 1s ease;
+    transition: opacity 2s ease;
+    -webkit-transition: opacity 2s ease;
   }
   .fade-enter-active {
     opacity: 0.5 !important;
