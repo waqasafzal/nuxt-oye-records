@@ -41,7 +41,7 @@
         function () {
           vm.show = false
         },
-        3000
+        2000
       )
     },
     beforeDestroy () {
@@ -51,17 +51,11 @@
 </script>
 
 <style>
-  .fade-leave-active {
-    transition: opacity 2s ease;
-    -webkit-transition: opacity 2s ease;
+  .fade-leave-active, .fade-enter-active  {
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
   }
-  .fade-enter-active {
-    opacity: 0.5 !important;
-  }
-  .fade-enter {
-    opacity: 0.5 !important;
-  }
-  .fade-leave-to {
+  .fade-leave-to, .fade-enter  {
     opacity: 0;
   }
 </style>
