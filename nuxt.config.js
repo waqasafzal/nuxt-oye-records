@@ -37,7 +37,7 @@ if (process.env.API_ROOT) {
 
 let adyenScript = (process.env.NODE_ENV === 'production')
   ? 'https://live.adyen.com/hpp/cse/js/8214959999792925.shtml'
-  : 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'
+  : 'https://test.adyen.com/hpp/cse/js/1115135975200408.shtml'
 
 //
 //      var heapdump = require('heapdump')
