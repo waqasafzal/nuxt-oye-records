@@ -28,13 +28,6 @@
         } else if (params['provider'] === 'paypal') {
           paymentProvider = 'paypal'
         }
-//          var verifyParams = {}
-//          for (let key in params) {
-//            if (key !== 'merchantSig') {
-//              verifyParams[key] = params[key]
-//            }
-//          }
-//        }
         this.verificationStatus = 'verifying'
         apolloClient.mutate({
           mutation: gql`mutation VerifyOrder($provider: String!, $params: JSONString!) {
