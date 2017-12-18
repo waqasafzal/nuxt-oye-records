@@ -148,10 +148,10 @@
 
       options.name = encryptedBlobFieldName
       options.onsubmit = this.onSubmit
-      options.cardTypeElement = this.$refs.cardType
 
       // eslint-disable-next-line no-undef
-      adyen.createEncryptedForm(form, options)
+      let encryptedForm = adyen.createEncryptedForm(form, options)
+      encryptedForm.addCardTypeDetection(this.$refs.cardType)
     }
   }
 </script>
