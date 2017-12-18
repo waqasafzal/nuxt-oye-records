@@ -35,7 +35,9 @@ if (process.env.API_ROOT) {
   setupAPI()
 }
 
-var heapdump = require('heapdump')
+let adyenScript = (process.env.NODE_ENV === 'production')
+  ? 'https://live.adyen.com/hpp/cse/js/8214959999792925.shtml'
+  : 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'
 
 //
 //      var heapdump = require('heapdump')
@@ -91,7 +93,7 @@ module.exports = {
       {href: 'https://fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
     ],
     script: [
-      {src: 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'}
+      {src: adyenScript}
     ]
   },
   /*
