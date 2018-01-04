@@ -131,6 +131,9 @@ body {
   background:
           -webkit-linear-gradient(-45deg, transparent 0%, transparent 48%, $brand-color-black 48%,  $brand-color-black 52%, transparent 52%, transparent 100%),
           -webkit-linear-gradient(45deg, transparent 0%, transparent 48%, $brand-color-black 48%,  $brand-color-black 52%, transparent 52%, transparent 100%);
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .force-bigger-screen {
