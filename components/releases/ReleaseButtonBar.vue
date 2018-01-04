@@ -1,6 +1,6 @@
 <template>
   <div class="release__button-bar" v-if="release">
-    <div class="play" v-if="release.tracks.length > 0">
+    <div class="play" v-if="release.tracks && release.tracks.length > 0">
       <play-release-button :size=baseSize :release="release"></play-release-button>
     </div>
     <add-to-cart-button :withTitle="withTitle" :release="release" :size=baseSize class="release__button-bar__add-to-cart"></add-to-cart-button>

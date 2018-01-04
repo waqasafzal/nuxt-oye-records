@@ -134,9 +134,14 @@ export const getUserFromLocalStorage = () => {
 }
 
 export const jwtUpToDate = (jwt) => {
-  let expMs = jwt['exp'] * 1000
-  let in30Secs = Date.now() + 30 * 1000
-  return new Date(expMs) > new Date(in30Secs)
+  let exp = jwt['exp']
+  if (exp) {
+    let expMs = exp * 1000
+    let in30Secs = Date.now() + 30 * 1000
+    return new Date(expMs) > new Date(in30Secs)
+  } else {
+    return true
+  }
 }
 
 export const resetEmail = (context, email, callback) => {

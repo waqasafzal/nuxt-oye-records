@@ -35,21 +35,12 @@ if (process.env.API_ROOT) {
   setupAPI()
 }
 
-let adyenScript = (process.env.NODE_ENV === 'production')
-  ? 'https://live.adyen.com/hpp/cse/js/1115135975200408.shtml'
+let adyenScript = process.env.ADYEN_CSE
+  ? process.env.ADYEN_CSE
   : 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'
-
-//
-//      var heapdump = require('heapdump')
-//
-// setInterval(function () {
-//   heapdump.writeSnapshot(function (err, filename) {
-//     console.log('dump written to', filename)
-//     if (err) {
-//       console.log(err)
-//     }
-//   })
-// }, 600000)
+  //
+  // : ((process.env.NODE_ENV === 'production')
+  //   ? 'https://live.adyen.com/hpp/cse/js/1115135975200408.shtml' : )
 
 module.exports = {
   /*

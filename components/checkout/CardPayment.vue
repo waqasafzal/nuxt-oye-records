@@ -4,7 +4,7 @@
       <div class="form-group flex-column">
         <label for="cardNumber">Card Number</label>
         <input @keypress="onCardNumberChanged" ref="cardNumber" type="text" id="cardNumber" class="form-control" data-encrypted-name="number">
-        <span ref="cardType" id="cardType"></span>
+        <!--<span ref="cardType" id="cardType"></span>-->
       </div>
       <div class="form-group flex-column owner">
         <label for="owner">Name On Card</label>
@@ -150,8 +150,7 @@
       options.onsubmit = this.onSubmit
 
       // eslint-disable-next-line no-undef
-      let encryptedForm = adyen.createEncryptedForm(form, options)
-      encryptedForm.addCardTypeDetection(this.$refs.cardType)
+      adyen.createEncryptedForm(form, options)
     }
   }
 </script>
