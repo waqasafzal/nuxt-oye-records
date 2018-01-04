@@ -41,6 +41,7 @@
     },
     mounted () {
       this.$store.commit(types.SET_UNPAID_ORDER, null)
+      this.$store.commit(types.SET_TERMS_AGREED, false)
 
       // set the current self collector property
       let shippingOption = this.$store.getters.getShippingOption

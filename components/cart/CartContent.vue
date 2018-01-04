@@ -221,6 +221,9 @@
     mounted () {
       this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, true)
       if (!this.review) {
+        this.$store.commit(types.FINISH_CHECKOUT)
+        this.$store.commit(types.SET_TERMS_AGREED, false)
+        this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, null)
         this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [{f: this.pushCheckout, text: 'Go to checkout'}])
         this.$store.commit(types.SET_BUTTON_BAR_SHOW, this.linesAvailable)
       }
