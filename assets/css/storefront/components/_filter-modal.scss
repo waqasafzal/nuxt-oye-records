@@ -23,7 +23,7 @@
   }
   &-modal {
     opacity: 1;
-    border-radius: 2px;
+    border-radius: 4px;
     margin: auto;
     font-weight: 300;
     max-width: 650px;
@@ -37,7 +37,7 @@
       flex-direction: row;
       justify-content: space-between;
       padding-left: 2 * $global-padding;
-      padding-right: $global-padding;
+      //padding-right: $global-padding;
       h4 {
         margin-top: auto;
         margin-bottom: auto;
@@ -47,6 +47,9 @@
         font-weight: 300;
         font-size: $font-size-h2;
         cursor: pointer;
+        background: inherit;
+        width: inherit;
+        height: inherit;
       }
     }
     &__body {
