@@ -34,8 +34,8 @@
     border-radius: 4px;
     &-close {
       position: absolute;
-      top: -2px;
-      right: 16px;
+      top: -8px;
+      right: 8px;
       padding: 2px;
       font-size: 28px;
       cursor: pointer;
