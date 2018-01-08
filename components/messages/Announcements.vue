@@ -1,5 +1,5 @@
 <template>
-  <transition name="announcements">
+  <transition name="announcements container-fluid">
     <div class="announcements" v-if="showAnnouncements && announcements">
       <announcement-item :key="`${item.priority}-${i}`" :announcement="item" v-for="(item, i) in announcements"></announcement-item>
     </div>

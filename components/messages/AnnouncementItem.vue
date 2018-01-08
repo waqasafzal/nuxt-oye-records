@@ -31,6 +31,7 @@
     text-align: center;
     padding: 8px;
     position: relative;
+    border-radius: 4px;
     &-close {
       position: absolute;
       top: -2px;
