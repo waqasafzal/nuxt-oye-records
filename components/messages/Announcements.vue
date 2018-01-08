@@ -31,9 +31,8 @@
 
 <style>
   .announcements {
-    margin-top: 41px;
     top: -100px;
-    margin-bottom: -41px;
+    width: 100%;
     display: flex;
   }
   .announcements-enter-active {

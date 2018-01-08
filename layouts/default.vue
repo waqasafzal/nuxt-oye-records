@@ -3,7 +3,6 @@
     <div class="header">
       <cookie-law transitionName="slideFromBottom" theme="oye" position="bottom" v-if="isMounted"></cookie-law>
       <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
-      <announcements></announcements>
     </div>
     <div class="force-bigger-screen d-md-none">
       The mobile version is coming soon.<br/>
@@ -11,6 +10,7 @@
       screen or bounce to the classic shop <a href="http://oye-records.com" target="_blank">here.</a>
     </div>
     <header class="navbar" role="navigation">
+      <announcements></announcements>
       <brand-navbar v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
     </header>
