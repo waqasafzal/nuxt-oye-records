@@ -87,7 +87,8 @@ const store = new Vuex.Store({
     checkoutActive: false,
     userFormErrors: getInitialUserForm(),
     isMobile: false,
-    isSmallScreen: false
+    isSmallScreen: false,
+    announcements: []
   },
 
   mutations: {
@@ -461,6 +462,12 @@ const store = new Vuex.Store({
     },
     [types.SET_USER_EMAIL]: (state, email) => {
       state.user.email = email
+    },
+    [types.SET_ANNOUNCEMENTS]: (state, announcements) => {
+      state.announcements = announcements
+    },
+    [types.REMOVE_ANNOUNCEMENT]: (state, announcement) => {
+      state.announcements = state.announcements.filter(item => item.message !== announcement.message)
     }
   },
 
@@ -655,7 +662,8 @@ const store = new Vuex.Store({
     },
     hasMobileMenu (state) {
       return state.isMobile || state.isSmallScreen
-    }
+    },
+    announcements: state => state.announcements
   },
 
   actions

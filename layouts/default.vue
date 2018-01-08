@@ -1,12 +1,9 @@
 <template>
   <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
     <div class="header">
-      <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
+      <cookie-law transitionName="slideFromBottom" theme="oye" position="bottom" v-if="isMounted"></cookie-law>
       <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
-    </div>
-    <div id="alpha-warning">
-      ATTENTION: This is the Alpha version of the new OYE Records webshop.<br/>
-      You <strong>can not</strong> buy any records here. Please visit our <a href="https://oye-records.com/">current website</a>
+      <announcements></announcements>
     </div>
     <div class="force-bigger-screen d-md-none">
       The mobile version is coming soon.<br/>
@@ -43,9 +40,10 @@
   import * as types from '../store/types'
   import PrimaryControlPanel from '../components/shared/PrimaryControlPanel'
   import AudioPlayer from '../components/audio/AudioPlayer'
+  import Announcements from '../components/messages/Announcements'
 
   export default {
-    components: {AudioPlayer, PrimaryControlPanel, MobileMenu, AccountNavbar, Alerts, BrandNavbar},
+    components: {Announcements, AudioPlayer, PrimaryControlPanel, MobileMenu, AccountNavbar, Alerts, BrandNavbar},
     name: 'app',
     data: function () {
       return {

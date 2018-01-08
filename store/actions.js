@@ -371,6 +371,10 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
                 }
             }
         }
+        announcements {
+            priority
+            message
+        }
     }
     ${oyeCart}
     ${addressFragment}
@@ -395,21 +399,15 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
           paymentMethods: profile.paymentMethods
         })
       }
-      // store.commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
-      // if (profile.unpaidOrder) {
-      //   if (profile.unpaidOrder.shippingAddress) {
-      //     let country = profile.unpaidOrder.shippingAddress.country
-      //     store.dispatch('setShippingCountry', {
-      //       country: country
-      //     })
-      //     store.dispatch('getPaymentOptions', {
-      //       country: country
-      //     })
-      //   }
-      // }
       if (profile.email) {
         store.commit(types.SET_USER_EMAIL, profile.email)
       }
+    }
+    let announcements = data.announcements
+    if (announcements && announcements.length > 0) {
+      let readAnnouncements = window.localStorage.getItem('announcements')
+      let msgList = readAnnouncements ? JSON.parse(readAnnouncements) : []
+      store.commit(types.SET_ANNOUNCEMENTS, announcements.filter(info => !msgList.includes(info.message)))
     }
     resolve(profile)
   })
