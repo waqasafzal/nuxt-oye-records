@@ -25,11 +25,8 @@
 
 <style lang="scss">
   .announcement {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    padding: 8px;
+    max-width: 320px;
+    padding: 16px 32px 16px 16px;
     position: relative;
     border-radius: 4px;
     &-close {
@@ -40,9 +37,12 @@
       font-size: 28px;
       cursor: pointer;
       &:hover {
-        top: -4px;
-        transform: scale(1.5);
+        color: darken(#fff, 5);
       }
+    }
+    a {
+      text-decoration: underline;
+      color: inherit;
     }
   }
 </style>

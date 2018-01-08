@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
     <div class="header">
-      <cookie-law transitionName="slideFromBottom" theme="oye" position="bottom" v-if="isMounted"></cookie-law>
+      <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
       <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
     </div>
     <div class="force-bigger-screen d-md-none">
@@ -10,7 +10,6 @@
       screen or bounce to the classic shop <a href="http://oye-records.com" target="_blank">here.</a>
     </div>
     <header class="navbar" role="navigation">
-      <announcements></announcements>
       <brand-navbar v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
     </header>
@@ -20,6 +19,7 @@
         <nuxt></nuxt>
       </div>
     </div>
+    <announcements></announcements>
     <div class="bottom">
       <div class="container-fluid">
         <primary-control-panel></primary-control-panel>
@@ -167,3 +167,15 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .navbar {
+    z-index: 50;
+    top: 40px;
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    border-bottom: 1px solid #EBE9E6;
+    padding: 0;
+  }
+</style>
