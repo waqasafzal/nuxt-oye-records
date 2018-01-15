@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form method="post" action="https://test.adyen.com/hpp/skipDetails.shtml" id="adyenForm" name="adyenForm" target="_parent">
+    <form method="post" action="https://live.adyen.com/hpp/skipDetails.shtml" id="adyenForm" name="adyenForm" target="_parent">
       <input type="hidden" :name="key" :value="value" v-for="(value, key) in paymentFormData" />
     </form>
 
