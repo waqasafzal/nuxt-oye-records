@@ -31,6 +31,7 @@
 
 <style>
   .announcements {
+    z-index: 60;
     position: fixed;
     bottom: 8px;
     left: 8px;
