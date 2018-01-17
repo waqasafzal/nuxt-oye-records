@@ -15,10 +15,12 @@
   import PayOrder from '~/components/checkout/PayOrder'
   import OrderComplete from '~/components/checkout/OrderComplete'
   import OrderVerification from '~/components/checkout/OrderVerification'
+  import CartContent from '~/components/cart/CartContent'
   import * as types from '../../store/types'
   import CheckoutOverview from '../../components/checkout/CheckoutOverview'
   import CheckoutButtons from '../../components/checkout/CheckoutButtons'
   import PaypalRedirect from '../../components/checkout/PaypalRedirect'
+  import { mapGetters } from 'vuex'
 
   export default {
     components: {CheckoutButtons, CheckoutOverview},
@@ -27,7 +29,9 @@
       currentCheckoutView () {
         var currentCheckoutView = null
         let checkoutState = this.$store.getters.getCheckoutState
-        if (checkoutState === 1) {
+        if (checkoutState < 5 && this.isEmptyCart) {
+          currentCheckoutView = CartContent
+        } else if (checkoutState === 1) {
           currentCheckoutView = CheckoutMethod
         } else if (checkoutState === 2) {
           currentCheckoutView = CheckoutAddresses
@@ -45,7 +49,8 @@
           currentCheckoutView = PaypalRedirect
         }
         return currentCheckoutView
-      }
+      },
+      ...mapGetters(['isEmptyCart'])
     },
     watch: {
       currentCheckoutView (view) {

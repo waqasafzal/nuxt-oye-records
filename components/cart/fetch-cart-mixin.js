@@ -14,13 +14,7 @@ const fetchCart = {
 const fetchUserProfile = {
   mounted () {
     const store = this.$store
-    store.dispatch('getProfile').then(
-      (profile) => {
-        if (profile.unpaidOrder) {
-          store.dispatch('getPaymentOptions', {country: profile.shippingAddresses[0].country})
-        }
-      }
-    ).catch(e => console.error(e))
+    store.dispatch('getProfile').catch(e => console.error(e))
   }
 }
 

@@ -553,6 +553,7 @@ const store = new Vuex.Store({
       if (checkoutState === 3 && store.getters.isPaymentOptionConfirmed) {
         checkoutState = 4
       }
+
       return checkoutState
     },
     getMaximumCheckoutState (state) {
@@ -664,7 +665,11 @@ const store = new Vuex.Store({
     hasMobileMenu (state) {
       return state.isMobile || state.isSmallScreen
     },
-    announcements: state => state.announcements
+    announcements: state => state.announcements,
+    isEmptyCart: (state, getters) => {
+      return getters.getCart &&
+        (getters.getCart.lines.length === 0 && getters.getCart.preorderLines === 0)
+    }
   },
 
   actions

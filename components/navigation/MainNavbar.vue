@@ -3,10 +3,10 @@
     <template v-if="!$store.getters.hasMobileMenu && isCheckout">
       <div class="navbar__checkout navigation">
         <div class="checkout__navbar">
-          <div :class="['nav-item', 'active', canSelectCheckout ? 'clickable': '']">
+          <div :class="['nav-item', checkoutState < 5 && isEmptyCart ? '': 'active', canSelectCheckout ? 'clickable': '']">
             <div class="checkout-state">
               <div class="checkout-num" @click="setCheckoutState(1)">1</div>
-              <div class="checkout-name" @click="seDtCheckoutState(1)">Checkout Method</div>
+              <div class="checkout-name" @click="setCheckoutState(1)">Checkout Method</div>
             </div>
           </div>
           <div :class="['nav-item', checkoutState > 1 ? 'active': '', hasCheckoutMethod ? 'clickable': '']">
@@ -64,6 +64,7 @@
   import { mixin as clickaway } from 'vue-clickaway'
 
   import * as types from '../../store/types'
+  import { mapGetters } from 'vuex'
   export default {
     name: 'MainNavbar',
     mixins: [ clickaway ],
@@ -91,7 +92,8 @@
       },
       checkoutState () {
         return this.$store.getters.getCheckoutState
-      }
+      },
+      ...mapGetters(['isEmptyCart'])
     },
     methods: {
       onClick (value) {
