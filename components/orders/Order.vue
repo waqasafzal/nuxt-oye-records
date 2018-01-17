@@ -66,7 +66,6 @@
     },
     methods: {
       onDownload () {
-        console.log('download')
         let config = {
           headers: {
             Authorization: getAuthHeader()

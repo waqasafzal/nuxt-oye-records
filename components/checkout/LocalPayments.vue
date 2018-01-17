@@ -12,7 +12,12 @@
     </div>
 
     <div class="d-flex justify-content-around">
-      <proceed-button type="submit" form="adyenForm">Pay</proceed-button>
+      <template v-if="isPaypal">
+        <proceed-button @click="sendPaypal" form="adyenForm">Pay</proceed-button>
+      </template>
+      <template v-else>
+        <proceed-button type="submit" form="adyenForm">Pay</proceed-button>
+      </template>
     </div>
 
   </div>
@@ -22,6 +27,7 @@
   import gql from 'graphql-tag'
   import apolloClient from '~/plugins/apollo'
   import ProceedButton from '../shared/ProceedButton'
+  import * as types from '../../store/types'
 
   const baseUrl = __API__.includes('localhost') ? 'http://localhost:3000' : __API__
 
@@ -39,6 +45,9 @@
       },
       resultUrl () {
         return baseUrl + this.$router.resolve({name: 'checkout', query: {verify: true}}).href
+      },
+      isPaypal () {
+        return this.order.paymentType === 'paypal'
       }
     },
     methods: {
@@ -58,6 +67,13 @@
       },
       getLogos (paymentType) {
         return this.$store.getters.getLogos(paymentType)
+      },
+      sendPaypal () {
+        if (this.order.paymentUrl) {
+          this.$store.commit(types.SET_PAYPAL_PAYMENT_URL, this.order.paymentUrl)
+          this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 8)
+          window.location.href = this.order.paymentUrl
+        }
       }
     },
     mounted () {

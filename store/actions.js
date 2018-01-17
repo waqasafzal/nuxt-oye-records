@@ -366,6 +366,7 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
                 shippingAddress {
                     country
                 }
+                paymentUrl
                 cart {
                     ...OyeCart
                 }
@@ -401,6 +402,10 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
       }
       if (profile.email) {
         store.commit(types.SET_USER_EMAIL, profile.email)
+      }
+      if (profile.unpaidOrder) {
+        store.commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
+        store.commit(types.ENTER_CHECKOUT)
       }
     }
     let announcements = data.announcements
@@ -732,6 +737,7 @@ export const cancelOrder = ({commit, dispatch}, args) => new Promise((resolve, r
       commit(types.SET_UNPAID_ORDER, null)
       dispatch('setCart', {cart: data.cancelOrder.cart})
       commit(types.SET_CURRENT_CHECKOUT_STATE, 4)
+      resolve()
     }
   )
 })

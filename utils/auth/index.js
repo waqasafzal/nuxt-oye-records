@@ -26,7 +26,14 @@ export const login = (context, creds, redirect) => {
     let data = response.data
     setToken(data.token)
     context.$store.dispatch('getCart')
-    context.$store.dispatch('getProfile')
+    context.$store.dispatch('getProfile').then(
+      (profile) => {
+        if (profile.unpaidOrder) {
+          context.$store.dispatch('getPaymentOptions', {country: profile.shippingAddresses[0].country})
+          context.$router.push({name: 'checkout'})
+        }
+      }
+    )
     // Redirect to a specified route
     if (redirect) {
       context.$router.push(redirect)

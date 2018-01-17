@@ -12,7 +12,7 @@
     <div class="col-12 col-md-3">
       <checkout-parameter @change="onChangePaymentMethod" :lines="paymentOptionLines">
         Payment Method
-        <component slot="extra" :is="paymentMethodComponent" :data="getPaymentMethodData(paymentMethod)" :variant="paymentOption.id"></component>
+        <component slot="extra" :is="paymentMethodComponent" :data="getPaymentMethodData(paymentMethod)" :variant="paymentOption && paymentOption.id || 'creditcard'"></component>
       </checkout-parameter>
     </div>
   </div>
@@ -59,7 +59,7 @@
       },
       paymentMethodComponent () {
         if (this.paymentMethod) {
-          if (this.paymentOption.id === 'creditcard') {
+          if (this.paymentOption && this.paymentOption.id === 'creditcard') {
             return CardPaymentMethod
           }
         } else {

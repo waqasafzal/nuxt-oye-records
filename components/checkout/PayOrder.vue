@@ -43,7 +43,15 @@
     },
     methods: {
       onCancel () {
-        this.$store.dispatch('cancelOrder', {id: this.order.pk})
+        let order = this.order
+        let vm = this
+        this.$store.dispatch('cancelOrder', {id: order.pk}).then(
+          () => {
+            if (order) {
+              vm.$store.commit('SET_SELECTED_PAYMENT_OPTION', {id: order.paymentType})
+            }
+          }
+        )
       }
     }
   }

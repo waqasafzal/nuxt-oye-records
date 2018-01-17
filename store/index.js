@@ -286,6 +286,7 @@ const store = new Vuex.Store({
     },
     [types.FINISH_CHECKOUT]: (state) => {
       state.checkoutActive = false
+      state.checkout.checkoutState = null
     },
     [types.DECREMENT_SEARCH_LOADING]: (state) => {
       state.search.loading--
