@@ -30,7 +30,6 @@ export const login = (context, creds, redirect) => {
       (profile) => {
         if (profile.unpaidOrder) {
           context.$store.dispatch('getPaymentOptions', {country: profile.shippingAddresses[0].country})
-          context.$router.push({name: 'checkout'})
         }
       }
     )

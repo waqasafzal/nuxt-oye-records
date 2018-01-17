@@ -403,10 +403,6 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
       if (profile.email) {
         store.commit(types.SET_USER_EMAIL, profile.email)
       }
-      if (profile.unpaidOrder) {
-        store.commit(types.SET_UNPAID_ORDER, profile.unpaidOrder)
-        store.commit(types.ENTER_CHECKOUT)
-      }
     }
     let announcements = data.announcements
     if (announcements && announcements.length > 0) {

@@ -18,7 +18,6 @@ const fetchUserProfile = {
       (profile) => {
         if (profile.unpaidOrder) {
           store.dispatch('getPaymentOptions', {country: profile.shippingAddresses[0].country})
-          this.$router.push({name: 'checkout'})
         }
       }
     ).catch(e => console.error(e))

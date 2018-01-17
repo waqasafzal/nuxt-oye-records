@@ -35,7 +35,8 @@
               ok
               order {
                 ...Order
-              }
+              },
+              newCart
             }
           }
           ${order}
@@ -54,6 +55,9 @@
             })
             this.$store.commit(types.SET_UNPAID_ORDER, data.verifyOrder.order)
             this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
+            if (data.verifiyOrder.newCart) {
+              this.$store.commit(types.SET_CART, data.verifiyOrder.newCart)
+            }
           } else {
             this.$store.commit(types.ADD_ALERT, {
               level: 'alert',
