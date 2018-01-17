@@ -21,6 +21,7 @@
   import { order, oyeCart } from '../graphql/cart'
   import CheckoutOverview from './CheckoutOverview'
   import LoadingSpinner from '../shared/LoadingSpinner'
+  import { mapGetters } from 'vuex'
 
   export default {
     components: {LoadingSpinner, CheckoutOverview, ProceedButton, CartContent},
@@ -32,15 +33,7 @@
     },
     watch: {
       selectedPaymentMethod (value) {
-        var button = {
-          f: this.onPlaceOrder
-        }
-        if (value) {
-          button['text'] = 'Pay Order'
-        } else {
-          button['text'] = 'Place Order'
-        }
-        this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [button])
+        this.switchButtonText(value)
       }
     },
     computed: {
@@ -75,7 +68,8 @@
       isLocalPayment () {
         let option = this.paymentOption
         return !['creditcard', 'cash'].includes(option)
-      }
+      },
+      ...mapGetters(['isOnlyPresale'])
     },
     methods: {
       onPlaceOrder () {
@@ -120,7 +114,7 @@
               cartId: this.cartId,
               porto: this.porto,
               vatExcluded: this.vatExcluded,
-              payment: this.paymentOption.id,
+              payment: this.paymentOption && this.paymentOption.id || '',
               paymentMethodId: this.selectedPaymentMethod && this.selectedPaymentMethod.id,
               email: this.$store.state.checkout.guestEmail
             }
@@ -158,22 +152,31 @@
             }
           )
         }
+      },
+      switchButtonText (paymentMethod) {
+        let button = {
+          f: this.onPlaceOrder
+        }
+        if (this.isOnlyPresale) {
+          button['text'] = 'Preorder Now'
+        } else if (paymentMethod) {
+          button['text'] = 'Pay Order'
+        } else {
+          button['text'] = 'Place Order'
+        }
+        this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [button])
       }
     },
     mounted () {
       this.$store.commit(types.SET_BUTTON_BAR_SHOW, true)
       this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, false)
-
-      var button = {
-        f: this.onPlaceOrder
+      this.switchButtonText(this.selectedPaymentMethod)
+      if (this.isOnlyPresale) {
+        this.$store.commit(types.SET_SHIPPING_OPTION, {
+          name: 'No shipping',
+          price: 0.0
+        })
       }
-
-      if (this.selectedPaymentMethod) {
-        button['text'] = 'Pay Order'
-      } else {
-        button['text'] = 'Place Order'
-      }
-      this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [button])
     },
     beforeDestroy () {
       this.$store.commit(types.SET_BUTTON_BAR_SHOW, false)

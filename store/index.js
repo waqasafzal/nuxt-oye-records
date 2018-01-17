@@ -528,8 +528,8 @@ const store = new Vuex.Store({
       let address = store.getters.getBillingAddress
       return address && address.country
     },
-    getCheckoutState (state) {
-      let order = store.getters.getUnpaidOrder
+    getCheckoutState (state, getters) {
+      let order = getters.getUnpaidOrder
       let currentState = state.checkout.checkoutState
 
       if (currentState < 6 && order && !order.isPaid) {
@@ -547,17 +547,17 @@ const store = new Vuex.Store({
       if (checkoutState === 1 && state.user.authenticated || state.checkout.guest || state.checkout.register) {
         checkoutState = 2
       }
-      if (checkoutState === 2 && store.getters.isShippingAddressConfirmed) {
+      if (checkoutState === 2 && getters.isShippingAddressConfirmed) {
         checkoutState = 3
       }
-      if (checkoutState === 3 && store.getters.isPaymentOptionConfirmed) {
+      if (checkoutState === 3 && getters.isPaymentOptionConfirmed || getters.isOnlyPresale) {
         checkoutState = 4
       }
 
       return checkoutState
     },
-    getMaximumCheckoutState (state) {
-      if (store.getters.getUnpaidOrder) {
+    getMaximumCheckoutState (state, getters) {
+      if (getters.getUnpaidOrder) {
         return 5
       }
       var checkoutState = 0
@@ -567,10 +567,10 @@ const store = new Vuex.Store({
       if (checkoutState === 1 && state.user.authenticated || state.checkout.guest || state.checkout.register) {
         checkoutState = 2
       }
-      if (checkoutState === 2 && store.getters.isShippingAddressConfirmed) {
+      if (checkoutState === 2 && getters.isShippingAddressConfirmed) {
         checkoutState = 3
       }
-      if (checkoutState === 3 && store.getters.isPaymentOptionConfirmed) {
+      if (checkoutState === 3 && getters.isPaymentOptionConfirmed) {
         checkoutState = 4
       }
       return checkoutState
@@ -669,6 +669,10 @@ const store = new Vuex.Store({
     isEmptyCart: (state, getters) => {
       return getters.getCart &&
         (getters.getCart.lines.length === 0 && getters.getCart.preorderLines === 0)
+    },
+    isOnlyPresale: (state, getters) => {
+      let cart = getters.getCart
+      return cart && cart.lines.length === 0 && cart.preorderLines.length > 0
     }
   },
 
