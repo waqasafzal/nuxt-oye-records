@@ -6,10 +6,6 @@
       </h3>
       <template v-if="!order.downloadDisabled">
         <div @click="onDownload" v-if="order.isPaid || !order.isSelfCollector" class="download">Download invoice</div>
-        <div class="download disabled" v-else-if="!order.isPaid">Invoice available after pickup</div>
-        <div class="download disabled" v-else>Order was not marked as paid</div>
-      </template>
-      <template v-else>
         <div class="download disabled">Download disabled</div>
       </template>
     </div>
