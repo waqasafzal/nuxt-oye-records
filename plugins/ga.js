@@ -26,8 +26,8 @@ import router from '~router'
   /*
    ** Set the current page
    */
-  // ga('create', 'UA-100941329-1', 'auto')
-  ga('create', 'UA-25861640-1', 'auto')
+  ga('create', 'UA-100941329-2', 'auto')
+  // ga('create', 'UA-25861640-1', 'auto')
   /*
    ** Every time the route changes (fired on initialization too)
    */
