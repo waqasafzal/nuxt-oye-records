@@ -9,11 +9,15 @@
     border-bottom: 1px solid $gray-color-2;
   }
   h1 {
+    font-size: 3rem;
+    vertical-align: inherit;
+    margin-top: inherit;
+
     line-height: 38px;
     letter-spacing: -1px;
     display: inline-block;
-    vertical-align: middle;
-    margin-top: 65px;
+    //vertical-align: middle;
+    //margin-top: 65px;
   }
   h3 {
     margin-top: 2em;

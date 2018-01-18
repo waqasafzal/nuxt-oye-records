@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div class="page__header">
-        New Releases
+        <h1>New Releases</h1>
 
         <meta-genre-filter @slug-selected="onGenreChanged"></meta-genre-filter>
         <filter-results-options @filter-changed="onFilterOptionsChanged" class="float-right"></filter-results-options>

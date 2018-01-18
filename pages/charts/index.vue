@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <div class="page__header">Charts</div>
+      <div class="page__header"><h1>Charts</h1></div>
       <div class="row">
         <div class="col-12 col-md-8">
           <div class="release-list-summary">
