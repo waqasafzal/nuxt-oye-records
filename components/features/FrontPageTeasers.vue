@@ -8,7 +8,6 @@
         </div>
         <div ref="slider" :class="['slider', animate ? 'animateXyz': '']" @mouseenter="disableSlider"
              @mouseleave="enableSlider">
-          <!--<div :class="['holder', animate ? 'animateXyz': '']" ref="holder">-->
           <template v-for="(release, i) in featuredReleases">
             <transition :name="transitionName" mode="out-in">
               <div :key="'release-'+i"
@@ -18,7 +17,10 @@
                   <div class="slide__inner" :style="backgroundImage(release)">
                     <div class="vmargin-auto">
                       <div class="feature-category">
-                        <nuxt-link :to="{name: 'releases-new'}">New In Stock</nuxt-link>
+                        <nuxt-link :to="{name: 'releases-new'}">
+                          <template v-if="release.availability.status === 'upcoming'">Coming Soon</template>
+                          <template v-else>New In Stock</template>
+                        </nuxt-link>
                       </div>
                       <nuxt-link class="release-info" :key="'release-'+i"
                                  :to="{name: 'releases-slug', params: {slug: release.slug}}">
@@ -76,7 +78,6 @@
   import ReleaseButtonBar from '../releases/ReleaseButtonBar'
   import PlayReleaseButton from '../releases/PlayReleaseButton'
   import AddToCartButton from '../cart/AddToCartButton'
-  //  import { swipedetect } from '~/utils/native'
 
   export default {
     components: {AddToCartButton, PlayReleaseButton, ReleaseButtonBar, WeekFeature},
@@ -89,9 +90,6 @@
         animate: false,
         touch: false,
         direction: 0
-//        ,
-//        nextLeft: 0,
-//        nextRight: 0
       }
     },
     computed: {
