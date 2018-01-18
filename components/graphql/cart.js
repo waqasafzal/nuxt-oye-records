@@ -17,6 +17,7 @@ export const order = gql`
         isPaid
         isSelfCollector
         paymentType
+        canDownload
     }
 `
 

@@ -4,20 +4,26 @@
       <h3>
         Order #{{order.pk}} ({{order.date}})
       </h3>
-      <div @click="onDownload" v-if="!order.isSelfCollector || order.isPaid" class="download">Download invoice</div>
-      <div class="download disabled" v-else>Invoice available after pickup</div>
+      <template v-if="!order.downloadDisabled">
+        <div @click="onDownload" v-if="order.isPaid || !order.isSelfCollector" class="download">Download invoice</div>
+        <div class="download disabled" v-else-if="!order.isPaid">Invoice available after pickup</div>
+        <div class="download disabled" v-else>Order was not marked as paid</div>
+      </template>
+      <template v-else>
+        <div class="download disabled">Download disabled</div>
+      </template>
     </div>
     <template v-if="loading">
       <loading-spinner :loading="loading"></loading-spinner>
     </template>
-    <template v-else-if="cart">
+    <template v-else-if="items">
       <div class="cart__lines">
-        <div class="cart__line" v-for="cartLine in cart.lines">
+        <div class="cart__line" v-for="cartLine in items">
           <nuxt-link :to="{name: 'releases-slug', params: {'slug': cartLine.release.slug}}">
 
             <div class="row">
               <div class="col-2">
-                <img class="" :src="cartLine.smallImageUrl"/>
+                <img class="" :src="cartLine.release.smallImageUrl"/>
               </div>
               <div class="col-4">
                 <div class="cart__line__product__info">
@@ -52,7 +58,7 @@
   import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import LoadingSpinner from '../shared/LoadingSpinner'
-  import { oyeCart } from '../graphql/cart'
+  import {release} from '../graphql/releases'
 
   export default {
     components: {LoadingSpinner},
@@ -60,7 +66,7 @@
     props: ['order'],
     data () {
       return {
-        cart: undefined,
+        items: undefined,
         loading: false
       }
     },
@@ -86,19 +92,24 @@
       apolloClient.query({
         query: gql`query Order($pk: ID!) {
           order(pk: $pk) {
-            cart {
-                ...OyeCart
+            items {
+               release {
+                   ...Release
+                   releasedAt
+                   smallImageUrl: thumbnailUrl(size: 100)
+               }
+               quantity
             }
           }
         }
-        ${oyeCart}`,
+        ${release}`,
         variables: {
           pk: this.order.pk
         }
       }).then(({data}) => {
         vm.loading = false
         let order = data.order
-        vm.cart = order.cart
+        vm.items = order.items
       })
     }
   }
