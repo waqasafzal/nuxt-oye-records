@@ -117,6 +117,18 @@
         currentMonth: currentMonth
       }
     },
+    head () {
+      return {
+        title: 'OYE Records - Charts',
+        meta: [
+          {
+            hid: 'image',
+            property: 'og:image',
+            content: `${__API__}/${this.monthlyBestsellerThumb}`
+          }
+        ]
+      }
+    },
     computed: {
       monthChart () {
         return {
