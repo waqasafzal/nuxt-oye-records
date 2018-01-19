@@ -1,7 +1,9 @@
 <template>
   <div v-if="authenticated" class="account">
     <div class="d-flex flex-row justify-content-between">
-      <h1>Account &mdash; {{ currentItem }}</h1>
+      <div class="page__header">
+        <h1>Account &mdash; {{ currentItem }}</h1>
+      </div>
       <button @click="onAddCharts" v-if="currentItem === 'Charts'" class="btn add-charts-btn primary">Add New Charts</button>
     </div>
     <div class="row no-gutters justify-content-between">

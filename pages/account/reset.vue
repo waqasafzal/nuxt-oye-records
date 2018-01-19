@@ -54,7 +54,7 @@
               resetEmail(this, this.email, () => {
                 vm.emailSent = true
                 this.$store.dispatch('addAlert', {
-                  message: `A email was sent out to ${this.email}`,
+                  message: `An email was sent out to ${this.email}`,
                   level: 'info'
                 })
               })

@@ -1,7 +1,9 @@
 <template>
   <div class="info">
     <div class="d-flex flex-row justify-content-between">
-      <h1>Info &mdash; {{ menuItems[currentAccountView] }}</h1>
+      <div class="page__header">
+        <h1>Info &mdash; {{ menuItems[currentAccountView] }}</h1>
+      </div>
     </div>
     <div class="row no-gutters justify-content-start">
       <div class="col-3">
