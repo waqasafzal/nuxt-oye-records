@@ -7,7 +7,7 @@
             <div class="col-8 reset-password__panel">
               <h3>Forgot your password?</h3>
               <div class="description">Please enter your email on the form below</div>
-              <form>
+              <form @submit.prevent="onResetPassword">
                 <fieldset>
                   <div class="form-group">
                     <div :class="['form-group-item', 'input-validation']">
@@ -20,7 +20,7 @@
                   </div>
                 </fieldset>
               </form>
-              <button @click="onResetPassword" class="btn primary">Reset My Password</button>
+              <button type="submit" class="btn primary">Reset My Password</button>
             </div>
           </template>
           <template v-else>

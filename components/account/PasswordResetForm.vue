@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form style="padding-bottom: 2rem;">
+    <form @submit.prevent="onConfirmPassword" style="padding-bottom: 2rem;">
       <fieldset>
         <div v-if="confirmOld" class="form-group">
           <div :class="['form-group-item', 'input-validation', passwordError ? 'has-danger': '']">
@@ -34,7 +34,7 @@
         </div>
       </fieldset>
     </form>
-    <button @click="onConfirmPassword" class="btn primary">Change My Password</button>
+    <button type="submit" class="btn primary">Change My Password</button>
   </div>
 </template>
 
