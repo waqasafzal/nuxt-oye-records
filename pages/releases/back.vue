@@ -22,6 +22,18 @@
         pageSize: 5,
         status: 'back'
       }
+    },
+    head () {
+      return {
+        title: 'OYE Records - Back In Stock',
+        meta: [
+          {
+            hid: 'title',
+            property: 'og:title',
+            content: 'OYE Records - Back In Stock'
+          }
+        ]
+      }
     }
   }
 </script>

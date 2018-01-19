@@ -22,6 +22,18 @@
         pageSize: 5,
         status: 'pre'
       }
+    },
+    head () {
+      return {
+        title: 'OYE Records - Upcoming Releases',
+        meta: [
+          {
+            hid: 'title',
+            property: 'og:title',
+            content: 'OYE Records - Upcoming Releases'
+          }
+        ]
+      }
     }
   }
 </script>

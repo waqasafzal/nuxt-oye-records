@@ -57,6 +57,18 @@
         genreReleases: {}
       }
     },
+    head () {
+      return {
+        title: 'OYE Records - Genres',
+        meta: [
+          {
+            hid: 'title',
+            property: 'og:title',
+            content: 'OYE Records - Genres'
+          }
+        ]
+      }
+    },
     computed: {
       genresMenuColumnStyle: function () {
         return {

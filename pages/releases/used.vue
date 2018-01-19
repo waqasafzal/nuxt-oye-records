@@ -22,6 +22,18 @@
         pageSize: 5,
         status: 'used'
       }
+    },
+    head () {
+      return {
+        title: 'OYE Records - Used Vinyl',
+        meta: [
+          {
+            hid: 'title',
+            property: 'og:title',
+            content: 'OYE Records - Used Vinyl'
+          }
+        ]
+      }
     }
   }
 </script>

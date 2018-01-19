@@ -134,6 +134,18 @@
         pageSize: 5,
         status: 'new'
       }
+    },
+    head () {
+      return {
+        title: 'OYE Records - New Releases',
+        meta: [
+          {
+            hid: 'title',
+            property: 'og:title',
+            content: 'OYE Records - New Releases'
+          }
+        ]
+      }
     }
   }
 </script>
