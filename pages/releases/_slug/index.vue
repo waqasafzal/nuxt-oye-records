@@ -212,7 +212,7 @@
             content: this.release && this.release.description
           },
           {
-            hid: 'og:image',
+            hid: 'image',
             property: 'og:image',
             content: this.releaseImage
           }
