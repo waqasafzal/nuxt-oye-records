@@ -22,7 +22,6 @@
 </template>
 
 <script>
-  import Vue from 'vue'
   import MainNavbar from './MainNavbar'
   import Search from '../search/Search'
   import * as types from '../../store/types'
