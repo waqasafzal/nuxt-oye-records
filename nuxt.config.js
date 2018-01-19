@@ -6,6 +6,9 @@ global.fetch = fetch
 
 var utils = require('./build/utils')
 
+var ogImage = require('~/assets/images/fb-og-image.jpg')
+
+
 var apiHost = '\'http://localhost:8000\''
 
 if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
@@ -75,7 +78,7 @@ module.exports = {
       {
         hid: 'image',
         property: 'og:image',
-        content: '~assets/images/fb-og-image.jpg'
+        content: ogImage
       }
     ],
     link: [
