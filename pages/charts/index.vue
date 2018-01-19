@@ -119,8 +119,12 @@
     },
     head () {
       return {
-        title: 'OYE Records - Charts',
         meta: [
+          {
+            hid: 'title',
+            property: 'og:title',
+            content: 'OYE Records - Charts'
+          },
           {
             hid: 'image',
             property: 'og:image',
