@@ -23,12 +23,9 @@
 
 <script>
   import Vue from 'vue'
-  import CartDropdown from '../../components/cart/CartDropdown.vue'
   import MainNavbar from './MainNavbar'
   import Search from '../search/Search'
   import * as types from '../../store/types'
-
-  Vue.component('cart-dropdown', CartDropdown)
 
   const oyeLogo = require('../../assets/images/oye_logo.svg')
 
