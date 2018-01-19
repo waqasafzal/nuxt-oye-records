@@ -60,7 +60,7 @@
           {
             hid: 'image',
             property: 'og:image',
-            content: ogImage
+            content: `${__API__}${ogImage}`
           }
         ]
       }
