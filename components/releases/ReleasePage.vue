@@ -16,11 +16,9 @@
   import Vue from 'vue'
 
   import ReleaseList from './ReleaseList.vue'
-  import NoResults from '../shared/NoResults.vue'
   import FilterResultsOptions from '../shared/FilterResultsOptions'
   import MetaGenreFilter from '../genres/MetaGenreFilter'
 
-  Vue.component('noresults', NoResults)
   Vue.component('release-list', ReleaseList)
 
   export default {
