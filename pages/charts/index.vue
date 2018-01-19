@@ -124,7 +124,7 @@
           {
             hid: 'image',
             property: 'og:image',
-            content: `${__API__}/${this.monthlyBestsellerThumb}`
+            content: `${__API__}${this.monthlyBestsellerThumb}`
           }
         ]
       }
