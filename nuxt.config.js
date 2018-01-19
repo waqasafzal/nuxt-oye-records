@@ -6,8 +6,7 @@ global.fetch = fetch
 
 var utils = require('./build/utils')
 
-var ogImage = require('~/assets/images/fb-og-image.jpg')
-
+var ogImage = require('./assets/images/fb-og-image.jpg')
 
 var apiHost = '\'http://localhost:8000\''
 
