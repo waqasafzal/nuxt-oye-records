@@ -6,8 +6,6 @@ global.fetch = fetch
 
 var utils = require('./build/utils')
 
-var ogImage = require('./assets/images/fb-og-image.jpg')
-
 var apiHost = '\'http://localhost:8000\''
 
 if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
@@ -73,11 +71,6 @@ module.exports = {
         hid: 'description',
         property: 'og:description',
         content: 'A is for Afro, B is for Breaks, C is for Cosmic, D is for Disco, E is for Electro, F is for Funk, G is for G-Funk, H is for House, Get it all and more at OYE!'
-      },
-      {
-        hid: 'image',
-        property: 'og:image',
-        content: ogImage
       }
     ],
     link: [

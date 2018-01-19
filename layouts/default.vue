@@ -42,6 +42,8 @@
   import AudioPlayer from '../components/audio/AudioPlayer'
   import Announcements from '../components/messages/Announcements'
 
+  var ogImage = require('~/assets/images/fb-og-image.jpg')
+
   export default {
     components: {Announcements, AudioPlayer, PrimaryControlPanel, MobileMenu, AccountNavbar, Alerts, BrandNavbar},
     name: 'app',
@@ -50,6 +52,17 @@
         isOpenMobileMenu: false,
         isPortable: false,
         isMounted: false
+      }
+    },
+    head () {
+      return {
+        meta: [
+          {
+            hid: 'image',
+            property: 'og:image',
+            content: ogImage
+          }
+        ]
       }
     },
     methods: {
