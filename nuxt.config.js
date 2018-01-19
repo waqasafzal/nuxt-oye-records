@@ -65,12 +65,12 @@ module.exports = {
       {
         hid: 'title',
         property: 'og:title',
-        content: 'OYE Records - The place to put the records on!'
+        content: 'OYE Records - On your ears'
       },
       {
         hid: 'description',
         property: 'og:description',
-        content: 'Find you favorite records in a place where the music is the key to your heart'
+        content: 'A is for Afro, B is for Breaks, C is for Cosmic, D is for Disco, E is for Electro, F is for Funk, G is for G-Funk, H is for House, Get it all and more at OYE!'
       }
     ],
     link: [
