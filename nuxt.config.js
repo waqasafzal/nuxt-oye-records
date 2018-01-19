@@ -65,7 +65,7 @@ module.exports = {
       {
         hid: 'title',
         property: 'og:title',
-        content: 'OYE Records - On your ears'
+        content: 'OYE Records'
       },
       {
         hid: 'description',
