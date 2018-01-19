@@ -17,19 +17,9 @@
 <script>
   import LoginForm from '../../components/account/LoginForm'
 
-  const pirateImages = {
-    oneTime: require('../../assets/images/pirate_login.png'),
-    twoTimes: require('../../assets/images/pirate_login2x.png')
-  }
-
   export default {
     components: {LoginForm},
-    name: 'Login',
-    data: function () {
-      return {
-        pirateImages: pirateImages
-      }
-    }
+    name: 'Login'
   }
 
 </script>
