@@ -41,7 +41,6 @@
                         <div class="release-navigation d-flex">
                           <play-release-button class="vmargin-auto" :size="100"
                                                :release="release"></play-release-button>
-                          <!--<release-button-bar :size=48 :release="release"></release-button-bar>-->
                         </div>
                       </div>
                     </div>

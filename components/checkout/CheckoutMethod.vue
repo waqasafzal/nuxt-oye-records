@@ -2,10 +2,10 @@
   <div class="row checkout__content checkout__method">
       <login-form redirect="#" class="checkout__content__col"></login-form>
       <div class="col-12 col-md-6 login__form__panel checkout__content__col">
-        <h3 class="checkout-box__header">Checkout as guest</h3>
-        <div class="login__form">
-          <proceed-button class="guest-btn" @click="setGuestCheckout">Continue as guest</proceed-button>
-        </div>
+        <!--<h3 class="checkout-box__header">Checkout as guest</h3>-->
+        <!--<div class="login__form">-->
+          <!--<proceed-button class="guest-btn" @click="setGuestCheckout">Continue as guest</proceed-button>-->
+        <!--</div>-->
       </div>
     </div>
 </template>
