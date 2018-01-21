@@ -67,15 +67,11 @@
     },
     methods: {
       mediaChange (mq) {
-        console.log('mediaChange')
         if (mq.matches) {
           this.isPortable = false
-
-          console.log('bigger')
           // window width is at least 500px
           this.$store.commit(types.SET_SMALL_SCREEN, false)
         } else {
-          console.log('smaller')
           this.isPortable = true
           // window width is less than 500px
           this.$store.commit(types.SET_SMALL_SCREEN, true)
