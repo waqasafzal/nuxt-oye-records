@@ -337,6 +337,7 @@ $bestseller-item-padding: 7px;
         flex-direction: column;
         justify-content: center;
         width: 100%;
+        min-width: 60px;
         padding: $bestseller-item-padding;
         .release-title {
           opacity: 0.5;
@@ -357,7 +358,7 @@ $bestseller-item-padding: 7px;
         flex-direction: column;
         justify-content: center;
         position: relative;
-        min-width: 80px;
+        min-width: 40px;
         .release-price {
           color: $brand-color-green;
           width: 60px;
