@@ -191,8 +191,9 @@ $bestseller-item-padding: 7px;
       .publisher-image {
         img {
           border-radius: 6px;
-          height: 192px;
+          height: auto;
           width: 300px;
+          max-width: 100%;
         }
         padding-bottom: 1em;
       }
