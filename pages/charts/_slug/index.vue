@@ -96,7 +96,7 @@
         if (this.isBestseller) {
           return `Bestseller \u2014 ${this.bestsellerHeader}`
         } else {
-          return `${this.name}'s ${this.chartsName(this.chart)} Charts ${this.chartsYear(this.chart)}`
+          return `${this.possessive} ${this.chartsName(this.chart)} Charts ${this.chartsYear(this.chart)}`
         }
       },
       pageTitle: function () {
