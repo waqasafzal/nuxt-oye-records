@@ -90,7 +90,7 @@
         return (this.chart.artist && this.chart.artist.name) || this.chart.user && this.chart.user.firstName || ''
       },
       possessive () {
-        return this.name + (this.name.endsWith('s') ? '\'' : '\'s')
+        return `${this.name}${(this.name.endsWith('s') ? '\'' : '\'s')}`
       },
       pageHeader: function () {
         if (this.isBestseller) {
