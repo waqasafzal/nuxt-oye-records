@@ -9,7 +9,7 @@
   import apolloClient from '~/plugins/apollo'
   import gql from 'graphql-tag'
   import * as types from '../../store/types'
-  import { order } from '../graphql/cart'
+  import { order, oyeCart } from '../graphql/cart'
 
   export default {
     name: 'CompleteCheckout',
@@ -36,10 +36,13 @@
               order {
                 ...Order
               },
-              newCart
+              newCart {
+                ...OyeCart
+              }
             }
           }
           ${order}
+          ${oyeCart}
           `,
           variables: {
             provider: paymentProvider, // merchantSig,
