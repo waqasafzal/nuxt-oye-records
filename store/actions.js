@@ -366,7 +366,6 @@ export const getProfile = (store, args) => new Promise((resolve, reject) => {
                 shippingAddress {
                     country
                 }
-                paymentUrl
                 cart {
                     ...OyeCart
                 }
