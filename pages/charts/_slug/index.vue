@@ -61,7 +61,7 @@
             <div class="chart-related" v-for="relatedChart in chart.relatedCharts">
               <nuxt-link :to="{name: 'charts-slug', params: {slug: relatedChart.slug}}">
                 <img src="../../../assets/images/arrow_right_grey.svg"/>
-                {{ name }}'s {{ chartsName(relatedChart) }} Charts {{ chartsYear(relatedChart) }}
+                {{ possessive }} {{ chartsName(relatedChart) }} Charts {{ chartsYear(relatedChart) }}
               </nuxt-link>
             </div>
           </div>
@@ -88,6 +88,9 @@
     computed: {
       name () {
         return (this.chart.artist && this.chart.artist.name) || this.chart.user && this.chart.user.firstName || ''
+      },
+      possessive () {
+        return this.name + this.name.endsWith('s') ? '\'' : '\'s'
       },
       pageHeader: function () {
         if (this.isBestseller) {
