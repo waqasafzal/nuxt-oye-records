@@ -25,6 +25,7 @@
         <primary-control-panel></primary-control-panel>
       </div>
       <audio-player></audio-player>
+      <oye-footer></oye-footer>
     </div>
   </div>
 </template>
@@ -41,11 +42,12 @@
   import PrimaryControlPanel from '../components/shared/PrimaryControlPanel'
   import AudioPlayer from '../components/audio/AudioPlayer'
   import Announcements from '../components/messages/Announcements'
+  import OyeFooter from '../components/navigation/Footer'
 
   var ogImage = require('~/assets/images/fb-og-image.jpg')
 
   export default {
-    components: {Announcements, AudioPlayer, PrimaryControlPanel, MobileMenu, AccountNavbar, Alerts, BrandNavbar},
+    components: {OyeFooter, Announcements, AudioPlayer, PrimaryControlPanel, MobileMenu, AccountNavbar, Alerts, BrandNavbar},
     name: 'app',
     data: function () {
       return {

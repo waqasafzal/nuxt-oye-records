@@ -98,6 +98,6 @@
   }
 
   .from-bottom-enter, .from-bottom-leave-to {
-    margin-bottom: calc(-50% + 70px);
+    margin-bottom: calc(-50% + 140px);
   }
 </style>
