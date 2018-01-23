@@ -7,7 +7,7 @@
     <div class="force-bigger-screen d-md-none">
       The mobile version is coming soon.<br/>
       Please open the beta shop on a device with a bigger
-      screen or bounce to the classic shop <a href="http://oye-records.com" target="_blank">here.</a>
+      screen or bounce to the classic shop <a href="https://classic.oye-records.com" target="_blank">here.</a>
     </div>
     <header class="navbar" role="navigation">
       <brand-navbar v-on:togglemenu="onToggleMobileMenu"
