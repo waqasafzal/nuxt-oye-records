@@ -1,7 +1,10 @@
 <template>
   <div class="navbar__search">
-    <img class="d-lg-none mobile-search-icon float-right"
-         src="../../assets/images/search-icon.svg">
+    <div class="d-flex vmargin-auto">
+      <search-svg></search-svg>
+    </div>
+    <!--<img class="d-lg-none mobile-search-icon float-right"-->
+         <!--src="../../assets/images/search-icon.svg">-->
     <div :class="['navbar__brand__search', searchActive ? 'active': '']">
       <form @submit.prevent="onSubmit" :class="['form-inline']">
         <div class="mobile-close-search d-md-none">
@@ -89,12 +92,14 @@
   import { getPageSize } from '../utils'
 
   import { mixin as clickaway } from 'vue-clickaway'
+  import SearchSvg from '../shared/SearchSvg'
 
   const MAX_ARTISTS = 2
   const MAX_RELEASES = 3
   const MAX_LABELS = 1
 
   export default {
+    components: {SearchSvg},
     name: 'Search',
     mixins: [ clickaway ],
     data: function () {

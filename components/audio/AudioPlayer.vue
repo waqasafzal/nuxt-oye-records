@@ -42,24 +42,21 @@
             </div>
           </nuxt-link>
           <div class="position-slider">
-            <!--<input v-model="currentTime" type="range" :max="duration"></input>-->
             <div class="slider" @click.capture="onClickSlider">
               <div class="slider-fill" :style="sliderStyle"></div>
             </div>
           </div>
         </div>
         <div @click="onCartClick" class="ap__element button-box add-to-cart">
-          <!--<div class="add-to-cart">-->
           <div>
             <img src="../../assets/images/cart_small_white.svg"/>
           </div>
-          <!--</div>-->
         </div>
         <div class="ap__element button-box link-box" @click="onBurgerClick">
           <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
         </div>
         <div @click="onClose" class="ap_element button-box link-box">
-          <div class="close-playlist"/>
+          <div class="close-playlist"></div>
         </div>
       </div>
   </transition>

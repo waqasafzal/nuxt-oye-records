@@ -62,7 +62,6 @@
         </div>
       </div>
     </div>
-    <!--</div>-->
     <div class="container-fluid">
       <div class="row frontpage__weekly__panel">
         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
@@ -237,7 +236,6 @@
             })
 
             this.el.slider.addEventListener('touchmove', function (event) {
-//              event.preventDefault()
               slider.move(event)
             })
 
@@ -267,11 +265,7 @@
             vm.animate = false
             vm.touch = true
 
-//            for (var i = 0; i < this.el.imgSlide.length; i++) {
-//              this.el.imgSlide[i].style.display = 'none'
-//            }
             for (var i = 0; i < this.el.imgSlide.length; i++) {
-//              console.log(`${i} ${i !== vm.currentFeature} current: ${vm.currentFeature} imgSlide: ${this.el.imgSlide[i]}`)
               if (i !== vm.currentFeature) {
                 this.el.imgSlide[i].style.display = 'none'
               }
