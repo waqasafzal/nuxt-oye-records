@@ -1,12 +1,17 @@
 <template id="releasepage">
-  <div class="row">
-    <div class="col-12">
-      <div class="page__header">
-        <h1><slot>{{ category }}</slot></h1>
-        <meta-genre-filter v-if="showFilter" @slug-selected="onSlugSelected"></meta-genre-filter>
-        <filter-results-options v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged" class="float-right"></filter-results-options>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="page__header">
+          <h1>
+            <slot>{{ category }}</slot>
+          </h1>
+          <meta-genre-filter v-if="showFilter" @slug-selected="onSlugSelected"></meta-genre-filter>
+          <filter-results-options v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged"
+                                  class="float-right"></filter-results-options>
+        </div>
+        <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
       </div>
-      <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
     </div>
   </div>
 </template>

@@ -3,16 +3,18 @@
     <div class="container-fluid vmargin-auto">
       <div class="navbar__brand-box">
         <div class="row no-gutters">
-          <div class="col-2 col-md-1 navbar__logo">
+          <div class="col-2 col-sm-1 navbar__logo">
             <nuxt-link to="/">
               <img :src="`${oyeLogo}`" alt="Oye Records"
                    height="50">
             </nuxt-link>
           </div>
-          <main-navbar class="col-8 col-md-9"></main-navbar>
-          <search v-if="!isCheckout" class="col-1 col-md-2"></search>
-          <div class="col-1 menu-icon-mobile d-md-none">
-            <img class="navbar__brand__menu-toggle closed open"
+          <div class="col-8 col-sm-9">
+            <main-navbar class="d-none d-lg-block"></main-navbar>
+          </div>
+          <search v-if="!isCheckout" class="col-1 col-lg-2 col-sm-1"></search>
+          <div class="col-1 menu-icon-mobile d-lg-none">
+            <img class="navbar__brand__menu-toggle"
                  src="../../assets/images/mobile-bar.svg" @click="toggleMobileNav">
           </div>
         </div>

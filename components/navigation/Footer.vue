@@ -1,5 +1,5 @@
 <template>
-  <div class="footer container-fluid">
+  <div class="footer">
     <div class="logo-copyright">
       &copy; 2017
     </div>
@@ -9,7 +9,7 @@
       <nuxt-link :to="{name: 'info-privacy'}">Privacy</nuxt-link>
     </div>
     <div class="creators">
-      <a href="mailto: buero@nanonansen.de">Design Nano Nansen</a>&nbsp;|
+      <a href="http://www.nanonansen.de" target="_blank">Design Nano Nansen</a>&nbsp;|
       <a href="mailto: till.kolter@gmail.com">Development Till Kolter</a>
     </div>
   </div>

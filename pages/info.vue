@@ -1,5 +1,5 @@
 <template>
-  <div class="info">
+  <div class="info container-fluid">
     <div class="d-flex flex-row justify-content-between">
       <div class="page__header">
         <h1>Info &mdash; {{ menuItems[currentAccountView] }}</h1>

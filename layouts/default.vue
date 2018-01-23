@@ -1,21 +1,21 @@
 <template>
-  <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
+  <div id="app">
     <div class="header">
       <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
-      <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
+      <account-navbar></account-navbar>
     </div>
-    <div class="force-bigger-screen d-md-none">
-      The mobile version is coming soon.<br/>
-      Please open the beta shop on a device with a bigger
-      screen or bounce to the classic shop <a href="https://classic.oye-records.com" target="_blank">here.</a>
-    </div>
+    <!--<div class="force-bigger-screen d-md-none">-->
+      <!--The mobile version is coming soon.<br/>-->
+      <!--Please open the beta shop on a device with a bigger-->
+      <!--screen or bounce to the classic shop <a href="https://classic.oye-records.com" target="_blank">here.</a>-->
+    <!--</div>-->
     <header class="navbar" role="navigation">
       <brand-navbar v-on:togglemenu="onToggleMobileMenu"
                     v-on:closemenu="closeMobileMenu"></brand-navbar>
     </header>
     <alerts></alerts>
     <div class="background">
-      <div class="container-fluid maincontent page">
+      <div class="maincontent page">
         <nuxt></nuxt>
       </div>
     </div>
@@ -25,7 +25,9 @@
         <primary-control-panel></primary-control-panel>
       </div>
       <audio-player></audio-player>
-      <oye-footer></oye-footer>
+      <div class="container-fluid">
+        <oye-footer></oye-footer>
+      </div>
     </div>
   </div>
 </template>
@@ -68,17 +70,17 @@
       }
     },
     methods: {
-      mediaChange (mq) {
-        if (mq.matches) {
-          this.isPortable = false
-          // window width is at least 500px
-          this.$store.commit(types.SET_SMALL_SCREEN, false)
-        } else {
-          this.isPortable = true
-          // window width is less than 500px
-          this.$store.commit(types.SET_SMALL_SCREEN, true)
-        }
-      },
+//      mediaChange (mq) {
+//        if (mq.matches) {
+//          this.isPortable = false
+//          // window width is at least 500px
+//          this.$store.commit(types.SET_SMALL_SCREEN, false)
+//        } else {
+//          this.isPortable = true
+//          // window width is less than 500px
+//          this.$store.commit(types.SET_SMALL_SCREEN, true)
+//        }
+//      },
       onToggleMobileMenu () {
         this.$store.commit(types.SET_MOBILE_NAV, !this.isOpenMobileMenu)
       },
@@ -95,12 +97,6 @@
     computed: {
       isOpenMobileMenu () {
         return this.$store.state.showMobile
-      },
-      isMobile () {
-        return this.$store.getters.isMobile
-      },
-      isSmallScreen () {
-        return this.$store.state.isSmallScreen
       }
     },
     beforeCreate () {
@@ -148,7 +144,7 @@
       const mq = window.matchMedia('(min-width: 768px)')
       mq.addListener(this.mediaChange)
 
-      this.$store.commit(types.SET_SMALL_SCREEN, screen.width < 768)
+//      this.$store.commit(types.SET_SMALL_SCREEN, screen.width < 768)
 
       var isTouch = false // var to indicate current input type (is touch versus no touch)
       var isTouchTimer

@@ -1,26 +1,28 @@
 <template>
-  <div v-if="authenticated" class="account">
-    <div class="d-flex flex-row justify-content-between">
-      <div class="page__header">
-        <h1>Account &mdash; {{ currentItem }}</h1>
+  <div v-if="authenticated" class="container-fluid">
+    <div class="account">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="page__header">
+          <h1>Account &mdash; {{ currentItem }}</h1>
+        </div>
+        <button @click="onAddCharts" v-if="currentItem === 'Charts'" class="btn add-charts-btn primary">Add New Charts</button>
       </div>
-      <button @click="onAddCharts" v-if="currentItem === 'Charts'" class="btn add-charts-btn primary">Add New Charts</button>
-    </div>
-    <div class="row no-gutters justify-content-between">
-      <div class="col-2">
-        <div class="account__nav">
-          <div @click="selectItem(item)" v-for="(item, view, index) in menuItems" :class="['account__menu-item', currentItem === item ? 'selected': '']">{{item}}</div>
-          <div @click="onLogout" class="account__menu-item">Logout</div>
+      <div class="row no-gutters justify-content-between">
+        <div class="col-2">
+          <div class="account__nav">
+            <div @click="selectItem(item)" v-for="(item, view, index) in menuItems" :class="['account__menu-item', currentItem === item ? 'selected': '']">{{item}}</div>
+            <div @click="onLogout" class="account__menu-item">Logout</div>
+          </div>
+        </div>
+        <div class="col-9 account__category">
+          <keep-alive>
+            <component :is="currentAccountView" :editChartsMode="editChartsMode" @charts-saved="onChartsSaved"></component>
+          </keep-alive>
         </div>
       </div>
-      <div class="col-9 account__category">
-        <keep-alive>
-          <component :is="currentAccountView" :editChartsMode="editChartsMode" @charts-saved="onChartsSaved"></component>
-        </keep-alive>
-      </div>
     </div>
-  </div>
-  <div v-else>
+    </div>
+  <div class="container-fluid" v-else>
     <logged-out></logged-out>
   </div>
 </template>

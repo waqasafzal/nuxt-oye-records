@@ -86,15 +86,15 @@ const store = new Vuex.Store({
     alerts: null,
     checkoutActive: false,
     userFormErrors: getInitialUserForm(),
-    isMobile: false,
-    isSmallScreen: false,
+    // isMobile: false,
+    // isSmallScreen: false,
     announcements: []
   },
 
   mutations: {
-    changeMobile (state, isMobile) {
-      state.isMobile = isMobile
-    },
+    // changeMobile (state, isMobile) {
+    //   state.isMobile = isMobile
+    // },
     [types.SET_CART]: (state, cart) => {
       state.cart = cart
     },
@@ -423,12 +423,12 @@ const store = new Vuex.Store({
     [types.SET_MOBILE_NAV]: (state, showMobileNav) => {
       state.showMobile = showMobileNav
     },
-    [types.SET_MOBILE]: (state, isMobile) => {
-      state.isMobile = isMobile
-    },
-    [types.SET_SMALL_SCREEN]: (state, isSmall) => {
-      state.isSmallScreen = isSmall
-    },
+    // [types.SET_MOBILE]: (state, isMobile) => {
+    //   state.isMobile = isMobile
+    // },
+    // [types.SET_SMALL_SCREEN]: (state, isSmall) => {
+    //   state.isSmallScreen = isSmall
+    // },
     [types.SET_BUTTON_BAR_CONTINUE]: (state, showContinue) => {
       state.primaryButtonBar.showContinue = showContinue
     },
@@ -473,7 +473,7 @@ const store = new Vuex.Store({
   },
 
   getters: {
-    isMobile: state => state.isMobile,
+    // isMobile: state => state.isMobile,
     isAuthenticated (state) {
       return state.user && state.user.authenticated
     },
@@ -661,9 +661,6 @@ const store = new Vuex.Store({
     },
     getAvailableOrders (state) {
       return state.userProfile.availableOrders || []
-    },
-    hasMobileMenu (state) {
-      return state.isMobile || state.isSmallScreen
     },
     announcements: state => state.announcements,
     isEmptyCart: (state, getters) => {

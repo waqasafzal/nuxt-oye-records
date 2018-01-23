@@ -1,6 +1,6 @@
 .navbar {
   padding: 41px 0 0 0;
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     img {
       max-height: 30px;
     }
@@ -133,7 +133,7 @@
     height: 103px;
     display: flex;
     flex-direction: column;
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       position: fixed;
       top: 0;
       width: 100vw;
@@ -147,7 +147,7 @@
     }
     &__cart {
       z-index: 4;
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(lg) {
         line-height: 2.4rem;
       }
       .cart__icon {
@@ -254,7 +254,7 @@
           padding: $global-padding / 7;
         }
       }
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         display: block;
         left: -100vw;
         position: absolute;
@@ -297,7 +297,7 @@
           border-bottom: 0;
           margin-bottom: 0;
         }
-        @include media-breakpoint-down(sm) {
+        @include media-breakpoint-down(md) {
           border-bottom: 0;
         }
         .nav-item {
@@ -330,7 +330,7 @@
         }
       }
     }
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       .navigation {
         position: fixed;
         right: 0;

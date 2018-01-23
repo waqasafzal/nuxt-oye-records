@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <div class="page__header">Cart</div>
     <cart-content></cart-content>
   </div>

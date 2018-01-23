@@ -1,5 +1,5 @@
 <template>
-  <div class="checkout">
+  <div class="checkout container-fluid">
     <div class="checkout__content row">
       <div class="checkout__content__col col-12">
         <div class="row justify-content-center">

@@ -4,15 +4,17 @@
                         :singleRelease="singleOfTheWeek"
                         :albumRelease="albumOfTheWeek"
     ></front-page-teasers>
-    <release-list-summary status="new" :releases="newReleases" :title="`New Releases`"></release-list-summary>
-    <release-list-summary status="pre" :releases="preReleases" :title="`Coming Soon`"></release-list-summary>
-    <div class="charts__summary" v-if="charts && charts.edges.length > 0">
-      <h3><nuxt-link :to="{name: 'charts'}">Charts</nuxt-link></h3>
-      <div class="row">
-        <chart-item class="col-6 col-sm-12 col-lg-3" :chart="chart.node" :key="'chart-'+i" v-for="(chart, i) in charts.edges"></chart-item>
+    <div class="container-fluid">
+      <release-list-summary status="new" :releases="newReleases" :title="`New Releases`"></release-list-summary>
+      <release-list-summary status="pre" :releases="preReleases" :title="`Coming Soon`"></release-list-summary>
+      <div class="charts__summary" v-if="charts && charts.edges.length > 0">
+        <h3><nuxt-link :to="{name: 'charts'}">Charts</nuxt-link></h3>
+        <div class="row">
+          <chart-item class="col-6 col-sm-12 col-lg-3" :chart="chart.node" :key="'chart-'+i" v-for="(chart, i) in charts.edges"></chart-item>
+        </div>
       </div>
+      <release-list-summary status="back" :releases="backReleases" :title="`Back In Stock`"></release-list-summary>
     </div>
-    <release-list-summary status="back" :releases="backReleases" :title="`Back In Stock`"></release-list-summary>
   </div>
 </template>
 

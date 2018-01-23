@@ -1,5 +1,5 @@
 <template>
-  <div class="checkout">
+  <div class="checkout container-fluid">
     <div class="row justify-content-center checkout__content">
       <template v-if="passwordChanged">
         <div class="complete">

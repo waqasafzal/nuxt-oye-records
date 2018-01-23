@@ -1,5 +1,5 @@
 <template>
-  <div v-if="release" v-on:keyup.65="addToCart(release.pk)">
+  <div class="container-fluid" v-if="release" v-on:keyup.65="addToCart(release.pk)">
     <div class="release-detail__header row">
       <div class="col-12">
         <div class="release-detail__back">

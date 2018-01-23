@@ -1,29 +1,31 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-      <div class="page__header">
-        <h1>New Releases</h1>
+  <div class="container-fluid">
 
-        <meta-genre-filter @slug-selected="onGenreChanged"></meta-genre-filter>
-        <filter-results-options @filter-changed="onFilterOptionsChanged" class="float-right"></filter-results-options>
+    <div class="row">
+      <div class="col-12">
+        <div class="page__header">
+          <h1>New Releases</h1>
+
+          <meta-genre-filter @slug-selected="onGenreChanged"></meta-genre-filter>
+          <filter-results-options @filter-changed="onFilterOptionsChanged" class="float-right"></filter-results-options>
+        </div>
+        <div class="release-list-panel" v-if="releasedToday.edges.length > 0">
+          <h3>Released Today</h3>
+          <release-list :releases="releasedToday"></release-list>
+        </div>
+        <div class="release-list-panel" v-if="releasedLast7.edges.length > 0">
+          <h3>Released last 7 days</h3>
+          <release-list :releases="releasedLast7"></release-list>
+        </div>
+        <div class="release-list-panel" v-if="releasedLast30.edges.length > 0">
+          <h3>Released last 30 days</h3>
+          <release-list :releases="releasedLast30"></release-list>
+        </div>
+        <h3>All Releases</h3>
+        <release-list id="releaselist" :releases="releases" :loading="loading"></release-list>
       </div>
-      <div class="release-list-panel" v-if="releasedToday.edges.length > 0">
-        <h3>Released Today</h3>
-        <release-list :releases="releasedToday"></release-list>
-      </div>
-      <div class="release-list-panel" v-if="releasedLast7.edges.length > 0">
-        <h3>Released last 7 days</h3>
-        <release-list :releases="releasedLast7"></release-list>
-      </div>
-      <div class="release-list-panel" v-if="releasedLast30.edges.length > 0">
-        <h3>Released last 30 days</h3>
-        <release-list :releases="releasedLast30"></release-list>
-      </div>
-      <h3>All Releases</h3>
-      <release-list id="releaselist" :releases="releases" :loading="loading"></release-list>
     </div>
   </div>
-
 </template>
 
 <script>

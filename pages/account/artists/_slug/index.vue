@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page container-fluid">
     <div class="page__header">Your artist <strong>{{ artist.name }}</strong></div>
     <div class="artist__image">
       <div>

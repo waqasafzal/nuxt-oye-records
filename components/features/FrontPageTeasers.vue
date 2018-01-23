@@ -1,19 +1,22 @@
 <template>
   <div>
-    <div class="row frontpage__teaser">
-      <div class="col-12 frontpage__teaser__content">
-        <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/>
+    <div class="frontpage__teaser">
+      <div class="container-fluid">
+        <div class="row">
         </div>
-        <div class="slider-right-control" @click="slideForward"><img src="~assets/images/Slider_Arrow_Right_Icon.svg"/>
-        </div>
-        <div ref="slider" :class="['slider', animate ? 'animateXyz': '']" @mouseenter="disableSlider"
-             @mouseleave="enableSlider">
-          <template v-for="(release, i) in featuredReleases">
-            <transition :name="transitionName" mode="out-in">
-              <div :key="'release-'+i"
-                   v-show="i === currentFeature"
-                   ref="slide" :class="['slide', animate ? '': '']">
-                <template v-if="$store.state.isSmallScreen === false">
+        <div class="col-12 frontpage__teaser__content">
+          <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/>
+          </div>
+          <div class="slider-right-control" @click="slideForward"><img
+              src="~assets/images/Slider_Arrow_Right_Icon.svg"/>
+          </div>
+          <div ref="slider" :class="['slider', animate ? 'animateXyz': '']" @mouseenter="disableSlider"
+               @mouseleave="enableSlider">
+            <template v-for="(release, i) in featuredReleases">
+              <transition :name="transitionName" mode="out-in">
+                <div :key="'release-'+i"
+                     v-show="i === currentFeature"
+                     ref="slide" :class="['slide', animate ? '': '']">
                   <div class="slide__inner" :style="backgroundImage(release)">
                     <div class="vmargin-auto">
                       <div class="feature-category">
@@ -32,41 +35,44 @@
                       </nuxt-link>
                     </div>
                   </div>
-                </template>
-                <template v-else>
-                  <div class="slide__inner">
-                    <div class="release">
-                      <div class="release-image">
-                        <img :src="release.featureImageUrl"/>
-                        <div class="release-navigation d-flex">
-                          <play-release-button class="vmargin-auto" :size="100"
-                                               :release="release"></play-release-button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="release-action d-flex flex-row justify-content-between">
-                      <div class="release-info">
-                        <div class="release-artist">{{ release.name }}</div>
-                        <div class="release-artist">{{ release.title }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </template>
-              </div>
-            </transition>
-          </template>
+                  <!--<template v-else>-->
+                  <!--<div class="slide__inner">-->
+                  <!--<div class="release">-->
+                  <!--<div class="release-image">-->
+                  <!--<img :src="release.featureImageUrl"/>-->
+                  <!--<div class="release-navigation d-flex">-->
+                  <!--<play-release-button class="vmargin-auto" :size="100"-->
+                  <!--:release="release"></play-release-button>-->
+                  <!--</div>-->
+                  <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="release-action d-flex flex-row justify-content-between">-->
+                  <!--<div class="release-info">-->
+                  <!--<div class="release-artist">{{ release.name }}</div>-->
+                  <!--<div class="release-artist">{{ release.title }}</div>-->
+                  <!--</div>-->
+                  <!--</div>-->
+                  <!--</div>-->
+                  <!--</template>-->
+                </div>
+              </transition>
+            </template>
+          </div>
           <!--</div>-->
         </div>
       </div>
     </div>
-    <div class="row frontpage__weekly__panel">
-      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
-        <week-feature class="frontpage__weekly__item" :release="singleRelease"
-                      :category="`Single Of The Week`"></week-feature>
-      </div>
-      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
-        <week-feature class="frontpage__weekly__item" :release="albumRelease"
-                      :category="`Album Of The Week`"></week-feature>
+    <!--</div>-->
+    <div class="container-fluid">
+      <div class="row frontpage__weekly__panel">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
+          <week-feature class="frontpage__weekly__item" :release="singleRelease"
+                        :category="`Single Of The Week`"></week-feature>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
+          <week-feature class="frontpage__weekly__item" :release="albumRelease"
+                        :category="`Album Of The Week`"></week-feature>
+        </div>
       </div>
     </div>
   </div>
