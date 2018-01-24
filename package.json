@@ -14,7 +14,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "node-fetch": "^1.6.3",
-    "nuxt": "file:../nuxt.js",
+    "nuxt": "v0.10.7",
     "style-loader": "^0.16.1",
     "tiny-cookie": "^2.0.2",
     "vue": "~2.2.6",
