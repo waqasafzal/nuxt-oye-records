@@ -10,8 +10,7 @@
       <!--screen or bounce to the classic shop <a href="https://classic.oye-records.com" target="_blank">here.</a>-->
     <!--</div>-->
     <header class="navbar" role="navigation">
-      <brand-navbar v-on:togglemenu="onToggleMobileMenu"
-                    v-on:closemenu="closeMobileMenu"></brand-navbar>
+      <brand-navbar></brand-navbar>
     </header>
     <alerts></alerts>
     <div class="background">
@@ -19,6 +18,7 @@
         <nuxt></nuxt>
       </div>
     </div>
+    <mobile-menu v-if="showMobile"></mobile-menu>
     <announcements></announcements>
     <div class="bottom">
       <div class="container-fluid">
@@ -40,11 +40,12 @@
   import client from '../plugins/apollo'
   import Vue from 'vue'
   import MobileMenu from '../components/navigation/MobileMenu'
-  import * as types from '../store/types'
+//  import * as types from '../store/types'
   import PrimaryControlPanel from '../components/shared/PrimaryControlPanel'
   import AudioPlayer from '../components/audio/AudioPlayer'
   import Announcements from '../components/messages/Announcements'
   import OyeFooter from '../components/navigation/Footer'
+  import { mapGetters } from 'vuex'
 
   var ogImage = require('~/assets/images/fb-og-image.jpg')
 
@@ -81,12 +82,12 @@
 //          this.$store.commit(types.SET_SMALL_SCREEN, true)
 //        }
 //      },
-      onToggleMobileMenu () {
-        this.$store.commit(types.SET_MOBILE_NAV, !this.isOpenMobileMenu)
-      },
-      closeMobileMenu () {
-        this.$store.commit(types.SET_MOBILE_NAV, false)
-      },
+//      onToggleMobileMenu () {
+//        this.$store.commit(types.SET_MOBILE_NAV, !this.isOpenMobileMenu)
+//      },
+//      closeMobileMenu () {
+//        this.$store.commit(types.SET_MOBILE_NAV, false)
+//      },
       onClosePlaylist () {
         this.noScroll = false
       },
@@ -95,9 +96,7 @@
       }
     },
     computed: {
-      isOpenMobileMenu () {
-        return this.$store.state.showMobile
-      }
+      ...mapGetters(['showMobile'])
     },
     beforeCreate () {
       client.networkInterface.use([{

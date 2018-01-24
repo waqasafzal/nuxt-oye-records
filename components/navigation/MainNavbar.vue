@@ -32,7 +32,7 @@
       </div>
     </template>
     <template v-else>
-      <nav v-on-clickaway="onClick" @click="onClick" :class="['navigation']">
+      <nav :class="['navigation']">
         <ul :class="['nav', 'navbar-nav']">
           <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-new'}"><span>New Releases</span></nuxt-link>
@@ -94,9 +94,9 @@
       ...mapGetters(['isEmptyCart'])
     },
     methods: {
-      onClick (value) {
-        this.$store.commit(types.SET_MOBILE_NAV, false)
-      },
+//      onClick (value) {
+//        this.$store.commit(types.SET_MOBILE_NAV, false)
+//      },
       setCheckoutState (value) {
         if (value === 1 && !this.canSelectCheckout) {
           // do nothing

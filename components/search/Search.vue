@@ -1,6 +1,6 @@
 <template>
   <div class="navbar__search">
-    <div class="d-flex vmargin-auto">
+    <div class="d-flex d-lg-none vmargin-auto">
       <search-svg></search-svg>
     </div>
     <!--<img class="d-lg-none mobile-search-icon float-right"-->

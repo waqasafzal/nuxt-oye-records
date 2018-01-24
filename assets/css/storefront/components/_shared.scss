@@ -76,10 +76,6 @@
   }
 }
 
-body {
-  overflow-x: hidden;
-}
-
 .float-right-bottom {
   margin-top: auto;
   margin-left: auto;
@@ -172,4 +168,10 @@ body {
   z-index: 100;
   background: $brand-secondary-color-red;
   color: white;
+}
+
+.noscroll {
+  overflow: hidden;
+  position: fixed;
+  height: 100%;
 }

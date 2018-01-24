@@ -9,7 +9,7 @@
                    height="50">
             </nuxt-link>
           </div>
-          <div class="col-5 col-sm-8">
+          <div class="col-5 col-lg-9 col-sm-8">
             <main-navbar class="d-none d-lg-block"></main-navbar>
           </div>
           <search v-if="!isCheckout" class="col-2 col-lg-2 col-sm-1"></search>
@@ -35,6 +35,7 @@
   import Search from '../search/Search'
   import * as types from '../../store/types'
   import CartSvg from '../shared/Cart'
+  import { mapGetters } from 'vuex'
 
   const oyeLogo = require('../../assets/images/oye_logo.svg')
 
@@ -57,18 +58,13 @@
       },
       toggleMobileNav () {
         this.$emit('togglemenu')
-        this.$store.commit(types.SET_MOBILE_NAV, !this.isVisibleMenu)
-      },
-      closeMobileNav () {
-        this.$emit('closemenu')
-        this.isVisibleMenu = false
-        this.$store.commit(types.SET_MOBILE_NAV, false)
+        this.$store.commit(types.SET_MOBILE_NAV, !this.showMobile)
       }
     },
     computed: {
-      isVisibleMenu () {
-        return this.$store.state.showMobile
-      },
+//      isVisibleMenu () {
+//        return this.$store.state.showMobile
+//      },
       cartCount () {
         var cart = this.$store.state.getters.getCart
         return cart ? cart.quantity : 0
@@ -77,7 +73,8 @@
         return this.$route.name === 'checkout' &&
           this.$store.getters.getCheckoutState &&
           this.$store.getters.getCheckoutState !== 6
-      }
+      },
+      ...mapGetters(['showMobile'])
     }
   }
 </script>

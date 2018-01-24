@@ -422,6 +422,7 @@ const store = new Vuex.Store({
     },
     [types.SET_MOBILE_NAV]: (state, showMobileNav) => {
       state.showMobile = showMobileNav
+      console.log('show mobile menu ' + showMobileNav)
     },
     // [types.SET_MOBILE]: (state, isMobile) => {
     //   state.isMobile = isMobile
@@ -670,7 +671,8 @@ const store = new Vuex.Store({
     isOnlyPresale: (state, getters) => {
       let cart = getters.getCart
       return cart && cart.lines.length === 0 && cart.preorderLines.length > 0
-    }
+    },
+    showMobile: (state) => state.showMobile
   },
 
   actions

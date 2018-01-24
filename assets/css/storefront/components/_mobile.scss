@@ -5,30 +5,11 @@
   position: relative;
   line-height: $lineHeight;
   max-height: $lineHeight * $lineCount;
-  //text-align: justify;
   margin-right: 0em;
   padding-right: 2em;
-  //&:before {
-  //  content: '...';
-  //  position: absolute;
-  //  right: 10px;
-  //  bottom: 0;
-  //}
-  //&:after {
-  //  content: '';
-  //  position: absolute;
-  //  right: 0;
-  //  width: 1em;
-  //  height: 1em;
-  //  margin-top: 0.2em;
-  //  background: transparent;
-  //}
 }
 
 .mobile {
-  //#audioplayer .current-track .position-slider .slider {
-  //  height: 10px;
-  //}
   .feature {
     img {
       @include media-breakpoint-down(sm) {
@@ -413,23 +394,38 @@
 }
 
 .mobile-menu {
-  background-color: $brand-color-black;
+  background-color: $gray-color-4;
   color: $gray-color-2;
   font-weight: normal;
-  z-index: 10;
+  z-index: 20;
   height: 100%;
+  padding-top: 100px;
+  padding-left: 24px;
   top: 0;
   right: 0;
-  width: 95%;
+  width: 100%;
   display: flex;
   position: fixed;
-  font-weight: normal;
-  .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 30px;
-    color: $gray-color-2;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-scrolling: touch;
+  ul {
+    font-size: 24px;
+    line-height: 48px;
+    font-weight: 300;
+    //text-align: right;
+    a {
+
+    }
+  }
+  .nav-more {
+    margin-top: 2rem;
+    list-style: none;
+    font-size: 16px;
+    line-height: 32px;
+    padding-left: 0;
+    a {
+      color: $gray-color-1 !important;
+    }
   }
 }
