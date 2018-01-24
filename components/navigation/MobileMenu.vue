@@ -41,9 +41,8 @@
 <script>
   import * as types from '../../store/types'
   import MainNavbar from './MainNavbar'
-  import NuxtLink from 'nuxt/dist/app/components/nuxt-link'
   export default {
-    components: {NuxtLink, MainNavbar},
+    components: {MainNavbar},
     name: 'MobileMenu',
     methods: {
       onClose () {
