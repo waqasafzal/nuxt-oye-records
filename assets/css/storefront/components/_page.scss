@@ -225,6 +225,9 @@
   width: 100vw;
   background-color: $gray-color-5;
   padding-bottom: 150px;
+  @include media-breakpoint-down(md) {
+    margin-top: 0px;
+  }
 }
 
 .feature-category {

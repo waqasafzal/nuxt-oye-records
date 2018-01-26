@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row">
         </div>
-        <div class="col-12 frontpage__teaser__content">
+        <div class="col-12 frontpage__teaser__content d-none d-lg-flex">
           <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/>
           </div>
           <div class="slider-right-control" @click="slideForward"><img
