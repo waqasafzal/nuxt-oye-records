@@ -532,6 +532,8 @@ const store = new Vuex.Store({
       let order = getters.getUnpaidOrder
       let currentState = state.checkout.checkoutState
 
+      console.log(`currentState: 1 ${currentState}`)
+
       if (currentState < 6 && order && !order.isPaid) {
         return 5
       }
@@ -541,19 +543,28 @@ const store = new Vuex.Store({
       }
 
       var checkoutState = 0
+
+      console.log(`currentState: 2 ${checkoutState}`)
       if (state.checkoutActive) {
         checkoutState = 1
       }
+
+      console.log(`currentState: 3 ${checkoutState}`)
       if (checkoutState === 1 && state.user.authenticated || state.checkout.guest || state.checkout.register) {
         checkoutState = 2
       }
+
+      console.log(`currentState: 4 ${checkoutState}`)
       if (checkoutState === 2 && getters.isShippingAddressConfirmed) {
         checkoutState = 3
       }
-      if (checkoutState === 3 && getters.isPaymentOptionConfirmed || getters.isOnlyPresale) {
+
+      console.log(`currentState: 5 ${checkoutState}`)
+      if (checkoutState === 3 && getters.isPaymentOptionConfirmed || state.checkoutActive && getters.isOnlyPresale) {
         checkoutState = 4
       }
 
+      console.log(`currentState: 6 ${checkoutState}`)
       return checkoutState
     },
     getMaximumCheckoutState (state, getters) {
