@@ -19,8 +19,8 @@
                     </div>
                   </div>
                 </fieldset>
+                <input type="submit" value="Reset My Password" class="btn primary" />
               </form>
-              <button type="submit" class="btn primary">Reset My Password</button>
             </div>
           </template>
           <template v-else>
