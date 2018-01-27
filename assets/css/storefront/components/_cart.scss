@@ -123,7 +123,11 @@
   }
   &__backorder {
     opacity: 0.6;
-    padding: $global-padding * 2;
+    //padding: $global-padding * 3.5;
+    padding-top: $global-padding * 2;
+    padding-bottom: $global-padding * 3.5;
+    padding-left: $global-padding * 2;
+    padding-top: $global-padding * 2;
     h4 {
       margin-bottom: $global-padding;
     }
