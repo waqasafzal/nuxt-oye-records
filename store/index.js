@@ -532,8 +532,6 @@ const store = new Vuex.Store({
       let order = getters.getUnpaidOrder
       let currentState = state.checkout.checkoutState
 
-      console.log(`currentState: 1 ${currentState}`)
-
       if (currentState < 6 && order && !order.isPaid) {
         return 5
       }
@@ -556,7 +554,7 @@ const store = new Vuex.Store({
         checkoutState = 3
       }
 
-      if (checkoutState === 3 && getters.isPaymentOptionConfirmed || state.checkoutActive && getters.isOnlyPresale) {
+      if (checkoutState === 3 && getters.isPaymentOptionConfirmed || state.checkoutActive && getters.isOnlyPresale && checkoutState > 1) {
         checkoutState = 4
       }
 
