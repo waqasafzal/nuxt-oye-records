@@ -677,7 +677,8 @@ const store = new Vuex.Store({
     isOnlyPresale: (state, getters) => {
       let cart = getters.getCart
       return cart && cart.lines.length === 0 && cart.preorderLines.length > 0
-    }
+    },
+    termsAgreed: (state, getters) => state.checkout.termsAgreed
   },
 
   actions

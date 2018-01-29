@@ -39,6 +39,7 @@
 <script>
   import ProceedButton from './ProceedButton'
   import * as types from '../../store/types'
+  import { mapGetters } from 'vuex'
   export default {
     components: {ProceedButton},
     name: 'PrimaryControlPanel',
@@ -50,10 +51,21 @@
     watch: {
       termsAgreed (value) {
         this.$store.commit(types.SET_TERMS_AGREED, value)
+      },
+      stateTermsAgreed (value) {
+        this.termsAgreed = value
       }
+    },
+    computed: {
+      ...mapGetters({
+        stateTermsAgreed: 'termsAgreed'
+      })
     },
     mounted () {
       this.$store.commit(types.SET_TERMS_AGREED, false)
+//    },
+//    beforeDestroyed () {
+//      this.$store.commit()
     }
   }
 </script>
