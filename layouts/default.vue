@@ -25,8 +25,8 @@
         <primary-control-panel></primary-control-panel>
       </div>
       <audio-player></audio-player>
-      <oye-footer></oye-footer>
     </div>
+    <oye-footer></oye-footer>
   </div>
 </template>
 

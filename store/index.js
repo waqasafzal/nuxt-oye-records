@@ -60,7 +60,8 @@ const store = new Vuex.Store({
       nextTrack: null,
       currentTrack: null,
       playing: false,
-      playlistVisible: false
+      playlistVisible: false,
+      visible: false
     },
     search: {
       query: null,
@@ -469,6 +470,9 @@ const store = new Vuex.Store({
     },
     [types.REMOVE_ANNOUNCEMENT]: (state, announcement) => {
       state.announcements = state.announcements.filter(item => item.message !== announcement.message)
+    },
+    [types.SET_PLAYER_VISIBLE]: (state, visible) => {
+      state.player.visible = visible
     }
   },
 
@@ -678,7 +682,8 @@ const store = new Vuex.Store({
       let cart = getters.getCart
       return cart && cart.lines.length === 0 && cart.preorderLines.length > 0
     },
-    termsAgreed: (state, getters) => state.checkout.termsAgreed
+    termsAgreed: (state, getters) => state.checkout.termsAgreed,
+    showAudioPlayer: (state) => state.player.visible
   },
 
   actions

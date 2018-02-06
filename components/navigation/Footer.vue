@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div :class="['footer', moveHigher ? 'higher' : '']">
     <div class="container-fluid footer-flex">
       <div class="logo-copyright">
         &copy; 2017
@@ -19,6 +19,11 @@
 
 <script>
   export default {
-    name: 'Footer'
+    name: 'Footer',
+    computed: {
+      moveHigher () {
+        return this.$store.state.primaryButtonBar.show || this.$store.getters.showAudioPlayer
+      }
+    }
   }
 </script>

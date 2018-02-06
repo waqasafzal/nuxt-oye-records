@@ -79,6 +79,7 @@
   import CartSvg from '../shared/Cart'
   import Playlist from './Playlist'
   import { mixin as clickaway } from 'vue-clickaway'
+  import { mapGetters } from 'vuex'
 
   const convertTimeHHMMSS = (val) => {
     if (val > 0) {
@@ -98,11 +99,15 @@
     data: function () {
       return {
         duration: 0,
-        currentTime: 0,
-        visible: false
+        currentTime: 0
+        // ,
+        // visible: false
       }
     },
     computed: {
+      ...mapGetters({
+        visible: 'showAudioPlayer'
+      }),
       showPlaylist () {
         return this.$store.state.player.playlistVisible
       },
@@ -177,7 +182,7 @@
         music.pause()
       },
       playAudio () {
-        this.visible = true
+        this.$store.commit(types.SET_PLAYER_VISIBLE, true)
         var music = this.$refs.music
         music.play()
       },
@@ -238,7 +243,8 @@
         this.$store.commit(types.SET_PLAYLIST_VISIBLE, false)
       },
       onClose () {
-        this.visible = false
+        this.$store.commit(types.SET_PLAYER_VISIBLE, false)
+        // this.visible = false
       },
       onKeyDown (e) {
         if (this.visible) {

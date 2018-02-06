@@ -5,8 +5,10 @@
   background-color: #fff;
   border-top: 1px solid $gray-color-2;
   z-index: 11;
-  position: fixed;
-  bottom: 0;
+  //position: fixed;
+  &.higher {
+    margin-bottom: 70px;
+  }
   display: flex;
   &-flex {
     display: flex;
