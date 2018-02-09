@@ -32,8 +32,8 @@ const SimplePagination = {
   },
   methods: {
     loadNextPage () {
-      if (this.orders) {
-        let edges = this.orders.edges
+      if (this.items) {
+        let edges = this.items.edges
         if (edges && edges.length > 0) {
           let lastEdgePos = edges.length - 1
           let lastEdge = edges[lastEdgePos]
