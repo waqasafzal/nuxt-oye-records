@@ -78,6 +78,7 @@
                   node {
                     ...Release
                     relatedId
+                    relatedType
                     smallImageUrl: thumbnailUrl(size:100)
                   }
                 }
@@ -103,7 +104,8 @@
       },
       onDelete: function (release) {
         this.$store.dispatch('removeBackOrder', {
-          pk: release.relatedId
+          pk: release.relatedId,
+          type: release.relatedType
         })
       }
     }
