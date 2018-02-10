@@ -75,6 +75,7 @@
             profile {
               backOrders(first: $first, after: $after) {
                 edges {
+                  cursor
                   node {
                     ...Release
                     relatedId
