@@ -75,9 +75,11 @@
             profile {
               backOrders(first: $first, after: $after) {
                 edges {
+                  cursor
                   node {
                     ...Release
                     relatedId
+                    relatedType
                     smallImageUrl: thumbnailUrl(size:100)
                   }
                 }
@@ -90,7 +92,8 @@
           },
           ${release}`,
           variables: {
-            first: 25
+            first: 25,
+            after: this.cursor
           }
         }
       }
@@ -102,7 +105,8 @@
       },
       onDelete: function (release) {
         this.$store.dispatch('removeBackOrder', {
-          pk: release.relatedId
+          pk: release.relatedId,
+          type: release.relatedType
         })
       }
     }

@@ -102,7 +102,8 @@
             }
             ${order}`,
           variables: {
-            first: 25
+            first: 25,
+            after: this.cursor
           },
           fetchPolicy: 'network-only'
         }

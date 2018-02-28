@@ -60,7 +60,8 @@ const store = new Vuex.Store({
       nextTrack: null,
       currentTrack: null,
       playing: false,
-      playlistVisible: false
+      playlistVisible: false,
+      visible: false
     },
     search: {
       query: null,
@@ -470,6 +471,9 @@ const store = new Vuex.Store({
     },
     [types.REMOVE_ANNOUNCEMENT]: (state, announcement) => {
       state.announcements = state.announcements.filter(item => item.message !== announcement.message)
+    },
+    [types.SET_PLAYER_VISIBLE]: (state, visible) => {
+      state.player.visible = visible
     }
   },
 
@@ -542,16 +546,20 @@ const store = new Vuex.Store({
       }
 
       var checkoutState = 0
+
       if (state.checkoutActive) {
         checkoutState = 1
       }
+
       if (checkoutState === 1 && state.user.authenticated || state.checkout.guest || state.checkout.register) {
         checkoutState = 2
       }
+
       if (checkoutState === 2 && getters.isShippingAddressConfirmed) {
         checkoutState = 3
       }
-      if (checkoutState === 3 && getters.isPaymentOptionConfirmed || getters.isOnlyPresale) {
+
+      if (checkoutState === 3 && getters.isPaymentOptionConfirmed || state.checkoutActive && getters.isOnlyPresale && checkoutState > 1) {
         checkoutState = 4
       }
 
@@ -672,7 +680,10 @@ const store = new Vuex.Store({
       let cart = getters.getCart
       return cart && cart.lines.length === 0 && cart.preorderLines.length > 0
     },
-    showMobile: (state) => state.showMobile
+    showMobile: (state) => state.showMobile,
+    termsAgreed: (state, getters) => state.checkout.termsAgreed,
+    showAudioPlayer: (state) => state.player.visible
+
   },
 
   actions

@@ -27,6 +27,7 @@
       <audio-player></audio-player>
       <oye-footer class="d-none d-md-flex"></oye-footer>
     </div>
+    <oye-footer></oye-footer>
   </div>
 </template>
 

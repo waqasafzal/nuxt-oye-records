@@ -28,7 +28,7 @@ export const login = (context, creds, redirect) => {
     context.$store.dispatch('getCart')
     context.$store.dispatch('getProfile').then(
       (profile) => {
-        if (profile.unpaidOrder) {
+        if (profile && profile.unpaidOrder) {
           context.$store.dispatch('getPaymentOptions', {country: profile.shippingAddresses[0].country})
         }
       }
