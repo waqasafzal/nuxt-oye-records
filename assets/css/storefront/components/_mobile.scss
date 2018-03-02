@@ -429,3 +429,22 @@
     }
   }
 }
+
+.agile {
+  &__list {
+    height: 350px;
+  }
+}
+
+.frontpage__teaser__item {
+  height: 100%;
+  width: 100%;
+  img {
+    //height: 350px;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100%;
+    height: 100%;
+    //height: 100%;
+  }
+}

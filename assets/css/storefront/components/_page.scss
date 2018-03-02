@@ -40,10 +40,11 @@
     background-color: rgba(248,247,245,1);
     letter-spacing: 1px;
     height: 654px;
-    //padding-left: 9999px;
-    //padding-right: 9999px;
-    //margin-left: -9999px;
-    //margin-right: -9999px;
+
+    @include media-breakpoint-down(md) {
+      height: inherit;
+      margin-bottom: 16px;
+    }
 
     &__content {
       position: relative;
@@ -53,13 +54,14 @@
       margin-right: auto;
       max-width: 1600px;
 
-      @include media-breakpoint-down(sm) {
-        padding-top: 100px;
-        padding-left: 60px;
-        padding-right: 50px;
+      @include media-breakpoint-down(md) {
+        padding-left: 0;
+        padding-right: 0;
         background-position: 0 250px;
         background-size: 100% auto;
-        height: 450px;
+        height: 100%;
+        margin-top: 120px;
+        padding-top: 0;
       }
 
       .slider {
@@ -152,6 +154,7 @@
       @include media-breakpoint-down(md) {
         margin-left: -15px;
         margin-right: -15px;
+        margin-top: inherit;
       }
       a {
         color: $body-color;

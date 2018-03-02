@@ -143,7 +143,8 @@ module.exports = {
     {src: '~plugins/vue-resource'},
     {src: '~plugins/vue-social-sharing'},
     {src: '~plugins/ga', ssr: false},
-    {src: '~plugins/vue-cookie-law.js', ssr: false}
+    {src: '~plugins/vue-cookie-law.js', ssr: false},
+    {src: '~/plugins/vue-agile', ssr: false}
   ],
   router: {
     middleware: ['check-auth'],

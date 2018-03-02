@@ -35,30 +35,24 @@
                       </nuxt-link>
                     </div>
                   </div>
-                  <!--<template v-else>-->
-                  <!--<div class="slide__inner">-->
-                  <!--<div class="release">-->
-                  <!--<div class="release-image">-->
-                  <!--<img :src="release.featureImageUrl"/>-->
-                  <!--<div class="release-navigation d-flex">-->
-                  <!--<play-release-button class="vmargin-auto" :size="100"-->
-                  <!--:release="release"></play-release-button>-->
-                  <!--</div>-->
-                  <!--</div>-->
-                  <!--</div>-->
-                  <!--<div class="release-action d-flex flex-row justify-content-between">-->
-                  <!--<div class="release-info">-->
-                  <!--<div class="release-artist">{{ release.name }}</div>-->
-                  <!--<div class="release-artist">{{ release.title }}</div>-->
-                  <!--</div>-->
-                  <!--</div>-->
-                  <!--</div>-->
-                  <!--</template>-->
                 </div>
               </transition>
             </template>
           </div>
-          <!--</div>-->
+        </div>
+        <div class="col-12 frontpage__teaser__content d-lg-none">
+          <no-ssr placeholder="Loading...">
+            <agile :options="sliderOptions">
+              <div class="slide" v-for="(release, i) in featuredReleases">
+                <nuxt-link class="frontpage__teaser__item" :key="'release-'+i"
+                           :to="{name: 'releases-slug', params: {slug: release.slug}}">
+                  <img :src="release.thumbnailUrl" />
+                  <div>{{release.name}}</div>
+                  <div>{{release.title}}</div>
+                </nuxt-link>
+              </div>
+            </agile>
+          </no-ssr>
         </div>
       </div>
     </div>
@@ -93,7 +87,10 @@
         sliderDisabled: false,
         animate: false,
         touch: false,
-        direction: 0
+        direction: 0,
+        sliderOptions: {
+          autoplay: true
+        }
       }
     },
     computed: {

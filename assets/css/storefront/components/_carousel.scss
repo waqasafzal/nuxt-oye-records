@@ -46,3 +46,34 @@
   height: 100%;
   overflow-y: hidden;
 }
+
+.agile {
+  &__list {
+    height: 100%;
+  }
+  &__dots {
+    justify-content: center;
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+  &__dot {
+    margin: 0 10px;
+    button {
+      background-color: $gray-color-1;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      border: none;
+      cursor: pointer;
+      display: block;
+      font-size: 0;
+      line-height: 0;
+      margin: 0;
+      transition-duration: .3s;
+      padding: 0;
+    }
+  }
+}
