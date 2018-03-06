@@ -1,5 +1,5 @@
 <template>
-  <div class="release__button-bar" v-if="release">
+  <div :class="['release__button-bar', release.availability.status]" v-if="release">
     <div class="play" v-if="release.tracks && release.tracks.length > 0">
       <play-release-button :size=baseSize :release="release"></play-release-button>
     </div>
