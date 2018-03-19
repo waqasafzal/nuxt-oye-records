@@ -6,7 +6,7 @@
       </h3>
       <template v-if="!order.downloadDisabled">
         <div @click="onDownload" v-if="order.isPaid || !order.isSelfCollector" class="download">Download invoice</div>
-        <div class="download disabled">Download disabled</div>
+        <div v-else class="download disabled">Download disabled</div>
       </template>
     </div>
     <template v-if="loading">
