@@ -48,6 +48,9 @@
     padding-bottom: 2em;
     margin-left: 0;
     margin-right: 0;
+    &.created {
+      padding-top: 0;
+    }
     &__col {
       border-top: 1px solid $gray-color-2;
       border-bottom: 1px solid $gray-color-2;

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="release" class="add-to-cart-button" @click.prevent="addToCart"
+  <div v-if="release" :class="['add-to-cart-button', release.availability.status]" @click.prevent="addToCart"
        :style="addToCartButtonStyle">
     <div class="d-flex flex-row vmargin-auto">
       <!--<div style="width: auto; height: auto">-->
@@ -101,6 +101,11 @@
     }
     &:hover {
       background-color: #29AB5D !important;
+    }
+    &.one {
+      overflow: inherit !important;
+      text-overflow: inherit !important;
+      white-space: inherit !important;
     }
   }
 </style>

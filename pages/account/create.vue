@@ -1,10 +1,10 @@
 <template>
   <div class="checkout">
-    <div class="checkout__content">
+    <div :class="['checkout__content', accountCreated ? 'created': '']">
       <div class="row">
-        <div class="col-12 login__form__panel centered-form-panel">
+        <div :class="['col-12', 'login__form__panel', 'centered-form-panel', accountCreated ? 'created': '']">
           <template v-if="accountCreated">
-            <div class="col-12 login__register">
+            <div :class="['col-12', 'login__register', accountCreated ? 'created': '']">
               <h3>Your account has been created.</h3>
               <div class="login__register__instructions">
                 To fulfill your registration please check your mailbox and

@@ -139,8 +139,6 @@
 </script>
 
 <style lang="scss">
-
-
   .account__create {
     &__btn {
       margin-top: 2rem;

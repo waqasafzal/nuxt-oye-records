@@ -13,18 +13,58 @@ $font-factor: 0.9;
         background-color: $brand-color-black-hover !important;
       }
     }
+    &:hover {
+      .one {
+        visibility: visible;
+      }
+    }
     &__add-to-cart {
       position: relative;
       background-color: $brand-color-green;
       border-radius: 2px;
       display: inline-block;
       line-height: 48px;
-      //width: 12em;
       padding: 0 2rem;
       color: white;
       text-align: center;
       font-size: $font-factor + em;
       vertical-align: top;
+
+      &.one {
+        &:before, &:after {
+          visibility: hidden;
+          opacity: 0;
+          pointer-events: none;
+        }
+        &:before {
+          position: absolute;
+          bottom: -150%;
+          left: 0%;
+          margin-left: 0;
+          padding: 7px;
+          width: 100%;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 2px;
+          background-color: #000;
+          background-color: hsla(0, 0%, 20%, 0.9);
+          color: #fff;
+          background-image: url('~assets/images/warning.png');
+          background-repeat: no-repeat;
+          background-position-x: 95%;
+          background-position-y: 95%;
+          content: "This is the last copy and might not be in mint condition!";
+          text-align: center;
+          font-size: 14px;
+          line-height: 1.2;
+        }
+        &:hover {
+          &:before, &:after {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }

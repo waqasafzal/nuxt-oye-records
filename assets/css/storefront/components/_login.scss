@@ -45,6 +45,12 @@
         }
       }
     }
+    &.created {
+      padding: 0;
+    }
+    &__instructions {
+      font-size: 18pt;
+    }
   }
   &__form {
     margin-bottom: 16.6px;
@@ -54,13 +60,15 @@
     justify-content: space-between;
     &__panel {
       a {
-        //color: $body-color;
         color: $brand-color-green;
         text-decoration: none;
         font-size: $font-size-sm;
         &:hover {
           text-decoration: underline;
         }
+      }
+      &.created {
+        padding: 0;
       }
       background: transparent;
       padding: $global-padding * 2 $global-padding * 5;
