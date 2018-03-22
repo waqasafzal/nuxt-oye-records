@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div class="page__header">Browse Genres</div>
+        <div class="page__header"><h1>Browse Genres</h1></div>
         <div class="genres__menu">
           <div class="genres__menu__column" :style="genresMenuColumnStyle" :key="i"
                v-for="(mainGenre, i) in metaGenres">
