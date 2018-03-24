@@ -1,4 +1,4 @@
-import client from '~plugins/apollo'
+import client from '../../plugins/apollo'
 import gql from 'graphql-tag'
 import { release } from '../graphql/releases'
 import { artistFragment } from '../graphql/artists'

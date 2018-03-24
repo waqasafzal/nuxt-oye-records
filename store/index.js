@@ -37,7 +37,7 @@ var isEmptyAddress = function (address) {
   )
 }
 
-const store = new Vuex.Store({
+const store = () => new Vuex.Store({
 
   state: {
     showMobile: false,
@@ -87,15 +87,11 @@ const store = new Vuex.Store({
     alerts: null,
     checkoutActive: false,
     userFormErrors: getInitialUserForm(),
-    isMobile: false,
     isSmallScreen: false,
     announcements: []
   },
 
   mutations: {
-    changeMobile (state, isMobile) {
-      state.isMobile = isMobile
-    },
     [types.SET_CART]: (state, cart) => {
       state.cart = cart
     },
@@ -424,9 +420,6 @@ const store = new Vuex.Store({
     [types.SET_MOBILE_NAV]: (state, showMobileNav) => {
       state.showMobile = showMobileNav
     },
-    [types.SET_MOBILE]: (state, isMobile) => {
-      state.isMobile = isMobile
-    },
     [types.SET_SMALL_SCREEN]: (state, isSmall) => {
       state.isSmallScreen = isSmall
     },
@@ -477,7 +470,6 @@ const store = new Vuex.Store({
   },
 
   getters: {
-    isMobile: state => state.isMobile,
     isAuthenticated (state) {
       return state.user && state.user.authenticated
     },
@@ -671,7 +663,7 @@ const store = new Vuex.Store({
       return state.userProfile.availableOrders || []
     },
     hasMobileMenu (state) {
-      return state.isMobile || state.isSmallScreen
+      return state.isSmallScreen
     },
     announcements: state => state.announcements,
     isEmptyCart: (state, getters) => {

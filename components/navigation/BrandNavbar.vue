@@ -34,7 +34,6 @@
     data: function () {
       return {
         isVisibleCart: false,
-        isVisibleMenu: false,
         oyeLogo: oyeLogo
       }
     },
@@ -51,7 +50,6 @@
       },
       closeMobileNav () {
         this.$emit('closemenu')
-        this.isVisibleMenu = false
         this.$store.commit(types.SET_MOBILE_NAV, false)
       }
     },

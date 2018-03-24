@@ -44,7 +44,6 @@
 <script>
   import PlayReleaseButton from '../releases/PlayReleaseButton'
   import ReleaseButtonBar from '../releases/ReleaseButtonBar'
-  import { mapGetters } from 'vuex'
   import AddToCartButton from '../cart/AddToCartButton'
 
   export default {
@@ -59,11 +58,7 @@
     computed: {
       contentStyle () {
         return `background-image: url(${this.release.featureImageUrl})`
-      },
-      isMobile () {
-        return ``
-      },
-      ...mapGetters(['isMobile'])
+      }
     }
   }
 </script>

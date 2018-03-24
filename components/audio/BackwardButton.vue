@@ -33,7 +33,7 @@
         return {
           height: `${this.baseSize}px`,
           width: `${this.baseSize}px`,
-          backgroundImage: `url(${require('~assets/images/Previous_Icon.svg')})`,
+          backgroundImage: `url(${require('~/assets/images/Previous_Icon.svg')})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           borderRadius: '2px',

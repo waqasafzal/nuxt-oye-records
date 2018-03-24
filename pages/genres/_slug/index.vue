@@ -14,8 +14,8 @@
       <div class="genres__detail__bestseller__carousel row"
            v-if="!bsLoading && (bestsellers.length > 0 || bestsellers.edges)">
         <div class="col-12" @mouseenter="disableSlider" @mouseleave="enableSlider">
-          <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/></div>
-          <div class="slider-right-control" @click="slideForward"><img src="~assets/images/Slider_Arrow_Right_Icon.svg"/></div>
+          <div class="slider-left-control" @click="slideBackward"><img src="~/assets/images/Slider_Arrow_Left_Icon.svg"/></div>
+          <div class="slider-right-control" @click="slideForward"><img src="~/assets/images/Slider_Arrow_Right_Icon.svg"/></div>
           <transition-group name="blend">
             <div :class="'carousel__item'" :key="p" v-for="p in pages" v-if="p === currentSlide" transition="blend">
               <release-item v-for="(release, i) in getBestsellers(p)"

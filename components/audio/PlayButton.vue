@@ -75,12 +75,12 @@
         let style = {
           width: `${this.baseSize / 2.6}px`,
           height: `${this.baseSize / 2.8}px`,
-          backgroundImage: `url(${require('~assets/images/Pause_icon.svg')})`,
+          backgroundImage: `url(${require('~/assets/images/Pause_icon.svg')})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center'
         }
         if (this.baseSize > 60) {
-          style['backgroundImage'] = `url(${require('~assets/images/Pause_icon_Big.svg')})`
+          style['backgroundImage'] = `url(${require('~/assets/images/Pause_icon_Big.svg')})`
         }
         return style
       },

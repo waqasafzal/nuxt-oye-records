@@ -1,8 +1,8 @@
 <template>
-  <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
+  <div id="app" :class="[$store.state.isSmallScreen ? 'mobile': '']">
     <div class="header">
       <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
-      <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
+      <account-navbar v-if="!($store.state.isSmallScreen)"></account-navbar>
     </div>
     <div class="force-bigger-screen d-md-none">
       The mobile version is coming soon.<br/>
@@ -51,7 +51,6 @@
     name: 'app',
     data: function () {
       return {
-        isOpenMobileMenu: false,
         isPortable: false,
         isMounted: false
       }
@@ -96,9 +95,6 @@
       isOpenMobileMenu () {
         return this.$store.state.showMobile
       },
-      isMobile () {
-        return this.$store.getters.isMobile
-      },
       isSmallScreen () {
         return this.$store.state.isSmallScreen
       }
@@ -110,17 +106,19 @@
             req.options.headers = {}  // Create the header object if needed.
           }
 
-          var jwt = Vue.cookie.get('jwt')
-          var header = null
-          if (jwt) {
-            header = getAuthHeader()
-          }
-          if (header) {
-            req.options.headers['Authorization'] = header
-          }
-          var cart = Vue.cookie.get('cart')
-          if (cart) {
-            req.options.headers['X-CART-TOKEN'] = cart
+          if (process.browser) {
+            var jwt = Vue.cookie.get('jwt')
+            var header = null
+            if (jwt) {
+              header = getAuthHeader()
+            }
+            if (header) {
+              req.options.headers['Authorization'] = header
+            }
+            var cart = Vue.cookie.get('cart')
+            if (cart) {
+              req.options.headers['X-CART-TOKEN'] = cart
+            }
           }
           next()
         }

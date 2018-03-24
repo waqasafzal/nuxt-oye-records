@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="release-detail__back">
           <a href="#back" @click.prevent="back">
-            <img src="~assets/images/arrow_right_grey.svg"/>
+            <img src="~/assets/images/arrow_right_grey.svg"/>
             Back
           </a>
         </div>
@@ -62,10 +62,10 @@
                         v-cloak inline-template>
           <div>
             <network network="facebook">
-              <img class="fa fa-facebook" src="~assets/images/Facebook.svg"/>
+              <img class="fa fa-facebook" src="~/assets/images/Facebook.svg"/>
             </network>
             <network network="twitter">
-              <img class="fa fa-twitter" src="~assets/images/Twitter.svg"/>
+              <img class="fa fa-twitter" src="~/assets/images/Twitter.svg"/>
             </network>
           </div>
         </social-sharing>
@@ -177,6 +177,7 @@
 
   export default {
     name: 'ReleaseDetailView',
+    layout: 'default',
     props: ['id', 'slug', 'subslug'],
     mixins: [GoogleAnalytics],
     components: {ReleaseList, PlayReleaseButton, ReleaseDescription, ReleaseButtonBar, JsonLdProductSchema},

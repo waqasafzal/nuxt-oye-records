@@ -138,12 +138,12 @@ module.exports = {
   //   ['@nuxtjs/google-analytics', { ua: 'UA-100941329-1' }]
   // ],
   plugins: [
-    {src: '~plugins/vue-cookie', injectAs: 'cookie'},
-    {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
-    {src: '~plugins/vue-resource'},
-    {src: '~plugins/vue-social-sharing'},
-    {src: '~plugins/ga', ssr: false},
-    {src: '~plugins/vue-cookie-law.js', ssr: false}
+    {src: '~/plugins/vue-cookie', injectAs: 'cookie'},
+    {src: '~/plugins/apollo.js', injectAs: 'apolloProvider'},
+    {src: '~/plugins/vue-resource'},
+    {src: '~/plugins/vue-social-sharing'},
+    {src: '~/plugins/ga', ssr: false},
+    {src: '~/plugins/vue-cookie-law.js', ssr: false}
   ],
   router: {
     middleware: ['check-auth'],
@@ -165,7 +165,7 @@ module.exports = {
     }
   },
   css: [
-    {src: '~assets/css/storefront/storefront.scss', lang: 'scss'}
+    {src: '~/assets/css/storefront/storefront.scss', lang: 'scss'}
   ],
   devProxy: {
     'localhost:3000/media': 'http://local.oye.com:8000/',

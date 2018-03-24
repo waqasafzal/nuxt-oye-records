@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import client from '~plugins/apollo'
+  import client from '~/plugins/apollo'
   import ChartItem from '~/components/charts/ChartItem'
   import { appendCharts } from '~/utils/charts'
   import { createChartsArchiveQuery } from '~/components/graphql/charts'

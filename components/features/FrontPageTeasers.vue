@@ -2,9 +2,9 @@
   <div>
     <div class="row frontpage__teaser">
       <div class="col-12 frontpage__teaser__content">
-        <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/>
+        <div class="slider-left-control" @click="slideBackward"><img src="~/assets/images/Slider_Arrow_Left_Icon.svg"/>
         </div>
-        <div class="slider-right-control" @click="slideForward"><img src="~assets/images/Slider_Arrow_Right_Icon.svg"/>
+        <div class="slider-right-control" @click="slideForward"><img src="~/assets/images/Slider_Arrow_Right_Icon.svg"/>
         </div>
         <div ref="slider" :class="['slider', animate ? 'animateXyz': '']" @mouseenter="disableSlider"
              @mouseleave="enableSlider">

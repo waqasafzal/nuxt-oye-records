@@ -14,10 +14,10 @@
                             v-cloak inline-template>
               <div>
                 <network network="facebook">
-                  <img class="fa fa-facebook" src="~assets/images/Facebook.svg"/>
+                  <img class="fa fa-facebook" src="~/assets/images/Facebook.svg"/>
                 </network>
                 <network network="twitter">
-                  <img class="fa fa-twitter" src="~assets/images/Twitter.svg"/>
+                  <img class="fa fa-twitter" src="~/assets/images/Twitter.svg"/>
                 </network>
               </div>
             </social-sharing>
