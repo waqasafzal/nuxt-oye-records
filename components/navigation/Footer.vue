@@ -2,7 +2,7 @@
   <div :class="['footer', moveHigher ? 'higher' : '']">
     <div class="container-fluid footer-flex">
       <div class="logo-copyright">
-        &copy; 2017
+        &copy; 2017 - 2018
       </div>
       <div class="terms">
         <nuxt-link :to="{name: 'info-imprint'}">Imprint</nuxt-link>|
