@@ -75,7 +75,7 @@
       onPlaceOrder () {
         if (!this.$store.state.checkout.termsAgreed) {
           this.$store.dispatch('addAlert', {level: 'error', message: 'You must agree to the terms of conditions to proceed.'})
-        } else if (this.porto === parseFloat('0.00') && !this.isSelfCollector) {
+        } else if ((typeof this.porto === 'undefined' || this.porto === parseFloat('0.00')) && !this.isSelfCollector) {
           this.$store.dispatch('addAlert', {level: 'error', message: 'Your must specify a shipping option.'})
         } else {
           this.placingOrder = true
