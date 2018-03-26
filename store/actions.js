@@ -562,8 +562,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
       addressDict['isBilling'] = true
       addressDict['isShipping'] = true
       callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
-        // this.billingAddressChanged = false
-        // this.shippingAddressChanged = false
         store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
         store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
         store.dispatch('addAlert', {
@@ -575,7 +573,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
       addressDict['isBilling'] = false
       addressDict['isShipping'] = true
       callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
-        // this.shippingAddressChanged = false
         store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
         store.dispatch('addAlert', {
           message: 'Shipping address has been saved.'
@@ -587,7 +584,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
       addressDict['isBilling'] = true
       addressId = billingAddress.id !== shippingAddress.id ? billingAddress.id : undefined
       callSaveAddress(addressId, addressDict, ({data}) => {
-        // this.billingAddressChanged = false
         store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
         store.dispatch('addAlert', {
           message: 'Billing address has been saved.'
@@ -599,7 +595,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
     addressDict['isBilling'] = false
     addressDict['isShipping'] = true
     callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
-      // this.shippingAddressChanged = false
       store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
       store.dispatch('addAlert', {
         message: 'Shipping address has been saved.'
@@ -611,7 +606,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
     addressDict['isBilling'] = true
     addressId = billingAddress.id !== shippingAddress.id ? billingAddress.id : undefined
     callSaveAddress(addressId, addressDict, ({data}) => {
-      // this.billingAddressChanged = false
       store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
       store.dispatch('addAlert', {
         message: 'Billing address has been saved.'
