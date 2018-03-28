@@ -18,7 +18,7 @@
         <nuxt></nuxt>
       </div>
     </div>
-    <announcements></announcements>
+    <!--<announcements></announcements>-->
     <div class="bottom">
       <div class="container-fluid">
         <primary-control-panel></primary-control-panel>

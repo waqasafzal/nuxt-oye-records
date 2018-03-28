@@ -46,10 +46,5 @@
         this.currentItem = item
       }
     }
-//    created () {
-//      if (this.$route.name === 'info') {
-//        return this.$router.push({name: 'info-questions'})
-//      }
-//    }
   }
 </script>
