@@ -50,11 +50,15 @@
         }
         return currentCheckoutView
       },
-      ...mapGetters(['isEmptyCart'])
+      ...mapGetters(['isEmptyCart']),
+      register () {
+        return this.$store.getters.isRegisterCheckout
+      }
     },
     watch: {
       currentCheckoutView (view) {
-        if (this.checkoutView === CheckoutAddresses && this.checkoutView !== view) {
+        // When changing from CheckoutAddressess to another view
+        if (this.checkoutView === CheckoutAddresses && this.checkoutView !== view && !this.register) {
           if (this.$store.getters.hasChangedAddresses) {
             this.$store.dispatch('saveAddresses')
           }
