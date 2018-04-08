@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * Created by tillkolter on 19/03/17.
  */
@@ -855,4 +856,26 @@ export const updateUser = ({commit, dispatch}, args) => new Promise((resolve, re
       }
     }
   )
+})
+
+export const sendTransaction = ({commit}, order) => new Promise((resolve, reject) => {
+  const cart = order.cart
+  ga('ecommerce:addTransaction', {
+    'id': order.pk,
+    'revenue': order.total,
+    'shipping': order.porto
+  })
+  cart.lines.forEach(
+    line => {
+      ga('ecommerce:addItem', {
+        'id': order.pk,
+        'name': line.release.name,
+        'sku': line.release.catalogueNumber,
+        'category': line.release.mainGenre.name,
+        'price': line.pricePerItem,
+        'quantity': line.quantity
+      })
+    }
+  )
+  ga('ecommerce:send')
 })

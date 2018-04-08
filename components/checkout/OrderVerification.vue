@@ -35,6 +35,9 @@
               ok
               order {
                 ...Order
+                cart {
+                  ...OyeCart
+                }
               },
               newCart {
                 ...OyeCart
@@ -61,6 +64,7 @@
             if (data.verifiyOrder.newCart) {
               this.$store.commit(types.SET_CART, data.verifiyOrder.newCart)
             }
+            this.$store.dispatch('sendTransaction', data.verifyOrder.order)
           } else {
             this.$store.commit(types.ADD_ALERT, {
               level: 'alert',
