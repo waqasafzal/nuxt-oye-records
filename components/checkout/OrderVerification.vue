@@ -61,7 +61,7 @@
             })
             this.$store.commit(types.SET_UNPAID_ORDER, data.verifyOrder.order)
             this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
-            if (data.verifiyOrder.newCart) {
+            if (data.verifyOrder.newCart) {
               this.$store.commit(types.SET_CART, data.verifiyOrder.newCart)
             }
             if (!data.verifyOrder.order.isSelfCollector) {
