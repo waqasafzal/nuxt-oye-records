@@ -526,6 +526,13 @@ export const createNewUser = ({commit}, args) => new Promise((resolve, reject) =
             userProfile {
                 firstName
                 lastName
+                email
+                preferredBillingAddress {
+                    id
+                }
+                preferredShippingAddress {
+                    id
+                }
             }
             token
         }
@@ -541,6 +548,8 @@ export const createNewUser = ({commit}, args) => new Promise((resolve, reject) =
     if (data.registerUser.errorStatus) {
       console.error(`Can not register user ${data.registerUser.errorStatus}`)
     } else {
+      commit(types.SET_SHIPPING_ADDRESS_ID, data.registerUser.userProfile.preferredShippingAddress.id)
+      commit(types.SET_BILLING_ADDRESS_ID, data.registerUser.userProfile.preferredBillingAddress.id)
       setToken(data.registerUser.token)
       resolve(data.registerUser)
     }
