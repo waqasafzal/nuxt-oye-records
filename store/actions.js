@@ -122,6 +122,8 @@ export const getCart = ({commit, dispatch}) => new Promise((resolve, reject) => 
 })
 
 export const addToCart = ({commit, dispatch}, args) => new Promise((resolve, reject) => {
+  const release = args.release
+  ga('send', 'event', 'Commerce', 'add-to-cart', `${release.name} - ${release.title}`)
   apolloClient.mutate(
     {
       mutation: gql`mutation ($releasePk: ID!, $quantity: Int!) {
@@ -133,7 +135,7 @@ export const addToCart = ({commit, dispatch}, args) => new Promise((resolve, rej
       },
       ${oyeCart}`,
       variables: {
-        releasePk: args.pk,
+        releasePk: args.release.pk,
         quantity: args.quantity
       },
       updateQueries: {

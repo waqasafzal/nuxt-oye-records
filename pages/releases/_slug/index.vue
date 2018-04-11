@@ -1,5 +1,5 @@
 <template>
-  <div v-if="release" v-on:keyup.65="addToCart(release.pk)">
+  <div v-if="release" v-on:keyup.65="addToCart(release)">
     <div class="release-detail__header row">
       <div class="col-12">
         <div class="release-detail__back">
@@ -266,9 +266,9 @@
           }
         }
       },
-      addToCart (pk) {
+      addToCart (release) {
         this.$store.dispatch('addToCart', {
-          pk: pk,
+          release: release,
           quantity: this.quantity
         }).catch(e => console.log(e))
       },

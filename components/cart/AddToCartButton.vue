@@ -80,7 +80,7 @@
     methods: {
       addToCart () {
         this.$store.dispatch('addToCart', {
-          pk: this.release.pk,
+          release: this.release,
           quantity: this.quantity || 1
         }).then(() => {
           this.$emit('added')
