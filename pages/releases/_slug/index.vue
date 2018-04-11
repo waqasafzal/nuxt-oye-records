@@ -194,23 +194,33 @@
       return {
         meta: [
           {
-            hid: 'title',
+            hid: 'og:title',
             property: 'og:title',
             content: this.pageTitle
           },
           {
-            hid: 'url',
+            hid: 'title',
+            property: 'title',
+            content: this.pageTitle
+          },
+          {
+            hid: 'og:url',
             property: 'og:url',
             content: this.currentRoute
           },
           {
-            hid: 'type',
+            hid: 'og:type',
             property: 'og:type',
             content: 'music.album'
           },
           {
-            hid: 'description',
+            hid: 'og:description',
             property: 'og:description',
+            content: this.release && this.release.description
+          },
+          {
+            hid: 'description',
+            property: 'description',
             content: this.release && this.release.description
           },
           {
