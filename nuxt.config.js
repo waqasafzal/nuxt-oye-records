@@ -64,12 +64,12 @@ module.exports = {
         content: 'website'
       },
       {
-        hid: 'title',
+        hid: 'og:title',
         property: 'og:title',
         content: 'OYE Records'
       },
       {
-        hid: 'description',
+        hid: 'og:description',
         property: 'og:description',
         content: 'A is for Afro, B is for Breaks, C is for Cosmic, D is for Disco, E is for Electro, F is for Funk, G is for G-Funk, H is for House, Get it all and more at OYE!'
       }

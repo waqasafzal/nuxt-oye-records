@@ -192,15 +192,11 @@
     },
     head () {
       return {
+        title: this.pageTitle,
         meta: [
           {
             hid: 'og:title',
             property: 'og:title',
-            content: this.pageTitle
-          },
-          {
-            hid: 'title',
-            property: 'title',
             content: this.pageTitle
           },
           {
