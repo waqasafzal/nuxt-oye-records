@@ -148,6 +148,8 @@
                     }
                     this.$store.commit(types.SET_PURCHASES, purchases)
                   }
+                  // eslint-disable-next-line no-undef
+                  ga('send', 'event', 'Commerce', 'sc-order')
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
                 }
               }

@@ -889,5 +889,5 @@ export const sendTransaction = ({commit}, order) => new Promise((resolve, reject
     }
   )
   ga('ecommerce:send')
-  ga('send', 'event', 'Commerce', 'order-complete', 'shipping')
+  ga('send', 'event', 'Commerce', 'paid-order', order.isSelfCollector ? 'sc' : 'shipping')
 })

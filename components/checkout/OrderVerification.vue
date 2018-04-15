@@ -64,12 +64,7 @@
             if (data.verifyOrder.newCart) {
               this.$store.commit(types.SET_CART, data.verifyOrder.newCart)
             }
-            if (!data.verifyOrder.order.isSelfCollector) {
-              this.$store.dispatch('sendTransaction', data.verifyOrder.order)
-            } else {
-              // eslint-disable-next-line no-undef
-              ga('send', 'event', 'Commerce', 'order-complete', 'sc')
-            }
+            this.$store.dispatch('sendTransaction', data.verifyOrder.order)
           } else {
             this.$store.commit(types.ADD_ALERT, {
               level: 'alert',
