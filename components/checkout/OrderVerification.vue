@@ -66,6 +66,9 @@
             }
             if (!data.verifyOrder.order.isSelfCollector) {
               this.$store.dispatch('sendTransaction', data.verifyOrder.order)
+            } else {
+              // eslint-disable-next-line no-undef
+              ga('send', 'event', 'sc-order')
             }
           } else {
             this.$store.commit(types.ADD_ALERT, {

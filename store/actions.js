@@ -889,4 +889,5 @@ export const sendTransaction = ({commit}, order) => new Promise((resolve, reject
     }
   )
   ga('ecommerce:send')
+  ga('send', 'event', 'shipping-order')
 })
