@@ -68,7 +68,7 @@
               this.$store.dispatch('sendTransaction', data.verifyOrder.order)
             } else {
               // eslint-disable-next-line no-undef
-              ga('send', 'event', 'sc-order')
+              ga('send', 'event', 'Commerce', 'order-complete', 'sc')
             }
           } else {
             this.$store.commit(types.ADD_ALERT, {
