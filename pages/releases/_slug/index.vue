@@ -340,11 +340,11 @@
         return 2017
       },
       pageTitle: function () {
-        var artist = ''
+        var releaseName = ''
         if (this.release) {
-          artist = this.release.artistFirstName + ' ' + this.release.artistLastName + ' - ' + this.release.title
+          releaseName = this.release.artistFirstName + ' ' + this.release.artistLastName + ' - ' + this.release.title
         }
-        return 'OYE Records - ' + artist
+        return `${releaseName} - ${this.release.format} at OYE Records`
       },
       currentRoute: function () {
         return __API__ + this.$route.path
