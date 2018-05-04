@@ -213,12 +213,12 @@
           {
             hid: 'og:description',
             property: 'og:description',
-            content: this.release && stripped(this.release.description) + ' ' + this.release.format + ' - Grab your copy!'
+            content: this.strippedDescription
           },
           {
             hid: 'description',
             property: 'description',
-            content: this.release && this.release.description
+            content: this.strippedDescription
           },
           {
             hid: 'image',
@@ -352,6 +352,9 @@
       },
       releaseImage: function () {
         return this.release && __API__ + this.release.thumbnailUrl
+      },
+      strippedDescription () {
+        return this.release && stripped(this.release.description) + ' ' + this.release.format + ' - Grab your copy!'
       }
     },
     beforeDestroy () {
