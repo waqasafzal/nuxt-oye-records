@@ -4,7 +4,7 @@ export const capitalizeFirstLetter = function (string) {
 }
 
 export const stripped = function (str) {
-  let strippedText = str.substring(200)
+  let strippedText = str.substring(0, 200)
   if (strippedText.length === 200) {
     strippedText = strippedText + '...'
   }
