@@ -170,7 +170,7 @@
   import ReleaseList from '../../../components/releases/ReleaseList'
   import GoogleAnalytics from '~/mixins/ga'
   import * as types from '../../../store/types'
-  import { stripped } from '../../../utils/string'
+  import { getMedium, stripped } from '../../../utils/string'
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
 
