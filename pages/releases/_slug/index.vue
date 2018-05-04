@@ -354,7 +354,7 @@
         return this.release && __API__ + this.release.thumbnailUrl
       },
       strippedDescription () {
-        return this.release && stripped(this.release.description) + ' ' + this.release.format + ' - Grab your copy!'
+        return this.release && stripped(this.release.description) + ' ' + getMedium(this.release.format) + ' - Grab your copy!'
       }
     },
     beforeDestroy () {
