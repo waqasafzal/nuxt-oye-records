@@ -170,6 +170,7 @@
   import ReleaseList from '../../../components/releases/ReleaseList'
   import GoogleAnalytics from '~/mixins/ga'
   import * as types from '../../../store/types'
+  import { stripped } from '../../../utils/string'
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
 
@@ -212,7 +213,7 @@
           {
             hid: 'og:description',
             property: 'og:description',
-            content: this.release && this.release.description
+            content: this.release && stripped(this.release.description) + ' ' + this.release.format + ' - Grab your copy!'
           },
           {
             hid: 'description',
