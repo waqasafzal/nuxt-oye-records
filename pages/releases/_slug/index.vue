@@ -342,9 +342,9 @@
       pageTitle: function () {
         var releaseName = ''
         if (this.release) {
-          releaseName = this.release.artistFirstName + ' ' + this.release.artistLastName + ' - ' + this.release.title
+          releaseName = `${this.release.artistFirstName} ${this.release.artistLastName} - ${this.release.title} - ${this.release.format}`
         }
-        return `${releaseName} - ${this.release.format} at OYE Records`
+        return `${releaseName} at OYE Records`
       },
       currentRoute: function () {
         return __API__ + this.$route.path
