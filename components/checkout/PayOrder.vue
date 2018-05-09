@@ -18,7 +18,7 @@
 <script>
   import CardPayment from '~/components/checkout/CardPayment'
   import LocalPayments from '~/components/checkout/LocalPayments'
-  import { roundFixed } from '../../utils/math'
+  import { getPrice, roundFixed } from '../../utils/math'
   export default {
     name: 'PayOrder',
     computed: {
@@ -32,7 +32,10 @@
         return CardPayment
       },
       totalAmount () {
-        return this.order && roundFixed(this.order.price + this.order.porto)
+        return this.order && getPrice(
+          this.order.price + this.order.porto,
+          {vatExcluded: this.order.excludedVat, vatRate: this.order.excludedVat}
+        )
       },
       paymentType () {
         return this.order && this.order.paymentType
