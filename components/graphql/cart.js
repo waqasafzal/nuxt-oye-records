@@ -18,6 +18,7 @@ export const order = gql`
         isSelfCollector
         paymentType
         canDownload
+        excludedVat
     }
 `
 

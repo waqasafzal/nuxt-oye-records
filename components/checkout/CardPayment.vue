@@ -75,7 +75,7 @@
       price () {
         return getPrice(
           this.order.price + this.order.porto,
-          {vatExcluded: this.vatExcluded, vatRate: this.vatRate}
+          {vatExcluded: this.order.excludedVat, vatRate: this.order.excludedVat}
         )
       },
       vatRate () {
