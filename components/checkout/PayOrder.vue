@@ -18,7 +18,7 @@
 <script>
   import CardPayment from '~/components/checkout/CardPayment'
   import LocalPayments from '~/components/checkout/LocalPayments'
-  import { getPrice, roundFixed } from '../../utils/math'
+  import { getPrice } from '../../utils/math'
   export default {
     name: 'PayOrder',
     computed: {
