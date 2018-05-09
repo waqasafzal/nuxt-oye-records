@@ -53,7 +53,7 @@
   import gql from 'graphql-tag'
   import ProceedButton from '../shared/ProceedButton'
   import { getAuthHeader } from '../../utils/auth/index'
-  import { getPrice, roundFixed } from '../../utils/math'
+  import { roundFixed } from '../../utils/math'
   import * as types from '../../store/types'
   import { creditCardFormat } from '~/utils/forms'
 
