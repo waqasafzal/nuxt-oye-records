@@ -138,7 +138,7 @@
 <script>
   import ReleasePrice from '~/components/releases/ReleasePrice'
   import ProceedButton from '../shared/ProceedButton'
-  import { roundFixed } from '../../utils/math'
+  import { roundFixed, getPrice } from '../../utils/math'
   import * as types from '../../store/types'
 
   const MAX_QUANTITY = 5
@@ -205,11 +205,8 @@
         })
       },
       getPrice: function (price) {
-        let parsedPrice = parseFloat(price)
-        if (this.vatExcluded) {
-          parsedPrice = parsedPrice * ((100 - this.vatRate) / 100)
-        }
-        return roundFixed(parsedPrice, 2)
+        return getPrice(price, {vatRate: this.vatRate, vatExcluded: this.vatExcluded})
+
       },
       getQuantityOptions (lineQuantity) {
         return lineQuantity > MAX_QUANTITY ? lineQuantity : MAX_QUANTITY

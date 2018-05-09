@@ -53,7 +53,7 @@
   import gql from 'graphql-tag'
   import ProceedButton from '../shared/ProceedButton'
   import { getAuthHeader } from '../../utils/auth/index'
-  import { roundFixed } from '../../utils/math'
+  import { getPrice, roundFixed } from '../../utils/math'
   import * as types from '../../store/types'
   import { creditCardFormat } from '~/utils/forms'
 
@@ -67,7 +67,10 @@
         return __API__ + '/oye/pay/'
       },
       totalAmount () {
-        return this.order && roundFixed(this.order.price + this.order.porto)
+        return this.order && getPrice(
+          this.order.price + this.order.porto,
+          {vatExcluded: this.order.vatExcluded, vatRate: this.order.vatRate}
+          )
       },
       order () {
         return this.$store.getters.getUnpaidOrder
