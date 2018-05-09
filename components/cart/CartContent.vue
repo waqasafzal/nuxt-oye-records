@@ -206,7 +206,6 @@
       },
       getPrice: function (price) {
         return getPrice(price, {vatRate: this.vatRate, vatExcluded: this.vatExcluded})
-
       },
       getQuantityOptions (lineQuantity) {
         return lineQuantity > MAX_QUANTITY ? lineQuantity : MAX_QUANTITY
