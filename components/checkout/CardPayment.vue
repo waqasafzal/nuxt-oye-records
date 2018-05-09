@@ -67,13 +67,16 @@
         return __API__ + '/oye/pay/'
       },
       totalAmount () {
-        return this.order && getPrice(
-          this.order.price + this.order.porto,
-          {vatExcluded: this.order.vatExcluded, vatRate: this.order.vatRate}
-          )
+        return this.order && this.price
       },
       order () {
         return this.$store.getters.getUnpaidOrder
+      },
+      price () {
+        return getPrice(
+          this.order.price + this.order.porto,
+          {vatExcluded: this.order.vatExcluded, vatRate: this.order.vatRate}
+        )
       }
     },
     data: function () {
@@ -103,7 +106,7 @@
           this.$http.post(__API__ + '/oye/pay/', {
             paymentData: encryptedData,
             orderId: this.order.pk,
-            orderPrice: this.order.price + this.order.porto
+            orderPrice: this.price
           }, {
             headers: {
               Authorization: authHeader
