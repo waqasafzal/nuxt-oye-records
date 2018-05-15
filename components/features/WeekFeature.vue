@@ -8,9 +8,6 @@
             <div class="frontpage__weekly__item__content__title">{{ release.title }}</div>
             <release-button-bar :release="release"></release-button-bar>
           </div>
-          <div class="frontpage__weekly__item__image">
-            <img :src="release.featureImageUrl" />
-          </div>
         </div>
         <div class="mobile frontpage__weekly__item__content d-md-none">
           <img :src="release.featureImageUrl" />
