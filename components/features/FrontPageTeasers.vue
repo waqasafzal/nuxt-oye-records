@@ -60,7 +60,6 @@
               </div>
             </agile>
           </no-ssr>
-          <release-button-bar></release-button-bar>
         </div>
       </div>
     </div>
