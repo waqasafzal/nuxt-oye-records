@@ -12,7 +12,7 @@
             <img :src="release.featureImageUrl" />
           </div>
         </div>
-        <div class="frontpage__weekly__item__content d-md-none">
+        <div class="mobile frontpage__weekly__item__content d-md-none">
           <img :src="release.featureImageUrl" />
           <div class="d-flex release-name">
             <nuxt-link class="category" :to="{name: 'releases-new'}">
