@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * Created by tillkolter on 19/03/17.
  */
@@ -121,6 +122,8 @@ export const getCart = ({commit, dispatch}) => new Promise((resolve, reject) => 
 })
 
 export const addToCart = ({commit, dispatch}, args) => new Promise((resolve, reject) => {
+  const release = args.release
+  ga('send', 'event', 'Commerce', 'add-to-cart', `${release.name} - ${release.title}`)
   apolloClient.mutate(
     {
       mutation: gql`mutation ($releasePk: ID!, $quantity: Int!) {
@@ -132,7 +135,7 @@ export const addToCart = ({commit, dispatch}, args) => new Promise((resolve, rej
       },
       ${oyeCart}`,
       variables: {
-        releasePk: args.pk,
+        releasePk: args.release.pk,
         quantity: args.quantity
       },
       updateQueries: {
@@ -525,6 +528,13 @@ export const createNewUser = ({commit}, args) => new Promise((resolve, reject) =
             userProfile {
                 firstName
                 lastName
+                email
+                preferredBillingAddress {
+                    id
+                }
+                preferredShippingAddress {
+                    id
+                }
             }
             token
         }
@@ -540,6 +550,8 @@ export const createNewUser = ({commit}, args) => new Promise((resolve, reject) =
     if (data.registerUser.errorStatus) {
       console.error(`Can not register user ${data.registerUser.errorStatus}`)
     } else {
+      commit(types.SET_SHIPPING_ADDRESS_ID, data.registerUser.userProfile.preferredShippingAddress.id)
+      commit(types.SET_BILLING_ADDRESS_ID, data.registerUser.userProfile.preferredBillingAddress.id)
       setToken(data.registerUser.token)
       resolve(data.registerUser)
     }
@@ -562,8 +574,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
       addressDict['isBilling'] = true
       addressDict['isShipping'] = true
       callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
-        // this.billingAddressChanged = false
-        // this.shippingAddressChanged = false
         store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
         store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
         store.dispatch('addAlert', {
@@ -575,7 +585,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
       addressDict['isBilling'] = false
       addressDict['isShipping'] = true
       callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
-        // this.shippingAddressChanged = false
         store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
         store.dispatch('addAlert', {
           message: 'Shipping address has been saved.'
@@ -587,7 +596,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
       addressDict['isBilling'] = true
       addressId = billingAddress.id !== shippingAddress.id ? billingAddress.id : undefined
       callSaveAddress(addressId, addressDict, ({data}) => {
-        // this.billingAddressChanged = false
         store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
         store.dispatch('addAlert', {
           message: 'Billing address has been saved.'
@@ -599,7 +607,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
     addressDict['isBilling'] = false
     addressDict['isShipping'] = true
     callSaveAddress(shippingAddress.id, addressDict, ({data}) => {
-      // this.shippingAddressChanged = false
       store.commit(types.SET_SHIPPING_ADDRESS_ID, data.saveAddress.address.id)
       store.dispatch('addAlert', {
         message: 'Shipping address has been saved.'
@@ -611,7 +618,6 @@ export const saveAddresses = (store, args) => new Promise((resolve, reject) => {
     addressDict['isBilling'] = true
     addressId = billingAddress.id !== shippingAddress.id ? billingAddress.id : undefined
     callSaveAddress(addressId, addressDict, ({data}) => {
-      // this.billingAddressChanged = false
       store.commit(types.SET_BILLING_ADDRESS_ID, data.saveAddress.address.id)
       store.dispatch('addAlert', {
         message: 'Billing address has been saved.'
@@ -861,4 +867,27 @@ export const updateUser = ({commit, dispatch}, args) => new Promise((resolve, re
       }
     }
   )
+})
+
+export const sendTransaction = ({commit}, order) => new Promise((resolve, reject) => {
+  const cart = order.cart
+  ga('ecommerce:addTransaction', {
+    'id': order.pk,
+    'revenue': order.total,
+    'shipping': order.porto
+  })
+  cart.lines.forEach(
+    line => {
+      ga('ecommerce:addItem', {
+        'id': order.pk,
+        'name': line.release.name,
+        'sku': line.release.catalogueNumber,
+        'category': line.release.mainGenre.name,
+        'price': line.pricePerItem,
+        'quantity': line.quantity
+      })
+    }
+  )
+  ga('ecommerce:send')
+  ga('send', 'event', 'Commerce', 'paid-order', order.isSelfCollector ? 'sc' : 'shipping')
 })

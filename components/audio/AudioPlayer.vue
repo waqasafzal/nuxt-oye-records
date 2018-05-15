@@ -164,6 +164,9 @@
         let diff = this.audio.currentTime - number
         // if the change diff is big enough to assume a user triggered skip
         if (diff > 1 || diff < -1) {
+          const release = this.currentTrack.release
+          // eslint-disable-next-line no-undef
+          ga('send', 'event', 'Audio', 'skip', `${release.name} - ${release.title}`)
           this.audio.currentTime = number
         }
       }
@@ -228,7 +231,7 @@
         if (this.currentTrack) {
           let release = this.currentTrack.release
           this.$store.dispatch('addToCart', {
-            pk: release.pk,
+            release: release,
             quantity: 1
           })
         }

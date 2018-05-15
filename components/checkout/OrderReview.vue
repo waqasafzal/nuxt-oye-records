@@ -75,6 +75,8 @@
       onPlaceOrder () {
         if (!this.$store.state.checkout.termsAgreed) {
           this.$store.dispatch('addAlert', {level: 'error', message: 'You must agree to the terms of conditions to proceed.'})
+        } else if ((typeof this.porto === 'undefined' || this.porto === parseFloat('0.00')) && !this.isSelfCollector) {
+          this.$store.dispatch('addAlert', {level: 'error', message: 'Your must specify a shipping option.'})
         } else {
           this.placingOrder = true
           apolloClient.mutate({
@@ -128,7 +130,7 @@
               } else {
                 let order = data.placeOrder.order
                 this.$store.commit(types.SET_UNPAID_ORDER, order)
-                if (!order.isPaid && !order.isSelfCollector) {
+                if (!order.isPaid && !(order.isSelfCollector && order.paymentType === 'cash')) {
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
                   if (order.shippingCountry) {
                     this.$store.dispatch('setShippingCountry', order)
@@ -146,6 +148,8 @@
                     }
                     this.$store.commit(types.SET_PURCHASES, purchases)
                   }
+                  // eslint-disable-next-line no-undef
+                  ga('send', 'event', 'Commerce', 'sc-order')
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
                 }
               }

@@ -80,7 +80,7 @@
     methods: {
       addToCart () {
         this.$store.dispatch('addToCart', {
-          pk: this.release.pk,
+          release: this.release,
           quantity: this.quantity || 1
         }).then(() => {
           this.$emit('added')
@@ -97,6 +97,8 @@
     display: flex;
     justify-content: space-around;
     img {
+      margin-bottom: auto;
+      margin-top: auto;
       margin-left: auto;
     }
     &:hover {

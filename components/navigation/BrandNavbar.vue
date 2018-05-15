@@ -13,7 +13,7 @@
             <main-navbar class="d-none d-lg-block"></main-navbar>
           </div>
           <search v-if="!isCheckout" class="col-2 col-lg-2 col-sm-1"></search>
-          <div class="d-inline-block d-lg-none col-1 col-sm-1 cart__icon">
+          <div class="d-inline-block vmargin-auto d-lg-none col-1 col-sm-1 cart__icon">
             <div class="d-flex">
               <cart-svg class="vmargin-auto"></cart-svg>
             </div>

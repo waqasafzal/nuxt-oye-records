@@ -2,7 +2,7 @@
   padding: 41px 0 0 0;
   @include media-breakpoint-down(md) {
     img {
-      max-height: 30px;
+      max-height: 42px;
     }
   }
   @media (max-width: 370px) {
@@ -110,6 +110,8 @@
           top: inherit;
           background: $brand-color-black;
         }
+      }
+      img {
       }
       //span {
       //  position: absolute;

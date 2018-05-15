@@ -46,13 +46,21 @@
               <div class="slide" v-for="(release, i) in featuredReleases">
                 <nuxt-link class="frontpage__teaser__item" :key="'release-'+i"
                            :to="{name: 'releases-slug', params: {slug: release.slug}}">
-                  <img :src="release.thumbnailUrl" />
-                  <div>{{release.name}}</div>
-                  <div>{{release.title}}</div>
+                  <img :src="release.featureImageUrl" />
+                  <div class="d-flex release-name">
+                    <nuxt-link class="category" :to="{name: 'releases-new'}">
+                      <template v-if="release.availability.status === 'upcoming'">Coming Soon</template>
+                      <template v-else>New In Stock</template>
+                    </nuxt-link>
+                    <div class="artist">{{release.name}}</div>
+                    <div class="title">{{release.title}}</div>
+                    <release-button-bar :size="toInt72" :release="release" ></release-button-bar>
+                  </div>
                 </nuxt-link>
               </div>
             </agile>
           </no-ssr>
+          <release-button-bar></release-button-bar>
         </div>
       </div>
     </div>
@@ -89,8 +97,10 @@
         touch: false,
         direction: 0,
         sliderOptions: {
-          autoplay: true
-        }
+          autoplay: true,
+          dots: false
+        },
+        toInt72: 54
       }
     },
     computed: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" v-if="release" v-on:keyup.65="addToCart(release.pk)">
+  <div v-if="release" v-on:keyup.65="addToCart(release.pk)">
     <div class="release-detail__header row">
       <div class="col-12">
         <div class="release-detail__back">
@@ -170,6 +170,7 @@
   import ReleaseList from '../../../components/releases/ReleaseList'
   import GoogleAnalytics from '~/mixins/ga'
   import * as types from '../../../store/types'
+  import { getMedium, stripped } from '../../../utils/string'
   var SocialSharing = require('vue-social-sharing')
   Vue.use(SocialSharing)
 
@@ -192,26 +193,32 @@
     },
     head () {
       return {
+        title: this.pageTitle,
         meta: [
           {
-            hid: 'title',
+            hid: 'og:title',
             property: 'og:title',
             content: this.pageTitle
           },
           {
-            hid: 'url',
+            hid: 'og:url',
             property: 'og:url',
             content: this.currentRoute
           },
           {
-            hid: 'type',
+            hid: 'og:type',
             property: 'og:type',
             content: 'music.album'
           },
           {
-            hid: 'description',
+            hid: 'og:description',
             property: 'og:description',
-            content: this.release && this.release.description
+            content: this.strippedDescription
+          },
+          {
+            hid: 'description',
+            property: 'description',
+            content: this.strippedDescription
           },
           {
             hid: 'image',
@@ -266,9 +273,9 @@
           }
         }
       },
-      addToCart (pk) {
+      addToCart (release) {
         this.$store.dispatch('addToCart', {
-          pk: pk,
+          release: release,
           quantity: this.quantity
         }).catch(e => console.log(e))
       },
@@ -334,17 +341,20 @@
         return 2017
       },
       pageTitle: function () {
-        var artist = ''
+        var releaseName = ''
         if (this.release) {
-          artist = this.release.artistFirstName + ' ' + this.release.artistLastName + ' - ' + this.release.title
+          releaseName = `${this.release.artistFirstName} ${this.release.artistLastName} - ${this.release.title} - ${this.release.format}`
         }
-        return 'OYE Records - ' + artist
+        return `${releaseName} at OYE Records`
       },
       currentRoute: function () {
         return __API__ + this.$route.path
       },
       releaseImage: function () {
         return this.release && __API__ + this.release.thumbnailUrl
+      },
+      strippedDescription () {
+        return this.release && stripped(this.release.description) + ' ' + getMedium(this.release.format) + ' - Grab your copy!'
       }
     },
     beforeDestroy () {
