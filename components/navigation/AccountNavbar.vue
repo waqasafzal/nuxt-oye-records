@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar__account d-sm-none d-md-flex">
+  <div class="navbar__account">
     <div class="container-fluid navbar__account-row">
       <!--<div class="d-flex justify-content-between">-->
       <div class="navbar__account__oye">
