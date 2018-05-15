@@ -4,6 +4,7 @@ ADD . /app
 WORKDIR /app
 
 RUN npm install
+RUN npm rebuild node-sass
 
 ARG APP_API="'https://oye-records.com'"
 ARG APP_NODE_ENV=production
