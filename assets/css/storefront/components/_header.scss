@@ -11,6 +11,9 @@
     }
   }
   &__account {
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
     position: fixed;
     background-color: white;
     z-index: 20;
