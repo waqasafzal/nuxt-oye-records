@@ -1,26 +1,26 @@
 <template>
   <div v-if="release">
-    <nuxt-link class="d-none d-lg-flex" :to="{name: 'releases-slug', params: { slug: release.slug }}">
-        <div class="frontpage__weekly__item__content flex-row mobile" v-if="release">
+    <nuxt-link class="d-none d-md-block" :to="{name: 'releases-slug', params: { slug: release.slug }}">
+        <div class="frontpage__weekly__item__content d-flex flex-row" v-if="release">
           <div class="frontpage__weekly__item__info">
             <div class="feature-category">{{ category }}</div>
             <div class="frontpage__weekly__item__content__artist">{{ release.name }}</div>
             <div class="frontpage__weekly__item__content__title">{{ release.title }}</div>
             <release-button-bar :release="release"></release-button-bar>
           </div>
+          <div class="frontpage__weekly__item__image">
+            <img :src="release.featureImageUrl" />
+          </div>
         </div>
     </nuxt-link>
     <nuxt-link :to="{name: 'releases-slug', params: { slug: release.slug }}" class="d-md-none">
         <div class="mobile frontpage__weekly__item__content">
-          <img :src="release.featureImageUrl" />
+          <img class="feature-image" :src="release.featureImageUrl" />
           <div class="d-flex release-name">
-            <nuxt-link class="category" :to="{name: 'releases-new'}">
-              <template v-if="release.availability.status === 'upcoming'">Coming Soon</template>
-              <template v-else>New In Stock</template>
-            </nuxt-link>
+            <div class="feature-category">{{ category }}</div>
             <div class="artist">{{release.name}}</div>
             <div class="title">{{release.title}}</div>
-            <release-button-bar :size="toInt72" :release="release" ></release-button-bar>
+            <release-button-bar :size=48 :release="release" ></release-button-bar>
           </div>
         </div>
     </nuxt-link>

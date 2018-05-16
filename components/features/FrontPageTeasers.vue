@@ -54,7 +54,7 @@
                     </nuxt-link>
                     <div class="artist">{{release.name}}</div>
                     <div class="title">{{release.title}}</div>
-                    <release-button-bar :size="toInt72" :release="release" ></release-button-bar>
+                    <release-button-bar :size=54 :release="release" ></release-button-bar>
                   </div>
                 </nuxt-link>
               </div>
@@ -99,8 +99,7 @@
           autoplay: true,
           dots: false,
           arrows: false
-        },
-        toInt72: 54
+        }
       }
     },
     computed: {

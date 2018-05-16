@@ -2,26 +2,60 @@
   <div>
     <json-ld-product-schema :release="release"></json-ld-product-schema>
     <nuxt-link :to="{ name: 'releases-slug', params: { slug: release.slug }}">
-      <div class="text-left list-item">
+      <div class="d-none d-md-flex text-left list-item">
         <div class="resizable-list-item-outer">
           <div class="resizable-list-item-inner">
             <div class="release-list-image">
-              <div @click.prevent="onGenreClick(release.mainGenre)" class="genre" v-if="release.mainGenre"><span>{{release.mainGenre.name}}</span></div>
+              <div @click.prevent="onGenreClick(release.mainGenre)" class="genre" v-if="release.mainGenre"><span>{{release.mainGenre.name}}</span>
+              </div>
               <img class="img-responsive" :src="release.thumbnailUrl" alt=""/>
-              <play-release-button background="#30C46C" :size="size" class="release-list-play" :release="release"></play-release-button>
+              <play-release-button background="#30C46C" :size="size" class="release-list-play"
+                                   :release="release"></play-release-button>
               <div class="format">{{release.format}}</div>
             </div>
             <div class="release-list-info">
               <div class="release-list-info__header">
-                <div class="release-list-info__header__artist-name" @click.prevent="$router.push({name: 'artists-query', params: {query: release.name}})">{{release.artistFirstName}} {{release.artistLastName}}</div>
+                <div class="release-list-info__header__artist-name"
+                     @click.prevent="$router.push({name: 'artists-query', params: {query: release.name}})">
+                  {{release.artistFirstName}} {{release.artistLastName}}
+                </div>
                 <releaseprice :price="release.price" :availability="release.availability"
                               class="release-list-info__header__price"/>
               </div>
               <span class="release-list-info__release-title">{{release.title}}</span>
-              <span class="release-list-info__label" @click.prevent="$router.push({name: 'labels-query', params: {query: release.label }})">{{ release.label }}</span>
+              <span class="release-list-info__label"
+                    @click.prevent="$router.push({name: 'labels-query', params: {query: release.label }})">{{ release.label }}</span>
             </div>
-            <add-to-cart-button :release="release" class="release__button-bar__add-to-cart release-list-add"></add-to-cart-button>
+            <add-to-cart-button :release="release"
+                                class="release__button-bar__add-to-cart release-list-add"></add-to-cart-button>
 
+          </div>
+        </div>
+      </div>
+      <div class="d-md-none text-left list-item">
+        <div class="list-item-outer">
+          <div class="resizable-list-item-inner">
+            <div class="release-list-image">
+              <div @click.prevent="onGenreClick(release.mainGenre)" class="genre" v-if="release.mainGenre"><span>{{release.mainGenre.name}}</span>
+              </div>
+              <img class="img-responsive" :src="release.thumbnailUrl" alt=""/>
+              <div class="format">{{release.format}}</div>
+              <play-release-button background="#313532" :size=42 class="release-list-play"
+                                   :release="release"></play-release-button>
+            </div>
+            <div class="release-list-info">
+              <div class="release-list-info__header">
+                <div class="release-list-info__header__artist-name"
+                     @click.prevent="$router.push({name: 'artists-query', params: {query: release.name}})">
+                  {{release.artistFirstName}} {{release.artistLastName}}
+                </div>
+                <releaseprice :price="release.price" :availability="release.availability"
+                              class="release-list-info__header__price"/>
+              </div>
+              <span class="release-list-info__release-title">{{release.title}}</span>
+              <span class="release-list-info__label"
+                    @click.prevent="$router.push({name: 'labels-query', params: {query: release.label }})">{{ release.label }}</span>
+            </div>
           </div>
         </div>
       </div>

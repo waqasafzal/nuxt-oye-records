@@ -19,7 +19,7 @@
             </div>
           </div>
           <div class="col-2 col-sm-1 menu-icon-mobile d-lg-none">
-            <div class="d-flex">
+            <div class="d-flex vmargin-auto" style="margin-left: auto; padding-top: 8px;">
               <div @click="toggleMobileNav" class="burger-menu">
               </div>
             </div>
