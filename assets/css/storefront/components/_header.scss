@@ -7,7 +7,7 @@
   }
   @media (max-width: 370px) {
     img {
-      max-height: 25px;
+      max-height: 42px;
     }
   }
   &__account {
@@ -110,7 +110,6 @@
       //display: inline-block;
       .burger-menu {
         &:before {
-          top: inherit;
           background: $brand-color-black;
         }
       }
