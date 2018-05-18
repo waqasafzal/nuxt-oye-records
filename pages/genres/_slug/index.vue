@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="page__header" v-if="detailGenre">
-        {{ detailGenre.name }}
+      <h1>{{ detailGenre.name }}</h1>
       <dropdown class="genres__detail__subgenre__selector"
                 v-if="detailGenre.subgenres && detailGenre.subgenres.length > 0"
                 @selected="onSelected"
