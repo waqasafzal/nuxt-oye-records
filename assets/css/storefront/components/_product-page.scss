@@ -110,6 +110,9 @@
     &__description {
       margin-top: $global-margin * 3;
       margin-bottom: $global-margin * 2;
+      @include media-breakpoint-down(sm) {
+        margin-bottom: 0;
+      }
       &__stripped {
         position: relative;
         overflow: hidden;
@@ -144,6 +147,10 @@
       .pressing {
         margin-left: 2em;
         opacity: 0.5;
+      }
+      @include media-breakpoint-down(sm) {
+        bottom: inherit;
+        padding-top: 1rem;
       }
     }
     @include media-breakpoint-down(md) {

@@ -43,8 +43,14 @@
           <release-button-bar :class="[releaseStatus]" :size=48 :release="release"></release-button-bar>
         </div>
         <div class="product__info__tax-included">Tax included, Shipping not included</div>
+        <div class="d-md-none d-sm-flex product__info__footer" :title="releaseStatus === 'one' ? 'This is the last copy and might not be in mint condition!': ''">
+          <div :class="['product__info__availability', releaseStatus]"></div>
+          <span>{{ inStockMessage }}</span>
+          <span class="pressing">{{ release.format }} | {{ year }} - {{ pressingRegion }} | {{ release.condition
+            }}</span>
+        </div>
         <release-description :release="release"></release-description>
-        <div class="product__info__footer" :title="releaseStatus === 'one' ? 'This is the last copy and might not be in mint condition!': ''">
+        <div class="d-none d-md-flex product__info__footer" :title="releaseStatus === 'one' ? 'This is the last copy and might not be in mint condition!': ''">
           <div :class="['product__info__availability', releaseStatus]"></div>
           <span>{{ inStockMessage }}</span>
           <span class="pressing">{{ release.format }} | {{ year }} - {{ pressingRegion }} | {{ release.condition
