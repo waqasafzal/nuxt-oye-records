@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row">
+    <div class="mx-0 row">
       <release-item :release="getRelease(release)"
                     v-for="(release, i) in getReleases(releases)"
                     :key="i"

@@ -21,11 +21,11 @@
         </div>
       </div>
     </div>
-    <div class="row product__main">
-      <div id="product-schema-component">
-        <json-ld-product-schema :release="release"></json-ld-product-schema>
-      </div>
+    <div class="mx-0 row product__main">
       <div class="col-md-6 col-12">
+        <div id="product-schema-component">
+          <json-ld-product-schema :release="release"></json-ld-product-schema>
+        </div>
         <div class="product__gallery">
           <img class="d-block img-fluid"
                :src="release.thumbnailUrl" alt=""/>
@@ -53,7 +53,7 @@
       </div>
     </div>
     <hr/>
-    <div class="row product__secondary-infos">
+    <div class="mx-0 row product__secondary-infos">
       <div class="col-md-6 col-12 product__details">
         <h4>Share Article</h4>
         <social-sharing class="social-sharing" :url="currentRoute + '?autoplay=1'"
@@ -132,7 +132,7 @@
       </div>
     </div>
     <template v-if="release.artistReleases.length > 0">
-      <div class="row">
+      <div class="mx-0 row">
         <div class="col-12">
           <h3 class="release-detail__related__header">More from <nuxt-link :to="{name: 'artists-query', params: {query: release.name }}">{{ release.name }}</nuxt-link></h3>
         </div>
@@ -140,7 +140,7 @@
       <release-list :releases="release.artistReleases"></release-list>
     </template>
     <template v-if="release.labelReleases.length > 0">
-      <div class="row">
+      <div class="mx-0 row">
         <div class="col-12">
           <h3 class="release-detail__related__header">More from <nuxt-link :to="{name: 'labels-query', params: {query: release.label }}">{{ release.label }}</nuxt-link></h3>
         </div>
@@ -148,7 +148,7 @@
       <release-list :releases="release.labelReleases"></release-list>
     </template>
     <template v-if="release.soldReleases.length > 0">
-      <div class="row">
+      <div class="mx-0 row">
         <div class="col-12">
           <h3 class="release-detail__related__header">Other people bought</h3>
         </div>

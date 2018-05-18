@@ -32,6 +32,9 @@
   h3 {
     margin-top: 2em;
     margin-bottom: 1.7em;
+    @include media-breakpoint-down(sm) {
+      font-size: 1.4rem;
+    }
   }
   .search {
     padding-top: 1.5em;
@@ -240,6 +243,7 @@
   padding-bottom: 150px;
   @include media-breakpoint-down(md) {
     margin-top: 0px;
+    padding-bottom: 0;
   }
 }
 
