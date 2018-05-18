@@ -7,8 +7,14 @@
     display: inline-block;
     padding-top: 1.1em;
     border-bottom: 1px solid $gray-color-2;
+    margin-bottom: 16px;
     @include media-breakpoint-down(md) {
       margin-top: 32px;
+    }
+    @include media-breakpoint-down(sm) {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      height: 2.8em;
     }
   }
   h1 {
@@ -19,6 +25,9 @@
     line-height: 38px;
     letter-spacing: -1px;
     display: inline-block;
+    @include media-breakpoint-down(sm) {
+      font-size: 1.5rem;
+    }
   }
   h3 {
     margin-top: 2em;

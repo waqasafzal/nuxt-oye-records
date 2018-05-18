@@ -2,6 +2,9 @@
   <div>
     <div @click="collapsed = !collapsed" class="genre-dropdown__button">
       Select genre
+      <div :class="['filled-arrow__box']">
+        <div :class="['filled-arrow__arrow', collapsed ? 'rotate180' : '']"></div>
+      </div>
     </div>
     <div :class="['genre-dropdown__content', collapsed ? 'collapsed': '']">
       <div class="genre-dropdown__metagenre" :key="i"
@@ -65,6 +68,7 @@
     &__content {
       background-color: #313532;
       color: white !important;
+      margin-top: 1rem;
       a {
         color: white !important;
       }
@@ -72,8 +76,10 @@
     &__button {
       background-color: #313532;
       color: white !important;
-      border-radius: 2px;
+      border-radius: 4px;
       padding: 8px;
+      position: relative;
+      max-width: 50%;
     }
     &__metagenre {
       border-bottom: 1px solid #989A98;
@@ -129,4 +135,31 @@
       -webkit-transform: rotate(-135deg);
     }
   }
+
+  .filled-arrow {
+    &__box {
+      position: absolute;
+      right: 0;
+      top: 0;
+      float: right;
+      height: 100%;
+      width: 20%;
+    }
+    &__arrow {
+      width: 0;
+      height: 0;
+      border-radius: 2px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid #fff;
+      position: relative;
+      left: 40%;
+      top: 45%;
+    }
+  }
+  .rotate180 {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+  }
+
 </style>
