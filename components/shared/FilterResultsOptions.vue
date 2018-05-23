@@ -18,10 +18,13 @@
                                                                           id="format-all"
                                                                           v-model="allFormats"/>All</label>
                   </div>
-                  <div class="form-group" v-for="f in formats">
-                    <label :for="`format-${f}`" class="checkbox-label"><input @click="onCheckboxClick" type="checkbox"
-                                                                              :id="`format-${f}`"
-                                                                              :value="f" v-model="selectedFormats"/>{{f}}</label>
+                  <div class="row">
+                    <div class="form-group col-6 col-md-12" v-for="f in formats">
+                      <input style="height: 16px;" @click="onCheckboxClick" type="checkbox"
+                             :id="`format-${f}`"
+                             :value="f" v-model="selectedFormats"/>
+                      <label :for="`format-${f}`" class="checkbox-label">{{f}}</label>
+                    </div>
                   </div>
                 </form>
               </div>

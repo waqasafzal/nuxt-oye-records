@@ -127,15 +127,8 @@
       }
     },
     methods: {
-      async onFilterOptionsChanged (options) {
+      onFilterOptionsChanged (options) {
         this.onFilterChanged(options)
-        // const data = await this.asyncData()
-        // if (options.filterBy.days) {
-        //   const period = options.filterBy.days
-        //   if (period <= 31) {
-        //
-        //   }
-        // }
       },
       getFilterByPeriod (period) {
         let filterByDict = {

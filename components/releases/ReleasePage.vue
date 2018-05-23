@@ -10,7 +10,7 @@
           <filter-results-options class="d-none d-md-flex float-right" v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged"
                                   ></filter-results-options>
         </div>
-        <release-filter-panel :daysOptions="filterDaysOptions" upcoming="status === 'upcoming'" :filterOnly="true" @filter-changed="onFilterChanged" :metaGenres="genres" class="d-flex d-md-none">
+        <release-filter-panel :daysOptions="filterDaysOptions" :upcoming="status === 'upcoming'" :filterOnly="true" @filter-changed="onFilterChanged" :metaGenres="genres" class="d-flex d-md-none">
         </release-filter-panel>
         <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
       </div>
