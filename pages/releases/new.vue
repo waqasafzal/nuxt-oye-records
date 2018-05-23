@@ -6,9 +6,10 @@
         <div class="page__header">
           <h1>New Releases</h1>
 
-          <meta-genre-filter @slug-selected="onGenreChanged"></meta-genre-filter>
-          <filter-results-options @filter-changed="onFilterOptionsChanged" class="float-right"></filter-results-options>
+          <meta-genre-filter class="d-none d-md-flex" @slug-selected="onGenreChanged"></meta-genre-filter>
+          <filter-results-options @filter-changed="onFilterOptionsChanged" class="d-none d-md-flex float-right"></filter-results-options>
         </div>
+        <release-filter-panel class="d-flex d-md-none" :filterOnly="true" :metaGenres="genres" :changeGenre="false" @filter-changed="onFilterOptionsChanged"></release-filter-panel>
         <div class="release-list-panel" v-if="releasedToday.edges.length > 0">
           <h3>Released Today</h3>
           <release-list :releases="releasedToday"></release-list>
@@ -32,11 +33,13 @@
   import Vue from 'vue'
   import { ReleasePagingMixin } from '../../components/releases/releases-paging-mixin'
   import client from '~/plugins/apollo'
+  import gql from 'graphql-tag'
 
   import ReleasePage from '../../components/releases/ReleasePage.vue'
   import { createReleaseListQuery } from '../../components/releases/queries'
   import FilterResultsOptions from '../../components/shared/FilterResultsOptions'
   import MetaGenreFilter from '../../components/genres/MetaGenreFilter'
+  import ReleaseFilterPanel from '../../components/features/mobile/ReleaseFilterPanel'
 
   const filterBy = JSON.stringify({
     status: 'new'
@@ -52,7 +55,11 @@
   Vue.component('releases-page', ReleasePage)
 
   export default {
-    components: {MetaGenreFilter, FilterResultsOptions},
+    components: {
+      ReleaseFilterPanel,
+      MetaGenreFilter,
+      FilterResultsOptions
+    },
     name: 'NewReleases',
     mixins: [ReleasePagingMixin(filterBy)],
     asyncData: async function ({params}) {
@@ -69,27 +76,31 @@
     },
     watch: {
       filterBy (value) {
-        let days = this.filterOptions.days
+        console.log('filterBy ' + value)
+        let days = this.filterOptions.days || this.filterOptions.period
 
         this.releasedToday = {edges: []}
         this.releasedLast7 = {edges: []}
         this.releasedLast30 = {edges: []}
         if (days) {
           if (days >= 1) {
+            console.log('search for 1')
             client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(1)})).then(
               ({data}) => {
                 this.releasedToday = data.releases
               }
             )
           }
-          if (days >= 7) {
+          if (days === 7) {
+            console.log('search for ' + days)
             client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(days)})).then(
               ({data}) => {
                 this.releasedLast7 = data.releases
               }
             )
           }
-          if (days >= 31) {
+          if (days > 7 && days <= 31) {
+            console.log('search for ' + days)
             client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(days)})).then(
               ({data}) => {
                 this.releasedLast30 = data.releases
@@ -116,8 +127,15 @@
       }
     },
     methods: {
-      onFilterOptionsChanged (options) {
+      async onFilterOptionsChanged (options) {
         this.onFilterChanged(options)
+        // const data = await this.asyncData()
+        // if (options.filterBy.days) {
+        //   const period = options.filterBy.days
+        //   if (period <= 31) {
+        //
+        //   }
+        // }
       },
       getFilterByPeriod (period) {
         let filterByDict = {
@@ -134,7 +152,8 @@
     data: function () {
       return {
         pageSize: 5,
-        status: 'new'
+        status: 'new',
+        genres: []
       }
     },
     head () {
@@ -148,6 +167,21 @@
           }
         ]
       }
+    },
+    mounted () {
+      client.query({
+        query: gql`query MetaGenres {
+           metaGenres {
+              name
+              slug
+           }
+        }
+        `
+      }).then(
+        ({data}) => {
+          this.genres = data.metaGenres
+        }
+      )
     }
   }
 </script>
