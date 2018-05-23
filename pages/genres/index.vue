@@ -28,10 +28,6 @@
             </div>
           </div>
         </div>
-        <!--<release-filter-panel @filter-changed="setFilterOptions" :changeGenre="false" :metaGenres="metaGenres" class="d-flex d-md-none">-->
-          <!--&lt;!&ndash;<template v-if="detailGenre">{{detailGenre.name}}</template>&ndash;&gt;-->
-        <!--</release-filter-panel>-->
-        <!--<release-filter-panel></release-filter-panel>-->
         <genre-dropdown class="d-md-none" :metaGenres="metaGenres"></genre-dropdown>
       </div>
     </div>
