@@ -6,10 +6,12 @@
           <h1>
             <slot>{{ category }}</slot>
           </h1>
-          <meta-genre-filter v-if="showFilter" @slug-selected="onSlugSelected"></meta-genre-filter>
-          <filter-results-options v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged"
-                                  class="float-right"></filter-results-options>
+          <meta-genre-filter class="d-none d-md-flex" v-if="showFilter" @slug-selected="onSlugSelected"></meta-genre-filter>
+          <filter-results-options class="d-none d-md-flex float-right" v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged"
+                                  ></filter-results-options>
         </div>
+        <release-filter-panel :filterOnly="true" @filter-changed="onFilterChanged" :metaGenres="genres" class="d-flex d-md-none">
+        </release-filter-panel>
         <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
       </div>
     </div>
@@ -23,11 +25,18 @@
   import ReleaseList from './ReleaseList.vue'
   import FilterResultsOptions from '../shared/FilterResultsOptions'
   import MetaGenreFilter from '../genres/MetaGenreFilter'
+  import ReleaseFilterPanel from '../features/mobile/ReleaseFilterPanel'
+  import apolloClient from '~/plugins/apollo'
+  import gql from 'graphql-tag'
 
   Vue.component('release-list', ReleaseList)
 
   export default {
-    components: {MetaGenreFilter, FilterResultsOptions},
+    components: {
+      ReleaseFilterPanel,
+      MetaGenreFilter,
+      FilterResultsOptions
+    },
     name: 'ReleasePage',
     props: {
       'pageSize': Number,
@@ -44,11 +53,13 @@
         filterBy: JSON.stringify({
           status: this.status
         }),
-        filterOptions: {}
+        filterOptions: {},
+        genres: []
       }
     },
     methods: {
       onFilterChanged (filterOptions) {
+        console.log('gilter filcj')
         this.$emit('filter-changed', filterOptions)
         if (filterOptions.date) {
           this.filterBy['date'] = filterOptions.date
@@ -81,6 +92,21 @@
           }
         }
       }
+    },
+    mounted () {
+      apolloClient.query({
+        query: gql`query MetaGenres {
+           metaGenres {
+              name
+              slug
+           }
+        }
+        `
+      }).then(
+        ({data}) => {
+          this.genres = data.metaGenres
+        }
+      )
     }
   }
 

@@ -51,7 +51,11 @@
     name: 'ReleaseFilterPanel',
     props: {
       metaGenres: Array,
-      changeGenre: Boolean
+      changeGenre: Boolean,
+      filterOnly: {
+        type: Boolean,
+        default: false
+      }
     },
     data () {
       return {
@@ -70,7 +74,9 @@
       },
       routeTo (mainGenre) {
         this.collapseAll()
-        this.$router.push({name: 'metagenres-slug', params: {slug: mainGenre.slug}})
+        if (!this.filterOnly) {
+          this.$router.push({name: 'metagenres-slug', params: {slug: mainGenre.slug}})
+        }
       },
       collapse () {
         const oldState = this.collapsed

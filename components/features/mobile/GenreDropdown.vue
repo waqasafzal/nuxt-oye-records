@@ -1,6 +1,6 @@
 <template>
   <div class="genre-dropdown">
-    <div @click.stop="collapse" class="genre-dropdown__button">
+    <div @click.self="collapse" class="genre-dropdown__button">
       Select genre
       <div :class="['filled-arrow__box']">
         <div :class="['filled-arrow__arrow', collapsed ? 'rotate180' : '']"></div>
@@ -49,7 +49,7 @@
     data () {
       return {
         selected: -1,
-        collapsed: false // !this.expanded
+        collapsed: true // !this.expanded
       }
     },
     methods: {
