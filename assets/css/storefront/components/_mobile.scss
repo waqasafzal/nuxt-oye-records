@@ -601,8 +601,28 @@
 .chart-item {
   @include media-breakpoint-down(sm) {
     margin-bottom: 1.5em;
-    .charts-infobox__name {
+    &:last-child {
+      .charts-infobox__label {
+        border-bottom: 1px solid $gray-color-2;
+        height: 40px;
+        margin-bottom: 12px;
+      }
+    }
+    &.charts-infobox {
       margin-bottom: 0;
+      height: 240px;
+      &__name {
+        margin-bottom: 0;
+      }
+    }
+    .charts-infobox {
+      margin-bottom: 0;
+      height: 240px;
+      &__name {
+        margin-top: .5em;
+        font-size: 1.1rem;
+        margin-bottom: 0;
+      }
     }
   }
 }

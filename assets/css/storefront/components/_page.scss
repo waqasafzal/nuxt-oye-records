@@ -36,7 +36,8 @@
     margin-top: 2em;
     margin-bottom: 1.7em;
     @include media-breakpoint-down(sm) {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
+      margin-top: 0.5em;
     }
   }
   .search {
