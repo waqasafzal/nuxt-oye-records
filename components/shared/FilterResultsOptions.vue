@@ -32,7 +32,7 @@
               <div class="filter-criterion__header">Date</div>
               <div class="filter-criterion__options">
                 <div v-for="value, key in daysOptions">
-                  <input type="radio" name="days" :value="parseInt(key)" :id="`days-${key}`" v-model="days"/>
+                  <input @click="setDay" type="radio" name="days" :value="parseInt(key)" :id="`days-${key}`" v-model="days"/>
                   <label :for="`days-${key}`">{{value}}</label>
                 </div>
               </div>
@@ -70,6 +70,10 @@
             '365': 'Last year'
           }
         }
+      },
+      upcoming: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {

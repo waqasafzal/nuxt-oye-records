@@ -8,7 +8,7 @@
           <div :class="['filled-arrow__arrow', collapsed ? 'rotate180' : '']"></div>
         </div>
       </div>
-      <filter-results-options @filter-changed="setOptions"></filter-results-options>
+      <filter-results-options :daysOptions="daysOptions" :upcoming="upcoming" @filter-changed="setOptions"></filter-results-options>
     </div>
     <div @click.stop :class="['genre-dropdown__content', collapsed ? 'collapsed': '']">
       <div class="genre-dropdown__metagenre" :key="i"
@@ -55,6 +55,21 @@
       filterOnly: {
         type: Boolean,
         default: false
+      },
+      upcoming: {
+        type: Boolean,
+        default: false
+      },
+      daysOptions: {
+        type: Object,
+        default: () => {
+          return {
+            '7': 'Last 7 days',
+            '14': 'Last 14 days',
+            '31': 'Last month',
+            '365': 'Last year'
+          }
+        }
       }
     },
     data () {
@@ -101,7 +116,7 @@
   .release-filter-panel {
     width: 100%;
     flex-direction: column;
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
 
     &__controls {
       display: flex;

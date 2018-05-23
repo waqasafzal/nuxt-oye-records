@@ -10,7 +10,7 @@
           <filter-results-options class="d-none d-md-flex float-right" v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged"
                                   ></filter-results-options>
         </div>
-        <release-filter-panel :filterOnly="true" @filter-changed="onFilterChanged" :metaGenres="genres" class="d-flex d-md-none">
+        <release-filter-panel :daysOptions="filterDaysOptions" upcoming="status === 'upcoming'" :filterOnly="true" @filter-changed="onFilterChanged" :metaGenres="genres" class="d-flex d-md-none">
         </release-filter-panel>
         <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
       </div>
@@ -50,9 +50,9 @@
     },
     data: function () {
       return {
-        filterBy: JSON.stringify({
+        filterBy: {
           status: this.status
-        }),
+        },
         filterOptions: {},
         genres: []
       }
@@ -60,13 +60,8 @@
     methods: {
       onFilterChanged (filterOptions) {
         console.log('gilter filcj')
-        this.$emit('filter-changed', filterOptions)
-        if (filterOptions.date) {
-          this.filterBy['date'] = filterOptions.date
-        }
-        if (filterOptions.formats) {
-          this.filterBy['formats'] = filterOptions.formats
-        }
+        this.filterBy = Object.assign({}, this.filterBy, filterOptions)
+        this.$emit('filter-changed', this.filterBy)
       },
       onSlugSelected (slug) {
         this.$emit('genre-selected', slug)
@@ -89,6 +84,13 @@
             '14': 'Next 14 days',
             '31': 'Next month',
             '365': 'Next year'
+          }
+        } else {
+          return {
+            '7': 'Last 7 days',
+            '14': 'Last 14 days',
+            '31': 'Last month',
+            '365': 'Last year'
           }
         }
       }

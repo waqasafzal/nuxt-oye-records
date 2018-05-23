@@ -309,6 +309,10 @@
 
 .releaselist-box {
   padding-top: 4em;
+  @include media-breakpoint-down(sm) {
+    padding-top: 2em;
+    border-bottom: 1px solid $gray-color-2;
+  }
 }
 
 .release-list-panel {
