@@ -32,12 +32,14 @@
         </div>
       </div>
       <div class="col-md-6 col-12 product__info">
-        <h2 class="product__info__artist"><nuxt-link :to="{name: 'artists-query', params: {query: release.name}}">{{ release.artistFirstName }} {{ release.artistLastName }}</nuxt-link></h2>
-        <h2 class="product__info__name">{{ release.title }}</h2>
-        <h5 class="product__info__label"><nuxt-link :to="{name: 'labels-query', params: {query: release.label}}">{{ release.label }}</nuxt-link></h5>
+        <div>
+          <h2 class="product__info__artist"><nuxt-link :to="{name: 'artists-query', params: {query: release.name}}">{{ release.artistFirstName }} {{ release.artistLastName }}</nuxt-link></h2>
+          <h2 class="product__info__name">{{ release.title }}</h2>
+          <h5 class="product__info__label"><nuxt-link :to="{name: 'labels-query', params: {query: release.label}}">{{ release.label }}</nuxt-link></h5>
 
-        <div class="product__info__price">
-          <release-price :price="release.price"></release-price>
+          <div class="product__info__price">
+            <release-price :price="release.price"></release-price>
+          </div>
         </div>
         <div>
           <release-button-bar :class="[releaseStatus]" :size=48 :release="release"></release-button-bar>

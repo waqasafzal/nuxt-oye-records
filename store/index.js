@@ -423,7 +423,6 @@ const store = new Vuex.Store({
     },
     [types.SET_MOBILE_NAV]: (state, showMobileNav) => {
       state.showMobile = showMobileNav
-      console.log('show mobile menu ' + showMobileNav)
     },
     // [types.SET_MOBILE]: (state, isMobile) => {
     //   state.isMobile = isMobile

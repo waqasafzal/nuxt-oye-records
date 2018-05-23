@@ -108,6 +108,9 @@
           this.lastOptions = this.currentOptions
         } else if (JSON.stringify(this.lastOptions) !== JSON.stringify(this.currentOptions)) {
           this.$emit('filter-changed', this.currentOptions)
+          this.showModal = false
+        } else {
+          this.$emit('filter-changed', this.lastOptions)
         }
       },
       onKeyDown (e) {
@@ -118,9 +121,16 @@
       },
       onCheckboxClick (e) {
         this.lastClicked = e.target.value
+        setTimeout(this.toggleModal, 50)
       },
       onClickAll (e) {
+        if (this.lastClicked) {
+          setTimeout(this.toggleModal, 50)
+        }
         this.lastClicked = null
+      },
+      setDay (day) {
+        setTimeout(this.toggleModal, 100)
       }
     },
     mounted () {

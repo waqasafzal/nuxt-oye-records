@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <div @click="collapsed = !collapsed" class="genre-dropdown__button">
+  <div class="genre-dropdown">
+    <div @click.stop="collapse" class="genre-dropdown__button">
       Select genre
       <div :class="['filled-arrow__box']">
         <div :class="['filled-arrow__arrow', collapsed ? 'rotate180' : '']"></div>
       </div>
     </div>
-    <div :class="['genre-dropdown__content', collapsed ? 'collapsed': '']">
+    <div @click.stop :class="['genre-dropdown__content', collapsed ? 'collapsed': '']">
       <div class="genre-dropdown__metagenre" :key="i"
            v-for="(mainGenre, i) in metaGenres">
         <div class="genre-dropdown__maingenre">
@@ -40,12 +40,16 @@
   export default {
     name: 'GenreDropdown',
     props: {
-      metaGenres: Array
+      metaGenres: Array,
+      expanded: {
+        type: Boolean,
+        default: false
+      }
     },
     data () {
       return {
         selected: -1,
-        collapsed: true
+        collapsed: false // !this.expanded
       }
     },
     methods: {
@@ -58,6 +62,13 @@
       },
       routeTo (mainGenre) {
         this.$router.push({name: 'metagenres-slug', params: {slug: mainGenre.slug}})
+      },
+      collapse () {
+        const oldState = this.collapsed
+        this.collapsed = !oldState
+        if (this.collapsed) {
+          this.$emit('collapsed', oldState)
+        }
       }
     }
   }
@@ -72,6 +83,7 @@
       a {
         color: white !important;
       }
+      width: 100%;
     }
     &__button {
       background-color: #313532;
@@ -79,7 +91,8 @@
       border-radius: 4px;
       padding: 8px;
       position: relative;
-      max-width: 50%;
+      min-width: 120px;
+      max-width: 120px;
     }
     &__metagenre {
       border-bottom: 1px solid #989A98;
@@ -160,6 +173,13 @@
   .rotate180 {
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
+  }
+  .page__header {
+    .genre-dropdown {
+      margin-top: 24px;
+      margin-bottom: auto;
+      width: 100%;
+    }
   }
 
 </style>

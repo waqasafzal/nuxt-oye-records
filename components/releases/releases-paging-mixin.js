@@ -56,7 +56,7 @@ export const ReleasePagingMixin = function (filterBy) {
 
         let options = this.filterOptions
         if (options.days) {
-          localFilter['days'] = options.days
+          localFilter['period'] = options.days
         }
         if (options.formats) {
           localFilter['formats'] = options.formats

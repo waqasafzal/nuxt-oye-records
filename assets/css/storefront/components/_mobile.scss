@@ -535,4 +535,31 @@
       }
     }
   }
+  .filter-options {
+    width: 100%;
+    :first-child {
+      max-width: 100%;
+    }
+    margin-bottom: 1rem;
+    .btn {
+      width: 100%;
+    }
+  }
+  .genres__detail__subgenre__selector {
+    margin-left: inherit;
+  }
+}
+
+.page__header {
+  .genre-dropdown {
+    font-size: 16px;
+    margin-top: 24px;
+    z-index: 3;
+  }
+}
+
+.genre-dropdown__content {
+  @include media-breakpoint-down(sm) {
+    z-index: 3;
+  }
 }
