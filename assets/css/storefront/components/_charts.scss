@@ -129,6 +129,9 @@ $bestseller-item-padding: 7px;
       display: flex;
       justify-content: center;
       flex-direction: column;
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
     }
     &__thumb {
       padding: $chart-item-padding;
@@ -171,11 +174,22 @@ $bestseller-item-padding: 7px;
       &:hover {
         opacity: 1;
       }
+      @include media-breakpoint-down(sm) {
+        min-width: inherit;
+        opacity: 1;
+      }
     }
     .release__button-bar {
       margin-left: auto;
       margin-right: 1rem;
       margin-top: 0;
+
+      @include media-breakpoint-down(sm) {
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        height: 96px;
+      }
+
       &__add-to-cart {
         width: 10rem;
         font-size: $font-size-sm;
@@ -230,6 +244,15 @@ $bestseller-item-padding: 7px;
     justify-content: space-between;
     width: 100%;
     border-bottom: 1px solid $gray-color-2;
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+      margin-top: 3rem;
+      padding-bottom: 1rem;
+      .page__header {
+        font-size: 24px;
+        padding-bottom: 0;
+      }
+    }
     .page__header {
       width: inherit;
       border: none;
@@ -239,6 +262,9 @@ $bestseller-item-padding: 7px;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    @include media-breakpoint-down(sm) {
+      margin-right: auto;
+    }
     .social-sharing {
       //margin-left: 1em;
       display: flex;

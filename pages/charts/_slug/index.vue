@@ -39,7 +39,7 @@
                 <div class="release-artist-name">{{ artistName(chartedRelease.release) }}</div>
                 <div class="release-title">{{ chartedRelease.release.title }}</div>
               </div>
-              <div class="charts__detail__price">
+              <div class="charts__detail__price d-none d-md-flex">
                 <release-price :price="chartedRelease.release.price"></release-price>
               </div>
               <div class="charts__detail__buttons">
