@@ -296,6 +296,14 @@
       height: inherit;
       .play {
         margin-right: 0;
+        position: relative;
+        &:after {
+          content: "";
+          padding: 25px;
+          position: absolute;
+          left: -7px;
+          top: -3px;
+        }
       }
       &__add-to-cart {
         padding: 0;
@@ -305,6 +313,13 @@
         }
         img {
           margin-right: 3px !important;
+        }
+        &:after {
+          content: "";
+          padding: 25px;
+          position: absolute;
+          left: -7px;
+          top: -11px;
         }
       }
     }

@@ -334,6 +334,9 @@ $bestseller-item-padding: 7px;
               .chart-list-play {
                 display: inline-block;
                 border-radius: 0px !important;
+                @include media-breakpoint-down(sm) {
+                  display: none;
+                }
               }
             }
           }

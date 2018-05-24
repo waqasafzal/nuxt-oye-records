@@ -1,9 +1,9 @@
 <template>
   <div :class="['release__button-bar', release.availability.status]" v-if="release">
     <div class="play" v-if="release.tracks && release.tracks.length > 0">
-      <play-release-button :size=baseSize :release="release"></play-release-button>
+      <play-release-button @click.prevent.stop :size=baseSize :release="release"></play-release-button>
     </div>
-    <add-to-cart-button :withTitle="withTitle" :release="release" :size=baseSize class="release__button-bar__add-to-cart"></add-to-cart-button>
+    <add-to-cart-button @click.prevent.stop :withTitle="withTitle" :release="release" :size=baseSize class="release__button-bar__add-to-cart"></add-to-cart-button>
   </div>
 </template>
 

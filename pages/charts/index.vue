@@ -81,7 +81,7 @@
                     <add-to-cart-button :release="release.node"></add-to-cart-button>
                   </div>
                   <div class="mobile-button-bar d-flex d-md-none">
-                    <release-button-bar :release="release.node"></release-button-bar>
+                    <release-button-bar @click.prevent.stop :release="release.node"></release-button-bar>
                   </div>
                 </nuxt-link>
               </div>
