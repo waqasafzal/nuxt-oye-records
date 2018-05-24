@@ -52,12 +52,14 @@
           </div>
           <div class="col-12 col-md-3 ml-md-auto">
             <div class="charts__overview__bestsellers">
+              <div class="d-flex d-md-none bg"></div>
               <div @click="onPlayBestsellers" class="charts__overview__bestsellers__header">
                 <span>Bestseller {{ currentMonth.name }}</span>
                 <div class="play">
                   <play-svg fill="#313532"></play-svg>
                 </div>
               </div>
+              <!--<chart-detail-row :isBestseller="true" :chart="bestsellers"></chart-detail-row>-->
               <div>
                 <nuxt-link :to="{name:'releases-slug', params: {slug: release.node.slug}}"
                            class="release-item"
@@ -78,9 +80,23 @@
                     <release-price class="release-price" :price="release.node.price"></release-price>
                     <add-to-cart-button :release="release.node"></add-to-cart-button>
                   </div>
+                  <div class="mobile-button-bar d-flex d-md-none">
+                    <release-button-bar :release="release.node"></release-button-bar>
+                  </div>
                 </nuxt-link>
               </div>
             </div>
+            <div class="d-none d-md-block charts__detail__more-charts">
+              <h3>Genre Charts &mdash; {{ currentMonth.name }}</h3>
+              <div class="chart-related" v-for="genre in genres">
+                <nuxt-link :to="{name: 'charts-slug', params: {slug:`bestseller-genre-${genre.slug}-${currentMonth.name.toLowerCase()}-${new Date().getFullYear()}`}}">
+                  <right-arrow></right-arrow>
+                  <span>{{genre.name}}</span>
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex d-md-none col-12 col-md-3 ml-md-auto">
             <div class="charts__detail__more-charts">
               <h3>Genre Charts &mdash; {{ currentMonth.name }}</h3>
               <div class="chart-related" v-for="genre in genres">
@@ -108,11 +124,20 @@
   import RightArrow from '../../components/shared/RightArrow'
   import PlaySvg from '../../components/shared/PlaySvg'
   import AddToCartButton from '../../components/cart/AddToCartButton'
+  import ReleaseButtonBar from '../../components/releases/ReleaseButtonBar'
 
   const currentMonth = getCurrentMonth()
 
   export default {
-    components: {AddToCartButton, PlaySvg, RightArrow, ChartItem, PlayReleaseButton, ReleasePrice},
+    components: {
+      ReleaseButtonBar,
+      AddToCartButton,
+      PlaySvg,
+      RightArrow,
+      ChartItem,
+      PlayReleaseButton,
+      ReleasePrice
+    },
     name: 'ChartsIndex',
     data: function () {
       return {
@@ -243,3 +268,7 @@
     }
   }
 </script>
+
+<!--<style>-->
+  <!---->
+<!--</style>-->

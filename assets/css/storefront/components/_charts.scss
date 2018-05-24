@@ -221,6 +221,9 @@ $bestseller-item-padding: 7px;
     }
     &__more-charts {
       margin-top: 2em;
+      @include media-breakpoint-down(sm) {
+        margin-top: 4em;
+      }
       img {
         margin-right: 0.5em;
       }
@@ -287,6 +290,28 @@ $bestseller-item-padding: 7px;
   &__overview {
     &__bestsellers {
       margin-top: 3em;
+      @include media-breakpoint-down(sm) {
+        background-color: transparent;
+        margin-top: inherit;
+        padding: 25px 0;
+        .release-item {
+          height: 100px !important;
+        }
+        &__header {
+          padding-top: 2rem;
+          padding-bottom: 0.5rem;
+          .play {
+            display: none !important;
+          }
+        }
+        .release-thumb {
+          img {
+            position: relative !important;
+            width: 60px !important;
+            height: 60px!important;
+          }
+        }
+      }
       background-color: rgba(232, 230, 224, 0.3);
       display: flex;
       flex-direction: column;
@@ -329,6 +354,12 @@ $bestseller-item-padding: 7px;
         }
         .release-thumb-box {
           padding: $bestseller-item-padding+3px $bestseller-item-padding $bestseller-item-padding 0px;
+          @include media-breakpoint-down(sm) {
+            padding: 16px 10px 16px 0;
+            .release-thumb {
+              height: inherit;
+            }
+          }
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -381,6 +412,9 @@ $bestseller-item-padding: 7px;
         }
       }
       .release-price-box {
+        @include media-breakpoint-down(sm) {
+          display: none;
+        }
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -416,6 +450,9 @@ $bestseller-item-padding: 7px;
         }
       }
       &__header {
+        @include media-breakpoint-down(sm) {
+          font-size: $font-size-h4;
+        }
         font-size: $font-size-h3;
         display: flex;
         justify-content: space-between;
