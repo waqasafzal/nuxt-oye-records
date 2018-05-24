@@ -40,6 +40,11 @@
       margin-top: 0.5em;
     }
   }
+  .release-list-summary__header {
+    h3 {
+      margin-top: 2em !important;
+    }
+  }
   .search {
     padding-top: 1.5em;
     font-size: $font-size-h3 !important;
