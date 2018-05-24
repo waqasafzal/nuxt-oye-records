@@ -4,7 +4,7 @@
             <h1>
               {{ detailGenre.name }}
             </h1>
-          <dropdown class="d-none d-md-flex genres__detail__subgenre__selector"
+          <dropdown class="d-none d-md-inline-block genres__detail__subgenre__selector"
                     v-if="detailGenre.subgenres && detailGenre.subgenres.length > 0"
                     @selected="onSelected"
                     :values="detailGenre.subgenres">Select Subgenre
