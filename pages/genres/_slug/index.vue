@@ -279,23 +279,23 @@
           })
         }
 
-        let releaseFilterParams = releaseFilterParams(options.params, options.route)
+        let filterParams = releaseFilterParams(options.params, options.route)
 
         var vm = this
         this.loading = true
         this.releases = []
         client.query(
-          createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)})
+          createReleaseListQuery({filterBy: JSON.stringify(filterParams)})
         ).then(({data}) => {
           vm.loading = false
           vm.releases = data.releases
         })
 
-        releaseFilterParams['status'] = 'bestsellers'
+        filterParams['status'] = 'bestsellers'
         this.bestsellers = []
         this.bsLoading = true
         client.query(
-          createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)})
+          createReleaseListQuery({filterBy: JSON.stringify(filterParams)})
         ).then(({data}) => {
           vm.bestsellers = data.releases
           vm.bsLoading = false
