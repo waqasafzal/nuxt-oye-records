@@ -145,7 +145,7 @@
           <h3 class="release-detail__related__header">More from <nuxt-link :to="{name: 'artists-query', params: {query: release.name }}">{{ release.name }}</nuxt-link></h3>
         </div>
       </div>
-      <release-list :releases="release.artistReleases"></release-list>
+      <release-list class="mx-0" :releases="release.artistReleases"></release-list>
     </template>
     <template v-if="release.labelReleases.length > 0">
       <div class="mx-0 row">
@@ -153,7 +153,7 @@
           <h3 class="release-detail__related__header">More from <nuxt-link :to="{name: 'labels-query', params: {query: release.label }}">{{ release.label }}</nuxt-link></h3>
         </div>
       </div>
-      <release-list :releases="release.labelReleases"></release-list>
+      <release-list class="mx-0" :releases="release.labelReleases"></release-list>
     </template>
     <template v-if="release.soldReleases.length > 0">
       <div class="mx-0 row">
@@ -161,7 +161,7 @@
           <h3 class="release-detail__related__header">Other people bought</h3>
         </div>
       </div>
-      <release-list :releases="release.soldReleases"></release-list>
+      <release-list class="mx-0" :releases="release.soldReleases"></release-list>
     </template>
   </div>
 </template>
