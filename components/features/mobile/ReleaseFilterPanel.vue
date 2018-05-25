@@ -93,7 +93,6 @@
         }
       },
       collapse () {
-        console.log('collapse')
         const oldState = this.collapsed
         this.collapsed = !oldState
         if (this.collapsed) {

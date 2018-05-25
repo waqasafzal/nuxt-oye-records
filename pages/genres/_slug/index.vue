@@ -279,12 +279,7 @@
           })
         }
 
-        let releaseFilterParams = {}
-        if (subslug) {
-          releaseFilterParams['subgenres'] = [subslug]
-        } else if (slug) {
-          releaseFilterParams['genres'] = [slug]
-        }
+        let releaseFilterParams = releaseFilterParams(options.params, options.route)
 
         var vm = this
         this.loading = true
