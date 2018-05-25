@@ -60,7 +60,7 @@
                 </form>
               </div>
             </div>
-            <div class="col-4 col-md-2 cart__line__cell">
+            <div :class="['col-md-2', 'cart__line__cell', review ? 'col-6' : 'col-4']">
               <p class="flex-align-right cart-cell-center">{{ getPrice(line.lineTotal) }} &euro;</p>
             </div>
             <div v-if="!review" class="cart-item-delete col-2 col-md-1 cart__line__cell">
@@ -79,10 +79,10 @@
         </div>
         <!--<div class="row justify-content-end">-->
           <div v-if="review" class="row justify-content-end">
-            <div class="col-2 cart__line__cell">
+            <div class="col-4 col-md-2 cart__line__cell">
               <h4 class="cart-cell-center">Shipping</h4>
             </div>
-            <div class="col-1 cart__line__cell">
+            <div class="col-8 col-md-1 cart__line__cell">
               <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(shipping) }} &euro;</h4>
             </div>
           </div>
@@ -127,8 +127,11 @@
         </div>
       </template>
       <div class="d-sm-flex d-md-none cart__checkout-button__panel">
-        <proceed-button class="cart__checkout-button" @click="pushCheckout">Go to checkout</proceed-button>
+        <template v-if="!review">
+          <proceed-button class="cart__checkout-button" @click="pushCheckout">Go to checkout</proceed-button>
+        </template>
       </div>
+
     </template>
     <template v-else>
       <div class="cart__empty">
@@ -165,6 +168,9 @@
     },
     watch: {
       linesAvailable (value) {
+        if (!value && this.cart.lines.length < 1) {
+          this.$store.commit(types.FINISH_CHECKOUT)
+        }
         this.$store.commit(types.SET_BUTTON_BAR_SHOW, value)
       }
     },

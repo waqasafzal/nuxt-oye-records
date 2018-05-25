@@ -3,6 +3,7 @@
     <h3>Review your order</h3>
     <checkout-overview class="checkout__overview"></checkout-overview>
     <cart-content :review="true"></cart-content>
+    <primary-control-panel></primary-control-panel>
     <div v-show="placingOrder" class="placing-order">
       <div class="vmargin-auto hmargin-auto">
         <loading-spinner :loading="true"></loading-spinner>
@@ -22,13 +23,21 @@
   import CheckoutOverview from './CheckoutOverview'
   import LoadingSpinner from '../shared/LoadingSpinner'
   import { mapGetters } from 'vuex'
+  import PrimaryControlPanel from '../shared/PrimaryControlPanel'
 
   export default {
-    components: {LoadingSpinner, CheckoutOverview, ProceedButton, CartContent},
+    components: {
+      PrimaryControlPanel,
+      LoadingSpinner,
+      CheckoutOverview,
+      ProceedButton,
+      CartContent
+    },
     name: 'OrderReview',
     data: function () {
       return {
-        placingOrder: false
+        placingOrder: false,
+        orderButton: undefined
       }
     },
     watch: {
@@ -168,6 +177,7 @@
         } else {
           button['text'] = 'Place Order'
         }
+        this.orderButton = button
         this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [button])
       }
     },

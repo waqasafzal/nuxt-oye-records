@@ -665,9 +665,9 @@
 
 // disable footer
 .bottom {
-  display: none !important;
   @include media-breakpoint-down(sm) {
     .footer {
+      display: none !important;
       .higher {
         margin-bottom: 0px;
       }
@@ -683,5 +683,13 @@
     &__register {
       margin-top: 0.5rem
     }
+  }
+  .checkout__content__col {
+    h3 {
+      margin-top: 2em;
+    }
+  }
+  .form-group {
+    margin-bottom: 8px;
   }
 }

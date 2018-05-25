@@ -79,6 +79,10 @@
 .float-right-bottom {
   margin-top: auto;
   margin-left: auto;
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    margin-top: 1rem;
+  }
 }
 
 .not-active {

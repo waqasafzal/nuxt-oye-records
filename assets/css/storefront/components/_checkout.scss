@@ -71,6 +71,9 @@
       }
       &:last-child {
         border-right: 1px solid $gray-color-2;
+        @include media-breakpoint-down(sm) {
+          border: 0;
+        }
       }
       //.payment-methods {
       //  border
@@ -222,6 +225,11 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    @include media-breakpoint-down(sm) {
+      h3 {
+        margin-top: inherit;
+      }
+    }
     .placing-order {
       position: absolute;
       display: flex;
@@ -243,6 +251,9 @@
     }
     .cart {
       border: 1px solid $gray-color-2;
+      @include media-breakpoint-down(sm) {
+        border: 0;
+      }
     }
   }
   &__payment {
@@ -388,10 +399,16 @@
     font-size: $font-size-h1;
     text-transform: none;
     margin-bottom: 0.1em;
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-h3;
+    }
   }
   h3 {
     margin-top: 0.6em !important;
     text-transform: none;
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-h4;
+    }
   }
   &__summary {
     font-size: $font-size-h5;
