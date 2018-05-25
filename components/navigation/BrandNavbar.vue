@@ -13,11 +13,11 @@
             <main-navbar class="d-none d-lg-block"></main-navbar>
           </div>
           <search v-if="!isCheckout" class="col-2 col-lg-2 col-sm-1"></search>
-          <div class="d-inline-block vmargin-auto d-lg-none col-1 col-sm-1 cart__icon">
+          <nuxt-link :to="{name: 'cart'}" class="d-inline-block vmargin-auto d-lg-none col-1 col-sm-1 cart__icon">
             <div class="d-flex">
               <cart-svg class="vmargin-auto"></cart-svg>
             </div>
-          </div>
+          </nuxt-link>
           <div class="col-2 col-sm-1 menu-icon-mobile d-lg-none">
             <div class="d-flex vmargin-auto" style="margin-left: auto; padding-top: 8px;">
               <div @click="toggleMobileNav" class="burger-menu">
