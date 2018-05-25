@@ -3,7 +3,7 @@
     <div class="release-filter-panel__controls">
       <div @click="collapse" class="genre-dropdown__button">
         <template v-if="changeGenre"><slot>Change</slot></template>
-        <template v-else>Select genre</template>
+        <template v-else>Select</template> genre
         <div :class="['filled-arrow__box']">
           <div :class="['filled-arrow__arrow', collapsed ? 'rotate180' : '']"></div>
         </div>

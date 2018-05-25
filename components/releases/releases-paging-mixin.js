@@ -33,7 +33,7 @@ export const ReleasePagingMixin = function (filterBy) {
         cursor: null,
         showMoreEnabled: false,
         filterOptions: {},
-        genre: null,
+        genre: undefined,
         filterBy: null
       }
     },

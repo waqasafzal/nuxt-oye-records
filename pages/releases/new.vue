@@ -4,12 +4,15 @@
     <div class="row">
       <div class="col-12">
         <div class="page__header">
-          <h1>New Releases</h1>
+          <h1>New Releases {{genre && genre.name}}</h1>
 
           <meta-genre-filter class="d-none d-md-flex" @genre-selected="onGenreChanged"></meta-genre-filter>
-          <filter-results-options @filter-changed="onFilterOptionsChanged" class="d-none d-md-flex float-right"></filter-results-options>
+          <filter-results-options @filter-changed="onFilterOptionsChanged"
+                                  class="d-none d-md-flex float-right"></filter-results-options>
         </div>
-        <release-filter-panel class="d-flex d-md-none" @genre-selected="onGenreChanged" :filterOnly="true" :metaGenres="genres" :changeGenre="false" @filter-changed="onFilterOptionsChanged"></release-filter-panel>
+        <release-filter-panel class="d-flex d-md-none" @genre-selected="onGenreChanged" :filterOnly="true"
+                              :metaGenres="genres" :changeGenre="typeof genre !== 'undefined'"
+                              @filter-changed="onFilterOptionsChanged"></release-filter-panel>
         <div class="release-list-panel" v-if="releasedToday.edges.length > 0">
           <h3>Released Today</h3>
           <release-list :releases="releasedToday"></release-list>
@@ -146,7 +149,8 @@
       return {
         pageSize: 5,
         status: 'new',
-        genres: []
+        genres: [],
+        genre: undefined
       }
     },
     head () {
