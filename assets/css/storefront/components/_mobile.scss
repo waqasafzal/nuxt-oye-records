@@ -675,3 +675,13 @@
   }
 }
 
+@include media-breakpoint-down(sm) {
+  .login__form__btn {
+    &__login {
+      padding-right: 0;
+    }
+    &__register {
+      margin-top: 0.5rem
+    }
+  }
+}

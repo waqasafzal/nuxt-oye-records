@@ -1,5 +1,8 @@
 .checkout {
   padding-top: 48px;
+  @include media-breakpoint-down(sm) {
+    margin-top: 1.5em;
+  }
   &__overview {
     margin-bottom: 2rem;
   }
@@ -61,6 +64,11 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      @include media-breakpoint-down(sm) {
+        padding-left: 16px;
+        padding-right: 16px;
+        border: 1px solid $gray-color-2;
+      }
       &:last-child {
         border-right: 1px solid $gray-color-2;
       }
