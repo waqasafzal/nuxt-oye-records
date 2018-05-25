@@ -40,8 +40,9 @@
               </div>
               <img class="img-responsive" :src="release.thumbnailUrl" alt=""/>
               <div class="format">{{release.format}}</div>
-              <play-release-button background="#313532" :size=42 class="release-list-play"
-                                   :release="release"></play-release-button>
+              <!--<play-release-button background="#313532" :size=42 class="release-list-play"-->
+                                   <!--:release="release"></play-release-button>-->
+              <release-button-bar :withTitle="false" :release="release" class="release-list-play"></release-button-bar>
             </div>
             <div class="release-list-info">
               <div class="release-list-info__header">
@@ -70,12 +71,18 @@
   import JsonLdProductSchema from './JsonLdProductSchema.vue'
   import PlayReleaseButton from './PlayReleaseButton'
   import AddToCartButton from '../cart/AddToCartButton'
+  import ReleaseButtonBar from './ReleaseButtonBar'
 
   Vue.component('releaseprice', ReleasePrice)
 
   export default {
     name: 'ReleaseItem',
-    components: {AddToCartButton, PlayReleaseButton, JsonLdProductSchema},
+    components: {
+      ReleaseButtonBar,
+      AddToCartButton,
+      PlayReleaseButton,
+      JsonLdProductSchema
+    },
     props: ['release'],
     data: function () {
       return {

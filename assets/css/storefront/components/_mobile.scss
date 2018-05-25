@@ -258,6 +258,21 @@
 
 
 @include media-breakpoint-down(sm) {
+  .list-item {
+      .release__button-bar {
+        margin-right: 0;
+        &__add-to-cart {
+          padding: 0;
+          width: 36px !important;
+          span {
+            display: none;
+          }
+          img {
+            margin-right: 3px !important;
+          }
+        }
+      }
+  }
   .charts__detail {
     margin-top: 0;
     .release__button-bar {
@@ -601,7 +616,11 @@
       width: 100%;
       .release-list-play {
         margin: auto auto 8px 8px;
-        display: block;
+        display: flex;
+        flex-direction: row;
+        left: inherit;
+        right: inherit;
+        top: inherit;
       }
     }
   }
@@ -693,3 +712,12 @@
     margin-bottom: 8px;
   }
 }
+
+@include media-breakpoint-down(sm) {
+  .release-list-play {
+    left: inherit;
+    right: inherit;
+    top: inherit;
+  }
+}
+
