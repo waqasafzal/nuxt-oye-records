@@ -2,7 +2,7 @@
   <div class="cart">
     <template v-if="linesAvailable">
       <template v-if="cart.lines.length > 0">
-        <div class="cart__table-header d-sm-none">
+        <div class="cart__table-header d-none d-md-block">
           <div class="row">
             <div class="col-md-5">
               <h5>Release</h5>
@@ -22,7 +22,7 @@
         <div class="cart__line" :key="i"
              v-for="(line, i) in cart.lines">
           <div class="row">
-            <div class="col-5 cart__line__product">
+            <div class="col-12 col-md-5 cart__line__product">
               <nuxt-link
                   :to="{name: 'releases-slug', params: {'id': line.release.pk, 'slug': line.release.slug}}">
                 <img :src="line.smallImageUrl" alt=""/>
@@ -42,11 +42,10 @@
                 </div>
               </nuxt-link>
             </div>
-            <div class="col-2 cart__line__cell">
+            <div class="col-3 col-md-2 cart__line__cell">
               <div class="cart-cell-center flex-align-right">{{getPrice(line.pricePerItem)}} &euro;</div>
             </div>
-            <div class="col-1"></div>
-            <div class="col-1 cart__line__cell">
+            <div class="col-3 offset-md-1 col-md-1 cart__line__cell">
               <div class="cart__line__quantity cart-cell-center">
                 <form class="form-cart">
                   <div :class="['form-group', line.quantity.errors ? 'has-error': '']" tabindex="-1">
@@ -61,10 +60,10 @@
                 </form>
               </div>
             </div>
-            <div class="col-2 cart__line__cell">
+            <div class="col-4 col-md-2 cart__line__cell">
               <p class="flex-align-right cart-cell-center">{{ getPrice(line.lineTotal) }} &euro;</p>
             </div>
-            <div v-if="!review" class="cart-item-delete col-1 cart__line__cell">
+            <div v-if="!review" class="cart-item-delete col-2 col-md-1 cart__line__cell">
               <div class="flex-align-right cart-cell-center" @click="onDelete(line)">&times;</div>
             </div>
           </div>
