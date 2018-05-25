@@ -81,7 +81,7 @@
         }
       },
       routeTo (genre, isSubslug = false) {
-        this.collapseAll()
+        this.collapse()
         if (!this.filterOnly) {
           if (!isSubslug) {
             this.$router.push({name: 'metagenres-slug', params: {slug: genre.slug}})
