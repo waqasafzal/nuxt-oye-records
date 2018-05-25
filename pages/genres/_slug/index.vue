@@ -262,11 +262,17 @@
         let subslug = params.subslug
 
         if (typeof this.detailGenre === 'undefined') {
+          const genreOptions = {
+            slug: subslug || slug,
+            sub: typeof subslug === 'undefined'
+          }
+
+          if (options.name === 'metagenres-slug') {
+            genreOptions['meta'] = true
+          }
+
           client.query(
-            createGenreQuery({
-              slug: subslug || slug,
-              sub: typeof subslug === 'undefined'
-            })
+            createGenreQuery(genreOptions)
           ).then((result) => {
             vm.loading = false
             vm.detailGenre = result.data.detailGenre
