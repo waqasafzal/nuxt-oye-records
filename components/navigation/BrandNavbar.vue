@@ -9,12 +9,12 @@
                    height="50">
             </nuxt-link>
           </div>
-          <div class="col-5 col-lg-9 col-sm-8">
+          <div class="col-4 col-lg-9 col-sm-8">
             <main-navbar class="d-none d-lg-block"></main-navbar>
           </div>
           <search class="col-2 col-lg-2 col-sm-1"></search>
-          <nuxt-link :to="{name: 'cart'}" class="d-inline-block vmargin-auto d-lg-none col-1 col-sm-1 cart__icon">
-            <div class="d-flex">
+          <nuxt-link :to="{name: 'cart'}" class="d-inline-block vmargin-auto d-lg-none col-2 col-sm-1 cart__icon">
+            <div class="d-flex justify-content-center">
               <cart-svg class="vmargin-auto"></cart-svg>
             </div>
           </nuxt-link>

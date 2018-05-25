@@ -322,6 +322,11 @@
       flex-direction: column-reverse !important;
 
     }
+    &-panel {
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
   }
   &__continue-button {
     height: 64px;
@@ -332,6 +337,14 @@
     }
   }
 
+}
+
+.bottom {
+  .cart__bottom-bar-panel {
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
 }
 
 .checkout {

@@ -126,8 +126,8 @@
           </div>
         </div>
       </template>
-      <div class="d-sm-flex d-md-none cart__checkout-button__panel">
-        <template v-if="!review">
+      <div v-if="!review" class="d-sm-flex d-md-none cart__checkout-button__panel">
+        <template>
           <proceed-button class="cart__checkout-button" @click="pushCheckout">Go to checkout</proceed-button>
         </template>
       </div>

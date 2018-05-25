@@ -29,7 +29,7 @@
     name: 'Checkout',
     computed: {
       currentCheckoutView () {
-        var currentCheckoutView = null
+        var currentCheckoutView = CartContent
         let checkoutState = this.$store.getters.getCheckoutState
         if (checkoutState < 5 && this.isEmptyCart) {
           currentCheckoutView = CartContent

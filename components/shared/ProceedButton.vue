@@ -32,6 +32,7 @@
     display: inline-block;
     font-size: 20px;
     padding: 0 4rem !important;
+    width: 100%;
     &__content {
       display: flex;
       flex-direction: row;
