@@ -8,9 +8,10 @@
           </h1>
           <meta-genre-filter class="d-none d-md-flex" v-if="showFilter" @slug-selected="onSlugSelected"></meta-genre-filter>
           <filter-results-options class="d-none d-md-flex float-right" v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged"
-                                  ></filter-results-options>
+          ></filter-results-options>
         </div>
-        <release-filter-panel :daysOptions="filterDaysOptions" :upcoming="status === 'upcoming'" :filterOnly="true" @filter-changed="onFilterChanged" :metaGenres="genres" class="d-flex d-md-none">
+        <release-filter-panel :daysOptions="filterDaysOptions" :filterOnly="true" @genre-selected="onGenreSelected" @filter-changed="onFilterChanged"
+                              :metaGenres="genres" class="d-flex d-md-none">
         </release-filter-panel>
         <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
       </div>
@@ -54,7 +55,8 @@
           status: this.status
         },
         filterOptions: {},
-        genres: []
+        genres: [],
+        selectedGenre: undefined
       }
     },
     methods: {
@@ -63,19 +65,29 @@
         this.filterBy = Object.assign({}, this.filterBy, filterOptions)
         this.$emit('filter-changed', this.filterBy)
       },
+      onGenreSelected (genre) {
+        console.log(`Genre` + JSON.stringify(genre))
+        this.selectedGenre = genre
+        this.$emit('genre-selected', genre)
+      },
       onSlugSelected (slug) {
         this.$emit('genre-selected', slug)
       }
     },
     computed: {
       category: function () {
+        let category
         if (this.status === 'new') {
-          return 'New Releases'
+          category = 'New Releases'
         } else if (this.status === 'pre') {
-          return 'Upcoming'
+          category = 'Upcoming'
         } else if (this.status === 'used') {
-          return 'Used Vinyl'
+          category = 'Used Vinyl'
         }
+        if (this.selectedGenre) {
+          category = category + ' ' + this.selectedGenre.name
+        }
+        return category
       },
       filterDaysOptions () {
         if (this.status === 'pre') {
@@ -101,6 +113,14 @@
            metaGenres {
               name
               slug
+              genres {
+                name
+                slug
+                parentGenre {
+                  slug
+                  name
+                }
+              }
            }
         }
         `

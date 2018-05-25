@@ -33,7 +33,7 @@ export const ReleasePagingMixin = function (filterBy) {
         cursor: null,
         showMoreEnabled: false,
         filterOptions: {},
-        genreSlug: null,
+        genre: null,
         filterBy: null
       }
     },
@@ -62,8 +62,16 @@ export const ReleasePagingMixin = function (filterBy) {
           localFilter['formats'] = options.formats
         }
 
-        if (this.genreSlug) {
-          localFilter['metagenres'] = [this.genreSlug]
+        if (this.genre) {
+          if (this.genre.parentGenre) {
+            localFilter['genres'] = [this.genre.slug]
+            delete localFilter['metagenres']
+            localFilter['isSubgenre'] = true
+          } else {
+            localFilter['metagenres'] = [this.genre.slug]
+            delete localFilter['genres']
+            localFilter['isSubgenre'] = false
+          }
         }
 
         this.filterBy = JSON.stringify(localFilter)
@@ -75,10 +83,11 @@ export const ReleasePagingMixin = function (filterBy) {
       },
       onFilterChanged (filterOptions) {
         this.filterOptions = filterOptions
+        console.log(`Filter changed ${JSON.stringify(filterOptions)}`)
         this.reloadQuery()
       },
-      onGenreChanged (genreSlug) {
-        this.genreSlug = genreSlug
+      onGenreChanged (genre) {
+        this.genre = genre
         this.reloadQuery()
       },
       checkInfiniteScrolling () {

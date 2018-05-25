@@ -127,6 +127,7 @@
         }
       },
       onCheckboxClick (e) {
+        console.log(`onCheckboxClick`)
         this.lastClicked = e.target.value
         setTimeout(this.toggleModal, 50)
       },

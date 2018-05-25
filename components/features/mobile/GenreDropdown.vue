@@ -1,6 +1,6 @@
 <template>
   <div class="genre-dropdown">
-    <div @click.self="collapse" class="genre-dropdown__button">
+    <div @click="collapse" class="genre-dropdown__button">
       Select genre
       <div :class="['filled-arrow__box']">
         <div :class="['filled-arrow__arrow', collapsed ? 'rotate180' : '']"></div>

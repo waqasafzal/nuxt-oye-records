@@ -1,21 +1,21 @@
 <template>
   <div class="release-filter-panel">
     <div class="release-filter-panel__controls">
-      <div @click.stop="collapse" class="genre-dropdown__button">
+      <div @click="collapse" class="genre-dropdown__button">
         <template v-if="changeGenre"><slot>Change</slot></template>
         <template v-else>Select genre</template>
         <div :class="['filled-arrow__box']">
           <div :class="['filled-arrow__arrow', collapsed ? 'rotate180' : '']"></div>
         </div>
       </div>
-      <filter-results-options :daysOptions="daysOptions" :upcoming="upcoming" @filter-changed="setOptions"></filter-results-options>
+      <filter-results-options :daysOptions="daysOptions" @filter-changed="setOptions"></filter-results-options>
     </div>
-    <div @click.stop :class="['genre-dropdown__content', collapsed ? 'collapsed': '']">
+    <div :class="['genre-dropdown__content', collapsed ? 'collapsed': '']">
       <div class="genre-dropdown__metagenre" :key="i"
          v-for="(mainGenre, i) in metaGenres">
       <div class="genre-dropdown__maingenre">
         <div class="expandable">
-          <div @click.self="toggleSelected(i)" class="expandable__header">
+          <div @click="toggleSelected(i)" class="expandable__header">
             <div class="genre-name" @click="routeTo(mainGenre)">{{ mainGenre.name }}</div>
             <div class="arrow-box">
               <div :class="['arrow', selected !== i  ? 'arrow-down' : 'arrow-up']"></div>
@@ -24,11 +24,10 @@
           <div :class="['expandable__details', selected !== i ? 'collapsed': '']">
             <template v-for="(genre, j) in mainGenre.genres">
               <template v-if="genre.parentGenre">
-                <nuxt-link @click="collapseAll" class="expandable__details__item"
-                           v-if="genre.parentGenre.name != genre.name"
-                           :to="{name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug, genre: genre}}">
+                <div @click="routeTo(genre, true)" class="expandable__details__item"
+                           v-if="genre.parentGenre.name != genre.name">
                   {{ genre.name }}
-                </nuxt-link>
+                </div>
               </template>
             </template>
           </div>
@@ -40,23 +39,17 @@
 </template>
 
 <script>
-  import GenreDropdown from './GenreDropdown'
   import FilterResultsOptions from '../../shared/FilterResultsOptions'
 
   export default {
     components: {
-      FilterResultsOptions,
-      GenreDropdown
+      FilterResultsOptions
     },
     name: 'ReleaseFilterPanel',
     props: {
       metaGenres: Array,
       changeGenre: Boolean,
       filterOnly: {
-        type: Boolean,
-        default: false
-      },
-      upcoming: {
         type: Boolean,
         default: false
       },
@@ -87,13 +80,20 @@
           this.selected = i
         }
       },
-      routeTo (mainGenre) {
+      routeTo (genre, isSubslug = false) {
         this.collapseAll()
         if (!this.filterOnly) {
-          this.$router.push({name: 'metagenres-slug', params: {slug: mainGenre.slug}})
+          if (!isSubslug) {
+            this.$router.push({name: 'metagenres-slug', params: {slug: genre.slug}})
+          } else {
+            this.$router.push({name: 'genres-slug-subslug', params: {slug: genre.parentGenre.slug, subslug: genre.slug, genre: genre}})
+          }
+        } else {
+          this.$emit('genre-selected', genre)
         }
       },
       collapse () {
+        console.log('collapse')
         const oldState = this.collapsed
         this.collapsed = !oldState
         if (this.collapsed) {
