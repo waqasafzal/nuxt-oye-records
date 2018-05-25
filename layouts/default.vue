@@ -179,7 +179,7 @@
     top: 40px;
     position: fixed;
     background-color: #fff;
-    width: 100%;
+    width: 100vw;
     border-bottom: 1px solid #EBE9E6;
     padding: 0;
   }
