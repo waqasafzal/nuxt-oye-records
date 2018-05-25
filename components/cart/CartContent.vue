@@ -69,14 +69,17 @@
           </div>
         </div>
         <div class="cart__subtotal">
-          <div class="row justify-content-end">
+          <div class="row">
             <div class="col-2 cart__total__subtotal cart__line__cell">
               <h4 class="cart-cell-center">Subtotal</h4>
             </div>
-            <div class="col-1 cart__line__cell">
-              <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(cart.totalAvailableNet) }} &euro;</h4>
+            <div class="col-10 col-md-1 cart__line__cell amount">
+              <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(cart.totalAvailableNet) }}
+                &euro;</h4>
             </div>
           </div>
+        </div>
+        <div class="row justify-content-end">
           <div v-if="review" class="row justify-content-end">
             <div class="col-2 cart__line__cell">
               <h4 class="cart-cell-center">Shipping</h4>
@@ -107,7 +110,8 @@
               <h4 class="cart-cell-center">Total</h4>
             </div>
             <div class="col-1 cart__line__cell">
-              <h4 class="flex-align-right cart-cell-center text-right"><strong>{{ getPrice(total) }} &euro;</strong></h4>
+              <h4 class="flex-align-right cart-cell-center text-right"><strong>{{ getPrice(total) }} &euro;</strong>
+              </h4>
             </div>
           </div>
         </div>
@@ -128,7 +132,9 @@
     <template v-else>
       <div class="cart__empty">
         <h1>Looks like your cart is empty.</h1>
-        <nuxt-link to="/"><div class="btn primary">Start Shopping</div></nuxt-link>
+        <nuxt-link to="/">
+          <div class="btn primary">Start Shopping</div>
+        </nuxt-link>
       </div>
     </template>
   </div>

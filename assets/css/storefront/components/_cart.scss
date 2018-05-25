@@ -170,6 +170,23 @@
   }
   &__subtotal {
     padding: $global-padding * 2;
+    @include media-breakpoint-down(sm) {
+      padding-top: 0;
+      padding-left: 0;
+      padding-bottom: 1rem;
+      padding-right: 0;
+      border-bottom: 1px solid $gray-color-2;
+      .row {
+        justify-content: space-between !important;
+      }
+      .amount {
+        padding-right: 0;
+        h4 {
+          margin-left: auto;
+          padding-right: 10px;
+        }
+      }
+    }
     .row {
       .cart__line__cell {
         padding-bottom: $global-padding * 2;
