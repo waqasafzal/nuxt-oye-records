@@ -79,7 +79,6 @@
     },
     watch: {
       filterBy (value) {
-        console.log('filterBy ' + value)
         let days = this.filterOptions.days || this.filterOptions.period
 
         this.releasedToday = {edges: []}

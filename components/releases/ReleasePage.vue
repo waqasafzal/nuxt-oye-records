@@ -11,7 +11,7 @@
           ></filter-results-options>
         </div>
         <release-filter-panel :daysOptions="filterDaysOptions" :filterOnly="true" @genre-selected="onGenreSelected" @filter-changed="onFilterChanged"
-                              :metaGenres="genres" class="d-flex d-md-none">
+                              :metaGenres="genres" class="d-flex d-md-none" v-if="showFilter">
         </release-filter-panel>
         <release-list id="releaselist" class="releaselist-box" :releases="releases" :loading="loading"></release-list>
       </div>
@@ -61,12 +61,10 @@
     },
     methods: {
       onFilterChanged (filterOptions) {
-        console.log('gilter filcj')
         this.filterBy = Object.assign({}, this.filterBy, filterOptions)
         this.$emit('filter-changed', this.filterBy)
       },
       onGenreSelected (genre) {
-        console.log(`Genre` + JSON.stringify(genre))
         this.selectedGenre = genre
         this.$emit('genre-selected', genre)
       },
