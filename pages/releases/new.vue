@@ -167,6 +167,14 @@
            metaGenres {
               name
               slug
+              genres {
+                name
+                slug
+                parentGenre {
+                  slug
+                  name
+                }
+              }
            }
         }
         `
