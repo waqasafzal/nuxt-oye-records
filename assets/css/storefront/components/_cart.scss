@@ -117,11 +117,20 @@
   &__total {
     height: 9em;
     display: flex;
-    flex-direction: column;
+    //flex-direction: column;
     background-color: $gray-color-2;
-    padding: $global-padding * 2;
-    margin-right: inherit;
-    margin-left: inherit;
+    //padding: $global-padding * 2;
+    flex-direction: row;
+    margin-right: -15px;
+    margin-left: -15px;
+    padding: 0 2rem 1rem;
+    @include media-breakpoint-down(sm) {
+      padding: 0 0 1rem;
+      font-size: 1.8rem;
+      height: 9rem;
+    }
+    //margin-right: inherit;
+    //margin-left: inherit;
     p {
       margin-bottom: 0;
     }
@@ -180,10 +189,8 @@
         justify-content: space-between !important;
       }
       .amount {
-        padding-right: 0;
         h4 {
           margin-left: auto;
-          padding-right: 10px;
         }
       }
     }
@@ -208,11 +215,21 @@
   }
   &__vat {
     font-size: $font-size-sm;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    @include media-breakpoint-down(sm) {
+      padding-top: 0;
+      padding-left: 0;
+      padding-bottom: 1rem;
+      padding-right: 0;
+    }
     &__title {
       color: $brand-color-green;
     }
     &__amount {
       color: $gray-color-1;
+      display: block;
+      text-align: right;
     }
   }
   &__delivery-info {
@@ -279,6 +296,10 @@
     height: 64px;
     line-height: 64px;
     text-align: center;
+    &__panel {
+      margin-top: 2em;
+      margin-bottom: 4em;
+    }
     a {
       display: inline-block;
       vertical-align: middle;

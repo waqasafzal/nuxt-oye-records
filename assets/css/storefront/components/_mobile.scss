@@ -662,3 +662,16 @@
     }
   }
 }
+
+// disable footer
+.bottom {
+  display: none !important;
+  @include media-breakpoint-down(sm) {
+    .footer {
+      .higher {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+

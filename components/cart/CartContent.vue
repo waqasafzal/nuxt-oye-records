@@ -68,18 +68,16 @@
             </div>
           </div>
         </div>
-        <div class="cart__subtotal">
-          <div class="row">
-            <div class="col-2 cart__total__subtotal cart__line__cell">
-              <h4 class="cart-cell-center">Subtotal</h4>
-            </div>
-            <div class="col-10 col-md-1 cart__line__cell amount">
-              <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(cart.totalAvailableNet) }}
-                &euro;</h4>
-            </div>
+        <div class="cart__subtotal row justify-content-end">
+          <div class="col-2 col-md-2 cart__total__subtotal cart__line__cell">
+            <h4 class="cart-cell-center">Subtotal</h4>
+          </div>
+          <div class="col-10 col-md-1 cart__line__cell amount">
+            <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(cart.totalAvailableNet) }}
+              &euro;</h4>
           </div>
         </div>
-        <div class="row justify-content-end">
+        <!--<div class="row justify-content-end">-->
           <div v-if="review" class="row justify-content-end">
             <div class="col-2 cart__line__cell">
               <h4 class="cart-cell-center">Shipping</h4>
@@ -89,7 +87,7 @@
             </div>
           </div>
           <div class="row justify-content-end cart__vat">
-            <div :class="[vatExcluded ? 'col-3': 'col-2', 'cart__line__cell', 'cart__vat__title']">
+            <div :class="[vatExcluded ? 'col-md-3': 'col-md-2', 'col-4', 'cart__line__cell', 'cart__vat__title']">
               <span class="cart-cell-center">
                 <template v-if="!vatExcluded">
                   incl. VAT (19%)
@@ -99,22 +97,22 @@
                 </template>
               </span>
             </div>
-            <div v-if="!vatExcluded" class="col-1 cart__line__cell cart__vat__amount">
+            <div v-if="!vatExcluded" class="col-8 col-md-1 cart__line__cell cart__vat__amount">
               <span class="flex-align-right cart-cell-center text-right">{{ vat }} &euro;</span>
             </div>
           </div>
-        </div>
-        <div class="cart__total">
-          <div class="row justify-content-end">
-            <div class="col-2 cart__line__cell">
-              <h4 class="cart-cell-center">Total</h4>
+        <!--</div>-->
+        <!--<div class="cart__total">-->
+          <div class="row cart__total justify-content-end">
+            <div class="col-md-2 col-4 cart__line__cell">
+              <span class="cart-cell-center">Total</span>
             </div>
-            <div class="col-1 cart__line__cell">
+            <div class="col-8 col-md-1 cart__line__cell">
               <h4 class="flex-align-right cart-cell-center text-right"><strong>{{ getPrice(total) }} &euro;</strong>
               </h4>
             </div>
           </div>
-        </div>
+        <!--</div>-->
       </template>
       <template v-if="cart.preorderLines.length > 0">
         <div class="cart__backorder">
@@ -128,6 +126,9 @@
           </div>
         </div>
       </template>
+      <div class="d-sm-flex d-md-none cart__checkout-button__panel">
+        <proceed-button class="cart__checkout-button" @click="pushCheckout">Go to checkout</proceed-button>
+      </div>
     </template>
     <template v-else>
       <div class="cart__empty">
@@ -145,11 +146,16 @@
   import ProceedButton from '../shared/ProceedButton'
   import { roundFixed, getPrice } from '../../utils/math'
   import * as types from '../../store/types'
+  import CheckoutButtons from '../checkout/CheckoutButtons'
 
   const MAX_QUANTITY = 5
 
   export default {
-    components: {ProceedButton, ReleasePrice},
+    components: {
+      CheckoutButtons,
+      ProceedButton,
+      ReleasePrice
+    },
     name: 'CartContent',
     props: {
       review: {
@@ -194,6 +200,9 @@
         } else {
           return roundFixed(parseFloat(this.cart.totalAvailable))
         }
+      },
+      primaryButtons () {
+        return this.$store.primaryButtonBar.buttons
       }
     },
     methods: {
