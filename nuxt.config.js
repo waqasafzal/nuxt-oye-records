@@ -41,7 +41,7 @@ let adyenScript = process.env.ADYEN_CSE
 
 let adyenSkin = process.env.ADYEN_SKIN_URL
   ? process.env.ADYEN_SKIN_URL
-  : 'https://test.adyen.com/hpp/skipDetails.shtml'
+  : "'https://test.adyen.com/hpp/skipDetails.shtml'"
   //
   // : ((process.env.NODE_ENV === 'production')
   //   ? 'https://live.adyen.com/hpp/cse/js/1115135975200408.shtml' : )

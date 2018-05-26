@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form method="post" :action="__ADYEN_SKIN__" id="adyenForm" name="adyenForm" target="_parent">
+    <form method="post" :action="adyenUrl" id="adyenForm" name="adyenForm" target="_parent">
       <input type="hidden" :name="key" :value="value" v-for="(value, key) in paymentFormData" />
     </form>
 
@@ -48,6 +48,9 @@
       },
       isPaypal () {
         return this.order.paymentType === 'paypal'
+      },
+      adyenUrl () {
+        return __ADYEN_SKIN__
       }
     },
     methods: {
