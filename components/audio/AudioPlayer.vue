@@ -3,60 +3,121 @@
     <!--<div class="audio-panel" v-show="showPlayer" v-on-clickaway="onClickaway">-->
       <playlist v-if="showPlayer && showPlaylist"></playlist>
   <transition name="player-from-bottom">
-      <div v-show="showPlayer" class="audioplayer" id="audioplayer">
-        <div class="ap__element button-box audio-control">
-          <div class="audio-control__buttons">
-            <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
-            <play-button :release="currentTrack && currentTrack.release" ref="playBtn" @play="onPlay" @pause="onPause"
-                         class="audio-control__btn play" background="#30C46C"></play-button>
-            <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
+      <div v-show="showPlayer" id="audioplayer">
+        <div class="audioplayer d-none d-md-flex">
+          <div class="ap__element button-box audio-control">
+            <div class="audio-control__buttons">
+              <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
+              <play-button :release="currentTrack && currentTrack.release" ref="playBtn" @play="onPlay" @pause="onPause"
+                           class="audio-control__btn play" background="#30C46C"></play-button>
+              <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
+            </div>
+          </div>
+          <div class="ap__element current-track">
+            <nuxt-link v-if="currentTrack" class="current-track__info-box"
+                       :to="{name: 'releases-slug', params: {slug: currentTrack.release.slug}}">
+              <div class="track-info d-flex row">
+                <div class="track-name d-flex flex-row col-12">
+                  <div class="track-artist">
+                    <template v-if="currentTrack.release.artistFirstName">
+                      {{ currentTrack.release.artistFirstName }}
+
+
+
+                    </template>
+                    {{ currentTrack.release.artistLastName }}&nbsp;-&nbsp;
+
+
+
+                  </div>
+                  <div class="track-title">
+                    <template v-if="currentTrack.title">{{ currentTrack.title }}</template>
+                    <template v-else>Track {{ currentTrack.position + 1 }}</template>
+                  </div>
+                </div>
+                <div class="release-title col-12">{{ currentTrack.release.title }}</div>
+              </div>
+              <div class="track-time">
+                <div class="track-time__remaining">{{ time(currentTime / 1000) }}&nbsp;/&nbsp;</div>
+                <div class="track-time__total">{{ time(duration / 1000) }}</div>
+              </div>
+            </nuxt-link>
+            <div class="position-slider">
+              <div class="slider" @click.capture="onClickSlider">
+                <div class="slider-fill" :style="sliderStyle"></div>
+              </div>
+            </div>
+          </div>
+          <div @click="onCartClick" class="ap__element button-box add-to-cart">
+            <div>
+              <img src="../../assets/images/cart_small_white.svg"/>
+            </div>
+          </div>
+          <div class="ap__element button-box link-box" @click="onBurgerClick">
+            <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
+          </div>
+          <div @click="onClose" class="ap_element button-box link-box">
+            <div class="close-playlist"></div>
           </div>
         </div>
-        <div class="ap__element current-track">
-          <nuxt-link v-if="currentTrack" class="current-track__info-box"
-                     :to="{name: 'releases-slug', params: {slug: currentTrack.release.slug}}">
-            <div class="track-info d-flex row">
-              <div class="track-name d-flex flex-row col-12">
-                <div class="track-artist">
-                  <template v-if="currentTrack.release.artistFirstName">
-                    {{ currentTrack.release.artistFirstName }}
-
-
-
-                  </template>
-                  {{ currentTrack.release.artistLastName }}&nbsp;-&nbsp;
-
-
-
-                </div>
-                <div class="track-title">
-                  <template v-if="currentTrack.title">{{ currentTrack.title }}</template>
-                  <template v-else>Track {{ currentTrack.position + 1 }}</template>
-                </div>
+        <div class="audioplayer d-sm-flex d-md-none">
+          <div class="d-flex flex-row">
+            <div class="position-slider">
+              <div class="slider" @click.capture="onClickSlider">
+                <div class="slider-fill" :style="sliderStyle"></div>
               </div>
-              <div class="release-title col-12">{{ currentTrack.release.title }}</div>
             </div>
             <div class="track-time">
               <div class="track-time__remaining">{{ time(currentTime / 1000) }}&nbsp;/&nbsp;</div>
               <div class="track-time__total">{{ time(duration / 1000) }}</div>
             </div>
-          </nuxt-link>
-          <div class="position-slider">
-            <div class="slider" @click.capture="onClickSlider">
-              <div class="slider-fill" :style="sliderStyle"></div>
+          </div>
+          <div v-if="currentTrack && currentTrack.release" class="current-track current-track__info-box d-flex flex-row justify-content-between">
+            <div class="release-image">
+              <img :src="currentTrack.release.thumbnailUrl" />
+            </div>
+            <div class="track-info d-flex flex-column">
+              <div>
+                <div class="track-name d-flex flex-row col-12">
+                  <div class="track-artist">
+                    <template v-if="currentTrack.release.artistFirstName">
+                      {{ currentTrack.release.artistFirstName }}
+                    </template>
+                    {{ currentTrack.release.artistLastName }}<span class="d-none d-md-block">&nbsp;-&nbsp;</span>
+                  </div>
+                  <div class="track-title">
+                    <template v-if="currentTrack.title">{{ currentTrack.title }}</template>
+                    <template v-else>Track {{ currentTrack.position + 1 }}</template>
+                  </div>
+                </div>
+                <div class="release-title col-12">{{ currentTrack.release.title }}</div>
+              </div>
+              <div style="margin-top: auto">
+                <div class="ap__element button-box audio-control">
+                  <div class="audio-control__buttons flex-row">
+                    <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
+                    <play-button :release="currentTrack && currentTrack.release" ref="playBtn" @play="onPlay" @pause="onPause"
+                                 class="audio-control__btn play" background="#30C46C"></play-button>
+                    <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
+                  </div>
+                  <div>
+                    <div @click="onCartClick" class="ap__element button-box add-to-cart">
+                      <div>
+                        <img src="../../assets/images/cart_small_white.svg"/>
+                      </div>
+                    </div>
+                    <div class="ap__element link-box" @click="onBurgerClick">
+                      <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
+                    </div>
+                    <div @click="onClose" class="ap_element link-box">
+                      <div class="close-playlist"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div @click="onCartClick" class="ap__element button-box add-to-cart">
-          <div>
-            <img src="../../assets/images/cart_small_white.svg"/>
-          </div>
-        </div>
-        <div class="ap__element button-box link-box" @click="onBurgerClick">
-          <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
-        </div>
-        <div @click="onClose" class="ap_element button-box link-box">
-          <div class="close-playlist"></div>
+          <em>NEW AUDIO</em>
         </div>
       </div>
   </transition>
