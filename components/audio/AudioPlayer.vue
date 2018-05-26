@@ -61,6 +61,18 @@
           </div>
         </div>
         <div class="audioplayer d-sm-flex d-md-none">
+          <div class="controls">
+            <div class="flex-row d-flex">
+              <div @click="onCartClick" class="ap__element add-to-cart">
+                <div class="cart-button">
+                  <img src="../../assets/images/cart_small_white.svg"/>
+                </div>
+              </div>
+              <div class="ap__element playlist-button" @click="onBurgerClick">
+                <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
+              </div>
+            </div>
+          </div>
           <div class="d-flex flex-row">
             <div class="position-slider">
               <div class="slider" @click.capture="onClickSlider">
@@ -99,19 +111,6 @@
                     <play-button :release="currentTrack && currentTrack.release" ref="playBtn" @play="onPlay" @pause="onPause"
                                  class="audio-control__btn play" background="#30C46C"></play-button>
                     <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
-                  </div>
-                  <div>
-                    <div @click="onCartClick" class="ap__element button-box add-to-cart">
-                      <div>
-                        <img src="../../assets/images/cart_small_white.svg"/>
-                      </div>
-                    </div>
-                    <div class="ap__element link-box" @click="onBurgerClick">
-                      <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
-                    </div>
-                    <div @click="onClose" class="ap_element link-box">
-                      <div class="close-playlist"></div>
-                    </div>
                   </div>
                 </div>
               </div>
