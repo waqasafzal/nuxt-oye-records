@@ -1,6 +1,6 @@
 <template>
   <div :class="['release__button-bar', release.availability.status]" v-if="release">
-    <div class="play" v-if="release">
+    <div v-if="release && hasTracks">
       <play-release-button @click.prevent.stop :size=baseSize :release="release"></play-release-button>
     </div>
     <add-to-cart-button @click.prevent.stop :withTitle="withTitle" :release="release" :size=baseSize class="release__button-bar__add-to-cart"></add-to-cart-button>
@@ -28,6 +28,12 @@
     data: function () {
       return {
         baseSize: this.size
+      }
+    },
+    computed: {
+      hasTracks () {
+        var release = this.release
+        return release && (release.hasTracks || (release.tracks && release.tracks.length > 0))
       }
     }
   }
