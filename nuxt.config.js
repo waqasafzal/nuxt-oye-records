@@ -38,6 +38,10 @@ if (process.env.API_ROOT) {
 let adyenScript = process.env.ADYEN_CSE
   ? process.env.ADYEN_CSE
   : 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'
+
+let adyenSkin = process.env.ADYEN_SKIN_URL
+  ? process.env.ADYEN_SKIN_URL
+  : 'https://test.adyen.com/hpp/skipDetails.shtml'
   //
   // : ((process.env.NODE_ENV === 'production')
   //   ? 'https://live.adyen.com/hpp/cse/js/1115135975200408.shtml' : )
@@ -129,7 +133,8 @@ module.exports = {
     ],
     plugins: [
       new webpack.DefinePlugin({
-        __API__: apiHost
+        __API__: apiHost,
+        __ADYEN_SKIN__: adyenSkin
       })
     ],
     vendor: ['vue-cookie']
