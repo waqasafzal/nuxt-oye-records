@@ -4,7 +4,7 @@
       <playlist v-if="showPlayer && showPlaylist"></playlist>
   <transition name="player-from-bottom">
       <div v-show="showPlayer && !minimized" id="audioplayer">
-        <div @touchstart="startAudioTouch" @touchend="endAudioTouch" class="audioplayer d-none d-md-flex">
+        <div class="audioplayer d-none d-md-flex">
           <div class="ap__element button-box audio-control">
             <div class="audio-control__buttons">
               <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
@@ -60,7 +60,7 @@
             <div class="close-playlist"></div>
           </div>
         </div>
-        <div class="audioplayer d-sm-flex d-md-none">
+        <div @touchstart="startAudioTouch" @touchend="endAudioTouch" class="audioplayer d-sm-flex d-md-none">
           <div class="controls">
             <div class="flex-row d-flex">
               <div @click="onCartClick" class="ap__element add-to-cart">
@@ -232,6 +232,16 @@
           this.onPause()
         }
       },
+      showPlaylist (value) {
+        console.log(`Show playlist: ${value}`)
+        if (value) {
+          this.$store.commit(types.SET_MINIMIZED, false)
+          clearInterval(this.autocloseInterval)
+          this.autocloseInterval = null
+        } else {
+          this.autoclose()
+        }
+      },
       visible (value) {
         if (value) {
           this.autoclose()
@@ -267,8 +277,11 @@
     },
     methods: {
       startAudioTouch () {
-        this.minimizedPlayer = false
-        // this.$store.commit(types.SET_PLAYER_VISIBLE, true)
+        console.log(`Start audio touch`)
+        this.$store.commit(types.SET_MINIMIZED, false)
+        console.log(`Clear interval ${this.count}`)
+        clearInterval(this.autocloseInterval)
+        this.autocloseInterval = null
         this.touchdown = true
       },
       endAudioTouch () {
@@ -288,7 +301,6 @@
       playAudio () {
         this.$store.commit(types.SET_PLAYER_VISIBLE, true)
         this.$store.commit(types.SET_MINIMIZED, false)
-        this.minimizedPlayer = false
         var music = this.$refs.music
         music.play()
       },
@@ -329,6 +341,7 @@
             this.autocloseInterval = null
           }
           this.count = this.count + 1
+          console.log(`Create interval #${this.count}`)
           this.autocloseInterval = setInterval(
             () => {
               console.log(`${this.count} ${this.autocloseInterval}`)
