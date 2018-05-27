@@ -124,17 +124,30 @@
   </transition>
     <transition name="player-from-bottom">
       <div class="minified-controls d-sm-block d-md-none" v-show="showPlayer && minimized">
+        <div @click="maximize" v-if="currentTrack" class="release-marquee">
+          <span behaviour="alternate">
+              <template v-if="currentTrack.release.artistFirstName">
+                {{ currentTrack.release.artistFirstName }}
+              </template>
+              {{ currentTrack.release.artistLastName }}&nbsp;-&nbsp;
+              <div class="track-title">
+                <template v-if="currentTrack.title">{{ currentTrack.title }}</template>
+                <template v-else>Track {{ currentTrack.position + 1 }}</template>
+              </div>&nbsp;-&nbsp;
+              <div class="release-title col-12">{{ currentTrack.release.title }}</div>
+          </span>
+        </div>
         <div class="ap__element button-box audio-control">
           <div class="audio-control__buttons flex-row">
             <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
             <play-button :release="currentTrack && currentTrack.release" ref="playBtn" @play="onPlay" @pause="onPause"
                          class="audio-control__btn play" background="#30C46C"></play-button>
             <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
-            <div @click="onCartClick" class="ap__element add-to-cart">
-              <div class="cart-button">
-                <img src="../../assets/images/cart_small_white.svg"/>
-              </div>
-            </div>
+          </div>
+        </div>
+        <div @click="onCartClick" class="ap__element add-to-cart">
+          <div class="cart-button">
+            <img src="../../assets/images/cart_small_white.svg"/>
           </div>
         </div>
       </div>
@@ -415,6 +428,10 @@
             this.forwards()
           }
         }
+      },
+      maximize () {
+        this.$store.commit(types.SET_MINIMIZED, false)
+        this.autoclose()
       }
     },
     mounted: function () {

@@ -422,15 +422,22 @@
 }
 
 .minified-controls {
-  margin-bottom: .2rem;
+  display: flex;
+  flex-direction: row;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  background-color: rgba(49, 53, 50, 1);
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
   .audio-control {
+    margin-left: auto;
     &__buttons {
       display: inline-flex;
       //justify-content: space-around;
       max-width: 200px;
       padding: 2px;
       margin-left: auto;
-      margin-right: 1.4em;
+      //margin-right: 1.4em;
       @include media-breakpoint-down(sm) {
         display: flex;
       }
@@ -442,7 +449,9 @@
     height: 32px;
     width: 32px;
     border-radius: 2px;
-    margin-left: 4rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    //margin-left: 4rem;
     background-color: #30C46C;
     img {
       height: 20px;
@@ -457,4 +466,30 @@
   .play-release-button {
     background-color: $brand-color-black !important;
   }
+  .release-marquee {
+    color: $gray-color-5;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 8px;
+    max-width: 160px;
+    span {
+      display: inline-block;
+      text-indent: 0;
+      animation: marquee 4s linear infinite;
+      padding-left: 100%;
+    }
+    .track-title {
+      display: inline-flex;
+    }
+    .release-title {
+      display: inline-flex;
+    }
+  }
+}
+
+@keyframes marquee {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
 }
