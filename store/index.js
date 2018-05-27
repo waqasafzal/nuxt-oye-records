@@ -72,6 +72,7 @@ const store = new Vuex.Store({
         results: [],
         total: 0
       },
+      hidden: true,
       artists: {
         results: [],
         total: 0
@@ -479,6 +480,9 @@ const store = new Vuex.Store({
     },
     [types.SET_MINIMIZED]: (state, minimized) => {
       state.player.minimized = minimized
+    },
+    [types.SET_SEARCH_HIDDEN]: (state, hidden) => {
+      state.search.hidden = hidden
     }
   },
 
@@ -688,7 +692,8 @@ const store = new Vuex.Store({
     showMobile: (state) => state.showMobile,
     termsAgreed: (state, getters) => state.checkout.termsAgreed,
     showAudioPlayer: (state) => state.player.visible,
-    minimizedAudioPlayer: (state) => state.player.minimized
+    minimizedAudioPlayer: (state) => state.player.minimized,
+    searchHidden: (state) => state.search.hidden
 
   },
 

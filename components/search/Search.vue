@@ -1,18 +1,18 @@
 <template>
   <div class="navbar__search">
-    <div class="d-flex d-lg-none vmargin-auto">
+    <div @click="toggleSearchForm" :class="['d-flex', 'd-lg-none', 'vmargin-auto', !searchHidden ? 'search-visible': '']">
       <search-svg></search-svg>
     </div>
     <!--<img class="d-lg-none mobile-search-icon float-right"-->
          <!--src="../../assets/images/search-icon.svg">-->
-    <div :class="['navbar__brand__search', searchActive ? 'active': '']">
+    <div :class="['navbar__brand__search', searchActive ? 'active': '', searchHidden ? 'd-none' : '', 'd-md-block']">
       <form @submit.prevent="onSubmit" :class="['form-inline']">
-        <div class="mobile-close-search d-md-none">
-          <img src="../../assets/images/close-icon.svg">
-        </div>
-        <input v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="d-none d-sm-block form-control search-input"
+        <!--<div class="mobile-close-search d-md-none">-->
+          <!--<img src="../../assets/images/close-icon.svg">-->
+        <!--</div>-->
+        <input v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
                type="text" name="q">
-        <button class="btn btn-link" type="submit">
+        <button class="btn btn-link d-none d-md-flex" type="submit">
           <img src="../../assets/images/search-icon.svg">
         </button>
         <div class="search__spinner" v-if="loading">
@@ -93,6 +93,7 @@
 
   import { mixin as clickaway } from 'vue-clickaway'
   import SearchSvg from '../shared/SearchSvg'
+  import { mapGetters } from 'vuex'
 
   const MAX_ARTISTS = 2
   const MAX_RELEASES = 3
@@ -125,6 +126,10 @@
       }
     },
     computed: {
+      ...mapGetters(['searchHidden']),
+      deviceWidth () {
+        return (window.innerWidth > 0) ? window.innerWidth : screen.width
+      },
       searchActive () {
         return this.resultsVisible && this.query
       },
@@ -233,6 +238,17 @@
       setQuery (query, fields) {
         this.$store.commit(types.SET_QUERY, {query, fields: JSON.stringify(fields)})
         this.hideResults()
+      },
+      toggleSearchForm () {
+        this.$store.commit(types.SET_SEARCH_HIDDEN, !this.searchHidden)
+      }
+    },
+    mounted () {
+      if (this.deviceWidth < 900) {
+        console.log('Hide search')
+        this.$store.commit(types.SET_SEARCH_HIDDEN, true) // searchHidden = true
+      } else {
+        this.$store.commit(types.SET_SEARCH_HIDDEN, false)
       }
     }
   }
