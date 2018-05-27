@@ -25,15 +25,19 @@
           </div>
         </div>
         <div class="d-flex flex-row">
-          <div class="track-info">
-            <div class="playlist-position">{{ i + 1 }}.</div>
-            <div class="track-artist">{{track.release.artistLastName}}</div>&nbsp;-&nbsp;
-            <div class="track-title">
-              <template v-if="track.title">{{track.title}}</template>
-              <template v-else>Track {{track.position + 1}}</template>
+          <div class="d-flex flex-column track-info-panel" style="width: 100%;">
+            <div class="track-info">
+              <div class="playlist-position">{{ i + 1 }}.</div>
+              <div class="flex-column">
+                <div class="track-artist">{{track.release.artistLastName}}</div><span class="d-none d-md-inline">&nbsp;-&nbsp;</span>
+                <div class="track-title">
+                  <template v-if="track.title">{{track.title}}</template>
+                  <template v-else>Track {{track.position + 1}}</template>
+                </div>
+                <div class="release-title">{{track.release.title}}</div>
+              </div>
             </div>
           </div>
-          <!--<div class="release-title">{{track.release.title}}</div>-->
         </div>
         <div class="release-label">{{track.release.label}}</div>
       </div>
