@@ -52,6 +52,13 @@
   &__customer-data {
     @include media-breakpoint-down(sm) {
       margin-top: 2rem;
+      tr {
+        padding-left: 1rem;
+        td {
+          padding: 0 !important;
+          min-width: unset !important;
+        }
+      }
     }
     tr {
       height: 80px !important;
