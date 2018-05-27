@@ -9,6 +9,7 @@
   import ReleaseList from '../components/releases/ReleaseList'
   import { getPageSize } from '../components/utils'
   import QueryResultPage from '../components/search/QueryResultPage'
+  import * as types from '../store/types'
 
   export default {
     components: {QueryResultPage, ReleaseList},
@@ -43,6 +44,7 @@
         this.loadMore(false)
       }
       window.onscroll = this.checkInfiniteScrolling
+      this.$store.commit(types.SET_SEARCH_HIDDEN, true)
     },
     methods: {
       checkInfiniteScrolling () {

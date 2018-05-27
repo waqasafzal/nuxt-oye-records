@@ -232,8 +232,7 @@
       }
       @include media-breakpoint-down(sm) {
         .search-input {
-          padding-left: 8px !important;
-          padding: $global-padding * 1 $global-padding * 1 $global-padding * 1 $global-padding * 2 !important;
+          padding: $global-padding $global-padding $global-padding 8px !important;
           border-radius: 4px !important;
         }
       }

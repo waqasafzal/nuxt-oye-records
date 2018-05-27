@@ -10,8 +10,8 @@
         <!--<div class="mobile-close-search d-md-none">-->
           <!--<img src="../../assets/images/close-icon.svg">-->
         <!--</div>-->
-        <input v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
-               type="text" name="q">
+        <input ref="search" v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
+               type="search" name="q">
         <button class="btn btn-link d-none d-md-flex" type="submit">
           <img src="../../assets/images/search-icon.svg">
         </button>
@@ -233,6 +233,18 @@
             q: this.query
           }
         })
+
+        const search = this.$refs.search
+        search.setAttribute('readonly', 'readonly')
+        search.setAttribute('disabled', 'true')
+        setTimeout(function () {
+          search.blur() // actually close the keyboard
+          // Remove readonly attribute after keyboard is hidden.
+          search.removeAttribute('readonly')
+          search.removeAttribute('disabled')
+        }, 100)
+
+        this.$store.commit(types.SET_SEARCH_HIDDEN, true)
         this.hideResults()
       },
       setQuery (query, fields) {
@@ -245,7 +257,6 @@
     },
     mounted () {
       if (this.deviceWidth < 900) {
-        console.log('Hide search')
         this.$store.commit(types.SET_SEARCH_HIDDEN, true) // searchHidden = true
       } else {
         this.$store.commit(types.SET_SEARCH_HIDDEN, false)
