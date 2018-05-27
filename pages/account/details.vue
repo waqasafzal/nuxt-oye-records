@@ -8,13 +8,13 @@
         <button @click="onAddCharts" v-if="currentItem === 'Charts'" class="btn add-charts-btn primary">Add New Charts</button>
       </div>
       <div class="row no-gutters justify-content-between">
-        <div class="col-2">
+        <div class="col-12 col-md-2">
           <div class="account__nav">
             <div @click="selectItem(item)" v-for="(item, view, index) in menuItems" :class="['account__menu-item', currentItem === item ? 'selected': '']">{{item}}</div>
             <div @click="onLogout" class="account__menu-item">Logout</div>
           </div>
         </div>
-        <div class="col-9 account__category">
+        <div class="col-12 col-md-9 account__category">
           <keep-alive>
             <component :is="currentAccountView" :editChartsMode="editChartsMode" @charts-saved="onChartsSaved"></component>
           </keep-alive>

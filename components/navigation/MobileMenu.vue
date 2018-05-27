@@ -21,6 +21,9 @@
           <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'gear'}"><span>DJ-Gear</span></nuxt-link>
           </li>
+          <li class="nav-item">
+            <nuxt-link class="nav-link" :to="{name: 'account-details'}"><span>Account</span></nuxt-link>
+          </li>
         </ul>
         <ul class="nav-more">
           <li class="nav-item">

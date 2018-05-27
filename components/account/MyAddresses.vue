@@ -2,7 +2,7 @@
   <div class="my-addresses">
     <div class="row">
       <template v-if="editAddress">
-        <div class="col-7">
+        <div class="col-12 col-md-7">
           <address-form
               :countries="countries"
               :showToggle="false"

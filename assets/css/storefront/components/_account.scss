@@ -10,6 +10,13 @@
     .selected {
       color: $brand-color-green;
     }
+    @include media-breakpoint-down(sm) {
+      max-width: 100%;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      background-color: transparent;
+    }
   }
   &__artist {
     img {
@@ -23,6 +30,17 @@
     font-weight: normal;
     &:hover {
       color: $brand-color-green;
+    }
+    @include media-breakpoint-down(sm) {
+      margin-right: 1rem;
+      margin-bottom: .5rem;
+      &:last-child {
+        margin-left: 0;
+      }
+      border-radius: 16px;
+      background-color: $gray-color-4;
+      padding: .1em 16px;
+
     }
   }
   &__customer-data {
