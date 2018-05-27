@@ -346,21 +346,15 @@
       },
       autoclose: function () {
         const width = (window.innerWidth > 0) ? window.innerWidth : screen.width
-        console.log('set autoclose for width ' + width)
         if (width < 992) {
-          console.log('set autoclose')
           if (this.autocloseInterval) {
             clearInterval(this.autocloseInterval)
             this.autocloseInterval = null
           }
           this.count = this.count + 1
-          console.log(`Create interval #${this.count}`)
           this.autocloseInterval = setInterval(
             () => {
-              console.log(`${this.count} ${this.autocloseInterval}`)
-              console.log(this.count + ' execute interval' + this.touchdown)
               if (!this.touchdown) {
-                console.log(this.count + ' close')
                 clearInterval(this.autocloseInterval)
                 this.autocloseInterval = null
                 this.$store.commit(types.SET_MINIMIZED, true)
@@ -370,7 +364,7 @@
                 this.$store.commit(types.SET_MINIMIZED, false)
               }
             },
-            3000
+            6000
           )
         }
       },
