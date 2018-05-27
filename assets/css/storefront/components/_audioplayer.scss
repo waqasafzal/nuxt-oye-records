@@ -109,7 +109,7 @@
   }
 
   .track-title {
-    color: $gray-color-1
+    color: $gray-color-1;
   }
 
   @media screen {
@@ -327,6 +327,12 @@
     height: 60px;
     border-bottom: 1px solid #414242;
     position: relative;
+    width: 100%;
+    @include media-breakpoint-down(sm) {
+      padding-left: 8px;
+      padding-right: 80px;
+      width: 100%;
+    }
     &:hover:after {
       content: '';
       position: absolute;
@@ -399,4 +405,13 @@
       align-items: center;
     }
   }
+  .track-info {
+    width: 220px;
+  }
+  //.track-title {
+  //  @include media-breakpoint-down(sm) {
+  //    display: none;
+  //  }
+  //}
 }
+

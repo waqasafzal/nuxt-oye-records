@@ -119,7 +119,6 @@
               </div>
             </div>
           </div>
-          <em>NEW AUDIO</em>
         </div>
       </div>
   </transition>
