@@ -721,3 +721,49 @@
   }
 }
 
+.my-addresses {
+  @include media-breakpoint-down(sm) {
+    margin-top: 2rem;
+  }
+}
+
+.account__category {
+  @include media-breakpoint-down(sm) {
+    //margin-top: 2rem;
+    &__header {
+      background-color: $brand-color-black-hover;
+      color: white;
+      display: flex;
+      padding: 1rem;
+      border-bottom: 1px solid white;
+    }
+    .arrow {
+      border: solid white;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 3px;
+      &-box {
+        margin-left: auto;
+        /*margin-right: 16px;*/
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      &-down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+      &-up {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+      }
+    }
+  }
+}
+
+.orders-available {
+  margin-top: 2rem;
+}
+
+.orders-missing {
+  margin-top: 2rem;
+}

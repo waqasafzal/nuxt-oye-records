@@ -55,6 +55,9 @@
     margin-top: inherit;
     margin-bottom: 1rem;
   }
+  @include media-breakpoint-down(sm) {
+    margin-top: 2rem;
+  }
   .release {
     &__infos {
       margin-left: 1rem;
