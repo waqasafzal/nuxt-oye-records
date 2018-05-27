@@ -2,7 +2,8 @@
   background-color: $brand-color-black;
   height: 70px;
   @include media-breakpoint-down(sm) {
-    height: 140px;
+    max-height: 140px;
+    height: unset;
   }
   bottom: 0px;
   width: 100%;
@@ -177,31 +178,6 @@
     background-color: #9a905d;
   }
 
-  .audioplayer {
-    width: 100%;
-    .release-image {
-      width: 105px;
-      min-width: 105px;
-      margin-right: 1em;
-      img {
-        max-width: 100%;
-        width: 100%;
-      }
-    }
-    .controls {
-      position: absolute;
-      top: 0;
-      right: 5%;
-      z-index: -1;
-      margin-top: -2.8rem;
-      background: $brand-color-black;
-      height: 100px;
-      width: 140px;
-      border-radius: 4px;
-
-    }
-  }
-
   .position-slider {
     margin-bottom: auto;
     position: relative;
@@ -279,37 +255,7 @@
     margin-top: 1.4rem;
   }
 
-  .audio-control {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @include media-breakpoint-down(sm) {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    &__buttons {
-      display: inline-flex;
-      justify-content: space-around;
-      width: 100%;
-      padding: 2px;
-      @include media-breakpoint-down(sm) {
-        display: flex;
-      }
-      display: flex;
-    }
-    &__btn {
-      position: relative;
-      &.play {
-        &:hover {
-          background-color: $brand-color-green-hover !important;
-        }
-      }
-      @include media-breakpoint-down(sm) {
-        height: 48px !important;
-        width: 48px !important;
-      }
-    }
-  }
+
 }
 
 .playlist {
@@ -414,10 +360,98 @@
       margin-bottom: auto;
     }
   }
-  //.track-title {
-  //  @include media-breakpoint-down(sm) {
-  //    display: none;
-  //  }
-  //}
 }
 
+
+.audioplayer {
+  width: 100%;
+  .release-image {
+    width: 105px;
+    min-width: 105px;
+    margin-right: 1em;
+    img {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+  .controls {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    z-index: -1;
+    margin-top: -2.8rem;
+    background: $brand-color-black;
+    height: 100px;
+    width: 140px;
+    border-radius: 4px;
+
+  }
+  .audio-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include media-breakpoint-down(sm) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    &__buttons {
+      display: inline-flex;
+      justify-content: space-around;
+      width: 100%;
+      padding: 2px;
+      @include media-breakpoint-down(sm) {
+        display: flex;
+      }
+    }
+    &__btn {
+      position: relative;
+      &.play {
+        &:hover {
+          background-color: $brand-color-green-hover !important;
+        }
+      }
+      @include media-breakpoint-down(sm) {
+        height: 48px !important;
+        width: 48px !important;
+      }
+    }
+  }
+}
+
+.minified-controls {
+  margin-bottom: .2rem;
+  .audio-control {
+    &__buttons {
+      display: inline-flex;
+      //justify-content: space-around;
+      max-width: 200px;
+      padding: 2px;
+      margin-left: auto;
+      margin-right: 1.4em;
+      @include media-breakpoint-down(sm) {
+        display: flex;
+      }
+    }
+  }
+  .add-to-cart {
+    cursor: pointer;
+    //background-color: $brand-color-black;
+    height: 32px;
+    width: 32px;
+    border-radius: 2px;
+    margin-left: 4rem;
+    background-color: #30C46C;
+    img {
+      height: 20px;
+      width: 20px;
+      margin-top: .3rem;
+      margin-left: .35rem;
+    }
+    &:hover {
+      background-color: $brand-color-green;
+    }
+  }
+  .play-release-button {
+    background-color: $brand-color-black !important;
+  }
+}

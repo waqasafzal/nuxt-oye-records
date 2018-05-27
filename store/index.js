@@ -61,7 +61,8 @@ const store = new Vuex.Store({
       currentTrack: null,
       playing: false,
       playlistVisible: false,
-      visible: false
+      visible: false,
+      minimized: false
     },
     search: {
       query: null,
@@ -155,6 +156,7 @@ const store = new Vuex.Store({
       if (changing) {
         player.position = position
       }
+      player.visible = true
     },
     [types.PAUSE_TRACK]: (state) => {
       if (state.player) {
@@ -239,6 +241,7 @@ const store = new Vuex.Store({
       }
     },
     [types.SET_PLAYLIST_VISIBLE]: (state, isVisible) => {
+      state.player.minimized = false
       state.player.playlistVisible = isVisible
     },
     [types.SET_USER_SHIPPING_ADDRESSES]: (state, args) => {
@@ -473,6 +476,9 @@ const store = new Vuex.Store({
     },
     [types.SET_PLAYER_VISIBLE]: (state, visible) => {
       state.player.visible = visible
+    },
+    [types.SET_MINIMIZED]: (state, minimized) => {
+      state.player.minimized = minimized
     }
   },
 
@@ -681,7 +687,8 @@ const store = new Vuex.Store({
     },
     showMobile: (state) => state.showMobile,
     termsAgreed: (state, getters) => state.checkout.termsAgreed,
-    showAudioPlayer: (state) => state.player.visible
+    showAudioPlayer: (state) => state.player.visible,
+    minimizedAudioPlayer: (state) => state.player.minimized
 
   },
 

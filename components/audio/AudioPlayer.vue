@@ -3,8 +3,8 @@
     <!--<div class="audio-panel" v-show="showPlayer" v-on-clickaway="onClickaway">-->
       <playlist v-if="showPlayer && showPlaylist"></playlist>
   <transition name="player-from-bottom">
-      <div v-show="showPlayer" id="audioplayer">
-        <div class="audioplayer d-none d-md-flex">
+      <div v-show="showPlayer && !minimized" id="audioplayer">
+        <div @touchstart="startAudioTouch" @touchend="endAudioTouch" class="audioplayer d-none d-md-flex">
           <div class="ap__element button-box audio-control">
             <div class="audio-control__buttons">
               <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
@@ -122,6 +122,23 @@
         </div>
       </div>
   </transition>
+    <transition name="player-from-bottom">
+      <div class="minified-controls d-sm-block d-md-none" v-show="showPlayer && minimized">
+        <div class="ap__element button-box audio-control">
+          <div class="audio-control__buttons flex-row">
+            <backward-button @backward="backwards()" class="audio-control__btn"></backward-button>
+            <play-button :release="currentTrack && currentTrack.release" ref="playBtn" @play="onPlay" @pause="onPause"
+                         class="audio-control__btn play" background="#30C46C"></play-button>
+            <forward-button class="audio-control__btn" @forward="forwards()"></forward-button>
+            <div @click="onCartClick" class="ap__element add-to-cart">
+              <div class="cart-button">
+                <img src="../../assets/images/cart_small_white.svg"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
       <audio id="music" ref="music">
         <source ref="clip" v-if="currentTrack" :src="currentTrack.url" type="audio/mpeg">
       </audio>
@@ -158,15 +175,22 @@
     data: function () {
       return {
         duration: 0,
-        currentTime: 0
+        currentTime: 0,
+        touchdown: false,
+        autocloseInterval: null,
+        count: 0
         // ,
         // visible: false
       }
     },
     computed: {
       ...mapGetters({
-        visible: 'showAudioPlayer'
+        visible: 'showAudioPlayer',
+        minimized: 'minimizedAudioPlayer'
       }),
+      deviceWidth () {
+        return (window.innerWidth > 0) ? window.innerWidth : screen.width
+      },
       showPlaylist () {
         return this.$store.state.player.playlistVisible
       },
@@ -204,11 +228,18 @@
     },
     watch: {
       showPlayer (value) {
-        if (!value) {
+        if (!value && this.deviceWidth > 900) {
           this.onPause()
         }
       },
+      visible (value) {
+        if (value) {
+          this.autoclose()
+        }
+      },
       currentTrack (val) {
+        this.$store.commit(types.SET_MINIMIZED, false)
+        this.autoclose()
         this.reloadMusic()
       },
       player: function (val) {
@@ -218,6 +249,7 @@
         if (!val) {
           this.pauseAudio()
         } else {
+          this.autoclose()
           this.playAudio()
         }
       },
@@ -234,6 +266,16 @@
       }
     },
     methods: {
+      startAudioTouch () {
+        this.minimizedPlayer = false
+        // this.$store.commit(types.SET_PLAYER_VISIBLE, true)
+        this.touchdown = true
+      },
+      endAudioTouch () {
+        console.log('End audio touch')
+        this.touchdown = false
+        this.autoclose()
+      },
       onClickSlider (e) {
         let offsetWidth = e.target.offsetParent.offsetWidth
         let currentTime = this.duration * e.offsetX / offsetWidth
@@ -245,6 +287,8 @@
       },
       playAudio () {
         this.$store.commit(types.SET_PLAYER_VISIBLE, true)
+        this.$store.commit(types.SET_MINIMIZED, false)
+        this.minimizedPlayer = false
         var music = this.$refs.music
         music.play()
       },
@@ -272,6 +316,37 @@
       init: function () {
         this.audio.addEventListener('timeupdate', this._handlePlayingUI)
         this.audio.addEventListener('ended', this.forwards)
+        this.$store.commit(types.SET_MINIMIZED, false)
+        this.autoclose()
+      },
+      autoclose: function () {
+        const width = (window.innerWidth > 0) ? window.innerWidth : screen.width
+        console.log('set autoclose for width ' + width)
+        if (width < 992) {
+          console.log('set autoclose')
+          if (this.autocloseInterval) {
+            clearInterval(this.autocloseInterval)
+            this.autocloseInterval = null
+          }
+          this.count = this.count + 1
+          this.autocloseInterval = setInterval(
+            () => {
+              console.log(`${this.count} ${this.autocloseInterval}`)
+              console.log(this.count + ' execute interval' + this.touchdown)
+              if (!this.touchdown) {
+                console.log(this.count + ' close')
+                clearInterval(this.autocloseInterval)
+                this.autocloseInterval = null
+                this.$store.commit(types.SET_MINIMIZED, true)
+              } else {
+                clearInterval(this.autocloseInterval)
+                this.autocloseInterval = null
+                this.$store.commit(types.SET_MINIMIZED, false)
+              }
+            },
+            3000
+          )
+        }
       },
       _handlePlayingUI: function (e) {
         let currTime = parseInt(this.audio.currentTime * PRECISION_FACTOR)

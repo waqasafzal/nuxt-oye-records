@@ -1,6 +1,6 @@
 <template>
   <transition name="from-bottom" @enter="onEnter">
-    <div class="playlist" ref="playlist">
+    <div v-if="!this.$store.getters.minimizedAudioPlayer" class="playlist" ref="playlist">
       <div @click="playTrack(track)" :ref="'track-'+i" class="playlist__item d-none d-md-flex" v-for="(track, i) in tracks">
         <div class="play-box">
           <div :class="[isPlaying(i) ? 'playing': '']">
@@ -85,6 +85,7 @@
       },
       onEnter () {
         this.scrollToCurrentTrack()
+        this.$store.commit(types.SET_MINIMIZED, false)
       },
       scrollToCurrentTrack () {
         let ref = this.$refs[`track-${this.$store.state.player.position}`]

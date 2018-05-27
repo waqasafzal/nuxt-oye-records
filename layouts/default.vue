@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @touchstart="startTouch" @touchend="endTouch" @sc>
     <div class="header">
       <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
       <account-navbar></account-navbar>
@@ -92,6 +92,12 @@
       },
       onOpenPlaylist () {
         this.noScroll = true
+      },
+      startTouch () {
+        console.log('start touch')
+      },
+      endTouch () {
+        console.log('end touch')
       }
     },
     computed: {
