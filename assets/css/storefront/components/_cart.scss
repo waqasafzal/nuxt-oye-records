@@ -20,6 +20,11 @@
       text-transform: uppercase;
     }
   }
+  &__lines {
+    @include media-breakpoint-down(sm) {
+      margin-top: 16px;
+    }
+  }
   &__line {
     padding: $global-padding * 2;
     @include media-breakpoint-down(sm) {
