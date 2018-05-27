@@ -20,7 +20,7 @@
             <td class="link edit" @click="togglePasswordEditMode">{{ !passwordEditMode ? "Edit" : "Cancel" }}</td>
           </tr>
           <tr v-if="passwordEditMode" class="password-change__panel">
-            <td colspan="3">
+            <td colspan="2">
               <password-reset-form @success="onPasswordResetSuccess" confirmOld="true"></password-reset-form>
             </td>
           </tr>

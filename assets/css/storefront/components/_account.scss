@@ -57,6 +57,12 @@
         td {
           padding: 0 !important;
           min-width: unset !important;
+          &:first-child {
+            padding-left: 16px !important;
+          }
+          &:last-child {
+            padding-right: 16px !important;
+          }
         }
       }
     }
