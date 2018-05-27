@@ -241,7 +241,7 @@
     },
     watch: {
       showPlayer (value) {
-        if (!value && this.deviceWidth > 900) {
+        if (!value) {
           this.onPause()
         }
       },
