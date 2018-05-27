@@ -204,6 +204,12 @@
       margin-left: 0px;
       margin-top: -6px;
     }
+    &-box {
+      width: 40px;
+      height: 40px;
+      margin-top: 23px;
+      margin-left: 1rem;
+    }
   }
 
   .ap {
@@ -307,8 +313,8 @@
       margin-top: -2.8rem;
       background: $brand-color-black;
       height: 100px;
-      width: 100px;
-      border-radius: 8px;
+      width: 140px;
+      border-radius: 4px;
 
     }
   }

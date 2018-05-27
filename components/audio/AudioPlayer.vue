@@ -71,6 +71,9 @@
               <div class="ap__element playlist-button" @click="onBurgerClick">
                 <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
               </div>
+              <div @click="onClose" class="ap_element button-box close-playlist-box">
+                <div class="close-playlist"></div>
+              </div>
             </div>
           </div>
           <div class="d-flex flex-row">
