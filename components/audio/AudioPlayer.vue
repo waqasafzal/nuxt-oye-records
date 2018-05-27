@@ -88,9 +88,9 @@
             </div>
           </div>
           <div v-if="currentTrack && currentTrack.release" class="current-track current-track__info-box d-flex flex-row justify-content-between">
-            <div class="release-image">
+            <nuxt-link :to="{name: 'releases-slug', params: {slug: currentTrack.release.slug}}" class="release-image">
               <img :src="currentTrack.release.thumbnailUrl" />
-            </div>
+            </nuxt-link>
             <div class="track-info d-flex flex-column">
               <div>
                 <div class="track-name d-flex flex-row col-12">
