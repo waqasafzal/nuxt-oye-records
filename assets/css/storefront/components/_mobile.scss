@@ -722,6 +722,7 @@
 }
 
 .my-addresses {
+  width: 100%;
   @include media-breakpoint-down(sm) {
     margin-top: 2rem;
   }
@@ -771,5 +772,31 @@
 .my-purchases {
   @include media-breakpoint-down(sm) {
     margin-top: 2rem;
+  }
+}
+
+.shipping-address__form {
+  .btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.mobile-purchases {
+  display: flex;
+  flex-wrap: wrap;
+  .order-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-bottom: 1px solid $gray-color-2;
+    .order-info {
+      margin-left: 16px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      text-align: right;
+    }
   }
 }

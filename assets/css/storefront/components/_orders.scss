@@ -1,6 +1,9 @@
 .order {
   background-color: $gray-color-4;
   padding: 2rem;
+  @include media-breakpoint-down(sm) {
+    padding: 0;
+  }
   h3 {
     margin-top: .2rem;
     margin-bottom: .5rem;
@@ -47,6 +50,19 @@
       color: $brand-secondary-color-red;
       cursor: not-allowed;
     }
+  }
+  .charts__detail__thumb {
+    padding: 8px;
+  }
+  .order__item__detail {
+    padding: 18px;
+    position: relative;
+    width: 100%;
+  }
+  .order__item__times {
+    right: 0px;
+    top: 0px;
+    position: absolute;
   }
 }
 
