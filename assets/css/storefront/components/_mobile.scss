@@ -767,3 +767,9 @@
 .orders-missing {
   margin-top: 2rem;
 }
+
+.my-purchases {
+  @include media-breakpoint-down(sm) {
+    margin-top: 2rem;
+  }
+}

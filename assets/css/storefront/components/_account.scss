@@ -1,6 +1,9 @@
 .account {
   h1 {
     margin-bottom: 2rem;
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 0.5rem;
+    }
   }
   &__nav {
     width: 90%;
@@ -44,6 +47,9 @@
     }
   }
   &__customer-data {
+    @include media-breakpoint-down(sm) {
+      margin-top: 2rem;
+    }
     tr {
       height: 80px !important;
       cursor: default !important;
