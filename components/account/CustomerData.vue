@@ -1,7 +1,7 @@
 <template>
   <div class="account__customer-data">
     <div class="row">
-      <div class="col-12 col-md-8">
+      <div class="col-12">
         <div class="summary__header">
           <div class="category">Login Details</div>
         </div>
@@ -19,12 +19,10 @@
             <td><span>******</span></td>
             <td class="link edit" @click="togglePasswordEditMode">{{ !passwordEditMode ? "Edit" : "Cancel" }}</td>
           </tr>
-          <tr v-if="passwordEditMode" class="password-change__panel">
-            <td colspan="2">
-              <password-reset-form @success="onPasswordResetSuccess" confirmOld="true"></password-reset-form>
-            </td>
-          </tr>
         </table>
+        <div v-if="passwordEditMode" class="password-change__panel">
+          <password-reset-form @success="onPasswordResetSuccess" confirmOld="true"></password-reset-form>
+        </div>
       </div>
     </div>
   </div>

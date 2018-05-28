@@ -46,7 +46,7 @@ const store = new Vuex.Store({
       buttons: [],
       show: false
     },
-    accountView: 'Addresses',
+    accountView: 'Customer Data',
     cart: null,
     cartUpdating: false,
     countries: null,

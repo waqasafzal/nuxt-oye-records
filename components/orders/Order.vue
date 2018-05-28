@@ -42,7 +42,7 @@
               <div class="col-4">{{cartLine.quantity}}x</div>
               <div class="col-2">{{cartLine.release.price.gross}}&euro;</div>
             </div>
-            <div class="row">
+            <div class="d-sm-flex d-md-none row">
               <div class="col-12">
                 <div class="d-flex flex-row">
                   <img class="charts__detail__thumb" :src="cartLine.release.smallImageUrl"/>

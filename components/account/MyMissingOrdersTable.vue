@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Outstanding</h3>
-    <table class="table" v-if="items">
+    <table class="table d-none d-md-block" v-if="items">
       <thead>
       <tr>
         <th>Release</th>
@@ -34,6 +34,9 @@
       </tr>
       </tbody>
     </table>
+    <div class="d-sm-block d-md-none order-release-list">
+      <order-release :canAdd="false" @delete-release="onDelete(release.node)" :key="`missing-${i}`" :release="release.node" v-for="(release, i) in items.edges"></order-release>
+    </div>
     <div class="d-flex flex-column">
       <loading-spinner :loading="isLoading"></loading-spinner>
       <div class="d-flex flex-row">
@@ -52,11 +55,15 @@
   import * as types from '../../store/types'
   import { release } from '../graphql/releases'
   import { roundFixed } from '../../utils/math'
+  import OrderRelease from '../releases/OrderRelease'
 
   export default {
     name: 'MyMissingOrdersTable',
     mixins: [SimplePagination],
-    components: {LoadingSpinner},
+    components: {
+      OrderRelease,
+      LoadingSpinner
+    },
     computed: {
       items () {
         return this.$store.getters.getBackOrders
@@ -107,6 +114,20 @@
         this.$store.dispatch('removeBackOrder', {
           pk: release.relatedId,
           type: release.relatedType
+        }).then((data) => {
+          if (data.ok) {
+            this.removeReleaseItem(release)
+          }
+        })
+      },
+      removeReleaseItem (release) {
+        var relatedId = release.relatedId
+        var filteredItems = this.items.edges.filter(function (item) {
+          return item.node.relatedId !== relatedId
+        })
+        this.commit({
+          edges: filteredItems,
+          pageInfo: this.items.pageInfo
         })
       }
     }

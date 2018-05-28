@@ -85,6 +85,9 @@
       }
     },
     computed: {
+      deviceWidth () {
+        return window && (window.innerWidth > 0) ? window.innerWidth : screen.width
+      },
       menuItems () {
         var menuItems = ['Customer Data', 'Addresses', 'Purchases', 'Back/Pre Orders']
         if (this.user.canPublishCharts) {
@@ -111,6 +114,9 @@
     },
     mounted () {
       this.processRoute(this.$route)
+      if (this.deviceWidth < 920) {
+        this.$store.commit(types.SET_CURRENT_ACCOUNT_VIEW, null)
+      }
 
       var vm = this
       client.query({
