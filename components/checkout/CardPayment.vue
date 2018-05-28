@@ -4,7 +4,6 @@
       <div class="form-group flex-column">
         <label for="cardNumber">Card Number</label>
         <input @keypress="onCardNumberChanged" ref="cardNumber" type="text" id="cardNumber" class="form-control" data-encrypted-name="number">
-        <!--<span ref="cardType" id="cardType"></span>-->
       </div>
       <div class="form-group flex-column owner">
         <label for="owner">Name On Card</label>

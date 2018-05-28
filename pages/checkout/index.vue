@@ -31,7 +31,7 @@
       currentCheckoutView () {
         var currentCheckoutView = CartContent
         let checkoutState = this.$store.getters.getCheckoutState
-        if (checkoutState < 5 && this.isEmptyCart) {
+        if (checkoutState < 5) {
           currentCheckoutView = CartContent
         } else if (checkoutState === 1) {
           currentCheckoutView = CheckoutMethod
