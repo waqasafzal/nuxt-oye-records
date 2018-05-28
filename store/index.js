@@ -550,11 +550,11 @@ const store = new Vuex.Store({
         checkoutState = 1
       }
 
-      if (checkoutState === 1 && state.user.authenticated || state.checkout.guest || state.checkout.register) {
+      if (checkoutState === 1 && state.user.authenticated || state.checkout.register) {
         checkoutState = 2
       }
 
-      if (checkoutState === 2 && getters.isShippingAddressConfirmed) {
+      if (checkoutState === 2 && getters.isShippingAddressConfirmed || getters.isOnlyPresale) {
         checkoutState = 3
       }
 
