@@ -6,12 +6,12 @@
       </div>
     </div>
     <div class="row no-gutters justify-content-start">
-      <div class="col-3">
+      <div class="col-12 col-md-3">
         <div class="info__nav">
           <nuxt-link :key="`info-${i}`" v-for="(item, i) in Object.keys(menuItems)" :to="{name: `info-${item}`}">{{menuItems[item]}}</nuxt-link>
         </div>
       </div>
-      <div class="col-7 account__category info-panel">
+      <div class="col-12 col-md-7 account__category info-panel">
         <nuxt-child :key="currentAccountView"/>
       </div>
     </div>

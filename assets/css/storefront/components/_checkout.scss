@@ -418,6 +418,10 @@
   max-width: 550px;
   margin-left: auto;
   margin-right: auto;
+  @include media-breakpoint-down(sm) {
+    margin-top: 6rem;
+    padding: 1rem;
+  }
   h2 {
     font-size: $font-size-h1;
     text-transform: none;
