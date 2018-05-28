@@ -9,10 +9,12 @@ RUN npm rebuild node-sass
 ARG APP_API="'https://oye-records.com'"
 ARG APP_NODE_ENV=production
 ARG ADYEN_CSE=https://live.adyen.com/hpp/cse/js/1115135975200408.shtml
+ARG ADYEN_SKIN_URL="'https://live.adyen.com/hpp/skipDetails.shtml'"
 
 ENV API_ROOT ${APP_API}
 ENV NODE_ENV ${NODE_ENV}
 ENV ADYEN_CSE ${ADYEN_CSE}
+ENV ADYEN_SKIN_URL ${ADYEN_SKIN_URL}
 ENV NODE_PRESERVE_SYMLINKS 1
 RUN npm run build
 
