@@ -37,7 +37,7 @@ if (process.env.API_ROOT) {
 
 let adyenScript = process.env.ADYEN_CSE
   ? process.env.ADYEN_CSE
-  : "'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'"
+  : 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'
 
 let adyenSkin = process.env.ADYEN_SKIN_URL
   ? process.env.ADYEN_SKIN_URL
