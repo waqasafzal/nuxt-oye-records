@@ -94,10 +94,8 @@
         this.noScroll = true
       },
       startTouch () {
-        console.log('start touch')
       },
       endTouch () {
-        console.log('end touch')
       }
     },
     computed: {

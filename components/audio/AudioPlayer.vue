@@ -123,7 +123,7 @@
       </div>
   </transition>
     <transition name="player-from-bottom">
-      <div class="minified-controls d-sm-block d-md-none" v-show="showPlayer && minimized">
+      <div ref="minified" class="minified-controls d-sm-block d-md-none" v-show="showPlayer && minimized">
         <div @click="maximize" v-if="currentTrack" class="release-marquee">
           <span behaviour="alternate">
               <template v-if="currentTrack.release.artistFirstName">
@@ -253,6 +253,16 @@
           this.autocloseInterval = null
         } else {
           this.autoclose()
+        }
+      },
+      minimized (value) {
+        if (value) {
+          console.log('Is minimized fire class removal')
+          setTimeout(() => {
+            // Seems like a bug, that the leave-to class is not removed
+            const minified = this.$refs.minified
+            minified.classList.remove('player-from-bottom-leave-to')
+          }, 2000)
         }
       },
       visible (value) {
