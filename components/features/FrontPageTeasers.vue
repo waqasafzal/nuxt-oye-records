@@ -90,7 +90,7 @@
     name: 'FrontPageTeasers',
     data: function () {
       return {
-        currentFeature: 0,
+        currentFeature: 1,
         sliderDisabled: false,
         animate: false,
         touch: false,
