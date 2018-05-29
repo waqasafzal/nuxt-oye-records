@@ -10,7 +10,7 @@ ARG APP_API="'https://oye-records.com'"
 ARG APP_NODE_ENV=production
 ARG ADYEN_CSE=https://live.adyen.com/hpp/cse/js/1115135975200408.shtml
 ARG ADYEN_SKIN_URL="'https://live.adyen.com/hpp/skipDetails.shtml'"
-ARG GA_URL="UA-25861640-1"
+ARG GA_URL="'UA-25861640-1'"
 
 ENV API_ROOT ${APP_API}
 ENV NODE_ENV ${NODE_ENV}

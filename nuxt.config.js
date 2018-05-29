@@ -45,7 +45,7 @@ const adyenSkin = process.env.ADYEN_SKIN_URL
 
 const gaUrl = process.env.GA_URL
   ? process.env.GA_URL
-  : 'UA-100941329-2'
+  : "'UA-100941329-2'"
 
 module.exports = {
   /*
