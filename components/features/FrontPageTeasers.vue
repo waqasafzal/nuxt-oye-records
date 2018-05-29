@@ -25,7 +25,7 @@
                           <template v-else>New In Stock</template>
                         </nuxt-link>
                       </div>
-                      <nuxt-link class="release-info" :key="'release-'+i"
+                      <nuxt-link class="release-info" :key="'mobile-release-'+i"
                                  :to="{name: 'releases-slug', params: {slug: release.slug}}">
                         <div class="release-name">
                           <div class="frontpage__teaser__artist">{{ release.name }}</div>
@@ -54,7 +54,7 @@
                     </nuxt-link>
                     <div class="artist">{{i}} {{release.name}}</div>
                     <div class="title">{{release.title}}</div>
-                    <release-button-bar :size=54 :release="release" ></release-button-bar>
+                    <release-button-bar :size=54 :release="release"></release-button-bar>
                   </div>
                 </nuxt-link>
               </div>
