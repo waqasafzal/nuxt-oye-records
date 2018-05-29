@@ -52,7 +52,7 @@
                       <template v-if="release.availability.status === 'upcoming'">Coming Soon</template>
                       <template v-else>New In Stock</template>
                     </nuxt-link>
-                    <div class="artist">{{i}} {{release.name}}</div>
+                    <div class="artist">{{release.name}}</div>
                     <div class="title">{{release.title}}</div>
                     <release-button-bar :size=54 :release="release"></release-button-bar>
                   </div>
