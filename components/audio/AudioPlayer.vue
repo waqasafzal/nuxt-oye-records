@@ -257,7 +257,6 @@
       },
       minimized (value) {
         if (value) {
-          console.log('Is minimized fire class removal')
           setTimeout(() => {
             // Seems like a bug, that the leave-to class is not removed
             const minified = this.$refs.minified

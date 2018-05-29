@@ -17,7 +17,6 @@
                 <div :key="'release-'+i"
                      v-show="i === currentFeature"
                      ref="slide" :class="['slide', animate ? '': '']">
-                  {{i}}
                   <div class="slide__inner" :style="backgroundImage(release)">
                     <div class="vmargin-auto">
                       <div class="feature-category">
@@ -45,6 +44,7 @@
           <no-ssr placeholder="Loading...">
             <agile :options="sliderOptions">
               <div class="slide" v-for="(release, i) in featuredReleases">
+                {{i}}
                 <nuxt-link class="frontpage__teaser__item" :key="'release-'+i"
                            :to="{name: 'releases-slug', params: {slug: release.slug}}">
                   <img :src="release.featureImageUrl" />
