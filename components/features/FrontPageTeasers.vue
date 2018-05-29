@@ -83,9 +83,16 @@
   import ReleaseButtonBar from '../releases/ReleaseButtonBar'
   import PlayReleaseButton from '../releases/PlayReleaseButton'
   import AddToCartButton from '../cart/AddToCartButton'
+  import NoSSR from 'vue-no-ssr'
 
   export default {
-    components: {AddToCartButton, PlayReleaseButton, ReleaseButtonBar, WeekFeature},
+    components: {
+      AddToCartButton,
+      PlayReleaseButton,
+      ReleaseButtonBar,
+      WeekFeature,
+      'no-ssr': NoSSR
+    },
     props: ['featuredReleases', 'singleRelease', 'albumRelease'],
     name: 'FrontPageTeasers',
     data: function () {
