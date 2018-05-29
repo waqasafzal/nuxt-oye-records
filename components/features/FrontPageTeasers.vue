@@ -17,6 +17,7 @@
                 <div :key="'release-'+i"
                      v-show="i === currentFeature"
                      ref="slide" :class="['slide', animate ? '': '']">
+                  {{i}}
                   <div class="slide__inner" :style="backgroundImage(release)">
                     <div class="vmargin-auto">
                       <div class="feature-category">
