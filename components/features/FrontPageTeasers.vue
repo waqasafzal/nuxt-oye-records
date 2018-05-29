@@ -97,7 +97,7 @@
         touch: false,
         direction: 0,
         sliderOptions: {
-          // autoplay: true,
+          autoplay: true,
           dots: false,
           arrows: false
         }
