@@ -319,6 +319,7 @@ const store = new Vuex.Store({
       }
     },
     [types.SET_CURRENT_CHECKOUT_STATE]: (state, checkoutState) => {
+      console.log('SET CURRENT CHECKOUT STATE ' + checkoutState)
       state.checkout.checkoutState = checkoutState
       state.primaryButtonBar.show = state.checkout.checkoutState === 4
     },

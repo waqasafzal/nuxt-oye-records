@@ -90,13 +90,13 @@
     name: 'FrontPageTeasers',
     data: function () {
       return {
-        currentFeature: 1,
+        currentFeature: 0,
         sliderDisabled: false,
         animate: false,
         touch: false,
         direction: 0,
         sliderOptions: {
-          autoplay: true,
+          // autoplay: true,
           dots: false,
           arrows: false
         }
