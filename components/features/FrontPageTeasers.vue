@@ -44,7 +44,6 @@
           <no-ssr placeholder="Loading...">
             <agile :options="sliderOptions">
               <div class="slide" v-for="(release, i) in featuredReleases">
-                {{i}}
                 <nuxt-link class="frontpage__teaser__item" :key="'release-'+i"
                            :to="{name: 'releases-slug', params: {slug: release.slug}}">
                   <img :src="release.featureImageUrl" />
@@ -53,7 +52,7 @@
                       <template v-if="release.availability.status === 'upcoming'">Coming Soon</template>
                       <template v-else>New In Stock</template>
                     </nuxt-link>
-                    <div class="artist">{{release.name}}</div>
+                    <div class="artist">{{i}} {{release.name}}</div>
                     <div class="title">{{release.title}}</div>
                     <release-button-bar :size=54 :release="release" ></release-button-bar>
                   </div>
