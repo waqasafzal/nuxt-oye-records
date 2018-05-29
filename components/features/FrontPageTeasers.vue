@@ -43,7 +43,7 @@
         <div class="col-12 frontpage__teaser__content d-lg-none">
           <no-ssr placeholder="Loading...">
             <agile :options="sliderOptions">
-              <div v-if="i !== 0" class="slide" v-for="(release, i) in featuredReleases">
+              <div class="slide" v-for="(release, i) in featuredReleases">
                 <nuxt-link class="frontpage__teaser__item" :key="'release-'+i"
                            :to="{name: 'releases-slug', params: {slug: release.slug}}">
                   <img :src="release.featureImageUrl" />
