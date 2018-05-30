@@ -494,3 +494,23 @@
   0%   { transform: translate(0, 0); }
   100% { transform: translate(-100%, 0); }
 }
+
+
+.from-bottom-enter-active {
+  @include media-breakpoint-down(sm) {
+    transition: margin-bottom 0.8s ease-out !important;
+  }
+}
+
+.from-bottom-leave-active {
+  /*max-height: -100%;*/
+  @include media-breakpoint-down(sm) {
+    transition: margin-bottom 0.8s ease !important;
+  }
+}
+
+.from-bottom-enter, .from-bottom-leave-to {
+  @include media-breakpoint-down(sm) {
+    margin-bottom: -120% !important;
+  }
+}
