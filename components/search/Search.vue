@@ -10,7 +10,7 @@
         <!--<div class="mobile-close-search d-md-none">-->
           <!--<img src="../../assets/images/close-icon.svg">-->
         <!--</div>-->
-        <input :placeholder="deviceWidth < 920 ? 'Search for artist name, release name, label, ...' : ''" ref="search" v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
+        <input ref="search" v-on-clickaway="onBlur" @focus="showResults" autocomplete="off" v-model="query" class="form-control search-input"
                type="search" name="q">
         <button class="btn btn-link d-none d-md-flex" type="submit">
           <img src="../../assets/images/search-icon.svg">
@@ -261,6 +261,7 @@
     mounted () {
       if (this.deviceWidth < 900) {
         this.$store.commit(types.SET_SEARCH_HIDDEN, true) // searchHidden = true
+        this.$ref.search.placeholder = 'Search for artist name, release name, label, ...'
       } else {
         this.$store.commit(types.SET_SEARCH_HIDDEN, false)
       }
