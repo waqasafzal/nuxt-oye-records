@@ -14,8 +14,9 @@
           </div>
           <search class="col-2 col-lg-2 col-sm-1"></search>
           <nuxt-link :to="{name: 'cart'}" class="d-inline-block vmargin-auto d-lg-none col-2 col-sm-1 cart__icon">
-            <div class="d-flex justify-content-center">
+            <div class="cart-icon-box d-flex justify-content-center">
               <cart-svg class="vmargin-auto"></cart-svg>
+              <span :class="['badge', cartItemCount === 0 ? reservationCount > 0 ? 'reserve': 'empty' : '']"></span>
             </div>
           </nuxt-link>
           <div class="col-2 col-sm-1 menu-icon-mobile d-lg-none">
@@ -62,9 +63,7 @@
       }
     },
     computed: {
-//      isVisibleMenu () {
-//        return this.$store.state.showMobile
-//      },
+      ...mapGetters(['cartItemCount', 'reservationCount']),
       cartCount () {
         var cart = this.$store.state.getters.getCart
         return cart ? cart.quantity : 0

@@ -111,7 +111,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .from-bottom-enter-active {
     transition: margin-bottom 1s ease-out;
   }
