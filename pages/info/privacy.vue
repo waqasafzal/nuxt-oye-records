@@ -58,7 +58,6 @@
       <li class="li1">Sie k&ouml;nnen dar&uuml;ber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung der Website bezogenen Daten (inkl. Ihrer IP-Adresse) sowie die Verarbeitung dieser Daten durch Google verhindern, indem Sie ein Browser-Add-on herunterladen und installieren <a href="https://tools.google.com/dlpage/gaoptout?hl=de">https://tools.google.com/dlpage/gaoptout?hl=de</a> .</li>
       <li class="li1">Alternativ zum Browser-Add-on, insbesondere bei Browsern auf mobilen Endger&auml;ten, k&ouml;nnen Sie die Erfassung durch Google Analytics zudem verhindern, indem Sie auf diesen Link klicken. Es wird ein Opt-out-Cookie gesetzt, das die zuk&uuml;nftige Erfassung Ihrer Daten beim Besuch dieser Website verhindert. Der Opt-out-Cookie gilt nur in diesem Browser und nur f&uuml;r unsere Website und wird auf Ihrem Ger&auml;t abgelegt. L&ouml;schen Sie die Cookies in diesem Browser, m&uuml;ssen Sie das Opt-out-Cookie erneut setzen.</li>
       <li class="li1">Weitere Informationen zum Datenschutz im Zusammenhang mit Google Analytics finden Sie etwa in der Google Analytics-Hilfe <a href="https://support.google.com/analytics/answer/6004245?hl=de">https://support.google.com/analytics/answer/6004245?hl=de</a>.</li>
-      <li class="li1">&nbsp;</li>
     </ol>
 
     <h3>7. Twitter</h3>
@@ -67,7 +66,6 @@
       <li class="li1">Wenn Sie eine Seite unseres Webauftritts aufrufen, die ein solches Plugin enth&auml;lt, wird eine direkte Verbindung zwischen Ihrem Browser und dem Twitter-Server hergestellt. Twitter erh&auml;lt dadurch die Information, dass Sie mit Ihrer IP-Adresse unsere Seite besucht haben. Wenn Sie den Twitter "tweet-Button" anklicken, w&auml;hrend Sie in Ihrem Twitter-Account eingeloggt sind, k&ouml;nnen Sie die Inhalte unserer Seiten auf Ihrem Twitter-Profil verlinken. Dadurch kann Twitter den Besuch unserer Seiten Ihrem Benutzerkonto zuordnen. Wir weisen darauf hin, dass wir als Anbieter der Seiten keine Kenntnis vom Inhalt der &uuml;bermittelten Daten sowie deren Nutzung durch Twitter erhalten.</li>
       <li class="li1">Wenn Sie nicht w&uuml;nschen, dass Twitter den Besuch unserer Seiten zuordnen kann, loggen Sie sich bitte aus Ihrem Twitter-Benutzerkonto aus.</li>
       <li class="li1">Weitere Informationen hierzu finden Sie in der Datenschutzerkl&auml;rung von Twitter ((<a href="https://twitter.com/privacy">https://twitter.com/privacy</a>).</li>
-      <li class="li1">&nbsp;</li>
     </ol>
 
     <h3>8. Soziale Medien</h3>
@@ -82,7 +80,6 @@
       <li class="li1">Facebook kann diese Informationen zum Zwecke der Werbung, Marktforschung und bedarfsgerechten Gestaltung der Facebook-Seiten benutzen. Hierzu werden von Facebook Nutzungs-, Interessen- und Beziehungsprofile erstellt, z. B. um Ihre Nutzung unserer Website im Hinblick auf die Ihnen bei Facebook eingeblendeten Werbeanzeigen auszuwerten, andere Facebook-Nutzer &uuml;ber Ihre Aktivit&auml;ten auf unserer Website zu informieren und um weitere mit der Nutzung von Facebook verbundene Dienstleistungen zu erbringen.</li>
       <li class="li1">Wenn Sie nicht m&ouml;chten, dass Facebook die &uuml;ber unseren Webauftritt gesammelten Daten Ihrem Facebook-Konto zuordnet, m&uuml;ssen Sie sich vor Ihrem Besuch unserer Website bei Facebook ausloggen.</li>
       <li class="li1">Zweck und Umfang der Datenerhebung und die weitere Verarbeitung und Nutzung der Daten durch Facebook sowie Ihre diesbez&uuml;glichen Rechte und Einstellungsm&ouml;glichkeiten zum Schutz Ihrer Privatsph&auml;re entnehmen Sie bitte den Datenschutzhinweisen <a href="https://www.facebook.com/about/privacy/">https://www.facebook.com/about/privacy/</a> von Facebook.</li>
-      <li class="li1">&nbsp;</li>
     </ol>
 
     <h3>9. Vertragsabwicklung und Bezahlung</h3>
