@@ -548,7 +548,9 @@ export const createNewUser = ({commit}, args) => new Promise((resolve, reject) =
     }
   }).then(({data}) => {
     if (data.registerUser.errorStatus) {
-      console.error(`Can not register user ${data.registerUser.errorStatus}`)
+      const message = `Can not register user ${data.registerUser.errorStatus}`
+      commit(types.ADD_ALERT, {message: message, level: 'error'})
+      console.error(message)
     } else {
       commit(types.SET_SHIPPING_ADDRESS_ID, data.registerUser.userProfile.preferredShippingAddress.id)
       commit(types.SET_BILLING_ADDRESS_ID, data.registerUser.userProfile.preferredBillingAddress.id)

@@ -25,8 +25,8 @@
         <primary-control-panel></primary-control-panel>
       </div>
       <audio-player></audio-player>
-      <oye-footer class="d-none d-md-flex"></oye-footer>
     </div>
+    <oye-footer class="d-none d-md-flex"></oye-footer>
     <!--<oye-footer></oye-footer>-->
   </div>
 </template>

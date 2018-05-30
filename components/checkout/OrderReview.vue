@@ -3,7 +3,7 @@
     <h3>Review your order</h3>
     <checkout-overview class="checkout__overview"></checkout-overview>
     <cart-content :review="true"></cart-content>
-    <primary-control-panel></primary-control-panel>
+    <primary-control-panel class="d-sm-flex d-md-none"></primary-control-panel>
     <div v-show="placingOrder" class="placing-order">
       <div class="vmargin-auto hmargin-auto">
         <loading-spinner :loading="true"></loading-spinner>

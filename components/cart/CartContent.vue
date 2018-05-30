@@ -68,18 +68,18 @@
             </div>
           </div>
         </div>
-        <div class="cart__subtotal row justify-content-end">
-          <div class="col-2 col-md-2 cart__total__subtotal cart__line__cell">
-            <h4 class="cart-cell-center">Subtotal</h4>
+        <div class="cart__subtotal">
+          <div class="row justify-content-end">
+            <div class="col-2 offset-md-9 col-md-2 cart__total__subtotal cart__line__cell">
+              <h4 class="cart-cell-center">Subtotal</h4>
+            </div>
+            <div class="col-10 col-md-1 cart__line__cell amount">
+              <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(cart.totalAvailableNet) }}
+                &euro;</h4>
+            </div>
           </div>
-          <div class="col-10 col-md-1 cart__line__cell amount">
-            <h4 class="flex-align-right cart-cell-center text-right">{{ getPrice(cart.totalAvailableNet) }}
-              &euro;</h4>
-          </div>
-        </div>
-        <!--<div class="row justify-content-end">-->
-          <div v-if="review" class="row justify-content-end">
-            <div class="col-4 col-md-2 cart__line__cell">
+          <div class="row justify-content-end" v-if="review">
+            <div class="col-4 offset-md-9 col-md-2 cart__line__cell">
               <h4 class="cart-cell-center">Shipping</h4>
             </div>
             <div class="col-8 col-md-1 cart__line__cell">
@@ -101,18 +101,20 @@
               <span class="flex-align-right cart-cell-center text-right">{{ vat }} &euro;</span>
             </div>
           </div>
+        </div>
+        <!--<div class="row justify-content-end">-->
         <!--</div>-->
-        <!--<div class="cart__total">-->
-          <div class="row cart__total justify-content-end">
+        <div class="cart__total">
+          <div class="row justify-content-end">
             <div class="col-md-2 col-4 cart__line__cell">
               <span class="cart-cell-center">Total</span>
             </div>
-            <div class="col-8 col-md-1 cart__line__cell">
+            <div class="col-8 col-md-1 cart__line__cell total__value">
               <h4 class="flex-align-right cart-cell-center text-right"><strong>{{ getPrice(total) }} &euro;</strong>
               </h4>
             </div>
           </div>
-        <!--</div>-->
+        </div>
       </template>
       <template v-if="cart.preorderLines.length > 0">
         <div class="cart__backorder">
