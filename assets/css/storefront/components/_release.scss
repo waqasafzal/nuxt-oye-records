@@ -10,6 +10,9 @@ $font-factor: 0.9;
       display: inline-block;
       position: relative;
       margin-right: 10px;
+      @include media-breakpoint-down(sm) {
+        margin-left: 6px;
+      }
       .play-release-button:hover {
         background-color: $brand-color-black-hover !important;
       }
