@@ -26,7 +26,7 @@
       </div>
       <audio-player></audio-player>
     </div>
-    <oye-footer class="d-none d-md-flex"></oye-footer>
+    <oye-footer></oye-footer>
     <!--<oye-footer></oye-footer>-->
   </div>
 </template>
