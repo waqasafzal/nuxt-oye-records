@@ -54,27 +54,42 @@
             </div>
           </div>
           <div class="ap__element button-box link-box" @click="onBurgerClick">
-            <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
+            <template v-if="!showPlaylist">
+              <div class="burger-menu"></div>
+            </template>
+            <template v-else>
+              <div class="arrow-box">
+                <div class="arrow arrow-down"></div>
+              </div>
+            </template>
+            <!--<div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>-->
           </div>
           <div @click="onClose" class="ap_element button-box link-box">
             <div class="close-playlist"></div>
           </div>
         </div>
         <div @touchstart="startAudioTouch" @touchend="endAudioTouch" class="audioplayer d-sm-flex d-md-none">
-          <div class="controls">
-            <div class="flex-row d-flex">
+          <div class="controls flex-row d-flex">
+            <!--<div class="">-->
               <div @click="onCartClick" class="ap__element add-to-cart">
                 <div class="cart-button">
                   <img src="../../assets/images/cart_small_white.svg"/>
                 </div>
               </div>
-              <div class="ap__element playlist-button" @click="onBurgerClick">
-                <div :class="[showPlaylist ? 'close-playlist': 'burger-menu']"></div>
+              <div :class="['ap__element', 'd-flex', 'playlist-button', showPlaylist ? 'close-arrow' : '']" @click="onBurgerClick">
+                <template v-if="!showPlaylist">
+                  <div class="burger-menu"></div>
+                </template>
+                <template v-else>
+                  <div class="arrow-box">
+                    <div class="arrow arrow-down"></div>
+                  </div>
+                </template>
               </div>
-              <div @click="onClose" class="ap_element button-box close-playlist-box">
+              <div @click="onClose" class="ap_element d-flex button-box close-playlist-box">
                 <div class="close-playlist"></div>
               </div>
-            </div>
+            <!--</div>-->
           </div>
           <div class="d-flex flex-row">
             <div class="position-slider">
@@ -354,28 +369,28 @@
         this.autoclose()
       },
       autoclose: function () {
-        const width = (window.innerWidth > 0) ? window.innerWidth : screen.width
-        if (width < 992) {
-          if (this.autocloseInterval) {
-            clearInterval(this.autocloseInterval)
-            this.autocloseInterval = null
-          }
-          this.count = this.count + 1
-          this.autocloseInterval = setInterval(
-            () => {
-              if (!this.touchdown) {
-                clearInterval(this.autocloseInterval)
-                this.autocloseInterval = null
-                this.$store.commit(types.SET_MINIMIZED, true)
-              } else {
-                clearInterval(this.autocloseInterval)
-                this.autocloseInterval = null
-                this.$store.commit(types.SET_MINIMIZED, false)
-              }
-            },
-            6000
-          )
-        }
+        // const width = (window.innerWidth > 0) ? window.innerWidth : screen.width
+        // if (width < 992) {
+        //   if (this.autocloseInterval) {
+        //     clearInterval(this.autocloseInterval)
+        //     this.autocloseInterval = null
+        //   }
+        //   this.count = this.count + 1
+        //   this.autocloseInterval = setInterval(
+        //     () => {
+        //       if (!this.touchdown) {
+        //         clearInterval(this.autocloseInterval)
+        //         this.autocloseInterval = null
+        //         this.$store.commit(types.SET_MINIMIZED, true)
+        //       } else {
+        //         clearInterval(this.autocloseInterval)
+        //         this.autocloseInterval = null
+        //         this.$store.commit(types.SET_MINIMIZED, false)
+        //       }
+        //     },
+        //     6000
+        //   )
+        // }
       },
       _handlePlayingUI: function (e) {
         let currTime = parseInt(this.audio.currentTime * PRECISION_FACTOR)
@@ -462,5 +477,27 @@
 
   .player-from-bottom-enter, .player-from-bottom-leave-to {
     margin-bottom: -100%;
+  }
+
+  .arrow {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 6px;
+    margin: auto;
+    &-box {
+      /*margin-left: auto;*/
+      /*margin-top: auto;*/
+      /*margin-bottom: auto;*/
+      margin: auto;
+    }
+    &-down {
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+    &-up {
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
   }
 </style>
