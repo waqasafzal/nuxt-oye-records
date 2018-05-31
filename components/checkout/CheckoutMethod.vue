@@ -1,7 +1,7 @@
 <template>
   <div class="row checkout__content checkout__method">
       <login-form redirect="#" class="checkout__content__col"></login-form>
-      <div class="d-none d-flex-md col-12 col-md-6 login__form__panel checkout__content__col">
+      <div class="d-none d-md-flex col-12 col-md-6 login__form__panel checkout__content__col">
       </div>
     </div>
 </template>
