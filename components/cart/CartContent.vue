@@ -170,9 +170,6 @@
     },
     watch: {
       linesAvailable (value) {
-        if (!value && this.cart.lines.length < 1) {
-          this.$store.commit(types.FINISH_CHECKOUT)
-        }
         this.$store.commit(types.SET_BUTTON_BAR_SHOW, value)
       }
     },
