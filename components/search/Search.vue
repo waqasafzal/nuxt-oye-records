@@ -261,7 +261,7 @@
     mounted () {
       if (this.deviceWidth < 900) {
         this.$store.commit(types.SET_SEARCH_HIDDEN, true) // searchHidden = true
-        this.$ref.search.placeholder = 'Search for artist name, release name, label, ...'
+        this.$refs.search.placeholder = 'Search for artist name, release name, label, ...'
       } else {
         this.$store.commit(types.SET_SEARCH_HIDDEN, false)
       }
