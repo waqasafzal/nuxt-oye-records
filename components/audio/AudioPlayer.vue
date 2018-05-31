@@ -369,28 +369,28 @@
         this.autoclose()
       },
       autoclose: function () {
-        // const width = (window.innerWidth > 0) ? window.innerWidth : screen.width
-        // if (width < 992) {
-        //   if (this.autocloseInterval) {
-        //     clearInterval(this.autocloseInterval)
-        //     this.autocloseInterval = null
-        //   }
-        //   this.count = this.count + 1
-        //   this.autocloseInterval = setInterval(
-        //     () => {
-        //       if (!this.touchdown) {
-        //         clearInterval(this.autocloseInterval)
-        //         this.autocloseInterval = null
-        //         this.$store.commit(types.SET_MINIMIZED, true)
-        //       } else {
-        //         clearInterval(this.autocloseInterval)
-        //         this.autocloseInterval = null
-        //         this.$store.commit(types.SET_MINIMIZED, false)
-        //       }
-        //     },
-        //     6000
-        //   )
-        // }
+        const width = (window.innerWidth > 0) ? window.innerWidth : screen.width
+        if (width < 992) {
+          if (this.autocloseInterval) {
+            clearInterval(this.autocloseInterval)
+            this.autocloseInterval = null
+          }
+          this.count = this.count + 1
+          this.autocloseInterval = setInterval(
+            () => {
+              if (!this.touchdown) {
+                clearInterval(this.autocloseInterval)
+                this.autocloseInterval = null
+                this.$store.commit(types.SET_MINIMIZED, true)
+              } else {
+                clearInterval(this.autocloseInterval)
+                this.autocloseInterval = null
+                this.$store.commit(types.SET_MINIMIZED, false)
+              }
+            },
+            6000
+          )
+        }
       },
       _handlePlayingUI: function (e) {
         let currTime = parseInt(this.audio.currentTime * PRECISION_FACTOR)
