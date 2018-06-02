@@ -266,14 +266,14 @@
       },
       focusSearch () {
         console.log('b')
-        // this.$refs.search.focus()
-        // const search = this.$refs.search
-        // search.focus()
-        // // console.log('set timeout for focus')
-        // setTimeout(() => {
-        //   console.log('timed focus')
-        //   search[0].focus()
-        // }, 1000)
+        this.$refs.search.focus()
+        const search = this.$refs.search
+        search.focus()
+        // console.log('set timeout for focus')
+        setTimeout(() => {
+          console.log('timed focus')
+          search[0].focus()
+        }, 1000)
       }
     },
     mounted () {
