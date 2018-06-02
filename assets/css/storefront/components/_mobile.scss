@@ -719,6 +719,17 @@
     right: inherit;
     top: inherit;
   }
+  .from-top-enter-active {
+    transition: margin-top 0.5s;
+  }
+
+  .from-top-leave-active {
+    transition: margin-top 0.5s;
+  }
+  .from-top-enter, .from-top-leave-to {
+    margin-top: -40px !important;
+  }
+
 }
 
 .my-addresses {

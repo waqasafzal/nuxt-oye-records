@@ -159,6 +159,11 @@
     height: 103px;
     display: flex;
     flex-direction: column;
+    @include media-breakpoint-down(sm) {
+      position: absolute !important;
+      z-index: auto !important;
+      top: auto !important;
+    }
     @include media-breakpoint-down(md) {
       position: fixed;
       top: 0;
@@ -235,6 +240,7 @@
           padding: $global-padding $global-padding $global-padding 8px !important;
           border-radius: 4px !important;
         }
+        z-index: -100 !important;
       }
       @include media-breakpoint-down(md) {
         display: block;
