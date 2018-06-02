@@ -5,7 +5,7 @@
     </div>
     <!--<img class="d-lg-none mobile-search-icon float-right"-->
          <!--src="../../assets/images/search-icon.svg">-->
-    <transition name="from-top" @enter="focusSearch">
+    <transition name="from-top" @enter="focusSearch" @after-enter="focusSearchE">
       <div v-show="!searchHidden" :class="['navbar__brand__search', searchActive ? 'active': '', 'd-md-block']">
         <form @submit.prevent="onSubmit" :class="['form-inline']">
           <!--<div class="mobile-close-search d-md-none">-->
@@ -259,10 +259,16 @@
       toggleSearchForm () {
         this.$store.commit(types.SET_SEARCH_HIDDEN, !this.searchHidden)
       },
-      focusSearch () {
-        // this.$refs.search.focus()
+      focusSearchE (el) {
+        console.log('e')
         const search = this.$refs.search
         search.focus()
+      },
+      focusSearch () {
+        console.log('b')
+        // this.$refs.search.focus()
+        // const search = this.$refs.search
+        // search.focus()
         // // console.log('set timeout for focus')
         // setTimeout(() => {
         //   console.log('timed focus')
