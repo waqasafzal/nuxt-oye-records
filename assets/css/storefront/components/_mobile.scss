@@ -518,8 +518,12 @@
 .agile {
   &__list {
     @include media-breakpoint-down(sm) {
+      height: 460px;
+    }
+    @media (max-width: 374px) {
       height: 420px;
     }
+
     height: 350px;
   }
   &__track {
