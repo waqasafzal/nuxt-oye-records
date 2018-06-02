@@ -350,6 +350,9 @@
       width: 376px;
       display: flex;
       align-items: center;
+      @include media-breakpoint-down(sm) {
+        width: auto;
+      }
     }
     &-label {
       width: 250px;
