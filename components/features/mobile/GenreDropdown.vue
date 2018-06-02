@@ -26,6 +26,12 @@
                     {{ genre.name }}
                   </nuxt-link>
                 </template>
+                <template v-else>
+                  <nuxt-link class="expandable__details__item"
+                             :to="{name: 'genres-slug', params: {slug: genre.slug, genre: genre}}">
+                    {{ genre.name }}
+                  </nuxt-link>
+                </template>
               </template>
             </div>
           </div>
