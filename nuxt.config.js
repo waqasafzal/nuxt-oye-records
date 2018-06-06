@@ -58,6 +58,7 @@ module.exports = {
         property: 'og:url',
         content: apiHost
       },
+      {name: 'google-site-verification', content: '97DMLXlRhOGBHBXejItwpPsvTogTeoo376AIzxtoDI0'},
       {
         hid: 'type',
         property: 'og:type',
