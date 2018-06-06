@@ -20,7 +20,7 @@
             <component :is="currentAccountView" :editChartsMode="editChartsMode" @charts-saved="onChartsSaved"></component>
           </keep-alive>
         </div>
-        <div class="d-sm-flex d-md-none col-12 account__category" v-for="(item, view, index) in menuItems">
+        <div class="d-sm-flex d-md-none col-12 account__category" v-if="item !== 'Charts'" v-for="(item, view, index) in menuItems">
           <div class="account__category__header" @click="toggleItem(item)">
             <span>{{item}}</span>
             <div class="arrow-box">
@@ -201,7 +201,7 @@
           return MyOrders
         } else if (item === 'Customer Data') {
           return CustomerData
-        } else {
+        } else if (item === 'Charts') {
           return MyCharts
         }
       }
