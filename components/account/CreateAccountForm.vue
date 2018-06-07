@@ -55,17 +55,11 @@
       </fieldset>
     </form>
     <div class="newsletter-flags">
-      <h4>Subscribe to our newsletters</h4>
       <div class="newsletter-toggles">
         <form>
           <div class="form-group">
             <label class="checkbox-label">
-              <input type="checkbox" name="weekly" v-model="account.weekly">Weekly News
-            </label>
-          </div>
-          <div class="form-group">
-            <label class="checkbox-label">
-              <input type="checkbox" name="monthly" v-model="account.monthly">Monthly Bestsellers
+              <input type="checkbox" name="weekly" v-model="account.registerNewsletter">Subscribe to our newsletter
             </label>
           </div>
         </form>
@@ -88,7 +82,8 @@
           password: '',
           passwordConfirmation: '',
           weekly: false,
-          monthly: false
+          monthly: false,
+          registerNewsletter: false
         }
       }
     },
@@ -116,7 +111,8 @@
           firstName: this.account.firstName,
           email: this.account.email,
           password: this.account.password,
-          passwordConfirm: this.account.passwordConfirmation
+          passwordConfirm: this.account.passwordConfirmation,
+          registerNewsletter: this.account.registerNewsletter
         }
         var validateUser = this.$store.dispatch('validateUserForm', {
           user: user
@@ -128,7 +124,8 @@
             email: this.account.email,
             password: this.account.password,
             first_name: this.account.firstName,
-            last_name: this.account.lastName
+            last_name: this.account.lastName,
+            newsletter: this.account.registerNewsletter
           }, () => {
             this.$emit('account-created')
           })
