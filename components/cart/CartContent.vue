@@ -46,7 +46,7 @@
               <div class="cart-cell-center flex-align-right">{{getPrice(line.pricePerItem)}} &euro;</div>
             </div>
             <div class="col-3 offset-md-1 col-md-1 cart__line__cell">
-              <div class="cart__line__quantity cart-cell-center">
+              <div v-show="!review" class="cart__line__quantity cart-cell-center">
                 <form class="form-cart">
                   <div :class="['form-group', line.quantity.errors ? 'has-error': '']" tabindex="-1">
                     <select class="form-control"
