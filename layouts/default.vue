@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @touchstart="startTouch" @touchend="endTouch" @sc>
+  <div id="app" @touchstart="startTouch" @touchend="endTouch">
     <div class="header">
       <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
       <account-navbar></account-navbar>
@@ -9,7 +9,7 @@
       <!--Please open the beta shop on a device with a bigger-->
       <!--screen or bounce to the classic shop <a href="https://classic.oye-records.com" target="_blank">here.</a>-->
     <!--</div>-->
-    <header class="navbar" role="navigation">
+    <header @click="onHeaderClick" class="navbar" role="navigation">
       <brand-navbar></brand-navbar>
     </header>
     <alerts></alerts>
@@ -45,6 +45,7 @@
   import Announcements from '../components/messages/Announcements'
   import OyeFooter from '../components/navigation/Footer'
   import { mapGetters } from 'vuex'
+  import * as types from '../store/types'
 
   var ogImage = require('~/assets/images/fb-og-image.jpg')
 
@@ -70,28 +71,14 @@
       }
     },
     methods: {
-//      mediaChange (mq) {
-//        if (mq.matches) {
-//          this.isPortable = false
-//          // window width is at least 500px
-//          this.$store.commit(types.SET_SMALL_SCREEN, false)
-//        } else {
-//          this.isPortable = true
-//          // window width is less than 500px
-//          this.$store.commit(types.SET_SMALL_SCREEN, true)
-//        }
-//      },
-//      onToggleMobileMenu () {
-//        this.$store.commit(types.SET_MOBILE_NAV, !this.isOpenMobileMenu)
-//      },
-//      closeMobileMenu () {
-//        this.$store.commit(types.SET_MOBILE_NAV, false)
-//      },
       onClosePlaylist () {
         this.noScroll = false
       },
       onOpenPlaylist () {
         this.noScroll = true
+      },
+      onHeaderClick () {
+        this.$store.commit(types.SET_MOBILE_NAV, !this.showMobile)
       },
       startTouch () {
       },
