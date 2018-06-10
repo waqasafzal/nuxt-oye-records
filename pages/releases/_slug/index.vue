@@ -259,7 +259,7 @@
       },
       onAddToCart (e) {
         var key = e.keyCode ? e.keyCode : e.which
-        let noText = e.target.type !== 'text'
+        let noText = !['text', 'search'].includes(e.target.type)
 
         if (noText) {
           if (key === 65) {
