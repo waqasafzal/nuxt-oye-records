@@ -130,13 +130,6 @@
         cursor: pointer;
       }
     }
-    .arrow {
-      border-width: 0 1px 1px 0 !important;
-      padding: 3px !important;
-      &-box {
-        margin-right: 0 !important;
-      }
-    }
   }
   .collapsed {
     display: none;
@@ -192,6 +185,15 @@
       margin-top: 24px;
       margin-bottom: auto;
       width: 100%;
+    }
+  }
+  .expandable {
+    .arrow {
+      border-width: 0 1px 1px 0 !important;
+      padding: 3px !important;
+      &-box {
+        margin-right: 0 !important;
+      }
     }
   }
 

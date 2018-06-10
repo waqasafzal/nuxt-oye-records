@@ -764,7 +764,7 @@
         /*margin-right: 16px;*/
         margin-top: auto !important;
         margin-bottom: auto !important;
-        margin: inherit;
+        margin-right: 0 !important;
       }
       &-down {
         transform: rotate(45deg);
@@ -823,5 +823,15 @@
 .charts__detail {
   .play {
     margin-left: 0 !important;
+  }
+}
+
+.expandable {
+  .arrow {
+    border-width: 0 1px 1px 0 !important;
+    padding: 3px !important;
+    &-box {
+      margin-right: 0 !important;
+    }
   }
 }
