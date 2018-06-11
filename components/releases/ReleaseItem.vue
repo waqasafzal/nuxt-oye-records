@@ -107,7 +107,7 @@
             'target': [
               {
                 '@type': 'EntryPoint',
-                'urlTemplate': release.url + '?autoplay=true',
+                'urlTemplate': release.url,
                 'actionPlatform': [
                   'http://schema.org/DesktopWebPlatform',
                   'http://schema.org/IOSPlatform',
