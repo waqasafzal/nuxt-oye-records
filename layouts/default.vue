@@ -45,7 +45,7 @@
   import Announcements from '../components/messages/Announcements'
   import OyeFooter from '../components/navigation/Footer'
   import { mapGetters } from 'vuex'
-  import * as types from '../store/types'
+  // import * as types from '../store/types'
 
   var ogImage = require('~/assets/images/fb-og-image.jpg')
 
