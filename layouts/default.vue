@@ -78,7 +78,9 @@
         this.noScroll = true
       },
       onHeaderClick () {
-        this.$store.commit(types.SET_MOBILE_NAV, !this.showMobile)
+        // if (this.showMobile) {
+        //   this.$store.commit(types.SET_MOBILE_NAV, false)
+        // }
       },
       startTouch () {
       },
