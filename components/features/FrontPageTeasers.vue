@@ -352,12 +352,6 @@
               }
               // Move and animate the elements.
               vm.animate = true
-              console.log(`${vm.currentFeature} ${this.slideWidth} r: ${this.lastRight} l: ${this.lastLeft} c: ${this.current}`)
-//            var s = this
-//
-//            if (!changed) {
-//
-//            }
               if (this.lastRight) {
 //              this.lastRight.style.left = 'inherit'
                 let left = parseInt(this.lastRight.style.left.split('px')[0])

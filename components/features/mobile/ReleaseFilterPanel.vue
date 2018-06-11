@@ -105,7 +105,6 @@
       },
       setOptions (options) {
         this.$emit('filter-changed', options)
-        console.log(`setOptions${JSON.stringify(options)}`)
       }
     }
   }

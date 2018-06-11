@@ -83,7 +83,6 @@ export const ReleasePagingMixin = function (filterBy) {
       },
       onFilterChanged (filterOptions) {
         this.filterOptions = filterOptions
-        console.log(`Filter changed ${JSON.stringify(filterOptions)}`)
         this.reloadQuery()
       },
       onGenreChanged (genre) {

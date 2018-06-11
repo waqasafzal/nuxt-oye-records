@@ -4,11 +4,6 @@
       <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
       <account-navbar></account-navbar>
     </div>
-    <!--<div class="force-bigger-screen d-md-none">-->
-      <!--The mobile version is coming soon.<br/>-->
-      <!--Please open the beta shop on a device with a bigger-->
-      <!--screen or bounce to the classic shop <a href="https://classic.oye-records.com" target="_blank">here.</a>-->
-    <!--</div>-->
     <header @click="onHeaderClick" class="navbar" role="navigation">
       <brand-navbar></brand-navbar>
     </header>
@@ -27,7 +22,6 @@
       <audio-player></audio-player>
     </div>
     <oye-footer></oye-footer>
-    <!--<oye-footer></oye-footer>-->
   </div>
 </template>
 
@@ -39,13 +33,12 @@
   import client from '../plugins/apollo'
   import Vue from 'vue'
   import MobileMenu from '../components/navigation/MobileMenu'
-//  import * as types from '../store/types'
   import PrimaryControlPanel from '../components/shared/PrimaryControlPanel'
   import AudioPlayer from '../components/audio/AudioPlayer'
   import Announcements from '../components/messages/Announcements'
   import OyeFooter from '../components/navigation/Footer'
   import { mapGetters } from 'vuex'
-  // import * as types from '../store/types'
+  import * as types from '../store/types'
 
   var ogImage = require('~/assets/images/fb-og-image.jpg')
 
@@ -78,9 +71,9 @@
         this.noScroll = true
       },
       onHeaderClick () {
-        // if (this.showMobile) {
-        //   this.$store.commit(types.SET_MOBILE_NAV, false)
-        // }
+        if (this.showMobile) {
+          this.$store.commit(types.SET_MOBILE_NAV, false)
+        }
       },
       startTouch () {
       },

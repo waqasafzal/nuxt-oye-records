@@ -261,7 +261,6 @@
         }
       },
       showPlaylist (value) {
-        console.log(`Show playlist: ${value}`)
         if (value) {
           this.$store.commit(types.SET_MINIMIZED, false)
           clearInterval(this.autocloseInterval)
@@ -314,15 +313,12 @@
     },
     methods: {
       startAudioTouch () {
-        console.log(`Start audio touch`)
         this.$store.commit(types.SET_MINIMIZED, false)
-        console.log(`Clear interval ${this.count}`)
         clearInterval(this.autocloseInterval)
         this.autocloseInterval = null
         this.touchdown = true
       },
       endAudioTouch () {
-        console.log('End audio touch')
         this.touchdown = false
         this.autoclose()
       },

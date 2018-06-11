@@ -166,7 +166,6 @@
       toggleItem (item) {
         console.log(`Toggle ${item} => ${this.currentItem}`)
         if (this.currentItem === item) {
-          console.log('hello')
           this.$store.commit(types.SET_CURRENT_ACCOUNT_VIEW, null)
           this.currentItem = null
         } else {
