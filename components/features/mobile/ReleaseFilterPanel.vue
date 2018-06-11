@@ -29,6 +29,11 @@
                   {{ genre.name }}
                 </div>
               </template>
+              <template v-else>
+                <div @click="$router.push({name: 'genres-slug', params: {slug: genre.slug, genre: genre}})" class="expandable__details__item">
+                  {{ genre.name }}
+                </div>
+              </template>
             </template>
           </div>
         </div>
