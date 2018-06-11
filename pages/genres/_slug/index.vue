@@ -16,14 +16,14 @@
       <div class="genres__detail__bestseller d-none d-md-block">
         <div class="genres__detail__bestseller__header" v-if="detailGenre">Bestseller {{ detailGenre.name }}</div>
         <div class="genres__detail__bestseller__carousel row"
-             v-if="(bestsellers.length > 0 || bestsellers.edges)">
+             v-if="!bsLoading &&(bestsellers.edges.length > 0 || bestsellers.edges)">
           <div class="col-12" @mouseenter="disableSlider" @mouseleave="enableSlider">
             <div class="slider-left-control" @click="slideBackward"><img
                 src="~assets/images/Slider_Arrow_Left_Icon.svg"/></div>
             <div class="slider-right-control" @click="slideForward"><img
                 src="~assets/images/Slider_Arrow_Right_Icon.svg"/></div>
             <transition-group name="blend">
-              <div :class="'carousel__item'" :key="`page-${p}`" v-for="(value, p) in pages" transition="blend">
+              <div :class="'carousel__item'" :key="`page-${p}`" v-for="(value, p) in pages" v-if="p === currentSlide" transition="blend">
                 <release-item v-for="(release, i) in getBestsellers(p)"
                               class="col-md-3 product-list bestseller__item"
                               :release="release"
@@ -35,7 +35,7 @@
               <div class="carousel__controls">
                 <div @click="selectSlide(p)"
                      :class="['carousel__controls__button', p === currentSlide ? 'active': '']"
-                     :key="`asjd-${p}`" v-for="p in pages">
+                     :key="`select-${p}`" v-for="p in pages">
                 </div>
               </div>
             </div>
@@ -50,7 +50,6 @@
 
 <script>
   import ReleaseList from '~/components/releases/ReleaseList.vue'
-  import { getReleaseListColumnNumber } from '~/components/utils'
   import ReleaseItem from '~/components/releases/ReleaseItem'
   import Dropdown from '~/components/shared/Dropdown'
   import LoadingSpinner from '~/components/shared/LoadingSpinner'
@@ -109,7 +108,7 @@
         genreSubslug: this.subslug,
         showMobileDropdown: false,
         metaGenres: [],
-        bsPageSize: getReleaseListColumnNumber() * (2 / 3),
+        bsPageSize: 4,
         currentSlide: 1,
         filterBy: JSON.stringify(releaseFilterParams(this.$route.params, this.$route))
       }
@@ -175,7 +174,6 @@
             bestsellers.push(bestsellerEdge.node)
           }
         }
-        // console.log(`BESTSELLERS ${JSON.stringify(bestsellers)} PAGE ${pageIndex}`)
         return bestsellers
       },
       selectSlide (index) {
