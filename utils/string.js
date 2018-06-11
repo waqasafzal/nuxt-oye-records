@@ -12,7 +12,7 @@ export const stripped = function (str) {
 }
 
 export const getMedium = function (format) {
-  if (format.includes('"') || format.includes('&quot;')) {
+  if (format.includes('"') || format.includes('&quot;') || (format.includes('LP'))) {
     return 'Vinyl'
   }
   return format

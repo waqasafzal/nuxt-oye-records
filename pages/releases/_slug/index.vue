@@ -351,7 +351,7 @@
       pageTitle: function () {
         var releaseName = ''
         if (this.release) {
-          releaseName = `${this.release.artistFirstName} ${this.release.artistLastName} - ${this.release.title} - ${this.release.format}`
+          releaseName = `${this.release.artistFirstName} ${this.release.artistLastName} - ${this.release.title} - ${getMedium(this.release.format)}`
         }
         return `${releaseName} at OYE Records`
       },
