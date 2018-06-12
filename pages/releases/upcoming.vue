@@ -31,6 +31,11 @@
             hid: 'title',
             property: 'og:title',
             content: 'OYE Records - Upcoming Releases'
+          },
+          {
+            hid: 'description',
+            property: 'description',
+            content: 'Stay fresh all the time and reserve whats hot tomorrow.'
           }
         ]
       }

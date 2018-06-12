@@ -157,6 +157,11 @@
             hid: 'image',
             property: 'og:image',
             content: `${__API__}${this.monthlyBestsellerThumb}`
+          },
+          {
+            hid: 'description',
+            property: 'description',
+            content: 'Get inspired by our talented artist friends and staff picks.'
           }
         ]
       }

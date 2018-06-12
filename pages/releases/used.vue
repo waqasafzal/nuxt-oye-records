@@ -31,6 +31,11 @@
             hid: 'title',
             property: 'og:title',
             content: 'OYE Records - Used Vinyl'
+          },
+          {
+            hid: 'description',
+            property: 'description',
+            content: 'Save money and dig for some lost exclusives.'
           }
         ]
       }

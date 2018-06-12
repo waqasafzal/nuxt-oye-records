@@ -72,6 +72,11 @@
             hid: 'title',
             property: 'og:title',
             content: 'OYE Records - Genres'
+          },
+          {
+            hid: 'description',
+            property: 'description',
+            content: 'Discover releases from more than 200 genres and subgenres.'
           }
         ]
       }

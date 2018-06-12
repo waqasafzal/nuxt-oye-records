@@ -160,6 +160,11 @@
             hid: 'title',
             property: 'og:title',
             content: 'OYE Records - New Releases'
+          },
+          {
+            hid: 'description',
+            property: 'description',
+            content: 'Keep yourself updated with the hottest new releases.'
           }
         ]
       }
