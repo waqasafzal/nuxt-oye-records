@@ -116,7 +116,9 @@
         for (var i = 0; i < chart.releases.length; i++) {
           let chartedRelease = chart.releases[i]
           let release = chartedRelease.release
-          chartItems.push(`${chartedRelease.rank + 1}. ${release.artistLastName} - ${release.title}`)
+          if (release) {
+            chartItems.push(`${chartedRelease.rank + 1}. ${release.artistLastName} - ${release.title}`)
+          }
         }
         return chartItems.join(', ')
       }

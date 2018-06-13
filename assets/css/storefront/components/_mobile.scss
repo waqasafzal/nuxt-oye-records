@@ -820,10 +820,12 @@
   }
 }
 
-.charts__detail {
-  .play {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+@include media-breakpoint-down(md) {
+  .charts__detail {
+    .play {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
   }
 }
 
