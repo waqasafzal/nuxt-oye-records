@@ -56,7 +56,8 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {name: 'keywords', lang: 'de', content: 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln'},
+      {hid: 'keywords', name: 'keywords', content: 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln'},
+      {name: 'robots', content: 'index, follow'},
       {hid: 'description', name: 'description', content: 'Oye Records houses a fantastic range of music. Mostly devoted to house and disco there is also enough hip hop, jazz, and brand new electronic 12-inches.'},
       {
         hid: 'url',

@@ -167,6 +167,8 @@
 </template>
 
 <script>
+  /* eslint-disable no-useless-escape */
+
   import Vue from 'vue'
   import ReleasePrice from '../../../components/releases/ReleasePrice.vue'
   import JsonLdProductSchema from '../../../components/releases/JsonLdProductSchema.vue'
@@ -232,6 +234,11 @@
             hid: 'image',
             property: 'og:image',
             content: this.releaseImage
+          },
+          {
+            hid: 'keywords',
+            name: 'keywords',
+            content: this.keywords // 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln'
           }
         ]
       }
@@ -348,12 +355,15 @@
         }
         return 2017
       },
-      pageTitle: function () {
+      pageTitleContent () {
         var releaseName = ''
         if (this.release) {
-          releaseName = `${this.release.artistFirstName} ${this.release.artistLastName} - ${this.release.title} - ${getMedium(this.release.format)}`
+          releaseName = `${this.release.artistFirstName ? this.release.artistFirstName + ' ' : ''}${this.release.artistLastName} - ${this.release.title} - ${getMedium(this.release.format)}`
         }
-        return `${releaseName} at OYE Records`
+        return releaseName
+      },
+      pageTitle: function () {
+        return `${this.pageTitleContent} at OYE Records`
       },
       currentRoute: function () {
         return __API__ + this.$route.path
@@ -363,6 +373,16 @@
       },
       strippedDescription () {
         return this.release && stripped(this.release.description) + ' ' + getMedium(this.release.format) + ' - Grab your copy!'
+      },
+      keywords () {
+        if (this.release) {
+          const extraKeywords = [this.release.format, this.release.catalogueNumber, this.release.label]
+          for (let genreIndex in this.release.genres) {
+            const genre = this.release.genres[genreIndex]
+            extraKeywords.push(genre.name)
+          }
+          return this.pageTitleContent.replace(/[\s|-]+/g, ' ').replace(/\s/g, ',') + ', ' + extraKeywords.join(', ')
+        }
       }
     },
     beforeDestroy () {
