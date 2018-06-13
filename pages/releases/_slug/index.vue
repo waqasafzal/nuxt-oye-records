@@ -381,7 +381,9 @@
             const genre = this.release.genres[genreIndex]
             extraKeywords.push(genre.name)
           }
-          return this.pageTitleContent.replace(/[\s|-]+/g, ' ').replace(/\s/g, ',') + ', ' + extraKeywords.join(', ')
+          const jointKeywords = extraKeywords.join(' ')
+          const kwString = this.pageTitleContent + ' ' + jointKeywords
+          return kwString.replace(/[\s|-|\\|\/]+/g, ' ').replace(/\s/g, ',')
         }
       }
     },
