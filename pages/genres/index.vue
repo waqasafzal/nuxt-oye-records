@@ -75,7 +75,7 @@
           },
           {
             hid: 'description',
-            property: 'description',
+            name: 'description',
             content: 'Discover releases from more than 200 genres and subgenres.'
           }
         ]

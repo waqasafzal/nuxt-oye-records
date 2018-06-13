@@ -34,7 +34,7 @@
           },
           {
             hid: 'description',
-            property: 'description',
+            name: 'description',
             content: 'Save money and dig for some lost exclusives.'
           }
         ]

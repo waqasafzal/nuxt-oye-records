@@ -34,7 +34,7 @@
           },
           {
             hid: 'description',
-            property: 'description',
+            name: 'description',
             content: 'Stay fresh all the time and reserve whats hot tomorrow.'
           }
         ]

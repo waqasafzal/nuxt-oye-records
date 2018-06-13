@@ -225,7 +225,7 @@
           },
           {
             hid: 'description',
-            property: 'description',
+            name: 'description',
             content: this.strippedDescription
           },
           {

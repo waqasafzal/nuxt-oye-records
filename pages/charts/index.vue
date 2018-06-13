@@ -160,7 +160,7 @@
           },
           {
             hid: 'description',
-            property: 'description',
+            name: 'description',
             content: 'Get inspired by our talented artist friends and staff picks.'
           }
         ]

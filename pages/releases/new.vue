@@ -163,7 +163,7 @@
           },
           {
             hid: 'description',
-            property: 'description',
+            name: 'description',
             content: 'Keep yourself updated with the hottest new releases.'
           }
         ]
