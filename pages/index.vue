@@ -31,7 +31,7 @@
     components: {ChartItem, ReleaseListSummary, FrontPageTeasers},
     name: 'OyeIndex',
     async asyncData ({params}) {
-      var filterByNew = JSON.stringify({status: 'new'})
+      var filterByNew = JSON.stringify({status: 'new', period: 14})
       var filterByBack = JSON.stringify({status: 'back'})
       var filterByPre = JSON.stringify({status: 'pre'})
       let {data} = await client.query({
