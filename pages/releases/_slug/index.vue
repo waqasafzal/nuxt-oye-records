@@ -383,7 +383,7 @@
           }
           const jointKeywords = extraKeywords.join(' ')
           const kwString = this.pageTitleContent + ' ' + jointKeywords
-          return kwString.replace(/[\s|-|\\|\/]+/g, ' ').replace(/\s/g, ',')
+          return kwString.replace(/[\s|\-|\\|\/]+/g, ' ').replace(/\s/g, ',')
         }
       }
     },
