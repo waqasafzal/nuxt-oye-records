@@ -254,6 +254,7 @@
     },
     head () {
       return {
+        title: this.pageTitle,
         meta: [
           {
             hid: 'title',
@@ -271,8 +272,13 @@
             content: 'music.playlist'
           },
           {
-            hid: 'description',
+            hid: 'og:description',
             property: 'og:description',
+            content: this.description
+          },
+          {
+            hid: 'description',
+            name: 'description',
             content: this.description
           },
           {
