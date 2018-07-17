@@ -73,7 +73,7 @@
       }
     },
     data: function () {
-      var range = [...Array(6).keys()]
+      var range = [...Array(10).keys()]
       let year = new Date().getFullYear()
       let years = []
       for (var i in range) {
