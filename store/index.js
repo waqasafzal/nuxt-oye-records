@@ -643,12 +643,12 @@ const store = new Vuex.Store({
     hasChangedAddresses (state) {
       return store.getters.hasShippingChanged || store.getters.hasBillingChanged
     },
-    getVat (state) {
-      var cart = store.getters.getCart
+    getVat (state, getters) {
+      const cart = getters.getCart
       return cart && cart.vat
     },
-    isVatExcluded (state) {
-      return state.checkout.isVatExcluded
+    isVatExcluded (state, getters) {
+      return !getters.isSelfCollector && state.checkout.isVatExcluded
     },
     getLogos (state) {
       return paymentType => {
@@ -693,7 +693,11 @@ const store = new Vuex.Store({
     termsAgreed: (state, getters) => state.checkout.termsAgreed,
     showAudioPlayer: (state) => state.player.visible,
     minimizedAudioPlayer: (state) => state.player.minimized,
-    searchHidden: (state) => state.search.hidden
+    searchHidden: (state) => state.search.hidden,
+    isSelfCollector: (state, getters) => {
+      let shippingOption = getters.getShippingOption
+      return shippingOption && shippingOption.id === '-1'
+    }
 
   },
 
