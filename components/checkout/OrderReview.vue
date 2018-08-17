@@ -151,6 +151,7 @@
                     message: 'Your order has been placed. Please fulfill order with payment.'
                   })
                 } else {
+                  console.log('purchases ' + data.placeOrder.notInStock.length)
                   let purchases = this.$store.getters.getPurchases
                   if (purchases && purchases.edges) {
                     purchases = {
