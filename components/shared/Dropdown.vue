@@ -81,7 +81,7 @@
 <style lang="scss">
   .dropdown {
     position: relative;
-    display: inline-block;
+    /*display: inline-block !important;*/
     &:hover {
       border-bottom-right-radius: 0px;
       border-bottom-left-radius: 0px;

@@ -46,7 +46,7 @@ const store = new Vuex.Store({
       buttons: [],
       show: false
     },
-    accountView: 'Addresses',
+    accountView: 'Customer Data',
     cart: null,
     cartUpdating: false,
     countries: null,
@@ -61,7 +61,8 @@ const store = new Vuex.Store({
       currentTrack: null,
       playing: false,
       playlistVisible: false,
-      visible: false
+      visible: false,
+      minimized: false
     },
     search: {
       query: null,
@@ -71,6 +72,7 @@ const store = new Vuex.Store({
         results: [],
         total: 0
       },
+      hidden: true,
       artists: {
         results: [],
         total: 0
@@ -87,15 +89,15 @@ const store = new Vuex.Store({
     alerts: null,
     checkoutActive: false,
     userFormErrors: getInitialUserForm(),
-    isMobile: false,
-    isSmallScreen: false,
+    // isMobile: false,
+    // isSmallScreen: false,
     announcements: []
   },
 
   mutations: {
-    changeMobile (state, isMobile) {
-      state.isMobile = isMobile
-    },
+    // changeMobile (state, isMobile) {
+    //   state.isMobile = isMobile
+    // },
     [types.SET_CART]: (state, cart) => {
       state.cart = cart
     },
@@ -155,6 +157,7 @@ const store = new Vuex.Store({
       if (changing) {
         player.position = position
       }
+      player.visible = true
     },
     [types.PAUSE_TRACK]: (state) => {
       if (state.player) {
@@ -239,6 +242,7 @@ const store = new Vuex.Store({
       }
     },
     [types.SET_PLAYLIST_VISIBLE]: (state, isVisible) => {
+      state.player.minimized = false
       state.player.playlistVisible = isVisible
     },
     [types.SET_USER_SHIPPING_ADDRESSES]: (state, args) => {
@@ -424,12 +428,12 @@ const store = new Vuex.Store({
     [types.SET_MOBILE_NAV]: (state, showMobileNav) => {
       state.showMobile = showMobileNav
     },
-    [types.SET_MOBILE]: (state, isMobile) => {
-      state.isMobile = isMobile
-    },
-    [types.SET_SMALL_SCREEN]: (state, isSmall) => {
-      state.isSmallScreen = isSmall
-    },
+    // [types.SET_MOBILE]: (state, isMobile) => {
+    //   state.isMobile = isMobile
+    // },
+    // [types.SET_SMALL_SCREEN]: (state, isSmall) => {
+    //   state.isSmallScreen = isSmall
+    // },
     [types.SET_BUTTON_BAR_CONTINUE]: (state, showContinue) => {
       state.primaryButtonBar.showContinue = showContinue
     },
@@ -473,11 +477,17 @@ const store = new Vuex.Store({
     },
     [types.SET_PLAYER_VISIBLE]: (state, visible) => {
       state.player.visible = visible
+    },
+    [types.SET_MINIMIZED]: (state, minimized) => {
+      state.player.minimized = minimized
+    },
+    [types.SET_SEARCH_HIDDEN]: (state, hidden) => {
+      state.search.hidden = hidden
     }
   },
 
   getters: {
-    isMobile: state => state.isMobile,
+    // isMobile: state => state.isMobile,
     isAuthenticated (state) {
       return state.user && state.user.authenticated
     },
@@ -633,12 +643,12 @@ const store = new Vuex.Store({
     hasChangedAddresses (state) {
       return store.getters.hasShippingChanged || store.getters.hasBillingChanged
     },
-    getVat (state) {
-      var cart = store.getters.getCart
+    getVat (state, getters) {
+      const cart = getters.getCart
       return cart && cart.vat
     },
-    isVatExcluded (state) {
-      return state.checkout.isVatExcluded
+    isVatExcluded (state, getters) {
+      return !getters.isSelfCollector && state.checkout.isVatExcluded
     },
     getLogos (state) {
       return paymentType => {
@@ -670,9 +680,6 @@ const store = new Vuex.Store({
     getAvailableOrders (state) {
       return state.userProfile.availableOrders || []
     },
-    hasMobileMenu (state) {
-      return state.isMobile || state.isSmallScreen
-    },
     announcements: state => state.announcements,
     isEmptyCart: (state, getters) => {
       return getters.getCart &&
@@ -682,8 +689,16 @@ const store = new Vuex.Store({
       let cart = getters.getCart
       return cart && cart.lines.length === 0 && cart.preorderLines.length > 0
     },
+    showMobile: (state) => state.showMobile,
     termsAgreed: (state, getters) => state.checkout.termsAgreed,
-    showAudioPlayer: (state) => state.player.visible
+    showAudioPlayer: (state) => state.player.visible,
+    minimizedAudioPlayer: (state) => state.player.minimized,
+    searchHidden: (state) => state.search.hidden,
+    isSelfCollector: (state, getters) => {
+      let shippingOption = getters.getShippingOption
+      return shippingOption && shippingOption.id === '-1'
+    }
+
   },
 
   actions

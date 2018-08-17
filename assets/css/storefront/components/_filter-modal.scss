@@ -57,6 +57,10 @@
       padding-left: 2 * $global-padding;
       padding-right: $global-padding;
       padding-bottom: 2 * $global-padding;
+      @include media-breakpoint-down(sm) {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
     }
   }
   &-criterion {

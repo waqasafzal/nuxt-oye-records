@@ -1,7 +1,7 @@
 <template>
   <transition name="from-bottom" @enter="onEnter">
-    <div class="playlist" ref="playlist">
-      <div @click="playTrack(track)" :ref="'track-'+i" class="playlist__item" v-for="(track, i) in tracks">
+    <div v-if="!this.$store.getters.minimizedAudioPlayer" class="playlist" ref="playlist">
+      <div @click="playTrack(track)" :ref="'track-'+i" class="playlist__item d-none d-md-flex" v-for="(track, i) in tracks">
         <div class="play-box">
           <div :class="[isPlaying(i) ? 'playing': '']">
             <play-release-button :size="24" :displayOnly="true" foreground="#EBE9E6" background="transparent"></play-release-button>
@@ -16,6 +16,29 @@
           </div>
         </div>
         <div class="release-title">{{track.release.title}}</div>
+        <div class="release-label">{{track.release.label}}</div>
+      </div>
+      <div @click="playTrack(track)" :ref="'track-'+i" class="playlist__item d-sm-block d-md-none" v-for="(track, i) in tracks">
+        <div class="play-box">
+          <div :class="[isPlaying(i) ? 'playing': '']">
+            <play-release-button :size="24" :displayOnly="true" foreground="#EBE9E6" background="transparent"></play-release-button>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-column track-info-panel" style="width: 100%;">
+            <div class="track-info">
+              <div class="playlist-position">{{ i + 1 }}.</div>
+              <div class="flex-column">
+                <div class="track-artist">{{track.release.artistLastName}}</div><span class="d-none d-md-inline">&nbsp;-&nbsp;</span>
+                <div class="track-title">
+                  <template v-if="track.title">{{track.title}}</template>
+                  <template v-else>Track {{track.position + 1}}</template>
+                </div>
+                <div class="release-title">{{track.release.title}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="release-label">{{track.release.label}}</div>
       </div>
     </div>
@@ -62,6 +85,7 @@
       },
       onEnter () {
         this.scrollToCurrentTrack()
+        this.$store.commit(types.SET_MINIMIZED, false)
       },
       scrollToCurrentTrack () {
         let ref = this.$refs[`track-${this.$store.state.player.position}`]
@@ -87,7 +111,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .from-bottom-enter-active {
     transition: margin-bottom 1s ease-out;
   }

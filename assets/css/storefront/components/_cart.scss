@@ -20,8 +20,18 @@
       text-transform: uppercase;
     }
   }
+  &__lines {
+    @include media-breakpoint-down(sm) {
+      margin-top: 16px;
+    }
+  }
   &__line {
     padding: $global-padding * 2;
+    @include media-breakpoint-down(sm) {
+      //padding: 2rem 0;
+      padding: 8px;
+      border-bottom: 0;
+    }
     margin-top: 0px !important;
 
     border-bottom: 1px solid $gray-color-2;
@@ -43,6 +53,10 @@
         margin-top: $global-margin / 2;
         margin-bottom: 0;
         line-height: 1rem;
+        @include media-breakpoint-down(sm) {
+          margin-top: auto;
+          margin-bottom: auto;
+        }
         .release {
           &__name {
 
@@ -100,9 +114,22 @@
       font-size: $font-size-h2;
       opacity: 0.5;
       margin-top: -6px;
+      @include media-breakpoint-down(sm) {
+        margin-top: 1.4rem;
+      }
     }
     &__cell {
       display: inline-flex;
+      //padding-bottom: 2rem;
+      //padding-top: 2rem;
+      @include media-breakpoint-down(sm) {
+        border-bottom: 1px solid #ebe9e6;
+        margin-top: 1.5rem;
+        // remove all padding and border properties
+        padding-bottom: 0;
+        border-bottom: 0;
+        padding-top: 0 !important;
+      }
     }
   }
   &__total {
@@ -111,8 +138,23 @@
     flex-direction: column;
     background-color: $gray-color-2;
     padding: $global-padding * 2;
-    margin-right: inherit;
-    margin-left: inherit;
+    //padding: 0 2rem 1rem;
+    @include media-breakpoint-down(sm) {
+      margin-right: -15px;
+      margin-left: -15px;
+      padding: 0 1rem 1rem 1rem;
+      font-size: 1.8rem;
+      height: 7rem;
+      flex-direction: row;
+      .row {
+        width: 100vw;
+        //.total__value {
+        //  padding-right: 0;
+        //}
+      }
+    }
+    //margin-right: inherit;
+    //margin-left: inherit;
     p {
       margin-bottom: 0;
     }
@@ -127,7 +169,10 @@
     padding-top: $global-padding * 2;
     padding-bottom: $global-padding * 3.5;
     padding-left: $global-padding * 2;
-    padding-top: $global-padding * 2;
+
+    @include media-breakpoint-down(sm) {
+      padding-bottom: inherit;
+    }
     h4 {
       margin-bottom: $global-padding;
     }
@@ -161,6 +206,21 @@
   }
   &__subtotal {
     padding: $global-padding * 2;
+    @include media-breakpoint-down(sm) {
+      padding-top: 0;
+      padding-left: 0;
+      padding-bottom: 1rem;
+      padding-right: 0;
+      border-bottom: 1px solid $gray-color-2;
+      .row {
+        justify-content: space-between !important;
+      }
+      .amount {
+        h4 {
+          margin-left: auto;
+        }
+      }
+    }
     .row {
       .cart__line__cell {
         padding-bottom: $global-padding * 2;
@@ -180,13 +240,27 @@
       }
     }
   }
+  &__shipping {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   &__vat {
     font-size: $font-size-sm;
+    //padding-right: 2rem;
+    //padding-left: 2rem;
+    @include media-breakpoint-down(sm) {
+      padding-top: 0;
+      padding-left: 0;
+      padding-bottom: 0;
+      padding-right: 0;
+    }
     &__title {
       color: $brand-color-green;
     }
     &__amount {
       color: $gray-color-1;
+      display: block;
+      text-align: right;
     }
   }
   &__delivery-info {
@@ -253,6 +327,10 @@
     height: 64px;
     line-height: 64px;
     text-align: center;
+    &__panel {
+      margin-top: 2em;
+      margin-bottom: 4em;
+    }
     a {
       display: inline-block;
       vertical-align: middle;
@@ -271,6 +349,15 @@
     background-color: white;
     padding: $global-padding * 2 $global-padding;
     margin-top: $global-margin * 2;
+    @include media-breakpoint-down(sm) {
+      flex-direction: column-reverse !important;
+
+    }
+    &-panel {
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
   }
   &__continue-button {
     height: 64px;
@@ -278,6 +365,33 @@
     color: $brand-color-green;
     &:hover {
       color: #29AB5D;
+    }
+  }
+
+}
+
+.bottom {
+  .cart__bottom-bar-panel {
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+}
+
+.checkout {
+
+    /* padding: 2rem 1rem; */
+    /* margin-top: 2rem; */
+    @include media-breakpoint-down(sm) {
+      .cart__bottom {
+        &-bar {
+        padding: 0;
+        margin-top: 0;
+        flex-direction: column !important;
+        }
+        &-panel {
+          margin-top: -4rem;
+        }
     }
   }
 }

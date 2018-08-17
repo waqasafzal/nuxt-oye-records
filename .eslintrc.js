@@ -25,6 +25,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   },
   'globals': {
-    '__API__': true
+    '__API__': true,
+    '__ADYEN_SKIN__': true
   }
 }

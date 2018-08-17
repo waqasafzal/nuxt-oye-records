@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>In Stock</h3>
-    <table class="table" v-if="items">
+    <table class="d-none d-md-block table" v-if="items">
       <thead>
       <tr>
         <th>Release</th>
@@ -39,6 +39,9 @@
       </tr>
       </tbody>
     </table>
+    <div class="d-sm-flex d-md-none order-release-list">
+      <order-release :key="`available-${i}`" :release="release.node" v-for="(release, i) in items.edges"></order-release>
+    </div>
     <div class="d-flex flex-column">
       <loading-spinner :loading="isLoading"></loading-spinner>
       <div class="d-flex flex-row">
@@ -58,11 +61,16 @@
   import { release } from '../graphql/releases'
   import { roundFixed } from '../../utils/math'
   import AddToCartButton from '../cart/AddToCartButton'
+  import OrderRelease from '../releases/OrderRelease'
 
   export default {
     name: 'MyAvailableOrdersTable',
     mixins: [SimplePagination],
-    components: {AddToCartButton, LoadingSpinner},
+    components: {
+      OrderRelease,
+      AddToCartButton,
+      LoadingSpinner
+    },
     computed: {
       items () {
         return this.$store.getters.getAvailableOrders

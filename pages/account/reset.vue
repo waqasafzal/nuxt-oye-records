@@ -1,10 +1,10 @@
 <template>
-  <div class="checkout">
+  <div class="checkout container-fluid">
     <div class="checkout__content row">
       <div class="checkout__content__col col-12">
         <div class="row justify-content-center">
           <template v-if="!emailSent">
-            <div class="col-8 reset-password__panel">
+            <div class="col-12 col-md-8 reset-password__panel">
               <h3>Forgot your password?</h3>
               <div class="description">Please enter your email on the form below</div>
               <form @submit.prevent="onResetPassword">

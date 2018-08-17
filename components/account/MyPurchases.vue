@@ -1,6 +1,6 @@
 <template>
   <div class="my-purchases">
-    <table class="table">
+    <table class="d-none d-md-block table">
       <thead>
       <tr>
         <th>Order</th>
@@ -32,6 +32,21 @@
       </template>
       </tbody>
     </table>
+    <div class="d-flex d-md-none mobile-purchases">
+      <div class="order-item" @click="onSelectOrder(order)" v-for="order in items.edges">
+        <div class="d-flex justify-content-between">
+          <div>#{{order.node.pk}}</div>
+          <div class="order-info">
+            <div>{{order.node.date}}</div>
+            <div>{{order.node.status}}</div>
+            <div>{{order.node.total}}&euro;</div>
+          </div>
+        </div>
+        <div :class="selectedOrder !== order ? 'd-none': ''">
+          <order :order="order.node"></order>
+        </div>
+      </div>
+    </div>
     <div class="d-flex flex-column">
       <loading-spinner :loading="isLoading"></loading-spinner>
       <div class="d-flex flex-row">

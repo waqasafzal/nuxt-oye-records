@@ -26,8 +26,9 @@ import router from '~router'
   /*
    ** Set the current page
    */
+  ga('create', __GA_URL__, 'auto')
   // ga('create', 'UA-100941329-2', 'auto')
-  ga('create', 'UA-25861640-1', 'auto');
+  // ga('create', 'UA-25861640-1', 'auto');
   ga('require', 'ecommerce');
   /*
    ** Every time the route changes (fired on initialization too)

@@ -22,7 +22,9 @@
     name: 'Footer',
     computed: {
       moveHigher () {
-        return this.$store.state.primaryButtonBar.show || this.$store.getters.showAudioPlayer
+        return !this.$store.getters.minimizedAudioPlayer &&
+          (this.$store.state.primaryButtonBar.show ||
+            this.$store.getters.showAudioPlayer)
       }
     }
   }

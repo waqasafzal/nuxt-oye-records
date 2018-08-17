@@ -23,7 +23,7 @@
     },
     methods: {
       onSelected (value) {
-        this.$emit('slug-selected', value.slug)
+        this.$emit('genre-selected', value)
         this.selectedGenreName = value.name
       }
     },

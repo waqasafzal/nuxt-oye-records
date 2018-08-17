@@ -3,6 +3,7 @@
     <h3>Review your order</h3>
     <checkout-overview class="checkout__overview"></checkout-overview>
     <cart-content :review="true"></cart-content>
+    <primary-control-panel class="d-sm-flex d-md-none"></primary-control-panel>
     <div v-show="placingOrder" class="placing-order">
       <div class="vmargin-auto hmargin-auto">
         <loading-spinner :loading="true"></loading-spinner>
@@ -22,13 +23,21 @@
   import CheckoutOverview from './CheckoutOverview'
   import LoadingSpinner from '../shared/LoadingSpinner'
   import { mapGetters } from 'vuex'
+  import PrimaryControlPanel from '../shared/PrimaryControlPanel'
 
   export default {
-    components: {LoadingSpinner, CheckoutOverview, ProceedButton, CartContent},
+    components: {
+      PrimaryControlPanel,
+      LoadingSpinner,
+      CheckoutOverview,
+      ProceedButton,
+      CartContent
+    },
     name: 'OrderReview',
     data: function () {
       return {
-        placingOrder: false
+        placingOrder: false,
+        orderButton: undefined
       }
     },
     watch: {
@@ -124,6 +133,7 @@
             }
           }).then(
             ({data}) => {
+              console.log('Placed order...')
               this.placingOrder = false
               if (data.placeOrder.paymentUrl) {
                 this.$store.commit(types.SET_PAYPAL_PAYMENT_URL)
@@ -133,6 +143,7 @@
                 let order = data.placeOrder.order
                 this.$store.commit(types.SET_UNPAID_ORDER, order)
                 if (!order.isPaid && !(order.isSelfCollector && order.paymentType === 'cash')) {
+                  console.log(`${!order.isPaid} && !(${order.isSelfCollector} && ${order.paymentType} === 'cash'}))`)
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
                   if (order.shippingCountry) {
                     this.$store.dispatch('setShippingCountry', order)
@@ -142,6 +153,8 @@
                     message: 'Your order has been placed. Please fulfill order with payment.'
                   })
                 } else {
+                  const notInStock = data.placeOrder.notInStock
+                  console.log('purchases ' + notInStock.length)
                   let purchases = this.$store.getters.getPurchases
                   if (purchases && purchases.edges) {
                     purchases = {
@@ -149,6 +162,15 @@
                       pageInfo: purchases.edges
                     }
                     this.$store.commit(types.SET_PURCHASES, purchases)
+                  }
+                  if (notInStock && notInStock.length > 0) {
+                    for (var line = 0; line < notInStock.length; line++) {
+                      let backorderLine = notInStock[line]
+                      this.$store.commit(types.ADD_ALERT, {
+                        level: 'warning',
+                        message: `We are sorry, but the last copy of '${backorderLine.release.name} - ${backorderLine.release.title}' was just grabbed. Ordered ${backorderLine.quantity} copy${backorderLine.quantity > 1 ? 's' : ''} for you.`
+                      })
+                    }
                   }
                   // eslint-disable-next-line no-undef
                   ga('send', 'event', 'Commerce', 'sc-order')
@@ -170,6 +192,7 @@
         } else {
           button['text'] = 'Place Order'
         }
+        this.orderButton = button
         this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [button])
       }
     },

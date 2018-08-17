@@ -4,15 +4,15 @@ export const capitalizeFirstLetter = function (string) {
 }
 
 export const stripped = function (str) {
-  let strippedText = str.substring(0, 200)
-  if (strippedText.length === 200) {
+  let strippedText = str.substring(0, 120)
+  if (strippedText.length === 120) {
     strippedText = strippedText + '...'
   }
   return strippedText
 }
 
 export const getMedium = function (format) {
-  if (format.includes('"') || format.includes('&quot;')) {
+  if (format.includes('"') || format.includes('&quot;') || (format.includes('LP'))) {
     return 'Vinyl'
   }
   return format

@@ -1,19 +1,22 @@
 <template>
   <div>
-    <div class="row frontpage__teaser">
-      <div class="col-12 frontpage__teaser__content">
-        <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/>
+    <div class="frontpage__teaser">
+      <div class="container-fluid">
+        <div class="row">
         </div>
-        <div class="slider-right-control" @click="slideForward"><img src="~assets/images/Slider_Arrow_Right_Icon.svg"/>
-        </div>
-        <div ref="slider" :class="['slider', animate ? 'animateXyz': '']" @mouseenter="disableSlider"
-             @mouseleave="enableSlider">
-          <template v-for="(release, i) in featuredReleases">
-            <transition :name="transitionName" mode="out-in">
-              <div :key="'release-'+i"
-                   v-show="i === currentFeature"
-                   ref="slide" :class="['slide', animate ? '': '']">
-                <template v-if="$store.state.isSmallScreen === false">
+        <div class="col-12 frontpage__teaser__content d-none d-lg-flex">
+          <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/>
+          </div>
+          <div class="slider-right-control" @click="slideForward"><img
+              src="~assets/images/Slider_Arrow_Right_Icon.svg"/>
+          </div>
+          <div ref="slider" :class="['slider', animate ? 'animateXyz': '']" @mouseenter="disableSlider"
+               @mouseleave="enableSlider">
+            <template v-for="(release, i) in featuredReleases">
+              <transition :name="transitionName" mode="out-in">
+                <div :key="'release-'+i"
+                     v-show="i === currentFeature"
+                     ref="slide" :class="['slide', animate ? '': '']">
                   <div class="slide__inner" :style="backgroundImage(release)">
                     <div class="vmargin-auto">
                       <div class="feature-category">
@@ -22,7 +25,7 @@
                           <template v-else>New In Stock</template>
                         </nuxt-link>
                       </div>
-                      <nuxt-link class="release-info" :key="'release-'+i"
+                      <nuxt-link class="release-info" :key="'mobile-release-'+i"
                                  :to="{name: 'releases-slug', params: {slug: release.slug}}">
                         <div class="release-name">
                           <div class="frontpage__teaser__artist">{{ release.name }}</div>
@@ -32,41 +35,44 @@
                       </nuxt-link>
                     </div>
                   </div>
-                </template>
-                <template v-else>
-                  <div class="slide__inner">
-                    <div class="release">
-                      <div class="release-image">
-                        <img :src="release.featureImageUrl"/>
-                        <div class="release-navigation d-flex">
-                          <play-release-button class="vmargin-auto" :size="100"
-                                               :release="release"></play-release-button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="release-action d-flex flex-row justify-content-between">
-                      <div class="release-info">
-                        <div class="release-artist">{{ release.name }}</div>
-                        <div class="release-artist">{{ release.title }}</div>
-                      </div>
-                    </div>
+                </div>
+              </transition>
+            </template>
+          </div>
+        </div>
+        <div class="col-12 frontpage__teaser__content d-lg-none">
+          <no-ssr placeholder="Loading...">
+            <agile :options="sliderOptions">
+              <div class="slide" v-for="(release, i) in featuredReleases">
+                <nuxt-link class="frontpage__teaser__item" :key="'release-'+i"
+                           :to="{name: 'releases-slug', params: {slug: release.slug}}">
+                  <img :src="release.featureImageUrl" />
+                  <div class="d-flex release-name">
+                    <nuxt-link class="category" :to="{name: 'releases-new'}">
+                      <template v-if="release.availability.status === 'upcoming'">Coming Soon</template>
+                      <template v-else>New In Stock</template>
+                    </nuxt-link>
+                    <div class="artist">{{release.name}}</div>
+                    <div class="title">{{release.title}}</div>
+                    <release-button-bar :size=54 :release="release"></release-button-bar>
                   </div>
-                </template>
+                </nuxt-link>
               </div>
-            </transition>
-          </template>
-          <!--</div>-->
+            </agile>
+          </no-ssr>
         </div>
       </div>
     </div>
-    <div class="row frontpage__weekly__panel">
-      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
-        <week-feature class="frontpage__weekly__item" :release="singleRelease"
-                      :category="`Single Of The Week`"></week-feature>
-      </div>
-      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
-        <week-feature class="frontpage__weekly__item" :release="albumRelease"
-                      :category="`Album Of The Week`"></week-feature>
+    <div class="container-fluid">
+      <div class="row frontpage__weekly__panel">
+        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
+          <week-feature class="frontpage__weekly__item" :release="singleRelease"
+                        :category="`Single Of The Week`"></week-feature>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 frontpage__weekly__item__cell">
+          <week-feature class="frontpage__weekly__item" :release="albumRelease"
+                        :category="`Album Of The Week`"></week-feature>
+        </div>
       </div>
     </div>
   </div>
@@ -77,9 +83,16 @@
   import ReleaseButtonBar from '../releases/ReleaseButtonBar'
   import PlayReleaseButton from '../releases/PlayReleaseButton'
   import AddToCartButton from '../cart/AddToCartButton'
+  import NoSSR from 'vue-no-ssr'
 
   export default {
-    components: {AddToCartButton, PlayReleaseButton, ReleaseButtonBar, WeekFeature},
+    components: {
+      AddToCartButton,
+      PlayReleaseButton,
+      ReleaseButtonBar,
+      WeekFeature,
+      'no-ssr': NoSSR
+    },
     props: ['featuredReleases', 'singleRelease', 'albumRelease'],
     name: 'FrontPageTeasers',
     data: function () {
@@ -88,7 +101,12 @@
         sliderDisabled: false,
         animate: false,
         touch: false,
-        direction: 0
+        direction: 0,
+        sliderOptions: {
+          autoplay: true,
+          dots: false,
+          arrows: false
+        }
       }
     },
     computed: {
@@ -231,7 +249,6 @@
             })
 
             this.el.slider.addEventListener('touchmove', function (event) {
-//              event.preventDefault()
               slider.move(event)
             })
 
@@ -261,11 +278,7 @@
             vm.animate = false
             vm.touch = true
 
-//            for (var i = 0; i < this.el.imgSlide.length; i++) {
-//              this.el.imgSlide[i].style.display = 'none'
-//            }
             for (var i = 0; i < this.el.imgSlide.length; i++) {
-//              console.log(`${i} ${i !== vm.currentFeature} current: ${vm.currentFeature} imgSlide: ${this.el.imgSlide[i]}`)
               if (i !== vm.currentFeature) {
                 this.el.imgSlide[i].style.display = 'none'
               }
@@ -339,12 +352,6 @@
               }
               // Move and animate the elements.
               vm.animate = true
-              console.log(`${vm.currentFeature} ${this.slideWidth} r: ${this.lastRight} l: ${this.lastLeft} c: ${this.current}`)
-//            var s = this
-//
-//            if (!changed) {
-//
-//            }
               if (this.lastRight) {
 //              this.lastRight.style.left = 'inherit'
                 let left = parseInt(this.lastRight.style.left.split('px')[0])
