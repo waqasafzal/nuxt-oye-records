@@ -133,6 +133,7 @@
             }
           }).then(
             ({data}) => {
+              console.log('Placed order...')
               this.placingOrder = false
               if (data.placeOrder.paymentUrl) {
                 this.$store.commit(types.SET_PAYPAL_PAYMENT_URL)
@@ -142,6 +143,7 @@
                 let order = data.placeOrder.order
                 this.$store.commit(types.SET_UNPAID_ORDER, order)
                 if (!order.isPaid && !(order.isSelfCollector && order.paymentType === 'cash')) {
+                  console.log(`${!order.isPaid} && !(${order.isSelfCollector} && ${order.paymentType} === 'cash'}))`)
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
                   if (order.shippingCountry) {
                     this.$store.dispatch('setShippingCountry', order)
@@ -151,7 +153,8 @@
                     message: 'Your order has been placed. Please fulfill order with payment.'
                   })
                 } else {
-                  console.log('purchases ' + data.placeOrder.notInStock.length)
+                  const notInStock = data.placeOrder.notInStock
+                  console.log('purchases ' + notInStock.length)
                   let purchases = this.$store.getters.getPurchases
                   if (purchases && purchases.edges) {
                     purchases = {
@@ -160,9 +163,9 @@
                     }
                     this.$store.commit(types.SET_PURCHASES, purchases)
                   }
-                  if (data.placeOrder.notInStock && data.placeOrder.notInStock.length > 0) {
-                    for (var line = 0; line < data.placeOrder.notInStock.length; line++) {
-                      const backorderLine = data.placeOrder.notInStock[line]
+                  if (notInStock && notInStock.length > 0) {
+                    for (var line = 0; line < notInStock.length; line++) {
+                      let backorderLine = notInStock[line]
                       this.$store.commit(types.ADD_ALERT, {
                         level: 'warning',
                         message: `We are sorry, but the last copy of '${backorderLine.release.name} - ${backorderLine.release.title}' was just grabbed. Ordered ${backorderLine.quantity} copy${backorderLine.quantity > 1 ? 's' : ''} for you.`
