@@ -159,7 +159,7 @@
                     }
                     this.$store.commit(types.SET_PURCHASES, purchases)
                   }
-                  if (data.placeOrder.notInStock && data.placeOrder.notInStock.length() > 0) {
+                  if (data.placeOrder.notInStock && data.placeOrder.notInStock.length > 0) {
                     for (let line = data.placeOrder.notInStock) {
                       const backorderLine = data.placeOrder.notInStock[line]
                       this.$store.commit(types.ADD_ALERT, {
