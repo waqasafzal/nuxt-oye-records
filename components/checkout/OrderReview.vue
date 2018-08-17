@@ -160,11 +160,11 @@
                     this.$store.commit(types.SET_PURCHASES, purchases)
                   }
                   if (data.placeOrder.notInStock && data.placeOrder.notInStock.length > 0) {
-                    for (let line = data.placeOrder.notInStock) {
+                    for (var line = 0; line < data.placeOrder.notInStock.length; line++) {
                       const backorderLine = data.placeOrder.notInStock[line]
                       this.$store.commit(types.ADD_ALERT, {
                         level: 'warning',
-                        message: `Sorry, but the last copy of '${backorderLine.release.name} - ${backorderLine.release.title}' was just reserved or bought. Ordered ${backorderLine.quantity} copy${backorderLine.quantity > 1 ? 's' : ''} for you.`
+                        message: `We are sorry, but the last copy of '${backorderLine.release.name} - ${backorderLine.release.title}' was just grabbed. Ordered ${backorderLine.quantity} copy${backorderLine.quantity > 1 ? 's' : ''} for you.`
                       })
                     }
                   }
