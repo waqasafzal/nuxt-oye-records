@@ -1,9 +1,10 @@
 <template>
-  <div :class="['navbar__menu', $store.getters.hasMobileMenu ? 'mobile': '']">
-    <template v-if="!$store.getters.hasMobileMenu && isCheckout">
+  <div class="navbar__menu">
+    <template v-if="isCheckout">
       <div class="navbar__checkout navigation">
         <div class="checkout__navbar">
-          <div :class="['nav-item', checkoutState < 5 && isEmptyCart ? '': 'active', canSelectCheckout ? 'clickable': '']">
+          <div
+              :class="['nav-item', checkoutState < 5 && isEmptyCart ? '': 'active', canSelectCheckout ? 'clickable': '']">
             <div class="checkout-state">
               <div class="checkout-num" @click="setCheckoutState(1)">1</div>
               <div class="checkout-name" @click="setCheckoutState(1)">Checkout Method</div>
@@ -31,11 +32,8 @@
       </div>
     </template>
     <template v-else>
-      <nav v-on-clickaway="onClick" @click="onClick" v-if="!$store.getters.hasMobileMenu || $store.state.showMobile" :class="['navigation']">
+      <nav :class="['navigation']">
         <ul :class="['nav', 'navbar-nav']">
-          <li class="nav-item" v-if="$store.getters.hasMobileMenu">
-            <nuxt-link class="nav-link" to="/" exact><span>Home</span></nuxt-link>
-          </li>
           <li class="nav-item">
             <nuxt-link class="nav-link" :to="{name: 'releases-new'}"><span>New Releases</span></nuxt-link>
           </li>
@@ -67,7 +65,7 @@
   import { mapGetters } from 'vuex'
   export default {
     name: 'MainNavbar',
-    mixins: [ clickaway ],
+    mixins: [clickaway],
     computed: {
       user () {
         return this.$store.state.user
@@ -96,9 +94,9 @@
       ...mapGetters(['isEmptyCart'])
     },
     methods: {
-      onClick (value) {
-        this.$store.commit(types.SET_MOBILE_NAV, false)
-      },
+//      onClick (value) {
+//        this.$store.commit(types.SET_MOBILE_NAV, false)
+//      },
       setCheckoutState (value) {
         if (value === 1 && !this.canSelectCheckout) {
           // do nothing

@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <div class="page__header">Cart</div>
+  <div class="container-fluid">
+    <div class="page__header">
+      <h1>Cart</h1>
+    </div>
     <cart-content></cart-content>
   </div>
 </template>

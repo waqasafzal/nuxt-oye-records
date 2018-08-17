@@ -18,10 +18,13 @@
                                                                           id="format-all"
                                                                           v-model="allFormats"/>All</label>
                   </div>
-                  <div class="form-group" v-for="f in formats">
-                    <label :for="`format-${f}`" class="checkbox-label"><input @click="onCheckboxClick" type="checkbox"
-                                                                              :id="`format-${f}`"
-                                                                              :value="f" v-model="selectedFormats"/>{{f}}</label>
+                  <div class="row">
+                    <div class="form-group col-6 col-md-12" v-for="f in formats">
+                      <input style="height: 16px;" @click="onCheckboxClick" type="checkbox"
+                             :id="`format-${f}`"
+                             :value="f" v-model="selectedFormats"/>
+                      <label :for="`format-${f}`" class="checkbox-label">{{f}}</label>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -32,7 +35,7 @@
               <div class="filter-criterion__header">Date</div>
               <div class="filter-criterion__options">
                 <div v-for="value, key in daysOptions">
-                  <input type="radio" name="days" :value="parseInt(key)" :id="`days-${key}`" v-model="days"/>
+                  <input @click="setDay" type="radio" name="days" :value="parseInt(key)" :id="`days-${key}`" v-model="days"/>
                   <label :for="`days-${key}`">{{value}}</label>
                 </div>
               </div>
@@ -70,6 +73,10 @@
             '365': 'Last year'
           }
         }
+      },
+      upcoming: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
@@ -108,6 +115,9 @@
           this.lastOptions = this.currentOptions
         } else if (JSON.stringify(this.lastOptions) !== JSON.stringify(this.currentOptions)) {
           this.$emit('filter-changed', this.currentOptions)
+          this.showModal = false
+        } else {
+          this.$emit('filter-changed', this.lastOptions)
         }
       },
       onKeyDown (e) {
@@ -118,9 +128,16 @@
       },
       onCheckboxClick (e) {
         this.lastClicked = e.target.value
+        setTimeout(this.toggleModal, 50)
       },
       onClickAll (e) {
+        if (this.lastClicked) {
+          setTimeout(this.toggleModal, 50)
+        }
         this.lastClicked = null
+      },
+      setDay (day) {
+        setTimeout(this.toggleModal, 100)
       }
     },
     mounted () {

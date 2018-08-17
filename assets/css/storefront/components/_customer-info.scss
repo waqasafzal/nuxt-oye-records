@@ -1,4 +1,10 @@
 .info {
+  @include media-breakpoint-down(sm) {
+    h1 {
+      margin-bottom: 0;
+    }
+    margin-bottom: 4rem;
+  }
   h1 {
     margin-bottom: 2rem;
   }
@@ -10,6 +16,9 @@
     }
     overflow: scroll;
     max-height: 450px;
+    @include media-breakpoint-down(sm) {
+      overflow: auto;
+    }
   }
   a {
     color: $brand-color-green;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <div class="page__header">All {{getHeader()}}</div>
     <div class="charts-archive" v-if="sortedCharts">
       <template v-for="(yearMap, i) in sortedCharts">

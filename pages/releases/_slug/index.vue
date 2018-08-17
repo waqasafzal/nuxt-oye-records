@@ -1,5 +1,5 @@
 <template>
-  <div v-if="release" v-on:keyup.65="addToCart(release)">
+  <div v-if="release" v-on:keyup.65="addToCart(release.pk)" class="container-fluid">
     <div class="release-detail__header row">
       <div class="col-12">
         <div class="release-detail__back">
@@ -22,29 +22,37 @@
       </div>
     </div>
     <div class="row product__main">
-      <div id="product-schema-component">
-        <json-ld-product-schema :release="release"></json-ld-product-schema>
-      </div>
       <div class="col-md-6 col-12">
+        <div id="product-schema-component">
+          <json-ld-product-schema :release="release"></json-ld-product-schema>
+        </div>
         <div class="product__gallery">
           <img class="d-block img-fluid"
                :src="release.thumbnailUrl" alt=""/>
         </div>
       </div>
       <div class="col-md-6 col-12 product__info">
-        <h2 class="product__info__artist"><nuxt-link :to="{name: 'artists-query', params: {query: release.name}}">{{ release.artistFirstName }} {{ release.artistLastName }}</nuxt-link></h2>
-        <h2 class="product__info__name">{{ release.title }}</h2>
-        <h5 class="product__info__label"><nuxt-link :to="{name: 'labels-query', params: {query: release.label}}">{{ release.label }}</nuxt-link></h5>
+        <div>
+          <h2 class="product__info__artist"><nuxt-link :to="{name: 'artists-query', params: {query: release.name}}">{{ release.artistFirstName }} {{ release.artistLastName }}</nuxt-link></h2>
+          <h2 class="product__info__name">{{ release.title }}</h2>
+          <h5 class="product__info__label"><nuxt-link :to="{name: 'labels-query', params: {query: release.label}}">{{ release.label }}</nuxt-link></h5>
 
-        <div class="product__info__price">
-          <release-price :price="release.price"></release-price>
+          <div class="product__info__price">
+            <release-price :price="release.price"></release-price>
+          </div>
         </div>
         <div>
           <release-button-bar :class="[releaseStatus]" :size=48 :release="release"></release-button-bar>
         </div>
         <div class="product__info__tax-included">Tax included, Shipping not included</div>
+        <div class="d-md-none d-sm-flex product__info__footer" :title="releaseStatus === 'one' ? 'This is the last copy and might not be in mint condition!': ''">
+          <div :class="['product__info__availability', releaseStatus]"></div>
+          <span>{{ inStockMessage }}</span>
+          <span class="pressing">{{ release.format }} | {{ year }} - {{ pressingRegion }} | {{ release.condition
+            }}</span>
+        </div>
         <release-description :release="release"></release-description>
-        <div class="product__info__footer" :title="releaseStatus === 'one' ? 'This is the last copy and might not be in mint condition!': ''">
+        <div class="d-none d-md-flex product__info__footer" :title="releaseStatus === 'one' ? 'This is the last copy and might not be in mint condition!': ''">
           <div :class="['product__info__availability', releaseStatus]"></div>
           <span>{{ inStockMessage }}</span>
           <span class="pressing">{{ release.format }} | {{ year }} - {{ pressingRegion }} | {{ release.condition
@@ -56,7 +64,7 @@
     <div class="row product__secondary-infos">
       <div class="col-md-6 col-12 product__details">
         <h4>Share Article</h4>
-        <social-sharing class="social-sharing" :url="currentRoute + '?autoplay=1'"
+        <social-sharing class="social-sharing" :url="currentRoute"
                         :title="pageTitle"
                         :description="release.description"
                         v-cloak inline-template>
@@ -159,6 +167,8 @@
 </template>
 
 <script>
+  /* eslint-disable no-useless-escape */
+
   import Vue from 'vue'
   import ReleasePrice from '../../../components/releases/ReleasePrice.vue'
   import JsonLdProductSchema from '../../../components/releases/JsonLdProductSchema.vue'
@@ -217,13 +227,18 @@
           },
           {
             hid: 'description',
-            property: 'description',
+            name: 'description',
             content: this.strippedDescription
           },
           {
             hid: 'image',
             property: 'og:image',
             content: this.releaseImage
+          },
+          {
+            hid: 'keywords',
+            name: 'keywords',
+            content: this.keywords // 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln'
           }
         ]
       }
@@ -251,7 +266,7 @@
       },
       onAddToCart (e) {
         var key = e.keyCode ? e.keyCode : e.which
-        let noText = e.target.type !== 'text'
+        let noText = !['text', 'search'].includes(e.target.type)
 
         if (noText) {
           if (key === 65) {
@@ -340,12 +355,15 @@
         }
         return 2017
       },
-      pageTitle: function () {
+      pageTitleContent () {
         var releaseName = ''
         if (this.release) {
-          releaseName = `${this.release.artistFirstName} ${this.release.artistLastName} - ${this.release.title} - ${this.release.format}`
+          releaseName = `${this.release.artistFirstName ? this.release.artistFirstName + ' ' : ''}${this.release.artistLastName} - ${this.release.title} - ${getMedium(this.release.format)}`
         }
-        return `${releaseName} at OYE Records`
+        return releaseName
+      },
+      pageTitle: function () {
+        return `${this.pageTitleContent} at OYE Records`
       },
       currentRoute: function () {
         return __API__ + this.$route.path
@@ -355,6 +373,18 @@
       },
       strippedDescription () {
         return this.release && stripped(this.release.description) + ' ' + getMedium(this.release.format) + ' - Grab your copy!'
+      },
+      keywords () {
+        if (this.release) {
+          const extraKeywords = [this.release.format, this.release.catalogueNumber, this.release.label]
+          for (let genreIndex in this.release.genres) {
+            const genre = this.release.genres[genreIndex]
+            extraKeywords.push(genre.name)
+          }
+          const jointKeywords = extraKeywords.join(' ')
+          const kwString = this.pageTitleContent + ' ' + jointKeywords
+          return kwString.replace(/[\s|\-|\\|\/]+/g, ' ').replace(/\s/g, ',')
+        }
       }
     },
     beforeDestroy () {

@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="{name: 'charts-slug', params: {slug: chart.slug}}">
+  <nuxt-link class="chart-item" :to="{name: 'charts-slug', params: {slug: chart.slug}}">
     <div class="chart-banner">
       <img :src="chart.imageUrl"/>
     </div>

@@ -1,21 +1,21 @@
 <template>
   <div class="row">
-    <div class="col-12 col-md-3">
-      <checkout-parameter @change="onChangeShipping" :lines="getAddressLines(shippingAddress)">Shipping Address</checkout-parameter>
-    </div>
-    <div class="col-12 col-md-3">
-      <checkout-parameter @change="onChangeBilling" :lines="getAddressLines(billingAddress)">Billing Address</checkout-parameter>
-    </div>
-    <div class="col-12 col-md-3">
-      <checkout-parameter @change="onChangeShippingMethod" :lines="shippingMethodLines">Shipping Method</checkout-parameter>
-    </div>
-    <div class="col-12 col-md-3">
-      <checkout-parameter @change="onChangePaymentMethod" :lines="paymentOptionLines">
-        Payment Method
-        <component slot="extra" :is="paymentMethodComponent" :data="getPaymentMethodData(paymentMethod)" :variant="paymentOption && paymentOption.id || 'creditcard'"></component>
-      </checkout-parameter>
-    </div>
+  <div class="col-12 col-md-3">
+    <checkout-parameter @change="onChangeShipping" :lines="getAddressLines(shippingAddress)">Shipping Address</checkout-parameter>
   </div>
+  <div class="col-12 col-md-3">
+    <checkout-parameter @change="onChangeBilling" :lines="getAddressLines(billingAddress)">Billing Address</checkout-parameter>
+  </div>
+  <div class="col-12 col-md-3">
+    <checkout-parameter @change="onChangeShippingMethod" :lines="shippingMethodLines">Shipping Method</checkout-parameter>
+  </div>
+  <div class="col-12 col-md-3">
+    <checkout-parameter @change="onChangePaymentMethod" :lines="paymentOptionLines">
+      Payment Method
+      <component slot="extra" :is="paymentMethodComponent" :data="getPaymentMethodData(paymentMethod)" :variant="paymentOption && paymentOption.id || 'creditcard'"></component>
+    </checkout-parameter>
+  </div>
+</div>
 </template>
 
 <script>

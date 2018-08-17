@@ -1,9 +1,11 @@
 <template>
-  <div class="checkout">
-    <keep-alive>
-      <component v-if="currentCheckoutView" :is="currentCheckoutView"></component>
-    </keep-alive>
-    <checkout-buttons></checkout-buttons>
+  <div class="container-fluid">
+    <div class="checkout">
+      <keep-alive>
+        <component v-if="currentCheckoutView" :is="currentCheckoutView"></component>
+      </keep-alive>
+      <checkout-buttons></checkout-buttons>
+    </div>
   </div>
 </template>
 
@@ -27,7 +29,7 @@
     name: 'Checkout',
     computed: {
       currentCheckoutView () {
-        var currentCheckoutView = null
+        var currentCheckoutView = CartContent
         let checkoutState = this.$store.getters.getCheckoutState
         if (checkoutState < 5 && this.isEmptyCart) {
           currentCheckoutView = CartContent

@@ -1,23 +1,19 @@
 <template>
-  <div id="app" :class="[$store.state.isSmallScreen || $store.state.isMobile ? 'mobile': '']">
+  <div id="app" @touchstart="startTouch" @touchend="endTouch">
     <div class="header">
       <cookie-law transitionName="slideFromTop" theme="oye" position="top" v-if="isMounted"></cookie-law>
-      <account-navbar v-if="!($store.state.isSmallScreen || $store.state.isMobile)"></account-navbar>
+      <account-navbar></account-navbar>
     </div>
-    <div class="force-bigger-screen d-md-none">
-      The mobile version is coming soon.<br/>
-      Please open the shop on a device with a bigger screen
-    </div>
-    <header class="navbar" role="navigation">
-      <brand-navbar v-on:togglemenu="onToggleMobileMenu"
-                    v-on:closemenu="closeMobileMenu"></brand-navbar>
+    <header @click="onHeaderClick" class="navbar" role="navigation">
+      <brand-navbar></brand-navbar>
     </header>
     <alerts></alerts>
     <div class="background">
-      <div class="container-fluid maincontent page">
+      <div class="maincontent page">
         <nuxt></nuxt>
       </div>
     </div>
+    <mobile-menu v-if="showMobile"></mobile-menu>
     <!--<announcements></announcements>-->
     <div class="bottom">
       <div class="container-fluid">
@@ -37,11 +33,12 @@
   import client from '../plugins/apollo'
   import Vue from 'vue'
   import MobileMenu from '../components/navigation/MobileMenu'
-  import * as types from '../store/types'
   import PrimaryControlPanel from '../components/shared/PrimaryControlPanel'
   import AudioPlayer from '../components/audio/AudioPlayer'
   import Announcements from '../components/messages/Announcements'
   import OyeFooter from '../components/navigation/Footer'
+  import { mapGetters } from 'vuex'
+  import * as types from '../store/types'
 
   var ogImage = require('~/assets/images/fb-og-image.jpg')
 
@@ -67,40 +64,24 @@
       }
     },
     methods: {
-      mediaChange (mq) {
-        if (mq.matches) {
-          this.isPortable = false
-          // window width is at least 500px
-          this.$store.commit(types.SET_SMALL_SCREEN, false)
-        } else {
-          this.isPortable = true
-          // window width is less than 500px
-          this.$store.commit(types.SET_SMALL_SCREEN, true)
-        }
-      },
-      onToggleMobileMenu () {
-        this.$store.commit(types.SET_MOBILE_NAV, !this.isOpenMobileMenu)
-      },
-      closeMobileMenu () {
-        this.$store.commit(types.SET_MOBILE_NAV, false)
-      },
       onClosePlaylist () {
         this.noScroll = false
       },
       onOpenPlaylist () {
         this.noScroll = true
+      },
+      onHeaderClick () {
+        if (this.showMobile) {
+          this.$store.commit(types.SET_MOBILE_NAV, false)
+        }
+      },
+      startTouch () {
+      },
+      endTouch () {
       }
     },
     computed: {
-      isOpenMobileMenu () {
-        return this.$store.state.showMobile
-      },
-      isMobile () {
-        return this.$store.getters.isMobile
-      },
-      isSmallScreen () {
-        return this.$store.state.isSmallScreen
-      }
+      ...mapGetters(['showMobile'])
     },
     beforeCreate () {
       client.networkInterface.use([{
@@ -147,7 +128,7 @@
       const mq = window.matchMedia('(min-width: 768px)')
       mq.addListener(this.mediaChange)
 
-      this.$store.commit(types.SET_SMALL_SCREEN, screen.width < 768)
+//      this.$store.commit(types.SET_SMALL_SCREEN, screen.width < 768)
 
       var isTouch = false // var to indicate current input type (is touch versus no touch)
       var isTouchTimer
@@ -184,7 +165,7 @@
     top: 40px;
     position: fixed;
     background-color: #fff;
-    width: 100%;
+    width: 100vw;
     border-bottom: 1px solid #EBE9E6;
     padding: 0;
   }

@@ -29,13 +29,13 @@
       releases: releasesConnections
     },
     methods: {
-      getReleases (items) {
-        let releases = items.edges || items
-        return releases
-      },
       getRelease (item) {
         let release = item.node || item.release || item
         return release
+      },
+      getReleases (items) {
+        let releases = items.edges || items
+        return releases
       }
     }
   }

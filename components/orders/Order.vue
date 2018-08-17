@@ -1,6 +1,6 @@
 <template>
   <div class="order">
-    <div class="d-flex justify-content-between">
+    <div class="d-none d-md-flex justify-content-between">
       <h3>
         Order #{{order.pk}} ({{order.date}})
       </h3>
@@ -17,7 +17,7 @@
         <div class="cart__line" v-for="cartLine in items">
           <nuxt-link :to="{name: 'releases-slug', params: {'slug': cartLine.release.slug}}">
 
-            <div class="row">
+            <div class="d-none d-md-flex row">
               <div class="col-2">
                 <img class="" :src="cartLine.release.smallImageUrl"/>
               </div>
@@ -41,6 +41,33 @@
               </div>
               <div class="col-4">{{cartLine.quantity}}x</div>
               <div class="col-2">{{cartLine.release.price.gross}}&euro;</div>
+            </div>
+            <div class="d-sm-flex d-md-none row">
+              <div class="col-12">
+                <div class="d-flex flex-row">
+                  <img class="charts__detail__thumb" :src="cartLine.release.smallImageUrl"/>
+                  <div class="d-flex flex-column order__item__detail">
+                    <div class="order__item__times">{{cartLine.quantity}}x</div>
+                    <div class="cart__line__product__info">
+                      <div class="release__name">{{ cartLine.release.artistFirstName}} {{ cartLine.release.artistLastName }}</div>
+                      <div class="release__title">{{ cartLine.release.title }}</div>
+                      <div>{{cartLine.release.price.gross}}&euro;</div>
+                      <div v-if="order.status === 'Paid'" class="release__shipping">
+                        <div :class="['product__info__availability', cartLine.release.availability.status]"></div>
+                        <div>
+                          <template v-if="cartLine.release.availability.status === 'out'">
+                            <span>Shipping as soon as possible</span>
+                          </template>
+                          <template v-else-if="cartLine.release.availability.status === 'upcoming'">
+                            <span>Preorder {{cartLine.release.releasedAt}}</span>
+                          </template>
+                          <template v-else>Ready for shipping</template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </nuxt-link>
         </div>

@@ -1,4 +1,5 @@
 <template>
+  <div class="container-fluid">
     <div class="checkout__content">
       <div class="row login">
         <login-form class="checkout__content__col" :register="false">Login</login-form>
@@ -12,6 +13,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>

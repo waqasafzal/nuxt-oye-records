@@ -22,6 +22,18 @@
         })
       }
     },
+    head () {
+      return {
+        title: `Artist ${this.query} at OYE Records`,
+        meta: [
+          {
+            hid: 'og:title',
+            property: 'og:title',
+            content: `Artist ${this.query} at OYE Records`
+          }
+        ]
+      }
+    },
     computed: {
       releasesTotal () {
         return this.releases.edges.length
