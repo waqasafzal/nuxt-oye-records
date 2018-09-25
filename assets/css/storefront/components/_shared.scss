@@ -68,6 +68,7 @@
   text-align: center;
   font-size: $font-factor + em;
   vertical-align: top;
+  cursor: pointer;
   &:hover:after {
     content: '';
     position: absolute;
