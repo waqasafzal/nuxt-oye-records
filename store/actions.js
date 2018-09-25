@@ -156,7 +156,7 @@ export const addToCart = ({commit, dispatch}, args) => new Promise((resolve, rej
       addCartAlertMessage('Article was added to cart, but might not be available', 'warning', true)
     }
     if (!data.addToCart.hasMoreItems) {
-      addCartAlertMessage('The requested quantity for this item might not be fully on stock. Additional quantities will be ordered for you.', 'warning', false, 5000)
+      addCartAlertMessage('The requested quantity for this item might not be fully on stock. Additional quantities will be ordered for you.', 'warning', false, 6000)
     }
     const cart = data && data.addToCart.cart
     Vue.cookie.set('cart', data.addToCart.cart.cookie, false)
