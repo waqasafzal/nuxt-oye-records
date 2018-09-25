@@ -19,6 +19,21 @@
             </div>
           </div>
         </div>
+        <modal :showBody="true" v-if="showModal" @close="showModal = false">
+          <div slot="headerTitle">
+            Attention!
+          </div>
+          <div slot="body">
+            <strong>{{deleteLine.release.name}} - {{deleteLine.release.title}}</strong> is reserved for you.<br><br>
+            Removing this item from cart removes the reservation and puts it back to stock. Do you <em>really</em> want to proceed?
+          </div>
+          <div slot="footer" class="hmargin-auto modal__button-bar">
+            <!--<div class="modal__button-bar">-->
+              <button class="button" @click="onDelete(deleteLine, true)">OK</button>
+              <button class="button" @click="showModal = false">Cancel</button>
+            <!--</div>-->
+          </div>
+        </modal>
         <div class="cart__line" :key="i"
              v-for="(line, i) in cart.lines">
           <div class="row">
@@ -133,7 +148,6 @@
           <proceed-button class="cart__checkout-button" @click="pushCheckout">Go to checkout</proceed-button>
         </template>
       </div>
-
     </template>
     <template v-else>
       <div class="cart__empty">
@@ -152,11 +166,13 @@
   import { roundFixed, getPrice } from '../../utils/math'
   import * as types from '../../store/types'
   import CheckoutButtons from '../checkout/CheckoutButtons'
+  import Modal from '../shared/Modal'
 
   const MAX_QUANTITY = 5
 
   export default {
     components: {
+      Modal,
       CheckoutButtons,
       ProceedButton,
       ReleasePrice
@@ -166,6 +182,11 @@
       review: {
         type: Boolean,
         default: false
+      }
+    },
+    data () {
+      return {
+        showModal: false
       }
     },
     watch: {
@@ -217,11 +238,16 @@
           value: event.target.value
         })
       },
-      onDelete: function (line) {
-        this.$store.dispatch('removeCartLine', {
-          pk: line.release.pk,
-          backorder: line.backorder
-        })
+      onDelete: function (line, confirmed = false) {
+        if (!confirmed && line.isReserved) {
+          this.showModal = true
+          this.deleteLine = line
+        } else {
+          this.$store.dispatch('removeCartLine', {
+            pk: line.release.pk,
+            backorder: line.backorder
+          })
+        }
       },
       getPrice: function (price) {
         return getPrice(price, {vatRate: this.vatRate, vatExcluded: this.vatExcluded})
@@ -251,3 +277,14 @@
   }
 
 </script>
+
+<style lang="scss">
+  .modal__button-bar {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    .button {
+      width: 10em;
+    }
+  }
+</style>

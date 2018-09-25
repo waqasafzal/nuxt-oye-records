@@ -40,6 +40,7 @@ export const oyeCart = gql`
             pricePerItem
             lineTotal
             backorder
+            isReserved
         }
         preorderLines: lines(backorder: true) {
             release {
