@@ -6,6 +6,9 @@
     padding: 2rem;
     background-color: $gray-color-2;
     line-height: 32px;
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
     .selected {
       color: $brand-color-green;
     }

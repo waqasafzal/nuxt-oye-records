@@ -35,12 +35,17 @@ if (process.env.API_ROOT) {
   setupAPI()
 }
 
-let adyenScript = process.env.ADYEN_CSE
+const adyenScript = process.env.ADYEN_CSE
   ? process.env.ADYEN_CSE
   : 'https://test.adyen.com/hpp/cse/js/8214959999792925.shtml'
-  //
-  // : ((process.env.NODE_ENV === 'production')
-  //   ? 'https://live.adyen.com/hpp/cse/js/1115135975200408.shtml' : )
+
+const adyenSkin = process.env.ADYEN_SKIN_URL
+  ? process.env.ADYEN_SKIN_URL
+  : "'https://test.adyen.com/hpp/skipDetails.shtml'"
+
+const gaUrl = process.env.GA_URL
+  ? process.env.GA_URL
+  : "'UA-100941329-2'"
 
 module.exports = {
   /*
@@ -51,7 +56,8 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {name: 'keywords', lang: 'de', content: 'vinyl,records,house,disco,jazz,prenzlauer berg,berlin,neukölln'},
+      {hid: 'keywords', name: 'keywords', content: 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln'},
+      {name: 'robots', content: 'index, follow'},
       {hid: 'description', name: 'description', content: 'Oye Records houses a fantastic range of music. Mostly devoted to house and disco there is also enough hip hop, jazz, and brand new electronic 12-inches.'},
       {
         hid: 'url',
@@ -78,9 +84,9 @@ module.exports = {
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
       {
-        href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css',
         rel: 'stylesheet',
-        integrity: 'sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M',
+        href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+        integrity: 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
         crossorigin: 'anonymous'
       },
       {href: 'https://fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
@@ -130,7 +136,9 @@ module.exports = {
     ],
     plugins: [
       new webpack.DefinePlugin({
-        __API__: apiHost
+        __API__: apiHost,
+        __ADYEN_SKIN__: adyenSkin,
+        __GA_URL__: gaUrl
       })
     ],
     vendor: ['vue-cookie']
@@ -144,7 +152,8 @@ module.exports = {
     {src: '~plugins/vue-resource'},
     {src: '~plugins/vue-social-sharing'},
     {src: '~plugins/ga', ssr: false},
-    {src: '~plugins/vue-cookie-law.js', ssr: false}
+    {src: '~plugins/vue-cookie-law.js', ssr: false},
+    {src: '~/plugins/vue-agile', ssr: false}
   ],
   router: {
     middleware: ['check-auth'],
@@ -169,10 +178,18 @@ module.exports = {
     {src: '~assets/css/storefront/storefront.scss', lang: 'scss'}
   ],
   devProxy: {
-    'localhost:3000/media': 'http://local.oye.com:8000/',
-    'localhost:3000/admin': 'http://local.oye.com:8000/',
-    'localhost:3000/static': 'http://local.oye.com:8000/',
-    'localhost:3000/oye': 'http://local.oye.com:8000/'
+    // 'localhost:3000/media': 'http://local.oye.com:8000/',
+    // 'localhost:3000/admin': 'http://local.oye.com:8000/',
+    // 'localhost:3000/static': 'http://local.oye.com:8000/',
+    // 'localhost:3000/oye': 'http://local.oye.com:8000/',
+    '192.168.2.38:3000/media': 'http://local.oye.com:8000/',
+    '192.168.2.38:3000/admin': 'http://local.oye.com:8000/',
+    '192.168.2.38:3000/static': 'http://local.oye.com:8000/',
+    '192.168.2.38:3000/oye': 'http://local.oye.com:8000/',
+    '192.168.0.3:3000/media': 'http://local.oye.com:8000/',
+    '192.168.0.3:3000/admin': 'http://local.oye.com:8000/',
+    '192.168.0.3:3000/static': 'http://local.oye.com:8000/',
+    '192.168.0.3:3000/oye': 'http://local.oye.com:8000/'
   },
   generate: {
     routes: function () {

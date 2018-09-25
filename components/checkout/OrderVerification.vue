@@ -61,10 +61,10 @@
             })
             this.$store.commit(types.SET_UNPAID_ORDER, data.verifyOrder.order)
             this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 6)
+            this.$store.dispatch('sendTransaction', data.verifyOrder.order)
             if (data.verifyOrder.newCart) {
               this.$store.commit(types.SET_CART, data.verifyOrder.newCart)
             }
-            this.$store.dispatch('sendTransaction', data.verifyOrder.order)
           } else {
             this.$store.commit(types.ADD_ALERT, {
               level: 'alert',

@@ -32,7 +32,13 @@ module.exports = {
       'localhost:8000/graphql': 'http://local.oye.com:8000/',
       'localhost:8000/oye/': 'http://local.oye.com:8000/',
       'localhost:8000/admin': 'http://local.oye.com:8000/',
-      'localhost:8000/static/admin/css': 'http://local.oye.com:8000/'
+      'localhost:8000/static/admin/css': 'http://local.oye.com:8000/',
+      '192.168.0.7:8000/media': 'http://local.oye.com:8000/',
+      'oye.kolter.it/media': 'http://local.oye.com:8000/'
+      // '192.168.0.7:8000/graphql': 'http://local.oye.com:8000/',
+      // '192.168.0.7:8000/oye/': 'http://local.oye.com:8000/',
+      // '192.168.0.7:8000/admin': 'http://local.oye.com:8000/',
+      // '192.168.0.7:8000/static/admin/css': 'http://local.oye.com:8000/'
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

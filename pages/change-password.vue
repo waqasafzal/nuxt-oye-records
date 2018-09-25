@@ -1,5 +1,5 @@
 <template>
-  <div class="checkout">
+  <div class="checkout container-fluid">
     <div class="row justify-content-center checkout__content">
       <template v-if="passwordChanged">
         <div class="complete">
@@ -12,7 +12,7 @@
         </div>
       </template>
       <template v-else>
-        <div class="col-8 reset-password__panel">
+        <div class="col-12 col-md-8 reset-password__panel">
           <h3>Password reset confirmation</h3>
           <div class="description">Please enter your new password twice so we can verify you typed it in correctly.</div>
           <password-reset-form @success="onSuccess"></password-reset-form>

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div class="page__header">Browse Genres</div>
-        <div class="genres__menu">
+        <div class="page__header"><h1>Browse Genres</h1></div>
+        <div class="genres__menu d-none d-lg-flex">
           <div class="genres__menu__column" :style="genresMenuColumnStyle" :key="i"
                v-for="(mainGenre, i) in metaGenres">
             <div class="genres__menu__column__head">
@@ -28,6 +28,7 @@
             </div>
           </div>
         </div>
+        <genre-dropdown class="d-md-none" :metaGenres="metaGenres"></genre-dropdown>
       </div>
     </div>
     <release-list-summary :releases="genre.releases"
@@ -47,9 +48,15 @@
   import client from '../../plugins/apollo'
   import ReleaseListSummary from '../../components/releases/ReleaseListSummary'
   import { createMainGenresQuery } from '../../components/genres/queries'
+  import GenreDropdown from '../../components/features/mobile/GenreDropdown'
+  import ReleaseFilterPanel from '../../components/features/mobile/ReleaseFilterPanel'
 
   export default {
-    components: {ReleaseListSummary},
+    components: {
+      ReleaseFilterPanel,
+      GenreDropdown,
+      ReleaseListSummary
+    },
     name: 'GenreOverviewPage',
     data: function () {
       return {
@@ -65,6 +72,11 @@
             hid: 'title',
             property: 'og:title',
             content: 'OYE Records - Genres'
+          },
+          {
+            hid: 'description',
+            name: 'description',
+            content: 'Discover releases from more than 200 genres and subgenres.'
           }
         ]
       }

@@ -1,5 +1,9 @@
 .checkout {
   padding-top: 48px;
+  @include media-breakpoint-down(sm) {
+    margin-top: 1.5em;
+    margin-bottom: 4rem;
+  }
   &__overview {
     margin-bottom: 2rem;
   }
@@ -10,6 +14,14 @@
     padding-bottom: 34px;
     height: 100%;
     border: 1px solid $gray-color-2;
+    @include media-breakpoint-down(sm) {
+      border-bottom: 1px solid #EBE9E6 !important;
+      border: 0;
+      padding-left: 0.2rem;
+      padding-top: 18px;
+      padding-right: 0;
+      padding-bottom: 18px;
+    }
     .payment__card__element {
       font-size: 12px;
       margin-right: inherit;
@@ -61,8 +73,16 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      @include media-breakpoint-down(sm) {
+        padding-left: 16px;
+        padding-right: 16px;
+        border: 1px solid $gray-color-2;
+      }
       &:last-child {
         border-right: 1px solid $gray-color-2;
+        @include media-breakpoint-down(sm) {
+          border: 0;
+        }
       }
       //.payment-methods {
       //  border
@@ -71,6 +91,9 @@
   }
   h2, h3 {
     margin: $global-margin * 2 0;
+    @include media-breakpoint-down(sm) {
+      margin: 2rem 0 !important;
+    }
     text-transform: uppercase;
   }
   hr {
@@ -214,6 +237,22 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    @include media-breakpoint-down(sm) {
+      h3 {
+        margin-top: inherit;
+
+      }
+      .cart__bottom-bar-panel {
+        margin-top: 2rem;
+        display: inherit;
+        .checkout__toc {
+          margin-bottom: 1rem;
+        }
+      }
+      .cart {
+        border: 0;
+      }
+    }
     .placing-order {
       position: absolute;
       display: flex;
@@ -235,6 +274,9 @@
     }
     .cart {
       border: 1px solid $gray-color-2;
+      @include media-breakpoint-down(sm) {
+        border: 0;
+      }
     }
   }
   &__payment {
@@ -346,6 +388,10 @@
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    @include media-breakpoint-down(sm) {
+      top: 30px;
+      right: 0;
+    }
   }
 }
 
@@ -376,14 +422,24 @@
   max-width: 550px;
   margin-left: auto;
   margin-right: auto;
+  @include media-breakpoint-down(sm) {
+    margin-top: 6rem;
+    padding: 1rem;
+  }
   h2 {
     font-size: $font-size-h1;
     text-transform: none;
     margin-bottom: 0.1em;
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-h3;
+    }
   }
   h3 {
     margin-top: 0.6em !important;
     text-transform: none;
+    @include media-breakpoint-down(sm) {
+      font-size: $font-size-h4;
+    }
   }
   &__summary {
     font-size: $font-size-h5;

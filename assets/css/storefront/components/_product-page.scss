@@ -110,6 +110,9 @@
     &__description {
       margin-top: $global-margin * 3;
       margin-bottom: $global-margin * 2;
+      @include media-breakpoint-down(sm) {
+        margin-bottom: 0;
+      }
       &__stripped {
         position: relative;
         overflow: hidden;
@@ -145,6 +148,10 @@
         margin-left: 2em;
         opacity: 0.5;
       }
+      @include media-breakpoint-down(sm) {
+        bottom: inherit;
+        padding-top: 1rem;
+      }
     }
     @include media-breakpoint-down(md) {
       padding-left: 15px !important;
@@ -156,6 +163,7 @@
     @include media-breakpoint-down(md) {
       padding-left: 0px !important;
       padding-right: 0px !important;
+      margin-top: 2em;
     }
     h4 {
       margin-bottom: 1em !important;
@@ -188,7 +196,7 @@
     padding-right: 2em;
     margin-bottom: 2em;
     &:last-child {
-      padding-right: inherit;
+      padding-right: 0;
     }
     .carousel-control {
       &-prev {

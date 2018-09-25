@@ -56,6 +56,7 @@
           height: `${this.baseSize * 2 / 3}px`,
           lineHeight: `${this.baseSize * 2 / 3 + Math.round(this.baseSize / 24)}px`,
           textOverflow: 'ellipsis',
+          // fontSize: `${this.baseSize / 4}px`,
           overflow: 'hidden',
           width: '100%'
         }
@@ -97,6 +98,8 @@
     display: flex;
     justify-content: space-around;
     img {
+      margin-bottom: auto;
+      margin-top: auto;
       margin-left: auto;
     }
     &:hover {

@@ -42,7 +42,7 @@
   &__detail {
     &__subgenre {
       &__selector {
-        display: inline-block;
+        display: inline-block !important;
         margin-left: 3em;
         width: 200px;
         background-color: white;

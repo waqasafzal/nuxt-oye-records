@@ -1,57 +1,66 @@
 <template>
-  <div class="page">
-    <div class="page__header" v-if="detailGenre">
-        {{ detailGenre.name }}
-      <dropdown class="genres__detail__subgenre__selector"
-                v-if="detailGenre.subgenres && detailGenre.subgenres.length > 0"
-                @selected="onSelected"
-                :values="detailGenre.subgenres">Select Subgenre
-      </dropdown>
-      <filter-results-options class="float-right"></filter-results-options>
-    </div>
-    <div class="genres__detail__bestseller">
-      <div class="genres__detail__bestseller__header" v-if="detailGenre">Bestseller {{ detailGenre.name }}</div>
-      <div class="genres__detail__bestseller__carousel row"
-           v-if="!bsLoading && (bestsellers.length > 0 || bestsellers.edges)">
-        <div class="col-12" @mouseenter="disableSlider" @mouseleave="enableSlider">
-          <div class="slider-left-control" @click="slideBackward"><img src="~assets/images/Slider_Arrow_Left_Icon.svg"/></div>
-          <div class="slider-right-control" @click="slideForward"><img src="~assets/images/Slider_Arrow_Right_Icon.svg"/></div>
-          <transition-group name="blend">
-            <div :class="'carousel__item'" :key="p" v-for="p in pages" v-if="p === currentSlide" transition="blend">
-              <release-item v-for="(release, i) in getBestsellers(p)"
-                            class="col-md-3 product-list bestseller__item"
-                            :release="release.node"
-                            :key="i"
-              ></release-item>
-            </div>
-          </transition-group>
-          <div class="col-12 ">
-            <div class="carousel__controls">
-              <div @click="selectSlide(p)" :class="['carousel__controls__button', p === currentSlide ? 'active': '']"
-                   :key="p+'s'" v-for="p in pages">
+  <div class="container-fluid">
+        <div class="page__header"  v-if="detailGenre">
+            <h1>
+              {{ detailGenre.name }}
+            </h1>
+          <dropdown class="d-none d-md-inline-block genres__detail__subgenre__selector"
+                    v-if="detailGenre.subgenres && detailGenre.subgenres.length > 0"
+                    @selected="onSelected"
+                    :values="detailGenre.subgenres">Select Subgenre
+          </dropdown>
+        </div>
+        <release-filter-panel @filter-changed="setFilterOptions" :changeGenre="typeof detailGenre === 'undefined'" :metaGenres="metaGenres" class="d-flex d-md-none">
+          <template v-if="detailGenre">{{detailGenre.name}}</template>
+        </release-filter-panel>
+      <div class="genres__detail__bestseller d-none d-md-block">
+        <div class="genres__detail__bestseller__header" v-if="detailGenre">Bestseller {{ detailGenre.name }}</div>
+        <div class="genres__detail__bestseller__carousel row"
+             v-if="!bsLoading &&(bestsellers.edges.length > 0 || bestsellers.edges)">
+          <div class="col-12" @mouseenter="disableSlider" @mouseleave="enableSlider">
+            <div class="slider-left-control" @click="slideBackward"><img
+                src="~assets/images/Slider_Arrow_Left_Icon.svg"/></div>
+            <div class="slider-right-control" @click="slideForward"><img
+                src="~assets/images/Slider_Arrow_Right_Icon.svg"/></div>
+            <transition-group name="blend">
+              <div :class="'carousel__item'" :key="`page-${p}`" v-for="(value, p) in pages" v-if="p === currentSlide" transition="blend">
+                <release-item v-for="(release, i) in getBestsellers(p)"
+                              class="col-md-3 product-list bestseller__item"
+                              :release="release"
+                              :key="`releasess-${i}-${p}`"
+                ></release-item>
+              </div>
+            </transition-group>
+            <div class="col-12 ">
+              <div class="carousel__controls">
+                <div @click="selectSlide(p)"
+                     :class="['carousel__controls__button', p === currentSlide ? 'active': '']"
+                     :key="`select-${p}`" v-for="p in pages">
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <loading-spinner :loading="bsLoading"></loading-spinner>
       </div>
-      <loading-spinner :loading="bsLoading"></loading-spinner>
+      <release-list :releases="releases" :loading="loading"></release-list>
     </div>
-
-    <release-list :releases="releases" :loading="loading"></release-list>
-  </div>
+  <!--</div>-->
 </template>
 
 <script>
   import ReleaseList from '~/components/releases/ReleaseList.vue'
-  import {getReleaseListColumnNumber} from '~/components/utils'
   import ReleaseItem from '~/components/releases/ReleaseItem'
   import Dropdown from '~/components/shared/Dropdown'
   import LoadingSpinner from '~/components/shared/LoadingSpinner'
   import client from '~/plugins/apollo'
   import { createReleaseListQuery } from '~/components/releases/queries'
   import { createGenreQuery } from '~/components/genres/queries'
-  import {ReleasePagingMixin} from '~/components/releases/releases-paging-mixin'
+  import { ReleasePagingMixin } from '~/components/releases/releases-paging-mixin'
   import FilterResultsOptions from '../../../components/shared/FilterResultsOptions'
+  import GenreDropdown from '../../../components/features/mobile/GenreDropdown'
+  import { createMainGenresQuery } from '../../../components/genres/queries'
+  import ReleaseFilterPanel from '../../../components/features/mobile/ReleaseFilterPanel'
 
   const MAX_BESTSELLERS = 40
 
@@ -69,6 +78,8 @@
 
   export default {
     components: {
+      ReleaseFilterPanel,
+      GenreDropdown,
       FilterResultsOptions,
       LoadingSpinner,
       Dropdown,
@@ -95,13 +106,18 @@
         detailGenre: this.genre,
         genreSlug: this.slug,
         genreSubslug: this.subslug,
-        bsPageSize: getReleaseListColumnNumber() * (2 / 3),
+        showMobileDropdown: false,
+        metaGenres: [],
+        bsPageSize: 4,
         currentSlide: 1,
         filterBy: JSON.stringify(releaseFilterParams(this.$route.params, this.$route))
       }
     },
     async asyncData ({route, params}) {
       var filterParams = releaseFilterParams(params, route)
+
+      let genres = await client.query(createMainGenresQuery(12))
+      let metaGenres = genres.data.metaGenres
 
       let genreReleases = await client.query(createReleaseListQuery({filterBy: JSON.stringify(filterParams)}))
 
@@ -120,7 +136,8 @@
       return {
         detailGenre: detailGenreResults.data.detailGenre,
         releases: genreReleases.data.releases,
-        bestsellers: bestsellerReleases.data.releases
+        bestsellers: bestsellerReleases.data.releases,
+        metaGenres: metaGenres
       }
     },
     computed: {
@@ -128,6 +145,8 @@
         if (this.bestsellers.edges) {
           return Math.ceil(this.bestsellers.edges.length / this.bsPageSize)
         }
+        console.log('Nona')
+        return 0
       }
     },
     methods: {
@@ -138,13 +157,22 @@
           return this.pageItems
         }
       },
+      setFilterOptions (options) {
+        this.onFilterChanged(options)
+      },
+      toogleMobileDropdown () {
+        this.showMobileDropdown = !this.showMobileDropdown
+      },
       getBestsellers (pageIndex) {
         let from = (pageIndex - 1) * this.bsPageSize
         let to = (pageIndex) * this.bsPageSize
         var bestsellers = []
         let bestsellerEdges = this.bestsellers.edges
         for (var i = from; i < to && i < bestsellerEdges.length; i++) {
-          bestsellers.push(bestsellerEdges[i])
+          const bestsellerEdge = bestsellerEdges[i]
+          if (typeof bestsellerEdge !== 'undefined') {
+            bestsellers.push(bestsellerEdge.node)
+          }
         }
         return bestsellers
       },
@@ -232,39 +260,40 @@
         let subslug = params.subslug
 
         if (typeof this.detailGenre === 'undefined') {
+          const genreOptions = {
+            slug: subslug || slug,
+            sub: typeof subslug === 'undefined'
+          }
+
+          if (options.name === 'metagenres-slug') {
+            genreOptions['meta'] = true
+          }
+
           client.query(
-            createGenreQuery({
-              slug: subslug || slug,
-              sub: typeof subslug === 'undefined'
-            })
+            createGenreQuery(genreOptions)
           ).then((result) => {
             vm.loading = false
             vm.detailGenre = result.data.detailGenre
           })
         }
 
-        let releaseFilterParams = {}
-        if (subslug) {
-          releaseFilterParams['subgenres'] = [subslug]
-        } else if (slug) {
-          releaseFilterParams['genres'] = [slug]
-        }
+        let filterParams = releaseFilterParams(options.params, options.route)
 
         var vm = this
         this.loading = true
         this.releases = []
         client.query(
-          createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)})
+          createReleaseListQuery({filterBy: JSON.stringify(filterParams)})
         ).then(({data}) => {
           vm.loading = false
           vm.releases = data.releases
         })
 
-        releaseFilterParams['status'] = 'bestsellers'
+        filterParams['status'] = 'bestsellers'
         this.bestsellers = []
         this.bsLoading = true
         client.query(
-          createReleaseListQuery({filterBy: JSON.stringify(releaseFilterParams)})
+          createReleaseListQuery({filterBy: JSON.stringify(filterParams)})
         ).then(({data}) => {
           vm.bestsellers = data.releases
           vm.bsLoading = false

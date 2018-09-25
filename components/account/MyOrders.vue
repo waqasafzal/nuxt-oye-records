@@ -1,7 +1,7 @@
 <template>
   <div class="my-orders">
-    <my-available-orders-table></my-available-orders-table>
-    <my-missing-orders-table></my-missing-orders-table>
+    <!--<my-available-orders-table class="orders-available"></my-available-orders-table>-->
+    <my-missing-orders-table class="orders-missing"></my-missing-orders-table>
   </div>
 </template>
 
