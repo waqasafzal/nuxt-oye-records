@@ -4,7 +4,7 @@
 
 import store from '../../store'
 
-export const addCartAlertMessage = function (message, level, showCart) {
+export const addCartAlertMessage = function (message, level, showCart, timeout = 2000) {
   var buttons = []
   if (showCart) {
     buttons.push({
@@ -17,7 +17,8 @@ export const addCartAlertMessage = function (message, level, showCart) {
   store.dispatch('addAlert', {
     message: message,
     level: level,
-    buttons: buttons
+    buttons: buttons,
+    timeout: timeout
   }).then(data => {
   })
 }

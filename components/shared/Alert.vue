@@ -23,6 +23,9 @@
       type: {
         default: 'info'
       },
+      timeout: {
+        default: 2000
+      },
       buttons: {
         default: function () {
           return []
@@ -41,7 +44,7 @@
         function () {
           vm.show = false
         },
-        2000
+        this.timeout
       )
     },
     beforeDestroy () {
