@@ -131,6 +131,8 @@ export const addToCart = ({commit, dispatch}, args) => new Promise((resolve, rej
               cart {
                   ...OyeCart
               }
+              moreItemsAvailable
+              addedStockItem
           }
       },
       ${oyeCart}`,
@@ -148,10 +150,16 @@ export const addToCart = ({commit, dispatch}, args) => new Promise((resolve, rej
       }
     }
   ).then(({data}) => {
-    addCartAlertMessage('Article successfully added to cart.', 'info', true)
-
+    if (data.addToCart.addedStockItem) {
+      addCartAlertMessage('Article successfully added to cart.', 'info', true)
+    } else if (!data.addToCart.addedStockItem) {
+      addCartAlertMessage('Article was added to cart, but might not be available', 'warning', true)
+    }
+    if (!data.addToCart.hasMoreItems) {
+      addCartAlertMessage('The requested quantity for this item might not be fully on stock. Additional quantities will be ordered for you.', 'warning', false, 6000)
+    }
     const cart = data && data.addToCart.cart
-    Vue.cookie.set('cart', data.addToCart.cart.cookie, true)
+    Vue.cookie.set('cart', data.addToCart.cart.cookie, false)
     dispatch('setCart', {cart: cart || null})
     return resolve(cart)
   }).catch(er => reject(er))

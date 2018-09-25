@@ -1,6 +1,6 @@
 <template>
   <div class="alert-list">
-    <alert :key="i" :type="alert.level" :buttons="alert.buttons" class="alert-list__item" v-for="(alert, i) in alerts">
+    <alert :key="i" :type="alert.level" :timeout="alert.timeout" :buttons="alert.buttons" class="alert-list__item" v-for="(alert, i) in alerts">
       <span v-html="alert.message"></span>
     </alert>
   </div>
