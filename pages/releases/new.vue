@@ -86,7 +86,6 @@
         this.releasedLast30 = {edges: []}
         if (days) {
           if (days >= 1) {
-            console.log('search for 1')
             client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(1)})).then(
               ({data}) => {
                 this.releasedToday = data.releases
@@ -94,7 +93,6 @@
             )
           }
           if (days === 7) {
-            console.log('search for ' + days)
             client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(days)})).then(
               ({data}) => {
                 this.releasedLast7 = data.releases
@@ -102,7 +100,6 @@
             )
           }
           if (days > 7 && days <= 31) {
-            console.log('search for ' + days)
             client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(days)})).then(
               ({data}) => {
                 this.releasedLast30 = data.releases

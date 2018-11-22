@@ -10,9 +10,7 @@
 
   Vue.component('releases-page', ReleasePage)
 
-  const filterBy = JSON.stringify({
-    status: 'pre'
-  })
+  const filterBy = JSON.stringify({ status: 'pre' })
 
   export default {
     name: 'PreOrderPage',

@@ -13,6 +13,9 @@
       <div class="shipping-cost">1-10 12“ = 4,30 €</div>
       <div class="shipping-cost">more than 10 12“ = free shipping.</div>
     </div>
+    <div>
+      <h4>Germany</h4>
+    </div>
     <pre>
 All incl. VAT
 

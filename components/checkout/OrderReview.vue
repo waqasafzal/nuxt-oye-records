@@ -133,7 +133,6 @@
             }
           }).then(
             ({data}) => {
-              console.log('Placed order...')
               this.placingOrder = false
               if (data.placeOrder.paymentUrl) {
                 this.$store.commit(types.SET_PAYPAL_PAYMENT_URL)
@@ -143,7 +142,6 @@
                 let order = data.placeOrder.order
                 this.$store.commit(types.SET_UNPAID_ORDER, order)
                 if (!order.isPaid && !(order.isSelfCollector && order.paymentType === 'cash')) {
-                  console.log(`${!order.isPaid} && !(${order.isSelfCollector} && ${order.paymentType} === 'cash'}))`)
                   this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 5)
                   if (order.shippingCountry) {
                     this.$store.dispatch('setShippingCountry', order)
@@ -154,7 +152,6 @@
                   })
                 } else {
                   const notInStock = data.placeOrder.notInStock
-                  console.log('purchases ' + notInStock.length)
                   let purchases = this.$store.getters.getPurchases
                   if (purchases && purchases.edges) {
                     purchases = {

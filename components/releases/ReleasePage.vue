@@ -6,7 +6,7 @@
           <h1>
             <slot>{{ category }}</slot>
           </h1>
-          <meta-genre-filter class="d-none d-md-block" v-if="showFilter" @slug-selected="onSlugSelected"></meta-genre-filter>
+          <meta-genre-filter @genre-selected="onGenreSelected" class="d-none d-md-block" v-if="showFilter" @slug-selected="onSlugSelected"></meta-genre-filter>
           <filter-results-options class="d-none d-md-flex float-right" v-if="showFilter" :daysOptions="filterDaysOptions" @filter-changed="onFilterChanged"
           ></filter-results-options>
         </div>
