@@ -32,5 +32,13 @@ module.exports = merge(baseWebpackConfig, {
       inject: true
     }),
     new FriendlyErrorsPlugin()
-  ]
+  ],
+  devServer: {
+    proxy: {
+      '/media': 'http://local.oye.com:8000/',
+      '/admin': 'http://local.oye.com:8000/',
+      '/static': 'http://local.oye.com:8000/',
+      '/oye': 'http://local.oye.com:8000/'
+    }
+  }
 })

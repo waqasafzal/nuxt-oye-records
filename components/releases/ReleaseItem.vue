@@ -6,7 +6,8 @@
         <div class="resizable-list-item-outer">
           <div class="resizable-list-item-inner">
             <div class="release-list-image">
-              <div @click.prevent="onGenreClick(release.mainGenre)" class="genre" v-if="release.mainGenre"><span>{{release.mainGenre.name}}</span>
+              <div @click.prevent="onGenreClick(displayGenre)" class="genre" v-if="displayGenre">
+                <span>{{ displayGenre.name }}</span>
               </div>
               <img class="img-responsive" :src="release.thumbnailUrl" alt=""/>
               <play-release-button background="#30C46C" :size="size" class="release-list-play"
@@ -87,6 +88,12 @@
     data: function () {
       return {
         size: 48
+      }
+    },
+    computed: {
+      displayGenre () {
+        const mainGenreSub = this.release.mainGenreSub
+        return mainGenreSub || this.release.mainGenre
       }
     },
     methods: {

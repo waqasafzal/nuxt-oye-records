@@ -25,7 +25,7 @@
           </div>
           <div slot="body">
             <strong>{{deleteLine.release.name}} - {{deleteLine.release.title}}</strong> is reserved for you.<br><br>
-            Removing this item from cart removes the reservation and puts it back to stock. Do you <em>really</em> want to proceed?
+            Removing this item from cart removes the reservation and puts it back to the open crates. Do you <em>really</em> want to proceed?
           </div>
           <div slot="footer" class="hmargin-auto modal__button-bar">
             <!--<div class="modal__button-bar">-->

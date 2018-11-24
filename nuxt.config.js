@@ -177,20 +177,6 @@ module.exports = {
   css: [
     {src: '~assets/css/storefront/storefront.scss', lang: 'scss'}
   ],
-  devProxy: {
-    // 'localhost:3000/media': 'http://local.oye.com:8000/',
-    // 'localhost:3000/admin': 'http://local.oye.com:8000/',
-    // 'localhost:3000/static': 'http://local.oye.com:8000/',
-    // 'localhost:3000/oye': 'http://local.oye.com:8000/',
-    '192.168.2.38:3000/media': 'http://local.oye.com:8000/',
-    '192.168.2.38:3000/admin': 'http://local.oye.com:8000/',
-    '192.168.2.38:3000/static': 'http://local.oye.com:8000/',
-    '192.168.2.38:3000/oye': 'http://local.oye.com:8000/',
-    '192.168.0.3:3000/media': 'http://local.oye.com:8000/',
-    '192.168.0.3:3000/admin': 'http://local.oye.com:8000/',
-    '192.168.0.3:3000/static': 'http://local.oye.com:8000/',
-    '192.168.0.3:3000/oye': 'http://local.oye.com:8000/'
-  },
   generate: {
     routes: function () {
       let cleanHostUrl = apiHost.replace(/'/g, '')

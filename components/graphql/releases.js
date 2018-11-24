@@ -117,6 +117,10 @@ export const release = gql`
         slug
         label
         format
+        mainGenreSub {
+            name
+            slug
+        }
         mainGenre {
             name
             slug

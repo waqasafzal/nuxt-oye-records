@@ -14,7 +14,7 @@
       <div class="shipping-cost">more than 10 12“ = free shipping.</div>
     </div>
     <div>
-      <h4>Germany</h4>
+      <h4>World</h4>
     </div>
     <pre>
 All incl. VAT
