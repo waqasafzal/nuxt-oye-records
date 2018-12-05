@@ -128,10 +128,10 @@
         return release.artistFirstName ? release.artistFirstName + ' ' : '' + release.artistLastName
       },
       chartsName (chart) {
-        return chart.name || getMonthFromString(chart.createdAt).name
+        return chart.name ? chart.name : getMonthFromString(chart.createdAt).name
       },
       chartsYear (chart) {
-        return new Date(chart.createdAt).getFullYear()
+        return chart.name ? '' : new Date(chart.createdAt).getFullYear()
       }
     },
     watch: {

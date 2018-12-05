@@ -29,6 +29,7 @@
       <div class="row">
         <div class="charts__form col-8">
           <form>
+            <input type="text" placeholder="Charts name (optional)" v-model="chartsName">
             <div v-for="(chartItem, n) in currentCharts.releases" class="charts__item-box">
               <div class="charts__rank">#{{n + 1}}</div>
               <template v-if="!chartItem.release.result || currentChartItem === n">
@@ -145,7 +146,8 @@
           target: {
             type: 'charts'
           }
-        })
+        }),
+        chartsName: ''
       }
     },
     computed: {
@@ -221,7 +223,10 @@
       },
       onSaveCharts () {
         this.$store.dispatch('saveChart', {
-          charts: JSON.stringify(this.currentCharts),
+          charts: JSON.stringify({
+            ...this.currentCharts,
+            name: this.chartsName
+          }),
           artistId: this.artist && this.artist.pk
         }).then(() => {
           this.$emit('charts-saved')
@@ -301,3 +306,9 @@
     }
   }
 </script>
+
+<style>
+  .my-charts {
+    width: 100%;
+  }
+</style>
