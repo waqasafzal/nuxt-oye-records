@@ -30,6 +30,9 @@
       width: 100%;
       background-color: $brand-color-green;
     }
+    &__section {
+      width: 100%;
+    }
   }
   &__menu-item {
     cursor: pointer;
