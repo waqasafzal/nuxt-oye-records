@@ -72,6 +72,7 @@
             edges {
               node {
                 slug
+                name
                 imageUrl(height: 168, width: 300)
                 category
                 artist {
