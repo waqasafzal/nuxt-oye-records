@@ -250,6 +250,7 @@
             chart(artistId: $artistId) {
                pk
                imageUrl
+               name
                artist {
                  pk
                  slug
@@ -283,6 +284,7 @@
                 value: vm.valueOf(item)
               }
             }
+            vm.chartsName = chart.name
             vm.currentCharts.pk = chart.pk
             vm.currentCharts.imageUrl = chart.imageUrl
             vm.currentChartsImageUrl = chart.imageUrl
