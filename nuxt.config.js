@@ -218,9 +218,9 @@ module.exports = {
         ssrId: false
       }
     },
-    // optimization: {
-    //   minimize: true
-    // },
+    optimization: {
+      minimize: process.env.NODE_ENV === 'production'
+    },
     postcss: false,
     cssSourceMap: false,
     extractCSS: true
