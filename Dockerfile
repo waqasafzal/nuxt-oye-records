@@ -6,7 +6,7 @@ WORKDIR /app
 RUN yarn
 # RUN npm rebuild node-sass
 
-ARG APP_API="'https://oye-records.com'"
+ARG APP_API="https://oye-records.com"
 ARG APP_NODE_ENV=production
 ARG ADYEN_CSE=https://live.adyen.com/hpp/cse/js/1115135975200408.shtml
 ARG ADYEN_SKIN_URL="'https://live.adyen.com/hpp/skipDetails.shtml'"
