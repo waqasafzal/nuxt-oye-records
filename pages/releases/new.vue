@@ -1,155 +1,230 @@
 <template>
   <div class="container-fluid">
-
     <div class="row">
       <div class="col-12">
         <div class="page__header">
-          <h1>New Releases {{genre && genre.name}}</h1>
+          <h1>New Releases {{ genre && genre.name }}</h1>
 
-          <meta-genre-filter class="d-none d-md-flex" @genre-selected="onGenreChanged"></meta-genre-filter>
-          <filter-results-options @filter-changed="onFilterOptionsChanged"
-                                  class="d-none d-md-flex float-right"></filter-results-options>
+          <meta-genre-filter 
+            class="d-none d-md-flex" 
+            @genre-selected="onGenreSelected"/>
+          <filter-results-options 
+            class="d-none d-md-flex float-right"
+            @filter-changed="onFilterOptionsChanged"/>
         </div>
-        <release-filter-panel class="d-flex d-md-none" @genre-selected="onGenreChanged" :filterOnly="true"
-                              :metaGenres="genres" :changeGenre="typeof genre !== 'undefined'"
-                              @filter-changed="onFilterOptionsChanged"></release-filter-panel>
-        <div class="release-list-panel" v-if="releasedToday.edges.length > 0">
-          <h3>Released Today</h3>
-          <release-list :releases="releasedToday"></release-list>
-        </div>
-        <div class="release-list-panel" v-if="releasedLast7.edges.length > 0">
-          <h3>Released last 7 days</h3>
-          <release-list :releases="releasedLast7"></release-list>
-        </div>
-        <div class="release-list-panel" v-if="releasedLast30.edges.length > 0">
-          <h3>Released last 30 days</h3>
-          <release-list :releases="releasedLast30"></release-list>
-        </div>
-        <h3>All Releases</h3>
-        <release-list id="releaselist" :releases="releases" :loading="loading"></release-list>
+        <release-filter-panel
+          :filter-only="true"
+          :meta-genres="genres" 
+          :change-genre="typeof genre !== 'undefined'"
+          class="d-flex d-md-none" 
+          @genre-selected="onGenreChanged"
+          @filter-changed="onFilterOptionsChanged"/>
+        <template v-if="!loadingPeriods">
+          <div
+            v-if="releasedToday && releasedToday.edges.length > 0"
+            class="release-list-panel">
+            <h3>Released Today</h3>
+            <release-list
+              :fixed="true"
+              :releases="releasedToday"
+              :loading="todayLoading"/>
+          </div>
+          <div
+            v-if="releasedLast7 && releasedLast7.edges.length > 0"
+            class="release-list-panel">
+            <h3>Released last 7 days</h3>
+            <release-list
+              :fixed="true"
+              :loading="releases7Loading"
+              :releases="releasedLast7"/>
+          </div>
+          <div
+            v-if="releasedLast30"
+            class="release-list-panel">
+            <h3>Released last 30 days</h3>
+            <release-list
+              :fixed="true"
+              :loading="releases30Loading"
+              :releases="releasedLast30"/>
+          </div>
+          <template v-if="releases && releases.edges.length > 0">
+            <h3>All Releases</h3>
+            <release-list
+              id="releaselist"
+              :releases="releases"
+              :loading="loading"/>
+          </template>
+          <template v-else-if="!releasesFound">
+            <div><h2>No new {{ genre && `${genre.name} ` }} found</h2></div>
+          </template>
+        </template>
+        <template v-else>
+          <loading-spinner :loading="true"/>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Vue from 'vue'
-  import { ReleasePagingMixin } from '../../components/releases/releases-paging-mixin'
-  import client from '~/plugins/apollo'
-  import gql from 'graphql-tag'
+import {
+  ApolloReleasesMixin,
+  ReleasePagingMixin
+} from '../../components/releases/releases-paging-mixin'
+import gql from 'graphql-tag'
+import ReleaseList from '../../components/releases/ReleaseList'
+import {createReleaseListQuery} from '../../components/releases/queries'
+import FilterResultsOptions from '../../components/shared/FilterResultsOptions'
+import MetaGenreFilter from '../../components/genres/MetaGenreFilter'
+import ReleaseFilterPanel from '../../components/features/mobile/ReleaseFilterPanel'
 
-  import ReleasePage from '../../components/releases/ReleasePage.vue'
-  import { createReleaseListQuery } from '../../components/releases/queries'
-  import FilterResultsOptions from '../../components/shared/FilterResultsOptions'
-  import MetaGenreFilter from '../../components/genres/MetaGenreFilter'
-  import ReleaseFilterPanel from '../../components/features/mobile/ReleaseFilterPanel'
-
-  const filterBy = JSON.stringify({
-    status: 'new'
+const filterBy = JSON.stringify({ status: 'new' })
+const filterByPeriod = function(period, options={}) {
+  return JSON.stringify({
+    status: 'new',
+    period: period,
+    ...options,
   })
+}
 
-  const filterByPeriod = function (period) {
-    return JSON.stringify({
+let releaseListTodayQuery = createReleaseListQuery ({filterBy: filterByPeriod (1)})
+let releaseList7Query = createReleaseListQuery ({filterBy: filterByPeriod (7)})
+let releaseList30Query = createReleaseListQuery ({filterBy: filterByPeriod (30)})
+// let releaseQuery = ApolloReleasesMixin (filterBy).apollo
+
+export default {
+  name: 'NewReleases',
+  components: {
+    ReleaseFilterPanel,
+    MetaGenreFilter,
+    FilterResultsOptions,
+    ReleaseList
+  },
+  mixins: [
+    ApolloReleasesMixin(filterBy),
+    ReleasePagingMixin (filterBy)
+  ],
+  data: function () {
+    return {
       status: 'new',
-      period: period
-    })
-  }
-
-  Vue.component('releases-page', ReleasePage)
-
-  export default {
-    components: {
-      ReleaseFilterPanel,
-      MetaGenreFilter,
-      FilterResultsOptions
-    },
-    name: 'NewReleases',
-    mixins: [ReleasePagingMixin(filterBy)],
-    asyncData: async function ({params}) {
-      let releasedTodayResults = await client.query(createReleaseListQuery({filterBy: filterByPeriod(1)}))
-      let releasedLast7Results = await client.query(createReleaseListQuery({filterBy: filterByPeriod(7)}))
-      let releasedLast30Results = await client.query(createReleaseListQuery({filterBy: filterByPeriod(30)}))
-      let {data} = await client.query(createReleaseListQuery({filterBy: filterBy}))
-      return {
-        releasedToday: releasedTodayResults.data.releases,
-        releasedLast7: releasedLast7Results.data.releases,
-        releasedLast30: releasedLast30Results.data.releases,
-        releases: data.releases
+      // genres: [],
+      genre: undefined,
+      todayLoading: false,
+      releases7Loading: false,
+      releases30Loading: false
+    }
+  },
+  apollo: {
+    releasedToday: {
+      ...releaseListTodayQuery,
+      watchLoading(isLoading, countModifier) {
+        this.todayLoading = isLoading
       }
     },
-    watch: {
-      filterBy (value) {
-        let days = this.filterOptions.days || this.filterOptions.period
-
-        this.releasedToday = {edges: []}
-        this.releasedLast7 = {edges: []}
-        this.releasedLast30 = {edges: []}
-        if (days) {
-          if (days >= 1) {
-            client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(1)})).then(
-              ({data}) => {
-                this.releasedToday = data.releases
-              }
-            )
-          }
-          if (days === 7) {
-            client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(days)})).then(
-              ({data}) => {
-                this.releasedLast7 = data.releases
-              }
-            )
-          }
-          if (days > 7 && days <= 31) {
-            client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(days)})).then(
-              ({data}) => {
-                this.releasedLast30 = data.releases
-              }
-            )
-          }
-        } else {
-          client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(1)})).then(
-            ({data}) => {
-              this.releasedToday = data.releases
-            }
-          )
-          client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(7)})).then(
-            ({data}) => {
-              this.releasedLast7 = data.releases
-            }
-          )
-          client.query(createReleaseListQuery({filterBy: this.getFilterByPeriod(30)})).then(
-            ({data}) => {
-              this.releasedLast30 = data.releases
-            }
-          )
-        }
+    releasedLast7: {
+      ...releaseList7Query,
+      watchLoading(isLoading, countModifier) {
+        this.releases7Loading = isLoading
       }
     },
-    methods: {
-      onFilterOptionsChanged (options) {
-        this.onFilterChanged(options)
-      },
-      getFilterByPeriod (period) {
-        let filterByDict = {
-          status: 'new',
-          period: period
-        }
-        if (this.filterBy) {
-          filterByDict = JSON.parse(this.filterBy)
-          filterByDict['period'] = period
-        }
-        return JSON.stringify(filterByDict)
+    releasedLast30: {
+      ...releaseList30Query,
+      watchLoading(isLoading, countModifier) {
+        this.releases30Loading = isLoading
       }
     },
-    data: function () {
-      return {
-        pageSize: 5,
+    // ...releaseQuery,
+    genres: {
+      query: gql`
+        query MetaGenres {
+          metaGenres {
+            name
+            slug
+            genres {
+              name
+              slug
+              parentGenre {
+                slug
+                name
+              }
+            }
+          }
+        }
+      `,
+      update: data => data.metaGenres
+    }
+  },
+  computed: {
+    // ...ApolloReleasesMixin (filterBy).computed,
+    releasesFound () {
+      return !this.releasedLast7
+        && !this.releasedLast30
+        && !this.releasedToday
+        && !this.releases
+    },
+    loadingPeriods () {
+      return this.todayLoading
+        || this.releases7Loading
+        || this.releases30Loading
+    }
+  },
+  // mounted() {
+  //   this.$apollo
+  //     .query({
+  //       query: gql`
+  //         query MetaGenres {
+  //           metaGenres {
+  //             name
+  //             slug
+  //             genres {
+  //               name
+  //               slug
+  //               parentGenre {
+  //                 slug
+  //                 name
+  //               }
+  //             }
+  //           }
+  //         }
+  //       `
+  //     })
+  //     .then(({ data }) => {
+  //       this.genres = data.metaGenres
+  //     })
+  // },
+  methods: {
+    onFilterOptionsChanged(options) {
+      this.onFilterChanged (options)
+    },
+    getFilterByPeriod(period) {
+      let filterByDict = {
         status: 'new',
-        genres: [],
-        genre: undefined
+        period: period
       }
+      if (this.filterBy) {
+        filterByDict = JSON.parse (this.filterBy)
+        filterByDict['period'] = period
+      }
+      return JSON.stringify (filterByDict)
     },
-    head () {
+    onGenreSelected(genre) {
+      this.onGenreChanged (genre)
+      let localFilter = this.getLocalFilter ()
+      const paging = {first: 30, after: ''}
+      this.$apollo.queries.releasedToday.refetch({
+        filterBy: filterByPeriod (1, localFilter),
+        ...paging
+      })
+      this.$apollo.queries.releasedLast7.refetch({
+        filterBy: filterByPeriod (7, localFilter),
+        ...paging
+      })
+      this.$apollo.queries.releasedLast30.refetch({
+        filterBy: filterByPeriod (30, localFilter),
+        ...paging
+      })
+    },
+    head() {
       return {
         title: 'OYE Records - New Releases',
         meta: [
@@ -165,29 +240,7 @@
           }
         ]
       }
-    },
-    mounted () {
-      client.query({
-        query: gql`query MetaGenres {
-           metaGenres {
-              name
-              slug
-              genres {
-                name
-                slug
-                parentGenre {
-                  slug
-                  name
-                }
-              }
-           }
-        }
-        `
-      }).then(
-        ({data}) => {
-          this.genres = data.metaGenres
-        }
-      )
     }
   }
+}
 </script>

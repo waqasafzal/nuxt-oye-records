@@ -1,42 +1,54 @@
 <template>
   <div>
-    <div class="row">
-      <release-item :release="getRelease(release)"
-                    v-for="(release, i) in getReleases(releases)"
-                    :key="i"
-                    class="col-6 col-sm-6 col-md-3 col-lg-2 product-list">
-      </release-item>
+    <div 
+      v-if="releases && (!fixed || !loading)"
+      class="row">
+      <release-item 
+        v-for="(release, i) in getReleases(releases)"
+        :release="getRelease(release)"
+        :key="i"
+        class="col-6 col-sm-6 col-md-3 col-lg-2 product-list"/>
     </div>
-    <loading-spinner :loading="loading"></loading-spinner>
+    <loading-spinner :loading="loading"/>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import { releasesConnections } from '../graphql/releases'
 
-  import Vue from 'vue'
-  import { releasesConnections } from '../graphql/releases'
+import LoadingSpinner from '../shared/LoadingSpinner.vue'
+import ReleaseItem from './ReleaseItem.vue'
 
-  import LoadingSpinner from '../shared/LoadingSpinner.vue'
-  import ReleaseItem from './ReleaseItem.vue'
+Vue.component('release-item', ReleaseItem)
+Vue.component('loading-spinner', LoadingSpinner)
 
-  Vue.component('release-item', ReleaseItem)
-  Vue.component('loading-spinner', LoadingSpinner)
-
-  export default {
-    name: 'ReleaseList',
-    props: ['releases', 'loading'],
-    fragments: {
-      releases: releasesConnections
+export default {
+  name: 'ReleaseList',
+  props: {
+    releases: {
+      type: [Object, Array],
+      default: null
     },
-    methods: {
-      getRelease (item) {
-        let release = item.node || item.release || item
-        return release
-      },
-      getReleases (items) {
-        let releases = items.edges || items
-        return releases
-      }
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    fixed: {
+      type: Boolean,
+      default: false
     }
-  }
+  },
+  fragments: {
+    releases: releasesConnections
+  },
+  methods: {
+    getRelease(item) {
+      return item.node || item.release || item
+    },
+    getReleases(items) {
+      return items.edges || items
+    }
+  },
+}
 </script>

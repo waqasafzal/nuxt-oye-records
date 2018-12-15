@@ -19,7 +19,9 @@
             <nuxt-link :to="{name: 'account-details'}">My account</nuxt-link>
           </div>
           <div class="ah-link">
-            <nuxt-link to="/" @click.native="logout()">Log out</nuxt-link>
+            <nuxt-link 
+              to="/" 
+              @click.native="logout()">Log out</nuxt-link>
           </div>
         </template>
         <template v-else>
@@ -28,14 +30,17 @@
           </div>
         </template>
         <div class="ah-link cart">
-          <nuxt-link :class="[isVisibleCart ? 'hover': '']" to="/cart" class="cart-link">
-              <span class="cart-label d-sm">
-                <span>My Cart</span>
-                <template v-if="cartCount > 0"> ({{ cartCount }})</template>
-              </span>
+          <nuxt-link 
+            :class="[isVisibleCart ? 'hover': '']" 
+            to="/cart" 
+            class="cart-link">
+            <span class="cart-label d-sm">
+              <span>My Cart</span>
+              <template v-if="cartCount > 0"> ({{ cartCount }})</template>
+            </span>
             <div class="cart-icon-box">
-              <cart-svg></cart-svg>
-              <span :class="['badge', cartCount === 0 ? reservationCount > 0 ? 'reserve': 'empty' : '']"></span>
+              <cart-svg/>
+              <span :class="['badge', cartCount === 0 ? reservationCount > 0 ? 'reserve': 'empty' : '']"/>
             </div>
           </nuxt-link>
         </div>
@@ -46,42 +51,50 @@
 </template>
 
 <script>
-  import { logout } from '~/utils/auth'
-  import { fetchCart, fetchUserProfile } from '../../components/cart/fetch-cart-mixin'
-  import CartSvg from '../shared/Cart'
+import { logout } from '~/utils/auth'
+import {
+  fetchCart,
+  fetchUserProfile
+} from '../../components/cart/fetch-cart-mixin'
+import CartSvg from '../shared/Cart'
 
-  export default {
-    components: {CartSvg},
-    name: 'AccountNavbar',
-    props: ['isOpenMobile'],
-    mixins: [fetchCart, fetchUserProfile],
-    computed: {
-      isAuthenticated () {
-        return this.$store.getters.isAuthenticated
-      },
-      cartCount () {
-        return this.$store.getters.cartItemCount
-      },
-      reservationCount () {
-        return this.$store.getters.reservationCount
-      }
+export default {
+  name: 'AccountNavbar',
+  components: { CartSvg },
+  mixins: [fetchCart, fetchUserProfile],
+  props: {
+    isOpenMobile: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data: function() {
+    return {
+      isVisibleCart: false
+    }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated
     },
-    data: function () {
-      return {
-        isVisibleCart: false
-      }
+    cartCount() {
+      return this.$store.getters.cartItemCount
     },
-    methods: {
-      logout: function () {
-        logout(this)
-      }
+    reservationCount() {
+      return this.$store.getters.reservationCount
+    }
+  },
+  methods: {
+    logout: function() {
+      logout(this)
     }
   }
+}
 </script>
 
-<style lang="scss">
-  .account-link {
-    justify-content: flex-end;
-    padding-right: 12px;
-  }
+<style>
+.account-link {
+  justify-content: flex-end !important;
+  padding-right: 12px !important;
+}
 </style>

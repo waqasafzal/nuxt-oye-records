@@ -1,30 +1,26 @@
-/* eslint-disable no-unused-vars */
+const pkg = require('./package')
 const webpack = require('webpack')
-const fetch = require('node-fetch')
 
-global.fetch = fetch
 
-var utils = require('./build/utils')
-
-var apiHost = '\'http://localhost:8000\''
+var apiHost = 'http://localhost:8000'
 
 if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
   process.env.NODE_ENV = 'production'
 }
 
-var setupAPI = function () {
-  apiHost = '\'http://localhost:8000\''
+var setupAPI = function() {
+  apiHost = 'http://localhost:8000'
   switch (process.env.NODE_ENV) {
     case 'production':
       // apiHost = "'https://oye-records.com'"
-      apiHost = '\'https://oye.kolter.it\''
+      apiHost = 'https://oye.kolter.it'
       break
     case 'testing':
-      apiHost = '\'https://oye.kolter.it\''
+      apiHost = 'https://oye.kolter.it'
       break
     case 'develop':
     default:
-      apiHost = '\'http://localhost:8000\''
+      apiHost = 'http://localhost:8000'
       break
   }
 }
@@ -43,14 +39,10 @@ const adyenSkin = process.env.ADYEN_SKIN_URL
   ? process.env.ADYEN_SKIN_URL
   : "'https://test.adyen.com/hpp/skipDetails.shtml'"
 
-const gaUrl = process.env.GA_URL
-  ? process.env.GA_URL
-  : "'UA-100941329-2'"
+const gaUrl = process.env.GA_URL ? process.env.GA_URL : "'UA-100941329-2'"
 
 module.exports = {
-  /*
-   ** Headers of the page
-   */
+  mode: 'universal',
   head: {
     title: 'OYE Records - Webshop',
     meta: [
@@ -95,68 +87,23 @@ module.exports = {
       {src: adyenScript}
     ]
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: {color: '#3B8070'},
-  /*
-   ** Build configuration
-   */
-  build: {
-    /*
-     ** Run ESLINT on save
-     */
-    extend (config, ctx) {
-      if (ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    },
-    loaders: [
+  modules: [
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios',
+    '@nuxtjs/apollo',
+    '@nuxtjs/proxy',
+    [
+      '@nuxtjs/google-analytics',
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
-        }
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        id: gaUrl,
+        ecommerce: {
+          enabled: true
         }
       }
-    ],
-    plugins: [
-      new webpack.DefinePlugin({
-        __API__: apiHost,
-        __ADYEN_SKIN__: adyenSkin,
-        __GA_URL__: gaUrl
-      })
-    ],
-    vendor: ['vue-cookie']
-  },
-  // modules: [
-  //   ['@nuxtjs/google-analytics', { ua: 'UA-100941329-1' }]
-  // ],
-  plugins: [
-    {src: '~plugins/vue-cookie', injectAs: 'cookie'},
-    {src: '~plugins/apollo.js', injectAs: 'apolloProvider'},
-    {src: '~plugins/vue-resource'},
-    {src: '~plugins/vue-social-sharing'},
-    {src: '~plugins/ga', ssr: false},
-    {src: '~plugins/vue-cookie-law.js', ssr: false},
-    {src: '~/plugins/vue-agile', ssr: false}
+    ]
   ],
   router: {
-    middleware: ['check-auth'],
+    // middleware: ['check-auth'],
     extendRoutes (routes, resolve) {
       routes.push(
         {
@@ -174,58 +121,110 @@ module.exports = {
       )
     }
   },
-  css: [
-    {src: '~assets/css/storefront/storefront.scss', lang: 'scss'}
-  ],
-  generate: {
-    routes: function () {
-      let cleanHostUrl = apiHost.replace(/'/g, '')
-      // var nextPage = cleanHostUrl + '/oye/api/releases?limit=-1'
-
-      // var generate = function (url) {
-      //   axios.get(url)
-      //     .then((res) => {
-      //       var nextPage = res.data.next
-      //       if (nextPage) {
-      //         generate(nextPage)
-      //       }
-      //       return res.data.results.map((release) => {
-      //         return '/releases/' + release.slug
-      //       })
-      //     })
-      // }
-      // generate(nextPage)karma
-
-      const axios = require('axios')
-      return axios.get(cleanHostUrl + '/oye/api/releases?limit=-1')
-        .then((res) => {
-          return res.data.map((release) => {
-            return '/releases/' + release.slug
-          })
-        })
-      // }
+  apollo: {
+    includeNodeModules: true,
+    errorHandler(error) {
+      console.log(
+        '%cError',
+        'background: red; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold;',
+        error.message
+      )
     },
-    dir: 'test-pkg',
-    interval: 1000,
-    minify: {
-      collapseBooleanAttributes: true,
-      collapseWhitespace: true,
-      decodeEntities: true,
-      minifyCSS: false,
-      minifyJS: false,
-      processConditionalComments: true,
-      removeAttributeQuotes: false,
-      removeComments: false,
-      removeEmptyAttributes: true,
-      removeOptionalTags: true,
-      removeRedundantAttributes: true,
-      removeScriptTypeAttributes: false,
-      removeStyleLinkTypeAttributes: false,
-      removeTagWhitespace: false,
-      sortAttributes: true,
-      sortClassName: true,
-      trimCustomFragments: true,
-      useShortDoctype: true
+    // required
+    networkInterfaces: {
+      default: '~/apollo/network-interfaces/default.js'
+    },
+    clientConfigs: {
+      default: {
+        // required
+        httpEndpoint: `${apiHost}/graphql`,
+        httpLinkOptions: {
+          credentials: 'same-origin'
+        }
+      }
     }
+  },
+  proxy: {
+    '/media': 'http://local.oye.com:8000/',
+    '/admin': 'http://local.oye.com:8000/',
+    '/static': 'http://local.oye.com:8000/',
+    '/oye': 'http://local.oye.com:8000/'
+  },
+
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: {color: '#30C46C'},
+
+  /*
+  ** Global CSS
+  */
+  css: [
+    './node_modules/bootstrap/dist/css/bootstrap.css',
+    // './assets/css/storefront/storefront.css',
+  ],
+
+  /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+    {src: '~/plugins/vue-cookie'},
+    {src: '~/plugins/vue-agile', ssr: false},
+    {src: '~/plugins/vue-cookie-law', ssr: false},
+    {src: '~/plugins/vue-social-sharing'},
+  ],
+
+  /*
+  ** Axios module configuration
+  */
+  axios: {
+  },
+  styleResources: {
+    sass: [
+      // [
+        './assets/css/storefront/storefront.scss',
+        // './assets/css/storefront/components/*.scss',
+        // './assets/css/storefront/_variables.scss'
+      // ]
+    ]
+  },
+  /*
+  ** Build configuration
+  */
+  build: {
+    /*
+    ** You can extend webpack config here
+    */
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        __API__: "'" + apiHost + "'",
+        __ADYEN_SKIN__: adyenSkin,
+        __GA_URL__: gaUrl
+      })
+    ],
+    loaders: {
+      vueStyle: {
+        ssrId: false
+      }
+    },
+    // optimization: {
+    //   minimize: true
+    // },
+    postcss: false,
+    cssSourceMap: false,
+    extractCSS: true
+    // cache: true,
+    // analyze: true
   }
 }

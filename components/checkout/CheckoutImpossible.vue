@@ -9,8 +9,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'CheckoutImpossible'
-  }
+export default {
+  name: 'CheckoutImpossible'
+}
 </script>
-

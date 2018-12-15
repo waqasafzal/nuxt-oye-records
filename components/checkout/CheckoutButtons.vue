@@ -1,11 +1,9 @@
 <template>
-  <div>
-
-  </div>
+  <div/>
 </template>
 
 <script>
-  export default {
-    name: 'CheckoutButtons'
-  }
+export default {
+  name: 'CheckoutButtons'
+}
 </script>

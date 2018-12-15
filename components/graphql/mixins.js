@@ -1,7 +1,5 @@
-import client from '~/plugins/apollo'
-
 const SimplePagination = {
-  data: function () {
+  data: function() {
     return {
       cursor: '',
       isLoading: false,
@@ -11,16 +9,16 @@ const SimplePagination = {
     }
   },
   computed: {
-    items () {
+    items() {
       return []
     },
-    hasNext () {
+    hasNext() {
       if (this.items.pageInfo) {
         return this.items.pageInfo.hasNextPage
       }
       return true
     },
-    loadingText () {
+    loadingText() {
       if (this.isLoading) {
         return 'Loading...'
       } else if (this.hasNext) {
@@ -31,7 +29,7 @@ const SimplePagination = {
     }
   },
   methods: {
-    loadNextPage () {
+    loadNextPage() {
       if (this.items) {
         let edges = this.items.edges
         if (edges && edges.length > 0) {
@@ -46,7 +44,7 @@ const SimplePagination = {
         this.isLoading = true
         let paginationQuery = this.paginationQuery()
         paginationQuery.variables['after'] = this.cursor
-        client.query(paginationQuery).then(({data}) => {
+        this.$apollo.query(paginationQuery).then(({ data }) => {
           this.isLoading = false
           var edges = []
           if (vm.items && vm.items['edges']) {
@@ -62,7 +60,7 @@ const SimplePagination = {
       }
     }
   },
-  mounted: function () {
+  mounted: function() {
     this.loadNextPage()
   }
 }

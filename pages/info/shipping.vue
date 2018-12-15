@@ -1,15 +1,15 @@
 <template>
   <div>
     <h2>Delivery</h2>
-    <p class="P3">Delivery: 1-2 days within Germany, 5 -30 days to the rest of the world <br/>Delivery times are approximate and could change due to the shipping companies.
+    <p class="P3">Delivery: 1-2 days within Germany, 5 -30 days to the rest of the world <br>Delivery times are approximate and could change due to the shipping companies.
     </p>
     <h2>Shipping prices</h2>
-    <p class="P1"></p>
+    <p class="P1"/>
     <p class="P2">2-LP = 2 x 12“, 3-LP =3 x 12“, etc.</p>
 
     <div class="shipping-germany">
       <h4>Germany</h4>
-      <div class="shipping-cost"></div>
+      <div class="shipping-cost"/>
       <div class="shipping-cost">1-10 12“ = 4,30 €</div>
       <div class="shipping-cost">more than 10 12“ = free shipping.</div>
     </div>
@@ -1733,7 +1733,7 @@ Zypern/Republik (Nordteil 5 (49 x 12“ max. 10 Kg) DHL 35,00 €
 </template>
 
 <script>
-  export default {
-    name: 'Shipping'
-  }
+export default {
+  name: 'Shipping'
+}
 </script>

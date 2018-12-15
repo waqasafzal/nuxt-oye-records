@@ -27,11 +27,11 @@
 //   }
 // }
 
-export const getReleaseListColumnNumber = function () {
+export const getReleaseListColumnNumber = function() {
   return 4
 }
 
 const ROWS = 5
-export const getPageSize = function () {
+export const getPageSize = function() {
   return getReleaseListColumnNumber() * ROWS
 }

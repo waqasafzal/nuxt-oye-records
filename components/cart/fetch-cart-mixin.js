@@ -3,7 +3,7 @@
  */
 
 const fetchCart = {
-  mounted () {
+  mounted() {
     const store = this.$store
     if (!store.getters.getCart) {
       store.dispatch('getCart').catch(e => console.error(e))
@@ -12,10 +12,10 @@ const fetchCart = {
 }
 
 const fetchUserProfile = {
-  mounted () {
+  mounted() {
     const store = this.$store
     store.dispatch('getProfile').catch(e => console.error(e))
   }
 }
 
-export {fetchCart, fetchUserProfile}
+export { fetchCart, fetchUserProfile }

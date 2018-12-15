@@ -11,22 +11,26 @@
                 <fieldset>
                   <div class="form-group">
                     <div :class="['form-group-item', 'input-validation']">
-                      <input class="form-control"
-                             type="email"
-                             placeholder="E-Mail Address *"
-                             v-model="email"
-                             required>
+                      <input 
+                        v-model="email"
+                        class="form-control"
+                        type="email"
+                        placeholder="E-Mail Address *"
+                        required>
                     </div>
                   </div>
                 </fieldset>
-                <input type="submit" value="Reset My Password" class="btn primary" />
+                <input 
+                  type="submit" 
+                  value="Reset My Password" 
+                  class="btn primary" >
               </form>
             </div>
           </template>
           <template v-else>
             <div class="col-8">
               <h3>Email sent</h3>
-              <div>We sent a link to <span class="green"><strong>{{email}}</strong></span> to reset your password.</div>
+              <div>We sent a link to <span class="green"><strong>{{ email }}</strong></span> to reset your password.</div>
             </div>
           </template>
         </div>
@@ -36,32 +40,32 @@
 </template>
 
 <script>
-  import { resetEmail } from '../../utils/auth/index'
-  export default {
-    name: 'ResetPassword',
-    data: function () {
-      return {
-        email: '',
-        emailSent: false
-      }
-    },
-    methods: {
-      onResetPassword () {
-        let vm = this
-        this.$store.dispatch('emailValidation', {email: this.email}).then(
-          isValid => {
-            if (isValid) {
-              resetEmail(this, this.email, () => {
-                vm.emailSent = true
-                this.$store.dispatch('addAlert', {
-                  message: `An email was sent out to ${this.email}`,
-                  level: 'info'
-                })
+import { resetEmail } from '../../utils/auth/index'
+export default {
+  name: 'ResetPassword',
+  data: function() {
+    return {
+      email: '',
+      emailSent: false
+    }
+  },
+  methods: {
+    onResetPassword() {
+      let vm = this
+      this.$store
+        .dispatch('emailValidation', { email: this.email })
+        .then(isValid => {
+          if (isValid) {
+            resetEmail(this, this.email, () => {
+              vm.emailSent = true
+              this.$store.dispatch('addAlert', {
+                message: `An email was sent out to ${this.email}`,
+                level: 'info'
               })
-            }
+            })
           }
-        )
-      }
+        })
     }
   }
+}
 </script>

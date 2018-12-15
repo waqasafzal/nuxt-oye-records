@@ -14,7 +14,7 @@
           </template>
           <template v-else>
             <h3>Create an account</h3>
-            <create-account-form @account-created="onCreated"></create-account-form>
+            <create-account-form @account-created="onCreated"/>
           </template>
         </div>
       </div>
@@ -23,27 +23,27 @@
 </template>
 
 <script>
-  import CreateAccountForm from '../../components/account/CreateAccountForm'
-  export default {
-    components: {CreateAccountForm},
-    name: 'CreateAccount',
-    data: function () {
-      return {
-        accountCreated: false
-      }
-    },
-    methods: {
-      onCreated () {
-        this.accountCreated = true
-      }
+import CreateAccountForm from '../../components/account/CreateAccountForm'
+export default {
+  name: 'CreateAccount',
+  components: { CreateAccountForm },
+  data: function() {
+    return {
+      accountCreated: false
+    }
+  },
+  methods: {
+    onCreated() {
+      this.accountCreated = true
     }
   }
+}
 </script>
 
 <style>
-  .centered-form-panel {
-    max-width: 765px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.centered-form-panel {
+  max-width: 765px;
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>

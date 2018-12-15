@@ -3,65 +3,65 @@
  */
 
 import gql from 'graphql-tag'
-import {release} from '~/components/graphql/releases'
+import { release } from '~/components/graphql/releases'
 
 export const order = gql`
-    fragment Order on OrderType {
-        id
-        pk
-        price
-        date
-        total
-        status
-        porto
-        isPaid
-        isSelfCollector
-        paymentType
-        canDownload
-        excludedVat
-    }
+  fragment Order on OrderType {
+    id
+    pk
+    price
+    date
+    total
+    status
+    porto
+    isPaid
+    isSelfCollector
+    paymentType
+    canDownload
+    excludedVat
+  }
 `
 
 export const oyeCart = gql`
-    fragment OyeCart on OyeCartType {
-        pk
-        quantity
-        vat
-        totalAvailable
-        totalAvailableNet
-        lines(backorder: false) {
-            release {
-                ...Release
-                releasedAt
-            }
-            quantity
-            smallImageUrl
-            notAvailable
-            pricePerItem
-            lineTotal
-            backorder
-            isReserved
-        }
-        preorderLines: lines(backorder: true) {
-            release {
-                ...Release
-                releasedAt
-            }
-            quantity
-            smallImageUrl
-            notAvailable
-            lineTotal
-            backorder
-        }
-        cookie
-        shippingOptions {
-            isVatExcluded
-            options {
-                id
-                name
-                price
-            }
-        }
+  fragment OyeCart on OyeCartType {
+    pk
+    quantity
+    vat
+    totalAvailable
+    totalAvailableNet
+    lines(backorder: false) {
+      release {
+        ...Release
+        releasedAt
+      }
+      quantity
+      smallImageUrl
+      notAvailable
+      pricePerItem
+      lineTotal
+      backorder
+      isReserved
     }
-    ${release}
+    preorderLines: lines(backorder: true) {
+      release {
+        ...Release
+        releasedAt
+      }
+      quantity
+      smallImageUrl
+      notAvailable
+      lineTotal
+      backorder
+    }
+    cookie
+    shippingOptions {
+      isVatExcluded
+      options {
+        id
+        name
+        price
+      }
+    }
+  }
+  ${release}
 `

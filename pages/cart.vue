@@ -3,15 +3,14 @@
     <div class="page__header">
       <h1>Cart</h1>
     </div>
-    <cart-content></cart-content>
+    <cart-content/>
   </div>
 </template>
 
 <script>
-  import CartContent from '~/components/cart/CartContent'
-  export default {
-    components: {CartContent},
-    name: 'CartPage'
-  }
-
+import CartContent from '~/components/cart/CartContent'
+export default {
+  name: 'CartPage',
+  components: { CartContent }
+}
 </script>

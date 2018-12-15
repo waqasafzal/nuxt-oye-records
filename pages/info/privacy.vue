@@ -12,7 +12,7 @@
     <p class="p2">OYE Records UG (Haftungsbeschr&auml;nkt), Oderbergerstr. 4, 10435 Berlin</p>
     <p class="p2">Gesch&auml;ftsf&uuml;hrung:</p>
     <p class="p3"><span class="s1">Tinko Rohst &amp; Markus Lindner</span></p>
-    <p class="p3"><span class="s2"><br /></span><span class="s1">Amtsgericht Berlin-Charlottenburg / Registernummer: HRB 150596 B / USt-ID-Nr.: DE291540858</span></p>
+    <p class="p3"><span class="s2"><br ></span><span class="s1">Amtsgericht Berlin-Charlottenburg / Registernummer: HRB 150596 B / USt-ID-Nr.: DE291540858</span></p>
     <p class="p2">Tel: +49 30 666 47 821</p>
     <p class="p2">Mail: <a href="mailto:privacy@oye-records.com">privacy@oye-records.com</a></p>
     <p class="p2"><span class="s3">Impressum: <a href="https://oye-records.com/info/imprint"><span class="s2">https://oye-records.com/info/imprint</span></a></span></p>
@@ -34,7 +34,7 @@
       <li class="li1">Sie sind zudem berechtigt bei uns dar&uuml;ber Auskunft zu erhalten, welche personenbezogenen Daten bei uns &uuml;ber Sie gespeichert sind. Ferner berichtigen oder l&ouml;schen wir personenbezogene Daten auf Ihren Wunsch jederzeit, sofern dem keine gesetzlichen Aufbewahrungspflichten entgegenstehen. S&auml;mtliche unserer Mitarbeiter stehen Ihnen in diesem Zusammenhang gerne zur Verf&uuml;gung.</li>
     </ol>
 
-    <h3>4. Sicherheit der Datenübertragung</h3>
+    <h3>4. Sicherheit der Daten&uuml;bertragung</h3>
     <ol>
       <li class="li1">
         <p class="p1">1. Um die Sicherheit Ihrer personenbezogenen Daten bei der &Uuml;bertragung zu sch&uuml;tzen, verwenden wir dem aktuellen Stand der Technik entsprechende SSL-Verschl&uuml;sselungsverfahren. Sie erkennen eine verschl&uuml;sselte Daten&uuml;bertragung durch das am Anfang der Browserzeile stehende &bdquo;https://www.oye-records.com&ldquo;. Unter personenbezogene Daten fallen beispielsweise Ihr Name, Ihre Anschrift oder E-Mailadresse sowie weitere Daten, die Sie uns bei der Registrierung und beim Anlegen Ihres Kundenkontos mitteilen. &Uuml;bermitteln Sie Ihre vertraulichen Informationen nur bei aktivierter SSL-Verschl&uuml;sselung.</p>
@@ -53,7 +53,7 @@
 
     <h3>6. Google Analytics</h3>
     <ol class="ol1">
-      <li class="li1">Zum Zwecke der bedarfsgerechten Gestaltung und fortlaufenden Optimierung unserer Seiten nutzen wir Google Analytics, ein Webanalysedienst der Google Inc. <a href="https://www.google.de/intl/de/about/">https://www.google.de/intl/de/about/</a><span class="Apple-converted-space">&nbsp; </span>(1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; im Folgenden "Google").In diesem Zusammenhang werden pseudonymisierte Nutzungsprofile erstellt und Cookies (siehe unter Ziff. 5) verwendet. Die durch den Cookie erzeugten Informationen &uuml;ber Ihre Benutzung dieser Website wie Browser-Typ/-Version, verwendetes Betriebssystem, Referrer-URL (die zuvor besuchte Seite),Hostname des zugreifenden Rechners (IP-Adresse) und Uhrzeit der Serveranfrage, werden an einen Server von Google in den USA &uuml;bertragen und dort gespeichert. Die Informationen werden verwendet, um die Nutzung der Website auszuwerten, um Reports &uuml;ber die Websiteaktivit&auml;ten zusammenzustellen und um weitere mit der Websitenutzung und der Internetnutzung verbundene Dienstleistungen zu Zwecken der Marktforschung und bedarfsgerechten Gestaltung dieser Internetseiten zu erbringen. Auch werden diese Informationen gegebenenfalls an Dritte &uuml;bertragen, sofern dies gesetzlich vorgeschrieben ist oder soweit Dritte diese Daten im Auftrag verarbeiten. Es wird in keinem Fall Ihre IP-Adresse mit anderen Daten von Google zusammengef&uuml;hrt. Die IP-Adressen werden anonymisiert, so dass eine Zuordnung nicht m&ouml;glich ist.</li>
+      <li class="li1">Zum Zwecke der bedarfsgerechten Gestaltung und fortlaufenden Optimierung unserer Seiten nutzen wir Google Analytics, ein Webanalysedienst der Google Inc. <a href="https://www.google.de/intl/de/about/">https://www.google.de/intl/de/about/</a><span class="Apple-converted-space">&nbsp; </span>(1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; im Folgenden &quot;Google&quot;).In diesem Zusammenhang werden pseudonymisierte Nutzungsprofile erstellt und Cookies (siehe unter Ziff. 5) verwendet. Die durch den Cookie erzeugten Informationen &uuml;ber Ihre Benutzung dieser Website wie Browser-Typ/-Version, verwendetes Betriebssystem, Referrer-URL (die zuvor besuchte Seite),Hostname des zugreifenden Rechners (IP-Adresse) und Uhrzeit der Serveranfrage, werden an einen Server von Google in den USA &uuml;bertragen und dort gespeichert. Die Informationen werden verwendet, um die Nutzung der Website auszuwerten, um Reports &uuml;ber die Websiteaktivit&auml;ten zusammenzustellen und um weitere mit der Websitenutzung und der Internetnutzung verbundene Dienstleistungen zu Zwecken der Marktforschung und bedarfsgerechten Gestaltung dieser Internetseiten zu erbringen. Auch werden diese Informationen gegebenenfalls an Dritte &uuml;bertragen, sofern dies gesetzlich vorgeschrieben ist oder soweit Dritte diese Daten im Auftrag verarbeiten. Es wird in keinem Fall Ihre IP-Adresse mit anderen Daten von Google zusammengef&uuml;hrt. Die IP-Adressen werden anonymisiert, so dass eine Zuordnung nicht m&ouml;glich ist.</li>
       <li class="li1">Sie k&ouml;nnen die Installation der Cookies durch eine entsprechende Einstellung der Browser-Software verhindern (siehe auch Ziffer 5); wir weisen jedoch darauf hin, dass in diesem Fall gegebenenfalls nicht s&auml;mtliche Funktionen dieser Website vollumf&auml;nglich genutzt werden k&ouml;nnen.</li>
       <li class="li1">Sie k&ouml;nnen dar&uuml;ber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung der Website bezogenen Daten (inkl. Ihrer IP-Adresse) sowie die Verarbeitung dieser Daten durch Google verhindern, indem Sie ein Browser-Add-on herunterladen und installieren <a href="https://tools.google.com/dlpage/gaoptout?hl=de">https://tools.google.com/dlpage/gaoptout?hl=de</a> .</li>
       <li class="li1">Alternativ zum Browser-Add-on, insbesondere bei Browsern auf mobilen Endger&auml;ten, k&ouml;nnen Sie die Erfassung durch Google Analytics zudem verhindern, indem Sie auf diesen Link klicken. Es wird ein Opt-out-Cookie gesetzt, das die zuk&uuml;nftige Erfassung Ihrer Daten beim Besuch dieser Website verhindert. Der Opt-out-Cookie gilt nur in diesem Browser und nur f&uuml;r unsere Website und wird auf Ihrem Ger&auml;t abgelegt. L&ouml;schen Sie die Cookies in diesem Browser, m&uuml;ssen Sie das Opt-out-Cookie erneut setzen.</li>
@@ -63,21 +63,22 @@
     <h3>7. Twitter</h3>
     <ol class="ol1">
       <li class="li1">Auf unseren Internetseiten sind Plugins des Kurznachrichtennetzwerks der Twitter Inc. (Twitter) integriert. Die Twitter-Plugins (Tweet-Button) erkennen Sie an dem Twitter-Logo auf unserer Seite. Eine &Uuml;bersicht &uuml;ber die g&auml;ngigen Twitter Logos erhalten Sie z.B. auf der Seite <a href="https://about.twitter.com/de/company/brand-resources.html">https://about.twitter.com/de/company/brand-resources.html</a> .</li>
-      <li class="li1">Wenn Sie eine Seite unseres Webauftritts aufrufen, die ein solches Plugin enth&auml;lt, wird eine direkte Verbindung zwischen Ihrem Browser und dem Twitter-Server hergestellt. Twitter erh&auml;lt dadurch die Information, dass Sie mit Ihrer IP-Adresse unsere Seite besucht haben. Wenn Sie den Twitter "tweet-Button" anklicken, w&auml;hrend Sie in Ihrem Twitter-Account eingeloggt sind, k&ouml;nnen Sie die Inhalte unserer Seiten auf Ihrem Twitter-Profil verlinken. Dadurch kann Twitter den Besuch unserer Seiten Ihrem Benutzerkonto zuordnen. Wir weisen darauf hin, dass wir als Anbieter der Seiten keine Kenntnis vom Inhalt der &uuml;bermittelten Daten sowie deren Nutzung durch Twitter erhalten.</li>
+      <li class="li1">Wenn Sie eine Seite unseres Webauftritts aufrufen, die ein solches Plugin enth&auml;lt, wird eine direkte Verbindung zwischen Ihrem Browser und dem Twitter-Server hergestellt. Twitter erh&auml;lt dadurch die Information, dass Sie mit Ihrer IP-Adresse unsere Seite besucht haben. Wenn Sie den Twitter &quot;tweet-Button&quot; anklicken, w&auml;hrend Sie in Ihrem Twitter-Account eingeloggt sind, k&ouml;nnen Sie die Inhalte unserer Seiten auf Ihrem Twitter-Profil verlinken. Dadurch kann Twitter den Besuch unserer Seiten Ihrem Benutzerkonto zuordnen. Wir weisen darauf hin, dass wir als Anbieter der Seiten keine Kenntnis vom Inhalt der &uuml;bermittelten Daten sowie deren Nutzung durch Twitter erhalten.</li>
       <li class="li1">Wenn Sie nicht w&uuml;nschen, dass Twitter den Besuch unserer Seiten zuordnen kann, loggen Sie sich bitte aus Ihrem Twitter-Benutzerkonto aus.</li>
       <li class="li1">Weitere Informationen hierzu finden Sie in der Datenschutzerkl&auml;rung von Twitter ((<a href="https://twitter.com/privacy">https://twitter.com/privacy</a>).</li>
     </ol>
 
     <h3>8. Soziale Medien</h3>
-    <p>Wir unterhalten Onlinepräsenzen innerhalb sozialer Netzwerke und Plattformen wie Facebook, Twitter, Google+ & Instagram, um mit den dort aktiven Kunden, Interessenten und Nutzer kommunizieren und sie dort über unser Angebot informieren zu können. Beim Aufruf der jeweiligen Netzwerke und Plattformen gelten die Geschäftsbedingungen und die Datenverarbeitungsrichtlinien deren jeweiligen Betreiber.  Soweit nicht anders im Rahmen unserer Datenschutzerklärung angegeben, verarbeiten wir die Daten der Nutzer sofern diese mit uns innerhalb der sozialen Netzwerke und Plattformen kommunizieren, wie z.B. Kontaktdaten zukommen lassen oder uns Nachrichten mit Informationen über die Kunden zusenden.</p>
+    <p>Wir unterhalten Onlinepr&auml;senzen innerhalb sozialer Netzwerke und Plattformen wie Facebook, Twitter, Google+ &amp; Instagram, um mit den dort aktiven Kunden, Interessenten und Nutzer kommunizieren und sie dort &uuml;ber unser Angebot informieren zu k&ouml;nnen. Beim Aufruf der jeweiligen Netzwerke und Plattformen gelten die Gesch&auml;ftsbedingungen und die Datenverarbeitungsrichtlinien deren jeweiligen Betreiber. Soweit nicht anders im Rahmen unserer Datenschutzerkl&auml;rung angegeben, verarbeiten wir die Daten der Nutzer sofern diese mit uns innerhalb der sozialen Netzwerke und Plattformen kommunizieren, wie z.B. Kontaktdaten zukommen lassen oder uns Nachrichten mit Informationen &uuml;ber die Kunden zusenden.
+    </p>
 
     <h3>8.1. Facebook</h3>
     <ol class="ol1">
-      <li class="li1">Auf unserer Website kommen Social-Media Plugins von Facebook zum Einsatz, um deren Nutzung pers&ouml;nlicher zu gestalten. Hierf&uuml;r nutzen wir den "TEILEN" (Share)-Button. Es handelt sich dabei um ein Angebot von Facebook.</li>
+      <li class="li1">Auf unserer Website kommen Social-Media Plugins von Facebook zum Einsatz, um deren Nutzung pers&ouml;nlicher zu gestalten. Hierf&uuml;r nutzen wir den &quot;TEILEN&quot; (Share)-Button. Es handelt sich dabei um ein Angebot von Facebook.</li>
       <li class="li1">Wenn Sie eine Seite unseres Webauftritts aufrufen, die ein solches Plugin enth&auml;lt, baut Ihr Browser eine direkte Verbindung mit den Servern von Facebook auf. Der Inhalt des Plugins wird von Facebook direkt an Ihren Browser &uuml;bermittelt und von diesem in die Webseite eingebunden.</li>
       <li class="li1">Durch die Einbindung der Plugins erh&auml;lt Facebook die Information, dass Ihr Browser die entsprechende Seite unseres Webauftritts aufgerufen hat, auch wenn Sie kein Facebook-Konto besitzen oder gerade nicht bei Facebook eingeloggt sind. Diese Information (einschlie&szlig;lich Ihrer IP-Adresse) wird von Ihrem Browser direkt an einen Server von Facebook in den USA &uuml;bermittelt und dort gespeichert.</li>
-      <li class="li1">Sind Sie bei Facebook eingeloggt, kann Facebook den Besuch unserer Website Ihrem Facebook-Konto direkt zuordnen. Wenn Sie mit den Plugins interagieren, zum Beispiel den "TEILEN"-Button bet&auml;tigen, wird die entsprechende Information ebenfalls direkt an einen Server von Facebook &uuml;bermittelt und dort gespeichert. Die Informationen werden zudem auf Facebook ver&ouml;ffentlicht und Ihren Facebook-Freunden angezeigt.</li>
-      <li class="li1">Facebook kann diese Informationen zum Zwecke der Werbung, Marktforschung und bedarfsgerechten Gestaltung der Facebook-Seiten benutzen. Hierzu werden von Facebook Nutzungs-, Interessen- und Beziehungsprofile erstellt, z. B. um Ihre Nutzung unserer Website im Hinblick auf die Ihnen bei Facebook eingeblendeten Werbeanzeigen auszuwerten, andere Facebook-Nutzer &uuml;ber Ihre Aktivit&auml;ten auf unserer Website zu informieren und um weitere mit der Nutzung von Facebook verbundene Dienstleistungen zu erbringen.</li>
+      <li class="li1">Sind Sie bei Facebook eingeloggt, kann Facebook den Besuch unserer Website Ihrem Facebook-Konto direkt zuordnen. Wenn Sie mit den Plugins interagieren, zum Beispiel den &quot;TEILEN&quot;-Button bet&auml;tigen, wird die entsprechende Information ebenfalls direkt an einen Server von Facebook &uuml;bermittelt und dort gespeichert. Die Informationen werden zudem auf Facebook ver&ouml;ffentlicht und Ihren Facebook-Freunden angezeigt.</li>
+      <li class="li1">F acebook kann diese Informationen zum Zwecke der Werbung, Marktforschung und bedarfsgerechten Gestaltung der Facebook-Seiten benutzen. Hierzu werden von Facebook Nutzungs-, Interessen- und Beziehungsprofile erstellt, z. B. um Ihre Nutzung unserer Website im Hinblick auf die Ihnen bei Facebook eingeblendeten Werbeanzeigen auszuwerten, andere Facebook-Nutzer &uuml;ber Ihre Aktivit&auml;ten auf unserer Website zu informieren und um weitere mit der Nutzung von Facebook verbundene Dienstleistungen zu erbringen.</li>
       <li class="li1">Wenn Sie nicht m&ouml;chten, dass Facebook die &uuml;ber unseren Webauftritt gesammelten Daten Ihrem Facebook-Konto zuordnet, m&uuml;ssen Sie sich vor Ihrem Besuch unserer Website bei Facebook ausloggen.</li>
       <li class="li1">Zweck und Umfang der Datenerhebung und die weitere Verarbeitung und Nutzung der Daten durch Facebook sowie Ihre diesbez&uuml;glichen Rechte und Einstellungsm&ouml;glichkeiten zum Schutz Ihrer Privatsph&auml;re entnehmen Sie bitte den Datenschutzhinweisen <a href="https://www.facebook.com/about/privacy/">https://www.facebook.com/about/privacy/</a> von Facebook.</li>
     </ol>
@@ -85,7 +86,7 @@
     <h3>9. Vertragsabwicklung und Bezahlung</h3>
     <ol>
       <li>
-        Um Ihre Bestellung abwickeln zu können arbeiten wir mit verschiedenen Dienstleistern zusammen. Dies betrifft vor allem Zahlungsdienste und Transportunternehmen. Dabei ist es unerlässlich diesen Dienstleistern gewisse personenbezogene Daten zur Verfügung zu stellen um eine reibungslose Abwicklung der Bestellung zu ermöglichen.
+        Um Ihre Bestellung abwickeln zu k&ouml;nnen arbeiten wir mit verschiedenen Dienstleistern zusammen. Dies betrifft vor allem Zahlungsdienste und Transportunternehmen. Dabei ist es unerl&auml;sslich diesen Dienstleistern gewisse personenbezogene Daten zur Verf&uuml;gung zu stellen um eine reibungslose Abwicklung der Bestellung zu erm&ouml;glichen.
       </li>
     </ol>
 
@@ -114,10 +115,10 @@
       <li class="li1">Die &Uuml;bermittlung der Daten erfolgt dabei auf Grundlage des Art. 6 Abs. 1 S. 1 lit. b DSGVO.</li>
       <li class="li1">Diese &Uuml;bermittelung ist zur Abwicklung Ihrer Bestellung mit der von Ihnen ausgew&auml;hlten Zahlungsart notwendig, insbesondere zur Best&auml;tigung Ihrer Identit&auml;t, zur Administration Ihrer Zahlung und der Kundenbeziehung.</li>
       <li class="li1">Zudem k&ouml;nnen personenbezogenen Daten von PayPal auch an andere Leistungserbringer, wie z.B. an Subunternehmer oder andere verbundene Unternehmen weitergegeben werden, soweit dies zur Erf&uuml;llung der vertraglichen Verpflichtungen aus Ihrer Bestellung erforderlich ist oder die personenbezogenen Daten im Auftrag verarbeitet werden sollen.</li>
-      <li class="li1">Bitte beachten Sie, dass sich PayPal f&uuml;r manche Zahlungsmethoden wie z.B. "Kreditkarte" oder "Kauf auf Rechnung" personenbezogenen Daten an Wirtschaftsauskunfteien &uuml;bermittelt. Diese &Uuml;bermittlung dient der Identit&auml;ts- und Bonit&auml;tspr&uuml;fung in Bezug auf die von Ihnen get&auml;tigte Bestellung. Um welche Auskunfteien es sich hierbei handelt und welche Daten von PayPal allgemein erhoben, verarbeitet, gespeichert und weitergegeben werden, entnehmen Sie der Datenschutzerkl&auml;rung von PayPal auf der Internetseite <a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full">https://www.paypal.com/de/webapps/mpp/ua/privacy-full</a>.</li>
+      <li class="li1">Bitte beachten Sie, dass sich PayPal f&uuml;r manche Zahlungsmethoden wie z.B. &quot;Kreditkarte&quot; oder &quot;Kauf auf Rechnung&quot; personenbezogenen Daten an Wirtschaftsauskunfteien &uuml;bermittelt. Diese &Uuml;bermittlung dient der Identit&auml;ts- und Bonit&auml;tspr&uuml;fung in Bezug auf die von Ihnen get&auml;tigte Bestellung. Um welche Auskunfteien es sich hierbei handelt und welche Daten von PayPal allgemein erhoben, verarbeitet, gespeichert und weitergegeben werden, entnehmen Sie der Datenschutzerkl&auml;rung von PayPal auf der Internetseite <a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full">https://www.paypal.com/de/webapps/mpp/ua/privacy-full</a>.</li>
     </ul>
 
-    <h4>Sofortüberweisung</h4>
+    <h4>Sofort&uuml;berweisung</h4>
     <ul class="ul1">
       <li class="li1">Auf unserer Website haben Sie zudem die M&ouml;glichkeit &uuml;ber den Anbieter <span class="s1">Adyen GmbH</span> &bdquo;Sofort&uuml;berweisung&ldquo; die Bezahlung Ihrer Bestellung zu t&auml;tigen. Bei Sofort&uuml;berweisung handelt es sich um einen Bezahldienst welcher die bargeldlose Bezahlung von Bestellungen im Onlinehandel erm&ouml;glicht.</li>
       <li class="li2"><span class="s2">Sofort&uuml;berweisung ist ein Angebot der </span><span class="s3">Adyen GmbH, Hackescher Markt 4 Geb&auml;ude 44, 10178 Berlin</span></li>
@@ -130,15 +131,15 @@
 
     <h4>Kreditkarte</h4>
     <ul class="ul1">
-      <li class="li1">Wenn Sie bei Ihrer Bestellung die Zahlungsart<span class="Apple-converted-space">&nbsp; </span>"Kreditkarte&ldquo; angeben, geben wir Ihre personenbezogenen Daten zum Zwecke der Zahlungsabwicklung an die <span class="s1">Adyen GmbH, Hackescher Markt 4 Geb&auml;ude 44, 10178 Berlin </span> weiter. Die Weitergabe Ihrer personenbezogenen Daten erfolgt dabei in dem f&uuml;r die Zahlungsabwicklung in dem bereits unter dem unter den Punkten PayPal und Sofort&uuml;berweisung genannten, Umfang zu Vertragsdurchf&uuml;hrung.</li>
+      <li class="li1">Wenn Sie bei Ihrer Bestellung die Zahlungsart &nbsp; &ldquo;Kreditkarte&ldquo; angeben, geben wir Ihre personenbezogenen Daten zum Zwecke der Zahlungsabwicklung an die <span class="s1">Adyen GmbH, Hackescher Markt 4 Geb&auml;ude 44, 10178 Berlin </span> weiter. Die Weitergabe Ihrer personenbezogenen Daten erfolgt dabei in dem f&uuml;r die Zahlungsabwicklung in dem bereits unter dem unter den Punkten PayPal und Sofort&uuml;berweisung genannten, Umfang zu Vertragsdurchf&uuml;hrung.</li>
       <li class="li1">Die &Uuml;bermittlung der Daten erfolgt auf Grundlage des Art. 6 Abs. 1 S. 1 lit. b DSGVO.</li>
     </ul>
 
     <h3>10 Newsletter</h3>
-    <p class="p1"><span class="s1">Der Versand der Newsletter erfolgt mittels des Versanddienstleisters &bdquo;MailChimp&ldquo;, einer Newsletterversandplattform des US-Anbieters Rocket Science Group, LLC, 675 Ponce De Leon Ave NE #5000, Atlanta, GA 30308, USA. Die Datenschutzbestimmungen des Versanddienstleisters k&ouml;nnen Sie hier einsehen: <a href="https://mailchimp.com/legal/privacy/"><span class="s2">https://mailchimp.com/legal/privacy/</span></a>. The Rocket Science Group LLC d/b/a MailChimp ist unter dem Privacy-Shield-Abkommen zertifiziert und bietet hierdurch eine Garantie, das europ&auml;isches Datenschutzniveau einzuhalten (<a href="https://www.privacyshield.gov/participant?id=a2zt0000000TO6hAAG&amp;status=Active"><span class="s2">https://www.privacyshield.gov/participant?id=a2zt0000000TO6hAAG&amp;status=Active</span></a>). Der Versanddienstleister wird auf Grundlage unserer berechtigten Interessen gem. Art. 6 Abs. 1 lit. f. DSGVO und eines Auftragsverarbeitungsvertrages gem. Art. 28 Abs. 3 S. 1 DSGVO eingesetzt.</span><span class="s3"><br /><br /></span><span class="s1">Der Versanddienstleister kann die Daten der Empf&auml;nger in pseudonymer Form, d.h. ohne Zuordnung zu einem Nutzer, zur Optimierung oder Verbesserung der eigenen Services nutzen, z.B. zur technischen Optimierung des Versandes und der Darstellung der Newsletter oder f&uuml;r statistische Zwecke verwenden. Der Versanddienstleister nutzt die Daten unserer Newsletterempf&auml;nger jedoch nicht, um diese selbst anzuschreiben oder um die Daten an Dritte weiterzugeben.</span></p>
+    <p class="p1"><span class="s1">Der Versand der Newsletter erfolgt mittels des Versanddienstleisters &bdquo;MailChimp&ldquo;, einer Newsletterversandplattform des US-Anbieters Rocket Science Group, LLC, 675 Ponce De Leon Ave NE #5000, Atlanta, GA 30308, USA. Die Datenschutzbestimmungen des Versanddienstleisters k&ouml;nnen Sie hier einsehen: <a href="https://mailchimp.com/legal/privacy/"><span class="s2">https://mailchimp.com/legal/privacy/</span></a>. The Rocket Science Group LLC d/b/a MailChimp ist unter dem Privacy-Shield-Abkommen zertifiziert und bietet hierdurch eine Garantie, das europ&auml;isches Datenschutzniveau einzuhalten (<a href="https://www.privacyshield.gov/participant?id=a2zt0000000TO6hAAG&amp;status=Active"><span class="s2">https://www.privacyshield.gov/participant?id=a2zt0000000TO6hAAG&amp;status=Active</span></a>). Der Versanddienstleister wird auf Grundlage unserer berechtigten Interessen gem. Art. 6 Abs. 1 lit. f. DSGVO und eines Auftragsverarbeitungsvertrages gem. Art. 28 Abs. 3 S. 1 DSGVO eingesetzt.</span><span class="s3"><br ><br ></span><span class="s1">Der Versanddienstleister kann die Daten der Empf&auml;nger in pseudonymer Form, d.h. ohne Zuordnung zu einem Nutzer, zur Optimierung oder Verbesserung der eigenen Services nutzen, z.B. zur technischen Optimierung des Versandes und der Darstellung der Newsletter oder f&uuml;r statistische Zwecke verwenden. Der Versanddienstleister nutzt die Daten unserer Newsletterempf&auml;nger jedoch nicht, um diese selbst anzuschreiben oder um die Daten an Dritte weiterzugeben.</span></p>
 
     <h3>11 Dauer der Speicherung Ihrer Daten</h3>
-    <p>Die Speicherung Ihrer Daten erfolgt grundsätzlich nur so lange dies für die Durchführung der Verträge mit Ihnen oder die Vertragsabwicklung erforderlich ist. Darüber hinaus sind wir gesetzlich verpflichtet gewisse Daten über einen bestimmten Zeitraum aufzubewahren (z.B. steuerliche Aufbewahrungsfristen). Nach dem Ablauf dieser Fristen werden die Daten routinemäßig gelöscht.</p>
+    <p>Die Speicherung Ihrer Daten erfolgt grunds&auml;tzlich nur so lange dies f&uuml;r die Durchf&uuml;hrung der Vertr&auml;ge mit Ihnen oder die Vertragsabwicklung erforderlich ist. Dar&uuml;ber hinaus sind wir gesetzlich verpflichtet gewisse Daten &uuml;ber einen bestimmten Zeitraum aufzubewahren (z.B. steuerliche Aufbewahrungsfristen). Nach dem Ablauf dieser Fristen werden die Daten routinem&auml;ßig gel&ouml;scht.</p>
 
     <h3>12 Betroffenenrechte</h3>
     <p>Sie haben das Recht:</p>
@@ -158,50 +159,17 @@
       <li class="li1">M&ouml;chten Sie von Ihrem Widerrufs- oder Widerspruchsrecht Gebrauch machen, gen&uuml;gt eine E-Mail an privacy@oye-records.com</li>
     </ol>
 
-    <h3>14 Aktualität und Änderung dieser Datenschutzerklärung</h3>
+    <h3>14 Aktualit&auml;t und &Auml;nderung dieser Datenschutzerkl&auml;rung</h3>
     <ol class="ol1">
       <li class="li1">Diese Datenschutzerkl&auml;rung ist aktuell g&uuml;ltig und hat den Stand Mai 2018.</li>
       <li class="li1">Durch die Weiterentwicklung unserer Website und Angebote dar&uuml;ber oder aufgrund ge&auml;nderter gesetzlicher beziehungsweise beh&ouml;rdlicher Vorgaben kann es notwendig werden, diese Datenschutzerkl&auml;rung zu &auml;ndern. Die jeweils aktuelle Datenschutzerkl&auml;rung kann jederzeit auf der Website unter <a href="https://oye-records.com/info/privacy">https://oye-records.com/info/privacy</a> von Ihnen abgerufen und ausgedruckt werden.</li>
       <li class="li1">Sollten Sie weitere Fragen zum Thema Datenschutz haben, k&ouml;nnen Sie gerne eine E-Mail an privacy@oye-records.com senden.</li>
     </ol>
-
-    <!--<h3>1. General Information</h3>-->
-    <!--<p><strong>1.1. </strong>This Privacy Policy has been designed to inform you and notify you of the kinds, the scope and the purpose, as well as your rights concerning your data collected and processed within the scope of this website provided by Oye Records UG (haftungsbeschr&auml;nkt), Oderbergerstr. 4, D 10435 Berlin, Germany (hereinafter also referred to as "Provider") as data processor.</p>-->
-    <!--<p><strong>1.2. </strong>"You" and "your" refer to you, as a user of the website. "We", "us", and "our" refer to the Provider</p>-->
-    <!--<h3>2. Data processing and data security</h3>-->
-    <!--<p><strong>2.1. </strong>We will collect, process and use personally identifiable data beyond the scope already permitted by law and without your required further consent only to the extent necessary for the conclusion and execution of a contractual relationship, performing requests or for billing purposes. </p>-->
-    <!--<p><strong>2.2. </strong>To protect your personally identifiable data collected and processed by us from unauthorized access and abuse, we have put a number of technical and organizational security measures in place, like encoding of privacy sensitive information (i.e. login data) transferred between this website and our servers.</p>-->
-    <!--<p><strong>2.3. </strong>These security measures are monitored on a regular basis and updated according to technical progress as necessary. Our staff is well informed about privacy rules and obliged to follow them. </p>-->
-    <!--<h3>3. Collection, Processing and Use of Personally Identifiable Data</h3>-->
-    <!--<p><strong>3.1. </strong>Your personal data are used for the following purposes:</p>-->
-    <!--<ul>-->
-      <!--<li>The provision of our website and the acceptance, processing and execution of your orders.</li>-->
-      <!--<li>Ensuring an efficient customer service and / or technical support for your products. When you contact us your details will be stored in order to process the enquiry and in case additional questions arise.</li>-->
-      <!--<li>Technical notifications concerning our service.</li>-->
-    <!--</ul>-->
-    <!--<p><strong>3.2. </strong>We pass your data on to third parties where this is necessary for invoicing purposes (e.g. carrying out transactions) or for other reasons to enable us to fulfil our contractual obligations to you. Should such passing on not be clear to you, we will point it out to you.</p>-->
-    <!--<h3>4. Newsletter</h3>-->
-    <!--<p><strong>4.1. </strong>Newsletters and other emails that are not service-related, are not fulfilling our duties to perform our service and contain advertisement will only be send to you, if you have given us your prior consent.</p>-->
-    <!--<p><strong>4.2. </strong>The content of the newsletter or email follows from its respective description. If no description is available, the content sent comprises information about us, our products and our services.</p>-->
-    <!--<p><strong>4.3. </strong>If you no longer want to receive our newsletter or e-mails you can opt to stop receiving it at any time.</p>-->
-    <!--<p><strong>4.4. </strong>You also give us the consent to store your IP addresses as part of the sign-up process. We are legally bound to record the log-on process so as to be able to verify that logging on is done in accordance with regulations.</p>-->
-    <!--<h3>5. Cookies and similar features</h3>-->
-    <!--<p><strong>5.1. </strong>A cookie (or similar data medium) is a small piece of data stored in a user's device while the user is using a website. Cookies can be send back to a server any time a user loads the website or accesses certain functions.</p>-->
-    <!--<p><strong>5.2. </strong>We apply cookies only in order to support the functions of this website, optimize your experience as its user.</p>-->
-    <!--<p><strong>5.3. </strong>We will ask for your consent or point out to the fact that we store and read cookies on your device.</p>-->
-    <!--<p><strong>5.4. </strong>You may opt-out from many ad-serving cookies by using the services provided by http://www.aboutads.info/choices/ or http://www.youronlinechoices.com/uk/your-ad-choices/ for users form the European Union.</p>-->
-    <!--<h3>6. Service and Notices</h3>-->
-    <!--<p><strong>6.1. </strong>In compliance with legal requirements we will at any time provide you with information on your personally identifiable data stored by us, free of charge and without undue delay. </p>-->
-    <!--<p><strong>6.2. </strong>Furthermore, you are free to revoke the approvals granted by confirming this Privacy Policy, at any time and with future effect. If you wish to do so, please feel free to contact us. Contact information is provided in Number 1 in this Privacy Policy.</p>-->
-    <!--<h3>7. Amendments of this Privacy Policy</h3>-->
-    <!--<p><strong>7.1. </strong>We reserve the right to modify or amend this Privacy Policy with view to the provision of new services, if and to the extent necessary. The same applies if the current Privacy Policy is found to contain any gaps. </p>-->
-    <!--<p><strong>7.2. </strong>Upon considerable amendments and if your consent is needed, we will contact you by email sent to the email address provided to us.</p>-->
-    <!--<br><br>-->
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Privacy'
-  }
+export default {
+  name: "Privacy"
+}
 </script>

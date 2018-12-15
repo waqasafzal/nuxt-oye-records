@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'AccountArtistsNotAllowed'
-  }
+export default {
+  name: 'AccountArtistsNotAllowed'
+}
 </script>

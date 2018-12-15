@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'MobileFrontPageTeasers'
-  }
+export default {
+  name: 'MobileFrontPageTeasers'
+}
 </script>

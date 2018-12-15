@@ -8,7 +8,9 @@
           </div>
         </div>
         <template v-if="releaseResults">
-          <release-list :releases="releaseResults" :loading="loadingReleases"></release-list>
+          <release-list 
+            :releases="releaseResults" 
+            :loading="loadingReleases"/>
         </template>
       </div>
     </div>
@@ -16,10 +18,27 @@
 </template>
 
 <script>
-  import ReleaseList from '../releases/ReleaseList'
-  export default {
-    components: {ReleaseList},
-    name: 'QueryResultPage',
-    props: ['releasesTotal', 'query', 'releaseResults', 'loadingReleases']
+import ReleaseList from '../releases/ReleaseList'
+export default {
+  name: 'QueryResultPage',
+  components: { ReleaseList },
+  props: {
+    releasesTotal: {
+      type: Number,
+      default: null
+    },
+    query: {
+      type: String,
+      default: ''
+    },
+    releaseResults: {
+      type: Array,
+      default: () => []
+    },
+    loadingReleases: {
+      type: Boolean,
+      default: false
+    }
   }
+}
 </script>

@@ -1,7 +1,10 @@
 <template>
-  <nuxt-link class="chart-item" :to="{name: 'charts-slug', params: {slug: chart.slug}}">
+  <nuxt-link
+    v-if="chart"
+    :to="{name: 'charts-slug', params: {slug: chart.slug}}" 
+    class="chart-item">
     <div class="chart-banner">
-      <img :src="chart.imageUrl"/>
+      <img :src="chart.imageUrl">
     </div>
     <template v-if="chart.artist">
       <div class="charts-infobox__name">{{ chart.artist.name }}</div>
@@ -17,8 +20,13 @@
 </template>
 
 <script>
-  export default {
-    name: 'ChartItem',
-    props: ['chart']
+export default {
+  name: 'ChartItem',
+  props: {
+    chart: {
+      type: Object,
+      default: null
+    }
   }
+}
 </script>

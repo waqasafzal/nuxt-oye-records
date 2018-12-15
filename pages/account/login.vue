@@ -2,11 +2,15 @@
   <div class="container-fluid">
     <div class="checkout__content">
       <div class="row login">
-        <login-form class="checkout__content__col" :register="false">Login</login-form>
+        <login-form 
+          :register="false" 
+          class="checkout__content__col">Login</login-form>
         <div class="col-12 col-md-6 register login__form__panel checkout__content__col">
           <h3>Don't have an account yet?</h3>
           <div class="login__form">
-            <nuxt-link class="register-btn" :to="{name: 'account-create'}">
+            <nuxt-link 
+              :to="{name: 'account-create'}" 
+              class="register-btn">
               Register
             </nuxt-link>
           </div>
@@ -17,11 +21,10 @@
 </template>
 
 <script>
-  import LoginForm from '../../components/account/LoginForm'
+import LoginForm from '../../components/account/LoginForm'
 
-  export default {
-    components: {LoginForm},
-    name: 'Login'
-  }
-
+export default {
+  name: 'Login',
+  components: { LoginForm }
+}
 </script>

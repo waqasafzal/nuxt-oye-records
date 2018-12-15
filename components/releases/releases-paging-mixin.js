@@ -1,20 +1,55 @@
 import { getReleaseListColumnNumber } from '../utils'
-import client from '../../plugins/apollo'
+// import client from '../../plugins/apollo'
 import { createReleaseListQuery } from './queries'
+import {releaseFilterParams} from '../../utils/router'
 
-const DEFAULT_PAGE_SIZE = 5
+const DEFAULT_PAGE_SIZE = 6
 
-export const ReleasePagingMixin = function (filterBy) {
-  var asyncData = async function () {}
-  if (filterBy) {
-    asyncData = async function ({params}) {
-      let {data} = await client.query(createReleaseListQuery({filterBy: filterBy}))
+export const ApolloReleasesMixin = function(filterBy) {
+  return {
+    apollo: {
+      releases: {
+        ...createReleaseListQuery (),
+        update: data => data.releases,
+        prefetch({route, params}) {
+          const filterParams = releaseFilterParams (params, route)
+          Object.assign(filterParams, filterBy && JSON.parse(filterBy) || {})
+          return {
+            first: 30,
+            after: '',
+            filterBy: JSON.stringify(filterParams)
+          }
+        },
+        manual: true,
+        result({data, loading}) {
+          if (!loading) {
+            this.releases = data.releases
+          } else {
+            this.releases = undefined
+          }
+        },
+        variables: {
+          first: 30,
+          after: '',
+          filterBy: filterBy || JSON.stringify ({})
+        }
+      }
+    },
+    computed: {
+      loading() {
+        let loading = this.$apollo.queries.releases && this.$apollo.queries.releases.loading
+        return loading
+      }
+    },
+    data () {
       return {
-        releases: data.releases
+        releases: null
       }
     }
   }
+}
 
+export const ReleasePagingMixin = function(filterBy) {
   return {
     props: {
       pageSize: {
@@ -24,42 +59,39 @@ export const ReleasePagingMixin = function (filterBy) {
     },
     data: function () {
       let pageSize = this.pageSize || 1
+      // if this.filte
       return {
-        count: pageSize * getReleaseListColumnNumber(),
-        pageItems: this.pageSize * getReleaseListColumnNumber(),
-        loading: false,
+        count: pageSize * getReleaseListColumnNumber (),
+        pageItems: this.pageSize * getReleaseListColumnNumber (),
         loadingQueriesCount: 0,
-        releases: [],
         cursor: null,
-        showMoreEnabled: false,
         filterOptions: {},
         genre: undefined,
+        showMoreEnabled: false,
         filterBy: null
       }
     },
-    asyncData: asyncData,
+
     mounted: function () {
       window.onscroll = this.checkInfiniteScrolling
     },
     methods: {
-      reloadQuery () {
-        var localFilter = this.filterBy
+      reloadQuery() {
+        this.filterBy = JSON.stringify (this.getLocalFilter())
+        this.cursor = null
+        this.releases = null
+        this.loadMore ()
+      },
+      getLocalFilter() {
+        let localFilter = this.filterBy
         if (!localFilter) {
           if (filterBy) {
-            localFilter = JSON.parse(filterBy)
+            localFilter = JSON.parse (filterBy)
           } else {
             localFilter = {}
           }
         } else {
-          localFilter = JSON.parse(localFilter)
-        }
-
-        let options = this.filterOptions
-        if (options.days) {
-          localFilter['period'] = options.days
-        }
-        if (options.formats) {
-          localFilter['formats'] = options.formats
+          localFilter = JSON.parse (localFilter)
         }
 
         if (this.genre) {
@@ -73,31 +105,38 @@ export const ReleasePagingMixin = function (filterBy) {
             localFilter['isSubgenre'] = false
           }
         }
-
-        this.filterBy = JSON.stringify(localFilter)
-        this.releases = {
-          edges: []
-        }
-        this.cursor = null
-        this.loadMore()
+        Object.assign(localFilter, this.filterOptions)
+        return localFilter
       },
-      onFilterChanged (filterOptions) {
+      onFilterChanged(filterOptions) {
         this.filterOptions = filterOptions
-        this.reloadQuery()
+        this.reloadQuery ()
       },
-      onGenreChanged (genre) {
+      onGenreChanged(genre) {
         this.genre = genre
-        this.reloadQuery()
+        this.reloadQuery ()
       },
-      checkInfiniteScrolling () {
-        if (this.$el.offsetHeight > 0 && !this.loading && !(this.releases && this.releases.pageInfo && !this.releases.pageInfo.hasNextPage) &&
-          (window.innerHeight + window.scrollY) >= this.$el.offsetHeight) {
-          if (this.releases && this.releases.pageInfo && this.releases.pageInfo.hasNextPage) {
-            this.loadMore()
+      checkInfiniteScrolling() {
+        if (
+          this.$el.offsetHeight > 0 &&
+          !this.loading &&
+          !(
+            this.releases &&
+            this.releases.pageInfo &&
+            !this.releases.pageInfo.hasNextPage
+          ) &&
+          window.innerHeight + window.scrollY >= this.$el.offsetHeight
+        ) {
+          if (
+            this.releases &&
+            this.releases.pageInfo &&
+            this.releases.pageInfo.hasNextPage
+          ) {
+            this.loadMore ()
           }
         }
       },
-      loadMore () {
+      loadMore() {
         if (this.releases) {
           let edges = this.releases.edges
           if (edges && edges.length > 0) {
@@ -108,21 +147,38 @@ export const ReleasePagingMixin = function (filterBy) {
         }
 
         // Fetch more data and transform the original result
-        this.loading = true
-        var vm = this
-        client.query(createReleaseListQuery({
-          first: this.count,
+        let variables = {
+          first: 30,
           filterBy: this.filterBy || filterBy,
           after: this.cursor
-        })).then(({data}) => {
-          vm.loading = false
-          vm.releases = {
-            edges: [...vm.releases['edges'], ...data.releases.edges],
-            pageInfo: data.releases.pageInfo
-          }
-          vm.showMoreEnabled = data.releases.pageInfo.hasNextPage
+        }
+
+        console.log('cursor ' + this.cursor)
+
+        // if the cursor is set, this is a pagination query, so we fetch more
+        if (this.cursor) {
+          this.$apollo.queries.releases.fetchMore({
+          variables,
+          updateQuery: (previousResult, { fetchMoreResult }) => {
+            const releases = {
+              edges: [...previousResult.releases['edges'], ...fetchMoreResult.releases.edges],
+              pageInfo: fetchMoreResult.releases.pageInfo,
+              __typename: previousResult.releases.__typename,
+            }
+            this.showMoreEnabled = fetchMoreResult.releases.pageInfo.hasNextPage
+
+            return {
+              // __typename: previousResult.releases.__typename,
+              releases: releases,
+              hasMore: this.showMoreEnabled
+            }
+          },
         })
+        } else {
+          this.$apollo.queries.releases.setVariables(variables)
+        }
       }
     }
   }
 }
+

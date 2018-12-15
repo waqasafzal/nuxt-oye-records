@@ -4,7 +4,12 @@
 
 import store from '../../store'
 
-export const addCartAlertMessage = function (message, level, showCart, timeout = 2000) {
+export const addCartAlertMessage = function(
+  message,
+  level,
+  showCart,
+  timeout = 2000
+) {
   var buttons = []
   if (showCart) {
     buttons.push({
@@ -14,11 +19,12 @@ export const addCartAlertMessage = function (message, level, showCart, timeout =
       }
     })
   }
-  store.dispatch('addAlert', {
-    message: message,
-    level: level,
-    buttons: buttons,
-    timeout: timeout
-  }).then(data => {
-  })
+  store
+    .dispatch('addAlert', {
+      message: message,
+      level: level,
+      buttons: buttons,
+      timeout: timeout
+    })
+    .then(data => {})
 }

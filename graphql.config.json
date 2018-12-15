@@ -5,6 +5,7 @@
     "file": "../saleor/saleor/static/schema.json"
   },
 
+  "README_endpoints": "A list of GraphQL endpoints that can be queried from '.graphql' files in the IDE",
   "endpoints" : [
     {
       "name": "Default (http://localhost:8000/graphql)",

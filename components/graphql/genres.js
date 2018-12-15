@@ -1,17 +1,16 @@
-
 import gql from 'graphql-tag'
 
 export const mainGenres = gql`
-    fragment MainGenres on MetaGenreType {
-        name
+  fragment MainGenres on MetaGenreType {
+    name
+    slug
+    genres {
+      pk
+      slug
+      name
+      parentGenre {
         slug
-        genres {
-            pk
-            slug
-            name
-            parentGenre {
-                slug
-            }
-        }
+      }
     }
+  }
 `

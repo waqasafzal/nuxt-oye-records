@@ -1,6 +1,6 @@
 import { getMonth } from './date'
 
-export const appendCharts = function (oldChartsMap, chartsEdges) {
+export const appendCharts = function(oldChartsMap, chartsEdges) {
   let chartsMap = Object.assign({}, oldChartsMap)
   for (var i = 0; i < chartsEdges.length; i++) {
     let chart = chartsEdges[i]
@@ -27,4 +27,3 @@ export const appendCharts = function (oldChartsMap, chartsEdges) {
 
   return chartsMap
 }
-

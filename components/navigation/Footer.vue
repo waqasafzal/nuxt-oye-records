@@ -18,14 +18,16 @@
 </template>
 
 <script>
-  export default {
-    name: 'Footer',
-    computed: {
-      moveHigher () {
-        return !this.$store.getters.minimizedAudioPlayer &&
-          (this.$store.state.primaryButtonBar.show ||
-            this.$store.getters.showAudioPlayer)
-      }
+export default {
+  name: 'Footer',
+  computed: {
+    moveHigher() {
+      return (
+        !this.$store.getters.minimizedAudioPlayer &&
+        (this.$store.state.primaryButtonBar.show ||
+          this.$store.getters.showAudioPlayer)
+      )
     }
   }
+}
 </script>

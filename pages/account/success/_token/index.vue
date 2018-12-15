@@ -16,17 +16,17 @@
 </template>
 
 <script>
-  import { setToken } from '~/utils/auth/index'
-  export default {
-    name: 'AccountSuccess',
-    data: function () {
-      return {
-        jwtToken: this.$route.params.token
-      }
-    },
-    mounted () {
-      var jwtToken = this.jwtToken
-      setToken(jwtToken)
+import { setToken } from '~/utils/auth/index'
+export default {
+  name: 'AccountSuccess',
+  data: function() {
+    return {
+      jwtToken: this.$route.params.token
     }
+  },
+  mounted() {
+    var jwtToken = this.jwtToken
+    setToken(jwtToken)
   }
+}
 </script>

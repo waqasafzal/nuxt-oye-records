@@ -1,4 +1,4 @@
-export const getInitialUserProfile = function () {
+export const getInitialUserProfile = function() {
   return {
     shipping: {
       options: null,
@@ -13,7 +13,7 @@ export const getInitialUserProfile = function () {
   }
 }
 
-export const getInitialUser = function () {
+export const getInitialUser = function() {
   return {
     authenticated: false,
     artists: [],
@@ -21,7 +21,7 @@ export const getInitialUser = function () {
   }
 }
 
-export const getInitialCheckout = function () {
+export const getInitialCheckout = function() {
   return {
     shipping: {
       address: getInitialAddress(),
@@ -54,7 +54,7 @@ export const getInitialCheckout = function () {
   }
 }
 
-export const getInitialUserForm = function () {
+export const getInitialUserForm = function() {
   return {
     name: null,
     firstName: null,
@@ -65,7 +65,7 @@ export const getInitialUserForm = function () {
   }
 }
 
-export const getInitialAddress = function () {
+export const getInitialAddress = function() {
   return {
     firstName: '',
     lastName: '',

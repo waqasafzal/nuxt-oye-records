@@ -6,52 +6,55 @@
 </template>
 
 <script>
-  import apolloClient from '~/plugins/apollo'
-  import gql from 'graphql-tag'
-  import * as types from '../../store/types'
-  import { order, oyeCart } from '../graphql/cart'
+// import apolloClient from '~/plugins/apollo'
+import gql from 'graphql-tag'
+import * as types from '../../store/types'
+import { order, oyeCart } from '../graphql/cart'
 
-  export default {
-    name: 'CompleteCheckout',
-    data: function () {
-      return {
-        verificationStatus: 'unverified'
+export default {
+  name: 'CompleteCheckout',
+  data: function() {
+    return {
+      verificationStatus: 'unverified'
+    }
+  },
+  mounted() {
+    let params = this.$route.query
+    if (params) {
+      let merchantSig = params['merchantSig']
+      let paymentProvider = null
+      if (merchantSig) {
+        paymentProvider = 'adyen'
+      } else if (params['provider'] === 'paypal') {
+        paymentProvider = 'paypal'
       }
-    },
-    mounted () {
-      let params = this.$route.query
-      if (params) {
-        let merchantSig = params['merchantSig']
-        let paymentProvider = null
-        if (merchantSig) {
-          paymentProvider = 'adyen'
-        } else if (params['provider'] === 'paypal') {
-          paymentProvider = 'paypal'
-        }
-        this.verificationStatus = 'verifying'
-        apolloClient.mutate({
-          mutation: gql`mutation VerifyOrder($provider: String!, $params: JSONString!) {
-            verifyOrder(provider: $provider, transactionParams: $params) {
-              ok
-              order {
-                ...Order
-                cart {
+      this.verificationStatus = 'verifying'
+      this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation VerifyOrder($provider: String!, $params: JSONString!) {
+              verifyOrder(provider: $provider, transactionParams: $params) {
+                ok
+                order {
+                  ...Order
+                  cart {
+                    ...OyeCart
+                  }
+                }
+                newCart {
                   ...OyeCart
                 }
-              },
-              newCart {
-                ...OyeCart
               }
             }
-          }
-          ${order}
-          ${oyeCart}
+            ${order}
+            ${oyeCart}
           `,
           variables: {
             provider: paymentProvider, // merchantSig,
             params: JSON.stringify(params)
           }
-        }).then(({data}) => {
+        })
+        .then(({ data }) => {
           let verified = data.verifyOrder.ok
           this.verificationStatus = verified ? 'verified' : 'not verified'
           if (verified) {
@@ -73,7 +76,7 @@
             this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, 4)
           }
         })
-      }
     }
   }
+}
 </script>

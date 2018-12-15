@@ -58,8 +58,8 @@
       <p>
         6.1. The Customer can select the mode of payment from the available payment methods during the ordering process and before completing the order. Information about the available payment methods is provided to customers on a information page:</p>
       https://oye-records.com/payment.html
-    <p>
-      6.2. International orders may be subject to customs duties and bank charges may be payable on international bank transfers; any such charges, duties or taxes shall be borne by the buyer.</p>
+      <p>
+        6.2. International orders may be subject to customs duties and bank charges may be payable on international bank transfers; any such charges, duties or taxes shall be borne by the buyer.</p>
       <p>
         6.3. Where third-parties (e.g. PayPal) are tasked with payment processing, their general terms and conditions shall apply.</p>
       <p>
@@ -83,18 +83,18 @@
         7.2. If  the Customer is an entrepreneur, the following regulations shall furthermore apply: the Customer is obliged to handle the purchase item with care. Purchase items are always processed or reformed by the Customer for the Seller. If the purchase item is processed with other items not belonging to the Seller, the Seller shall acquire co-ownership of the new item in proportion to the value of the purchase item to the other processed items at the time of processing. The same applies to the item arising from the processing as for the purchase item delivered subject to reservation. The Customer shall also assign to us the claim to secure demands against him which arise against a third party due to connecting the purchase item to property. Access by third parties to the goods owned or co-owned by the Seller must be demonstrated by the Customer immediately. The Customer shall bear the costs incurred by such interventions for third-party proceedings or for out-of-court surrenders. The Customer is entitled to resell the purchase item in the course of ordinary business. The Customer shall assign claims resulting from resale or other legal reasons regarding the goods (including all current account balance claims) to the Seller as a security in their full extent. The Seller authorises the Purchaser/Customer to collect the claims assigned to the Seller for his own account and in his own name. This authorisation may be revoked if the Purchaser/Customer fails to meet his payment obligations. The Seller agrees to release the securities of the Customer at his request insofar as the realisable value of the securities exceeds the secured claims by more than 10%; the choice of the securities to be released is incumbent upon the Seller.</p>
     </div>
     <div class="withdrawal">
-      <a name="cancel"></a>
+      <a name="cancel"/>
       <h3>8. Consumers' right to withdraw (Cancellation policy)</h3>
       <h3>Right of withdrawal</h3>
       <p>
         You have the right to cancel this contract within 14 days without giving any reason. The cancellation period will expire after 14 days from the day on which you acquire, or a third party other than the carrier and indicated by you acquires, physical possession of the last good. To exercise the right of withdrawal, you must inform us</p>
       <div class="addressee">
-        UG (haftungsbeschränkt)<br/>
-        Oderbergerstr. 4<br/>
-        D 10435 Berlin<br/>
-        Germany<br/>
-        Phone +49 (0)30 66647821<br/>
-        Mail@oye-records.com<br/>
+        UG (haftungsbeschränkt)<br>
+        Oderbergerstr. 4<br>
+        D 10435 Berlin<br>
+        Germany<br>
+        Phone +49 (0)30 66647821<br>
+        Mail@oye-records.com<br>
       </div>
       <p>
         of your decision to withdraw from this contract by an unequivocal statement (e.g. a letter sent by post, fax or e-mail). You may use the attached model cancellation form, but it is not obligatory. To meet the withdrawal deadline, it is sufficient for you to send your communication concerning your exercise of the right of withdrawal before the withdrawal period has expired.</p>
@@ -181,7 +181,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'Terms'
-  }
+export default {
+  name: 'Terms'
+}
 </script>

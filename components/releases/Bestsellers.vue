@@ -1,12 +1,15 @@
 <template>
-  <div class="bestsellers">
-
-  </div>
+  <div class="bestsellers"/>
 </template>
 
 <script>
-  export default {
-    name: 'Bestsellers',
-    props: ['releases']
+export default {
+  name: 'Bestsellers',
+  props: {
+    releases: {
+      type: Object,
+      default: null
+    }
   }
+}
 </script>

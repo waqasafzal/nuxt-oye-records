@@ -1,7 +1,10 @@
-import { getUserFromCookie, getUserFromLocalStorage } from '~/utils/auth'
+import { getUserFromCookie, getUserFromLocalStorage } from '../utils/auth'
 
-export default function ({ isServer, store, req }) {
+export default function ({ store, req }) {
   // If nuxt generate, pass this middleware
+  console.log('check-auth')
+  const isServer = process.server
+  console.log('isServer ' + isServer)
   if (isServer && !req) return
   const loggedUser = isServer ? getUserFromCookie(req) : getUserFromLocalStorage()
 

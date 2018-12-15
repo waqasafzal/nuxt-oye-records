@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Payment methods</h2>
-    <p>You will receive a confirmation email from us as soon as we have received your payment.<br/>Please note that the payment confirmation you receive from Paypal or from your credit card institute does not automatically imply that we have already received your payment.
+    <p>You will receive a confirmation email from us as soon as we have received your payment.<br>Please note that the payment confirmation you receive from Paypal or from your credit card institute does not automatically imply that we have already received your payment.
     </p>
     <p>We accept the following payment methods:</p>
     <h4>VISA Card / Master Card</h4>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'Payment'
-  }
+export default {
+  name: 'Payment'
+}
 </script>

@@ -5,9 +5,13 @@
 </template>
 
 <script>
-
-  export default {
-    name: 'ReleasePrice',
-    props: ['price']
+export default {
+  name: 'ReleasePrice',
+  props: {
+    price: {
+      type: Object,
+      default: () => {}
+    }
   }
+}
 </script>

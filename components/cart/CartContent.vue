@@ -10,7 +10,7 @@
             <div class="col-md-2 text-right">
               <h5>Price</h5>
             </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-1"/>
             <div class="col-md-1">
               <h5>Quantity</h5>
             </div>
@@ -19,37 +19,50 @@
             </div>
           </div>
         </div>
-        <modal :showBody="true" v-if="showModal" @close="showModal = false">
+        <modal 
+          v-if="showModal" 
+          :show-body="true" 
+          @close="showModal = false">
           <div slot="headerTitle">
             Attention!
           </div>
           <div slot="body">
-            <strong>{{deleteLine.release.name}} - {{deleteLine.release.title}}</strong> is reserved for you.<br><br>
+            <strong>{{ deleteLine.release.name }} - {{ deleteLine.release.title }}</strong> is reserved for you.<br><br>
             Removing this item from cart removes the reservation and puts it back to the open crates. Do you <em>really</em> want to proceed?
           </div>
-          <div slot="footer" class="hmargin-auto modal__button-bar">
+          <div 
+            slot="footer" 
+            class="hmargin-auto modal__button-bar">
             <!--<div class="modal__button-bar">-->
-              <button class="button" @click="onDelete(deleteLine, true)">OK</button>
-              <button class="button" @click="showModal = false">Cancel</button>
-            <!--</div>-->
+            <button 
+              class="button" 
+              @click="onDelete(deleteLine, true)">OK</button>
+            <button 
+              class="button" 
+              @click="showModal = false">Cancel</button>
+              <!--</div>-->
           </div>
         </modal>
-        <div class="cart__line" :key="i"
-             v-for="(line, i) in cart.lines">
+        <div 
+          v-for="(line, i) in cart.lines" 
+          :key="i"
+          class="cart__line">
           <div class="row">
             <div class="col-12 col-md-5 cart__line__product">
               <nuxt-link
-                  :to="{name: 'releases-slug', params: {'id': line.release.pk, 'slug': line.release.slug}}">
-                <img :src="line.smallImageUrl" alt=""/>
+                :to="{name: 'releases-slug', params: {'id': line.release.pk, 'slug': line.release.slug}}">
+                <img 
+                  :src="line.smallImageUrl" 
+                  alt="">
                 <div class="cart__line__product__info">
                   <div class="release__name">{{ line.release.artistFirstName }} {{ line.release.artistLastName }}</div>
                   <div class="release__title">{{ line.release.title }}</div>
                   <div class="release__shipping">
-                    <div :class="['product__info__availability', line.release.availability.status]"></div>
+                    <div :class="['product__info__availability', line.release.availability.status]"/>
                     <div>
                       <template v-if="line.backorder">Shipping as soon as possible</template>
                       <template v-else-if="line.release.availability.status === 'upcoming'">
-                        Preorder {{line.release.releasedAt}}
+                        Preorder {{ line.release.releasedAt }}
                       </template>
                       <template v-else>Ready for shipping</template>
                     </div>
@@ -58,18 +71,27 @@
               </nuxt-link>
             </div>
             <div class="col-3 col-md-2 cart__line__cell">
-              <div class="cart-cell-center flex-align-right">{{getPrice(line.pricePerItem)}} &euro;</div>
+              <div class="cart-cell-center flex-align-right">{{ getPrice(line.pricePerItem) }} &euro;</div>
             </div>
             <div class="col-3 offset-md-1 col-md-1 cart__line__cell">
-              <div v-show="!review" class="cart__line__quantity cart-cell-center">
+              <div 
+                v-show="!review" 
+                class="cart__line__quantity cart-cell-center">
                 <form class="form-cart">
-                  <div :class="['form-group', line.quantity.errors ? 'has-error': '']" tabindex="-1">
-                    <select class="form-control"
-                            name="id_quantity"
-                            v-model.lazy="line.quantity"
-                            @change="onChange(line, $event)"
-                            :value="line.quantity" required>
-                      <option :value="n" v-for="n in getQuantityOptions(line.quantity)">{{ n }}</option>
+                  <div 
+                    :class="['form-group', line.quantity.errors ? 'has-error': '']" 
+                    tabindex="-1">
+                    <select 
+                      v-model.lazy="line.quantity"
+                      :value="line.quantity"
+                      class="form-control"
+                      name="id_quantity"
+                      required 
+                      @change="onChange(line, $event)">
+                      <option
+                        v-for="n in getQuantityOptions(line.quantity)"
+                        :key="`change-to-${n}`"
+                        :value="n">{{ n }}</option>
                     </select>
                   </div>
                 </form>
@@ -78,8 +100,12 @@
             <div :class="['col-md-2', 'cart__line__cell', review ? 'col-6' : 'col-4']">
               <p class="flex-align-right cart-cell-center">{{ getPrice(line.lineTotal) }} &euro;</p>
             </div>
-            <div v-if="!review" class="cart-item-delete col-2 col-md-1 cart__line__cell">
-              <div class="flex-align-right cart-cell-center" @click="onDelete(line)">&times;</div>
+            <div 
+              v-if="!review" 
+              class="cart-item-delete col-2 col-md-1 cart__line__cell">
+              <div 
+                class="flex-align-right cart-cell-center" 
+                @click="onDelete(line)">&times;</div>
             </div>
           </div>
         </div>
@@ -93,7 +119,9 @@
                 &euro;</h4>
             </div>
           </div>
-          <div class="row justify-content-end" v-if="review">
+          <div 
+            v-if="review" 
+            class="row justify-content-end">
             <div class="col-4 offset-md-9 col-md-2 cart__line__cell">
               <h4 class="cart-cell-center">Shipping</h4>
             </div>
@@ -112,7 +140,9 @@
                 </template>
               </span>
             </div>
-            <div v-if="!vatExcluded" class="col-8 col-md-1 cart__line__cell cart__vat__amount">
+            <div 
+              v-if="!vatExcluded" 
+              class="col-8 col-md-1 cart__line__cell cart__vat__amount">
               <span class="flex-align-right cart-cell-center text-right">{{ vat }} &euro;</span>
             </div>
           </div>
@@ -134,18 +164,28 @@
       <template v-if="cart.preorderLines.length > 0">
         <div class="cart__backorder">
           <h4>These items will be ordered for you but will not be charged yet:</h4>
-          <div :key="'preorderLine' + i"
-               v-for="(line, i) in cart.preorderLines" class="d-flex cart-line">
-            <nuxt-link class="cart__backorder__name" :to="{name: 'releases-slug', params: {slug: line.release.slug}}">
-              <span>{{ line.quantity }} &times; {{ line.release.name }} - {{ line.release.title}}</span>
+          <div 
+            v-for="(line, i) in cart.preorderLines"
+            :key="'preorderLine' + i" 
+            class="d-flex cart-line">
+            <nuxt-link 
+              :to="{name: 'releases-slug', params: {slug: line.release.slug}}" 
+              class="cart__backorder__name">
+              <span>{{ line.quantity }} &times; {{ line.release.name }} - {{ line.release.title }}</span>
             </nuxt-link>
-            <div class="cart__backorder__delete" @click="onDelete(line)">Cancel</div>
+            <div 
+              class="cart__backorder__delete" 
+              @click="onDelete(line)">Cancel</div>
           </div>
         </div>
       </template>
-      <div v-if="!review" class="d-sm-flex d-md-none cart__checkout-button__panel">
+      <div 
+        v-if="!review" 
+        class="d-sm-flex d-md-none cart__checkout-button__panel">
         <template>
-          <proceed-button class="cart__checkout-button" @click="pushCheckout">Go to checkout</proceed-button>
+          <proceed-button 
+            class="cart__checkout-button" 
+            @click="pushCheckout">Go to checkout</proceed-button>
         </template>
       </div>
     </template>
@@ -161,130 +201,143 @@
 </template>
 
 <script>
-  import ReleasePrice from '~/components/releases/ReleasePrice'
-  import ProceedButton from '../shared/ProceedButton'
-  import { roundFixed, getPrice } from '../../utils/math'
-  import * as types from '../../store/types'
-  import CheckoutButtons from '../checkout/CheckoutButtons'
-  import Modal from '../shared/Modal'
+import ReleasePrice from '~/components/releases/ReleasePrice'
+import ProceedButton from '../shared/ProceedButton'
+import { roundFixed, getPrice } from '../../utils/math'
+import * as types from '../../store/types'
+import CheckoutButtons from '../checkout/CheckoutButtons'
+import Modal from '../shared/Modal'
 
-  const MAX_QUANTITY = 5
+const MAX_QUANTITY = 5
 
-  export default {
-    components: {
-      Modal,
-      CheckoutButtons,
-      ProceedButton,
-      ReleasePrice
+export default {
+  name: 'CartContent',
+  components: {
+    Modal,
+    CheckoutButtons,
+    ProceedButton,
+    ReleasePrice
+  },
+  props: {
+    review: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      showModal: false
+    }
+  },
+  computed: {
+    linesAvailable() {
+      return (
+        this.cart &&
+        (this.cart.lines.length > 0 || this.cart.preorderLines.length > 0)
+      )
     },
-    name: 'CartContent',
-    props: {
-      review: {
-        type: Boolean,
-        default: false
+    cart() {
+      return this.$store.getters.getCart
+    },
+    cartUpdating() {
+      return this.$store.state.cartUpdating
+    },
+    shipping() {
+      return (
+        (this.$store.getters.getShippingOption &&
+          this.$store.getters.getShippingOption.price) ||
+        '0.00'
+      )
+    },
+    totalNet() {
+      return this.total / (1 + this.vatRate / 100)
+    },
+    vat() {
+      let value = this.total - this.totalNet
+      return roundFixed(value)
+    },
+    vatRate() {
+      return this.$store.getters.getVat
+    },
+    vatExcluded() {
+      return this.$store.getters.isVatExcluded
+    },
+    total() {
+      if (this.review) {
+        return roundFixed(
+          parseFloat(this.cart.totalAvailable) + parseFloat(this.shipping)
+        )
+      } else {
+        return roundFixed(parseFloat(this.cart.totalAvailable))
       }
     },
-    data () {
-      return {
-        showModal: false
-      }
+    primaryButtons() {
+      return this.$store.primaryButtonBar.buttons
+    }
+  },
+  watch: {
+    linesAvailable(value) {
+      this.$store.commit(types.SET_BUTTON_BAR_SHOW, value)
+    }
+  },
+  mounted() {
+    this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, true)
+    if (!this.review) {
+      this.$store.commit(types.FINISH_CHECKOUT)
+      this.$store.commit(types.SET_TERMS_AGREED, false)
+      this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, null)
+      this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [
+        { f: this.pushCheckout, text: 'Go to checkout' }
+      ])
+      this.$store.commit(types.SET_BUTTON_BAR_SHOW, this.linesAvailable)
+    }
+  },
+  beforeDestroy() {
+    this.$store.commit(types.SET_BUTTON_BAR_SHOW, false)
+    this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, true)
+    this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [])
+  },
+  methods: {
+    onChange(line, event) {
+      this.$store.dispatch('updateCart', {
+        line: line,
+        value: event.target.value
+      })
     },
-    watch: {
-      linesAvailable (value) {
-        this.$store.commit(types.SET_BUTTON_BAR_SHOW, value)
-      }
-    },
-    computed: {
-      linesAvailable () {
-        return this.cart && (this.cart.lines.length > 0 || this.cart.preorderLines.length > 0)
-      },
-      cart () {
-        return this.$store.getters.getCart
-      },
-      cartUpdating () {
-        return this.$store.state.cartUpdating
-      },
-      shipping () {
-        return this.$store.getters.getShippingOption && this.$store.getters.getShippingOption.price || '0.00'
-      },
-      totalNet () {
-        return this.total / (1 + this.vatRate / 100)
-      },
-      vat () {
-        let value = (this.total - this.totalNet)
-        return roundFixed(value)
-      },
-      vatRate () {
-        return this.$store.getters.getVat
-      },
-      vatExcluded () {
-        return this.$store.getters.isVatExcluded
-      },
-      total () {
-        if (this.review) {
-          return roundFixed(parseFloat(this.cart.totalAvailable) + parseFloat(this.shipping))
-        } else {
-          return roundFixed(parseFloat(this.cart.totalAvailable))
-        }
-      },
-      primaryButtons () {
-        return this.$store.primaryButtonBar.buttons
-      }
-    },
-    methods: {
-      onChange (line, event) {
-        this.$store.dispatch('updateCart', {
-          line: line,
-          value: event.target.value
+    onDelete: function(line, confirmed = false) {
+      if (!confirmed && line.isReserved) {
+        this.showModal = true
+        this.deleteLine = line
+      } else {
+        this.$store.dispatch('removeCartLine', {
+          pk: line.release.pk,
+          backorder: line.backorder
         })
-      },
-      onDelete: function (line, confirmed = false) {
-        if (!confirmed && line.isReserved) {
-          this.showModal = true
-          this.deleteLine = line
-        } else {
-          this.$store.dispatch('removeCartLine', {
-            pk: line.release.pk,
-            backorder: line.backorder
-          })
-        }
-      },
-      getPrice: function (price) {
-        return getPrice(price, {vatRate: this.vatRate, vatExcluded: this.vatExcluded})
-      },
-      getQuantityOptions (lineQuantity) {
-        return lineQuantity > MAX_QUANTITY ? lineQuantity : MAX_QUANTITY
-      },
-      pushCheckout () {
-        this.$router.push({name: 'checkout'})
       }
     },
-    mounted () {
-      this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, true)
-      if (!this.review) {
-        this.$store.commit(types.FINISH_CHECKOUT)
-        this.$store.commit(types.SET_TERMS_AGREED, false)
-        this.$store.commit(types.SET_CURRENT_CHECKOUT_STATE, null)
-        this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [{f: this.pushCheckout, text: 'Go to checkout'}])
-        this.$store.commit(types.SET_BUTTON_BAR_SHOW, this.linesAvailable)
-      }
+    getPrice: function(price) {
+      return getPrice(price, {
+        vatRate: this.vatRate,
+        vatExcluded: this.vatExcluded
+      })
     },
-    beforeDestroy () {
-      this.$store.commit(types.SET_BUTTON_BAR_SHOW, false)
-      this.$store.commit(types.SET_BUTTON_BAR_CONTINUE, true)
-      this.$store.commit(types.SET_BUTTON_BAR_BUTTONS, [])
+    getQuantityOptions(lineQuantity) {
+      return lineQuantity > MAX_QUANTITY ? lineQuantity : MAX_QUANTITY
+    },
+    pushCheckout() {
+      this.$router.push({ name: 'checkout' })
     }
   }
-
+}
 </script>
 
 <style lang="scss">
-  .modal__button-bar {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    .button {
-      width: 10em;
-    }
+.modal__button-bar {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  .button {
+    width: 10em;
   }
+}
 </style>

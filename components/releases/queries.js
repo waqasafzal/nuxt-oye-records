@@ -2,61 +2,35 @@ import gql from 'graphql-tag'
 import { releaseDetails, tracksFragment } from '../graphql/releases'
 
 import ReleaseList from '../releases/ReleaseList.vue'
+import {releaseFilterParams} from '../../utils/router'
 
-export const createReleaseDetailsQuery = function (slug) {
+export const createReleaseDetailsQuery = function(slug) {
   return {
-    query: gql`query Release($slug: String!) {
-        release (slug: $slug){
+    query: gql`
+      query Release($slug: String!) {
+        release(slug: $slug) {
+          ...ReleaseDetails
+          chartedBy {
+            name
+            currentCharts(releaseSlug: $slug) {
+              slug
+            }
+          }
+          artistReleases: related(relatedType: "artist") {
             ...ReleaseDetails
-            chartedBy {
-                name
-                currentCharts(releaseSlug: $slug) {
-                    slug
-                }
-            }
-            artistReleases: related(relatedType: "artist") {
-                ...ReleaseDetails
-                hasTracks
-            }
-            labelReleases: related(relatedType: "label") {
-                ...ReleaseDetails
-                hasTracks
-            }
-            soldReleases: related(relatedType: "sold") {
-                ...ReleaseDetails
-                hasTracks
-            }
-        }
-    }
-    ${releaseDetails}
-    `,
-    variables: {
-      slug: slug
-    }
-  }
-}
-
-export const createReleaseBaseDetailsQuery = function (slug) {
-  return {
-    query: gql`query Release($slug: String!) {
-        release (slug: $slug) {
-            pk
-            slug
-            artistFirstName
-            artistLastName
-            title
             hasTracks
-            tracks {
-                ...Tracks
-            }
-            availability {
-                status
-            }
-            thumbnailUrl
-            discogsUrl
+          }
+          labelReleases: related(relatedType: "label") {
+            ...ReleaseDetails
+            hasTracks
+          }
+          soldReleases: related(relatedType: "sold") {
+            ...ReleaseDetails
+            hasTracks
+          }
         }
-    }
-    ${tracksFragment}
+      }
+      ${releaseDetails}
     `,
     variables: {
       slug: slug
@@ -64,18 +38,49 @@ export const createReleaseBaseDetailsQuery = function (slug) {
   }
 }
 
-export const createReleaseListQuery = function (options = {}) {
+export const createReleaseBaseDetailsQuery = function(slug) {
   return {
-    query: gql`query Releases($first: Int!, $after: String, $filterBy: JSONString!) {
-        releases(first: $first, after: $after, filterBy: $filterBy) {
-            ...Releases
+    query: gql`
+      query Release($slug: String!) {
+        release(slug: $slug) {
+          pk
+          slug
+          artistFirstName
+          artistLastName
+          title
+          hasTracks
+          tracks {
+            ...Tracks
+          }
+          availability {
+            status
+          }
+          thumbnailUrl
+          discogsUrl
         }
-    }
-    ${ReleaseList.fragments.releases}
+      }
+      ${tracksFragment}
     `,
     variables: {
-      first: options.first || 30,
-      after: options.after || '',
+      slug: slug
+    }
+  }
+}
+
+export const createReleaseListQuery = function(options = {}) {
+  return {
+    query: gql`
+      query Releases($first: Int!, $after: String, $filterBy: JSONString!) {
+        releases(first: $first, after: $after, filterBy: $filterBy) {
+          ...Releases
+        }
+      }
+      ${ReleaseList.fragments.releases}
+    `,
+    update: data => data.releases,
+    variables: {
+      first: 30,
+      after: '',
       filterBy: options.filterBy || JSON.stringify({})
     }
   }

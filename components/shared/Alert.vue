@@ -1,9 +1,13 @@
 <template>
   <transition name="fade">
-    <div :class="['alert-list__' + type]" v-if="show">
-      <slot></slot>
+    <div 
+      v-if="show" 
+      :class="['alert-list__' + type]">
+      <slot/>
       <div class="alert-list__buttons">
-        <div v-for="button in buttons">
+        <div 
+          v-for="(button, i) in buttons" 
+          :key="`alert-button-${i}`">
           <nuxt-link :to="button.route">
             <div class="alert-list__button">
               {{ button.title }}
@@ -16,49 +20,48 @@
 </template>
 
 <script>
-
-  export default {
-    name: 'Alert',
-    props: {
-      type: {
-        default: 'info'
-      },
-      timeout: {
-        default: 2000
-      },
-      buttons: {
-        default: function () {
-          return []
-        }
-      }
+export default {
+  name: 'Alert',
+  props: {
+    type: {
+      type: String,
+      default: 'info'
     },
-    data: function () {
-      return {
-        show: true,
-        disableAlertTimeout: undefined
-      }
+    timeout: {
+      type: Number,
+      default: 2000
     },
-    mounted: function () {
-      var vm = this
-      this.disableAlertTimeout = setTimeout(
-        function () {
-          vm.show = false
-        },
-        this.timeout
-      )
-    },
-    beforeDestroy () {
-      clearTimeout(this.disableAlertTimeout)
+    buttons: {
+      type: Array,
+      default: () => []
     }
+  },
+  data: function() {
+    return {
+      show: true,
+      disableAlertTimeout: undefined
+    }
+  },
+  mounted: function() {
+    var vm = this
+    this.disableAlertTimeout = setTimeout(function() {
+      vm.show = false
+    }, this.timeout)
+  },
+  beforeDestroy() {
+    clearTimeout(this.disableAlertTimeout)
   }
+}
 </script>
 
 <style>
-  .fade-leave-active, .fade-enter-active  {
-    transition: opacity 1s ease;
-    -webkit-transition: opacity 1s ease;
-  }
-  .fade-leave-to, .fade-enter  {
-    opacity: 0;
-  }
+.fade-leave-active,
+.fade-enter-active {
+  transition: opacity 1s ease;
+  -webkit-transition: opacity 1s ease;
+}
+.fade-leave-to,
+.fade-enter {
+  opacity: 0;
+}
 </style>
