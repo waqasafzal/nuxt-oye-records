@@ -215,7 +215,7 @@ module.exports = {
     ],
     loaders: {
       vueStyle: {
-        ssrId: false
+          ssrId: true
       }
     },
     optimization: {
