@@ -39,14 +39,14 @@ const SimplePagination = {
         }
       }
 
-      var vm = this
+      const vm = this
       if (this.hasNext) {
         this.isLoading = true
         let paginationQuery = this.paginationQuery()
         paginationQuery.variables['after'] = this.cursor
         this.$apollo.query(paginationQuery).then(({ data }) => {
           this.isLoading = false
-          var edges = []
+          let edges = []
           if (vm.items && vm.items['edges']) {
             edges = vm.items['edges']
           }

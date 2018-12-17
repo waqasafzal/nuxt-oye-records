@@ -65,7 +65,7 @@
 
 <script>
 import gql from 'graphql-tag'
-import { SimplePagination } from '~/components/graphql/mixins'
+import { SimplePagination } from '../../components/graphql/mixins'
 import LoadingSpinner from '~/components/shared/LoadingSpinner'
 import * as types from '../../store/types'
 import { release } from '../graphql/releases'
