@@ -199,20 +199,20 @@ export const frontPageQueries = gql`
     features {
       features {
         ...Release
-        featureImageUrl(height: 600, width: 400)
+        featureImageUrl
         tracks {
           ...Tracks
-        }
+        }   
       }
       singleOfTheWeek {
         ...Release
-        featureImageUrl(height: 600, width: 400)
+        featureImageUrl
         tracks {
           ...Tracks
         }
       }
       albumOfTheWeek {
-        featureImageUrl(height: 600, width: 400)
+        featureImageUrl
         ...Release
         tracks {
           ...Tracks
