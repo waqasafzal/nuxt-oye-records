@@ -157,7 +157,7 @@ export const release = gql`
         }
       }
     }
-    thumbnailUrl(size: 380)
+    thumbnailUrl(size: 190)
     discogsUrl
   }
 `
