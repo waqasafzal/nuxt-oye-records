@@ -221,9 +221,9 @@ module.exports = {
     optimization: {
       minimize: process.env.NODE_ENV === 'production'
     },
-    postcss: false,
+    postcss: true,
     cssSourceMap: false,
-    // extractCSS: false
+    extractCSS: false
     // cache: true,
     // analyze: true
   }
