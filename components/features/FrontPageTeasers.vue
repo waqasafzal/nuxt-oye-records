@@ -61,13 +61,16 @@
           <no-ssr placeholder="Loading...">
             <agile 
               :options="sliderOptions" 
-              @beforeChange="beforeAgileSlideChange($event)">
+              @beforeChange="beforeAgileSlideChange($event)"
+              @afterChange="afterAgileSlideChange($event)"
+            >
               <div
                 v-for="(release, i) in featuredReleases"
                 :key="`release-${i}`"
                 class="slide">
                 <nuxt-link
-                  :key="'release-'+i" 
+                  v-if="[currentMobileSlide, nextMobileSlide].includes(i)" 
+                  :key="'release-'+i"
                   :to="{name: 'releases-slug', params: {slug: release.slug}}"
                   class="frontpage__teaser__item"
                 >
@@ -144,6 +147,8 @@ export default {
   data: function() {
     return {
       currentFeature: 0,
+      currentMobileSlide: 0,
+      nextMobileSlide: 0,
       sliderDisabled: false,
       animate: false,
       touch: false,
@@ -191,227 +196,6 @@ export default {
       }
     })
     this.startAutopager()
-
-    // https://css-tricks.com/the-javascript-behind-touch-friendly-sliders/
-    // var sliderRef = this.$refs.slider
-    // var slides = this.$refs.slide
-    // var holderRef = this.$refs.holder
-
-    // if (navigator.msMaxTouchPoints) {
-    //   sliderRef.classList.add('ms-touch')
-    //
-    //   // Listed for the scroll event and move the image with translate.
-    //   sliderRef.addEventListener('scroll', function() {
-    //     slides.css(
-    //       'transform',
-    //       'translate3d(-' + (100 - vm.$el.scrollLeft() / 6) + 'px,0,0)'
-    //     )
-    //   })
-    // } else {
-    //   var slider = {
-    //     // The elements.
-    //     el: {
-    //       slider: sliderRef,
-    //       holder: holderRef,
-    //       imgSlide: slides
-    //     },
-    //
-    //     // The stuff that makes the slider work.
-    //     slideWidth: sliderRef.offsetWidth, // Calculate the slider width.
-    //
-    //     // Define these as global variables so we can use them across the entire script.
-    //     touchstartx: undefined,
-    //     touchmovex: undefined,
-    //     movex: undefined,
-    //     index: 0,
-    //     longTouch: undefined,
-    //     lastLeft: undefined,
-    //     lastRight: undefined,
-    //     current: undefined,
-    //     slideLongTouchTimeout: undefined,
-    //     startAutopagerTimeout: undefined,
-    //
-    //     // continued
-    //
-    //     init: function() {
-    //       this.bindUIEvents()
-    //     },
-    //
-    //     bindUIEvents: function() {
-    //       clearTimeout(this.sliderLongTouchTimeout)
-    //       this.el.slider.addEventListener('touchstart', function(event) {
-    //         slider.start(event)
-    //       })
-    //
-    //       this.el.slider.addEventListener('touchmove', function(event) {
-    //         slider.move(event)
-    //       })
-    //
-    //       this.el.slider.addEventListener('touchend', function(event) {
-    //         slider.end(event)
-    //       })
-    //
-    //       this.longTouch = false
-    //       this.sliderLongTouchTimeout = setTimeout(function() {
-    //         // Since the root of setTimout is window we can’t reference this. That’s why this variable says window.slider in front of it.
-    //         slider.longTouch = true
-    //       }, 250)
-    //     },
-    //
-    //     start: function(event) {
-    //       clearTimeout(this.sliderLongTouchTimeout)
-    //       // Test for flick.
-    //       this.longTouch = false
-    //       this.sliderLongTouchTimeout = setTimeout(function() {
-    //         slider.longTouch = true
-    //       }, 250)
-    //
-    //       // Get the original touch position.
-    //       this.touchstartx = event.targetTouches[0].pageX
-    //
-    //       // The movement gets all janky if there's a transition on the elements.
-    //       vm.animate = false
-    //       vm.touch = true
-    //
-    //       for (var i = 0; i < this.el.imgSlide.length; i++) {
-    //         if (i !== vm.currentFeature) {
-    //           this.el.imgSlide[i].style.display = 'none'
-    //         }
-    //       }
-    //     },
-    //
-    //     move: function(event) {
-    //       vm.stopAutopager()
-    //       // Continuously return touch position.
-    //       this.touchmovex = event.targetTouches[0].pageX
-    //       // Calculate distance to translate holder.
-    //       this.movex = this.touchstartx - this.touchmovex
-    //       // Defines the speed the images should move at.
-    //
-    //       if (this.current) {
-    //         this.current.style.transform = ''
-    //         this.current.style.left = ''
-    //         this.current.style.display = 'none'
-    //       }
-    //       if (this.lastRight) {
-    //         this.lastRight.style.transform = ''
-    //         this.lastRight.style.left = ''
-    //         this.lastRight.style.display = 'none'
-    //       }
-    //       if (this.lastLeft) {
-    //         this.lastLeft.style.transform = ''
-    //         this.lastLeft.style.left = ''
-    //         this.lastLeft.style.display = 'none'
-    //       }
-    //       if (this.movex < 0) {
-    //         this.lastLeft = this.el.imgSlide[vm.nextLeft]
-    //         this.current = this.el.imgSlide[vm.currentFeature]
-    //         this.current.style.left = -1 * this.movex + 'px'
-    //         this.current.style.display = ''
-    //         this.lastLeft.style.left = -1 * this.movex - this.slideWidth + 'px'
-    //         this.lastLeft.style.display = ''
-    //         vm.direction = 1
-    //       } else if (this.movex > 0) {
-    //         vm.direction = -1
-    //         this.lastRight = this.el.imgSlide[vm.nextRight]
-    //         this.current = this.el.imgSlide[vm.currentFeature]
-    //         this.current.style.left = -1 * this.movex + 'px'
-    //         this.current.style.display = ''
-    //         this.lastRight.style.left = -1 * this.movex + this.slideWidth + 'px'
-    //         this.lastRight.style.display = ''
-    //       }
-    //       vm.touch = true
-    //     },
-    //
-    //     end: function(event) {
-    //       // Calculate the distance swiped.
-    //       clearTimeout(this.startAutopagerTimeout)
-    //       if (this.movex) {
-    //         var absMove = Math.abs(this.movex)
-    //         // Calculate the index. All other calculations are based on the index.
-    //         //            var newCurrent = null
-    //         var changed = false
-    //         if (absMove > this.slideWidth / 2) {
-    //           if (this.movex > 0) {
-    //             vm.incrementRelease(true)
-    //             vm.direction = -1
-    //             //                newCurrent = this.lastRight
-    //             changed = true
-    //           } else if (this.movex < 0) {
-    //             vm.decrementRelease(true)
-    //             changed = true
-    //             //                newCurrent = this.lastRight
-    //           } else {
-    //           }
-    //         } else {
-    //         }
-    //         // Move and animate the elements.
-    //         vm.animate = true
-    //         if (this.lastRight) {
-    //           //              this.lastRight.style.left = 'inherit'
-    //           let left = parseInt(this.lastRight.style.left.split('px')[0])
-    //           if (changed) {
-    //             this.lastRight.style.transform =
-    //               'translate3d(' + -1 * left + 'px,0,0)'
-    //             this.current.style.transform =
-    //               'translate3d(' + -1 * left + 'px,0,0)'
-    //           } else {
-    //             let currentLeft = parseInt(
-    //               this.current.style.left.split('px')[0]
-    //             )
-    //             this.lastRight.style.transform = `translate3d(${-1 *
-    //               currentLeft}px, 0, 0)`
-    //             this.current.style.transform = `translate3d(${-1 *
-    //               currentLeft}px, 0, 0)`
-    //           }
-    //         }
-    //         if (this.lastLeft) {
-    //           let left = parseInt(this.lastLeft.style.left.split('px')[0])
-    //           if (changed) {
-    //             this.current.style.transform =
-    //               'translate3d(' + -1 * left + 'px,0,0)'
-    //             this.lastLeft.style.transform =
-    //               'translate3d(' + -1 * left + 'px,0,0)'
-    //           } else {
-    //             let currentLeft = parseInt(
-    //               this.current.style.left.split('px')[0]
-    //             )
-    //             this.lastLeft.style.transform = `translate3d(${-1 *
-    //               currentLeft}px, 0, 0)`
-    //             this.current.style.transform = `translate3d(${-1 *
-    //               currentLeft}px, 0, 0)`
-    //           }
-    //         }
-    //
-    //         var lastLeft = this.lastLeft
-    //         var lastRight = this.lastRight
-    //         var current = this.current
-    //
-    //         this.startAutopagerTimeout = setTimeout(function() {
-    //           vm.touch = false
-    //           vm.startAutopager()
-    //           lastLeft.style.transform = ''
-    //           lastLeft.style.left = ''
-    //           lastRight.style.transform = ''
-    //           lastRight.style.left = ''
-    //           current.style.transform = ''
-    //           current.style.left = ''
-    //           var style = this.el.imgSlide[this.currentFeature].style
-    //           style.left = ''
-    //           style.transform = ''
-    //         }, 300)
-    //
-    //         //              for (var i = 0; i < this.el.imgSlide.length; i++) {
-    //         //              console.log(`${i} ${i !== vm.currentFeature} current: ${vm.currentFeature} imgSlide: ${this.el.imgSlide[i]}`)
-    //         //                if (i !== vm.currentFeature) {
-    //         //                  this.el.imgSlide[i].style.display = 'none'
-    //         //                }
-    //         //              }
-    //       }
-    //     }
-    //   }
-    //   slider.init()
-    // }
   },
   beforeDestroy() {
     window.clearInterval(this.autopager)
@@ -468,6 +252,11 @@ export default {
     },
     beforeAgileSlideChange(event) {
       console.log(event)
+      this.currentMobileSlide = event.currentSlide
+      this.nextMobileSlide = event.goToNext
+    },
+    afterAgileSlideChange(event) {
+      this.currentMobileSlide = event.currentSlide
     },
     backgroundImage(release, show) {
       console.log('bi: ' + release.slug + ' ' + show);
