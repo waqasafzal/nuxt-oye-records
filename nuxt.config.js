@@ -221,6 +221,7 @@ module.exports = {
     optimization: {
       minimize: process.env.NODE_ENV === 'production'
     },
+    optimizeCSS: process.env.NODE_ENV === 'production',
     postcss: true,
     cssSourceMap: false,
     extractCSS: true
