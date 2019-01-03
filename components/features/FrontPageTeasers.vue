@@ -255,19 +255,12 @@ export default {
       console.log(event)
       this.currentMobileSlide = event.currentSlide
       this.nextMobileSlide = event.goToNext
-      console.log('before: LAST ' + this.lastMobileSlide
-        + ', CURRENT: ' + this.currentMobileSlide
-        + ', NEXT: ' + this.nextMobileSlide)
     },
     afterAgileSlideChange(event) {
       this.lastMobileSlide = this.currentMobileSlide
       this.currentMobileSlide = event.currentSlide
-      console.log('after: LAST ' + this.lastMobileSlide
-        + ', CURRENT: ' + this.currentMobileSlide
-        + ', NEXT: ' + this.nextMobileSlide)
     },
     backgroundImage(release, show) {
-      console.log('bi: ' + release.slug + ' ' + show);
       if (!this.$store.state.isSmallScreen) {
         const backgroundImage = show && `url(${release.featureImageUrl})` || 'none'
         return { backgroundImage }
