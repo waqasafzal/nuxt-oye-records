@@ -61,7 +61,7 @@
           <no-ssr placeholder="Loading...">
             <agile 
               :options="sliderOptions" 
-              @beforechange="beforeAgileSlideChange">
+              @beforeChange="beforeAgileSlideChange($event)">
               <div
                 v-for="(release, i) in featuredReleases"
                 :key="`release-${i}`"
