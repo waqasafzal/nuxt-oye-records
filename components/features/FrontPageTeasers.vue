@@ -69,12 +69,12 @@
                 :key="`release-${i}`"
                 class="slide">
                 <nuxt-link
-                  v-if="[currentMobileSlide, nextMobileSlide].includes(i)" 
+                  v-if="[lastMobileSlide, currentMobileSlide, nextMobileSlide].includes(i)"
                   :key="'release-'+i"
                   :to="{name: 'releases-slug', params: {slug: release.slug}}"
                   class="frontpage__teaser__item"
                 >
-                  <img :data-src="release.featureImageUrl" >
+                  <img :src="release.featureImageUrl" >
                   <div class="d-flex release-name">
                     <nuxt-link 
                       :to="{name: 'releases-new'}" 
@@ -148,6 +148,7 @@ export default {
     return {
       currentFeature: 0,
       currentMobileSlide: 0,
+      lastMobileSlide: 0,
       nextMobileSlide: 0,
       sliderDisabled: false,
       animate: false,
@@ -256,6 +257,7 @@ export default {
       this.nextMobileSlide = event.goToNext
     },
     afterAgileSlideChange(event) {
+      this.lastMobileSlide = event.currentMobileSlide
       this.currentMobileSlide = event.currentSlide
     },
     backgroundImage(release, show) {
