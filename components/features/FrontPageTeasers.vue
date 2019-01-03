@@ -260,7 +260,7 @@ export default {
         + ', NEXT: ' + this.nextMobileSlide)
     },
     afterAgileSlideChange(event) {
-      this.lastMobileSlide = event.currentMobileSlide
+      this.lastMobileSlide = this.currentMobileSlide
       this.currentMobileSlide = event.currentSlide
       console.log('after: LAST ' + this.lastMobileSlide
         + ', CURRENT: ' + this.currentMobileSlide
