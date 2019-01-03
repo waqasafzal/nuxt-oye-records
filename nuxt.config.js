@@ -223,7 +223,7 @@ module.exports = {
     },
     postcss: true,
     cssSourceMap: false,
-    extractCSS: false
+    extractCSS: true
     // cache: true,
     // analyze: true
   }
