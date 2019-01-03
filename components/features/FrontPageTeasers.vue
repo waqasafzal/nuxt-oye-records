@@ -24,7 +24,7 @@
                 :name="transitionName"
                 mode="out-in">
                 <div 
-                  v-show="i === currentFeature"
+                  v-if="i === currentFeature"
                   ref="slide"
                   :key="'release-'+i" 
                   :class="['slide', animate ? '': '']">
