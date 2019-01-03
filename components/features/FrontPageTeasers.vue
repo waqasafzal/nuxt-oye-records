@@ -464,6 +464,7 @@ export default {
       }
     },
     backgroundImage(release, show) {
+      console.log('bi: ' + release.slug + ' ' + show);
       if (!this.$store.state.isSmallScreen) {
         const backgroundImage = show && `url(${release.featureImageUrl})` || 'none'
         return { backgroundImage }
