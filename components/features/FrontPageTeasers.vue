@@ -29,7 +29,7 @@
                   :key="'release-'+i" 
                   :class="['slide', animate ? '': '']">
                   <div 
-                    :style="backgroundImage(release)" 
+                    :style="backgroundImage(release, i === currentFeature)"
                     class="slide__inner">
                     <div class="vmargin-auto">
                       <div class="feature-category">
@@ -463,11 +463,10 @@ export default {
         this.autopager = undefined
       }
     },
-    backgroundImage(release) {
+    backgroundImage(release, show) {
       if (!this.$store.state.isSmallScreen) {
-        return {
-          backgroundImage: `url(${release.featureImageUrl})`
-        }
+        const backgroundImage = show && `url(${release.featureImageUrl})` || 'none'
+        return { backgroundImage }
       }
       return {}
     }
