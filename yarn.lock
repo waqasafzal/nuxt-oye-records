@@ -9017,10 +9017,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-agile@0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/vue-agile/-/vue-agile-0.3.7.tgz#dfab89b0e4d55c9da8a6fcdc58f69c79242b4057"
-  integrity sha512-rs+Dl4Yb2UpkPwq8AqOS+cRV7KznRNnGw5mgPg1Nj74l+E8z2SXuilnzQqOhmyHTwIarU6RXPLz34yAlfSZ9og==
+vue-agile@0.4.0-alpha.3:
+  version "0.4.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/vue-agile/-/vue-agile-0.4.0-alpha.3.tgz#31eb66ba3437dd272195118ae08f23846b9b9510"
+  integrity sha1-MetmujQ33SchlRGK4I8jhGublRA=
   dependencies:
     vue "2.*.*"
 

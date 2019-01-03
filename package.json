@@ -23,7 +23,7 @@
     "isomorphic-fetch": "2.2.1",
     "jwt-decode": "2.2.0",
     "nuxt": "2.3.2",
-    "vue-agile": "0.3.7",
+    "vue-agile": "0.4.0-alpha.3",
     "vue-clickaway": "2.2.2",
     "vue-cookie": "1.1.4",
     "vue-cookie-law": "1.8.0",

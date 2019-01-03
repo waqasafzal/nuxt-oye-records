@@ -59,16 +59,19 @@
         </div>
         <div class="col-12 frontpage__teaser__content d-lg-none">
           <no-ssr placeholder="Loading...">
-            <agile :options="sliderOptions">
+            <agile 
+              :options="sliderOptions" 
+              @beforechange="beforeAgileSlideChange">
               <div
                 v-for="(release, i) in featuredReleases"
                 :key="`release-${i}`"
                 class="slide">
-                <nuxt-link 
+                <nuxt-link
                   :key="'release-'+i" 
                   :to="{name: 'releases-slug', params: {slug: release.slug}}"
-                  class="frontpage__teaser__item">
-                  <img :src="release.featureImageUrl" >
+                  class="frontpage__teaser__item"
+                >
+                  <img :data-src="release.featureImageUrl" >
                   <div class="d-flex release-name">
                     <nuxt-link 
                       :to="{name: 'releases-new'}" 
@@ -462,6 +465,9 @@ export default {
         window.clearInterval(this.autopager)
         this.autopager = undefined
       }
+    },
+    beforeAgileSlideChange(event) {
+      console.log(event)
     },
     backgroundImage(release, show) {
       console.log('bi: ' + release.slug + ' ' + show);
