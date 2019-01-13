@@ -33,7 +33,7 @@ export default function(context) {
     // required
     httpEndpoint: `${apiHost}/graphql`,
     httpLinkOptions: {
-      credentials: 'omit'
+      credentials: 'same-origin'
     },
     tokenName: 'apollo-token',
     validateToken: isUpToDate
