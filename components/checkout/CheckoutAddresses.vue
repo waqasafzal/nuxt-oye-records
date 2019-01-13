@@ -151,7 +151,6 @@ export default {
       this.$store
         .dispatch('setShippingCountry', { country: value })
         .then(shippingOptions => {
-          console.log('Checkout Addresses', shippingOptions)
           this.$store.commit(types.SET_SHIPPING_OPTIONS, shippingOptions)
         })
     },

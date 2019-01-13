@@ -6,7 +6,7 @@ export const isUpToDate = (jwt) => {
     let in30Secs = Date.now() + 30 * 1000
     return new Date(expMs) > new Date(in30Secs)
   } else {
-    return true
+    return false
   }
 }
 
