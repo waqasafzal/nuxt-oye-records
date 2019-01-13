@@ -5,9 +5,7 @@ import {
 
 export default function ({ app, store, req }) {
   // If nuxt generate, pass this middleware
-  console.log('check-auth')
   const isServer = process.server
-  console.log('isServer ' + isServer)
   if (isServer && !req) return
   const token = app.$apolloHelpers.getToken()
   const loggedUser = token && getUserFromToken(token)
@@ -19,7 +17,6 @@ export default function ({ app, store, req }) {
         authenticated: false
       }
     })
-    console.log('logout')
     app.$apolloHelpers.onLogout()
   }
 }
