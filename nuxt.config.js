@@ -1,36 +1,9 @@
-import {isUpToDate} from './utils/jwt'
+import {apiHost} from './config/host'
 
-const pkg = require('./package')
 const webpack = require('webpack')
-
-
-var apiHost = 'http://localhost:8000'
 
 if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
   process.env.NODE_ENV = 'production'
-}
-
-var setupAPI = function() {
-  apiHost = 'http://localhost:8000'
-  switch (process.env.NODE_ENV) {
-    case 'production':
-      // apiHost = "'https://oye-records.com'"
-      apiHost = 'https://oye.kolter.it'
-      break
-    case 'testing':
-      apiHost = 'https://oye.kolter.it'
-      break
-    case 'develop':
-    default:
-      apiHost = 'http://localhost:8000'
-      break
-  }
-}
-
-if (process.env.API_ROOT) {
-  apiHost = process.env.API_ROOT
-} else {
-  setupAPI()
 }
 
 const adyenScript = process.env.ADYEN_CSE
@@ -136,18 +109,6 @@ module.exports = {
     clientConfigs: {
       default: '~/plugins/apollo-config'
     },
-    // getAuth: () => {
-    //   let token
-    //   console.log('sjalksjkj')
-    //   if(process.server){
-    //     const cookies = cookie.parse((req && req.headers.cookie) || '')
-    //     token = cookies['apollo-token']
-    //   } else {
-    //     token = jsCookie.get('apollo-token')
-    //   }
-    //
-    //   return token && jwtUpToDate(token) ? 'JWT' + token : ''
-    // }
   },
   proxy: {
     '/media': 'http://local.oye.com:8000/',
@@ -166,7 +127,6 @@ module.exports = {
   */
   css: [
     './node_modules/bootstrap/dist/css/bootstrap.css',
-    // './assets/css/storefront/storefront.css',
   ],
 
   /*
