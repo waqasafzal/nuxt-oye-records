@@ -149,7 +149,7 @@ export default {
     onDownload() {
       let config = {
         headers: {
-          Authorization: getAuthHeader(this.$store)
+          Authorization: getAuthHeader(this)
         }
       }
       var orderPk = this.order.pk

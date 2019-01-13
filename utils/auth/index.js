@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import store from '../../store'
 import jwtDecode from 'jwt-decode'
 import * as types from '../../store/types'
+import {isUpToDate} from '../jwt'
 
 // URL and endpoint constants
 const LOGIN_URL = `${__API__}/oye/api-token-auth/`
@@ -24,6 +24,10 @@ export const login = (context, creds, redirect) => {
     .then(
       response => {
         let data = response.data
+        console.log('Data ' + JSON.stringify(data))
+        const tokenExpires = new Date().getTime() + 15 * 60 * 1000
+        context.$apolloHelpers.onLogin(data.token, undefined, tokenExpires)
+
         setToken(data.token, context.$store)
         context.$store.dispatch('getCart')
         context.$store.dispatch('getProfile').then(profile => {
@@ -59,7 +63,7 @@ export const signup = (context, creds, callback) => {
 // To log out, we just need to remove the token
 export const logout = function(context, redirect) {
   let headers = {
-    Authorization: getAuthHeader(context.$store)
+    Authorization: getAuthHeader(context)
   }
   var cart = context.$cookie.get('cart')
   if (cart) {
@@ -68,7 +72,7 @@ export const logout = function(context, redirect) {
 
   context.$axios.post(LOGOUT_URL, {}, { headers: headers }).then(
     response => {
-      unsetToken(context.$store)
+      unsetToken(context)
       context.$store.dispatch('addAlert', {
         message: 'You have been logged out.',
         level: 'info'
@@ -79,7 +83,7 @@ export const logout = function(context, redirect) {
         message: 'You could not log out correctly. Please try again.',
         level: 'error'
       })
-      unsetToken(context.$store)
+      unsetToken(context)
       console.error('err: ' + err)
     }
   )
@@ -87,15 +91,16 @@ export const logout = function(context, redirect) {
 }
 
 // The object to be passed as a header for authenticated requests
-export const getAuthHeader = (store) => {
+export const getAuthHeader = (context) => {
+  console.log('getAuthHeader')
   var jwt = Vue.cookie.get('jwt')
   if (jwt) {
     var decoded = jwtDecode(jwt)
     if (decoded) {
-      if (jwtUpToDate(decoded)) {
+      if (isUpToDate(decoded)) {
         return 'JWT ' + jwt
       } else {
-        unsetToken(store)
+        unsetToken(context)
       }
     }
   }
@@ -103,7 +108,9 @@ export const getAuthHeader = (store) => {
 
 export const setToken = (token, store) => {
   if (process.SERVER_BUILD) return
+  console.log('token ' + token)
   let decodedToken = jwtDecode(token)
+  console.log('decoded ' + JSON.stringify(decodedToken))
   window.localStorage.setItem('user', JSON.stringify(decodedToken))
   Vue.cookie.set('jwt', token)
 
@@ -112,7 +119,9 @@ export const setToken = (token, store) => {
     }).then(user => {})
 }
 
-export const unsetToken = store => {
+export const unsetToken = context => {
+  const store = context.$store
+  context.$apolloHelpers.onLogout()
   if (process.SERVER_BUILD) return
   window.localStorage.removeItem('user')
   Vue.cookie.delete('jwt')
@@ -120,19 +129,26 @@ export const unsetToken = store => {
   store.dispatch('getCart')
 }
 
+export const getUserFromToken = token => {
+  console.log('getUserfromtoken')
+  let decoded = jwtDecode(token)
+  console.log('decoded', decoded)
+  if (isUpToDate(decoded)) {
+    return Object.assign({ authenticated: true }, decoded)
+  } else {
+    return undefined
+  }
+}
+
 export const getUserFromCookie = req => {
+  console.log('getuserfromcookie ')
   if (!req.headers.cookie) return
   const jwtCookie = req.headers.cookie
     .split(';')
     .find(c => c.trim().startsWith('jwt='))
   if (!jwtCookie) return
   const jwt = jwtCookie.split('=')[1]
-  let decoded = jwtDecode(jwt)
-  if (jwtUpToDate(decoded)) {
-    return Object.assign({ authenticated: true }, decoded)
-  } else {
-    return undefined
-  }
+  return getUserFromToken(jwt)
 }
 
 export const getUserFromLocalStorage = () => {
@@ -140,23 +156,25 @@ export const getUserFromLocalStorage = () => {
   console.log('getUserfromlocalstorage ' + json)
   if (json) {
     var userData = JSON.parse(json)
-    if (jwtUpToDate(userData)) {
+    if (isUpToDate(userData)) {
       return Object.assign({ authenticated: true }, userData)
     }
   }
   return undefined
 }
-
-export const jwtUpToDate = jwt => {
-  let exp = jwt['exp']
-  if (exp) {
-    let expMs = exp * 1000
-    let in30Secs = Date.now() + 30 * 1000
-    return new Date(expMs) > new Date(in30Secs)
-  } else {
-    return true
-  }
-}
+//
+// export const jwtUpToDate = jwt => {
+//   console.log('check jwt')
+//   console.trace()
+//   let exp = jwt['exp']
+//   if (exp) {
+//     let expMs = exp * 1000
+//     let in30Secs = Date.now() + 30 * 1000
+//     return new Date(expMs) > new Date(in30Secs)
+//   } else {
+//     return true
+//   }
+// }
 
 export const resetEmail = (context, email, callback) => {
   context.$axios.post(RESET_URL, { email: email }).then(callback)

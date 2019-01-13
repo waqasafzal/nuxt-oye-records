@@ -100,7 +100,7 @@ export default {
       if (process.browser) {
         var jwt = this.$cookie.get('jwt')
         if (jwt) {
-          var header = getAuthHeader(this.$store)
+          var header = getAuthHeader(this)
           return {
             Authorization: header
           }

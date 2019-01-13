@@ -22,7 +22,7 @@ export default {
   name: 'CheckoutParameter',
   props: {
     lines: {
-      type: Object,
+      type: Array,
       default: null
     }
   },

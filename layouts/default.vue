@@ -53,6 +53,7 @@ var ogImage = require('~/assets/images/fb-og-image.jpg')
 
 export default {
   name: 'App',
+  // middleware: 'auth',
   components: {
     OyeFooter,
     Announcements,
@@ -137,12 +138,14 @@ export default {
               req.options.headers = {} // Create the header object if needed.
             }
 
-            if (process.browser) {
+            console.log('action....')
+            if (process.client) {
               var jwt = Vue.cookie.get('jwt')
               var header = null
               if (jwt) {
                 header = getAuthHeader(this.$store)
               }
+              console.log('header is ', header)
               if (header) {
                 req.options.headers['Authorization'] = header
               }

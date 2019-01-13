@@ -2,15 +2,16 @@
  * Created by tillkolter on 26/04/17.
  */
 
-import store from '../../store'
+// import store from '../../store'
 
 export const addCartAlertMessage = function(
+  dispatch,
   message,
   level,
   showCart,
   timeout = 2000
 ) {
-  var buttons = []
+  const buttons = []
   if (showCart) {
     buttons.push({
       title: 'View Cart',
@@ -19,8 +20,7 @@ export const addCartAlertMessage = function(
       }
     })
   }
-  store
-    .dispatch('addAlert', {
+  dispatch('addAlert', {
       message: message,
       level: level,
       buttons: buttons,

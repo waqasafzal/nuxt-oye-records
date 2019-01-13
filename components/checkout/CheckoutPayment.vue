@@ -133,9 +133,10 @@ export default {
         .dispatch('getPaymentOptions', {
           country: country
         })
-        .then(paymentOptions => {
-          this.$store.commit(types.SET_PAYMENT_OPTIONS, paymentOptions)
-          if (paymentOptions.length > 0) {
+        .then((data) => {
+          // const {paymentOptions} = data
+          this.$store.commit(types.SET_PAYMENT_OPTIONS, data)
+          if (data.paymentOptions && data.paymentOptions.length > 0) {
             if (this.shippingOption) {
               this.selectPaymentByShippingOption(this.shippingOption)
             } else {
@@ -182,7 +183,7 @@ export default {
       return true
     },
     onProceed() {
-      this.$store.commit(types.SET_PAYMENT_OPTION_CONFIRMED)
+      this.$store.dispatch('setPaymentOptionConfirmed')
     },
     onPaymentDeleted(method) {
       this.$store.commit(types.DELETE_PAYMENT_METHOD, method)

@@ -8,6 +8,7 @@ import {
   getInitialUserForm,
   getInitialUserProfile
 } from './utils'
+import {isAddressComplete, isEmptyAddress} from '../utils/address'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -226,8 +227,8 @@ const createStore = () => {
         ) {
           let address = args.shippingAddresses[0]
           state.checkout.shipping.address = address
-          state.checkout.shipping.confirmed =
-            store.getters.isShippingAddressComplete
+          const complete = address && isAddressComplete(address)
+          state.checkout.shipping.confirmed = complete
         }
       },
       [types.SET_USER_BILLING_ADDRESSES]: (state, args) => {
@@ -251,7 +252,6 @@ const createStore = () => {
             state.checkout.shipping.changed = true
           }
         }
-        // state.checkout.shipping.address.complete = store.getters.isShippingAddressComplete
       },
       [types.SET_BILLING_ADDRESS]: (state, address) => {
         let formerAddress = state.checkout.billing.address
@@ -282,9 +282,11 @@ const createStore = () => {
         state.checkout.guest = true
       },
       [types.SET_SHIPPING_OPTIONS]: (state, shippingOptions) => {
-        state.userProfile.shipping.options = shippingOptions
-        if (shippingOptions.length > 0 && !state.checkout.shipping.option) {
-          state.checkout.shipping.option = shippingOptions[0]
+        if(shippingOptions) {
+          state.userProfile.shipping.options = shippingOptions
+          if (shippingOptions.length > 0 && !state.checkout.shipping.option) {
+            state.checkout.shipping.option = shippingOptions[0]
+          }
         }
       },
       [types.SET_SHIPPING_OPTION]: (state, shippingOption) => {
@@ -306,7 +308,6 @@ const createStore = () => {
       },
       [types.SET_PAYMENT_OPTION_CONFIRMED]: state => {
         state.checkout.payment.confirmed = true
-        store.commit(types.SET_CURRENT_CHECKOUT_STATE, 4)
       },
       [types.SET_UNPAID_ORDER]: (state, unpaidOrder) => {
         state.checkout.unpaidOrder = unpaidOrder
@@ -500,8 +501,8 @@ const createStore = () => {
       isPaymentOptionConfirmed(state) {
         return state.checkout.payment.confirmed
       },
-      getShippingCountry(state) {
-        let address = store.getters.getShippingAddress
+      getShippingCountry(state, getters) {
+        let address = getters.getShippingAddress
         return address && address.country
       },
       getShippingOptions(state) {
@@ -529,8 +530,8 @@ const createStore = () => {
       getShippingAddressValidation(state) {
         return state.checkout.shipping.validation
       },
-      getBillingCountry(state) {
-        let address = store.getters.getBillingAddress
+      getBillingCountry(state, getters) {
+        let address = getters.getBillingAddress
         return address && address.country
       },
       getCheckoutState(state, getters) {
@@ -605,9 +606,9 @@ const createStore = () => {
       getPaymentOptions(state) {
         return state.checkout.payment.options
       },
-      getShippingOption(state) {
+      getShippingOption(state, getters) {
         let option = state.checkout.shipping.option
-        let options = store.getters.getShippingOptions
+        let options = getters.getShippingOptions
         return option || (options && options[0])
       },
       getUnpaidOrder(state) {
@@ -649,9 +650,9 @@ const createStore = () => {
       hasShippingChanged(state) {
         return state.checkout.shipping.changed
       },
-      hasChangedAddresses(state) {
+      hasChangedAddresses(state, getters) {
         return (
-          store.getters.hasShippingChanged || store.getters.hasBillingChanged
+          getters.hasShippingChanged || getters.hasBillingChanged
         )
       },
       getVat(state, getters) {
@@ -661,9 +662,9 @@ const createStore = () => {
       isVatExcluded(state, getters) {
         return !getters.isSelfCollector && state.checkout.isVatExcluded
       },
-      getLogos(state) {
+      getLogos(state, getters) {
         return paymentType => {
-          let options = store.getters.getPaymentOptions
+          let options = getters.getPaymentOptions
           if (options) {
             for (var i = 0; i < options.length; i++) {
               if (options[i].id === paymentType) {

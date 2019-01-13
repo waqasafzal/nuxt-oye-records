@@ -157,7 +157,7 @@ export default {
       var element = form.elements[encryptedBlobFieldName]
       if (element) {
         var encryptedData = element.value
-        var authHeader = getAuthHeader(this.$store)
+        var authHeader = getAuthHeader(this)
         this.$axios
           .post(
             __API__ + '/oye/pay/',

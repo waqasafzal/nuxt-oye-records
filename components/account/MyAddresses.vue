@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import AddressSummary from '~/components/account/AddressSummary'
+import AddressSummary from '../../components/account/AddressSummary'
 import AddressForm from './AddressForm'
 import * as types from '../../store/types'
 import LoadingSpinner from '../shared/LoadingSpinner'

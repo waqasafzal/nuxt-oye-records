@@ -16,7 +16,7 @@ export default {
       default: null
     },
     variant: {
-      type: Object,
+      type: String,
       default: null
     }
   },

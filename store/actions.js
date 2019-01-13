@@ -189,12 +189,14 @@ export const addToCart = function({ commit, dispatch }, args) {
     }).then (({data}) => {
       if (data.addToCart.addedStockItem) {
         addCartAlertMessage (
+          dispatch,
           'Article successfully added to cart.',
           'info',
           true
         )
       } else if (!data.addToCart.addedStockItem) {
         addCartAlertMessage (
+          dispatch,
           'Article was added to cart, but might not be available',
           'warning',
           true
@@ -202,6 +204,7 @@ export const addToCart = function({ commit, dispatch }, args) {
       }
       if (!data.addToCart.moreItemsAvailable) {
         addCartAlertMessage (
+          dispatch,
           'The requested quantity for this item might not be fully on stock. Additional quantities will be ordered for you.',
           'warning',
           false,
@@ -259,11 +262,13 @@ export const updateCart = ({ commit, dispatch }, args) =>
         if (absAdded !== 0) {
           if (addedQuantity > 0) {
             addCartAlertMessage(
+              dispatch,
               `Added ${addedQuantity} ${itemStr} to cart.`,
               'info'
             )
           } else if (addedQuantity < 0) {
             addCartAlertMessage(
+              dispatch,
               `Removed ${-1 * addedQuantity} ${itemStr} from cart.`,
               'info'
             )
@@ -272,11 +277,13 @@ export const updateCart = ({ commit, dispatch }, args) =>
       }
       if (reorderQuantity > 0) {
         addCartAlertMessage(
+          dispatch,
           `Added ${reorderQuantity} items for preorder.`,
           'warning'
         )
       } else if (reorderQuantity < 0) {
         addCartAlertMessage(
+          dispatch,
           `Removed ${-1 * reorderQuantity} items from preorder.`,
           'warning'
         )
@@ -314,11 +321,12 @@ export const removeCartLine = ({ commit, dispatch }, args) =>
     .then(({ data }) => {
       if (args.backorder) {
         addCartAlertMessage(
+          dispatch,
           'Article was removed from pre/back order.',
           'info'
         )
       } else {
-        addCartAlertMessage('Article was removed from cart.', 'info')
+        addCartAlertMessage(dispatch, 'Article was removed from cart.', 'info')
       }
       const r = data && data.removeRelease.cart
       Vue.cookie.set('cart', data.removeRelease.cart.cookie, true)
@@ -582,6 +590,7 @@ export const setShippingCountry = function(store, args) {
         countryName: args.country
       }
     }).then (({data}) => {
+      console.log('sad;sadasd')
       // resolve(data.cart.shippingOptions)
       // let cart = data.cart
       // vm.shippingOptions = cart.shippingOptions
@@ -593,12 +602,14 @@ export const setShippingCountry = function(store, args) {
         types.SET_VAT_EXCLUDED,
         data.cart.shippingOptions.isVatExcluded
       )
+      console.log(data.cart.shippingOptions)
+      resolve(data.cart.shippingOptions)
     })
   })
 }
 
-export const getPaymentOptions = function({ commit }, args) {
-  new Promise ((resolve, reject) => {
+export const  getPaymentOptions = function({ commit }, args) {
+  return new Promise ((resolve, reject) => {
     this.app.apolloProvider.clients.defaultClient.query ({
       query: gql`
           query PaymentMethods($country: String) {
@@ -607,7 +618,7 @@ export const getPaymentOptions = function({ commit }, args) {
                   name
                   logos {
                       logo
-                      variant
+                      variant   
                   }
                   methods {
                       id
@@ -630,8 +641,8 @@ export const getPaymentOptions = function({ commit }, args) {
       }
     })
     .then (({data}) => {
-      commit (types.SET_PAYMENT_OPTIONS, data.paymentOptions)
-      resolve (data.paymentOptions)
+      console.log('set payment options', data.paymentOptions)
+      resolve(data.paymentOptions)
     })
   })
 }
@@ -966,6 +977,7 @@ export const setCart = ({ commit }, args) =>
     commit(types.SET_CART, cart)
     if (cart && cart.shippingOptions) {
       let options = cart.shippingOptions.options
+      console.log('setCart l978', JSON.stringify(cart.shippingOptions))
       commit(types.SET_SHIPPING_OPTIONS, options)
       if (options.length > 0) {
         commit(types.SET_SHIPPING_OPTION, options[0])
@@ -1125,3 +1137,8 @@ export const sendTransaction = ({ commit }, order) =>
       order.isSelfCollector ? 'sc' : 'shipping'
     )
   })
+
+export const setPaymentOptionConfirmed = ({commit}) => {
+  commit (types.SET_PAYMENT_OPTION_CONFIRMED)
+  commit (types.SET_CURRENT_CHECKOUT_STATE, 4)
+}

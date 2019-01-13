@@ -112,7 +112,8 @@ export default {
   middleware: 'authenticated',
   data: function() {
     return {
-      editChartsMode: false
+      editChartsMode: false,
+      currentItem: this.$store.state.accountView,
     }
   },
   computed: {
@@ -139,9 +140,6 @@ export default {
     },
     user() {
       return this.$store.state.user
-    },
-    currentItem() {
-      return this.$store.state.accountView
     },
     currentAccountView() {
       var item = this.currentItem

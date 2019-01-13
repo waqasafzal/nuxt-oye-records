@@ -39,6 +39,10 @@ export default {
       this.loaded = true
     }
   },
+  mounted() {
+    this.loading = false
+    this.loaded = true
+  },
   updated() {
     this.loading = false
   },

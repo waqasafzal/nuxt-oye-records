@@ -107,7 +107,6 @@ export default {
   },
   methods: {
     onSubmit: function(e) {
-      console.log('error')
       e.preventDefault()
       const credentials = {
         login: this.credentials.login,

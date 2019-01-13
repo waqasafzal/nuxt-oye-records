@@ -62,7 +62,7 @@ export default {
       this.$axios
         .delete(`${__API__}/oye/adyen-payment-method/${this.objectId}/`, {
           headers: {
-            Authorization: getAuthHeader(this.$store)
+            Authorization: getAuthHeader(this)
           }
         })
         .then(data => {

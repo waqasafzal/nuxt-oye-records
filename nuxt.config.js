@@ -1,3 +1,5 @@
+import {isUpToDate} from './utils/jwt'
+
 const pkg = require('./package')
 const webpack = require('webpack')
 
@@ -43,6 +45,25 @@ const gaUrl = process.env.GA_URL ? process.env.GA_URL : "'UA-100941329-2'"
 
 module.exports = {
   mode: 'universal',
+  router: {
+    middleware: 'auth',
+    extendRoutes (routes, resolve) {
+      routes.push(
+        {
+          name: 'genres-slug-subslug',
+          path: '/genres/:slug/:subslug',
+          component: resolve(__dirname, 'pages/genres/_slug/index.vue')
+        }
+      )
+      routes.push(
+        {
+          name: 'metagenres-slug',
+          path: '/metagenres/:slug',
+          component: resolve(__dirname, 'pages/genres/_slug/index.vue')
+        }
+      )
+    }
+  },
   head: {
     title: 'OYE Records - Webshop',
     meta: [
@@ -102,26 +123,8 @@ module.exports = {
       }
     ]
   ],
-  router: {
-    // middleware: ['check-auth'],
-    extendRoutes (routes, resolve) {
-      routes.push(
-        {
-          name: 'genres-slug-subslug',
-          path: '/genres/:slug/:subslug',
-          component: resolve(__dirname, 'pages/genres/_slug/index.vue')
-        }
-      )
-      routes.push(
-        {
-          name: 'metagenres-slug',
-          path: '/metagenres/:slug',
-          component: resolve(__dirname, 'pages/genres/_slug/index.vue')
-        }
-      )
-    }
-  },
   apollo: {
+    authenticationType: 'JWT',
     includeNodeModules: true,
     errorHandler(error) {
       console.log(
@@ -130,19 +133,21 @@ module.exports = {
         error.message
       )
     },
-    // required
-    networkInterfaces: {
-      default: '~/apollo/network-interfaces/default.js'
-    },
     clientConfigs: {
-      default: {
-        // required
-        httpEndpoint: `${apiHost}/graphql`,
-        httpLinkOptions: {
-          credentials: 'same-origin'
-        }
-      }
-    }
+      default: '~/plugins/apollo-config'
+    },
+    // getAuth: () => {
+    //   let token
+    //   console.log('sjalksjkj')
+    //   if(process.server){
+    //     const cookies = cookie.parse((req && req.headers.cookie) || '')
+    //     token = cookies['apollo-token']
+    //   } else {
+    //     token = jsCookie.get('apollo-token')
+    //   }
+    //
+    //   return token && jwtUpToDate(token) ? 'JWT' + token : ''
+    // }
   },
   proxy: {
     '/media': 'http://local.oye.com:8000/',
@@ -181,11 +186,7 @@ module.exports = {
   },
   styleResources: {
     sass: [
-      // [
-        './assets/css/storefront/storefront.scss',
-        // './assets/css/storefront/components/*.scss',
-        // './assets/css/storefront/_variables.scss'
-      // ]
+      './assets/css/storefront/storefront.scss',
     ]
   },
   /*

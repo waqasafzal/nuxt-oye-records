@@ -3,7 +3,7 @@
  */
 
 import gql from 'graphql-tag'
-import { release } from '~/components/graphql/releases'
+import { release } from './releases'
 
 export const order = gql`
   fragment Order on OrderType {
