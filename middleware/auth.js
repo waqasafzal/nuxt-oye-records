@@ -11,9 +11,6 @@ export default function ({ app, store, req }) {
   if (isServer && !req) return
   const token = app.$apolloHelpers.getToken()
   const loggedUser = token && getUserFromToken(token)
-  // const loggedUser = isServer ? getUserFromCookie(req) : getUserFromLocalStorage()
-
-  console.log('logged user ', loggedUser)
   if (loggedUser) {
     store.commit('SET_USER', loggedUser)
   } else {

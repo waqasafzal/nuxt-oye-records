@@ -108,9 +108,7 @@ export const getAuthHeader = (context) => {
 
 export const setToken = (token, store) => {
   if (process.SERVER_BUILD) return
-  console.log('token ' + token)
   let decodedToken = jwtDecode(token)
-  console.log('decoded ' + JSON.stringify(decodedToken))
   window.localStorage.setItem('user', JSON.stringify(decodedToken))
   Vue.cookie.set('jwt', token)
 

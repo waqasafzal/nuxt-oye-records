@@ -977,7 +977,6 @@ export const setCart = ({ commit }, args) =>
     commit(types.SET_CART, cart)
     if (cart && cart.shippingOptions) {
       let options = cart.shippingOptions.options
-      console.log('setCart l978', JSON.stringify(cart.shippingOptions))
       commit(types.SET_SHIPPING_OPTIONS, options)
       if (options.length > 0) {
         commit(types.SET_SHIPPING_OPTION, options[0])

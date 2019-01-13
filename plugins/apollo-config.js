@@ -26,6 +26,8 @@ var setupAPIHost = function() {
 
 setupAPIHost()
 
+console.log('API HOST ' + apiHost)
+
 export default function(context) {
   return {
     // required
@@ -34,19 +36,6 @@ export default function(context) {
       credentials: 'omit'
     },
     tokenName: 'apollo-token',
-    validateToken: (jwt) => {
-      console.log('validate')
-      let exp = jwt['exp']
-      if (exp) {
-        let expMs = exp * 1000
-        let in30Secs = Date.now() + 30 * 1000
-        const valid = new Date(expMs) > new Date(in30Secs)
-        console.log('valid:', valid)
-        return valid
-      } else {
-        console.log('valid')
-        return false
-      }
-    }
+    validateToken: isUpToDate
   }
 }
