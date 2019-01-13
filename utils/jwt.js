@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode'
 
 export const isUpToDate = (jwt) => {
   console.log('sss', jwt)
@@ -11,5 +12,14 @@ export const isUpToDate = (jwt) => {
   } else {
     console.log('isUptTodate, does not exist but yes')
     return true
+  }
+}
+
+export const validateJwtToken = (token) => {
+  const decoded = jwtDecode(token)
+  if (decoded) {
+    return isUpToDate(decoded)
+  } else {
+    false
   }
 }

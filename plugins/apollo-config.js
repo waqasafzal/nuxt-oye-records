@@ -1,4 +1,4 @@
-import {isUpToDate} from '../utils/jwt'
+import {validateJwtToken} from '../utils/jwt'
 
 
 var apiHost = 'http://localhost:8000'
@@ -36,6 +36,6 @@ export default function(context) {
       credentials: 'same-origin'
     },
     tokenName: 'apollo-token',
-    validateToken: isUpToDate
+    validateToken: validateJwtToken
   }
 }
