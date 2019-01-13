@@ -7,7 +7,7 @@ if (!process.env.NODE_ENV && process.env.npm_lifecycle_event !== 'dev') {
   process.env.NODE_ENV = 'production'
 }
 
-var setupAPI = function() {
+var setupAPIHost = function() {
   apiHost = 'http://localhost:8000'
   switch (process.env.NODE_ENV) {
     case 'production':
@@ -23,6 +23,8 @@ var setupAPI = function() {
       break
   }
 }
+
+setupAPIHost()
 
 export default function(context) {
   return {
