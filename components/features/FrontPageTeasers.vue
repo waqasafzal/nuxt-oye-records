@@ -252,7 +252,6 @@ export default {
       }
     },
     beforeAgileSlideChange(event) {
-      console.log(event)
       this.currentMobileSlide = event.currentSlide
       this.nextMobileSlide = event.goToNext
     },
