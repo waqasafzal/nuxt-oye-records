@@ -161,7 +161,6 @@ export default {
         if (this.$route.name === 'metagenres-slug') {
           options['meta'] = true
         }
-        console.log('voptions ' + JSON.stringify(options))
         return {
           slug: options.slug,
           sub: options.isSubgenre || false,
@@ -200,8 +199,6 @@ export default {
   },
   watch: {
     $route({params, name}) {
-      console.log('options ' + JSON.stringify(options))
-
       this.genre = params.genre
       let slug = params.slug
       let subslug = params.subslug

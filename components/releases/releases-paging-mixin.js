@@ -153,8 +153,6 @@ export const ReleasePagingMixin = function(filterBy) {
           after: this.cursor
         }
 
-        console.log('cursor ' + this.cursor)
-
         // if the cursor is set, this is a pagination query, so we fetch more
         if (this.cursor) {
           this.$apollo.queries.releases.fetchMore({

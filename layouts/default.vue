@@ -137,8 +137,6 @@ export default {
             if (!req.options.headers) {
               req.options.headers = {} // Create the header object if needed.
             }
-
-            console.log('action....')
             if (process.client) {
               var jwt = Vue.cookie.get('jwt')
               var header = null

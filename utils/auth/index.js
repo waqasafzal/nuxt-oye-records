@@ -24,7 +24,6 @@ export const login = (context, creds, redirect) => {
     .then(
       response => {
         let data = response.data
-        console.log('Data ' + JSON.stringify(data))
         const tokenExpires = new Date().getTime() + 15 * 60 * 1000
         context.$apolloHelpers.onLogin(data.token, undefined, tokenExpires)
 
@@ -92,7 +91,6 @@ export const logout = function(context, redirect) {
 
 // The object to be passed as a header for authenticated requests
 export const getAuthHeader = (context) => {
-  console.log('getAuthHeader')
   var jwt = Vue.cookie.get('jwt')
   if (jwt) {
     var decoded = jwtDecode(jwt)
@@ -128,9 +126,7 @@ export const unsetToken = context => {
 }
 
 export const getUserFromToken = token => {
-  console.log('getUserfromtoken')
   let decoded = jwtDecode(token)
-  console.log('decoded', decoded)
   if (isUpToDate(decoded)) {
     return Object.assign({ authenticated: true }, decoded)
   } else {
@@ -139,7 +135,6 @@ export const getUserFromToken = token => {
 }
 
 export const getUserFromCookie = req => {
-  console.log('getuserfromcookie ')
   if (!req.headers.cookie) return
   const jwtCookie = req.headers.cookie
     .split(';')
@@ -151,7 +146,6 @@ export const getUserFromCookie = req => {
 
 export const getUserFromLocalStorage = () => {
   const json = window.localStorage.user
-  console.log('getUserfromlocalstorage ' + json)
   if (json) {
     var userData = JSON.parse(json)
     if (isUpToDate(userData)) {

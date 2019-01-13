@@ -78,8 +78,6 @@ function runPasswordValidation(commit, password, passwordConfirm) {
 }
 
 export const getCart = function({ commit, dispatch }) {
-  // console.log(`app : ${Object.entries(app)}`)
-  // console.log(`this: ${Object.entries(this)}`)
   new Promise ((resolve, reject) => {
     this.app.apolloProvider.clients.defaultClient.mutate ({
       mutation: gql`
@@ -590,7 +588,6 @@ export const setShippingCountry = function(store, args) {
         countryName: args.country
       }
     }).then (({data}) => {
-      console.log('sad;sadasd')
       // resolve(data.cart.shippingOptions)
       // let cart = data.cart
       // vm.shippingOptions = cart.shippingOptions
@@ -602,7 +599,6 @@ export const setShippingCountry = function(store, args) {
         types.SET_VAT_EXCLUDED,
         data.cart.shippingOptions.isVatExcluded
       )
-      console.log(data.cart.shippingOptions)
       resolve(data.cart.shippingOptions)
     })
   })
@@ -641,7 +637,6 @@ export const  getPaymentOptions = function({ commit }, args) {
       }
     })
     .then (({data}) => {
-      console.log('set payment options', data.paymentOptions)
       resolve(data.paymentOptions)
     })
   })
