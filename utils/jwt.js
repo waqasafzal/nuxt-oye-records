@@ -1,13 +1,15 @@
 
 export const isUpToDate = (jwt) => {
-  let exp = jwt['exp']
+  console.log('sss', jwt)
+  const exp = jwt['exp']
   if (exp) {
-    let expMs = exp * 1000
-    let in30Secs = Date.now() + 30 * 1000
-    return new Date(expMs) > new Date(in30Secs)
+    const expMs = exp * 1000
+    const in30Secs = Date.now() + 30 * 1000
+    const isValid = new Date(expMs) > new Date(in30Secs)
+    console.log('isUptTodate', isValid)
+    return isValid
   } else {
+    console.log('isUptTodate, does not exist but yes')
     return true
   }
 }
-
-export const abc = () => {}
