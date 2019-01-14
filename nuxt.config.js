@@ -85,7 +85,7 @@ module.exports = {
       }
     ],
     script: [
-      {src: adyenScript}
+      {src: adyenScript, async: true}
     ]
   },
   modules: [
