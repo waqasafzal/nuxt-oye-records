@@ -21,16 +21,16 @@
 //}
 @font-face {
   font-family: 'Roboto Condensed';
-  //src: url('~assets/fonts/RobotoCondensed-Light.ttf') format('truetype');
-  //font-weight: 300;
+  src: url('~assets/fonts/RobotoCondensed-Light.ttf') format('truetype');
+  font-weight: 300;
 }
-//@font-face {
-//  font-family: 'Roboto Condensed';
-//  src: url('~assets/fonts/RobotoCondensed-Regular.ttf') format('truetype');
-//  font-weight: 400;
-//}
-//@font-face {
-//  font-family: 'Roboto Condensed';
-//  src: url('~assets/fonts/RobotoCondensed-Bold.ttf') format('truetype');
-//  font-weight: 700;
-//}
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('~assets/fonts/RobotoCondensed-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url('~assets/fonts/RobotoCondensed-Bold.ttf') format('truetype');
+  font-weight: 700;
+}

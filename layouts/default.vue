@@ -194,7 +194,7 @@ export default {
   border-bottom: 1px solid #ebe9e6;
   padding: 0 !important;
 }
-  /*body {*/
-    /*font-family: 'Roboto Condensed', sans-serif;*/
-  /*}*/
+  body {
+    font-family: 'Roboto Condensed', sans-serif;
+  }
 </style>
