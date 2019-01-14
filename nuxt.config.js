@@ -42,7 +42,7 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'keywords', name: 'keywords', content: 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln'},
+      {hid: 'keywords', name: 'keywords', content: 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln,mailorder,germany'},
       {name: 'robots', content: 'index, follow'},
       {hid: 'description', name: 'description', content: 'Oye Records houses a fantastic range of music. Mostly devoted to house and disco there is also enough hip hop, jazz, and brand new electronic 12-inches.'},
       {
@@ -75,7 +75,14 @@ module.exports = {
         integrity: 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
         crossorigin: 'anonymous'
       },
-      {href: 'https://fonts.googleapis.com/icon?family=Material+Icons', rel: 'stylesheet'}
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Roboto+Condensed',
+      },
+      {
+        href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+        rel: 'stylesheet',
+      }
     ],
     script: [
       {src: adyenScript}
