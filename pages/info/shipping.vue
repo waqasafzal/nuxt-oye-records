@@ -1737,3 +1737,12 @@ export default {
   name: 'Shipping'
 }
 </script>
+
+<style lang="scss">
+  .shipping {
+    &-germany {
+       margin-bottom: 1rem;
+       margin-top: 1rem;
+     }
+  }
+</style>

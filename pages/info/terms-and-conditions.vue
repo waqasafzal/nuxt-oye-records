@@ -185,3 +185,12 @@ export default {
   name: 'Terms'
 }
 </script>
+
+<style lang="scss">
+  .withdrawal {
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: $gray-color-3;
+  }
+</style>

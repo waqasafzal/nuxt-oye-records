@@ -11,7 +11,8 @@
           <nuxt-link
             v-for="(item, i) in Object.keys(menuItems)"
             :key="`info-${i}`"
-            :to="{name: `info-${item}`}">{{ menuItems[item] }}</nuxt-link>
+            :to="{name: `info-${item}`}">{{ menuItems[item] }}
+          </nuxt-link>
         </div>
       </div>
       <div class="col-12 col-md-7 account__category info-panel">
@@ -25,7 +26,7 @@
   export default {
     name: 'CustomerInfo',
     middleware: ['default-redirect'],
-    data: function() {
+    data: function () {
       return {
         menuItems: {
           questions: 'Questions',
@@ -40,7 +41,7 @@
     },
     computed: {
       currentAccountView() {
-        return this.$route.name.replace('info-', '')
+        return this.$route.name.replace ('info-', '')
       }
     },
     methods: {
@@ -50,3 +51,36 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .info {
+    @include media-breakpoint-down(sm) {
+      h1 {
+        margin-bottom: 0;
+      }
+      margin-bottom: 4rem;
+    }
+    h1 {
+      margin-bottom: 2rem;
+    }
+    &-panel {
+      padding-top: 32px;
+      h1, h2, h3, h4, h5 {
+        margin: inherit;
+        margin-bottom: 1rem;
+      }
+      overflow: scroll;
+      max-height: 450px;
+      @include media-breakpoint-down(sm) {
+        overflow: auto;
+      }
+    }
+    a {
+      color: $brand-color-green;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+</style>
