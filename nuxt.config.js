@@ -46,7 +46,7 @@ module.exports = {
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {hid: 'keywords', name: 'keywords', content: 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln,mailorder,germany'},
-      {name: 'robots', content: 'index, follow'},
+      {name: 'robots', content: 'index, follow'},body-beat-ritual-december-2018-charts
       {hid: 'description', name: 'description', content: 'Oye Records houses a fantastic range of music. Mostly devoted to house and disco there is also enough hip hop, jazz, and brand new electronic 12-inches.'},
       {
         hid: 'url',
@@ -196,7 +196,7 @@ module.exports = {
     optimizeCSS: process.env.NODE_ENV === 'production',
     postcss: true,
     cssSourceMap: false,
-    extractCSS: true
+    extractCSS: false
     // cache: true,
     // analyze: true
   },
