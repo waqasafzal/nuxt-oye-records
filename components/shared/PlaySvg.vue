@@ -9,24 +9,24 @@
     <title>icon/play-white</title>
     <defs/>
     <g 
-      id="Page-1" 
+      id="play-Page-1"
       stroke="none" 
       stroke-width="1" 
       fill="none" 
       fill-rule="evenodd">
       <g 
-        id="New-Releases" 
+        id="play-New-Releases"
         transform="translate(-607.000000, -505.000000)" 
         fill="#FFFFFF">
         <g 
-          id="Group-3" 
+          id="play-Group-3"
           transform="translate(504.000000, 405.000000)">
           <g 
-            id="Group-2" 
+            id="play-Group-2"
             transform="translate(82.500000, 82.500000)">
             <g id="Button-/-Play-Large">
               <polygon 
-                id="icon/play-white" 
+                id="play-icon/play-white"
                 :style="polygonStyle" 
                 transform="translate(22.707420, 24.692726) rotate(-315.000000) translate(-22.707420, -24.692726) " 
                 points="16.6197683 21.3686447 28.795072 18.7466476 26.1106463 30.6388047"/>

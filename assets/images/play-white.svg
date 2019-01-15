@@ -4,11 +4,11 @@
     <title>icon/play-white</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="New-Releases" transform="translate(-607.000000, -505.000000)" fill="#FFFFFF">
-            <g id="Group-3" transform="translate(504.000000, 405.000000)">
-                <g id="Group-2" transform="translate(82.500000, 82.500000)">
-                    <g id="Button-/-Play-Large">
+    <g id="play-white-Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="play-white-New-Releases" transform="translate(-607.000000, -505.000000)" fill="#FFFFFF">
+            <g id="play-white-Group-3" transform="translate(504.000000, 405.000000)">
+                <g id="play-white-Group-2" transform="translate(82.500000, 82.500000)">
+                    <g id="play-white-sButton-/-Play-Large">
                         <polygon id="icon/play-white" transform="translate(22.707420, 24.692726) rotate(-315.000000) translate(-22.707420, -24.692726) " points="16.6197683 21.3686447 28.795072 18.7466476 26.1106463 30.6388047"></polygon>
                     </g>
                 </g>
