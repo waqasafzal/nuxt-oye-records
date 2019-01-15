@@ -118,48 +118,42 @@ export const releasePlayerInfo = gql`
   ${tracksFragment}
 `
 
-export const release = gql`
-  fragment Release on ArtikelType {
+export const releaseBasic = gql`
+  fragment ReleaseBasic on ArtikelType {
     pk
     title
     slug
     label
     format
-    mainGenreSub {
-      name
-      slug
-    }
+    artistFirstName
+    artistLastName
+    name
     mainGenre {
       name
       slug
     }
-    artistFirstName
-    artistLastName
-    name
     price {
       currency
       gross
     }
-    description
     hasTracks
     availability {
       status
-      priceRange {
-        maxPrice {
-          gross
-          grossLocalized
-          currency
-        }
-        minPrice {
-          gross
-          grossLocalized
-          currency
-        }
-      }
+    }
+  }
+  
+`
+
+export const release = gql`
+  fragment Release on ArtikelType {
+    ...ReleaseBasic
+    mainGenreSub {
+      name
+      slug
     }
     thumbnailUrl(size: 190)
-    discogsUrl
   }
+  ${releaseBasic}
 `
 
 export const releasesConnections = gql`
