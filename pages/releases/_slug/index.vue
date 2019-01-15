@@ -409,6 +409,18 @@ export default {
   beforeDestroy() {
     document.removeEventListener('keyup', this.onAddToCart)
   },
+  async asyncData ({app, route}) {
+    const client = app.apolloProvider.clients.defaultClient
+    const {data} = await client.query({
+      ...createReleaseDetailsQuery(),
+      variables: {
+        slug: route.params.slug
+      },
+    })
+    return {
+      release: data.release
+    }
+  },
   mounted() {
     let autoplay = this.$route.query.autoplay
     if (autoplay === '1') {

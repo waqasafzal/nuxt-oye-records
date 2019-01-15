@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { releaseDetails, tracksFragment } from '../graphql/releases'
+import {release, releaseDetails, tracksFragment} from '../graphql/releases'
 
 import ReleaseList from '../releases/ReleaseList.vue'
 import {releaseFilterParams} from '../../utils/router'
@@ -17,20 +17,21 @@ export const createReleaseDetailsQuery = function(slug) {
             }
           }
           artistReleases: related(relatedType: "artist") {
-            ...ReleaseDetails
+            ...Release
             hasTracks
           }
           labelReleases: related(relatedType: "label") {
-            ...ReleaseDetails
+            ...Release
             hasTracks
           }
           soldReleases: related(relatedType: "sold") {
-            ...ReleaseDetails
+            ...Release
             hasTracks
           }
         }
       }
       ${releaseDetails}
+      ${release}
     `,
     variables: {
       slug: slug
