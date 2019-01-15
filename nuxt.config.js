@@ -83,6 +83,7 @@ module.exports = {
       //   href: 'https://fonts.googleapis.com/css?family=Roboto+Condensed',
       // },
       {
+
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         rel: 'stylesheet',
       }
@@ -195,7 +196,7 @@ module.exports = {
     optimizeCSS: process.env.NODE_ENV === 'production',
     postcss: true,
     cssSourceMap: false,
-    extractCSS: false
+    extractCSS: true
     // cache: true,
     // analyze: true
   },
