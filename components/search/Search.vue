@@ -26,12 +26,16 @@
           <button 
             class="btn btn-link d-none d-md-flex" 
             type="submit">
-            <img alt="search icon" src="../../assets/images/search-icon.svg">
+            <img 
+              alt="search icon" 
+              src="../../assets/images/search-icon.svg">
           </button>
           <div 
             v-if="loading" 
             class="search__spinner">
-            <img alt="search loader" src="../../assets/images/search_loader.svg" >
+            <img 
+              alt="search loader" 
+              src="../../assets/images/search_loader.svg" >
           </div>
         </form>
         <div 
