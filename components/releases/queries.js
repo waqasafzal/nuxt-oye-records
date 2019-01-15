@@ -21,11 +21,11 @@ export const createReleaseDetailsQuery = function(slug) {
             hasTracks
           }
           labelReleases: related(relatedType: "label") {
-            ...Release
+            ...ReleaseDetails
             hasTracks
           }
           soldReleases: related(relatedType: "sold") {
-            ...Release
+            ...ReleaseDetails
             hasTracks
           }
         }

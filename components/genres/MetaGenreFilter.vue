@@ -6,7 +6,6 @@
 </template>
 
 <script>
-// import apolloClient from '~/plugins/apollo'
 import gql from 'graphql-tag'
 import Dropdown from '../shared/Dropdown'
 

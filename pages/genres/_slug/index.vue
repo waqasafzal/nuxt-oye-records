@@ -98,16 +98,9 @@ import {
 import {createReleaseListQuery} from '../../../components/releases/queries'
 import {ReleasePagingMixin} from '../../../components/releases/releases-paging-mixin'
 
-const MAX_BESTSELLERS = 40
-
 const filterByBestsellers = {
   filterBy: JSON.stringify({status: 'bestsellers'})
 }
-//
-// const filterByGenre = {
-//   filterBy: JSON.stringify({genre: })
-// }
-
 export default {
   name: 'GenreDetailPage',
   components: {
@@ -135,7 +128,7 @@ export default {
       showMobileDropdown: false,
       bsPageSize: 4,
       currentSlide: 1,
-      filterBy: getFilterByGenreParams(this.$route)
+      filterBy: JSON.stringify(getFilterByGenreParams(this.$route))
     }
   },
   apollo: {
@@ -145,7 +138,7 @@ export default {
         return {
           first: 30,
           after: '',
-          filterBy: getFilterByGenreParams(this.$route)
+          filterBy: JSON.stringify(getFilterByGenreParams(this.$route))
         }
       }
     },
@@ -202,10 +195,9 @@ export default {
   watch: {
     $route({params, name}) {
       this.genre = params.genre
-      let slug = params.slug
-      let subslug = params.subslug
+      const slug = params.slug
+      const subslug = params.subslug
 
-      // if (typeof this.detailGenre === 'undefined') {
       const genreOptions = {
         slug: subslug || slug,
         sub: typeof subslug === 'undefined'
@@ -221,7 +213,7 @@ export default {
         meta: params.meta || false
       })
 
-      let filterParams = releaseFilterParams(options.params, options.route)
+      const filterParams = releaseFilterParams(options.params, options.route)
 
       this.$apollo.queries.releases.setVariables({
           first: 30,
@@ -234,13 +226,6 @@ export default {
         after: '',
         filterBy: Object.assign({}, filterParams, {status: 'bestsellers'})
       })
-        // .query(
-        //   createReleaseListQuery({ filterBy: JSON.stringify(filterParams) })
-        // )
-        // .then(({ data }) => {
-        //   vm.bestsellers = data.releases
-        //   vm.bsLoading = false
-        // })
     }
   },
   mounted() {
@@ -288,11 +273,9 @@ export default {
       this.startAutopager()
     },
     disableSlider() {
-      //        this.sliderDisabled = true
       this.stopAutopager()
     },
     enableSlider() {
-      //        this.sliderDisabled = false
       this.startAutopager()
     },
     incrementSlide() {
