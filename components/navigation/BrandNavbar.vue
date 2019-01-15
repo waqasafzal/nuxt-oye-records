@@ -7,7 +7,7 @@
             <nuxt-link to="/">
               <img 
                 :src="`${oyeLogo}`" 
-                alt="Oye Records"
+                alt="Oye Records Logo"
                 height="50">
             </nuxt-link>
           </div>

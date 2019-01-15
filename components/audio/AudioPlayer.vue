@@ -69,7 +69,9 @@
             class="ap__element button-box add-to-cart" 
             @click="onCartClick">
             <div>
-              <img src="../../assets/images/cart_small_white.svg">
+              <img 
+                alt="add current release to cart"
+                src="../../assets/images/cart_small_white.svg">
             </div>
           </div>
           <div 
@@ -101,7 +103,9 @@
               class="ap__element add-to-cart" 
               @click="onCartClick">
               <div class="cart-button">
-                <img src="../../assets/images/cart_small_white.svg">
+                <img 
+                  alt="add current release to cart"
+                  src="../../assets/images/cart_small_white.svg">
               </div>
             </div>
             <div 

@@ -49,7 +49,8 @@
               required>
             <input type="hidden">
           </template>
-          <img 
+          <img
+            alt="Password icon"
             class="passIcon" 
             src="../../assets/images/pass-invisible.svg" 
             @click="togglePasswordVisible">

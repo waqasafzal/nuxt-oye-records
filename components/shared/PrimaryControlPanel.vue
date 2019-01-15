@@ -11,7 +11,8 @@
           to="/" >
           <div>
             <span class="helper"/>
-            <img 
+            <img
+              alt="arrow right"
               src="../../assets/images/arrow_right_green.svg" 
               class="arrow-rotated">
             <span>Continue shopping</span>

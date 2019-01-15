@@ -5,8 +5,6 @@
       @click="toggleSearchForm">
       <search-svg/>
     </div>
-    <!--<img class="d-lg-none mobile-search-icon float-right"-->
-    <!--src="../../assets/images/search-icon.svg">-->
     <transition 
       name="from-top" 
       @enter="focusSearch">
@@ -16,9 +14,6 @@
         <form 
           :class="['form-inline']" 
           @submit.prevent="onSubmit">
-          <!--<div class="mobile-close-search d-md-none">-->
-          <!--<img src="../../assets/images/close-icon.svg">-->
-          <!--</div>-->
           <input 
             v-on-clickaway="onBlur" 
             ref="search" 
@@ -31,12 +26,12 @@
           <button 
             class="btn btn-link d-none d-md-flex" 
             type="submit">
-            <img src="../../assets/images/search-icon.svg">
+            <img alt="search icon" src="../../assets/images/search-icon.svg">
           </button>
           <div 
             v-if="loading" 
             class="search__spinner">
-            <img src="../../assets/images/search_loader.svg" >
+            <img alt="search loader" src="../../assets/images/search_loader.svg" >
           </div>
         </form>
         <div 

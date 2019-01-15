@@ -6,11 +6,14 @@
         <div class="col-12 frontpage__teaser__content d-none d-lg-flex">
           <div 
             class="slider-left-control" 
-            @click="slideBackward"><img src="~/assets/images/Slider_Arrow_Left_Icon.svg">
+            @click="slideBackward"><img 
+              alt="previous slide" 
+              src="~/assets/images/Slider_Arrow_Left_Icon.svg">
           </div>
           <div 
             class="slider-right-control" 
             @click="slideForward"><img
+              alt="next slide"
               src="~/assets/images/Slider_Arrow_Right_Icon.svg">
           </div>
           <div 
@@ -74,7 +77,9 @@
                   :to="{name: 'releases-slug', params: {slug: release.slug}}"
                   class="frontpage__teaser__item"
                 >
-                  <img :src="release.featureImageUrl" >
+                  <img 
+                    :alt="`Image for ${getReleaseName(release)}`" 
+                    :src="release.featureImageUrl" >
                   <div class="d-flex release-name">
                     <nuxt-link 
                       :to="{name: 'releases-new'}" 
@@ -265,6 +270,9 @@ export default {
         return { backgroundImage }
       }
       return {}
+    },
+    getReleaseName(release) {
+      return `${release.name} - ${release.title}`
     }
   }
 }

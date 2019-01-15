@@ -9,7 +9,9 @@
           <a 
             href="#back" 
             @click.prevent="back">
-            <img src="~/assets/images/arrow_right_grey.svg">
+            <img 
+              alt="Go Back" 
+              src="~/assets/images/arrow_right_grey.svg">
             Back
           </a>
         </div>
@@ -34,8 +36,8 @@
         <div class="product__gallery">
           <img 
             :src="release.thumbnailUrl"
-            class="d-block img-fluid" 
-            alt="">
+            :alt="getReleaseName(release)" 
+            class="d-block img-fluid">
         </div>
       </div>
       <div class="col-md-6 col-12 product__info">
@@ -87,12 +89,14 @@
           inline-template>
           <div>
             <network network="facebook">
-              <img 
+              <img
+                alt="Facebook icon"
                 class="fa fa-facebook" 
                 src="~assets/images/Facebook.svg">
             </network>
             <network network="twitter">
-              <img 
+              <img
+                alt="Twitter icon"
                 class="fa fa-twitter" 
                 src="~assets/images/Twitter.svg">
             </network>
@@ -484,6 +488,9 @@ export default {
           release: this.release
         })
       }
+    },
+    getReleaseName(release) {
+      return `${release.name} - ${release.title}`
     }
   }
 }

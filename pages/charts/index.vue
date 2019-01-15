@@ -78,7 +78,9 @@
                   class="release-item">
                   <div class="release-thumb-box">
                     <div class="release-thumb">
-                      <img :src="release.node.thumbnailUrl">
+                      <img 
+                        :alt="getReleaseTitle(release.node)" 
+                        :src="release.node.thumbnailUrl">
                       <play-release-button 
                         :size="40" 
                         :release="release.node"
@@ -237,105 +239,19 @@ export default {
           play: false
         })
       }
+    },
+    getReleaseTitle(release) {
+      return `${release.name} - ${release.title}`
     }
   },
-  // apollo: {
-  //   charts: createChartsOverviewQuery()
-  // },
   async asyncData({app}) {
     const client = app.apolloProvider.clients.defaultClient
-    const {data} = await client.query({
-      ...createChartsOverviewQuery(currentMonth)
+    const {data} = await client.query ({
+      ...createChartsOverviewQuery (currentMonth)
     })
     return {
       charts: data
     }
   }
-  // async asyncData({ params }) {
-  //   var charts = await this.$apollo.query({
-  //     query: gql`
-  //       query Charts($month: Int!, $filterBy: JSONString!) {
-  //         artistCharts: charts(category: "artist", month: $month) {
-  //           edges {
-  //             node {
-  //               pk
-  //               slug
-  //               user {
-  //                 firstName
-  //               }
-  //               artist {
-  //                 name
-  //                 homeLabel
-  //               }
-  //               imageUrl
-  //               name
-  //             }
-  //           }
-  //         }
-  //         staffCharts: charts(category: "staff", month: $month) {
-  //           edges {
-  //             node {
-  //               pk
-  //               slug
-  //               user {
-  //                 firstName
-  //               }
-  //               imageUrl
-  //               name
-  //             }
-  //           }
-  //         }
-  //         bestsellers: releases(first: 10, filterBy: $filterBy) {
-  //           edges {
-  //             node {
-  //               slug
-  //               name
-  //               thumbnailUrl(size: 120)
-  //               ...ReleasePlayerInfo
-  //               price {
-  //                 gross
-  //               }
-  //               availability {
-  //                 status
-  //               }
-  //             }
-  //           }
-  //         }
-  //         weeklyBestsellerThumb: defaultThumbnailUrl(
-  //           imageType: "charts"
-  //           tag: "weekly"
-  //           width: 410
-  //           height: 208
-  //         )
-  //         monthlyBestsellerThumb: defaultThumbnailUrl(
-  //           imageType: "charts"
-  //           tag: "monthly"
-  //           width: 410
-  //           height: 208
-  //         )
-  //         metaGenres {
-  //           name
-  //           slug
-  //         }
-  //       }
-  //       ${releasePlayerInfo}
-  //     `,
-  //     variables: {
-  //       month: currentMonth.value + 1,
-  //       filterBy: JSON.stringify({
-  //         status: 'bestsellers',
-  //         year_month: `${new Date().getFullYear()}-${currentMonth.value + 1}`
-  //       })
-  //     }
-  //   })
-  //   return {
-  //     artistCharts: charts.data.artistCharts,
-  //     staffCharts: charts.data.staffCharts,
-  //     bestsellers: charts.data.bestsellers,
-  //     weeklyBestsellerThumb: charts.data.weeklyBestsellerThumb,
-  //     monthlyBestsellerThumb: charts.data.monthlyBestsellerThumb,
-  //     genres: charts.data.metaGenres
-  //   }
-  // }
 }
 </script>

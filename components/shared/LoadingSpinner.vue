@@ -3,7 +3,9 @@
     v-if="loading" 
     class="row loader">
     <div class="col-12">
-      <img src="../../assets/images/load_more.svg">
+      <img 
+        alt="Loading spinner" 
+        src="../../assets/images/load_more.svg">
     </div>
   </div>
 </template>

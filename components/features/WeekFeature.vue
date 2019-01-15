@@ -13,7 +13,9 @@
           <release-button-bar :release="release"/>
         </div>
         <div class="frontpage__weekly__item__image">
-          <img :src="release.featureImageUrl" >
+          <img
+            :alt="`${category}: ${getReleaseName(release)}`"
+            :src="release.featureImageUrl" >
         </div>
       </div>
     </nuxt-link>
@@ -21,7 +23,8 @@
       :to="{name: 'releases-slug', params: { slug: release.slug }}" 
       class="d-md-none">
       <div class="mobile frontpage__weekly__item__content">
-        <img 
+        <img
+          :alt="`${category}: ${getReleaseName(release)}`"
           :src="release.featureImageUrl" 
           class="feature-image" >
         <div class="d-flex release-name">
@@ -64,6 +67,11 @@ export default {
     contentStyle() {
       return `background-image: url(${this.release.featureImageUrl})`
     }
-  }
+  },
+  methods: {
+    getReleaseName(release) {
+      return `${release.name} - ${release.title}`
+    }
+  },
 }
 </script>

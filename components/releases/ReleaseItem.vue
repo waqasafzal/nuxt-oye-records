@@ -14,8 +14,8 @@
               </div>
               <img 
                 :src="release.thumbnailUrl" 
-                class="img-responsive" 
-                alt="">
+                :alt="getReleaseName(release)" 
+                class="img-responsive">
               <play-release-button 
                 :size="size" 
                 :release="release" 
@@ -57,8 +57,8 @@
               </div>
               <img 
                 :src="release.thumbnailUrl" 
-                class="img-responsive" 
-                alt="">
+                :alt="getReleaseName(release)" 
+                class="img-responsive">
               <div class="format">{{ release.format }}</div>
               <!--<play-release-button background="#313532" :size=42 class="release-list-play"-->
               <!--:release="release"></play-release-button>-->
@@ -128,6 +128,9 @@ export default {
   methods: {
     onGenreClick(genre) {
       this.$router.push({ name: 'genres-slug', params: { slug: genre.slug } })
+    },
+    getReleaseName(release) {
+      return `${release.name} - ${release.title}`
     },
     getSchema() {
       const release = this.$data.release

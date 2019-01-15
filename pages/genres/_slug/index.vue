@@ -36,10 +36,12 @@
           <div 
             class="slider-left-control" 
             @click="slideBackward"><img
+              alt="previous slide" 
               src="~assets/images/Slider_Arrow_Left_Icon.svg"></div>
           <div 
             class="slider-right-control" 
             @click="slideForward"><img
+              alt="next slide"
               src="~assets/images/Slider_Arrow_Right_Icon.svg"></div>
           <transition-group name="blend">
             <div 
