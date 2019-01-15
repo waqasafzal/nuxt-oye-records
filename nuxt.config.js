@@ -195,5 +195,8 @@ module.exports = {
     extractCSS: false
     // cache: true,
     // analyze: true
+  },
+  render: {
+    http2: {push: true}
   }
 }
