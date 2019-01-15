@@ -89,7 +89,7 @@ module.exports = {
       }
     ],
     script: [
-      {src: adyenScript, defer: true}
+      {src: adyenScript, async: true}
     ]
   },
   modules: [
