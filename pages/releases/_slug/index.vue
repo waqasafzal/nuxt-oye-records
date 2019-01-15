@@ -352,13 +352,13 @@ export default {
       }
       return releaseName
     },
-    pageTitle: function() {
+    pageTitle() {
       return `${this.pageTitleContent} at OYE Records`
     },
-    currentRoute: function() {
+    currentRoute() {
       return __API__ + this.$route.path
     },
-    releaseImage: function() {
+    releaseImage() {
       return this.release && __API__ + this.release.thumbnailUrl
     },
     strippedDescription() {
@@ -433,10 +433,9 @@ export default {
     document.addEventListener('keyup', this.onAddToCart)
   },
   methods: {
-    onAddToCartSuccess() {},
     onAddToCart(e) {
-      var key = e.keyCode ? e.keyCode : e.which
-      let noText = !['text', 'search'].includes(e.target.type)
+      const key = e.keyCode ? e.keyCode : e.which
+      const noText = !['text', 'search'].includes(e.target.type)
 
       if (noText) {
         if (key === 65) {
@@ -473,7 +472,6 @@ export default {
         })
         .then(track => {})
     },
-    onAddToCartError() {},
     back() {
       this.$router.go(-1)
     },
