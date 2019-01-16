@@ -1,22 +1,22 @@
 <template>
   <div class="container-fluid">
+    <json-ld-item-list :releases="allReleases" />
     <div class="row">
       <div class="col-12">
         <div class="page__header">
           <h1>New Releases {{ genre && genre.name }}</h1>
-
-          <meta-genre-filter 
-            class="d-none d-md-flex" 
+          <meta-genre-filter
+            class="d-none d-md-flex"
             @genre-selected="onGenreSelected"/>
-          <filter-results-options 
+          <filter-results-options
             class="d-none d-md-flex float-right"
             @filter-changed="onFilterOptionsChanged"/>
         </div>
         <release-filter-panel
           :filter-only="true"
-          :meta-genres="genres" 
+          :meta-genres="genres"
           :change-genre="typeof genre !== 'undefined'"
-          class="d-flex d-md-none" 
+          class="d-flex d-md-none"
           @genre-selected="onGenreChanged"
           @filter-changed="onFilterOptionsChanged"/>
         <template v-if="!loadingPeriods">
@@ -77,6 +77,7 @@ import {createReleaseListQuery} from '../../components/releases/queries'
 import FilterResultsOptions from '../../components/shared/FilterResultsOptions'
 import MetaGenreFilter from '../../components/genres/MetaGenreFilter'
 import ReleaseFilterPanel from '../../components/features/mobile/ReleaseFilterPanel'
+import JsonLdItemList from '../../components/releases/JsonLdItemList'
 
 const filterBy = JSON.stringify({ status: 'new' })
 const filterByPeriod = function(period, options={}) {
@@ -95,6 +96,7 @@ let releaseList30Query = createReleaseListQuery ({filterBy: filterByPeriod (30)}
 export default {
   name: 'NewReleases',
   components: {
+    JsonLdItemList,
     ReleaseFilterPanel,
     MetaGenreFilter,
     FilterResultsOptions,
@@ -166,32 +168,21 @@ export default {
       return this.todayLoading
         || this.releases7Loading
         || this.releases30Loading
+    },
+    allReleases() {
+      const releaseGroups = [
+        this.releasedToday,
+        this.releasedLast7,
+        this.releasedLast30,
+        this.releases
+      ]
+      const reduced = releaseGroups
+        .filter(group => group && group.edges.length > 0)
+        .map(group => group.edges.map(edge => edge.node))
+        .reduce((acc, releases) => [...acc, ...releases], [])
+      return reduced
     }
   },
-  // mounted() {
-  //   this.$apollo
-  //     .query({
-  //       query: gql`
-  //         query MetaGenres {
-  //           metaGenres {
-  //             name
-  //             slug
-  //             genres {
-  //               name
-  //               slug
-  //               parentGenre {
-  //                 slug
-  //                 name
-  //               }
-  //             }
-  //           }
-  //         }
-  //       `
-  //     })
-  //     .then(({ data }) => {
-  //       this.genres = data.metaGenres
-  //     })
-  // },
   methods: {
     onFilterOptionsChanged(options) {
       this.onFilterChanged (options)

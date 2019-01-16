@@ -1,6 +1,5 @@
 <template>
   <div>
-    <json-ld-product-schema :release="release"/>
     <nuxt-link :to="{ name: 'releases-slug', params: { slug: release.slug }}">
       <div class="d-none d-md-flex text-left list-item">
         <div class="resizable-list-item-outer">
@@ -93,7 +92,6 @@
 <script>
 import Vue from 'vue'
 import ReleasePrice from './ReleasePrice.vue'
-import JsonLdProductSchema from './JsonLdProductSchema.vue'
 import PlayReleaseButton from './PlayReleaseButton'
 import AddToCartButton from '../cart/AddToCartButton'
 import ReleaseButtonBar from './ReleaseButtonBar'
@@ -105,8 +103,7 @@ export default {
   components: {
     ReleaseButtonBar,
     AddToCartButton,
-    PlayReleaseButton,
-    JsonLdProductSchema
+    PlayReleaseButton
   },
   props: {
     release: {
