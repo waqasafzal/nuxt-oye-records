@@ -30,9 +30,7 @@
     </div>
     <div class="row product__main">
       <div class="col-md-6 col-12">
-        <div id="product-schema-component">
-          <json-ld-product-schema :release="release"/>
-        </div>
+        <json-ld-product-schema :release="release"/>
         <div class="product__gallery">
           <img 
             :src="release.thumbnailUrl"
