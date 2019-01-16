@@ -24,7 +24,11 @@
           url: __API__ + this.$route.path,
           numberOfItems: this.releases.length,
           itemListElement: this.releases.map((x,i) => {
-            return {...getReleaseProduct(x, this.$router), position: i}
+            return {
+              '@type': 'ListItem',
+              position: i + 1,
+              item: getReleaseProduct (x, this.$router)
+            }
           })
         }
       }

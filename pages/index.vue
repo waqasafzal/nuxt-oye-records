@@ -1,5 +1,8 @@
 <template>
   <div>
+    <json-ld-item-list 
+      v-if="allReleases"
+      :releases="allReleases"/>
     <front-page-teasers 
       :featured-releases="featuredReleases"
       :single-release="singleOfTheWeek"
@@ -39,6 +42,8 @@ import FrontPageTeasers from '../components/features/FrontPageTeasers'
 import ReleaseListSummary from '../components/releases/ReleaseListSummary'
 import { frontPageQueries } from '../components/graphql/releases'
 import ChartItem from '../components/charts/ChartItem'
+import JsonLdItemList from '../components/releases/JsonLdItemList'
+import {getReleases} from '../utils/releases'
 
 const filterByNew = JSON.stringify({ status: 'new', period: 14 })
 const filterByBack = JSON.stringify({ status: 'back' })
@@ -52,8 +57,18 @@ const filterParams = {
 
 export default {
   name: 'OyeIndex',
-  components: { ChartItem, ReleaseListSummary, FrontPageTeasers },
+  components: {
+    JsonLdItemList,
+    ChartItem, ReleaseListSummary, FrontPageTeasers },
   computed: {
+    allReleases() {
+      const releaseGroups = [
+        this.preReleases,
+        this.newReleases,
+        this.backReleases
+      ]
+      return [...getReleases(releaseGroups), ...this.featuredReleases]
+    },
     preReleases() {
       return this.FrontPageReleases && this.FrontPageReleases.preReleases
     },

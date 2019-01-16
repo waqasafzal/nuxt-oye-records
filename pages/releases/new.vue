@@ -78,6 +78,7 @@ import FilterResultsOptions from '../../components/shared/FilterResultsOptions'
 import MetaGenreFilter from '../../components/genres/MetaGenreFilter'
 import ReleaseFilterPanel from '../../components/features/mobile/ReleaseFilterPanel'
 import JsonLdItemList from '../../components/releases/JsonLdItemList'
+import {getReleases} from '../../utils/releases'
 
 const filterBy = JSON.stringify({ status: 'new' })
 const filterByPeriod = function(period, options={}) {
@@ -176,11 +177,8 @@ export default {
         this.releasedLast30,
         this.releases
       ]
-      const reduced = releaseGroups
-        .filter(group => group && group.edges.length > 0)
-        .map(group => group.edges.map(edge => edge.node))
-        .reduce((acc, releases) => [...acc, ...releases], [])
-      return reduced
+
+      return getReleases(releaseGroups)
     }
   },
   methods: {
