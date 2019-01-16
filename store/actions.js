@@ -297,9 +297,9 @@ export const updateCart = ({ commit, dispatch }, args) =>
     })
   })
 
-export const removeCartLine = ({ commit, dispatch }, args) =>
-  new Promise((resolve, reject) => {
-    this.app.apolloProvider.clients.defaultClient.mutate({
+export const removeCartLine = function ({ commit, dispatch }, args) {
+  new Promise ((resolve, reject) => {
+    this.app.apolloProvider.clients.defaultClient.mutate ({
       mutation: gql`
         mutation($releasePk: ID!, $backorder: Boolean) {
           removeRelease(releasePk: $releasePk, backorder: $backorder) {
@@ -316,40 +316,42 @@ export const removeCartLine = ({ commit, dispatch }, args) =>
       },
       fetchPolicy: 'no-cache'
     })
-    .then(({ data }) => {
+    .then (({data}) => {
       if (args.backorder) {
-        addCartAlertMessage(
+        addCartAlertMessage (
           dispatch,
           'Article was removed from pre/back order.',
           'info'
         )
       } else {
-        addCartAlertMessage(dispatch, 'Article was removed from cart.', 'info')
+        addCartAlertMessage (dispatch, 'Article was removed from cart.', 'info')
       }
       const r = data && data.removeRelease.cart
-      Vue.cookie.set('cart', data.removeRelease.cart.cookie, true)
-      dispatch('setCart', { cart: r || null })
-      return resolve(r)
+      Vue.cookie.set ('cart', data.removeRelease.cart.cookie, true)
+      dispatch ('setCart', {cart: r || null})
+      return resolve (r)
     })
-    .catch(er => reject(er))
+    .catch (er => reject (er))
   })
+}
 
-export const playRelease = ({ commit }, args) =>
-  new Promise((resolve, reject) => {
+export const playRelease = function ({ commit }, args) {
+  new Promise ((resolve, reject) => {
     var release = args.release
     var play = typeof args.play === 'undefined' || args.play
     if (release) {
       for (var i = 0; i < release.tracks.length; i++) {
         var track = release.tracks[i]
         if (i === 0 && play) {
-          commit(types.PLAY_TRACK, track)
+          commit (types.PLAY_TRACK, track)
         } else {
-          commit(types.ADD_TRACK, track)
+          commit (types.ADD_TRACK, track)
         }
       }
-      resolve(release)
+      resolve (release)
     }
   })
+}
 
 export const playTrack = ({ commit }, args) =>
   new Promise((resolve, reject) => {
