@@ -2,7 +2,8 @@
   <div 
     v-if="release" 
     class="container-fluid" 
-    @keyup.65="addToCart(release.pk)">
+    @keyup.65="addToCart(release.pk)">s
+    <json-ld-product-schema :release="release"/>
     <div class="release-detail__header row">
       <div class="col-12">
         <div class="release-detail__back">
@@ -30,7 +31,6 @@
     </div>
     <div class="row product__main">
       <div class="col-md-6 col-12">
-        <json-ld-product-schema :release="release"/>
         <div class="product__gallery">
           <img 
             :src="release.thumbnailUrl"
@@ -217,6 +217,7 @@ import ReleaseList from '../../../components/releases/ReleaseList'
 import GoogleAnalytics from '~/mixins/ga'
 import * as types from '../../../store/types'
 import { getMedium, stripped } from '../../../utils/string'
+import {getReleaseProduct} from '../../../utils/ldjson'
 var SocialSharing = require('vue-social-sharing')
 Vue.use(SocialSharing)
 
@@ -259,6 +260,7 @@ export default {
   head() {
     return {
       title: this.pageTitle,
+      __dangerouslyDisableSanitizers: ['script'],
       meta: [
         {
           hid: 'og:title',
@@ -294,6 +296,12 @@ export default {
           hid: 'keywords',
           name: 'keywords',
           content: this.keywords // 'vinyl,records,house,disco,jazz,techno,prenzlauer berg,berlin,neukölln'
+        },
+      ],
+      script: [
+        {
+          innerHTML: JSON.stringify(getReleaseProduct(this.release, this.$router, {withPlace: true})),
+          type: 'application/ld+json'
         }
       ]
     }
