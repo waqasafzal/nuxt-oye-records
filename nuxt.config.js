@@ -88,12 +88,12 @@ module.exports = {
         rel: 'preload',
         as: 'style',
         onload: "this.rel='stylesheet'",
-        href: 'https://fonts.googleapis.com/css?family=Roboto+Condensed',
+        href: 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400',
       },
       {
         rel: 'preload',
-        as: 'style',
-        onload: "this.rel='stylesheet'",
+        as: 'font',
+        onload: "this.rel='font'",
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         // rel: 'stylesheet',
       }
