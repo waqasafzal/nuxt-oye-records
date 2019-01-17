@@ -72,16 +72,24 @@ module.exports = {
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+      // {
+      //   rel: 'stylesheet',
+      //   href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+      //   integrity: 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
+      //   crossorigin: 'anonymous'
+      // },
       {
-        rel: 'stylesheet',
+        rel: 'preload',
+        as: 'style',
+        onload: "this.rel='stylesheet'",
         href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
         integrity: 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
         crossorigin: 'anonymous'
       },
-      // {
-      //   rel: 'stylesheet',
-      //   href: 'https://fonts.googleapis.com/css?family=Roboto+Condensed',
-      // },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Roboto+Condensed',
+      },
       {
 
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
@@ -190,8 +198,6 @@ module.exports = {
     postcss: true,
     cssSourceMap: false,
     extractCSS: false
-    // cache: true,
-    // analyze: true
   },
   render: {
     http2: {
