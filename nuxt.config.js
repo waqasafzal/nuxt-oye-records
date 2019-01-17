@@ -78,12 +78,12 @@ module.exports = {
       //   integrity: 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
       //   crossorigin: 'anonymous'
       // },
-      {
-        rel: 'stylesheet',
-        href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-        integrity: 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
-        crossorigin: 'anonymous'
-      },
+      // {
+      //   rel: 'stylesheet',
+      //   href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+      //   integrity: 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
+      //   crossorigin: 'anonymous'
+      // },
       // {
       //   rel: 'preload',
       //   as: 'style',
@@ -136,9 +136,9 @@ module.exports = {
   /*
   ** Global CSS
   */
-  // css: [
-  //   './node_modules/bootstrap/dist/css/bootstrap.css',
-  // ],
+  css: [
+    './node_modules/bootstrap/dist/css/bootstrap.css',
+  ],
 
   /*
   ** Plugins to load before mounting the App
