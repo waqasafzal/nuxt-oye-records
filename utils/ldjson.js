@@ -61,3 +61,19 @@ export const getReleaseProduct = (release, router, options = {}) => {
   }
   return schemaObject
 }
+
+export const getItemList = (releases, context) => {
+  return {
+    '@context': 'http://schema.org',
+    '@type': 'ItemList',
+    url: __API__ + context.$route.path,
+    numberOfItems: releases.length,
+    itemListElement: releases.map((x,i) => {
+      return {
+        '@type': 'ListItem',
+        position: i + 1,
+        item: getReleaseProduct (x, context.$router)
+      }
+    })
+  }
+}

@@ -1,8 +1,5 @@
 <template>
   <div>
-    <json-ld-item-list 
-      v-if="allReleases"
-      :releases="allReleases"/>
     <front-page-teasers 
       :featured-releases="featuredReleases"
       :single-release="singleOfTheWeek"
@@ -105,6 +102,15 @@ export default {
 
     return {
       FrontPageReleases: data
+    }
+  },
+  head() {
+    return {
+      __dangerouslyDisableSanitizers: ['script'],
+      script: [{
+        innerHTML: JSON.stringify(getItemList(this.allReleases, this)),
+        type: 'application/ld+json'
+      }]
     }
   }
 }
