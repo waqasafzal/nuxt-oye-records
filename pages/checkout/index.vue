@@ -26,9 +26,17 @@ import CheckoutButtons from '../../components/checkout/CheckoutButtons'
 import PaypalRedirect from '../../components/checkout/PaypalRedirect'
 import { mapGetters } from 'vuex'
 
+
 export default {
   name: 'Checkout',
   components: { CheckoutButtons, CheckoutOverview },
+  head () {
+    return {
+      script: [
+        {src: __ADYEN_SCRIPT__, async: true}
+      ]
+    }
+  },
   computed: {
     currentCheckoutView() {
       var currentCheckoutView = CartContent

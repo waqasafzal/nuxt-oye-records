@@ -99,9 +99,6 @@ module.exports = {
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         // rel: 'stylesheet',
       }
-    ],
-    script: [
-      {src: adyenScript, async: true}
     ]
   },
   modules: [
@@ -187,6 +184,7 @@ module.exports = {
       new webpack.DefinePlugin({
         __API__: "'" + apiHost + "'",
         __ADYEN_SKIN__: adyenSkin,
+        __ADYEN_SCRIPT__: adyenScript,
         __GA_URL__: gaUrl
       })
     ],
