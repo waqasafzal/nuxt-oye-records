@@ -28,7 +28,8 @@ export const getReleaseProduct = (release, router, options = {}) => {
     '@type': 'Offer',
     priceCurrency: 'EUR',
     availability: availabilitySchema(release),
-    price: release.price.gross
+    price: release.price.gross,
+    url
   }
   if (options.withPlace) {
     offers.availableAtOrFrom = {
@@ -41,7 +42,8 @@ export const getReleaseProduct = (release, router, options = {}) => {
           'addressCountry': 'Germany',
           'postalCode': '10435',
           'streetAddress': 'Oderberger Str. 4',
-          'telephone': '0049 30 66647821'
+          'telephone': '0049 30 66647821',
+          'url': 'https://oye-records.com'
       }
     }
   }
@@ -50,6 +52,7 @@ export const getReleaseProduct = (release, router, options = {}) => {
     '@type': 'Product',
     name: `${release.name} - ${release.title} (${release.format})`,
     image: __API__ + release.thumbnailUrl,
+    brand: release.label,
     url,
     offers
   }
