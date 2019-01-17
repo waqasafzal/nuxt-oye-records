@@ -2,8 +2,8 @@
   <div 
     v-if="release" 
     class="container-fluid" 
-    @keyup.65="addToCart(release.pk)">s
-    <json-ld-product-schema :release="release"/>
+    @keyup.65="addToCart(release.pk)">
+    <!--<json-ld-product-schema :release="release"/>-->
     <div class="release-detail__header row">
       <div class="col-12">
         <div class="release-detail__back">
