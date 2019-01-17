@@ -33,7 +33,7 @@ export default {
   head () {
     return {
       script: [
-        {src: __ADYEN_SCRIPT__, async: true}
+        {src: "__ADYEN_SCRIPT__", async: true}
       ]
     }
   },
