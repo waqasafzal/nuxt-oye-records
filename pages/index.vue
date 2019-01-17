@@ -41,6 +41,7 @@ import { frontPageQueries } from '../components/graphql/releases'
 import ChartItem from '../components/charts/ChartItem'
 import JsonLdItemList from '../components/releases/JsonLdItemList'
 import {getReleases} from '../utils/releases'
+import {getItemList} from '../utils/ldjson'
 
 const filterByNew = JSON.stringify({ status: 'new', period: 14 })
 const filterByBack = JSON.stringify({ status: 'back' })
