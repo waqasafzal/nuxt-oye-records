@@ -246,6 +246,8 @@
           this.$store.dispatch('removeCartLine', {
             pk: line.release.pk,
             backorder: line.backorder
+          }).then(() => {
+            this.showModal = false
           })
         }
       },
